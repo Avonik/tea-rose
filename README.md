@@ -2,7 +2,7 @@
 
 Trademark overlap evidence agent, built on Qloo's taste graph for the Qloo Agentic Hackathon 2026.
 
-Courts ask whether Jack Daniel's drinkers and dog-toy buyers are the same people. Today that is a six-figure consumer survey. Tea Rose reads a complaint or a cease-and-desist letter, works out which legal questions the dispute turns on, and answers the three that are really questions about consumer taste from Qloo's taste graph:
+Courts ask whether Jack Daniel's drinkers and dog-toy buyers are the same people. Today that is a consumer survey that costs $15,000 to $100,000 and takes weeks to months. Tea Rose reads a complaint or a cease-and-desist letter, works out which legal questions the dispute turns on, and answers the three that are really questions about consumer taste from Qloo's taste graph:
 
 | Legal question | Where it matters | Qloo evidence |
 | --- | --- | --- |
