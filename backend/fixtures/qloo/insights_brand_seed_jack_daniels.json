@@ -1,0 +1,1638 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Top-50 brands by affinity for an audience seeded with Jack Daniel's. Explainability enabled; with a single seed entity every result is explained entirely by that seed, so the explainability blocks are shape-only. The inner layout of query.explainability is UNVERIFIED (docs describe it only in prose). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/insights",
+      "params": {
+        "filter.type": "urn:entity:brand",
+        "signal.interests.entities": "FA4E0000-0000-4000-A000-000000000001",
+        "feature.explainability": true,
+        "take": 50
+      }
+    }
+  },
+  "success": true,
+  "results": {
+    "entities": [
+      {
+        "name": "Jim Beam",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000007",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Jim Beam (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000007-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9004,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.971,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Maker's Mark",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000008",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Maker's Mark (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000008-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.932,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9683,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Crown Royal",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000009",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Crown Royal (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000009-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.944,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9645,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Jameson",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000000A",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Jameson (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000000A-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9603,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9623,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Wild Turkey",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000000B",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Wild Turkey (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000000B-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9629,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9589,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Captain Morgan",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000000C",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Captain Morgan (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000000C-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9519,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9551,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Fireball",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000000D",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Fireball (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000000D-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9353,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9518,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Johnnie Walker",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000000E",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Johnnie Walker (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000000E-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9635,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9488,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Bulleit",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000000F",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Bulleit (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000000F-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.923,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9468,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Evan Williams",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000010",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Evan Williams (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000010-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9729,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9431,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Jose Cuervo",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000011",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Jose Cuervo (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000011-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9385,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9395,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Tito's Handmade Vodka",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000012",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Tito's Handmade Vodka (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000012-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9364,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:wine_and_spirits",
+            "name": "Wine & Spirits",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9361,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Budweiser",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000013",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Budweiser (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000013-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9986,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9334,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Coors Light",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000014",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Coors Light (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000014-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9621,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9298,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Miller Lite",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000015",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Miller Lite (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000015-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9329,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9281,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Bud Light",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000016",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Bud Light (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000016-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9039,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9248,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Busch",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000017",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Busch (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000017-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9327,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9206,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Yuengling",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000018",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Yuengling (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000018-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9853,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9188,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Pabst Blue Ribbon",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000019",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Pabst Blue Ribbon (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000019-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9432,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9149,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Michelob Ultra",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000001A",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Michelob Ultra (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000001A-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9611,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:food_and_beverage:beer",
+            "name": "Beer",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.913,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Harley-Davidson",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000001B",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Harley-Davidson (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000001B-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9922,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:automotive",
+            "name": "Automotive",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9099,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Ford",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000001C",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Ford (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000001C-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9182,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:automotive:car_and_suv",
+            "name": "Car & SUV",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9064,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Chevrolet",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000001D",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Chevrolet (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000001D-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9451,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:automotive:car_and_suv",
+            "name": "Car & SUV",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9035,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Ram Trucks",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000001E",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Ram Trucks (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000001E-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.941,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:automotive:car_and_suv",
+            "name": "Car & SUV",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.9003,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Wrangler",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000001F",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Wrangler (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000001F-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9244,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion:jeans",
+            "name": "Jeans",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.897,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Levi's",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000020",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Levi's (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000020-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9741,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion:jeans",
+            "name": "Jeans",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8934,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Carhartt",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000021",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Carhartt (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000021-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9524,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8908,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Dickies",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000022",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Dickies (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000022-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.993,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8872,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Ariat",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000023",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Ariat (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000023-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9646,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion:footwear",
+            "name": "Footwear",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8841,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Wolverine",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000024",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Wolverine (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000024-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9527,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion:footwear",
+            "name": "Footwear",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.881,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Red Wing Shoes",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000025",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Red Wing Shoes (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000025-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.979,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion:footwear",
+            "name": "Footwear",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8783,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Columbia Sportswear",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000026",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Columbia Sportswear (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000026-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9299,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8749,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "The North Face",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000027",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "The North Face (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000027-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9662,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8726,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Bass Pro Shops",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000028",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Bass Pro Shops (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000028-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9407,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.869,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Cabela's",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000029",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Cabela's (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000029-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.963,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8652,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Yeti",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000002A",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Yeti (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000002A-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9746,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8629,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Coleman",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000002B",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Coleman (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000002B-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9599,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.859,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Realtree",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000002C",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Realtree (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000002C-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9608,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8566,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Zippo",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000002D",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Zippo (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000002D-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9089,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8525,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Oakley",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000002E",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Oakley (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000002E-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9765,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8492,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Under Armour",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000002F",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Under Armour (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000002F-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9727,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8463,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Dodge",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000030",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Dodge (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000030-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9203,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:automotive:car_and_suv",
+            "name": "Car & SUV",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8439,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "NASCAR",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000031",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "NASCAR (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000031-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9088,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:sports_organization",
+            "name": "Sports Organization",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8404,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Professional Bull Riders",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000032",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Professional Bull Riders (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000032-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9085,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:sports_organization",
+            "name": "Sports Organization",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8373,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Tractor Supply Co.",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000033",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Tractor Supply Co. (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000033-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9858,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8349,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Stetson",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000034",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Stetson (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000034-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9808,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8314,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Lucchese",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000035",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Lucchese (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000035-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9833,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion:footwear",
+            "name": "Footwear",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8291,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Duck Dynasty",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000036",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Duck Dynasty (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000036-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9495,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:entertainment",
+            "name": "Entertainment",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8257,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Filson",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000037",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Filson (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000037-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9578,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:fashion",
+            "name": "Fashion",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8223,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Traeger",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000038",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Traeger (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000038-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9181,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:retail",
+            "name": "Retail",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.8185,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      }
+    ]
+  },
+  "query": {
+    "explainability": {
+      "signal.interests.entities": [
+        {
+          "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+          "average_score": {
+            "top_3": 1,
+            "top_5": 1,
+            "top_10": 1,
+            "all": 1
+          }
+        }
+      ]
+    }
+  },
+  "duration": 61
+}

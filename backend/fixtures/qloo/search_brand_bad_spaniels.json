@@ -1,0 +1,17 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Junior mark (VIP Products dog toy) is NOT in the Qloo catalogue in this scenario: zero results, so the app must fall back to a proxy brand (BarkBox) or to pet-supply tags. The live API may instead answer HTTP 404 \"No results\" (documented response code for /search) - UNVERIFIED. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/search",
+      "params": {
+        "query": "Bad Spaniels",
+        "types": "urn:entity:brand",
+        "take": 5
+      }
+    }
+  },
+  "results": []
+}

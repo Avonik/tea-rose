@@ -1,0 +1,574 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Same seed (Jack Daniel's) but results restricted to pet-supply brand tags. BarkBox (proxy for Bad Spaniels) ranks 14th of 15 with a low affinity. Affinity is normalized per query, so these scores must not be compared numerically with the unfiltered query. Pet tag IDs are synthetic (UNVERIFIED). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/insights",
+      "params": {
+        "filter.type": "urn:entity:brand",
+        "signal.interests.entities": "FA4E0000-0000-4000-A000-000000000001",
+        "filter.tags": "urn:tag:genre:brand:pet_supplies",
+        "feature.explainability": true,
+        "take": 50
+      }
+    },
+    "expected_rank_of_proxy": {
+      "name": "BarkBox",
+      "rank": 14,
+      "of": 15
+    }
+  },
+  "success": true,
+  "results": {
+    "entities": [
+      {
+        "name": "Chewy",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000039",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Chewy (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000039-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9095,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.7102,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "PetSmart",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000003A",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "PetSmart (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000003A-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9467,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.6872,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Petco",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000003B",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Petco (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000003B-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9782,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.669,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Purina",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000003C",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Purina (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000003C-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9517,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+            "name": "Pet Food",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.6431,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Pedigree",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000003D",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Pedigree (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000003D-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.8779,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+            "name": "Pet Food",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.6257,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "KONG",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000003E",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "KONG (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000003E-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9134,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:dog_toys",
+            "name": "Dog Toys",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.6058,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Blue Buffalo",
+        "entity_id": "FA4E0000-0000-4000-A000-00000000003F",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Blue Buffalo (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-00000000003F-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9232,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+            "name": "Pet Food",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.586,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Milk-Bone",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000040",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Milk-Bone (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000040-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9144,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+            "name": "Pet Food",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.5608,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Nylabone",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000041",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Nylabone (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000041-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9234,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:dog_toys",
+            "name": "Dog Toys",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.5398,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Greenies",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000042",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Greenies (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000042-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9588,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+            "name": "Pet Food",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.521,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Rachael Ray Nutrish",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000043",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Rachael Ray Nutrish (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000043-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9007,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+            "name": "Pet Food",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.497,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Frisco",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000044",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Frisco (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000044-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.8787,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:dog_toys",
+            "name": "Dog Toys",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.4782,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Ruffwear",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000045",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Ruffwear (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000045-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9815,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.4598,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "BarkBox",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000004",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Subscription box of dog toys and treats (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000004-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.9312,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          },
+          {
+            "id": "urn:tag:genre:brand:pet_supplies:dog_toys",
+            "name": "Dog Toys",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.4367,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      },
+      {
+        "name": "Wild One",
+        "entity_id": "FA4E0000-0000-4000-A000-000000000046",
+        "type": "urn:entity",
+        "subtype": "urn:entity:brand",
+        "properties": {
+          "description": "Wild One (synthetic fixture description).",
+          "image": {
+            "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000046-420x-auto.jpg"
+          }
+        },
+        "popularity": 0.95,
+        "tags": [
+          {
+            "id": "urn:tag:genre:brand:pet_supplies",
+            "name": "Pet Supplies",
+            "type": "urn:tag:genre:brand"
+          }
+        ],
+        "query": {
+          "affinity": 0.413,
+          "explainability": {
+            "signal.interests.entities": [
+              {
+                "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+                "score": 1
+              }
+            ]
+          }
+        },
+        "disambiguation": ""
+      }
+    ]
+  },
+  "query": {
+    "explainability": {
+      "signal.interests.entities": [
+        {
+          "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+          "average_score": {
+            "top_3": 1,
+            "top_5": 1,
+            "top_10": 1,
+            "all": 1
+          }
+        }
+      ]
+    }
+  },
+  "duration": 48
+}

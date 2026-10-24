@@ -1,0 +1,32 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Nationally dispersed comparison brand for the heatmap demo. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/search",
+      "params": {
+        "query": "Smashburger",
+        "types": "urn:entity:brand",
+        "take": 5
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "Smashburger",
+      "entity_id": "FA4E0000-0000-4000-A000-000000000006",
+      "types": [
+        "urn:entity:brand"
+      ],
+      "popularity": 0.9514,
+      "properties": {
+        "description": "Fast-casual burger chain (synthetic fixture description).",
+        "image": {
+          "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000006-420x-auto.jpg"
+        }
+      }
+    }
+  ]
+}

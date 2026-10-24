@@ -1,0 +1,32 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Regional brand used for the geographic-reach (heatmap) demo. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/search",
+      "params": {
+        "query": "In-N-Out",
+        "types": "urn:entity:brand",
+        "take": 5
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "In-N-Out Burger",
+      "entity_id": "FA4E0000-0000-4000-A000-000000000005",
+      "types": [
+        "urn:entity:brand"
+      ],
+      "popularity": 0.9902,
+      "properties": {
+        "description": "Regional burger chain (synthetic fixture description).",
+        "image": {
+          "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000005-420x-auto.jpg"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Brand lookup for the senior mark. First hit is the parent brand; line extensions follow. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/search",
+      "params": {
+        "query": "Jack Daniel's",
+        "types": "urn:entity:brand",
+        "take": 5
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "Jack Daniel's",
+      "entity_id": "FA4E0000-0000-4000-A000-000000000001",
+      "types": [
+        "urn:entity:brand"
+      ],
+      "popularity": 0.9981,
+      "properties": {
+        "description": "Tennessee whiskey brand (synthetic fixture description).",
+        "image": {
+          "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000001-420x-auto.jpg"
+        }
+      }
+    },
+    {
+      "name": "Jack Daniel's Tennessee Honey",
+      "entity_id": "FA4E0000-0000-4000-A000-000000000002",
+      "types": [
+        "urn:entity:brand"
+      ],
+      "popularity": 0.9412,
+      "properties": {
+        "description": "Flavoured whiskey line extension (synthetic fixture description)."
+      }
+    },
+    {
+      "name": "Jack Daniel's Country Cocktails",
+      "entity_id": "FA4E0000-0000-4000-A000-000000000003",
+      "types": [
+        "urn:entity:brand"
+      ],
+      "popularity": 0.8127,
+      "properties": {}
+    }
+  ]
+}

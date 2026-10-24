@@ -1,0 +1,262 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Taste analysis: tags that describe the Jack Daniel's audience. Shape merges the two documented variants (taste-analysis reference page and the 'taste tags' recipe): tag_id, name, types, subtype, tag_value, query.affinity. Tag IDs other than urn:tag:genre:brand:* top-level categories are synthetic (UNVERIFIED). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/insights",
+      "params": {
+        "filter.type": "urn:tag",
+        "signal.interests.entities": "FA4E0000-0000-4000-A000-000000000001",
+        "take": 20
+      }
+    }
+  },
+  "success": true,
+  "results": {
+    "tags": [
+      {
+        "tag_id": "urn:tag:adjective:qloo:rugged",
+        "name": "Rugged",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:rugged",
+        "query": {
+          "affinity": 0.981
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:classic",
+        "name": "Classic",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:classic",
+        "query": {
+          "affinity": 0.964
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:authentic",
+        "name": "Authentic",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:authentic",
+        "query": {
+          "affinity": 0.947
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:americana",
+        "name": "Americana",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:americana",
+        "query": {
+          "affinity": 0.93
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:masculine",
+        "name": "Masculine",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:masculine",
+        "query": {
+          "affinity": 0.913
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:heritage",
+        "name": "Heritage",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:heritage",
+        "query": {
+          "affinity": 0.896
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:outdoors",
+        "name": "Outdoors",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:outdoors",
+        "query": {
+          "affinity": 0.879
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:hunting_and_fishing",
+        "name": "Hunting And Fishing",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:hunting_and_fishing",
+        "query": {
+          "affinity": 0.862
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:motorsports",
+        "name": "Motorsports",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:motorsports",
+        "query": {
+          "affinity": 0.845
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:country_music",
+        "name": "Country Music",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:country_music",
+        "query": {
+          "affinity": 0.828
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:bbq",
+        "name": "Bbq",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:bbq",
+        "query": {
+          "affinity": 0.811
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:nightlife",
+        "name": "Nightlife",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:nightlife",
+        "query": {
+          "affinity": 0.794
+        }
+      },
+      {
+        "tag_id": "urn:tag:style:qloo:workwear",
+        "name": "Workwear",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:style:qloo",
+        "tag_value": "urn:tag:style:qloo:workwear",
+        "query": {
+          "affinity": 0.777
+        }
+      },
+      {
+        "tag_id": "urn:tag:style:qloo:western",
+        "name": "Western",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:style:qloo",
+        "tag_value": "urn:tag:style:qloo:western",
+        "query": {
+          "affinity": 0.76
+        }
+      },
+      {
+        "tag_id": "urn:tag:genre:brand:wine_and_spirits",
+        "name": "Wine & Spirits",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:genre:brand",
+        "tag_value": "urn:tag:genre:brand:wine_and_spirits",
+        "query": {
+          "affinity": 0.743
+        }
+      },
+      {
+        "tag_id": "urn:tag:genre:brand:food_and_beverage",
+        "name": "Food & Beverage",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:genre:brand",
+        "tag_value": "urn:tag:genre:brand:food_and_beverage",
+        "query": {
+          "affinity": 0.726
+        }
+      },
+      {
+        "tag_id": "urn:tag:genre:brand:automotive",
+        "name": "Automotive",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:genre:brand",
+        "tag_value": "urn:tag:genre:brand:automotive",
+        "query": {
+          "affinity": 0.709
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:humorous",
+        "name": "Humorous",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:adjective:qloo",
+        "tag_value": "urn:tag:adjective:qloo:humorous",
+        "query": {
+          "affinity": 0.572
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:pet_owners",
+        "name": "Pet Owners",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:lifestyle:qloo",
+        "tag_value": "urn:tag:lifestyle:qloo:pet_owners",
+        "query": {
+          "affinity": 0.555
+        }
+      },
+      {
+        "tag_id": "urn:tag:genre:brand:pet_supplies",
+        "name": "Pet Supplies",
+        "types": [
+          "urn:entity:brand"
+        ],
+        "subtype": "urn:tag:genre:brand",
+        "tag_value": "urn:tag:genre:brand:pet_supplies",
+        "query": {
+          "affinity": 0.538
+        }
+      }
+    ]
+  },
+  "duration": 27
+}

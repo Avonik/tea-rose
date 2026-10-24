@@ -1,0 +1,57 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Keyword search for the junior user's product category. Tag IDs are synthetic (no pet-supply brand tag appears in the docs taxonomy) - UNVERIFIED. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/tags",
+      "params": {
+        "filter.query": "dog toys",
+        "take": 10
+      }
+    }
+  },
+  "success": true,
+  "results": {
+    "tags": [
+      {
+        "id": "urn:tag:genre:brand:pet_supplies:dog_toys",
+        "name": "Dog Toys",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.62
+      },
+      {
+        "id": "urn:tag:category:place:pet_store",
+        "name": "Pet Store",
+        "type": "urn:tag:category:place",
+        "parents": [
+          {
+            "type": "urn:entity:place"
+          }
+        ],
+        "popularity": 0.71
+      },
+      {
+        "id": "urn:tag:keyword:media:dog_toy",
+        "name": "Dog Toy",
+        "type": "urn:tag:keyword:media",
+        "parents": [
+          {
+            "type": "urn:entity:movie"
+          },
+          {
+            "type": "urn:entity:tv_show"
+          }
+        ],
+        "popularity": 0.18
+      }
+    ]
+  },
+  "duration": 9
+}

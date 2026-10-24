@@ -1,0 +1,76 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Keyword search used to build filter.tags for the pet-supply market. The urn:tag:pets:place namespace is documented (Schema & Taxonomy, places); the specific IDs are synthetic - UNVERIFIED. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/tags",
+      "params": {
+        "filter.query": "pet supplies",
+        "take": 10
+      }
+    }
+  },
+  "success": true,
+  "results": {
+    "tags": [
+      {
+        "id": "urn:tag:genre:brand:pet_supplies",
+        "name": "Pet Supplies",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.74
+      },
+      {
+        "id": "urn:tag:genre:brand:pet_supplies:pet_food",
+        "name": "Pet Food",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.69
+      },
+      {
+        "id": "urn:tag:genre:brand:pet_supplies:dog_toys",
+        "name": "Dog Toys",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.62
+      },
+      {
+        "id": "urn:tag:category:place:pet_store",
+        "name": "Pet Store",
+        "type": "urn:tag:category:place",
+        "parents": [
+          {
+            "type": "urn:entity:place"
+          }
+        ],
+        "popularity": 0.71
+      },
+      {
+        "id": "urn:tag:pets:place:dogs_allowed",
+        "name": "Dogs Allowed",
+        "type": "urn:tag:pets:place",
+        "parents": [
+          {
+            "type": "urn:entity:place"
+          }
+        ],
+        "popularity": 0.83
+      }
+    ]
+  },
+  "duration": 9
+}

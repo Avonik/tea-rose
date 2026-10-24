@@ -1,0 +1,103 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Reference case (stripes dispute): clearly higher shared-tag overlap than JD vs BarkBox. urn:tag:style:qloo:athletic is the documented recipe example; the other IDs are synthetic. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/analysis/compare",
+      "params": {
+        "a.signal.interests.entities": "FA4E0000-0000-4000-A000-000000000049",
+        "b.signal.interests.entities": "FA4E0000-0000-4000-A000-00000000004A",
+        "take": 8
+      }
+    },
+    "a_name": "Adidas",
+    "b_name": "Thom Browne"
+  },
+  "duration": 0.42,
+  "results": {
+    "tags": [
+      {
+        "tag_id": "urn:tag:style:qloo:athletic",
+        "name": "Athletic",
+        "type": "urn:tag",
+        "subtype": "urn:tag:style:qloo",
+        "popularity": 0.91,
+        "query": {
+          "score": 0.731
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:iconic",
+        "name": "Iconic",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.87,
+        "query": {
+          "score": 0.702
+        }
+      },
+      {
+        "tag_id": "urn:tag:style:qloo:streetwear",
+        "name": "Streetwear",
+        "type": "urn:tag",
+        "subtype": "urn:tag:style:qloo",
+        "popularity": 0.89,
+        "query": {
+          "score": 0.664
+        }
+      },
+      {
+        "tag_id": "urn:tag:genre:brand:fashion",
+        "name": "Fashion",
+        "type": "urn:tag",
+        "subtype": "urn:tag:genre:brand",
+        "popularity": 0.97,
+        "query": {
+          "score": 0.649
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:premium",
+        "name": "Premium",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.84,
+        "query": {
+          "score": 0.588
+        }
+      },
+      {
+        "tag_id": "urn:tag:style:qloo:preppy",
+        "name": "Preppy",
+        "type": "urn:tag",
+        "subtype": "urn:tag:style:qloo",
+        "popularity": 0.72,
+        "query": {
+          "score": 0.512
+        }
+      },
+      {
+        "tag_id": "urn:tag:genre:brand:fashion:footwear:sneakers",
+        "name": "Sneakers",
+        "type": "urn:tag",
+        "subtype": "urn:tag:genre:brand",
+        "popularity": 0.9,
+        "query": {
+          "score": 0.497
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:luxurious",
+        "name": "Luxurious",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.78,
+        "query": {
+          "score": 0.433
+        }
+      }
+    ]
+  }
+}

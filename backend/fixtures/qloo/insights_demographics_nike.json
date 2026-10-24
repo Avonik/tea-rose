@@ -1,0 +1,39 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Fame-breadth comparison: near gender-neutral, youth-skewed mass brand. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/insights",
+      "params": {
+        "filter.type": "urn:demographics",
+        "signal.interests.entities": "FA4E0000-0000-4000-A000-000000000048"
+      }
+    },
+    "entity_name": "Nike"
+  },
+  "success": true,
+  "results": {
+    "demographics": [
+      {
+        "entity_id": "FA4E0000-0000-4000-A000-000000000048",
+        "query": {
+          "age": {
+            "24_and_younger": 0.36,
+            "25_to_29": 0.24,
+            "30_to_34": 0.09,
+            "35_to_44": -0.05,
+            "45_to_54": -0.22,
+            "55_and_older": -0.33
+          },
+          "gender": {
+            "male": 0.07,
+            "female": -0.07
+          }
+        }
+      }
+    ]
+  },
+  "duration": 41
+}

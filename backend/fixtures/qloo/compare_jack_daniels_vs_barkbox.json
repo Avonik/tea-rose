@@ -1,0 +1,103 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Low shared-tag overlap between the senior mark and the junior-user proxy (all scores < 0.45). Compare responses have NO \"success\" key per the official recipe. Tag IDs beyond the documented namespaces are synthetic. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/analysis/compare",
+      "params": {
+        "a.signal.interests.entities": "FA4E0000-0000-4000-A000-000000000001",
+        "b.signal.interests.entities": "FA4E0000-0000-4000-A000-000000000004",
+        "take": 8
+      }
+    },
+    "a_name": "Jack Daniel's",
+    "b_name": "BarkBox"
+  },
+  "duration": 0.42,
+  "results": {
+    "tags": [
+      {
+        "tag_id": "urn:tag:adjective:qloo:humorous",
+        "name": "Humorous",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.88,
+        "query": {
+          "score": 0.412
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:pet_owners",
+        "name": "Pet Owners",
+        "type": "urn:tag",
+        "subtype": "urn:tag:lifestyle:qloo",
+        "popularity": 0.93,
+        "query": {
+          "score": 0.377
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:casual",
+        "name": "Casual",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.95,
+        "query": {
+          "score": 0.341
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:outdoors",
+        "name": "Outdoors",
+        "type": "urn:tag",
+        "subtype": "urn:tag:lifestyle:qloo",
+        "popularity": 0.91,
+        "query": {
+          "score": 0.296
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:americana",
+        "name": "Americana",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.79,
+        "query": {
+          "score": 0.188
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:subscription_shopping",
+        "name": "Subscription Shopping",
+        "type": "urn:tag",
+        "subtype": "urn:tag:lifestyle:qloo",
+        "popularity": 0.74,
+        "query": {
+          "score": 0.121
+        }
+      },
+      {
+        "tag_id": "urn:tag:adjective:qloo:rugged",
+        "name": "Rugged",
+        "type": "urn:tag",
+        "subtype": "urn:tag:adjective:qloo",
+        "popularity": 0.82,
+        "query": {
+          "score": 0.097
+        }
+      },
+      {
+        "tag_id": "urn:tag:lifestyle:qloo:nightlife",
+        "name": "Nightlife",
+        "type": "urn:tag",
+        "subtype": "urn:tag:lifestyle:qloo",
+        "popularity": 0.86,
+        "query": {
+          "score": 0.064
+        }
+      }
+    ]
+  }
+}

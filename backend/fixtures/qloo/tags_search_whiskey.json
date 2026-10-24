@@ -1,0 +1,68 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Keyword search for the senior mark's category. urn:tag:genre:brand:wine_and_spirits is documented; the sub-tags are synthetic - UNVERIFIED. Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/tags",
+      "params": {
+        "filter.query": "whiskey",
+        "take": 10
+      }
+    }
+  },
+  "success": true,
+  "results": {
+    "tags": [
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits",
+        "name": "Wine & Spirits",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.88
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:whiskey",
+        "name": "Whiskey",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.81
+      },
+      {
+        "id": "urn:tag:genre:place:bar:whiskey_bar",
+        "name": "Whiskey Bar",
+        "type": "urn:tag:genre:place",
+        "parents": [
+          {
+            "type": "urn:entity:place"
+          }
+        ],
+        "popularity": 0.77
+      },
+      {
+        "id": "urn:tag:keyword:media:whiskey",
+        "name": "Whiskey",
+        "type": "urn:tag:keyword:media",
+        "parents": [
+          {
+            "type": "urn:entity:movie"
+          },
+          {
+            "type": "urn:entity:tv_show"
+          }
+        ],
+        "popularity": 0.34
+      }
+    ]
+  },
+  "duration": 9
+}

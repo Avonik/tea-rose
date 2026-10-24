@@ -1,0 +1,19 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "HTTP 401 returned when a hackathon key is used against api.qloo.com or staging.api.qloo.com (hackathon developer guide). Body field names follow the documented error schema {code, reason, message}; the exact 401 body is UNVERIFIED (the guide quotes \"No API key found in request\" for a missing header). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://api.qloo.com",
+      "path": "/v2/insights",
+      "params": {
+        "filter.type": "urn:entity:brand",
+        "signal.interests.entities": "FA4E0000-0000-4000-A000-000000000001"
+      }
+    },
+    "http_status": 401
+  },
+  "code": 401,
+  "reason": "Unauthorized",
+  "message": "Invalid API key for this environment."
+}

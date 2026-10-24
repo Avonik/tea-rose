@@ -1,0 +1,32 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Proxy brand for the junior user (dog-toy category). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/search",
+      "params": {
+        "query": "BarkBox",
+        "types": "urn:entity:brand",
+        "take": 5
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "BarkBox",
+      "entity_id": "FA4E0000-0000-4000-A000-000000000004",
+      "types": [
+        "urn:entity:brand"
+      ],
+      "popularity": 0.9312,
+      "properties": {
+        "description": "Subscription box of dog toys and treats (synthetic fixture description).",
+        "image": {
+          "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000004-420x-auto.jpg"
+        }
+      }
+    }
+  ]
+}

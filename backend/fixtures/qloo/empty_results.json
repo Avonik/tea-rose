@@ -1,0 +1,22 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "HTTP 200 with an empty entities array: what the API returns when a parameter is not valid for the filter.type (silently ignored, here filter.location.query on brands) or when no data exists (developer guide, 'Empty Results'). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/v2/insights",
+      "params": {
+        "filter.type": "urn:entity:brand",
+        "filter.location.query": "Nashville",
+        "filter.tags": "urn:tag:genre:brand:pet_supplies:dog_toys"
+      }
+    },
+    "http_status": 200
+  },
+  "success": true,
+  "results": {
+    "entities": []
+  },
+  "duration": 14
+}

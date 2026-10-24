@@ -106,13 +106,19 @@ def parse_search(raw: dict[str, Any]) -> list[Entity]:
 
 
 def parse_tag(item: dict[str, Any], rank: int | None = None) -> Tag:
+    """Tags come in two spellings: /v2/tags uses id/type; insights and compare use
+    tag_id/subtype, with the score under query.affinity (insights) or query.score (compare)."""
     q = _query_block(item)
     types = item.get("types") or []
+    subtype = item.get("subtype")
+    ttype = item.get("type")
+    # Prefer the specific subtype over the generic "urn:tag" type.
+    tag_type = subtype or (ttype if ttype and ttype != "urn:tag" else None) or (types[0] if types else ttype)
     return Tag(
         tag_id=str(_first(item, "tag_id", "id")),
         name=str(_first(item, "name", default="")),
-        tag_type=_first(item, "type", "subtype", default=(types[0] if types else None)),
-        affinity=_norm_affinity(_first(q, "affinity", default=item.get("affinity"))),
+        tag_type=tag_type,
+        affinity=_norm_affinity(_first(q, "affinity", "score", default=item.get("affinity"))),
         rank=rank,
     )
 
@@ -168,6 +174,9 @@ def parse_demographics(raw: dict[str, Any]) -> Demographics:
 
 
 def parse_compare(raw: dict[str, Any]) -> CompareResult:
+    """Documented shape: results.tags[{tag_id, name, subtype, query{score}}] — the endpoint
+    returns TAGS that characterize how the two groups differ. Entities are parsed too in case
+    the live API adds them; today that list is expected to be empty."""
     res = _results(raw)
     ents: list[CompareEntity] = []
     for it in _first(res, "entities", default=[]) or []:
