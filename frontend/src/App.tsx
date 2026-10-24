@@ -70,6 +70,23 @@ function Topbar() {
   )
 }
 
+const BASE_TITLE = 'Tea Rose · Trademark evidence from the taste graph'
+const PAGE_TITLE: Record<string, string> = {
+  '/': BASE_TITLE,
+  '/analyze': 'Analyze a dispute · Tea Rose',
+  '/method': 'Method · Tea Rose',
+}
+
+/** Per-page tab titles. Run and case pages set their own from the case caption (see RunView). */
+function DocumentTitle() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    if (pathname.startsWith('/run/') || pathname.startsWith('/case/')) return
+    document.title = PAGE_TITLE[pathname] ?? 'Page not found · Tea Rose'
+  }, [pathname])
+  return null
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
@@ -86,6 +103,7 @@ function Layout() {
         Skip to content
       </a>
       <ScrollToTop />
+      <DocumentTitle />
       <Topbar />
       <main id="main" tabIndex={-1}>
         <Suspense fallback={<StateView kind="loading" title="Loading" />}>

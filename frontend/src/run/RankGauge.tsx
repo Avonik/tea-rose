@@ -1,4 +1,4 @@
-import { ordinal, pct } from '../lib/format'
+import { num, ordinal, readPercentile } from '../lib/format'
 import type { Side } from '../types'
 
 /**
@@ -53,7 +53,7 @@ export default function RankGauge({
           )}
         </div>
         <div className="gauge__value">
-          <span className="gauge__pct num">{p == null ? '–' : p.toFixed(2)}</span>
+          <span className="gauge__pct num">{num(p)}</span>
           <span className="caption faint">percentile</span>
         </div>
       </div>
@@ -62,7 +62,17 @@ export default function RankGauge({
         <span>median</span>
         <span>#1 (closest)</span>
       </div>
-      {p != null && <span className="sr-only">Percentile {pct(p)}.</span>}
+      {p != null && (
+        <p className="gauge__read footnote">
+          {rank != null && universe ? (
+            <>
+              <span className="num">{Math.max(0, universe - rank).toLocaleString('en-US')}</span> of the{' '}
+              <span className="num">{universe.toLocaleString('en-US')}</span> {universeLabel} rank lower:{' '}
+            </>
+          ) : null}
+          {readPercentile(p)}.
+        </p>
+      )}
     </figure>
   )
 }

@@ -30,6 +30,9 @@ function HowItWorks() {
           <li>
             <span className="how__key how__key--code" aria-hidden="true" /> Deterministic code
           </li>
+          <li>
+            <span className="how__key how__key--both" aria-hidden="true" /> Agent writes, code builds the appendix
+          </li>
         </ul>
       </div>
       <ol className="how__steps">
@@ -122,8 +125,13 @@ export default function ShowcasePage() {
             Courts ask whether Jack Daniel’s drinkers and dog-toy buyers are the same people.
           </h1>
           <p className="hero__lead">
-            Today that is a six-figure survey. Tea Rose answers it in two minutes from Qloo’s taste graph, and shows its
-            work.
+            Today that question goes to a consumer survey. Tea Rose gives you triage evidence from Qloo’s taste graph in
+            two minutes, before you commission one, and every number traces to a logged Qloo query.
+          </p>
+          <p className="hero__note">
+            A consumer survey costs from about $15,000–$25,000 for a basic internet survey up to the commonly cited
+            $50,000–$100,000, and takes from 7–10 business days to about two months (IPWatchdog 2019; Michigan Bar Journal
+            2020; California Lawyers Association 2025).
           </p>
           <div className="hero__actions">
             <Link to="/analyze" className="btn btn--primary btn--lg">
@@ -134,18 +142,18 @@ export default function ShowcasePage() {
               How the numbers are made
             </Link>
           </div>
-          <ul className="hero__facts" aria-label="What a memo contains">
+          <ul className="hero__facts" aria-label="The three survey questions Tea Rose answers">
             <li>
-              <strong>Shared purchasers</strong>
-              <span>rank among category peers, both directions</span>
+              <strong>Same customers?</strong>
+              <span>Relatedness and channels: where each brand ranks among the other’s fans</span>
             </li>
             <li>
-              <strong>Fame</strong>
-              <span>breadth across six age groups and both genders</span>
+              <strong>Famous with everyone?</strong>
+              <span>Dilution: how evenly the mark is liked across age and gender</span>
             </li>
             <li>
-              <strong>Zone of reputation</strong>
-              <span>where the mark is actually known</span>
+              <strong>Known where?</strong>
+              <span>Zone of reputation: the map of where the mark is actually liked</span>
             </li>
           </ul>
         </div>

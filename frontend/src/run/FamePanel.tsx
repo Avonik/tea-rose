@@ -85,17 +85,20 @@ export default function FamePanel({ ev, senior }: { ev: FameEvidence; senior: st
       <div className="fame-stats stats">
         <div className="stat">
           <span className="stat__value">{num(ev.breadth_score)}</span>
-          <span className="stat__label">Breadth score (0–1)</span>
+          <span className="stat__label">Breadth across age and gender groups</span>
+          <span className="stat__hint">1.00 = liked by every group; low = a niche audience</span>
           {ev.breadth_score != null && <Meter value={ev.breadth_score} color="var(--senior)" label={`Breadth ${num(ev.breadth_score)}`} />}
         </div>
         <div className="stat">
           <span className="stat__value">{pct(ev.popularity_percentile, ev.popularity_percentile != null && ev.popularity_percentile > 0.99 ? 1 : 0)}</span>
           <span className="stat__label">Popularity percentile</span>
+          <span className="stat__hint">More popular than this share of brands in Qloo</span>
           {ev.popularity_percentile != null && <Meter value={ev.popularity_percentile} color="var(--senior)" label={`Popularity ${pct(ev.popularity_percentile)}`} />}
         </div>
         <div className="stat">
           <span className="stat__value">{pct(ev.heatmap_coverage)}</span>
           <span className="stat__label">National heatmap cells above median</span>
+          <span className="stat__hint">How much of the US map shows above-median affinity</span>
           {ev.heatmap_coverage != null && <Meter value={ev.heatmap_coverage} color="var(--senior)" label={`Coverage ${pct(ev.heatmap_coverage)}`} />}
         </div>
       </div>

@@ -76,6 +76,12 @@ export default function FollowupBox({ running, onAsk }: { running: boolean; onAs
       <div aria-live="polite">
         {err && <Notice kind="error">{err}</Notice>}
         {sent && running && <p className="caption faint">Working on: “{sent}”. Watch the trace for progress.</p>}
+        {sent && !running && !err && (
+          <p className="footnote muted followup__done">
+            Answered: “{sent}”. The memo above now has the new section, and any new queries are in its appendix.{' '}
+            <a href="#memo">Go to the memo</a>
+          </p>
+        )}
       </div>
     </section>
   )

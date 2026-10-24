@@ -211,6 +211,7 @@ function Intake({ me, limits, onSignedOut }: { me: AuthMe; limits?: Limits; onSi
     try {
       setText(await api.sample(name))
       setFile(null)
+      setError(null)
     } catch (e) {
       setError(`Could not load the sample: ${errorMessage(e)}`)
     } finally {
@@ -361,7 +362,7 @@ function Intake({ me, limits, onSignedOut }: { me: AuthMe; limits?: Limits; onSi
           <span className="hint num" id={hintId}>
             {file ? 'One file per run · max 2 MB' : `${text.length.toLocaleString('en-US')} characters · drop a file anywhere on this card`}
           </span>
-          <button className="btn btn--primary" type="submit" disabled={busy || outOfRuns}>
+          <button className="btn btn--primary" type="submit" disabled={busy || outOfRuns || loadingSample}>
             {busy ? <span className="spinner" aria-hidden="true" /> : null}
             {busy ? 'Starting' : 'Analyze'}
             {!busy && <IconArrow size={15} />}

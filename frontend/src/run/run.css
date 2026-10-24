@@ -728,6 +728,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--s-4);
+  align-items: start;
 }
 
 .resolve-side {
@@ -1034,7 +1035,9 @@
 
 .gauge__scale {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* equal outer columns keep "median" under the 50% tick even when the end labels differ in width */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: var(--s-2);
   margin-right: calc(4.5rem + var(--s-4));
 }
 
@@ -1751,4 +1754,93 @@ a.ref-chip:hover {
   .followup__form {
     grid-template-columns: 1fr;
   }
+}
+
+/* Plain-words readings under the numbers: what a percentile means for this case */
+.gauge__read {
+  margin: 0;
+  color: var(--text-2);
+}
+
+.stat__read {
+  display: block;
+  margin-top: var(--s-1);
+  font-size: var(--fs-footnote);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.stat__read::first-letter {
+  text-transform: uppercase;
+}
+
+.stat__hint {
+  display: block;
+  font-size: var(--fs-caption);
+  color: var(--text-3);
+}
+
+/* Bottom line: the memo's answer, up top, before the evidence that backs it */
+.bottom-line {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.bottom-line__headline {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-title3);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  max-width: 48rem;
+}
+
+.bottom-line__leans {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+}
+
+.bottom-line__leans li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-footnote);
+  color: var(--text-2);
+}
+
+.bottom-line__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+}
+
+.followup__done {
+  margin-top: var(--s-3);
+}
+
+/* Touch targets: disclosure rows and the section index reach 44 px on touch screens */
+@media (pointer: coarse) {
+  .disclosure > summary {
+    min-height: 2.75rem;
+  }
+
+  .toc a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+}
+
+/* Fame stats: hints wrap to different heights; keep the three meters on one baseline */
+.fame-stats .stat > .meter {
+  margin-top: auto;
+}
+
+.fame-stats .stat__hint {
+  margin-bottom: var(--s-2);
 }

@@ -1,9 +1,10 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { IconBack, IconPrint } from '../components/icons'
-import { Notice, SkeletonCard } from '../components/ui'
-import { sideNames } from '../lib/format'
+import { LeanChip, Notice, SkeletonCard } from '../components/ui'
+import { factorLabel, sideNames } from '../lib/format'
 import type { Connection } from '../lib/useLiveRun'
-import type { Analysis, AnalysisResult, TraceEvent } from '../types'
+import type { Analysis, AnalysisResult, Memo, TraceEvent } from '../types'
 import BridgingPanel from './BridgingPanel'
 import CaseHeader from './CaseHeader'
 import FamePanel from './FamePanel'
@@ -30,6 +31,35 @@ function Pending({ label }: { label: string }) {
       </p>
       <SkeletonCard lines={3} />
     </div>
+  )
+}
+
+/** The memo's answer at the top of the page, so the verdict is legible before the evidence. */
+function BottomLine({ memo }: { memo: Memo }) {
+  const n = memo.appendix_queries.length
+  return (
+    <section className="card bottom-line no-print" aria-labelledby="bottom-line-title">
+      <p className="eyebrow" id="bottom-line-title">
+        Bottom line
+      </p>
+      <p className="bottom-line__headline">{memo.headline}</p>
+      {memo.findings.length > 0 && (
+        <ul className="bottom-line__leans" aria-label="Factor findings">
+          {memo.findings.map((f) => (
+            <li key={f.factor}>
+              <span>{factorLabel(f.factor)}</span>
+              <LeanChip lean={f.lean} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="bottom-line__foot footnote muted">
+        <a href="#memo">Read the memo</a>
+        <span>
+          Every number below traces to one of <span className="num">{n}</span> logged Qloo {n === 1 ? 'query' : 'queries'}.
+        </span>
+      </p>
+    </section>
   )
 }
 
@@ -65,6 +95,10 @@ export default function RunView({
   const routed = r.routing?.analyses
   const order: Analysis[] = ['overlap', 'bridging', 'fame', 'zone']
   const title = r.extraction ? `${names.senior} v. ${names.junior}` : undefined
+
+  useEffect(() => {
+    document.title = `${title ?? (running ? 'Analyzing' : 'Run')} · Tea Rose`
+  }, [title, running])
 
   function evidenceFor(a: Analysis) {
     if (ev?.[a]) {
@@ -148,6 +182,8 @@ export default function RunView({
               <p className="footnote muted">{r.input_excerpt}</p>
             </section>
           )}
+
+          {r.memo && <BottomLine memo={r.memo} />}
 
           {r.resolution ? <ResolutionCard resolution={r.resolution} /> : running && r.extraction ? <Pending label="Resolving brands in Qloo" /> : null}
 

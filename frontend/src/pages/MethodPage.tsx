@@ -12,6 +12,27 @@ interface BacktestRow {
 
 function BacktestTable({ rows, note, status }: { rows: BacktestRow[]; note?: string; status?: string }) {
   if (!rows.length) return <StateView kind="empty" title="No back-test results yet" body={note} />
+  // Before the back-test has run, a table of "pending" pills reads as broken. Show the
+  // pre-registered metrics as a plan with one status instead.
+  if (status === 'pending' && rows.every((r) => r.value === 'pending'))
+    return (
+      <div className="card card--flat backtest-plan">
+        <p className="backtest-plan__status">
+          <span className="chip chip--outline">Pre-registered</span>
+          <span className="footnote muted">{note}</span>
+        </p>
+        <ol className="backtest-plan__list">
+          {rows.map((r, i) => (
+            <li key={i}>
+              <span>{r.metric}</span>
+              {r.baseline && r.baseline !== 'n/a' && (
+                <span className="caption faint"> · baseline: {r.baseline.replace(/:\s*pending$/i, '').toLowerCase()}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    )
   return (
     <>
       <div className="table-scroll">
@@ -86,8 +107,10 @@ export default function MethodPage() {
         <p className="eyebrow">Method</p>
         <h1>How Tea Rose turns taste data into evidence</h1>
         <p className="method__lead muted">
-          Three questions that are decided today on expensive surveys or on intuition are all questions about consumer
-          taste. Here is what Tea Rose measures for each, how a number is computed, and where it stops.
+          Three questions that are argued today with consumer surveys (about $15,000–$25,000 for a basic internet survey, up
+          to the commonly cited $50,000–$100,000, and from 7–10 business days to about two months) or with intuition are
+          all questions about consumer taste. Tea Rose is triage before you commission a survey: here is what it measures
+          for each question, how a number is computed, and where it stops.
         </p>
       </header>
 
@@ -138,6 +161,16 @@ export default function MethodPage() {
               131st of 300 pet-supply brands” is a statement a lawyer can check; a raw affinity is not.
             </p>
             <dl className="formulas">
+              <div>
+                <dt>Reading a percentile</dt>
+                <dd>
+                  Every overlap and bridging number is a position in a peer set, from 0 to 1. <strong>0.90</strong> means
+                  the brand ranks ahead of about nine in ten of its peers for that audience: unusually close.{' '}
+                  <strong>0.50</strong> is the middle of the pack: the taste graph shows no pull either way.{' '}
+                  <strong>Near 0</strong> means it barely shows up. It is never a share of consumers, so 0.52 does not
+                  mean “52% of buyers overlap”.
+                </dd>
+              </div>
               <div>
                 <dt>Overlap, one direction</dt>
                 <dd>

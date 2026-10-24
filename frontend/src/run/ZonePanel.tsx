@@ -94,6 +94,7 @@ export default function ZonePanel({ ev, senior, junior, juniorIsProxy }: { ev: Z
             <div className="stat">
               <span className="stat__value">{ev.geographic_overlap == null ? '–' : num(ev.geographic_overlap)}</span>
               <span className="stat__label">Geographic overlap with the junior side (cosine)</span>
+              <span className="stat__hint">1 = the two maps match; 0 = no places in common</span>
             </div>
           </div>
           {ev.top_regions.length > 0 && (

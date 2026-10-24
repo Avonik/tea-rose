@@ -135,20 +135,23 @@ table {
   border: 0;
 }
 
+/* Hidden off-canvas with no shadow (its shadow used to leak a grey smudge into the top-left corner);
+   slides in from its edge on focus, animating transform only. */
 .skip-link {
   position: absolute;
   left: var(--s-4);
-  top: -3rem;
+  top: var(--s-3);
   z-index: 100;
   padding: var(--s-2) var(--s-4);
   border-radius: var(--r-sm);
   background: var(--surface);
-  box-shadow: var(--shadow-2);
-  transition: top var(--dur-2) var(--ease-out);
+  transform: translateY(calc(-100% - 2rem));
+  transition: transform var(--dur-2) var(--ease-out);
 }
 
 .skip-link:focus {
-  top: var(--s-3);
+  transform: none;
+  box-shadow: var(--shadow-2);
 }
 
 .num {

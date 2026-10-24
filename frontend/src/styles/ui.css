@@ -535,7 +535,8 @@
   vertical-align: top;
 }
 
-.table tr:last-child td {
+.table tbody tr:last-child > td,
+.table tbody tr:last-child > th {
   border-bottom: 0;
 }
 

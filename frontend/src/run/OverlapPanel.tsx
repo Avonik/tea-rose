@@ -1,4 +1,4 @@
-import { num, possessive, signed } from '../lib/format'
+import { num, possessive, readPercentile, signed } from '../lib/format'
 import type { CompareRow, OverlapEvidence, RankedPeer, Resolution, Side } from '../types'
 import RankGauge from './RankGauge'
 
@@ -57,7 +57,7 @@ function CompareList({ title, rows, side, kind }: { title: string; rows: Compare
     <div className={`compare-list compare-list--${side}`}>
       <h4 className="compare-list__title">{title}</h4>
       <ul>
-        {rows.slice(0, 10).map((r, i) => {
+        {(kind === 'distinct' ? [...rows].sort((a, b) => Math.abs(b.delta ?? 0) - Math.abs(a.delta ?? 0)) : rows).slice(0, 10).map((r, i) => {
           const v = rowValue(r)
           return (
             <li key={String(r.tag_id ?? r.entity_id ?? i)}>
@@ -107,12 +107,14 @@ export default function OverlapPanel({
 
       <div className="overlap-hero">
         <div className="stat">
-          <span className="stat__value">{ev.symmetric_percentile == null ? '–' : ev.symmetric_percentile.toFixed(2)}</span>
-          <span className="stat__label">Symmetric overlap percentile (0 = no overlap, 1 = strongest)</span>
+          <span className="stat__value">{num(ev.symmetric_percentile)}</span>
+          <span className="stat__label">Shared-purchaser percentile, both directions averaged</span>
+          {ev.symmetric_percentile != null && <span className="stat__read">{readPercentile(ev.symmetric_percentile)}</span>}
         </div>
         <p className="footnote muted overlap-hero__how">
-          Mean of both directions. Each direction ranks one side among its category peers when Qloo is seeded with the
-          other side. Ranks, not raw affinity, because affinity is normalized per query.
+          How to read it: ask Qloo what fans of one brand also like, then find the other brand among its category peers.
+          1.00 means it ranks first, 0.50 means the middle of the pack, near 0 means it barely shows up. Ranks, not raw
+          affinity, because Qloo normalizes affinity within each query.
         </p>
       </div>
 

@@ -1,13 +1,36 @@
 import type { AnalysisResult, Claim, ProxyResolution, Side, TagOption } from '../types'
 
+/**
+ * Round half away from zero at `digits` decimals. `toFixed` alone rounds the binary value, so
+ * 0.475 showed as "0.47" while the trace and the memo say 0.48.
+ */
+export const fixed = (v: number, digits = 2) => {
+  const f = 10 ** digits
+  const r = Math.round(Math.abs(v) * f + 1e-9) / f
+  return (v < 0 && r !== 0 ? -r : r).toFixed(digits)
+}
+
 export const pct = (v: number | null | undefined, digits = 0) =>
-  v == null || Number.isNaN(v) ? '–' : `${(v * 100).toFixed(digits)}%`
+  v == null || Number.isNaN(v) ? '–' : `${fixed(v * 100, digits)}%`
 
 export const num = (v: number | null | undefined, digits = 2) =>
-  v == null || Number.isNaN(v) ? '–' : v.toFixed(digits)
+  v == null || Number.isNaN(v) ? '–' : fixed(v, digits)
 
 export const signed = (v: number | null | undefined, digits = 2) =>
-  v == null || Number.isNaN(v) ? '–' : `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(digits)}`
+  v == null || Number.isNaN(v) ? '–' : `${v > 0 ? '+' : v < 0 ? '−' : ''}${fixed(Math.abs(v), digits)}`
+
+/**
+ * Plain-words reading of a 0–1 percentile inside a peer set. 0.50 is the middle of the pack, which
+ * means "no signal either way", not "half overlap". Descriptive bands, never a legal conclusion.
+ */
+export function readPercentile(p: number | null | undefined): string {
+  if (p == null || Number.isNaN(p)) return 'not computable'
+  if (p >= 0.9) return 'top tenth of the peer set: an unusually close audience'
+  if (p >= 0.65) return 'clearly above the middle of the peer set'
+  if (p > 0.35) return 'near the middle of the peer set: no signal either way'
+  if (p > 0.1) return 'below the middle of the peer set'
+  return 'bottom tenth of the peer set: the audiences barely meet'
+}
 
 export const ordinal = (n: number) => `#${n.toLocaleString('en-US')}`
 
