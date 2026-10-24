@@ -1,0 +1,854 @@
+SOURCE URL: https://storage.courtlistener.com/pdf/2023/12/05/vans_inc._v._mschf_product_studio_inc..pdf
+DOCUMENT TYPE: Opinion, U.S. Court of Appeals for the Second Circuit, Vans, Inc. v. MSCHF Product Studio, Inc., No. 22-1006, 88 F.4th 125 (affirming preliminary injunction; Polaroid likelihood-of-confusion analysis); full text, PDF-extracted
+DATE: 2023-12-05
+
+
+22-1006
+Vans, Inc. v. MSCHF Product Studio, Inc.
+
+                            In the
+
+         United States Court of Appeals
+
+                  For the Second Circuit
+
+                               ______________
+
+                                          August Term, 2022
+
+(Argued: September 28, 2022 Decided: December 5, 2023)
+
+                                          Docket No. 22-1006
+                                            ______________
+
+         VANS, INC., VF OUTDOOR, LLC.,
+
+                                          Plaintiffs-Appellees,
+
+                                          –v.–
+
+         MSCHF PRODUCT STUDIO, INC.,
+
+                                          Defendant-Appellant.
+
+                                          ______________
+
+Before:  JACOBS, CHIN, and ROBINSON, Circuit Judges.
+                           ______________
+
+        Defendant-Appellant MSCHF Product Studio, Inc. (“MSCHF”), the creator
+of the Wavy Baby sneaker, appeals from the April 29, 2022 order of the United
+States District Court for the Eastern District of New York (Kuntz, J.) granting the
+request by Plaintiffs-Appellees Vans, Inc., and VF Outdoor, LLC (collectively
+“Vans”) for a temporary restraining order and preliminary injunction enjoining
+MSCHF’s use of Vans’ trademark and trade dress in the Wavy Baby sneakers.
+        On appeal, MSCHF argues that the district court erred by failing to apply
+enhanced First Amendment protections in its likelihood-of-confusion analysis
+under the Lanham Act and in assessing the likelihood of confusion; the
+preliminary injunction is an unconstitutional prior restraint on MSCHF’s free
+expression; the district court erred in requiring MSCHF to place its Wavy Baby
+revenues in escrow; and the district court erred by failing to make a bond
+determination.
+
+        The main issues in this appeal are governed by the United States Supreme
+Court’s recent decision in Jack Daniel’s Properties, Inc. v. VIP Products LLC, 599 U.S.
+140 (2023). Applying Jack Daniel’s, we conclude that Vans is likely to prevail in
+arguing that MSCHF’s Wavy Baby shoes used Vans’ marks and trade dress as
+source identifiers, and thus no special First Amendment protections apply to
+protect MSCHF against Vans’ trademark infringement claim. As such, the district
+court did not err in concluding that Vans is likely to prevail on the merits of its
+trademark infringement claim in light of the likelihood of confusion as to the
+source of the Wavy Baby shoes. We further conclude that the district court did not
+err in requiring MSCHF to escrow its revenues from Wavy Baby sales, and that
+the district court was not required to make a bond determination because MSCHF
+never requested security. We therefore AFFIRM.
+
+                                            ______________
+
+                                          DAVID H. BERNSTEIN (Megan K. Bannigan,
+                                          Debevoise & Plimpton LLP, New York, NY;
+                                          William D. Patterson, Swanson, Martin & Bell,
+                                          LLP, Chicago IL, on the brief), for Defendant-
+                                          Appellant.
+
+                                          LUCY JEWETT WHEATLEY, McGuire Woods LLP,
+                                          Richmond, VA (Philip A. Goldstein, McGuire
+                                          Woods LLP, New York, NY; Tanya L. Greene,
+                                          McGuire Woods LLP, Los Angeles, CA, on the
+                                          brief), for Plaintiffs-Appellees.
+
+                                          Vivek Jayaram, Jayaram Law Group, Chicago, IL,
+                                          for Amicus Curiae Daniel Arsham in Support of
+                                          Defendant-Appellant.
+
+                                                          2
+Ronald D. Coleman, Dhillon Law Group Inc.,
+Newark, NJ, for Amici Curiae Emmanuel Perrotin,
+Jean-Paul Engelen in Support of Defendant-Appellant.
+
+Mark A. Lemley, Lex Lumina PLLC, New York,
+NY, for Amici Curiae Intellectual Property Professors
+in Support of Plaintiffs-Appellees.
+
+John P. O’Herron (Zachary D. Cohen, Rachel W.
+Adams, on the brief), ThompsonMcMullan, P.C.,
+Richmond, VA, for Amici Curiae American Apparel &
+Footwear Association, Footwear Distributors &
+Retailers of America, Council of Fashion Designers of
+America, Inc., and Accessories Council in Support of
+Plaintiffs-Appellees.
+
+Stanley Panikowski, DLA Piper LLP (US), San
+Diego, CA (Tamar Y. Duvdevani, DLA Piper LLP
+(US), New York, NY, on the brief), for Amicus Curiae
+Nike, Inc., in Support of Plaintiffs-Appellees.
+
+Vijay K. Toke, Rimon P.C., San Francisco, CA
+(Martin Schwimmer, Leason Ellis LLP, White
+Plains, NY; David Donahue, Fross Zelnick
+Lehrman & Zissu, P.C., New York, NY, on the brief),
+for Amicus Curiae International Trademark
+Association in Support of neither party.
+
+Rhett O. Millsaps II, Lex Lumina PLLC, New York,
+NY (Mark P. McKenna, Christopher J. Sprigman,
+Rebecca Tushnet, on the brief), for Amici Curiae
+Authors Alliance, Mason Rothschild, Alfred Steiner in
+Support of neither party.
+
+ ______________
+
+            3
+PER CURIAM:
+        In this case, defendant-appellant MSCHF Product Studio, Inc. (“MSCHF”),
+
+created a sneaker, the Wavy Baby, that purported to parody the Old Skool shoe,
+created and marketed by plaintiff-appellee Vans, Inc. (“Vans”), and thereby
+comment on the consumerism inherent in sneakerhead culture. MSCHF altered
+the features of an Old Skool sneaker by distorting Vans’ trademarks and trade
+dress, resulting in a shoe that was “exceedingly wavy.” After MSCHF engaged in
+an online marketing campaign, it sold 4,306 pairs of the Wavy Baby in one hour.
+Vans, unsurprisingly, was not amused.
+
+        The central issue in this case is whether and when an alleged infringer who
+uses another’s trademarks for parodic purposes is entitled to heightened First
+Amendment protections, rather than the Lanham Act’s traditional likelihood of
+confusion inquiry.
+
+        The Supreme Court recently addressed this issue in Jack Daniel’s Properties,
+Inc. v. VIP Products LLC, 599 U.S. 140 (2023). There, the Court held that, even if an
+alleged infringer used another’s trademarks for an expressive purpose, special
+First Amendment protections did not apply if the trademarks were used for source
+identification—that is, if the alleged infringer was “trading on the good will of the
+trademark owner to market its own goods.” Id. at 156 (citation omitted). Applying
+
+                                                          4
+Jack Daniel’s, we conclude that no special First Amendment protections apply to
+insulate MSCHF against Vans’ trademark infringement claim.1 As to those
+trademark infringement claims, the district court did not err in concluding that
+Vans is likely to prevail on the merits. We further conclude that the district court
+did not err in requiring MSCHF to escrow its revenues from Wavy Baby sales, and
+that the district court was not required to make a bond determination because
+MSCHF never requested security. We therefore AFFIRM.
+
+                                          BACKGROUND2
+I. Facts
+
+        A. Vans
+        Vans is a globally known footwear and apparel company that specializes in
+skateboard-friendly shoes and sneakers. The company, founded in 1966,
+originally catered to customers in Southern California. Vans became popular
+among skateboarders, celebrities, and the public. One of Vans’ most recognizable
+products is its “Old Skool” shoe, shown below:
+
+1 After we heard oral argument, we held the case pending a decision by the Supreme Court in
+Jack Daniel’s. After the Supreme Court ruled, the parties submitted supplemental briefing.
+2 This account is drawn from the record relied upon by the district court, comprising the parties’
+declarations and exhibits.
+
+                                                          5
+                      Vans Old Skool Shoe
+
+Jt. App’x at 13, 15.
+
+The Old Skool trade dress consists of a combination of elements, including:
+
+(1) the Vans Side Stripe Mark on the upper shoe; (2) a rubberized sidewall of
+
+uniform height around the shoe’s perimeter; (3) a three-tiered or grooved sidewall;
+
+(4) a textured toe box; (5) visible stitching; and (6) the placement and proportion
+
+of each of these elements in relation to one another. Jt. App’x at 256. It also
+
+features a distinctive “waffle sole” design. Id. at 258. The Old Skool is one of Vans’
+
+most popular shoes and sold for about $60 a pair. Most Old Skool shoes are black
+
+and white, but Vans has expanded the shoes to come in a variety of colors or color
+
+arrangements.
+
+        Vans often collaborates with artists and celebrities to design and sell special
+edition versions of its shoes, including the Old Skools. Beyond official
+collaborations, many of the rich and famous have been photographed wearing the
+Vans Old Skool. In short, the Old Skool is an iconic Vans sneaker, easily
+
+                      6
+recognizable by both “sneakerheads” and the uninitiated. Id. at 273 (explaining
+that sneakerheads are people who collect shoes to display them, but “rarely” to
+wear them).
+
+        B. MSCHF
+        MSCHF is a Brooklyn-based art collective “known as (and for) MSCHF.” Id.
+at 271. MSCHF’s mission is to use artwork “to start a conversation about consumer
+culture . . . by participating in consumer culture.” Id. at 486–87. MSCHF
+recontextualizes everyday objects as a means of commenting on contemporary
+society. MSCHF’s work has been displayed in museums, galleries, auction houses,
+and art shows worldwide, including Phillips Auction House, Art Basel, the Design
+Museum of London, and the Perrotin gallery.
+        MSCHF’s works are often sold with “manifestos” that explain the work’s
+commentary and are sold in “drops,” or prescribed sales periods. Recent drops
+have critiqued music, the political system, consumerism, digital media,
+standardized testing, holidays, and the legal system. And often, MSCHF’s
+“drops” will sell out in a day.
+        MSCHF has recently focused its artistic expression on “sneakerhead
+culture.” Sneakers are utilitarian objects for most, but for sneakerheads, shoes are
+expressive, “collect[ed], trade[d], and display[ed] as a hobby.” Id. at 497. MSCHF
+
+                                                          7
+critiques the consumerism present in sneakerhead culture, as well as sneaker
+companies’ practice of collaborating with “anyone and everyone to make money.”
+Id. at 352.
+
+        C. The Wavy Baby
+        This case is about MSCHF’s sneaker drop of the “Wavy Baby” shoe,
+depicted below:
+
+                                               MSCHF “Wavy Baby”
+Jt. App’x at 14, 17.
+
+        MSCHF’s co-Chief Creative Officer explained MSCHF’s conception of the
+connection between Vans’ Old Skool shoe and MSCHF’s Wavy Baby in the
+following manner: “The Wavy Baby concept started with a Vans Old Skool
+sneaker” because no other shoe embodies the dichotomies between “niche and
+
+                                                          8
+mass taste, functional and trendy, utilitarian and frivolous” as perfectly as the Old
+Skool. Id. at 353. The Wavy Baby design process thus started with an image of a
+classic Vans Old Skool skate shoe. Id. MSCHF used a digital filter tool to warp the
+shoe into a new image, “transform[ing] the once iconic shoe into the modern,
+wobbly, and unbalanced realities.” Id. at 353–54. One evident feature of the
+parody is that the distortion destroys the original premise of the Old Skool’s
+popularity—its utility as a skateboarding shoe due to its flat sole.
+
+        Wavy Baby incorporates and distorts the Old Skool black and white color
+scheme, the side stripe, the perforated sole, the logo on the heel, the logo on the
+footbed, and the packaging. Examples of the critical similarities, and distortions,
+are reflected in the graphics below.
+
+Vans’ Trademarks/Trade Dress     WAVY BABY Design
+
+                              9
+Vans’ Trademarks/Trade Dress      WAVY BABY Design
+
+                              10
+Vans’ Trademarks/Trade Dress  WAVY BABY Design
+
+Jt. App’x at 171–72; 252–53.
+        Prior to the Wavy Baby’s release, MSCHF engaged in a marketing campaign
+
+in collaboration with musical artist Michael Stevenson, also known as Tyga. Id. at
+363. MSCHF advertised the Wavy Baby collaboration before releasing the
+sneakers for sale—garnering hype and excitement through MSCHF’s website,
+Instagram and YouTube accounts, and sneaker-focused platforms. Tyga also
+released a music video in which he wore the Wavy Baby shoe. Id. at 377.
+
+        Upon learning of the impending drop of the Wavy Baby shoe, Vans sent a
+cease and desist letter to Tyga on April 5, 2022, and to MSCHF the following day,
+putting them on notice of their claim that the Wavy Baby shoes infringed their
+trademarks and trade dress. MSCHF, however, continued to promote the planned
+drop and on April 18, 2022, after this suit commenced, launched the pre-planned
+
+                                                         11
+one-hour drop of 4,306 Wavy Baby shoes. Customers purchased the shoes only
+on MSCHF’s proprietary app for $220.
+
+II. District Court Proceedings
+        Vans filed a complaint in United States District Court for the Eastern District
+
+of New York on April 14, 2022, alleging six claims under state and federal law,
+including a federal claim for trademark infringement under the Lanham Act. 15
+U.S.C. § 1114.
+
+        On April 15, 2022, Vans filed a motion for a temporary restraining order and
+preliminary injunction asking the district court to enjoin MSCHF from: (1)
+fulfilling orders for or otherwise releasing for sale to the public any of the “Wavy
+Baby” shoes, or colorful imitations or reconstructions thereof (the “Prohibited
+Shoes”); (2) using Vans’ Old Skool trade dress or marks or confusingly similar
+marks (collectively, the “Prohibited Marks”); (3) referring to or using any
+Prohibited Marks in any advertising, marketing, or promotion; and (4) aiding any
+other person or entity in taking the prohibited actions. Jt. App’x at 65, 147. Vans
+attached to its motion several supporting declarations with exhibits. MSCHF
+opposed the motion with numerous declarations and exhibits.
+
+        After oral argument on April 27, 2022, the district court granted the
+temporary restraining order and preliminary injunction, concluding primarily
+
+                                                         12
+that because Vans had shown a significant danger of consumer confusion, Vans
+would likely prevail on its trademark infringement claims; it had shown that it
+would suffer irreparable harm without injunctive relief; and the balance of
+hardships and public interest supported preliminary relief. Vans, Inc. v. MSCHF
+Product Studio, Inc., 602 F. Supp. 3d 358, 368, 371–73 (E.D.N.Y. 2022).
+
+        In concluding that Vans would likely prevail on the consumer confusion
+issue, the court considered the factors set forth in Polaroid Corp. v. Polarad
+Electronics Corp., 287 F.2d 492 (2d Cir. 1961). See Vans, 602 F. Supp. 3d at 367–70.
+In particular, the Court concluded that MSCHF’s distortion of the Old Skool marks
+and trade dress on the Wavy Baby shoes was not sufficient to dispel the consumer
+confusion arising from the similarity of the marks. Id. at 368. It relied on evidence
+that various consumers “misunderstood the source of the Wavy Baby shoes as a
+collaboration between [Vans] and [MSCHF],” id., and admissions by MSCHF’s
+own representatives that the “base” of the Wavy Baby shoe before MSCHF’s
+transformation was the Vans Old Skool. Id.
+
+        The court further concluded that the “sophistication of the buyers” factor
+weighed in Vans’ favor because MSCHF advertised the Wavy Baby broadly in
+conjunction with Tyga, sold the shoes directly to the general public, and shoes are
+generally a common consumer item. Id. at 368–69.
+
+                                                         13
+        Moreover, the court concluded that the market proximity of the Wavy Baby
+shoes and Vans’ Old Skool shoes enhanced the likelihood of consumer confusion.
+Id. at 369. The court rejected MSCHF’s suggestion that the Wavy Baby shoes were
+not, like Old Skool shoes, intended to be worn but were instead “collectible
+work[s] of art,” that were “likely to be kept in glass cases or on shelves.” Id. In
+rejecting MSCHF’s claim, it pointed to statements of MSCHF’s own representative,
+the quantity of shoes produced (4,306 pairs), and the fact that MSCHF held back
+some shoes in case the shoes shipped were the wrong size, thereby suggesting the
+Wavy Baby is to be worn. Id.
+
+        The district court rejected MSCHF’s contention that Wavy Baby, as a parodic
+work of artistic expression, was subject to special First Amendment protections
+rather than the traditional likelihood of confusion test. Id. at 370–71. The court
+acknowledged that courts have “accorded considerable leeway to parodists whose
+expressive works aim their parodic commentary at a trademark or a trademarked
+product,” but emphasized that they “have not hesitated to prevent a manufacturer
+from using an alleged parody of a competitor’s mark to sell a competing product.”
+Id. at 370 (quoting Harley Davidson, Inc. v. Grottanelli, 164 F.3d 806, 812 (2d Cir.
+1999)). Moreover, the court observed that even while purporting to represent “the
+original,” a successful parody must simultaneously convey “that it is not the
+
+                                                         14
+original and is instead a parody.” Id. (emphasis added) (quoting Cliffs Notes, Inc.
+v. Bantam Doubleday Dell Publ’g Grp., Inc., 886 F.2d 490, 494 (2d Cir. 1989)). The
+court concluded that the Wavy Baby shoes on their face did not clearly indicate to
+the ordinary observer that MSCHF is “not connected in any way with the owner
+of the target trademark.” Id. at 370–71 (quoting Louis Vuitton Malletier, S.A. v. My
+Other Bag, Inc., 156 F. Supp. 3d 425, 435 (S.D.N.Y. 2016), aff’d, 674 F. App’x 16 (2d
+Cir. 2016)).
+
+        For these reasons, the district court granted Vans’ motion for a temporary
+restraining order and preliminary injunction, prohibiting MSCHF from
+advertising or fulfilling orders for the Wavy Baby shoes, and ordering MSCHF to
+cancel any orders that had been placed for the shoes at the time of the court’s order,
+and to escrow the funds received from orders that could not be reversed. MSCHF
+appealed.
+
+                                            DISCUSSION
+        On appeal, MSCHF argues that the district court erred in concluding that
+Vans was likely to succeed on the merits of its trademark infringement claim
+because Vans’ claims are precluded by the First Amendment. For the same reason,
+MSCHF argues that the district court’s injunction prohibiting Vans from
+advertising the Wavy Baby shoes amounts to an unconstitutional prior restraint of
+
+                                                         15
+speech. Finally, MSCHF argues that the district court erred in requiring it to
+escrow all revenues from Wavy Baby sales, and in failing to require Vans to give
+security.
+
+        After considering the applicable standard of review, we consider each
+argument in turn.
+I. Standard of Review
+
+        We review a district court’s grant of a temporary restraining order (“TRO”)
+or preliminary injunction for abuse of discretion. See Sunward Electronics, Inc. v.
+McDonald, 362 F.3d 17, 24 (2d Cir. 2004). “An abuse of discretion may be found
+when the district court relies on clearly erroneous findings of fact or on an error of
+law in issuing the injunction.” Cliffs Notes, 886 F.2d at 493 (citation omitted).
+
+        Although we review a district court’s grant of a preliminary injunction for
+abuse of discretion, Citigroup Glob. Mkts., Inc. v. VCG Special Opportunities Master
+Fund Ltd., 598 F.3d 30, 34 (2d Cir. 2010), any “allegations of error in a preliminary
+injunction [that] involve questions of law” are reviewed without deference. Briggs
+v. Bremby, 792 F.3d 239, 241 (2d Cir. 2015) (citing Am. Express Fin. Advisors Inc. v.
+Thorley, 147 F.3d 229, 231 (2d Cir. 1998)).
+
+                                                         16
+II. Trademark Infringement, the First Amendment, and Wavy Baby
+        To evaluate whether the district court abused its discretion in concluding
+
+that Vans was likely to succeed on its infringement claims, we must first
+determine whether Wavy Baby is subject to trademark law’s traditional
+likelihood of confusion analysis or whether it is an expressive work entitled to
+heightened First Amendment scrutiny under Rogers v. Grimaldi, 875 F.2d 994 (2d
+Cir. 1989). We begin with an overview of the two frameworks before addressing
+the Supreme Court’s recent guidance in Jack Daniel’s, applying the lessons of that
+decision to this case, and evaluating the district court’s application of the Polaroid
+factors.
+
+        A. The Lanham Act
+        The Lanham Act defines a trademark as “any word, name, symbol, or
+device, or any combination thereof” that a manufacturer uses to distinguish the
+manufacturer’s goods from those manufactured or sold by others and to “indicate
+the source of the goods.” 15 U.S.C. § 1127. As the Jack Daniel’s Court observed, a
+trademark “enables customers to select ‘the goods and services that they wish to
+purchase, as well as those they want to avoid.’” Jack Daniel’s, 599 U.S. at 146
+(quoting Matal v. Tam, 582 U.S. 218, 224 (2017)). A trademark holder “derive[s]
+significant value from its marks” because such marks “ensure that the producer
+
+                                                         17
+itself—and not some ‘imitating competitor’—will reap the financial rewards
+associated with the product’s good reputation.” Id. (citing Qualitex Co. v. Jacobson
+Prods. Co., 514 U.S. 159, 164 (1995)).
+
+        To prevail on a trademark infringement claim under the Lanham Act, the
+plaintiff must show that: (1) plaintiff owns a valid protectable mark; and (2)
+defendant’s use of a similar mark is likely to cause consumer confusion as to the
+origin or association of the goods or services. See Christian Louboutin S.A. v. Yves
+Saint Laurent Am. Holdings, 696 F.3d 206, 216–17 (2d Cir. 2012). MSCHF does not
+challenge the district court’s conclusion that Vans owns valid and protectable
+marks in its Old Skool shoes; in any case, Vans’ marks are registered, which is
+prima facie evidence that they are valid and protectable. See Matal v. Tam, 582 U.S.
+218, 226–27 (2017). Accordingly, the focus of our inquiry on appeal is the second
+prong: likelihood of consumer confusion.
+
+        This Court applies the eight-factor test identified in Polaroid, 287 F.2d at 495,
+to assess the likelihood that an allegedly infringing product will create consumer
+
+                                                         18
+confusion.3 The eight factors are: (1) strength of the trademark; (2) similarity
+between the two marks; (3) proximity of the products and their competitiveness
+with one another; (4) likelihood the prior owner may “bridge the gap” in the
+markets for their products; (5) evidence of actual consumer confusion; (6) the
+defendant’s good faith in adopting its imitative mark; (7) quality of the defendant’s
+product compared with the plaintiff’s product; and (8) sophistication of the
+buyers. Id. Collectively, these factors establish whether the allegedly infringing
+product creates consumer confusion.
+
+        B. The Rogers Test
+        The traditional infringement inquiry may be applied more narrowly if the
+allegedly infringing good or service is a work of “artistic expression.” See Rogers,
+875 F.2d at 1000. In Rogers, this Court held that the Lanham Act should not apply
+to “artistic works” as long as the defendant’s use of the mark is (1) artistically
+relevant to the work, and (2) not “explicitly misleading” as to the source or content
+of the work. Id. at 999; see also Twin Peaks Prods., Inc. v. Publ’ns Int’l, Ltd, 996 F.2d
+
+3 Other circuits apply balancing tests that are substantially the same. See, e.g., Louis Vuitton
+Malletier S.A. v. Haute Diggity Dog, LLC, 507 F.3d 252, 259–63 (4th Cir. 2007) (applying the
+Pizzeria Uno factors as articulated in Pizzeria Uno Corp. v Temple, 747 F.2d 1522, 1527 (4th Cir.
+1984)); Brookfield Commc’ns, Inc. v. West Coast Ent. Corp., 174 F.3d 1036, 1054 (9th Cir. 1999)
+(applying the Sleekcraft factors as articulated in AMF Inc. v. Sleekcraft Boats, 599 F.2d 341, 348–49
+(9th Cir. 1979)).
+
+                                                         19
+1366, 1379 (2d Cir. 1993) (requiring the likelihood of confusion to be “particularly
+compelling” to outweigh the First Amendment concerns).
+
+         Although Rogers involved a dispute over a film title, lower courts adopting
+Rogers have applied its test to other kinds of works but have “confined it to similar
+cases, in which a trademark is used not to designate a work’s source, but solely to
+perform some other expressive function.” Jack Daniel’s, 599 U.S. at 154. Courts in
+this Circuit have been careful to apply Rogers to a limited category of expressive
+works, including the title and cover of books and magazines, see, e.g., Rogers, 875
+F.2d at 1001–02 (film title); Twin Peaks, 996 F.2d at 1379–80 (book title); Cliffs Notes,
+886 F.2d at 495 (book title), and the use of trademarked products in feature films
+and video games, see, e.g., Louis Vuitton Malletier S.A. v. Warner Bros. Ent. Inc., 868
+F. Supp. 2d 172, 178 (S.D.N.Y. 2012) (film); AM Gen. LLC v. Activision Blizzard, Inc.,
+450 F. Supp. 3d 467, 479–80 (S.D.N.Y. 2020) (video game).
+
+        C. Jack Daniel’s
+        The Supreme Court’s recent decision in Jack Daniel’s clarified when the
+Rogers test, and its heightened First Amendment protections, does not apply: when
+the allegedly infringing mark is used as a source identifier—that is, “as a
+designation of source for [the alleged infringer’s] own goods.” 599 U.S. at 153.
+
+                                                         20
+        Jack Daniel’s is a case “about dog toys and whiskey.” Id. at 144. Respondent
+VIP Products created a dog toy called “Bad Spaniels” that was designed to look
+like a bottle of Jack Daniel’s whiskey, with some playful changes. See id. For
+example, VIP Products changed “Jack Daniel’s” to “Bad Spaniels,” “Old No. 7
+Brand Tennessee Sour Mash Whiskey” to “The Old No. 2 On Your Tennessee
+Carpet,” and “40% alc. by vol. (80 proof)” to “43% poo by vol.” and “100% smelly.”
+Id. at 149–50. Jack Daniel’s did not appreciate the joke.
+
+        The central question before the Supreme Court was whether the Rogers test
+should have applied to Jack Daniel’s trademark infringement claims against VIP
+Products, where VIP Products’ Bad Spaniels dog toy (the allegedly infringing
+product) was an expressive or parodic work.4 Though the Court acknowledged
+that parodies are inherently expressive, it concluded that Rogers does not apply
+when the alleged infringer uses trademarks to designate source. Id. at 153 (“[W]e
+hold that [Rogers] does not [apply] when an alleged infringer uses a trademark in
+the way the Lanham Act most cares about: as a designation of source for the
+infringer’s own goods.”).
+
+4 Some sister circuits have adopted the Rogers test. See, e.g., Mattel, Inc. v. MCA Records, Inc., 296
+F.3d 896, 902 (9th Cir. 2002) (adopting Rogers test); Westchester Media v. PLR USA Holdings, Inc.,
+214 F.3d 658, 665 (5th Cir. 2000) (noting that Fifth Circuit has adopted the approach in Rogers).
+The Supreme Court expressly used the Rogers test as a proxy for any threshold First
+Amendment filter in the Lanham Act context. Jack Daniel’s, 599 U.S. at 153 n.1.
+
+                                                         21
+        The Court explained that, historically, Rogers has been confined to cases
+where the trademark is not used to designate a work’s source, and instead is used
+“solely to perform some other expressive function.” Id. at 154 (emphasis added).
+In contrast, the use of another’s trademark that “convey[s] information (or
+misinformation) about who is responsible for a product . . . ‘implicates the core
+concerns of trademark law’ and creates ‘the paradigmatic infringement case.’” Id.
+at 157 (alterations adopted) (citation omitted).
+
+        Moreover, the Court declined to adopt the Ninth Circuit’s holding that
+Rogers applied to all “expressive work[s].” Id. at 151–52. It reasoned that such an
+expansive read of Rogers would “conflict with courts’ longstanding view of
+trademark law,” as “few cases would even get to the likelihood-of-confusion
+inquiry if all expressive content triggered the Rogers filter.” Id. at 158–59. Because
+the Court concluded that VIP Products used its Bad Spaniels “trademark and trade
+dress as source identifiers of its dog toy,” it held that Rogers did not apply to Jack
+Daniel’s claims of infringement. Id. at 159–61 (internal citation omitted).
+
+        Far from disregarding the parodic nature of the Bad Spaniel’s toy, however,
+the Supreme Court noted that “a trademark’s expressive message—particularly a
+parodic one . . . — may properly figure in assessing the likelihood of confusion.”
+Id. at 161; see also id. at 159 (noting that “the likelihood-of-confusion inquiry does
+
+                                                         22
+enough work to account for the interest in free expression”). This is because,
+where a message of “ridicule or pointed humor” is clear, “a parody is not often
+likely to create confusion” for “consumers are not so likely to think that the maker
+of a mocked product is itself doing the mocking.” Id. at 161, 153; see id. at 161
+(“[A]lthough VIP’s effort to ridicule Jack Daniel’s does not justify use of the Rogers
+test, it may make a difference in the standard trademark analysis.”).
+
+        D. MSCHF’s Use of Vans’ Marks as Source Identifiers
+        The Supreme Court’s decision in Jack Daniel’s forecloses MSCHF’s argument
+that Wavy Baby’s parodic message merits higher First Amendment scrutiny under
+Rogers. As the Court held, even if a defendant uses a mark to parody the
+trademark holder’s product, Rogers does not apply if the mark is used “‘at least in
+part’ for ‘source identification.’” Id. at 156 (quoting Tommy Hilfiger Licensing, Inc.,
+v. Nature Labs, LLC, 221 F. Supp. 2d 410, 414–15 (S.D.N.Y. 2002)).
+        Here, MSCHF used Vans’ marks in much the same way that VIP Products
+used Jack Daniel’s marks—as source identifiers. As discussed above and
+illustrated below, VIP Products used the Jack Daniel’s bottle size, distinctive
+squared-off shape, and black and white stylized text to invoke an image of Jack
+Daniel’s famous whiskey bottle.
+
+                                                         23
+Jack Daniel’s, 599 U.S. 148–49.
+        Likewise, MSCHF’s design evoked myriad elements of the Old Skool
+
+trademarks and trade dress. Among other things, MSCHF incorporates, with
+distortions, the Old Skool black and white color scheme, the side stripe, the
+perforated sole, the logo on the heel, the logo on the footbed, and the packaging.
+See Part I, above. MSCHF included its own branding on the label and heel of the
+Wavy Baby sneaker, just as VIP Products placed its logo on the toy’s hangtag. But
+even the design of the MSCHF logo evokes the Old Skool logo. And unlike VIP
+Products, MSCHF did not include a disclaimer disassociating it from Vans or Old
+Skool shoes. See Jack Daniel’s, 599 U.S. at 150 (noting the dog toy included a
+disclaimer that read: “This product is not affiliated with Jack Daniel Distillery”).
+
+      A trademark is used as a “source identifier” when it is used “to identify or
+brand a defendant’s goods or services” or to indicate the “‘source or origin’ of a
+
+                                                         24
+product.” Id. at 156 (alterations adopted). MSCHF used Vans’ trademarks—
+particularly its red and white logo—to brand its own products, which constitutes
+“quintessential ‘trademark use’” subject to the Lanham Act. Id. at 155 (citation
+omitted); see also Harley-Davidson, Inc. v. Grottanelli, 164 F.3d 806, 812–13
+(mechanic’s use of Harley-Davidson’s bar and shield motif in his logo, despite
+the “humorous[]” message, was traditional trademark use subject to the
+likelihood of confusion analysis).
+
+        Moreover, although MSCHF did not purport to sell the Wavy Baby under
+the Vans brand, it admitted to “start[ing]” with Vans’ marks because “[n]o other
+shoe embodies the dichotomies—niche and mass taste, functional and trendy,
+utilitarian and frivolous—as perfectly as the Old Skool.” Jt. App’x at 353. In
+other words, MSCHF sought to benefit from the “good will” that Vans—as the
+source of the Old Skool and its distinctive marks—had generated over a decades-
+long period. See Jack Daniel’s, 599 U.S. at 156. Notwithstanding the Wavy Baby’s
+expressive content, MSCHF used Vans’ trademarks in a source-identifying
+manner. Accordingly, the district court was correct when it applied the
+traditional likelihood-of-confusion test instead of applying the Rogers test.
+
+                                                         25
+        E. Application of the Polaroid Factors
+        Having determined that the district court did not err in declining to apply
+the Rogers test in evaluating Vans’ claims, we consider whether the district court
+erred in its conduct of the traditional likelihood-of-confusion analysis.5 We review
+the district court’s overall likelihood-of-confusion determination without
+deference. “[I]nsofar as the determination of whether one of the Polaroid factors
+favors one party or another involves a legal judgment—which it often does—” we
+review that determination without deference to the district court. Souza v. Exotic
+Island Enterprises, 68 F.4th 99, 109 (2d Cir. 2023) (alteration adopted). And we
+review the district court’s factual findings for clear error. See RiseandShine Corp. v.
+PepsiCo, Inc., 41 F.4th 112, 119 (2d Cir. 2022).
+
+        We agree with the district court’s assessment that Vans is likely to prevail
+on the issue of whether the Wavy Baby causes consumer confusion. Like the
+district court, we consider the factors identified in Polaroid in considering whether
+MSCHF’s Wavy Baby is likely to cause consumer confusion as to the source of the
+shoe. Polaroid, 287 F.2d at 495.
+
+5 We disagree with Vans’ argument that the likelihood-of-confusion analysis is not before us.
+See Vans FRAP 28(j) Letter (June 20, 2023) at 1–2. Although the core of MSCHF’s argument on
+appeal is that the district court erred in failing to apply Rogers, part of MSCHF’s opening brief
+challenges the district court’s Polaroid analysis. See Appellant Br. at 42–60. Although its
+argument has evolved slightly post-Jack Daniel’s, it was adequately preserved.
+
+                                                         26
+        The strength of the marks at issue supports Vans. MSCHF expressly chose
+the Old Skool marks and dress because it was the “most iconic, prototypical” skate
+shoe there is, as conceded by MSCHF’s co-Chief Creative Officer. Jt. App’x at 353,
+¶ 24.
+
+        The similarity of the marks presents a closer question, as the marks on Wavy
+Baby, while derived from the Old Skool shoes, are distorted. But MSCHF’s
+creative officer, Lukas Bentel, admitted that the Wavy Baby sneaker design
+intentionally evoked an image of Vans’ Old Skool sneaker. See S. App’x at 8–9
+(“Yes, [Vans Old Skools] are the anchor of the shoe . . . .“); see also Harley-Davidson,
+164 F.3d at 812–13 (concluding, in part, because defendant “admits that his use of
+[Harley Davidson’s] bar-and-shield logo purposefully suggests an association
+with Harley,” such use was impermissible under the Lanham Act. (internal
+quotation marks omitted)).
+
+        This admission is embodied in the Wavy Baby design: the Wavy Baby
+features a combination of elements (e.g., a three-tiered appearance, textured toe
+box, visible stitching, and red tags on the back), which are placed relative to one
+another such that the Wavy Baby’s appearance evokes Vans’ Old Skool sneaker.
+
+                                                         27
+        Plus, context matters. Though Vans has never warped its design in the same
+“liquified” or “microwaved” manner as MSCHF’s work with the Wavy Baby,6
+Vans has previously created special editions of its Old Skool sneaker often
+collaborating in launching the sneakers with celebrities and high-profile brands
+including Marc Jacobs, Supreme, Stussy, Kenzo, The North Face, and Disney. Jt.
+App’x at 257–58, ¶ 12.
+
+        The admittedly mimicked features of the Wavy Baby, combined with Vans’
+history of collaborating with artists and other brands, support our conclusion that
+the “similarity” factor favors Vans.
+
+        In considering competitive proximity, we are concerned with “‘whether and
+to what extent the two products compete with each other’ and ‘the nature of the
+products themselves and the structure of the relevant market.’” Morningside Grp.
+Ltd. v. Morningside Capital Grp., 182 F.3d 133, 140 (2d Cir. 1999) (quoting Cadbury
+Beverages, Inc. v. Cott Corp., 73 F.3d 474, 480 (2d Cir. 1996)). “Among the
+considerations germane to the structure of the market are the class of customers to
+whom the goods are sold, the manner in which the products are advertised, and
+the channels through which the goods are sold.” Cadbury Beverages, 73 F.3d at 480.
+
+6 MSCHF describes the Wavy Baby as a “‘liquified’ version of a classic skate shoe silhouette.” Jt.
+App’x at 501.
+
+                                                         28
+        The district court did not clearly err in rejecting MSCHF’s factual claim that
+the Wavy Baby is a work of art meant to be displayed rather than a pair of sneakers
+meant to be worn. Although it is hard to see why some people would wear the
+Wavy Baby as a functional shoe, we owe that finding deference. Many people are
+martyrs to fashion and dress to excite comment.
+
+        Considering the Wavy Baby as a wearable sneaker, we agree with the
+district court that the shoes are relatively proximate. MSCHF advertised the Wavy
+Baby as a wearable piece of footwear in promotional social media posts and in the
+promotional music video featuring Tyga. Vans’ own Old Skool limited releases
+are often sold on the same secondary platforms as those that sell Wavy Baby shoes
+to sneakerheads. Jt. App’x at 854. And where the Wavy Baby sold 4,306 units as
+a limited-edition collaboration with Tyga at $220 per pair, Vans offers special
+editions of its Old Skool sneakers made in collaboration with celebrities or artists,
+sometimes selling for $180 per pair, and often selling a limited edition of 4,000
+units. Id. at 785, 813, 893. Because we conclude that the products are competitively
+proximate, we need not consider whether Vans may “bridge the gap” by
+developing a product in MSCHF’s market.
+
+        The district court did not clearly err in finding actual evidence of consumer
+confusion, and we conclude as a matter of law that this factor favors Vans. The
+
+                                                         29
+district court relied on evidence in the record that customers were actually
+confused. For example, it pointed to comments made on a sneaker-centric podcast
+with guest appearance by MSCHF’s chief creative officer, Lukas Bentel. Bentel
+acknowledged the host’s comment that “[e]veryone [the host has] spoken to
+about” the Wavy Baby agrees that if a person saw someone wearing Wavy Baby
+sneakers on the street, “they’d say they’re wearing a pair of Vans.” Vans, 602 F.
+Supp. 3d at 368; Complex Sneakers Podcast Recording at 31:16–33:46.
+
+        It may be true that consumers who purchase the Wavy Baby shoes directly
+from MSCHF and receive the accompanying “manifesto” explaining the genesis
+of the shoes may not be confused. But the Lanham Act protects against several
+categories of consumer confusion, “including point-of-sale confusion . . . initial
+interest confusion, . . . and post-sale confusion.” Louis Vuitton Malletier v. Burlington
+Coat Factory Warehouse Corp., 426 F.3d 532, 537 n.2 (2d Cir. 2005) (emphases in
+original) (internal citations omitted); see also Lois Sportswear, U.S.A., Inc. v. Levi
+Strauss & Co., 799 F.2d 867, 872–73 (2d Cir. 1986) (explaining that “post-sale
+confusion would involve consumers seeing appellant’s [product] outside of the
+retail store, perhaps being worn by a passer-by” and that “in this post-sale context
+appellants’ labels, most of which having been long since discarded, will be of no
+help”). The comments relied upon by the district court demonstrate both initial
+
+                                                         30
+and post-sale confusion. The district court’s factual finding of actual consumer
+confusion was not clearly erroneous, and its conclusion that this factor favors Vans
+was legally correct.
+
+        The district court’s finding that the Wavy Baby sneakers are lower quality
+shoes is not clearly erroneous, though we do not embrace the district court’s legal
+conclusion that this factor favors Vans. In comparing the quality of MSCHF’s
+product to that of the Old Skool sneaker, the district court found “particular
+deficiencies” in the Wavy Baby sneakers that demonstrated a lower quality shoe.
+Vans, 602 F. Supp. 3d at 369. The Wavy Baby’s stylized bottom may create
+instability where a skate shoe should be stable—a fact that is conceded by MSCHF.
+See id. at 368 (“[I]f you put them on and walked around, you’ll see this is not the
+greatest foot-feeling shoe.”); see also Jt. App’x at 286 (MSCHF acknowledging itself
+that “[i]t is difficult to walk in Wavy Baby for long distances . . . and they cannot
+safely be worn to walk down stairs”); Jt. App’x at 362 (“[T]hey cannot be worn as
+an actual sneaker.”); Jt. App’x at 501–02 (“We took a functional, iconic skate shoe
+and made it a non-functional—or at least ‘non-functional’ relative to the ways
+sneakers traditionally function.”). The district court’s finding that the Wavy Baby
+is a lower quality skate shoe is not clearly erroneous.
+
+                                                         31
+        We are skeptical, however, that the Wavy Baby’s inferior quality as a skate
+shoe weighs in favor of Vans. The Wavy Baby’s primary purpose is to convey a
+message or fashion statement rather than to serve as a functional shoe. It seems
+unlikely that consumers would expect the Wavy Baby—a shoe with an obviously
+uneven sole—to be as comfortable or functional as the Old Skool. But even if the
+district court erred by weighing this factor in Vans’ favor, this one factor does not
+change our conclusion that Vans is likely to prevail on the merits of its trademark
+infringement claim. Accord Nabisco, Inc. v. Warner-Lambert Co., 220 F.3d 43, 46 (2d
+Cir. 2000) (“The evaluation of the Polaroid factors is not a mechanical process where
+the party with the greatest number of factors weighing in its favor wins. Rather,
+a court should focus on the ultimate question of whether consumers are likely to
+be confused.” (citation omitted)).
+
+        Finally, the district court was correct to conclude that sophistication of the
+buyers also favored Vans. MSCHF engaged in broad advertising to the “general
+public,” and customers of sneakers are not professional buyers.7
+
+        The fact that the Wavy Baby was conceived as a parody does not change
+that assessment. The Wavy Baby is a parody, just not one entitled to protection
+
+7 The district court made no finding with respect to MSCHF’s good faith and we do not rely on
+this factor in our own Polaroid analysis.
+
+                                                         32
+under Rogers. As noted above, to succeed, a parody must create contrasts with the
+
+subject of the parody so that the “message of ridicule or pointed humor comes
+
+clear.” Jack Daniel’s, 599 U.S. at 161. If that is done, “a parody is not often likely to
+
+create confusion.” Id. But if a parodic use of protected marks and trade dress
+
+leaves confusion as to the source of a product, the parody has not “succeeded” for
+
+purposes of the Lanham Act, and the infringement is unlawful.
+
+        For these reasons, we conclude that the Wavy Baby does create a likelihood
+
+of consumer confusion, and the district court correctly concluded that Vans is
+
+likely to prevail on the merits. It did not exceed its discretion by enjoining
+
+MSCHF’s marketing and sale of the Wavy Baby.8
+
+8 MSCHF’s opening brief also argues that the district court’s injunction was an unconstitutional
+prior restraint on MSCHF’s expression. Generally, if a product is found to infringe, preliminary
+injunctions under the Lanham Act are not considered prior restraints. See Dallas Cowboys
+Cheerleaders, Inc. v. Pussycat Cinema, Ltd., 604 F.2d 200, 206 (2d Cir. 1979) (holding that an
+injunction pursuant to the Lanham Act was not a prior restraint because trademark
+infringement implicated property rights, not speech rights); see also Dr. Seuss Enterprises, L.P. v.
+Penguin Books USA, Inc., 109 F.3d 1394 (9th Cir. 1997) (upholding a preliminary injunction even
+for noncommercial speech); Deceptive Commercial Speech, 6 McCarthy on Trademarks and
+Unfair Competition § 31:142 (5th ed.) (“[T]he prior restraint prohibition does not apply to most
+trademark preliminary injunctions. . . .”). MSCHF’s argument that the preliminary injunction
+was an unlawful prior restraint piggybacks on its argument that the district court’s assessment
+of Vans’ likelihood of prevailing on the merits failed to properly account for First Amendment
+concerns, and thus fails for the same reasons.
+
+                                                         33
+III. Escrow Order
+        MSCHF argues that the district court exceeded its discretion in ordering it
+
+to escrow all of its revenues from the Wavy Baby sales it had completed.
+Specifically, the district court ordered MSCHF, for any purchase that could not be
+reversed and/or cancelled, to escrow “any funds received from all orders taken to
+date for the Prohibited Shoes so that, if Vans prevails in this action, [MSCHF] may
+return those funds to customers who ordered [MSCHF’s] Prohibited Shoes under
+the mistaken belief that Vans was the source of the shoes or otherwise approved
+or sponsored the shoes.” Vans, 602 F. Supp. 3d at 373. MSCHF contends that an
+order to escrow net profits might make sense if necessary to ensure the availability
+of funds to provide the plaintiff’s requested equitable relief, but not an order to
+escrow gross revenues.
+
+        We disagree. Under 15 U.S.C. § 1117, Vans is entitled to MSCHF’s profits,
+damages, and attorneys’ fees if it establishes trademark infringement under the
+Lanham Act. In assessing profits, the plaintiff is required to prove the defendant’s
+sales only; the defendant must prove all elements of cost or deduction claimed.
+See 15 U.S.C. § 1117(a). And, this Court has held that “district courts have the
+authority to issue a prejudgment asset restraint injunction in favor of plaintiffs
+
+                                                         34
+seeking an accounting against allegedly infringing defendants in Lanham Act
+cases.” Gucci Am., Inc. v. Weixing Li, 768 F.3d 122, 132 (2d Cir. 2014).
+
+        In this case, Vans has sought an accounting. Moreover, MSCHF has not
+established its costs of production. Under these circumstances, we cannot
+conclude that the district court exceeded its discretion when it ordered MSCHF to
+essentially freeze its revenues from the Wavy Baby. We express no opinion as to
+the propriety of the ultimate relief the district court suggested in its order—
+refunds to consumers—and uphold the district court’s order without prejudice to
+MSCHF’s ability to renew its arguments before the district court on remand.
+
+IV. Bond Determination
+        MSCHF’s final claim is that the district court erred under Fed. R. Civ. P. 65(c)
+
+by failing to either require Vans to post security or to find, expressly, that no
+security was required. Vans argues that MSCHF waived this challenge by failing
+to seek a bond determination before the district court.
+
+        Under Rule 65(c), before issuing a preliminary injunction, the court must
+order the moving party to provide a security (“post bond”) in an amount the court
+determines would cover damages sustained in the event a party has been
+wrongfully enjoined. See Fed. R. Civ. P. 65(c) (“The court may issue a preliminary
+injunction or a temporary restraining order only if the movant gives security in an
+
+                                                         35
+amount that the court considers proper to pay the costs and damages sustained by
+any party found to have been wrongfully enjoined or restrained.”).
+
+        But where the party opposing an injunction does not request security, the
+district court does not err in failing to order it. See Clarkson Co., Ltd. v. Shaheen, 544
+F.2d 624, 632 (2d Cir. 1976). In Clarkson we ruled that, “[b]ecause no request for a
+bond was ever made in the district court, and because, under Fed. R. Civ. P. 65,
+the amount of any bond to be given upon the issuance of a preliminary injunction
+rests within the sound discretion of the trial court, . . . the district court may
+dispense with the filing of a bond.” Id. (internal citations omitted).
+
+        We reject MSCHF’s suggestion that our decision in Corning Inc. v. PicVue
+Electronics., Ltd., 365 F.3d 156 (2d Cir. 2004), overrules or limits our holding in
+Clarkson. In Corning, we said, “While it might have been within the discretion of
+the district court to decide that, under the circumstances, no security was required,
+. . . the district court was required to make this determination before it entered the
+preliminary injunction.” Id. at 158 (internal citation omitted). Nothing in Corning
+suggests that its holding applies even if the enjoined party never requested security.
+Accordingly, we conclude the district court did not err in failing to require security
+from Vans. Nothing in our analysis precludes MSCHF from seeking security
+pursuant to Fed. R. Civ. P. 65(c) in the district court.
+
+                                                         36
+                                           CONCLUSION
+        For the reasons discussed above, we AFFIRM the district court’s grant of
+the preliminary injunction and the temporary restraining order.
+
+                                                         37
+

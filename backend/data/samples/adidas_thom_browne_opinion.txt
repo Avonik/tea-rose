@@ -1,0 +1,150 @@
+SOURCE URL: https://storage.courtlistener.com/pdf/2026/04/29/adidas_america_inc._v._thom_browne_inc..pdf
+DOCUMENT TYPE: Appellate opinion, adidas America, Inc. v. Thom Browne, Inc., No. 24-1510 (2d Cir. 2026) (affirms denial of Rule 60(b)(2)/(b)(3) relief from the 2023 jury verdict of non-infringement; holds a merely negligent discovery violation is not "misconduct" under Rule 60(b)(3)); full text, PDF-extracted (page numbers removed, lines reflowed into paragraphs, images replaced by [Image: caption] placeholders, footnotes inline as [Footnote N] after the paragraph where they fell, split footnotes rejoined, in-text markers as [N])
+DATE: 2026-04-29
+
+24-1510
+Adidas America, Inc. v. Thom Browne, Inc.
+
+United States Court of Appeals for the Second Circuit
+
+August Term 2025
+Argued: October 28, 2025
+Decided: April 29, 2026
+
+No. 24-1510
+
+ADIDAS AMERICA, INC., ADIDAS AG, Plaintiffs-Appellants,
+v.
+THOM BROWNE, INC., Defendant-Appellee.
+
+On Appeal from the United States District Court for the Southern District of New York
+No. 21-cv-5615
+Jed S. Rakoff, Judge.
+
+Before: CABRANES, PARK, and ROBINSON, Circuit Judges.
+
+Adidas America, Inc., sued Thom Browne, Inc., for trademark infringement, trademark dilution, and unfair competition. A jury found Thom Browne not liable, but adidas later learned that Thom Browne had failed to disclose several relevant emails during discovery. Adidas moved for relief from the final judgment under Federal Rules of Civil Procedure 60(b)(2) and (b)(3), which the district court (Rakoff, J.) denied. We agree with the district court that adidas failed to meet its burden under Rule 60(b)(2) to show that the newly discovered evidence probably would have changed the verdict. Moreover, although Thom Browne’s failure to disclose the emails was negligent, a negligent discovery violation is not “misconduct” under Rule 60(b)(3), so adidas was not entitled to relief. We thus AFFIRM the order of the district court.
+
+ADAM H. CHARNES, Kilpatrick Townsend & Stockton LLP, Dallas, TX (R. Charles Henn Jr., K. Bradford Sears, Kilpatrick Townsend & Stockton LLP, Atlanta, GA, on the brief), for Plaintiffs-Appellants.
+
+ALEXANDRA A.E. SHAPIRO, Shapiro Arato Bach LLP, New York, NY (Julian S. Brod, Christopher Johnson, Shapiro Arato Bach LLP, New York, NY; Robert T. Maldonado, Wolf, Greenfield & Sacks, PC, New York, NY; John L. Strand, John L. Welch, Wolf, Greenfield & Sacks, PC, Boston, MA; Harley I. Lewin, LewinConsult LLC, Portland, ME, on the brief), for Defendant-Appellee.
+
+PARK, Circuit Judge:
+
+Adidas America, Inc., sued Thom Browne, Inc., for trademark infringement, trademark dilution, and unfair competition. A jury found Thom Browne not liable, but adidas later learned that Thom Browne had failed to disclose several relevant emails during discovery. Adidas moved for relief from the final judgment under Federal Rules of Civil Procedure 60(b)(2) and (b)(3), which the district court denied. We agree with the district court that adidas failed to meet its burden under Rule 60(b)(2) to show that the newly discovered evidence probably would have changed the verdict. Moreover, although Thom Browne’s failure to disclose the emails was negligent, a negligent discovery violation is not “misconduct” under Rule 60(b)(3), so adidas was not entitled to relief. We thus affirm the order of the district court.
+
+I. BACKGROUND
+
+A. Factual Background
+
+Adidas is a sportswear manufacturer known for its Three-Stripe Mark:
+
+[Image: Adidas’s Three-Stripe Mark]
+
+Thom Browne is a luxury apparel company that uses, among its motifs, the Four-Bar Signature, which consists of four wide horizontal bars, and the Grosgrain, “a pattern of red, white and blue stripes.” Adidas Am., Inc. v. Thom Browne, Inc., 742 F. Supp. 3d 352, 354 (S.D.N.Y. 2024).
+
+[Image: Thom Brown’s Grosgrain (left) and Four-Bar Signature]
+
+In 2021, adidas sued Thom Browne for trademark infringement, trademark dilution, and unfair competition over its use of the Four-Bar and Grosgrain in a new line of activewear. The case went to trial, and the jury heard from sixteen witnesses and saw over four hundred exhibits before finding Thom Browne not liable on all counts. Adidas then unsuccessfully appealed.[1]
+
+While the appeal was pending, Thom Browne produced several new emails in a separate litigation between the two companies in the United Kingdom. The emails included the following:
+
+1. December 2016 email exchange between Emily Maturo, a Senior Men’s Account Manager at Thom Browne and Incorp S.a.L., a distributor in Switzerland that purchased product from Thom Browne for retail stores in Asia. Discussing the display of Thom Browne’s clothes, Maturo states: “We try to avoid rows of 4 bar armband on the racks so as to not look like Adidas. We’ve therefore removed some styles from your original orders.”
+
+2. November 2018 email exchange between Thi Wan, then Thom Browne’s Head of Menswear, and Mr. Thom Browne himself. In the exchange, the two discuss design choices for formalwear and accessories that Thom Browne was creating for FC Barcelona (“FCB”), the Spanish soccer (football) club. In the initial email, Wan states: “I wanted to hear your thoughts on the usage of 4bar for FCB dressing for players. I wanted to raise a flag now from me before other teams start bombarding you with this concern. As Adidas has such a big presence in the sporting world, it is inevitable that our 4bar in white be read as adidas stripes, especially on accessories. Or would you also consider RWB?.”[2]
+
+3. December 2019 email exchange among Kelly Connor, Director of Brand Relations at Thom Browne, Tomaso Galli, Vice President of Marketing and Communication at Thom Browne, and Mr. Thom Browne. The discussion concerns the same formalwear and accessories for FCB that were being discussed in Email 2. In the final email in the chain, Galli states, “They [FCB] are not comfortable with any four bars, which in their view is too much in the spirit of Adidas.”
+
+4. August 2019 email exchange between Wan and Browne. The discussion concerns design choices for accessories that Thom Browne was designing for FCB. In his initial email, Wan states: “There is a 4bar range and RWB range in case you feel that 4bar is too loud and ‘adidas’ in the football context.” In response, Browne states: “[I] thought [Galli] has already said that we shouldn’t use the four bar because of adidas … please confirm with matt and then we can proceed … maybe it would be safer to just make the rwb stripes bigger and proceed …”
+
+Finally, Wan replies back, “You’re right on the 4bar. We should and will focus on the RWB.”
+
+[Footnote 1] See adidas Am., Inc. v. Thom Browne, Inc., No. 23-166, 2024 WL 1953594 (2d Cir. May 3, 2024).
+
+[Footnote 2] In context, RWB appears to mean “red, white, and blue” stripes.
+
+Id. at 355-56 (cleaned up).
+
+B. Procedural History
+
+After learning of the unproduced emails, adidas moved for a new trial under Federal Rules of Civil Procedure 60(b)(2) and (b)(3). The district court held an evidentiary hearing to determine why the emails were not produced. Two paralegals at Wolf Greenfield—Thom Browne’s law firm—testified. The district court also permitted adidas to depose two Wolf Greenfield associates who worked on the case, as well as a representative of Thom Browne’s e-discovery services provider, Consilio.
+
+The district court found that the non-production of the emails resulted from the following events. The parties first agreed that Thom Browne would search the electronically stored information of nine custodians. Wolf Greenfield collected over 1.4 million documents from these custodians, which it reduced to a set of presumptively responsive documents. It then used search terms to identify potentially privileged documents. The documents containing those terms were to be reviewed by counsel before being produced or withheld and listed on Thom Browne’s privilege log. A Wolf Greenfield paralegal emailed Consilio with instructions to create “a saved search for ALL potentially privileged documents that have not already been produced by Thom Browne so that we will have one search to work with when we go to do our privilege review.” Adidas, 742 F. Supp. 3d at 357 (cleaned up). Consilio created the requested search, noting that it had run the search terms across all documents “that are not produced, not coded for responsiveness and not coded for privilege.” Id. (cleaned up). Wolf Greenfield used that saved search to conduct its privilege review.
+
+A week before emailing Consilio, however, the Wolf Greenfield paralegal had apparently “carried out a mass edit on some subset of documents that hit on the search term ‘adidas’—including the four emails here at issue—changing the responsiveness, privilege and confidentiality fields to ‘needs further review.’” Id. at 358. As a result, those documents were not included in Consilio’s saved search, which captured only documents with no coding in the responsiveness or privilege fields. They were thus not part of the initial privilege review. They were also not caught in a subsequent “quality control” check, in which a Wolf Greenfield associate was supposed to review all documents marked “needs further review” to ensure nothing slipped through the cracks. Id. at 368-69.
+
+The district court ultimately denied adidas’s Rule 60(b) motion. First, it determined that adidas had failed to meet its burden of showing that the emails probably would have changed the verdict under Rule 60(b)(2) because they did not implicate “the central issues in this case as they actually played out at trial.” Id. at 361. In particular, the district court noted that the jury was unpersuaded by more direct evidence of consumer confusion that had been presented at trial. Second, the district court determined that a negligent discovery violation is sufficient to constitute “misconduct” under Rule 60(b)(3). But it found that Thom Browne’s counsel did not act negligently in failing to produce the emails, so it did not commit misconduct.
+
+Adidas appeals from the district court’s denial of its Rule 60(b) motion.
+
+II. DISCUSSION
+
+Adidas argues that it was entitled to relief from the jury’s verdict under Rule 60(b)(2) for “newly discovered evidence” or 60(b)(3) for Thom Browne’s “misconduct.” We disagree. Adidas’s argument under Rule 60(b)(2) fails because the unproduced emails probably would not have changed the verdict. And its argument under Rule 60(b)(3) fails because “misconduct” does not encompass merely negligent discovery violations like Thom Browne’s. We thus affirm the district court’s denial of adidas’s Rule 60(b) motion.
+
+A. Legal Standards
+
+“We review questions of law de novo and a district court’s [decision on] a Rule 60(b) motion for abuse of discretion. A district court abuses its discretion if it bases its ruling on an erroneous view of the law or on a clearly erroneous assessment of the evidence.” Ins. Co. of N. Am. v. Pub. Serv. Mut. Ins. Co., 609 F.3d 122, 127 (2d Cir. 2010) (cleaned up). Whether the district court erred in interpreting Rule 60(b)(3) is a question of law, which we review de novo. Cf. Hayward v. IBI Armored Servs., Inc., 954 F.3d 573, 575 (2d Cir. 2020).
+
+“[T]he rule in this circuit has long been to consider [rulings on negligence] de novo” because such rulings “are ultimately conclusions of law.” In re M/V MSC Flaminia, 72 F.4th 430, 446 (2d Cir. 2023). But “[i]n most cases, negligence determinations turn upon factual findings subject to clear-error review.” In re Energetic Tank, Inc., 110 F.4th 131, 152 (2d Cir. 2024). We will thus disturb a district court’s negligence determination only if it errs in “interpreting applicable law” or clearly errs “in finding material facts.” Id. at 152-53.
+
+B. Rule 60(b)(2)
+
+Rule 60(b)(2) states that a court may relieve a party from a final judgment for “newly discovered evidence that, with reasonable diligence, could not have been discovered in time to move for a new trial under Rule 59(b).” ”The movant must demonstrate that (1) the newly discovered evidence was of facts that existed at the time of trial or other dispositive proceeding, (2) the movant must have been justifiably ignorant of them despite due diligence, (3) the evidence must be admissible and of such importance that it probably would have changed the outcome, and (4) the evidence must not be merely cumulative or impeaching.” United States v. Int’l Bhd. of Teamsters, 247 F.3d 370, 392 (2d Cir. 2001) (cleaned up).
+
+Only the third factor is at issue here—whether the unproduced emails were “of such importance that [they] probably would have changed the outcome” at trial. Id. We discern no abuse of discretion by the district court in denying adidas’s Rule 60(b)(2) motion based on its conclusion that the emails probably would not have changed the verdict.
+
+First, the district court correctly found that the emails do not bear directly on any of the factors for determining whether an allegedly infringing product created a reasonable likelihood of confusion. See Polaroid Corp. v. Polarad Elecs. Corp., 287 F.2d 492, 495 (2d Cir. 1961).[3] Adidas asserts that the emails were admissions that confusion was likely, but likelihood of confusion is an objective standard, and the emails reflected executives’ opinions about likely confusion.
+
+Second, more direct evidence of consumer confusion—such as adidas’s consumer survey—did not persuade the jury, so it is unlikely that the emails would have made a difference. The emails were not about the allegedly infringing products or even products in the same Thom Browne collection (i.e., activewear). Rather, they discussed formalwear and accessories, which were not at issue in this case.
+
+Third, the emails did not bear on Thom Browne’s main defenses in this case—i.e., its contentions that adidas wanted to “own[] all stripe designs” and that Thom Browne and adidas compete in different markets and sell their products at different price points. Adidas, 742 F. Supp. 3d at 361-62. Adidas insists that the emails show that it “did not want to ‘own all stripes,’ but simply address an arrangement of stripes that Thom Browne officials knew ‘looked like adidas’ and made consumer confusion ‘inevitable.’” Appellant’s Br. at 49 (cleaned up). But Thom Browne responds that it would have made the exact same argument it made at trial, with the exact same result, if Adidas introduced the emails.
+
+The district court had the benefit of observing the trial. It did not err in finding that the newly discovered evidence probably would not have changed the outcome of trial, so adidas was not entitled to relief under Rule 60(b)(2).
+
+[Footnote 3] Those factors, per the district court’s jury instructions, were: (1) “the strength of adidas’ Three Stripe Mark”; (2) “the degree of similarity between adidas’ Three Stripe Mark and Thom Browne’s use of the Four Bar and/or Grosgrain designs on the Accused products”; (3) “whether the Accused Products and adidas[’] products compete for the same consumers”; (4) “whether or not there is evidence that consumers are actually confused about which company offers the Accused Products”; (5) “the quality of the Accused Products relative to adidas’ products bearing the Three Stripe Mark”; (6) “the degree of care and attention that an ordinary consumer would use when encountering adidas’ and Thom Browne’s respective products”; and (7) “whether adidas has shown that Thom Browne acted in bad faith.” Adidas, 472 F. Supp. 3d at 359-60.
+
+C. Rule 60(b)(3)
+
+Rule 60(b)(3) provides that a court may relieve a party from a final judgment for “fraud . . . , misrepresentation, or misconduct by an opposing party.” To prevail under Rule 60(b)(3), a party must prove the opposing party’s misconduct by clear and convincing evidence. See Fleming v. N.Y. Univ., 865 F.2d 478, 484 (2d Cir. 1989). It must also show that the misconduct interfered with its ability to present its case fully and fairly. See State St. Bank & Tr. Co. v. Inversiones Errazuriz Limitada, 374 F.3d 158, 176 (2d Cir. 2004).
+
+1. Mental State Required for Misconduct
+
+This Court has not addressed the meaning of “misconduct” under Rule 60(b)(3) or the level of culpability it requires. Based on the text and structure of the Federal Rules of Civil Procedure and historical evidence, we conclude that “misconduct” does not include a merely negligent discovery violation.
+
+We begin with the text of the Rule. The term “misconduct” is susceptible to different meanings. See, e.g., Misconduct, Black’s Law Dictionary (12th ed. 2024) (defining “misconduct” as a “dereliction of duty; unlawful, dishonest, or improper behavior, esp. by someone in a position of authority or trust”); Misconduct, Merriam-Webster.com (defining “misconduct” as “mismanagement especially of governmental or military responsibilities”; “intentional wrongdoing”; or “improper behavior”). When a term “takes on different meanings depending on context,” it is proper to “look not only to the word itself, but also to the statute and the surrounding scheme” in interpreting it. Dubin v. United States, 599 U.S. 110, 118 (2023) (cleaned up).
+
+We then turn to context—here, other Federal Rules of Civil Procedure. In particular, Rule 37, which governs discovery sanctions, supports the view that discovery-related “misconduct” involves more than mere negligence. Sanctions comparable to vacatur of a final judgment under Rule 37 require heightened culpability. When a party fails to preserve electronically stored information, for example, the most severe sanctions—an adverse inference instruction, dismissal, or entry of a default judgment—may be imposed only when “the party acted with the intent to deprive another party of the information’s use in the litigation.” Fed R. Civ. P. 37(e)(2); see also Societe Internationale pour Participations Industrielles et Commerciales, S. A. v. Rogers, 357 U.S. 197, 212 (1958) (“Rule 37 should not be construed to authorize dismissal of this complaint because of petitioner’s noncompliance with a pretrial production order when it has been established that failure to comply [was not due to] willfulness, bad faith, or any fault of petitioner.”).
+
+As with sanctions under Rule 37, an important reason that “misconduct” under Rule 60(b)(3) requires a higher degree of culpability is the severity of the remedy—i.e., setting aside a final judgment. As we have repeatedly emphasized, “final judgments should not be lightly reopened,” so relief under Rule 60(b) is available only in “exceptional circumstances.” Nemaizer v. Baker, 793 F.2d 58, 61 (2d Cir. 1986) (cleaned up); see also Terra Firma Invs. (GP) 2 Ltd. v. Citigroup Inc., 716 F.3d 296, 298 (2d Cir. 2013) (“Absent fundamental error, we are loath to overturn a jury verdict in a civil case.”). Here, vacating the jury’s verdict would deprive Thom Browne of the benefit of a judgment obtained after trial and appeal, causing it to operate under a cloud of legal liability and forcing it to expend additional resources defending the action again. Although intentional discovery violations may well warrant such harsh consequences, mere negligence does not. Put differently, just as a negligent discovery violation would not support sanctions like dismissal or default judgment under Rule 37, it likewise would not justify the “extraordinary judicial relief” of vacating a final judgment under Rule 60(b)(3). Nemaizer, 793 F.2d at 61. If it did, a party could get a new trial for negligent conduct that typically would merit only a modest discovery sanction, like cost-shifting, which would be an anomalous result.[4]
+
+Next, historical evidence is consistent with this conclusion. Before Rule 60(b), courts focused on the presence or absence of conduct akin to fraud when discussing an opposing party’s wrongdoing as an equitable ground for relief from a judgment. See, e.g., Hungerford v. Sigerson, 61 U.S. 156, 161 (1857) (“There is no charge of fraud . . . nor that, by the contrivance or unfairness of the defendant, a remedy was not had at law.”). And the Rules Committee’s proceedings on Rule 60(b)(3) indicate that it drafted the rule with an eye towards intentional wrongful acts, such as a “deceit practiced on a party.” Transcript of Proceedings of Advisory Committee on Rules for Civil Procedure (May 1945), at 517-18; see also Transcript of Proceedings of Advisory Committee on Rules for Civil Procedure (March 1946), at 601-02 (noting that Rule 60(b)(3) was meant to deal with “tricks played by one party upon the other”). Given the “incorporation of fraud and the like within the scope of the rule,” Fed. R. Civ. P. 60(b) advisory committee’s note to 1946 amendment, the most natural understanding of “misconduct” in Rule 60(b)(3) is that—like fraud—it requires more than mere negligence. See Homaidan v. Sallie Mae, Inc., 3 F.4th 595, 604 (2d Cir. 2021) (noting that the canon of noscitur a sociis “instructs us to cabin [a potentially ambiguous term] such that its scope aligns with that of its listed companions”).
+
+[Footnote 4] Unsurprisingly, district courts considering a new trial as a discovery sanction have viewed it as akin to the more severe remedies authorized under Rule 37. See, e.g., Health All. Network, Inc. v. Cont’l Cas. Co., 245 F.R.D. 121, 128 (S.D.N.Y. 2007) (“Moreover, a sanction for a discovery violation as severe as granting a new trial requires that the court find willfulness, bad faith, or any fault, and that the opposing party has been seriously prejudiced and that no lesser sanction is sufficient to deter discovery abuses.” (cleaned up)); Mugavero v. Arms Acres, Inc., 680 F. Supp. 2d 544, 573-74 (S.D.N.Y. 2010) (declining to grant a new trial as a discovery sanction for a failure to produce documents because the failure was not sufficiently egregious).
+
+Finally, the cases adidas cites do not persuade us that “misconduct” includes negligent acts. As the district court recognized, in most of these cases, “some degree of purposeful culpability was clearly apparent.” Adidas, 742 F. Supp. 3d at 366 & nn.14-15 (collecting cases). The only case analyzing the meaning of “misconduct” relies exclusively on the canon against surplusage, concluding that “misconduct” cannot require “proof of nefarious intent” because it would otherwise be redundant with “fraud” and “misrepresentation.” Anderson v. Cryovac, 862 F.2d 910, 923 (1st Cir. 1988) (cleaned up). But “misconduct” can encompass intentional acts that do not involve “deception or trickery” (i.e., fraud), Husky Int’l Elecs., Inc. v. Ritz, 578 U.S. 355, 360 (2016), or the making of a false or misleading statement (i.e., misrepresentation), see Universal Health Servs., Inc. v. United States, 579 U.S. 176, 188-89 (2016).[5] So reading “misconduct” to require more than mere negligence does not violate the canon against surplusage.
+
+[Footnote 5] For example, a party may attempt to “defeat [an opponent’s] claim” by filing “meritless motions and pleadings” to induce delay and cause their opponent to incur needless expenses. Chambers v. NASCO, Inc., 501 U.S. 32, 38, 57 (1991).
+
+We thus conclude that a merely negligent discovery violation does not constitute “misconduct” under Rule 60(b)(3).
+
+2. Thom Browne’s Discovery Violation Was Not Misconduct
+
+To obtain relief under Rule 60(b)(3), adidas must show that Thom Browne’s non-production of emails was “misconduct.” It cannot do so because Thom Browne’s discovery violation was only negligent.
+
+In discovery, negligence is a “failure to conform” to the standard of “what a party must do to meet its obligation to participate meaningfully and fairly in the discovery phase of a judicial proceeding.” Pension Comm. of Univ. of Montr. Pension Plan v. Banc of Am. Secs., 685 F. Supp. 2d 456, 464 (S.D.N.Y. 2010), abrogated on other grounds by Chin v. Port Auth. of N.Y. & N.J., 685 F.3d 135 (2d Cir. 2012); see also Dobbs’ Law of Torts § 126 (2025 ed.) (“[N]egligence is a failure to exercise care that is reasonable under the circumstances.”). Gross negligence is the “failure to exercise even that care which a careless person would use.” Pension Comm., 685 F. Supp. 2d at 464 (cleaned up); see also Dobbs’ Law of Torts § 140 (defining gross negligence as “the failure to use even slight care”).
+
+“Discovery is run largely by attorneys, and the court and the judicial process depend upon honesty and fair dealing among attorneys,” so negligence in discovery is a low bar. In re Sept. 11th Liab. Ins. Coverage Cases, 243 F.R.D. 114, 125 (S.D.N.Y. 2007). For example, courts have found negligence when counsel possessed an important document but failed to recognize its importance and timely produce it, see id. at 130; when a party agreed to gather files from certain custodians but failed to do so, see Harkabi v. SanDisk Corp., 275 F.R.D. 414, 419 (S.D.N.Y. 2010); when a party failed to preserve documents that it had a duty to preserve even if it innocently thought that it did not have such a duty, see Zubulake v. UBS Warbug LLC, 220 F.R.D. 212, 220 (S.D.N.Y. 2003); and when counsel failed to locate and produce a specifically requested document merely because the document was not among “the universe of documents” that counsel deemed “potentially relevant,” Kortright Cap. Partners LP v. Investcorp Inv. Advisers Ltd., 330 F.R.D. 134, 139 (S.D.N.Y. 2019) (cleaned up).
+
+Here, the district court concluded that Wolf Greenfield did not act negligently because (1) it was reasonable for the paralegal to assume that the e-discovery services provider followed her instructions to produce a saved search with all potentially privileged documents and (2) an associate conducted a separate quality-control check to “ensure no other documents fell through the cracks,” which showed that Wolf Greenfield attempted to meet its discovery obligations. Adidas, 742 F. Supp. 3d at 368-69. But even assuming the former (i.e., that the miscommunication between the paralegal and the e-discovery services provider is excusable in the context of a complex discovery process), the record simply does not support the latter (i.e., that the associate conducted an adequate quality-control review).
+
+The record indicates that Wolf Greenfield failed to meet its discovery obligations. The associate testified that she “endeavored to be careful and review every document that was tagged ‘further review’”; “it was [her] intent, when she was completing the privilege log exercise, to review every document that was tagged ‘needs further review’”; and “she believe[d] her actions matched her intent.” Id. (emphases added) (cleaned up). The emails at issue were tagged “needs further review,” but their document histories show that, apart from two Wolf Greenfield paralegals, no one at the firm ever viewed them. Neither the district court nor Thom Browne offers any explanation for that failure. In light of the obvious relevance of the emails, Wolf Greenfield’s failure to review or to produce them was negligent. See, e.g., In re Sept. 11th, 243 F.R.D. at 130 (finding “inadvertence,” without more, to be an unsatisfactory explanation for a failure to locate and produce relevant material in counsel’s possession).
+
+Nonetheless, Wolf Greenfield’s actions were no worse than negligent. Courts typically find recklessness or gross negligence when a party fails to take “widely-recognized steps” in complying with its discovery obligations. Harkabi, 275 F.R.D. at 419. For instance, courts have found gross negligence when counsel fails to issue a written litigation hold or timely inspect a client’s computers and servers. See In re NTL, Inc. Secs. Litig., 244 F.R.D. 179, 198-99 (S.D.N.Y. 2007) (collecting cases). Here, the record shows that the responsible associate failed to review the four emails at issue, but not that she failed to review any of the documents tagged “needs further review.” In other words, Wolf Greenfield took the “widely-recognized step” of reviewing potentially responsive documents, but apparently missed some. While its performance was negligent, it was not worse than that.[6]
+
+Because “misconduct” under Rule 60(b)(3) does not encompass merely negligent discovery violations, and Thom Browne’s failure to produce the emails at issue was no more than negligent, adidas is not entitled to relief under Rule 60(b)(3).
+
+[Footnote 6] Because we conclude that Wolf Greenfield’s actions were no more than negligent, we need not determine the specific level of culpability (e.g., gross negligence or intent) required to support relief under Rule 60(b)(3).
+
+III. CONCLUSION
+
+In sum, adidas was not entitled to relief under Rule 60(b)(2) or (b)(3). Under Rule 60(b)(2), the unproduced emails probably would not have changed the verdict, and, under Rule 60(b)(3), Thom Browne’s negligent failure to produce the emails was not misconduct. We thus affirm the district court’s order denying adidas’s Rule 60(b) motion.

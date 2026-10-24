@@ -40,5 +40,8 @@ Thumbs.db
 logs/
 *.log
 
+# Back-test outputs from fixture runs (live results under backend/eval/results/ ARE committed)
+backend/eval/_fixture/
+
 # Internal planning notes, not part of the submission (decide at the public flip)
 TEA_ROSE_CONCEPT.md
