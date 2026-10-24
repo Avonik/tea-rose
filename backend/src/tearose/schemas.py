@@ -31,7 +31,9 @@ class Party(BaseModel):
 
 
 class Extraction(BaseModel):
-    document_type: Literal["complaint", "cease_and_desist", "opinion", "petition", "notes", "unknown"]
+    document_type: Literal[
+        "complaint", "cease_and_desist", "opinion", "petition", "notes", "unknown"
+    ]
     title: str
     senior: Party
     junior: Party
@@ -142,7 +144,7 @@ class BridgingEvidence(BaseModel):
 
 class FameEvidence(BaseModel):
     demographics: Demographics
-    breadth_score: float | None  # 0..1: share of age/gender buckets with positive affinity, weighted
+    breadth_score: float | None  # 0..1, see ARCHITECTURE.md "Fame breadth"
     skew_description: str  # e.g. "skews 25-34, male"
     popularity_percentile: float | None
     heatmap_coverage: float | None  # 0..1 share of national cells with above-median affinity
@@ -152,7 +154,8 @@ class FameEvidence(BaseModel):
 class ZoneEvidence(BaseModel):
     points: list[HeatmapPoint]
     concentration_index: float | None  # 0..1, Gini-like: 1 = all affinity in few cells
-    top_regions: list[dict[str, Any]] = Field(default_factory=list)  # [{"label","share"}]; label falls back to a "lat, lon" bin
+    # [{"label", "share"}]; label falls back to a "lat, lon" bin string
+    top_regions: list[dict[str, Any]] = Field(default_factory=list)
     junior_points: list[HeatmapPoint] = Field(default_factory=list)
     geographic_overlap: float | None = None  # 0..1 when both sides have maps
     notes: list[str] = Field(default_factory=list)
@@ -173,7 +176,8 @@ FactorLean = Literal["favors_senior", "neutral", "favors_junior", "insufficient_
 
 
 class FactorFinding(BaseModel):
-    factor: str  # "relatedness_of_goods" | "channels_and_purchasers" | "bridging_the_gap" | "fame" | "zone_of_reputation"
+    # relatedness_of_goods | channels_and_purchasers | bridging_the_gap | fame | zone_of_reputation
+    factor: str
     lean: FactorLean
     confidence: Literal["high", "medium", "low"]
     finding: str  # 2-4 sentences in lawyer language

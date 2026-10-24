@@ -77,8 +77,12 @@ class ScriptedEngine:
         r.memo = Memo(
             headline="Jack Daniel's purchasers show little affinity for pet-supply brands.",
             findings=[
-                FactorFinding(factor="relatedness_of_goods", lean="favors_junior", confidence="medium",
-                              finding="Scripted placeholder finding."),
+                FactorFinding(
+                    factor="relatedness_of_goods",
+                    lean="favors_junior",
+                    confidence="medium",
+                    finding="Scripted placeholder finding.",
+                ),
             ],
             sections=[MemoSection(id="summary", title="Summary", markdown="Scripted placeholder.")],
             limitations=["Affinity is not confusion.", "No survey percentages."],

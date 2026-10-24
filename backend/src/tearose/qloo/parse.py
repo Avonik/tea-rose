@@ -113,7 +113,8 @@ def parse_tag(item: dict[str, Any], rank: int | None = None) -> Tag:
     subtype = item.get("subtype")
     ttype = item.get("type")
     # Prefer the specific subtype over the generic "urn:tag" type.
-    tag_type = subtype or (ttype if ttype and ttype != "urn:tag" else None) or (types[0] if types else ttype)
+    specific_type = ttype if ttype and ttype != "urn:tag" else None
+    tag_type = subtype or specific_type or (types[0] if types else ttype)
     return Tag(
         tag_id=str(_first(item, "tag_id", "id")),
         name=str(_first(item, "name", default="")),

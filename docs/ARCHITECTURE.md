@@ -110,16 +110,21 @@ exception.
 | POST | `/api/auth/login` | – | body `{passcode}` → sets signed HttpOnly cookie; 5 failures/IP ⇒ 15-min lockout |
 | POST | `/api/auth/logout` | cookie | clears cookie |
 | GET | `/api/auth/me` | – | `{authenticated, runs_left_today, runs_left_session}` |
-| POST | `/api/analyze` | cookie | body `{text}` or multipart `file` (pdf/txt) → `{run_id}`; 429 when caps hit |
-| GET | `/api/analyze/{run_id}/events` | cookie | SSE stream of `TraceEvent` (replays past events first, then live); ends with `run_finished`/`run_failed` |
-| GET | `/api/analyze/{run_id}` | cookie | `AnalysisResult` (current state, partial while running) |
-| POST | `/api/analyze/{run_id}/followup` | cookie | body `{question}` → `{run_id}` (same run, new events) |
-| GET | `/api/limits` | – | public cap status for the UI banner |
+| POST | `/api/analyze` | cookie | body `{text}` or multipart `file` (pdf/txt) → **202** `{run_id}`. Errors: 400 empty/unreadable, 413 > 2 MB, 415 wrong type, 422 bad JSON, 429 `{detail, kind:"cap"}` with Retry-After (UTC midnight), 503 engine unavailable. Input is validated before a cap is consumed |
+| GET | `/api/analyze/{run_id}/events?after=N` | cookie | SSE: `event: trace` / `id: <seq>` / `data: <TraceEvent JSON>` for each event (replays those after `N` or `Last-Event-ID`, then live), then one `event: done` with `{status, error}`. Ping every 15 s |
+| GET | `/api/analyze/{run_id}` | cookie | `AnalysisResult` (current state, partial while running); 403 for another session's run |
+| POST | `/api/analyze/{run_id}/followup` | cookie | body `{question}` (1..2000 chars) → **202** `{run_id}`; 409 while the run is still running |
+| GET | `/api/limits` | – | `{daily_cap, daily_used, session_cap, live_mode_enabled}` for the UI banner |
 
 Static: everything not under `/api` serves `frontend/dist` (SPA fallback to `index.html`).
 
 Cookies: `tearose_session`, signed with `itsdangerous`, `HttpOnly; Secure; SameSite=Lax`,
-TTL 12 h. Rate limit: 60 req/min per IP on `/api/*` (in-memory token buckets; single process).
+TTL 12 h; logout revokes the session id in memory. Login: 503 when no passcode is configured;
+401 wrong passcode; after `login_max_failures` failures per IP, 429 `{kind:"lockout"}` for
+`login_lockout_minutes`. Rate limit: 60 req/min per IP on `/api/*`, 429 `{kind:"rate_limit"}`
+(in-memory token buckets; single process). Client IP = right-most `X-Forwarded-For` entry (the
+hop our own reverse proxy appended), else the socket address. All session, cap and ownership
+state is in memory on `app.state.ctx`; a restart forgets run ownership (reloaded runs 403).
 
 ## Frontend (React + Vite + TS)
 
