@@ -1,0 +1,242 @@
+/* Shell: floating glass nav, scroll-edge effect, footer. */
+
+/* ---------------------------------------------------------------- floating nav */
+
+.fnav-wrap {
+  position: fixed;
+  top: 0.75rem;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding-inline: 0.75rem;
+  pointer-events: none;
+}
+
+.fnav {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 100%;
+  padding: 0.25rem;
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  box-shadow: var(--shadow-glass), inset 0 0 0 0.5px var(--glass-line), inset 0 1px 0 var(--glass-edge);
+  overflow: hidden;
+}
+
+.fnav__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  height: 2.5rem; /* 48px pill with the 4px padding */
+}
+
+.fnav__brand {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: var(--text);
+}
+
+.fnav__brand:hover {
+  background: var(--fill);
+}
+
+.fnav__items {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.fnav__item,
+.fnav__chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: var(--r-pill);
+  color: var(--text);
+  font-size: var(--fs-footnote);
+  font-weight: 500;
+  letter-spacing: 0.005em; /* vibrancy: a touch of tracking over glass */
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.fnav__item:hover,
+.fnav__chip:hover {
+  text-decoration: none;
+}
+
+.fnav__item:not([aria-current]):hover .fnav__label,
+.fnav__chip:not([aria-current]):hover .fnav__label {
+  opacity: 0.7;
+}
+
+.fnav__label {
+  position: relative;
+  z-index: 1;
+}
+
+.fnav__pill,
+.fnav__chip-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--fill-2);
+}
+
+.fnav__item[aria-current] .fnav__label {
+  font-weight: 600;
+}
+
+.fnav__sections-wrap {
+  border-top: 0.5px solid var(--glass-line);
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+}
+
+.fnav__sections {
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: min(42rem, calc(100vw - 2rem));
+  mask-image: linear-gradient(90deg, transparent 0, #000 0.75rem, #000 calc(100% - 0.75rem), transparent 100%);
+}
+
+.fnav__sections::-webkit-scrollbar {
+  display: none;
+}
+
+.fnav__sections ul {
+  display: flex;
+  justify-content: center;
+  gap: 0.125rem;
+  width: max-content;
+  min-width: 100%;
+  padding-inline: 0.5rem;
+}
+
+.fnav__chip {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: var(--fs-caption);
+  color: var(--text-2);
+}
+
+.fnav__chip[aria-current] {
+  color: var(--text);
+}
+
+@media (pointer: coarse) {
+  .fnav__chip {
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .fnav__item {
+    padding: 0 0.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------- scroll-edge effect */
+
+.scroll-edge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 49;
+  height: 5.5rem;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--page) 70%, transparent), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.scroll-edge[data-on] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .scroll-edge {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.footer {
+  border-top: 1px solid var(--hairline);
+  background: var(--band);
+  color: var(--text-2);
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-6);
+  padding-block: var(--s-8) var(--s-10);
+}
+
+.footer__text {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-top: var(--s-2);
+}
+
+.footer__mock {
+  color: var(--text-3);
+}
+
+.footer__appearance {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.footer__label {
+  color: var(--text-3);
+}
+
+/* Pages without a hero start below the floating nav */
+.page-top {
+  padding-top: max(var(--band-pad), 8.5rem);
+}
+
+/* 404 */
+.notfound {
+  display: grid;
+  align-items: center;
+  min-height: 82vh;
+}
+
+.notfound__inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  text-align: center;
+}

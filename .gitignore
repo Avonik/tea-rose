@@ -2,6 +2,9 @@
 .env
 .env.*
 !.env.example
+# Vite mode files: only VITE_MOCK=0/1, no secrets
+!frontend*/.env.development
+!frontend*/.env.api
 *.pem
 *.key
 

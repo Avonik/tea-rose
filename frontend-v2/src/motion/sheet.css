@@ -1,0 +1,80 @@
+.sheet-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--scrim);
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 61;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: var(--glass-filter-thick);
+  backdrop-filter: var(--glass-filter-thick);
+  border-radius: 1.375rem 1.375rem 0 0;
+  box-shadow: var(--shadow-glass-thick), inset 0 1px 0 var(--glass-edge), inset 0 0 0 0.5px var(--glass-line);
+  will-change: transform;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.sheet__grab {
+  flex: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sheet[data-dragging] .sheet__grab {
+  cursor: grabbing;
+}
+
+.sheet__handle {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.sheet__handle span {
+  width: 2.25rem;
+  height: 0.3125rem;
+  border-radius: var(--r-pill);
+  background: var(--fill-3);
+  transition: background var(--dur-1) var(--ease-out);
+}
+
+.sheet__handle:hover span,
+.sheet[data-dragging] .sheet__handle span {
+  background: var(--text-3);
+}
+
+.sheet__header {
+  padding: 0 var(--s-5) var(--s-3);
+}
+
+.sheet__body {
+  flex: 1;
+  min-height: 0;
+  overscroll-behavior: contain;
+  padding: 0 var(--s-5) var(--s-6);
+  border-top: 0.5px solid var(--glass-line);
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .sheet {
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: var(--shadow-glass-thick), inset 0 1px 0 var(--hairline-2);
+  }
+}
