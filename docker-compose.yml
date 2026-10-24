@@ -1,0 +1,26 @@
+services:
+  tearose:
+    build: .
+    image: tearose:latest
+    container_name: tearose
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8000"
+    ports:
+      - "127.0.0.1:8000:8000"   # only the reverse proxy on the host talks to it
+    volumes:
+      - tearose-data:/app/backend/data/cache
+      - tearose-runs:/app/backend/data/runs
+      - tearose-live:/app/backend/data/live
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  tearose-data:
+  tearose-runs:
+  tearose-live:

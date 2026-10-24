@@ -1,0 +1,14 @@
+.git
+.env
+.env.*
+!.env.example
+backend/.venv
+backend/data/cache
+backend/data/runs
+backend/data/live
+backend/.pytest_cache
+backend/.ruff_cache
+frontend/node_modules
+frontend/dist
+TEA_ROSE_CONCEPT.md
+**/__pycache__
