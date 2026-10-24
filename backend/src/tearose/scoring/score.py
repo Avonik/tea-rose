@@ -250,12 +250,20 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
     shared: list[dict[str, Any]] = []
     d_senior: list[dict[str, Any]] = []
     d_junior: list[dict[str, Any]] = []
-    if raw.compare is None or not raw.compare.entities:
+    if raw.compare is None or (not raw.compare.entities and not raw.compare.tags):
         notes.append("No compare data: shared/distinct affinities are empty.")
-    else:
+    elif raw.compare.entities:
         shared = [_compare_row(e) for e in raw.compare.shared()]
         d_senior = [_compare_row(e) for e in raw.compare.distinct_to_a()]
         d_junior = [_compare_row(e) for e in raw.compare.distinct_to_b()]
+    else:
+        # Documented live shape: /v2/analysis/compare returns tags with query.score that
+        # characterize how the two audiences differ. Surface them as "shared affinities".
+        shared = [
+            {"tag_id": t.tag_id, "name": t.name, "type": t.tag_type, "score": t.affinity}
+            for t in raw.compare.tags[:15]
+        ]
+        notes.append("Compare returned audience tags (documented shape); no per-entity lists.")
 
     used_proxy = raw.used_proxy_senior or raw.used_proxy_junior
     if used_proxy:
@@ -266,8 +274,10 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
     return OverlapEvidence(
         senior_to_junior_rank=round(s2j_rank) if s2j_rank is not None else None,
         senior_to_junior_universe=s2j_size,
+        senior_to_junior_percentile=s2j_pct,
         junior_to_senior_rank=round(j2s_rank) if j2s_rank is not None else None,
         junior_to_senior_universe=j2s_size,
+        junior_to_senior_percentile=j2s_pct,
         symmetric_percentile=symmetric,
         top_peers_senior_seed=_top_peers(raw.senior_seed_junior_universe),
         top_peers_junior_seed=_top_peers(raw.junior_seed_senior_universe),
