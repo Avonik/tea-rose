@@ -115,8 +115,10 @@ class OverlapEvidence(BaseModel):
 
     senior_to_junior_rank: int | None  # junior's rank among junior's peers when seeded by senior
     senior_to_junior_universe: int | None
+    senior_to_junior_percentile: float | None = None  # 0..1, 1 = strongest overlap
     junior_to_senior_rank: int | None
     junior_to_senior_universe: int | None
+    junior_to_senior_percentile: float | None = None
     symmetric_percentile: float | None  # 0..1, 1 = strongest overlap; mean of both directions
     top_peers_senior_seed: list[RankedPeer] = Field(default_factory=list)
     top_peers_junior_seed: list[RankedPeer] = Field(default_factory=list)
@@ -150,7 +152,7 @@ class FameEvidence(BaseModel):
 class ZoneEvidence(BaseModel):
     points: list[HeatmapPoint]
     concentration_index: float | None  # 0..1, Gini-like: 1 = all affinity in few cells
-    top_regions: list[dict[str, Any]] = Field(default_factory=list)  # [{"label","share"}]
+    top_regions: list[dict[str, Any]] = Field(default_factory=list)  # [{"label","share"}]; label falls back to a "lat, lon" bin
     junior_points: list[HeatmapPoint] = Field(default_factory=list)
     geographic_overlap: float | None = None  # 0..1 when both sides have maps
     notes: list[str] = Field(default_factory=list)

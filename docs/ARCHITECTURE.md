@@ -84,10 +84,12 @@ state): `qloo_search`, `qloo_tags_search`, `qloo_insights_entities`, `qloo_insig
   and note it.
 - **Bridging:** seed = senior; `insights_tags` → position of the junior's category tag(s) among
   the senior's taste tags; percentile as above.
-- **Fame breadth:** from `demographics`: share of the 8 buckets (6 age + 2 gender) with
-  affinity > 0, weighted by magnitude: `breadth = mean(clip(v, 0, 1)) / max(mean(|v|), eps)`
-  bounded to 0..1; plus `popularity` percentile and heatmap coverage (share of returned cells
-  with affinity above the median of the response).
+- **Fame breadth:** from `demographics`, over the 8 buckets (6 age + 2 gender), each value
+  clipped to [-1, 1]: `share_pos = #(v > 0) / 8`, `mass_pos = Σ max(v, 0) / max(Σ |v|, eps)`,
+  `breadth = clip(share_pos × mass_pos, 0, 1)`. A brand must be positive in many buckets AND
+  positive overall to score high (a single positive spike scores low). Plus `popularity`
+  percentile and heatmap coverage (share of returned cells with affinity above the median of
+  the response; None below 5 cells).
 - **Zone concentration:** Gini coefficient of heatmap affinities across cells (0 = uniform,
   1 = concentrated); `top_regions` = cells aggregated by `label` or by 1-decimal lat/lon bins.
   `geographic_overlap` = cosine similarity of the two sides' binned affinity vectors.
