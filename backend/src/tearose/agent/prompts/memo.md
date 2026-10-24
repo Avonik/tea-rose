@@ -14,6 +14,8 @@ Return:
   3. `method` ("Method"): how the evidence was produced: brand resolution (and the proxy path
      with the goods phrase and chosen tags, if used), the comparison universes, ranks within a
      query, the number of Qloo queries (listed in the appendix). Scores were computed in code.
+     Cite individual queries by their id exactly as given in the query list (`Q1`, `Q7`, …);
+     the reader can click each id to see the request.
   4. `limitations` ("Limitations"): a bullet list of the limitations provided.
 
 Hard rules: never call an affinity a share of consumers or a confusion rate; never invent or

@@ -1,0 +1,11 @@
+{
+  "status": "pending",
+  "note": "Labels are pre-registered in eval/cases_candidates.csv before any score is computed. Results land here after the back-test run.",
+  "rows": [
+    { "n": "pending", "metric": "Spearman ρ: overlap score vs court's channels/purchasers finding", "value": "pending", "baseline": "Same-category heuristic: pending" },
+    { "n": "pending", "metric": "AUC: overlap score predicts \"favors plaintiff\"", "value": "pending", "baseline": "Popularity-only: pending" },
+    { "n": "pending", "metric": "Spearman ρ: overlap score vs court's relatedness finding", "value": "pending", "baseline": "Same-category heuristic: pending" },
+    { "n": "pending", "metric": "AUC: fame breadth predicts court's fame finding", "value": "pending", "baseline": "Popularity-only: pending" },
+    { "n": "pending", "metric": "Agreement: LLM-only baseline (contaminated; reported for reference)", "value": "pending", "baseline": "n/a" }
+  ]
+}

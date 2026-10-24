@@ -1,0 +1,2269 @@
+{
+  "run_id": "showcase-jack-daniels",
+  "status": "finished",
+  "created_at": "2026-10-22T14:03:11.000Z",
+  "mode": "fixture",
+  "showcase_slug": "jack-daniels-v-vip-products",
+  "input_excerpt": "COUNTERCLAIMS. Jack Daniel's Properties, Inc. (\"JDPI\") owns the trademarks JACK DANIEL'S and OLD NO. 7 and the distinctive trade dress of the Jack Daniel's Tennessee whiskey bottle and label. VIP Products LLC markets a dog toy called \"Bad Spaniels\" in the shape of a Jack Daniel's bottle bearing an imitation of its label…",
+  "extraction": {
+    "document_type": "complaint",
+    "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC",
+    "senior": {
+      "side": "senior",
+      "name": "Jack Daniel's Properties, Inc.",
+      "marks": [
+        "JACK DANIEL'S",
+        "OLD NO. 7",
+        "Jack Daniel's bottle and label trade dress"
+      ],
+      "goods": [
+        "Tennessee sour mash whiskey"
+      ],
+      "channels": [
+        "liquor stores",
+        "bars and restaurants",
+        "licensed merchandise"
+      ],
+      "geography": [
+        "Tennessee",
+        "nationwide"
+      ]
+    },
+    "junior": {
+      "side": "junior",
+      "name": "VIP Products LLC",
+      "marks": [
+        "BAD SPANIELS",
+        "Silly Squeakers"
+      ],
+      "goods": [
+        "durable rubber squeaky chew toys for dogs",
+        "dog toys"
+      ],
+      "channels": [
+        "pet supply stores",
+        "online retailers"
+      ],
+      "geography": [
+        "Arizona",
+        "nationwide"
+      ]
+    },
+    "claims": [
+      "likelihood_of_confusion",
+      "dilution"
+    ],
+    "court_or_forum": "U.S. District Court for the District of Arizona (on remand, 599 U.S. 140 (2023))",
+    "summary": "Jack Daniel's alleges that VIP's Bad Spaniels dog toy, shaped like its whiskey bottle and carrying a parody label, is likely to confuse consumers and dilutes its marks by tarnishment. VIP contends the toy is an expressive parody that no reasonable buyer would attribute to the distiller.",
+    "key_quotes": [
+      "The Bad Spaniels toy is in the shape of a Jack Daniel's bottle and has an imitation label.",
+      "\"The Old No. 2 on your Tennessee Carpet.\"",
+      "\"43% POO BY VOL.\" and \"100% SMELLY.\""
+    ]
+  },
+  "routing": {
+    "analyses": [
+      "overlap",
+      "bridging",
+      "fame",
+      "zone"
+    ],
+    "rationale": {
+      "overlap": "Likelihood of confusion pleaded; channels and purchasers factor applies.",
+      "bridging": "Confusion pleaded; asks whether whiskey drinkers already lean toward pet goods.",
+      "fame": "Dilution by tarnishment pleaded; fame is a threshold element.",
+      "zone": "No priority dispute; national heatmap supports the fame analysis only."
+    }
+  },
+  "resolution": {
+    "senior": {
+      "side": "senior",
+      "query": "Jack Daniel's",
+      "entity_id": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+      "entity_name": "Jack Daniel's",
+      "popularity": 0.987,
+      "candidates_considered": [
+        "Jack Daniel's",
+        "Jack Daniel's Tennessee Honey",
+        "Jack Daniel's Tennessee Fire",
+        "Jack Daniel's Distillery",
+        "Gentleman Jack"
+      ],
+      "disambiguation_note": "Parent brand chosen over line extensions and the distillery (a place, not a brand)."
+    },
+    "junior": {
+      "side": "junior",
+      "query": "Bad Spaniels",
+      "entity_id": null,
+      "entity_name": null,
+      "popularity": null,
+      "candidates_considered": [],
+      "disambiguation_note": "No brand entity for \"Bad Spaniels\" or \"VIP Products\"."
+    },
+    "senior_proxy": null,
+    "junior_proxy": {
+      "side": "junior",
+      "goods_phrase": "dog toys",
+      "tag_options": [
+        {
+          "id": "urn:tag:category:qloo:dog_toys",
+          "name": "Dog Toys",
+          "type": "urn:tag:category"
+        },
+        {
+          "id": "urn:tag:category:qloo:pet_supplies",
+          "name": "Pet Supplies",
+          "type": "urn:tag:category"
+        },
+        {
+          "id": "urn:tag:category:qloo:toys_games",
+          "name": "Toys & Games",
+          "type": "urn:tag:category"
+        },
+        {
+          "id": "urn:tag:keyword:qloo:dog_toy",
+          "name": "dog toy",
+          "type": "urn:tag:keyword"
+        },
+        {
+          "id": "urn:tag:category:qloo:pet_food",
+          "name": "Pet Food",
+          "type": "urn:tag:category"
+        },
+        {
+          "id": "urn:tag:genre:qloo:dog_breeds",
+          "name": "Dog Breeds",
+          "type": "urn:tag:genre"
+        },
+        {
+          "id": "urn:tag:category:qloo:chew_toys",
+          "name": "Chew Toys",
+          "type": "urn:tag:category"
+        },
+        {
+          "id": "urn:tag:keyword:qloo:squeaky",
+          "name": "squeaky",
+          "type": "urn:tag:keyword"
+        }
+      ],
+      "chosen_tag_ids": [
+        "urn:tag:category:qloo:dog_toys",
+        "urn:tag:category:qloo:pet_supplies"
+      ],
+      "comparator_brand_ids": [
+        "58E869A0-9506-9FB7-18FC-7FE3398500E8",
+        "2A6365A2-3911-68F2-D77C-0D4E2C1E239C",
+        "4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1",
+        "9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6",
+        "46788166-6ED0-697D-DA18-C2B9C21E4AB0"
+      ],
+      "comparator_brand_names": [
+        "KONG",
+        "Chuckit!",
+        "Nylabone",
+        "BarkBox",
+        "Petstages"
+      ],
+      "rationale": "The goods are dog toys; Dog Toys is the exact match and Pet Supplies defines the peer universe. \"Toys & Games\" targets children and \"Dog Breeds\" is not a goods category."
+    },
+    "universes": [
+      {
+        "side": "junior",
+        "description": "pet-supply brands",
+        "tag_ids": [
+          "urn:tag:category:qloo:pet_supplies"
+        ],
+        "size": 300
+      },
+      {
+        "side": "senior",
+        "description": "whiskey brands",
+        "tag_ids": [
+          "urn:tag:category:qloo:whiskey"
+        ],
+        "size": 120
+      }
+    ]
+  },
+  "evidence": {
+    "overlap": {
+      "senior_to_junior_rank": 131,
+      "senior_to_junior_universe": 300,
+      "junior_to_senior_rank": 64,
+      "junior_to_senior_universe": 120,
+      "symmetric_percentile": 0.52,
+      "top_peers_senior_seed": [
+        {
+          "entity_id": "62DE67C6-098B-03B4-695F-E9DA1FC918BE",
+          "name": "Ruffwear",
+          "rank": 1,
+          "affinity": 0.94
+        },
+        {
+          "entity_id": "C8929BBE-BE2C-104A-78A0-E5EFBC4C9D1F",
+          "name": "Orvis Dog",
+          "rank": 2,
+          "affinity": 0.905
+        },
+        {
+          "entity_id": "D2F37DD2-C4F5-5D79-0C79-A6C298556833",
+          "name": "Carhartt Pet",
+          "rank": 3,
+          "affinity": 0.87
+        },
+        {
+          "entity_id": "AF2A101B-8B84-8A77-A422-2F3988DB6EE0",
+          "name": "Kurgo",
+          "rank": 4,
+          "affinity": 0.835
+        },
+        {
+          "entity_id": "D36228A0-5B4A-969B-05E4-DEC1D678C053",
+          "name": "Tractor Supply Pet",
+          "rank": 5,
+          "affinity": 0.8
+        },
+        {
+          "entity_id": "21D53275-368B-D62C-1C97-89E255D775CF",
+          "name": "Yeti Boomer",
+          "rank": 6,
+          "affinity": 0.765
+        },
+        {
+          "entity_id": "F87381BD-0583-CE28-51B8-17B1CB973953",
+          "name": "Duluth Trading Pet",
+          "rank": 7,
+          "affinity": 0.73
+        },
+        {
+          "entity_id": "3CD95C10-9292-CF8D-6C0A-4985AADD1147",
+          "name": "Purina Pro Plan",
+          "rank": 8,
+          "affinity": 0.695
+        },
+        {
+          "entity_id": "6CB32983-A7AD-1177-6FFC-3E2AC64AFCC5",
+          "name": "Blue Buffalo",
+          "rank": 9,
+          "affinity": 0.66
+        },
+        {
+          "entity_id": "EA9494C3-1F57-DAF6-199F-4AA4ADF5A27D",
+          "name": "Pedigree",
+          "rank": 10,
+          "affinity": 0.625
+        }
+      ],
+      "top_peers_junior_seed": [
+        {
+          "entity_id": "734E89B7-B677-F9B9-8C32-10FEA70368A5",
+          "name": "Fireball",
+          "rank": 1,
+          "affinity": 0.91
+        },
+        {
+          "entity_id": "2E7CCD42-48E3-8B44-16D0-A418DAEDA745",
+          "name": "Crown Royal",
+          "rank": 2,
+          "affinity": 0.878
+        },
+        {
+          "entity_id": "7722E557-B4D5-4FB1-B8A2-F3E61858FCB9",
+          "name": "Jameson",
+          "rank": 3,
+          "affinity": 0.846
+        },
+        {
+          "entity_id": "1E355C6B-72E2-0426-8D87-CFC93AB75F6D",
+          "name": "Maker's Mark",
+          "rank": 4,
+          "affinity": 0.814
+        },
+        {
+          "entity_id": "72C5E7B2-1CBF-D622-7F50-5CFE62642228",
+          "name": "Bulleit",
+          "rank": 5,
+          "affinity": 0.782
+        },
+        {
+          "entity_id": "7FDA2216-90F9-2EDC-624C-02C63FCBDA75",
+          "name": "Jim Beam",
+          "rank": 6,
+          "affinity": 0.75
+        },
+        {
+          "entity_id": "A3FCBB43-B07C-5032-A34C-9E02670E9B38",
+          "name": "Woodford Reserve",
+          "rank": 7,
+          "affinity": 0.718
+        },
+        {
+          "entity_id": "5EBF325A-5DE3-1416-0385-59187CEB45D6",
+          "name": "Buffalo Trace",
+          "rank": 8,
+          "affinity": 0.686
+        },
+        {
+          "entity_id": "6E8C00BE-1025-C622-48D8-931839A833CA",
+          "name": "Evan Williams",
+          "rank": 9,
+          "affinity": 0.654
+        },
+        {
+          "entity_id": "C94D7539-8453-00F3-78EB-589F4F17834F",
+          "name": "Knob Creek",
+          "rank": 10,
+          "affinity": 0.622
+        }
+      ],
+      "senior_to_junior_percentile": 0.567,
+      "junior_to_senior_percentile": 0.475,
+      "shared_affinities": [
+        {
+          "tag_id": "urn:tag:audience:qloo:outdoor_recreation",
+          "name": "Outdoor recreation",
+          "type": "urn:tag:audience",
+          "score": 0.81
+        },
+        {
+          "tag_id": "urn:tag:audience:qloo:rural",
+          "name": "Rural lifestyle",
+          "type": "urn:tag:audience",
+          "score": 0.74
+        },
+        {
+          "tag_id": "urn:tag:audience:qloo:homeowners",
+          "name": "Home ownership",
+          "type": "urn:tag:audience",
+          "score": 0.69
+        },
+        {
+          "tag_id": "urn:tag:keyword:qloo:barbecue",
+          "name": "Grilling & barbecue",
+          "type": "urn:tag:keyword",
+          "score": 0.66
+        },
+        {
+          "tag_id": "urn:tag:genre:qloo:country",
+          "name": "Country music",
+          "type": "urn:tag:genre",
+          "score": 0.58
+        },
+        {
+          "tag_id": "urn:tag:keyword:qloo:pickup_trucks",
+          "name": "Pickup trucks",
+          "type": "urn:tag:keyword",
+          "score": 0.55
+        },
+        {
+          "tag_id": "urn:tag:audience:qloo:hunting_fishing",
+          "name": "Hunting & fishing",
+          "type": "urn:tag:audience",
+          "score": 0.49
+        },
+        {
+          "tag_id": "urn:tag:keyword:qloo:warehouse_club",
+          "name": "Warehouse clubs",
+          "type": "urn:tag:keyword",
+          "score": 0.41
+        }
+      ],
+      "distinct_to_senior": [
+        {
+          "entity_id": "ACB52667-3C08-2E8F-EBAD-B60E40DAC71A",
+          "name": "Harley-Davidson",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.86,
+          "b_affinity": 0.21,
+          "delta": 0.65
+        },
+        {
+          "entity_id": "C1224DD5-C244-A113-F18C-4228709BBB0E",
+          "name": "Zippo",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.77,
+          "b_affinity": 0.14,
+          "delta": 0.63
+        },
+        {
+          "entity_id": "3F7C839D-B34C-FEEB-CEFE-96D90A0E37E0",
+          "name": "Copenhagen",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.69,
+          "b_affinity": 0.09,
+          "delta": 0.6
+        },
+        {
+          "entity_id": "1FDCF1F1-504F-16D0-0D12-F7A37357F1C4",
+          "name": "Coors Light",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.73,
+          "b_affinity": 0.2,
+          "delta": 0.53
+        },
+        {
+          "entity_id": "F5513F96-0A2F-D9BC-7281-4528783835BD",
+          "name": "Stetson",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.62,
+          "b_affinity": 0.12,
+          "delta": 0.5
+        },
+        {
+          "entity_id": "9F9BEAFC-3C87-6D88-6E75-F5DEC0B948CF",
+          "name": "Wrangler",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.66,
+          "b_affinity": 0.24,
+          "delta": 0.42
+        }
+      ],
+      "distinct_to_junior": [
+        {
+          "entity_id": "431739DD-0EF8-3427-5CFB-3D78469A2FB6",
+          "name": "Chewy",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.12,
+          "b_affinity": 0.94,
+          "delta": -0.82
+        },
+        {
+          "entity_id": "AC54ED2D-6C6C-938B-B66C-63C5D0282E93",
+          "name": "Rover",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.08,
+          "b_affinity": 0.81,
+          "delta": -0.73
+        },
+        {
+          "entity_id": "5F36D81E-6026-D679-C889-F5493B41719B",
+          "name": "Petco",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.19,
+          "b_affinity": 0.88,
+          "delta": -0.69
+        },
+        {
+          "entity_id": "9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6",
+          "name": "BarkBox",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.06,
+          "b_affinity": 0.79,
+          "delta": -0.73
+        },
+        {
+          "entity_id": "D2667E42-A8BE-AC84-D6F9-5887AB807A94",
+          "name": "Trader Joe's",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.21,
+          "b_affinity": 0.71,
+          "delta": -0.5
+        },
+        {
+          "entity_id": "62E1F22F-5038-9F76-9918-007A758EEF1D",
+          "name": "Wild One",
+          "subtype": "urn:entity:brand",
+          "a_affinity": 0.04,
+          "b_affinity": 0.6,
+          "delta": -0.56
+        }
+      ],
+      "used_proxy": true,
+      "notes": [
+        "Junior side is a proxy: rank is the mean rank of 5 dog-toy comparator brands (KONG, Chuckit!, Nylabone, BarkBox, Petstages).",
+        "Two comparator ranks (158, 227) lie beyond the 150-result page limit and are interpolated; excluding them gives a mean rank of 90 (p=0.70)."
+      ]
+    },
+    "bridging": {
+      "category_tag_ids": [
+        "urn:tag:category:qloo:pet_supplies"
+      ],
+      "category_rank_among_senior_tags": 184,
+      "senior_tag_universe": 400,
+      "category_affinity": 0.21,
+      "percentile": 0.54,
+      "notes": [
+        "The narrow pet-type tag filter returned nothing; position was taken from the wide category-tag query."
+      ]
+    },
+    "fame": {
+      "demographics": {
+        "age": {
+          "24_and_younger": 0.12,
+          "25_to_29": 0.31,
+          "30_to_34": 0.34,
+          "35_to_44": 0.22,
+          "45_to_54": 0.05,
+          "55_and_older": -0.14
+        },
+        "gender": {
+          "male": 0.28,
+          "female": -0.19
+        }
+      },
+      "breadth_score": 0.8,
+      "skew_description": "Skews 25–34 and male; positive in 5 of 6 age buckets",
+      "popularity_percentile": 0.987,
+      "heatmap_coverage": 0.61,
+      "notes": [
+        "Demographics are age and gender only; Qloo reports no income, race or ethnicity."
+      ]
+    },
+    "zone": {
+      "points": [
+        {
+          "latitude": 36.16,
+          "longitude": -86.78,
+          "geohash": "36bfd9",
+          "affinity": 1,
+          "affinity_rank": 1,
+          "popularity": null,
+          "label": "Nashville, TN"
+        },
+        {
+          "latitude": 35.28,
+          "longitude": -86.37,
+          "geohash": "5b2f37",
+          "affinity": 0.98,
+          "affinity_rank": 0.975,
+          "popularity": null,
+          "label": "Lynchburg, TN"
+        },
+        {
+          "latitude": 35.96,
+          "longitude": -83.92,
+          "geohash": "8acfdf",
+          "affinity": 0.93,
+          "affinity_rank": 0.95,
+          "popularity": null,
+          "label": "Knoxville, TN"
+        },
+        {
+          "latitude": 35.15,
+          "longitude": -90.05,
+          "geohash": "abce8f",
+          "affinity": 0.91,
+          "affinity_rank": 0.925,
+          "popularity": null,
+          "label": "Memphis, TN"
+        },
+        {
+          "latitude": 35.05,
+          "longitude": -85.31,
+          "geohash": "923c63",
+          "affinity": 0.9,
+          "affinity_rank": 0.9,
+          "popularity": null,
+          "label": "Chattanooga, TN"
+        },
+        {
+          "latitude": 38.25,
+          "longitude": -85.76,
+          "geohash": "5f8fe1",
+          "affinity": 0.86,
+          "affinity_rank": 0.875,
+          "popularity": null,
+          "label": "Louisville, KY"
+        },
+        {
+          "latitude": 33.52,
+          "longitude": -86.8,
+          "geohash": "361008",
+          "affinity": 0.84,
+          "affinity_rank": 0.85,
+          "popularity": null,
+          "label": "Birmingham, AL"
+        },
+        {
+          "latitude": 33.75,
+          "longitude": -84.39,
+          "geohash": "0c2c63",
+          "affinity": 0.78,
+          "affinity_rank": 0.825,
+          "popularity": null,
+          "label": "Atlanta, GA"
+        },
+        {
+          "latitude": 32.3,
+          "longitude": -90.18,
+          "geohash": "e70057",
+          "affinity": 0.8,
+          "affinity_rank": 0.8,
+          "popularity": null,
+          "label": "Jackson, MS"
+        },
+        {
+          "latitude": 34.75,
+          "longitude": -92.29,
+          "geohash": "f54a25",
+          "affinity": 0.79,
+          "affinity_rank": 0.775,
+          "popularity": null,
+          "label": "Little Rock, AR"
+        },
+        {
+          "latitude": 29.95,
+          "longitude": -90.07,
+          "geohash": "00e7e8",
+          "affinity": 0.74,
+          "affinity_rank": 0.75,
+          "popularity": null,
+          "label": "New Orleans, LA"
+        },
+        {
+          "latitude": 32.78,
+          "longitude": -96.8,
+          "geohash": "100722",
+          "affinity": 0.72,
+          "affinity_rank": 0.725,
+          "popularity": null,
+          "label": "Dallas, TX"
+        },
+        {
+          "latitude": 29.76,
+          "longitude": -95.37,
+          "geohash": "1dbc33",
+          "affinity": 0.68,
+          "affinity_rank": 0.7,
+          "popularity": null,
+          "label": "Houston, TX"
+        },
+        {
+          "latitude": 29.42,
+          "longitude": -98.49,
+          "geohash": "b0601d",
+          "affinity": 0.63,
+          "affinity_rank": 0.675,
+          "popularity": null,
+          "label": "San Antonio, TX"
+        },
+        {
+          "latitude": 35.47,
+          "longitude": -97.52,
+          "geohash": "72131a",
+          "affinity": 0.7,
+          "affinity_rank": 0.65,
+          "popularity": null,
+          "label": "Oklahoma City, OK"
+        },
+        {
+          "latitude": 35.23,
+          "longitude": -80.84,
+          "geohash": "c83c92",
+          "affinity": 0.69,
+          "affinity_rank": 0.625,
+          "popularity": null,
+          "label": "Charlotte, NC"
+        },
+        {
+          "latitude": 35.78,
+          "longitude": -78.64,
+          "geohash": "65718f",
+          "affinity": 0.6,
+          "affinity_rank": 0.6,
+          "popularity": null,
+          "label": "Raleigh, NC"
+        },
+        {
+          "latitude": 34,
+          "longitude": -81.03,
+          "geohash": "dad2a8",
+          "affinity": 0.66,
+          "affinity_rank": 0.575,
+          "popularity": null,
+          "label": "Columbia, SC"
+        },
+        {
+          "latitude": 30.33,
+          "longitude": -81.66,
+          "geohash": "566168",
+          "affinity": 0.61,
+          "affinity_rank": 0.55,
+          "popularity": null,
+          "label": "Jacksonville, FL"
+        },
+        {
+          "latitude": 27.95,
+          "longitude": -82.46,
+          "geohash": "6ec7cc",
+          "affinity": 0.55,
+          "affinity_rank": 0.525,
+          "popularity": null,
+          "label": "Tampa, FL"
+        },
+        {
+          "latitude": 25.76,
+          "longitude": -80.19,
+          "geohash": "5a8a35",
+          "affinity": 0.41,
+          "affinity_rank": 0.5,
+          "popularity": null,
+          "label": "Miami, FL"
+        },
+        {
+          "latitude": 38.63,
+          "longitude": -90.2,
+          "geohash": "72cad2",
+          "affinity": 0.71,
+          "affinity_rank": 0.475,
+          "popularity": null,
+          "label": "St. Louis, MO"
+        },
+        {
+          "latitude": 39.1,
+          "longitude": -94.58,
+          "geohash": "0cbec4",
+          "affinity": 0.62,
+          "affinity_rank": 0.45,
+          "popularity": null,
+          "label": "Kansas City, MO"
+        },
+        {
+          "latitude": 39.77,
+          "longitude": -86.16,
+          "geohash": "b4777c",
+          "affinity": 0.6,
+          "affinity_rank": 0.425,
+          "popularity": null,
+          "label": "Indianapolis, IN"
+        },
+        {
+          "latitude": 39.96,
+          "longitude": -83,
+          "geohash": "686cd1",
+          "affinity": 0.55,
+          "affinity_rank": 0.4,
+          "popularity": null,
+          "label": "Columbus, OH"
+        },
+        {
+          "latitude": 42.33,
+          "longitude": -83.05,
+          "geohash": "022848",
+          "affinity": 0.5,
+          "affinity_rank": 0.375,
+          "popularity": null,
+          "label": "Detroit, MI"
+        },
+        {
+          "latitude": 41.88,
+          "longitude": -87.63,
+          "geohash": "1c5c65",
+          "affinity": 0.52,
+          "affinity_rank": 0.35,
+          "popularity": null,
+          "label": "Chicago, IL"
+        },
+        {
+          "latitude": 43.04,
+          "longitude": -87.91,
+          "geohash": "3abd52",
+          "affinity": 0.47,
+          "affinity_rank": 0.325,
+          "popularity": null,
+          "label": "Milwaukee, WI"
+        },
+        {
+          "latitude": 44.98,
+          "longitude": -93.27,
+          "geohash": "723328",
+          "affinity": 0.38,
+          "affinity_rank": 0.3,
+          "popularity": null,
+          "label": "Minneapolis, MN"
+        },
+        {
+          "latitude": 39.74,
+          "longitude": -104.99,
+          "geohash": "5bc4df",
+          "affinity": 0.44,
+          "affinity_rank": 0.275,
+          "popularity": null,
+          "label": "Denver, CO"
+        },
+        {
+          "latitude": 33.45,
+          "longitude": -112.07,
+          "geohash": "1bd305",
+          "affinity": 0.43,
+          "affinity_rank": 0.25,
+          "popularity": null,
+          "label": "Phoenix, AZ"
+        },
+        {
+          "latitude": 36.17,
+          "longitude": -115.14,
+          "geohash": "5675e1",
+          "affinity": 0.49,
+          "affinity_rank": 0.225,
+          "popularity": null,
+          "label": "Las Vegas, NV"
+        },
+        {
+          "latitude": 34.05,
+          "longitude": -118.24,
+          "geohash": "35e96b",
+          "affinity": 0.33,
+          "affinity_rank": 0.2,
+          "popularity": null,
+          "label": "Los Angeles, CA"
+        },
+        {
+          "latitude": 37.77,
+          "longitude": -122.42,
+          "geohash": "d8b5cc",
+          "affinity": 0.22,
+          "affinity_rank": 0.175,
+          "popularity": null,
+          "label": "San Francisco, CA"
+        },
+        {
+          "latitude": 47.61,
+          "longitude": -122.33,
+          "geohash": "739cca",
+          "affinity": 0.27,
+          "affinity_rank": 0.15,
+          "popularity": null,
+          "label": "Seattle, WA"
+        },
+        {
+          "latitude": 45.52,
+          "longitude": -122.68,
+          "geohash": "fa12ba",
+          "affinity": 0.25,
+          "affinity_rank": 0.125,
+          "popularity": null,
+          "label": "Portland, OR"
+        },
+        {
+          "latitude": 40.76,
+          "longitude": -111.89,
+          "geohash": "a5e2df",
+          "affinity": 0.18,
+          "affinity_rank": 0.1,
+          "popularity": null,
+          "label": "Salt Lake City, UT"
+        },
+        {
+          "latitude": 40.71,
+          "longitude": -74.01,
+          "geohash": "51bcae",
+          "affinity": 0.31,
+          "affinity_rank": 0.075,
+          "popularity": null,
+          "label": "New York, NY"
+        },
+        {
+          "latitude": 39.95,
+          "longitude": -75.17,
+          "geohash": "dbcc1c",
+          "affinity": 0.36,
+          "affinity_rank": 0.05,
+          "popularity": null,
+          "label": "Philadelphia, PA"
+        },
+        {
+          "latitude": 42.36,
+          "longitude": -71.06,
+          "geohash": "d4c690",
+          "affinity": 0.24,
+          "affinity_rank": 0.025,
+          "popularity": null,
+          "label": "Boston, MA"
+        }
+      ],
+      "concentration_index": 0.27,
+      "top_regions": [
+        {
+          "label": "Tennessee",
+          "share": 0.142
+        },
+        {
+          "label": "Kentucky & Alabama",
+          "share": 0.081
+        },
+        {
+          "label": "Texas",
+          "share": 0.079
+        },
+        {
+          "label": "Georgia & the Carolinas",
+          "share": 0.074
+        },
+        {
+          "label": "Mississippi & Arkansas",
+          "share": 0.064
+        }
+      ],
+      "junior_points": [
+        {
+          "latitude": 47.61,
+          "longitude": -122.33,
+          "geohash": "739cca",
+          "affinity": 1,
+          "affinity_rank": 1,
+          "popularity": null,
+          "label": "Seattle, WA"
+        },
+        {
+          "latitude": 45.52,
+          "longitude": -122.68,
+          "geohash": "fa12ba",
+          "affinity": 0.97,
+          "affinity_rank": 0.969,
+          "popularity": null,
+          "label": "Portland, OR"
+        },
+        {
+          "latitude": 39.74,
+          "longitude": -104.99,
+          "geohash": "5bc4df",
+          "affinity": 0.95,
+          "affinity_rank": 0.938,
+          "popularity": null,
+          "label": "Denver, CO"
+        },
+        {
+          "latitude": 37.77,
+          "longitude": -122.42,
+          "geohash": "d8b5cc",
+          "affinity": 0.88,
+          "affinity_rank": 0.906,
+          "popularity": null,
+          "label": "San Francisco, CA"
+        },
+        {
+          "latitude": 34.05,
+          "longitude": -118.24,
+          "geohash": "35e96b",
+          "affinity": 0.83,
+          "affinity_rank": 0.875,
+          "popularity": null,
+          "label": "Los Angeles, CA"
+        },
+        {
+          "latitude": 32.72,
+          "longitude": -117.16,
+          "geohash": "3487ca",
+          "affinity": 0.86,
+          "affinity_rank": 0.844,
+          "popularity": null,
+          "label": "San Diego, CA"
+        },
+        {
+          "latitude": 30.27,
+          "longitude": -97.74,
+          "geohash": "908759",
+          "affinity": 0.84,
+          "affinity_rank": 0.813,
+          "popularity": null,
+          "label": "Austin, TX"
+        },
+        {
+          "latitude": 44.98,
+          "longitude": -93.27,
+          "geohash": "723328",
+          "affinity": 0.79,
+          "affinity_rank": 0.781,
+          "popularity": null,
+          "label": "Minneapolis, MN"
+        },
+        {
+          "latitude": 42.36,
+          "longitude": -71.06,
+          "geohash": "d4c690",
+          "affinity": 0.74,
+          "affinity_rank": 0.75,
+          "popularity": null,
+          "label": "Boston, MA"
+        },
+        {
+          "latitude": 40.71,
+          "longitude": -74.01,
+          "geohash": "51bcae",
+          "affinity": 0.7,
+          "affinity_rank": 0.719,
+          "popularity": null,
+          "label": "New York, NY"
+        },
+        {
+          "latitude": 41.88,
+          "longitude": -87.63,
+          "geohash": "1c5c65",
+          "affinity": 0.72,
+          "affinity_rank": 0.688,
+          "popularity": null,
+          "label": "Chicago, IL"
+        },
+        {
+          "latitude": 33.45,
+          "longitude": -112.07,
+          "geohash": "1bd305",
+          "affinity": 0.66,
+          "affinity_rank": 0.656,
+          "popularity": null,
+          "label": "Phoenix, AZ"
+        },
+        {
+          "latitude": 40.76,
+          "longitude": -111.89,
+          "geohash": "a5e2df",
+          "affinity": 0.77,
+          "affinity_rank": 0.625,
+          "popularity": null,
+          "label": "Salt Lake City, UT"
+        },
+        {
+          "latitude": 43.62,
+          "longitude": -116.2,
+          "geohash": "6843a4",
+          "affinity": 0.69,
+          "affinity_rank": 0.594,
+          "popularity": null,
+          "label": "Boise, ID"
+        },
+        {
+          "latitude": 35.78,
+          "longitude": -78.64,
+          "geohash": "65718f",
+          "affinity": 0.62,
+          "affinity_rank": 0.563,
+          "popularity": null,
+          "label": "Raleigh, NC"
+        },
+        {
+          "latitude": 33.75,
+          "longitude": -84.39,
+          "geohash": "0c2c63",
+          "affinity": 0.58,
+          "affinity_rank": 0.531,
+          "popularity": null,
+          "label": "Atlanta, GA"
+        },
+        {
+          "latitude": 36.16,
+          "longitude": -86.78,
+          "geohash": "36bfd9",
+          "affinity": 0.6,
+          "affinity_rank": 0.5,
+          "popularity": null,
+          "label": "Nashville, TN"
+        },
+        {
+          "latitude": 32.78,
+          "longitude": -96.8,
+          "geohash": "100722",
+          "affinity": 0.55,
+          "affinity_rank": 0.469,
+          "popularity": null,
+          "label": "Dallas, TX"
+        },
+        {
+          "latitude": 39.95,
+          "longitude": -75.17,
+          "geohash": "dbcc1c",
+          "affinity": 0.57,
+          "affinity_rank": 0.438,
+          "popularity": null,
+          "label": "Philadelphia, PA"
+        },
+        {
+          "latitude": 38.91,
+          "longitude": -77.04,
+          "geohash": "08d71e",
+          "affinity": 0.63,
+          "affinity_rank": 0.406,
+          "popularity": null,
+          "label": "Washington, DC"
+        },
+        {
+          "latitude": 39.96,
+          "longitude": -83,
+          "geohash": "686cd1",
+          "affinity": 0.51,
+          "affinity_rank": 0.375,
+          "popularity": null,
+          "label": "Columbus, OH"
+        },
+        {
+          "latitude": 39.1,
+          "longitude": -94.58,
+          "geohash": "0cbec4",
+          "affinity": 0.49,
+          "affinity_rank": 0.344,
+          "popularity": null,
+          "label": "Kansas City, MO"
+        },
+        {
+          "latitude": 27.95,
+          "longitude": -82.46,
+          "geohash": "6ec7cc",
+          "affinity": 0.5,
+          "affinity_rank": 0.313,
+          "popularity": null,
+          "label": "Tampa, FL"
+        },
+        {
+          "latitude": 25.76,
+          "longitude": -80.19,
+          "geohash": "5a8a35",
+          "affinity": 0.42,
+          "affinity_rank": 0.281,
+          "popularity": null,
+          "label": "Miami, FL"
+        },
+        {
+          "latitude": 29.76,
+          "longitude": -95.37,
+          "geohash": "1dbc33",
+          "affinity": 0.47,
+          "affinity_rank": 0.25,
+          "popularity": null,
+          "label": "Houston, TX"
+        },
+        {
+          "latitude": 42.33,
+          "longitude": -83.05,
+          "geohash": "022848",
+          "affinity": 0.4,
+          "affinity_rank": 0.219,
+          "popularity": null,
+          "label": "Detroit, MI"
+        },
+        {
+          "latitude": 36.17,
+          "longitude": -115.14,
+          "geohash": "5675e1",
+          "affinity": 0.45,
+          "affinity_rank": 0.188,
+          "popularity": null,
+          "label": "Las Vegas, NV"
+        },
+        {
+          "latitude": 35.08,
+          "longitude": -106.65,
+          "geohash": "b87cd2",
+          "affinity": 0.41,
+          "affinity_rank": 0.156,
+          "popularity": null,
+          "label": "Albuquerque, NM"
+        },
+        {
+          "latitude": 35.23,
+          "longitude": -80.84,
+          "geohash": "c83c92",
+          "affinity": 0.53,
+          "affinity_rank": 0.125,
+          "popularity": null,
+          "label": "Charlotte, NC"
+        },
+        {
+          "latitude": 38.63,
+          "longitude": -90.2,
+          "geohash": "72cad2",
+          "affinity": 0.38,
+          "affinity_rank": 0.094,
+          "popularity": null,
+          "label": "St. Louis, MO"
+        },
+        {
+          "latitude": 35.15,
+          "longitude": -90.05,
+          "geohash": "abce8f",
+          "affinity": 0.29,
+          "affinity_rank": 0.063,
+          "popularity": null,
+          "label": "Memphis, TN"
+        },
+        {
+          "latitude": 33.52,
+          "longitude": -86.8,
+          "geohash": "361008",
+          "affinity": 0.27,
+          "affinity_rank": 0.031,
+          "popularity": null,
+          "label": "Birmingham, AL"
+        }
+      ],
+      "geographic_overlap": 0.58,
+      "notes": [
+        "Heatmap values are rank-normalized within each query: they show relative concentration, not absolute reach."
+      ]
+    }
+  },
+  "memo": {
+    "headline": "Jack Daniel's fans sit near the median for pet-supply brands, so the taste graph neither shows nor rules out shared purchasers; the mark's audience is broad across ages and both genders.",
+    "findings": [
+      {
+        "factor": "relatedness_of_goods",
+        "lean": "neutral",
+        "confidence": "low",
+        "finding": "Whiskey and dog toys are different goods; the taste graph places Pet Supplies at #184 of 400 of the senior brand's taste tags (percentile 0.54), close to the middle. Nothing here suggests consumers would expect the senior to make dog toys.",
+        "evidence_refs": [
+          "Q11",
+          "bridging.percentile"
+        ]
+      },
+      {
+        "factor": "channels_and_purchasers",
+        "lean": "neutral",
+        "confidence": "medium",
+        "finding": "Seeded by Jack Daniel's, the dog-toy comparators rank #131 of 300 pet-supply brands; seeded by the comparators, Jack Daniel's ranks #64 of 120 whiskey brands. A symmetric percentile of 0.52 is median overlap: shared purchasers exist but are not concentrated.",
+        "evidence_refs": [
+          "Q5",
+          "Q6",
+          "Q7",
+          "Q8",
+          "overlap.symmetric_percentile"
+        ]
+      },
+      {
+        "factor": "bridging_the_gap",
+        "lean": "neutral",
+        "confidence": "low",
+        "finding": "The senior brand's audience shows no particular pull toward pet supplies (category affinity 0.21). Licensed pet merchandise exists in the market generally, but the data does not show this audience leaning that way.",
+        "evidence_refs": [
+          "Q11"
+        ]
+      },
+      {
+        "factor": "fame",
+        "lean": "favors_senior",
+        "confidence": "high",
+        "finding": "Affinity is positive in 5 of 6 age buckets and among men, with a breadth score of 0.80 and a popularity percentile of 0.99. That is the profile of a household mark rather than a niche one, which supports the fame threshold for dilution.",
+        "evidence_refs": [
+          "Q12",
+          "Q13",
+          "fame.breadth_score"
+        ]
+      },
+      {
+        "factor": "zone_of_reputation",
+        "lean": "insufficient_data",
+        "confidence": "low",
+        "finding": "No priority dispute is pleaded. The heatmap concentrates in Tennessee and the South (Gini 0.27) but covers 61% of national cells above the median; it is reported as fame support only.",
+        "evidence_refs": [
+          "Q13",
+          "Q14"
+        ]
+      }
+    ],
+    "sections": [
+      {
+        "id": "scope",
+        "title": "Question presented and scope",
+        "markdown": "Jack Daniel's Properties alleges that VIP Products' **Bad Spaniels** squeaky toy infringes and tarnishes the JACK DANIEL'S marks and bottle trade dress. This memo addresses the consumer-facing questions the taste graph can speak to:\n\n1. Do the two brands share purchasers (relatedness, channels and class of purchasers)?\n2. Does the senior brand's audience lean toward the junior's product category (bridging the gap)?\n3. Is the senior mark famous with the general consuming public (dilution threshold)?\n\nIt does not address parody, expressive use or the *Rogers* question the Supreme Court resolved in 2023. Bad Spaniels is not in Qloo's graph; the junior side is measured through five category-leading dog-toy brands chosen from the menu returned for the goods phrase *\"dog toys\"* (Q3, Q4)."
+      },
+      {
+        "id": "purchasers",
+        "title": "Shared purchasers",
+        "markdown": "Ranks, not raw affinity, carry the finding because Qloo normalizes affinity within each query.\n\n| Direction | Rank | Universe | Percentile |\n| --- | ---: | ---: | ---: |\n| Seeded by Jack Daniel's → dog-toy comparators | #131 | 300 pet-supply brands | 0.57 |\n| Seeded by comparators → Jack Daniel's | #64 | 120 whiskey brands | 0.48 |\n| **Symmetric** | | | **0.52** |\n\nThe compare response (Q9) connects the two audiences through outdoor recreation, rural lifestyle and home ownership, while each side keeps distinct anchors: Harley-Davidson and Zippo for the senior, Chewy and Rover for the comparators. Two comparator ranks fall beyond the 150-result page limit; excluding them raises the percentile to 0.70, so the finding is sensitive to the proxy set."
+      },
+      {
+        "id": "fame",
+        "title": "Fame and breadth of recognition",
+        "markdown": "The demographic response (Q12) is positive in every age bucket except 55 and older (−0.14) and among men (+0.28); women under-index slightly (−0.19). The breadth score is **0.80** on a 0–1 scale and the popularity percentile is **0.99**. The national heatmap (Q13) shows above-median affinity in **61%** of returned cells.\n\nFor comparison, a mark the Federal Circuit found *not* famous for dilution (Coach, 2012) is expected to show a narrower profile; see the showcase. Breadth is a proxy for recognition across the general consuming public, not a recognition survey."
+      },
+      {
+        "id": "geography",
+        "title": "Geography",
+        "markdown": "Affinity concentrates in Tennessee (14% of total), Kentucky and Alabama, Texas, and the Southeast, with a concentration index of **0.27** (0 = uniform). The dog-toy comparators skew West and Mountain (Q14); the cosine overlap of the two maps is **0.58**.\n\nNo party pleads common-law priority, so the zone of reputation is not a live issue. The map is included to show national reach for the fame question."
+      }
+    ],
+    "limitations": [
+      "Affinity is not confusion. Taste overlap shows who likes what; it does not measure whether any consumer was or would be confused about source.",
+      "No survey percentages. Scores are ranks within one query, never a share of consumers, and must not be read as one.",
+      "Data reflects today, not the year of the dispute. Audiences in 2014 or 2023 may have looked different.",
+      "Coverage gaps. Small brands are often missing from Qloo; proxy categories stand in for them and every proxied finding is flagged.",
+      "Age and gender only. Qloo reports no income, ethnicity or region-level demographics, and heatmaps show relative concentration, not absolute reach.",
+      "Case-specific: the junior side is measured through five comparator brands, and two of their ranks lie beyond the 150-result page limit."
+    ],
+    "appendix_queries": [
+      {
+        "endpoint": "/search",
+        "params": {
+          "query": "Jack Daniel's",
+          "types": "urn:entity:brand",
+          "take": 10
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 212,
+        "result_count": 7,
+        "fixture_file": "fixtures/qloo/jd_search_j_d.json"
+      },
+      {
+        "endpoint": "/search",
+        "params": {
+          "query": "Bad Spaniels",
+          "types": "urn:entity:brand",
+          "take": 10
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 188,
+        "result_count": 0,
+        "fixture_file": "fixtures/qloo/jd_search_b_s.json"
+      },
+      {
+        "endpoint": "/v2/tags",
+        "params": {
+          "filter.query": "dog toys",
+          "take": 10
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 164,
+        "result_count": 8,
+        "fixture_file": "fixtures/qloo/jd_tags.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "filter.tags": "urn:tag:category:qloo:dog_toys",
+          "sort_by": "popularity",
+          "take": 5
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 301,
+        "result_count": 5,
+        "fixture_file": "fixtures/qloo/jd_comparators.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tags": "urn:tag:category:qloo:pet_supplies",
+          "take": 50,
+          "page": 1,
+          "feature.explainability": true
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 644,
+        "result_count": 50,
+        "fixture_file": "fixtures/qloo/jd_pet1.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tags": "urn:tag:category:qloo:pet_supplies",
+          "take": 50,
+          "page": 2,
+          "feature.explainability": true
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 598,
+        "result_count": 50,
+        "fixture_file": "fixtures/qloo/jd_pet2.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tags": "urn:tag:category:qloo:pet_supplies",
+          "take": 50,
+          "page": 3,
+          "feature.explainability": true
+        },
+        "cache_hit": true,
+        "status": 200,
+        "elapsed_ms": 9,
+        "result_count": 50,
+        "fixture_file": null
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "58E869A0-9506-9FB7-18FC-7FE3398500E8,2A6365A2-3911-68F2-D77C-0D4E2C1E239C,4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1,9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6,46788166-6ED0-697D-DA18-C2B9C21E4AB0",
+          "filter.tags": "urn:tag:category:qloo:whiskey",
+          "take": 50,
+          "page": 1
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 702,
+        "result_count": 50,
+        "fixture_file": "fixtures/qloo/jd_whiskey.json"
+      },
+      {
+        "endpoint": "/v2/analysis/compare",
+        "params": {
+          "a.signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "b.signal.interests.entities": "58E869A0-9506-9FB7-18FC-7FE3398500E8,2A6365A2-3911-68F2-D77C-0D4E2C1E239C,4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1,9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6,46788166-6ED0-697D-DA18-C2B9C21E4AB0",
+          "filter.type": "urn:entity:brand",
+          "take": 50
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 880,
+        "result_count": 48,
+        "fixture_file": "fixtures/qloo/jd_compare.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:tag",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tag.types": "urn:tag:category:qloo:pet",
+          "take": 50
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 233,
+        "result_count": 0,
+        "fixture_file": "fixtures/qloo/jd_tags_narrow.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:tag",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.parents.types": "urn:tag:category",
+          "take": 400
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 1104,
+        "result_count": 400,
+        "fixture_file": "fixtures/qloo/jd_tags_wide.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:demographics",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552"
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 276,
+        "result_count": 1,
+        "fixture_file": "fixtures/qloo/jd_demo.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:heatmap",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.location.query": "United States"
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 1388,
+        "result_count": 40,
+        "fixture_file": "fixtures/qloo/jd_heat_j_d.json"
+      },
+      {
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:heatmap",
+          "signal.interests.entities": "58E869A0-9506-9FB7-18FC-7FE3398500E8,2A6365A2-3911-68F2-D77C-0D4E2C1E239C,4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1,9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6,46788166-6ED0-697D-DA18-C2B9C21E4AB0",
+          "filter.location.query": "United States"
+        },
+        "cache_hit": false,
+        "status": 200,
+        "elapsed_ms": 1290,
+        "result_count": 32,
+        "fixture_file": "fixtures/qloo/jd_heat_jr.json"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "ts": "2026-10-22T14:03:11.000Z",
+      "seq": 1,
+      "node": "extract",
+      "type": "run_started",
+      "title": "Run started",
+      "detail": "Fixture mode · document of 41,212 characters",
+      "data": {
+        "mode": "fixture"
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:11.400Z",
+      "seq": 2,
+      "node": "extract",
+      "type": "node_started",
+      "title": "Reading the document",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:13.800Z",
+      "seq": 3,
+      "node": "extract",
+      "type": "decision",
+      "title": "Parties: Jack Daniel's Properties (senior) v. VIP Products (junior)",
+      "detail": "Senior = registrant and counterclaim plaintiff; junior = maker of the Bad Spaniels toy.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:14.200Z",
+      "seq": 4,
+      "node": "extract",
+      "type": "note",
+      "title": "Claims pleaded: likelihood of confusion, dilution by tarnishment",
+      "detail": "Goods quoted verbatim: \"Tennessee sour mash whiskey\"; \"durable rubber squeaky chew toys for dogs\".",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:14.600Z",
+      "seq": 5,
+      "node": "extract",
+      "type": "node_finished",
+      "title": "Extraction complete",
+      "detail": "2 parties · 5 marks · 2 claims · 3 key quotes",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:15.000Z",
+      "seq": 6,
+      "node": "route",
+      "type": "node_started",
+      "title": "Choosing analyses",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:16.200Z",
+      "seq": 7,
+      "node": "route",
+      "type": "decision",
+      "title": "Run overlap + bridging",
+      "detail": "Likelihood of confusion pleaded: relatedness and channels/purchasers factors apply.",
+      "data": {
+        "analyses": [
+          "overlap",
+          "bridging"
+        ]
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:16.600Z",
+      "seq": 8,
+      "node": "route",
+      "type": "decision",
+      "title": "Run fame + zone (as fame support)",
+      "detail": "Dilution pleaded: fame is a threshold. No priority dispute; heatmap used only for national coverage.",
+      "data": {
+        "analyses": [
+          "fame",
+          "zone"
+        ]
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:17.000Z",
+      "seq": 9,
+      "node": "route",
+      "type": "node_finished",
+      "title": "Routing complete",
+      "detail": "4 analyses",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:17.400Z",
+      "seq": 10,
+      "node": "resolve",
+      "type": "node_started",
+      "title": "Resolving brands in Qloo",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:17.700Z",
+      "seq": 11,
+      "node": "resolve",
+      "type": "tool_call",
+      "title": "Search brand \"Jack Daniel's\"",
+      "detail": null,
+      "data": {
+        "tool": "qloo_search",
+        "query_id": "Q1",
+        "endpoint": "/search",
+        "params": {
+          "query": "Jack Daniel's",
+          "types": "urn:entity:brand",
+          "take": 10
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:17.912Z",
+      "seq": 12,
+      "node": "resolve",
+      "type": "tool_result",
+      "title": "7 candidates",
+      "detail": null,
+      "data": {
+        "query_id": "Q1",
+        "endpoint": "/search",
+        "result_count": 7,
+        "cache_hit": false,
+        "elapsed_ms": 212,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:18.312Z",
+      "seq": 13,
+      "node": "resolve",
+      "type": "decision",
+      "title": "Senior → Jack Daniel's (brand)",
+      "detail": "Chose the parent brand over \"Jack Daniel's Tennessee Honey\" and the distillery venue.",
+      "data": {
+        "entity_id": "0802FC1B-B5FC-61BC-2AED-2722375FE552"
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:18.612Z",
+      "seq": 14,
+      "node": "resolve",
+      "type": "tool_call",
+      "title": "Search brand \"Bad Spaniels\"",
+      "detail": null,
+      "data": {
+        "tool": "qloo_search",
+        "query_id": "Q2",
+        "endpoint": "/search",
+        "params": {
+          "query": "Bad Spaniels",
+          "types": "urn:entity:brand",
+          "take": 10
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:18.800Z",
+      "seq": 15,
+      "node": "resolve",
+      "type": "tool_result",
+      "title": "No results",
+      "detail": null,
+      "data": {
+        "query_id": "Q2",
+        "endpoint": "/search",
+        "result_count": 0,
+        "cache_hit": false,
+        "elapsed_ms": 188,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:19.200Z",
+      "seq": 16,
+      "node": "resolve",
+      "type": "warning",
+      "title": "Junior brand not in Qloo → proxy path",
+      "detail": "Neither \"Bad Spaniels\" nor \"VIP Products\" resolves to a brand entity. Using the goods phrase verbatim.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:19.500Z",
+      "seq": 17,
+      "node": "resolve",
+      "type": "tool_call",
+      "title": "Tags for goods phrase \"dog toys\"",
+      "detail": null,
+      "data": {
+        "tool": "qloo_tags_search",
+        "query_id": "Q3",
+        "endpoint": "/v2/tags",
+        "params": {
+          "filter.query": "dog toys",
+          "take": 10
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:19.664Z",
+      "seq": 18,
+      "node": "resolve",
+      "type": "tool_result",
+      "title": "8 tag options",
+      "detail": null,
+      "data": {
+        "query_id": "Q3",
+        "endpoint": "/v2/tags",
+        "result_count": 8,
+        "cache_hit": false,
+        "elapsed_ms": 164,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:20.064Z",
+      "seq": 19,
+      "node": "resolve",
+      "type": "decision",
+      "title": "Proxy tags: Dog Toys + Pet Supplies",
+      "detail": "Picked from the returned menu only; rejected \"Toys & Games\" (children) and \"Dog Breeds\" (not goods).",
+      "data": {
+        "chosen": [
+          "urn:tag:category:qloo:dog_toys",
+          "urn:tag:category:qloo:pet_supplies"
+        ]
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:20.364Z",
+      "seq": 20,
+      "node": "resolve",
+      "type": "tool_call",
+      "title": "Category-leading dog-toy brands",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_entities",
+        "query_id": "Q4",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "filter.tags": "urn:tag:category:qloo:dog_toys",
+          "sort_by": "popularity",
+          "take": 5
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:20.665Z",
+      "seq": 21,
+      "node": "resolve",
+      "type": "tool_result",
+      "title": "5 comparator brands",
+      "detail": null,
+      "data": {
+        "query_id": "Q4",
+        "endpoint": "/v2/insights",
+        "result_count": 5,
+        "cache_hit": false,
+        "elapsed_ms": 301,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:21.065Z",
+      "seq": 22,
+      "node": "resolve",
+      "type": "decision",
+      "title": "Comparators: KONG, Chuckit!, Nylabone, BarkBox, Petstages",
+      "detail": "Junior rank will be the mean rank of these five.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:21.465Z",
+      "seq": 23,
+      "node": "resolve",
+      "type": "node_finished",
+      "title": "Resolution complete",
+      "detail": "Universes: 300 pet-supply brands · 120 whiskey brands",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:21.865Z",
+      "seq": 24,
+      "node": "fetch",
+      "type": "node_started",
+      "title": "Fetching evidence",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:22.165Z",
+      "seq": 25,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Pet-supply brands seeded by Jack Daniel's · page 1",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_entities",
+        "query_id": "Q5",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tags": "urn:tag:category:qloo:pet_supplies",
+          "take": 50,
+          "page": 1,
+          "feature.explainability": true
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:22.809Z",
+      "seq": 26,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "50 brands · 1 of 5 comparators",
+      "detail": null,
+      "data": {
+        "query_id": "Q5",
+        "endpoint": "/v2/insights",
+        "result_count": 50,
+        "cache_hit": false,
+        "elapsed_ms": 644,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:23.109Z",
+      "seq": 27,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Same query · page 2",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_entities",
+        "query_id": "Q6",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tags": "urn:tag:category:qloo:pet_supplies",
+          "take": 50,
+          "page": 2,
+          "feature.explainability": true
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:23.707Z",
+      "seq": 28,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "50 brands · 2 of 5 comparators",
+      "detail": null,
+      "data": {
+        "query_id": "Q6",
+        "endpoint": "/v2/insights",
+        "result_count": 50,
+        "cache_hit": false,
+        "elapsed_ms": 598,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:24.007Z",
+      "seq": 29,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Same query · page 3",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_entities",
+        "query_id": "Q7",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tags": "urn:tag:category:qloo:pet_supplies",
+          "take": 50,
+          "page": 3,
+          "feature.explainability": true
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:24.016Z",
+      "seq": 30,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "50 brands · 3 of 5 comparators (cached)",
+      "detail": null,
+      "data": {
+        "query_id": "Q7",
+        "endpoint": "/v2/insights",
+        "result_count": 50,
+        "cache_hit": true,
+        "elapsed_ms": 9,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:24.416Z",
+      "seq": 31,
+      "node": "fetch",
+      "type": "warning",
+      "title": "3 of 5 comparators within the 150-result limit (ranks 44, 97, 129)",
+      "detail": "KONG and BarkBox fall beyond page 3; ranks 158 and 227 interpolated from the explainability tail and flagged.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:24.716Z",
+      "seq": 32,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Whiskey brands seeded by the comparators",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_entities",
+        "query_id": "Q8",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:entity:brand",
+          "signal.interests.entities": "58E869A0-9506-9FB7-18FC-7FE3398500E8,2A6365A2-3911-68F2-D77C-0D4E2C1E239C,4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1,9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6,46788166-6ED0-697D-DA18-C2B9C21E4AB0",
+          "filter.tags": "urn:tag:category:qloo:whiskey",
+          "take": 50,
+          "page": 1
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:25.418Z",
+      "seq": 33,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "50 brands · Jack Daniel's at #64",
+      "detail": null,
+      "data": {
+        "query_id": "Q8",
+        "endpoint": "/v2/insights",
+        "result_count": 50,
+        "cache_hit": false,
+        "elapsed_ms": 702,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:25.718Z",
+      "seq": 34,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Audience comparison: Jack Daniel's vs comparators",
+      "detail": null,
+      "data": {
+        "tool": "qloo_compare",
+        "query_id": "Q9",
+        "endpoint": "/v2/analysis/compare",
+        "params": {
+          "a.signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "b.signal.interests.entities": "58E869A0-9506-9FB7-18FC-7FE3398500E8,2A6365A2-3911-68F2-D77C-0D4E2C1E239C,4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1,9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6,46788166-6ED0-697D-DA18-C2B9C21E4AB0",
+          "filter.type": "urn:entity:brand",
+          "take": 50
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:26.598Z",
+      "seq": 35,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "48 entities",
+      "detail": null,
+      "data": {
+        "query_id": "Q9",
+        "endpoint": "/v2/analysis/compare",
+        "result_count": 48,
+        "cache_hit": false,
+        "elapsed_ms": 880,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:26.898Z",
+      "seq": 36,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Jack Daniel's taste tags, pet types only",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_tags",
+        "query_id": "Q10",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:tag",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.tag.types": "urn:tag:category:qloo:pet",
+          "take": 50
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:27.131Z",
+      "seq": 37,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "Empty response",
+      "detail": null,
+      "data": {
+        "query_id": "Q10",
+        "endpoint": "/v2/insights",
+        "result_count": 0,
+        "cache_hit": false,
+        "elapsed_ms": 233,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:27.531Z",
+      "seq": 38,
+      "node": "fetch",
+      "type": "decision",
+      "title": "Retry with a wider tag filter",
+      "detail": "An empty narrow query is a parameter problem, not a finding. Widening to all category tags and locating Pet Supplies by position.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:27.831Z",
+      "seq": 39,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Jack Daniel's taste tags, all categories",
+      "detail": null,
+      "data": {
+        "tool": "qloo_insights_tags",
+        "query_id": "Q11",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:tag",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.parents.types": "urn:tag:category",
+          "take": 400
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:28.935Z",
+      "seq": 40,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "400 tags",
+      "detail": null,
+      "data": {
+        "query_id": "Q11",
+        "endpoint": "/v2/insights",
+        "result_count": 400,
+        "cache_hit": false,
+        "elapsed_ms": 1104,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:29.235Z",
+      "seq": 41,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "Demographics for Jack Daniel's",
+      "detail": null,
+      "data": {
+        "tool": "qloo_demographics",
+        "query_id": "Q12",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:demographics",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552"
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:29.511Z",
+      "seq": 42,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "6 age buckets · 2 genders",
+      "detail": null,
+      "data": {
+        "query_id": "Q12",
+        "endpoint": "/v2/insights",
+        "result_count": 1,
+        "cache_hit": false,
+        "elapsed_ms": 276,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:29.811Z",
+      "seq": 43,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "US heatmap for Jack Daniel's",
+      "detail": null,
+      "data": {
+        "tool": "qloo_heatmap",
+        "query_id": "Q13",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:heatmap",
+          "signal.interests.entities": "0802FC1B-B5FC-61BC-2AED-2722375FE552",
+          "filter.location.query": "United States"
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:31.199Z",
+      "seq": 44,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "40 cells",
+      "detail": null,
+      "data": {
+        "query_id": "Q13",
+        "endpoint": "/v2/insights",
+        "result_count": 40,
+        "cache_hit": false,
+        "elapsed_ms": 1388,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:31.499Z",
+      "seq": 45,
+      "node": "fetch",
+      "type": "tool_call",
+      "title": "US heatmap for the dog-toy comparators",
+      "detail": null,
+      "data": {
+        "tool": "qloo_heatmap",
+        "query_id": "Q14",
+        "endpoint": "/v2/insights",
+        "params": {
+          "filter.type": "urn:heatmap",
+          "signal.interests.entities": "58E869A0-9506-9FB7-18FC-7FE3398500E8,2A6365A2-3911-68F2-D77C-0D4E2C1E239C,4AD6ED8D-0475-EDB6-8AFE-20FCD3ACA0B1,9DC4BD91-CDC0-FD26-7E64-D4B270E7AFB6,46788166-6ED0-697D-DA18-C2B9C21E4AB0",
+          "filter.location.query": "United States"
+        }
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:32.789Z",
+      "seq": 46,
+      "node": "fetch",
+      "type": "tool_result",
+      "title": "32 cells",
+      "detail": null,
+      "data": {
+        "query_id": "Q14",
+        "endpoint": "/v2/insights",
+        "result_count": 32,
+        "cache_hit": false,
+        "elapsed_ms": 1290,
+        "status": 200
+      }
+    },
+    {
+      "ts": "2026-10-22T14:03:33.189Z",
+      "seq": 47,
+      "node": "fetch",
+      "type": "node_finished",
+      "title": "Fetch complete",
+      "detail": "14 queries · 1 retry · 1 cache hit",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:33.589Z",
+      "seq": 48,
+      "node": "score",
+      "type": "node_started",
+      "title": "Scoring (pure Python, no model)",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:33.709Z",
+      "seq": 49,
+      "node": "score",
+      "type": "note",
+      "title": "Overlap: senior→junior #131 of 300 (p=0.57); junior→senior #64 of 120 (p=0.48)",
+      "detail": "Symmetric percentile 0.52 · proxy path",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:33.789Z",
+      "seq": 50,
+      "node": "score",
+      "type": "note",
+      "title": "Fame breadth 0.80 · popularity p=0.99 · coverage 0.61; zone Gini 0.27",
+      "detail": "Bridging: Pet Supplies #184 of 400 senior tags (p=0.54)",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:33.849Z",
+      "seq": 51,
+      "node": "score",
+      "type": "node_finished",
+      "title": "Scores computed",
+      "detail": "Deterministic; same inputs give the same numbers",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:34.249Z",
+      "seq": 52,
+      "node": "interpret",
+      "type": "node_started",
+      "title": "Translating scores into factor language",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:37.349Z",
+      "seq": 53,
+      "node": "interpret",
+      "type": "decision",
+      "title": "Channels & purchasers: neutral (medium)",
+      "detail": "Overlap sits near the median of the pet-supply universe in both directions.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:37.749Z",
+      "seq": 54,
+      "node": "interpret",
+      "type": "decision",
+      "title": "Fame: favors senior (high)",
+      "detail": "Positive affinity in 5 of 6 age buckets and among men; near-universal popularity.",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:38.149Z",
+      "seq": 55,
+      "node": "interpret",
+      "type": "node_finished",
+      "title": "Findings ready",
+      "detail": "5 factors · 6 limitations",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:38.549Z",
+      "seq": 56,
+      "node": "memo",
+      "type": "node_started",
+      "title": "Writing the memo",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:42.749Z",
+      "seq": 57,
+      "node": "memo",
+      "type": "note",
+      "title": "Appendix built in code from 14 recorded queries",
+      "detail": null,
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:43.149Z",
+      "seq": 58,
+      "node": "memo",
+      "type": "node_finished",
+      "title": "Memo complete",
+      "detail": "4 sections",
+      "data": {}
+    },
+    {
+      "ts": "2026-10-22T14:03:43.549Z",
+      "seq": 59,
+      "node": "memo",
+      "type": "run_finished",
+      "title": "Memo ready",
+      "detail": "Total 41 s",
+      "data": {}
+    }
+  ],
+  "error": null
+}

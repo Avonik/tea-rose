@@ -21,7 +21,8 @@ HARD RULES
    say so in the finding and lower the confidence by one level.
 4. `evidence_refs`: cite the evidence field names you relied on, e.g.
    `overlap.symmetric_percentile`, `bridging.category_rank_among_senior_tags`,
-   `fame.breadth_score`, `zone.concentration_index`.
+   `fame.breadth_score`, `zone.concentration_index`, plus the query ids (`Q1`, `Q7`, …) from
+   the query list when a number came from a specific query.
 5. `lean`: favors_senior when the evidence supports the senior's position on that factor,
    favors_junior when it cuts against it, neutral when mixed or middling.
 6. `finding`: 2-4 sentences, neutral lawyer language, numbers quoted exactly as given.

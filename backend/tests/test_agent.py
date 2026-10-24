@@ -448,7 +448,7 @@ async def test_tool_summary_is_compact_but_context_keeps_everything(
             {"seed_entity_ids": [JD], "filter_tags": [DOG], "page": 1}
         )
     )
-    assert out["count"] == 50 and len(out["top"]) == 10 and out["ref"] == "q1"
+    assert out["count"] == 50 and len(out["top"]) == 10 and out["ref"] == "Q1"
     assert len(ctx.tools.pages[((JD,), (DOG,))][1]) == 50
     assert [e.type for e in events] == ["tool_call", "tool_result"]
     assert events[1].data["query"]["endpoint"] == "/v2/insights"

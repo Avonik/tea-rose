@@ -84,7 +84,7 @@ class ToolContext:
 
     def _record(self, q: QlooQuery) -> str:
         self.queries.append(q)
-        q.id = f"q{self.query_offset + len(self.queries)}"
+        q.id = f"Q{self.query_offset + len(self.queries)}"
         return q.id
 
     def drain_queries(self) -> list[QlooQuery]:
@@ -97,8 +97,9 @@ class ToolContext:
             self.notes.append(text)
 
     async def _event(self, type_: str, title: str, detail: str | None = None, **data: Any):
+        ref = data.get("query_id") or data.get("ref")
         await self.emit(
-            TraceEvent(node=self.node, type=type_, title=title, detail=detail, data=data)
+            TraceEvent(node=self.node, type=type_, title=title, detail=detail, ref=ref, data=data)
         )
 
     async def _call(
@@ -126,7 +127,13 @@ class ToolContext:
             f"{tool} → {n if n is not None else '?'} result(s)",
             tool=tool,
             ref=ref,
+            query_id=ref,
+            endpoint=q.endpoint,
+            params=q.params,
             count=n,
+            result_count=n,
+            cache_hit=q.cache_hit,
+            fixture_file=q.fixture_file,
             elapsed_ms=int((time.perf_counter() - t0) * 1000),
             query=q.model_dump(mode="json"),
         )

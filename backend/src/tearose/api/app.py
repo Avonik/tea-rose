@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import mimetypes
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -27,6 +28,11 @@ from tearose.api.limits import (
 from tearose.config import Settings, get_settings
 
 log = logging.getLogger("tearose.api")
+
+# Vite emits the MapLibre worker as an .mjs module; Windows' mimetypes table lacks the entry
+# and would serve it as application/octet-stream, which browsers refuse to run as a worker.
+mimetypes.add_type("text/javascript", ".mjs")
+mimetypes.add_type("text/javascript", ".js")
 
 
 def _mount_frontend(app: FastAPI, dist: Path) -> None:
