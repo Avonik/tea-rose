@@ -1,0 +1,55 @@
+[project]
+name = "tearose"
+version = "0.1.0"
+description = "Tea Rose: trademark overlap evidence agent built on Qloo's taste graph"
+authors = [{ name = "Julian Hermes", email = "julian@hermesfamilie.de" }]
+license = { file = "../LICENSE" }
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "httpx>=0.27",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "langgraph>=0.2",
+    "langchain-core>=0.3",
+    "langchain-openai>=0.2",
+    "itsdangerous>=2.2",
+    "pypdf>=5.0",
+    "sse-starlette>=2.1",
+    "python-multipart>=0.0.9",
+    "orjson>=3.10",
+    "tenacity>=9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "respx>=0.21",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+tearose = "tearose.api.app:main"
+
+[build-system]
+requires = ["uv_build>=0.9.27,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "llm: tests that call a real language model (cost money; skipped unless --run-llm)",
+    "live: tests that call the live Qloo API (need QLOO_API_KEY; skipped unless --run-live)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
