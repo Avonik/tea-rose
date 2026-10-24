@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "slug": "bad_spaniels",
+      "sample": "bad_spaniels_complaint",
+      "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC (Bad Spaniels), 2023"
+    },
+    {
+      "slug": "charbucks",
+      "sample": "charbucks_opinion",
+      "title": "Starbucks Corp. v. Wolfe's Borough Coffee, Inc. (Charbucks), 2d Cir. 2013"
+    },
+    {
+      "slug": "chewy_vuiton",
+      "sample": "chewy_vuiton_opinion",
+      "title": "Louis Vuitton Malletier S.A. v. Haute Diggity Dog, LLC (Chewy Vuiton), 4th Cir. 2007"
+    },
+    {
+      "slug": "coach_triumph",
+      "sample": "coach_triumph_opinion",
+      "title": "Coach Services, Inc. v. Triumph Learning LLC, Fed. Cir. 2012"
+    },
+    {
+      "slug": "taco_tuesday",
+      "sample": "taco_tuesday_petition",
+      "title": "Taco Bell IP Holder, LLC v. Taco John's International, Inc. (Taco Tuesday), TTAB 2023"
+    }
+  ]
+}
