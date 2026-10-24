@@ -1,0 +1,44 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Qloo response caches and recorded live data (Qloo forbids publishing response data)
+data/cache/
+*.sqlite
+*.sqlite3
+*.db
+data/live/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+.vite/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Internal planning notes, not part of the submission (decide at the public flip)
+TEA_ROSE_CONCEPT.md
