@@ -28,6 +28,7 @@ GENDERS: tuple[str, ...] = ("male", "female")
 class QlooQuery(BaseModel):
     """Provenance record for one API call. Every number in a memo traces back to one of these."""
 
+    id: str | None = None  # "q7": stable reference used by evidence_refs and trace events
     endpoint: str
     params: dict[str, Any]
     cache_hit: bool = False

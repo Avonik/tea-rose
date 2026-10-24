@@ -208,7 +208,7 @@ class LiveClient:
             "/v2/analysis/compare", P.compare_params(a_entity_ids, b_entity_ids, take)
         )
         cmp = parse_compare(body)
-        q.result_count = len(cmp.entities)
+        q.result_count = len(cmp.tags) + len(cmp.entities)
         return cmp, q
 
     async def raw(self, endpoint: str, params: dict[str, Any]) -> tuple[dict[str, Any], QlooQuery]:

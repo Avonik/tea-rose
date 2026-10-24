@@ -89,7 +89,8 @@ class Universe(BaseModel):
     side: Side  # whose peers these are
     description: str  # "pet-supply brands" / "whiskey brands"
     tag_ids: list[str]
-    size: int
+    size: int  # informational: planned depth (3 pages × 50) or the real count once exhausted;
+    # scoring takes the authoritative size from DirectionalPeers
 
 
 class Resolution(BaseModel):
@@ -223,6 +224,7 @@ class TraceEvent(BaseModel):
     type: EventType
     title: str  # one line for the UI
     detail: str | None = None  # optional second line
+    ref: str | None = None  # query id ("q7") for tool events, links to the appendix row
     data: dict[str, Any] = Field(default_factory=dict)  # e.g. the QlooQuery, counts, choices
 
 

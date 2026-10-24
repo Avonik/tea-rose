@@ -57,18 +57,27 @@ class ScriptedEngine:
         r.extraction = Extraction(
             document_type="complaint",
             title="Jack Daniel's Properties, Inc. v. VIP Products LLC",
-            senior=Party(side="senior", name="Jack Daniel's Properties", marks=["Jack Daniel's"],
-                         goods=["Tennessee whiskey"]),
-            junior=Party(side="junior", name="VIP Products LLC", marks=["Bad Spaniels"],
-                         goods=["dog toys"]),
+            senior=Party(
+                side="senior",
+                name="Jack Daniel's Properties",
+                marks=["Jack Daniel's"],
+                goods=["Tennessee whiskey"],
+            ),
+            junior=Party(
+                side="junior", name="VIP Products LLC", marks=["Bad Spaniels"], goods=["dog toys"]
+            ),
             claims=["likelihood_of_confusion", "dilution"],
             summary="Scripted placeholder result for development.",
         )
         await self._step(handle, "route", "Running overlap, bridging and fame (dilution pleaded)")
         r.routing = RoutingDecision(
             analyses=["overlap", "bridging", "fame"],
-            rationale={"overlap": "confusion pleaded", "bridging": "confusion pleaded",
-                       "fame": "dilution pleaded", "zone": "no priority dispute"},
+            rationale={
+                "overlap": "confusion pleaded",
+                "bridging": "confusion pleaded",
+                "fame": "dilution pleaded",
+                "zone": "no priority dispute",
+            },
         )
         await self._step(handle, "resolve", "Junior brand not in Qloo; proxy via 'dog toys' tags")
         await self._step(handle, "fetch", "7 Qloo queries, 1 retry with a wider tag")

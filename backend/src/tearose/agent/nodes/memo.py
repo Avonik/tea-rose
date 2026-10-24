@@ -1,0 +1,129 @@
+"""memo: findings + evidence -> Memo (one LLM call for prose; appendix and limitations in code)."""
+
+from __future__ import annotations
+
+from typing import Any
+
+from langchain_core.messages import HumanMessage, SystemMessage
+from pydantic import BaseModel
+
+from tearose.agent.llm import ainvoke_structured
+from tearose.agent.nodes.base import (
+    NodeEvents,
+    RunContext,
+    first_sentence,
+    instruction_block,
+    load_prompt,
+    to_json,
+)
+from tearose.agent.nodes.interpret import case_payload, compact_evidence, maybe_blind
+from tearose.schemas import FactorFinding, Memo, MemoSection
+
+FIXED_LIMITATIONS: tuple[str, ...] = (
+    "Affinity is not confusion; this is evidence on the relatedness and purchaser factors, "
+    "not a confusion rate.",
+    "No survey percentages: Qloo affinities are normalized per query and are not population "
+    "shares.",
+    "Coverage gaps are stated per brand; proxied findings are marked.",
+    "Data reflects current taste, not the year of the dispute.",
+    "Not legal advice; a tool for counsel.",
+)
+SECTION_ORDER = (
+    ("summary", "Summary"),
+    ("factors", "Factor-by-factor"),
+    ("method", "Method"),
+    ("limitations", "Limitations"),
+)
+
+
+class MemoDraft(BaseModel):
+    headline: str
+    sections: list[MemoSection]
+
+
+def _lean(f: FactorFinding) -> str:
+    return f.lean.replace("_", " ")
+
+
+def _code_section(sid: str, findings: list[FactorFinding], limitations: list[str], nq: int) -> str:
+    if sid == "summary":
+        return " ".join(
+            f"{f.factor.replace('_', ' ').capitalize()}: {_lean(f)}." for f in findings
+        ) or ("No factor findings were produced.")
+    if sid == "factors":
+        return (
+            "\n\n".join(
+                f"**{f.factor.replace('_', ' ').capitalize()}** ({_lean(f)}, {f.confidence} "
+                f"confidence). {f.finding}"
+                for f in findings
+            )
+            or "No factor findings were produced."
+        )
+    if sid == "method":
+        return (
+            f"Tea Rose ran {nq} Qloo queries (listed in the appendix). Scores are computed in "
+            "code from ranks within each query; the language model chose what to measure and "
+            "wrote this prose, but produced no number."
+        )
+    return "\n".join(f"- {x}" for x in limitations)
+
+
+def dedupe(xs: list[str]) -> list[str]:
+    seen: set[str] = set()
+    return [x for x in xs if x.strip() and not (x.strip() in seen or seen.add(x.strip()))]
+
+
+async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
+    ev = NodeEvents(ctx.emit, "memo")
+    findings: list[FactorFinding] = list(state.get("findings") or [])
+    queries = list(state.get("queries") or [])
+    limitations = dedupe([*(state.get("case_limitations") or []), *FIXED_LIMITATIONS])
+    body = to_json(
+        {
+            "case": case_payload(state),
+            "findings": [f.model_dump() for f in findings],
+            "evidence": compact_evidence(state.get("evidence")),
+            "limitations": limitations,
+            "query_count": len(queries),
+            "data_notes": (state.get("raw").notes if state.get("raw") else []),
+        }
+    )
+    messages = [
+        SystemMessage(load_prompt("memo")),
+        HumanMessage(
+            "MATERIAL:\n" + maybe_blind(state, body) + maybe_blind(state, instruction_block(state))
+        ),
+    ]
+    try:
+        draft = await ainvoke_structured(ctx.model(), MemoDraft, messages)
+    except Exception as exc:  # noqa: BLE001 — a code-written memo beats no memo
+        await ev.warning("Memo model failed; memo written from findings in code", repr(exc))
+        draft = MemoDraft(headline="Taste-graph evidence summary.", sections=[])
+
+    by_id = {s.id: s for s in draft.sections}
+    sections: list[MemoSection] = []
+    for sid, title in SECTION_ORDER:
+        sec = by_id.pop(sid, None)
+        if sec is None or not sec.markdown.strip():
+            sec = MemoSection(
+                id=sid,
+                title=title,
+                markdown=_code_section(sid, findings, limitations, len(queries)),
+            )
+        sections.append(sec)
+    sections.extend(by_id.values())
+
+    memo = Memo(
+        headline=first_sentence(draft.headline),
+        findings=findings,
+        sections=sections,
+        limitations=limitations,
+        appendix_queries=queries,
+    )
+    await ev.decision(
+        "Memo ready",
+        memo.headline,
+        sections=[s.id for s in sections],
+        queries=len(queries),
+    )
+    return {"memo": memo}

@@ -21,6 +21,8 @@ class DirectionalPeers(BaseModel):
     entities: list[Entity] = Field(default_factory=list)
     pages_fetched: int = 0
     exhausted: bool = False  # True when the API returned fewer than `take` on the last page
+    gave_up: bool = False  # True when results stayed empty after the widened-filter retry
+    filter_tag_ids_used: list[str] = Field(default_factory=list)  # actual filter after widening
 
 
 class RawData(BaseModel):

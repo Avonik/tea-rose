@@ -76,7 +76,7 @@ class ToolContext:
         self.filter_alias: dict[Key, tuple[str, ...]] = {}  # original filter -> retried filter
         self.gave_up: set[Key] = set()
         self.seed_tags: dict[tuple[str, ...], list[Tag]] = {}
-        self.demographics: dict[tuple[str, ...], Demographics] = {}
+        self.demos: dict[tuple[str, ...], Demographics] = {}
         self.heatmaps: dict[tuple[tuple[str, ...], str | None], list[HeatmapPoint]] = {}
         self.compares: dict[tuple[tuple[str, ...], tuple[str, ...]], CompareResult] = {}
 
@@ -84,7 +84,8 @@ class ToolContext:
 
     def _record(self, q: QlooQuery) -> str:
         self.queries.append(q)
-        return f"q{self.query_offset + len(self.queries)}"
+        q.id = f"q{self.query_offset + len(self.queries)}"
+        return q.id
 
     def drain_queries(self) -> list[QlooQuery]:
         new = self.queries[self._drained :]
@@ -96,7 +97,9 @@ class ToolContext:
             self.notes.append(text)
 
     async def _event(self, type_: str, title: str, detail: str | None = None, **data: Any):
-        await self.emit(TraceEvent(node=self.node, type=type_, title=title, detail=detail, data=data))
+        await self.emit(
+            TraceEvent(node=self.node, type=type_, title=title, detail=detail, data=data)
+        )
 
     async def _call(
         self, tool: str, label: str, args: dict[str, Any], fn: Callable[[], Awaitable[Any]]
@@ -112,7 +115,12 @@ class ToolContext:
             )
             raise
         ref = self._record(q)
-        n = q.result_count if q.result_count is not None else (len(data) if hasattr(data, "__len__") else None)
+        if isinstance(data, CompareResult):  # compare answers with tags, not entities
+            n: int | None = len(data.tags) + len(data.entities)
+        elif q.result_count is not None:
+            n = q.result_count
+        else:
+            n = len(data) if hasattr(data, "__len__") else None
         await self._event(
             "tool_result",
             f"{tool} → {n if n is not None else '?'} result(s)",
@@ -146,7 +154,10 @@ class ToolContext:
 
     async def tags_search(self, query: str) -> tuple[list[Tag], str]:
         tags, ref = await self._call(
-            "qloo_tags_search", repr(query), {"query": query}, lambda: self.client.tags_search(query)
+            "qloo_tags_search",
+            repr(query),
+            {"query": query},
+            lambda: self.client.tags_search(query),
         )
         self.tag_searches.append((query, tags))
         self._see_tags(tags)
@@ -204,9 +215,7 @@ class ToolContext:
         else:
             filt_desc = str(list(key[1])) if key[1] else "no tag filter"
         self.gave_up.add(orig)
-        self.note(
-            f"Gave up: brands seeded by {seed_names} with {filt_desc} returned no results."
-        )
+        self.note(f"Gave up: brands seeded by {seed_names} with {filt_desc} returned no results.")
         await self._event("warning", "Gave up on an empty query", self.notes[-1])
         return [], ref
 
@@ -245,7 +254,7 @@ class ToolContext:
             {"seed_entity_ids": seeds},
             lambda: self.client.demographics(seeds),
         )
-        self.demographics[tuple(seeds)] = d
+        self.demos[tuple(seeds)] = d
         return d, ref
 
     async def heatmap(

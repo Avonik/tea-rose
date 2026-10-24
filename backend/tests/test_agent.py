@@ -1,0 +1,651 @@
+"""Agent pipeline tests: scripted fake model + FixtureClient, no network, no real LLM.
+
+Unit-level fixtures are written per test into tmp_path (deterministic, independent of the
+shared backend/fixtures/qloo set); one smoke test runs against the shared set if present.
+"""
+
+from __future__ import annotations
+
+import asyncio
+import json
+from pathlib import Path
+from typing import Any
+
+import pytest
+
+from tearose.agent.graph import GraphEngine
+from tearose.agent.llm import ScriptedChatModel, ai_tools, ainvoke_structured, tool_call
+from tearose.agent.nodes import extract, fetch, interpret, resolve, route
+from tearose.agent.nodes.base import RunContext
+from tearose.agent.nodes.memo import FIXED_LIMITATIONS
+from tearose.agent.runs import RunHandle
+from tearose.agent.tools import ToolContext, make_tools
+from tearose.config import BACKEND_DIR
+from tearose.qloo.fixtures import FixtureClient
+from tearose.schemas import (
+    AnalysisResult,
+    Evidence,
+    Extraction,
+    ProxyResolution,
+    Resolution,
+    ResolvedBrand,
+    RoutingDecision,
+    TraceEvent,
+    Universe,
+)
+
+# --------------------------------------------------------------------------------------
+# Minimal synthetic Qloo world
+# --------------------------------------------------------------------------------------
+
+JD, JDH, BB, KG, PU = "E-JD", "E-JDH", "E-BB", "E-KG", "E-PU"
+DOG = "urn:tag:genre:brand:pet_supplies:dog_toys"
+PETS = "urn:tag:genre:brand:pet_supplies"
+PETFOOD = "urn:tag:genre:brand:pet_supplies:pet_food"
+WHISKEY = "urn:tag:genre:brand:wine_and_spirits:whiskey"
+SPIRITS = "urn:tag:genre:brand:wine_and_spirits"
+JUNIOR_GOODS = "durable rubber squeaky novelty dog toys"
+
+TEXT = (
+    "VIP Products LLC v. Jack Daniel's Properties, Inc. Jack Daniel's Properties, Inc. owns the "
+    "JACK DANIEL'S trademarks and trade dress used on Tennessee whiskey since 1866. VIP Products "
+    'LLC markets durable rubber squeaky novelty dog toys under the name "Bad Spaniels", in a '
+    "bottle shape imitating the Jack Daniel's label, sold through pet stores and online. "
+    "Count I alleges trademark infringement; Count II alleges dilution by tarnishment."
+)
+
+EXTRACTION: dict[str, Any] = {
+    "document_type": "complaint",
+    "title": "VIP Products LLC v. Jack Daniel's Properties, Inc.",
+    "senior": {
+        "side": "senior",
+        "name": "Jack Daniel's Properties, Inc.",
+        "marks": ["Jack Daniel's"],
+        "goods": ["Tennessee whiskey"],
+    },
+    "junior": {
+        "side": "junior",
+        "name": "VIP Products LLC",
+        "marks": ["Bad Spaniels"],
+        "goods": [JUNIOR_GOODS],
+        "channels": ["pet stores", "online"],
+    },
+    "claims": ["likelihood_of_confusion", "dilution"],
+    "summary": "A whiskey brand owner alleges a dog-toy maker infringes and dilutes its marks.",
+    "key_quotes": ["Count II alleges dilution by tarnishment"],
+}
+
+
+def _ent(eid: str, name: str, tags: list[str]) -> dict[str, Any]:
+    return {
+        "entity_id": eid,
+        "name": name,
+        "types": ["urn:entity:brand"],
+        "popularity": 0.9,
+        "tags": [{"tag_id": t, "name": t.rsplit(":", 1)[-1]} for t in tags],
+    }
+
+
+def write_fixtures(d: Path, *, peers: int = 60) -> Path:
+    def w(name: str, body: dict[str, Any]) -> None:
+        (d / f"{name}.json").write_text(json.dumps(body), encoding="utf-8")
+
+    w("empty_results", {"success": True, "results": {"entities": []}})
+    w(
+        "search_brand_jack_daniels",
+        {
+            "results": [
+                {**_ent(JD, "Jack Daniel's", [WHISKEY]), "popularity": 0.99},
+                _ent(JDH, "Jack Daniel's Tennessee Honey", [WHISKEY]),
+            ]
+        },
+    )
+    w("search_brand_barkbox", {"results": [_ent(BB, "BarkBox", [DOG, PETS])]})
+    w("search_brand_kong", {"results": [_ent(KG, "KONG", [DOG])]})
+    w("search_brand_purina", {"results": [_ent(PU, "Purina", [PETFOOD])]})
+    tag = lambda i, n, t="urn:tag:genre:brand": {"id": i, "name": n, "type": t}  # noqa: E731
+    w(
+        "tags_search_dog_toys",
+        {"results": {"tags": [tag(DOG, "Dog Toys"), tag("urn:tag:category:place:pet_store",
+                                                        "Pet Store", "urn:tag:category:place")]}},
+    )  # fmt: skip
+    w("tags_search_pet_supplies", {"results": {"tags": [tag(PETS, "Pet Supplies"),
+                                                        tag(DOG, "Dog Toys")]}})  # fmt: skip
+    w("tags_search_tennessee_whiskey", {"results": {"tags": [tag(WHISKEY, "Whiskey")]}})
+    # Senior seed in the pet universe: BarkBox at rank 55, KONG at 57 (page 2 of 50).
+    ents = [_ent(f"E-F{i:02d}", f"Pet brand {i}", [DOG]) for i in range(peers)]
+    if peers >= 57:
+        ents[54] = _ent(BB, "BarkBox", [DOG])
+        ents[56] = _ent(KG, "KONG", [DOG])
+    for i, e in enumerate(ents):
+        e["query"] = {"affinity": round(0.99 - i * 0.01, 3)}
+    w("insights_brand_seed_jack_daniels_filter_pet_tags", {"results": {"entities": ents}})
+    w(
+        "insights_tag_seed_jack_daniels",
+        {
+            "results": {
+                "tags": [
+                    {"tag_id": f"urn:tag:keyword:t{i}", "name": f"Taste {i}"} for i in range(3)
+                ]
+                + [{"tag_id": DOG, "name": "Dog Toys"}]
+                + [{"tag_id": f"urn:tag:keyword:u{i}", "name": f"Taste u{i}"} for i in range(16)]
+            }
+        },
+    )
+    demo = {
+        "age": {
+            "24_and_younger": 0.1,
+            "25_to_29": 0.3,
+            "30_to_34": 0.2,
+            "35_to_44": 0.1,
+            "45_to_54": -0.1,
+            "55_and_older": -0.2,
+        },
+        "gender": {"male": 0.3, "female": -0.1},
+    }
+    w("insights_demographics_jack_daniels", {"results": {"demographics": [{"query": demo}]}})
+    w("insights_demographics_barkbox_and_kong", {"results": {"demographics": [{"query": demo}]}})
+    pts = [
+        {"location": {"latitude": 36.0 + i, "longitude": -86.0 - i}, "query": {"affinity": a}}
+        for i, a in enumerate([0.9, 0.5, 0.3, 0.2, 0.1])
+    ]
+    w("insights_heatmap_jack_daniels", {"results": {"heatmap": pts}})
+    w(
+        "compare_jack_daniels_vs_barkbox_and_kong",
+        {"results": {"tags": [{"tag_id": "urn:tag:keyword:humor", "name": "Humorous",
+                               "query": {"score": 0.4}}]}},
+    )  # fmt: skip
+    return d
+
+
+@pytest.fixture
+def client(tmp_path: Path) -> FixtureClient:
+    return FixtureClient(write_fixtures(tmp_path))
+
+
+def make_ctx(client: Any, model: ScriptedChatModel) -> tuple[RunContext, list[TraceEvent]]:
+    events: list[TraceEvent] = []
+
+    async def emit(e: TraceEvent) -> None:
+        events.append(e)
+
+    ctx = RunContext(
+        client=client,
+        model_factory=lambda strong=False: model,
+        emit=emit,
+        tools=ToolContext(client, emit),
+    )
+    return ctx, events
+
+
+def proxied_resolution() -> Resolution:
+    return Resolution(
+        senior=ResolvedBrand(
+            side="senior", query="Jack Daniel's", entity_id=JD, entity_name="Jack Daniel's",
+            popularity=0.99,
+        ),
+        junior=ResolvedBrand(side="junior", query="Bad Spaniels"),
+        junior_proxy=ProxyResolution(
+            side="junior", goods_phrase=JUNIOR_GOODS, tag_options=[{"id": DOG}],
+            chosen_tag_ids=[DOG], comparator_brand_ids=[BB, KG],
+            comparator_brand_names=["BarkBox", "KONG"], rationale="test",
+        ),
+        universes=[
+            Universe(side="senior", description="whiskey brands", tag_ids=[WHISKEY], size=150),
+            Universe(side="junior", description="dog-toy brands", tag_ids=[DOG], size=150),
+        ],
+    )  # fmt: skip
+
+
+RESOLVE_DECISION: dict[str, Any] = {
+    "senior": {
+        "query": "Jack Daniel's",
+        "entity_id": JD,
+        "candidates_considered": ["Jack Daniel's", "Jack Daniel's Tennessee Honey"],
+        "disambiguation_note": "Parent whiskey brand, not the line extension.",
+        "universe_tag_ids": [WHISKEY],
+        "universe_description": "whiskey brands",
+        "rationale": "Exact match for the whiskey brand.",
+    },
+    "junior": {
+        "query": "Bad Spaniels",
+        "entity_id": None,
+        "proxy_goods_phrase": JUNIOR_GOODS,
+        "proxy_chosen_tag_ids": [DOG],
+        "comparator_entity_ids": [BB, KG, PU],
+        "universe_description": "dog-toy brands",
+        "rationale": "Bad Spaniels is not in Qloo; dog-toy brands stand in.",
+    },
+}
+
+RESOLVE_LOOP: list[Any] = [
+    ai_tools(tool_call("qloo_search", query="Jack Daniel's"),
+             tool_call("qloo_search", query="Bad Spaniels")),
+    ai_tools(tool_call("qloo_search", query="VIP Products LLC")),
+    ai_tools(tool_call("qloo_tags_search", query=JUNIOR_GOODS)),
+    ai_tools(tool_call("qloo_tags_search", query="dog toys")),
+    ai_tools(tool_call("qloo_search", query="BarkBox"), tool_call("qloo_search", query="KONG"),
+             tool_call("qloo_search", query="Purina")),
+    ai_tools(tool_call("qloo_tags_search", query="Tennessee whiskey")),
+    "Resolution complete.",
+]  # fmt: skip
+
+INTERPRETATION: dict[str, Any] = {
+    "findings": [
+        {
+            "factor": "relatedness_of_goods",
+            "lean": "favors_junior",
+            "confidence": "medium",
+            "finding": "Jack Daniel's fans rank the dog-toy comparators low among pet brands.",
+            "evidence_refs": ["overlap.symmetric_percentile"],
+        },
+        {
+            "factor": "fame",
+            "lean": "favors_senior",
+            "confidence": "high",
+            "finding": "The senior brand's audience is broad across age groups.",
+            "evidence_refs": ["fame.breadth_score"],
+        },
+    ],
+    "limitations": ["The junior brand is represented by two comparator brands."],
+}
+
+MEMO_DRAFT: dict[str, Any] = {
+    "headline": "Jack Daniel's fans show little affinity for dog-toy brands. A second sentence.",
+    "sections": [{"id": "summary", "title": "Summary", "markdown": "Short summary."}],
+}
+
+
+# --------------------------------------------------------------------------------------
+# llm helpers
+# --------------------------------------------------------------------------------------
+
+
+class _NoStructured(ScriptedChatModel):
+    def with_structured_output(self, schema: Any, **kwargs: Any):  # type: ignore[override]
+        raise NotImplementedError
+
+
+async def test_structured_output_falls_back_to_json_mode() -> None:
+    from langchain_core.messages import HumanMessage, SystemMessage
+
+    model = _NoStructured(scripts={"extract": ["```json\n" + json.dumps(EXTRACTION) + "\n```"]})
+    out = await ainvoke_structured(
+        model, Extraction, [SystemMessage("# extract\nx"), HumanMessage("doc")]
+    )
+    assert out.junior.marks == ["Bad Spaniels"]
+    assert "JSON schema" in model.prompts_for("extract")[0]
+
+
+# --------------------------------------------------------------------------------------
+# (1) extract
+# --------------------------------------------------------------------------------------
+
+
+async def test_extract_maps_bad_spaniels_paragraph(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={"Extraction": [json.dumps(EXTRACTION)]})
+    ctx, events = make_ctx(client, model)
+    out = await extract.run({"input_text": TEXT}, ctx)
+    ex: Extraction = out["extraction"]
+    assert ex.senior.name == "Jack Daniel's Properties, Inc."
+    assert ex.junior.marks == ["Bad Spaniels"]
+    assert ex.junior.goods == [JUNIOR_GOODS]
+    assert set(ex.claims) == {"likelihood_of_confusion", "dilution"}
+    assert TEXT in model.prompts_for("Extraction")[0]
+    assert any(e.type == "decision" and "Bad Spaniels" in (e.detail or "") for e in events)
+    assert not [e for e in events if e.type == "warning"]  # goods are verbatim
+
+
+async def test_extract_warns_on_paraphrased_goods(client: FixtureClient) -> None:
+    bad = json.loads(json.dumps(EXTRACTION))
+    bad["junior"]["goods"] = ["canine playthings"]
+    ctx, events = make_ctx(client, ScriptedChatModel(scripts={"Extraction": [bad]}))
+    await extract.run({"input_text": TEXT}, ctx)
+    assert any(e.type == "warning" and "verbatim" in e.title for e in events)
+
+
+# --------------------------------------------------------------------------------------
+# (2) route guardrails
+# --------------------------------------------------------------------------------------
+
+
+def test_guardrails_add_required_analyses() -> None:
+    ex = Extraction.model_validate({**EXTRACTION, "claims": ["dilution", "common_law_priority"]})
+    final, added = route.apply_guardrails(RoutingDecision(analyses=[], rationale={}), ex)
+    assert final.analyses == ["overlap", "fame", "zone"]
+    assert {a for a, _ in added} == {"overlap", "fame", "zone"}
+    assert set(final.rationale) == {"overlap", "bridging", "fame", "zone"}
+
+
+async def test_route_adds_fame_when_dilution_pleaded(client: FixtureClient) -> None:
+    model = ScriptedChatModel(
+        scripts={"RoutingDecision": [{"analyses": ["overlap"], "rationale": {"overlap": "x"}}]}
+    )
+    ctx, events = make_ctx(client, model)
+    out = await route.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx)
+    routing: RoutingDecision = out["routing"]
+    assert "fame" in routing.analyses and "bridging" in routing.analyses
+    assert routing.rationale["fame"].startswith("Added by guardrail")
+    assert any(e.title == "Guardrail added 'fame'" for e in events)
+
+
+# --------------------------------------------------------------------------------------
+# (3) resolve: proxy path
+# --------------------------------------------------------------------------------------
+
+
+async def test_resolve_takes_proxy_path_and_records_tag_options(client: FixtureClient) -> None:
+    model = ScriptedChatModel(
+        scripts={"resolve": list(RESOLVE_LOOP), "ResolveDecision": [RESOLVE_DECISION]}
+    )
+    ctx, events = make_ctx(client, model)
+    out = await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx)
+    res: Resolution = out["resolution"]
+
+    assert res.senior.entity_id == JD
+    assert "Jack Daniel's Tennessee Honey" in res.senior.candidates_considered
+    assert res.junior.entity_id is None
+    proxy = res.junior_proxy
+    assert proxy is not None
+    assert proxy.goods_phrase == JUNIOR_GOODS
+    assert {o["id"] for o in proxy.tag_options} == {DOG, "urn:tag:category:place:pet_store"}
+    assert proxy.chosen_tag_ids == [DOG]
+    assert proxy.comparator_brand_ids == [BB, KG]  # Purina shares no chosen tag → dropped
+    assert "Purina" in proxy.rationale
+    assert {u.side: u.tag_ids for u in res.universes} == {"senior": [WHISKEY], "junior": [DOG]}
+    # the verbatim phrase was queried first, the shortened one second
+    queries = [q for q, _ in ctx.tools.tag_searches]
+    assert queries.index(JUNIOR_GOODS) < queries.index("dog toys")
+    assert any(e.type == "warning" and "Purina" in e.title for e in events)
+    assert any(e.type == "tool_call" for e in events)
+
+
+async def test_resolve_code_enforces_verbatim_goods_lookup(client: FixtureClient) -> None:
+    """The model skips the tag lookup entirely; code runs the verbatim then the short phrase."""
+    loop = [
+        ai_tools(tool_call("qloo_search", query="Jack Daniel's"),
+                 tool_call("qloo_search", query="Bad Spaniels"),
+                 tool_call("qloo_search", query="BarkBox")),
+    ]  # fmt: skip
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["junior"]["proxy_chosen_tag_ids"] = ["urn:tag:made:up"]
+    decision["junior"]["comparator_entity_ids"] = [BB]
+    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
+    ctx, events = make_ctx(client, model)
+    out = await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx)
+    proxy = out["resolution"].junior_proxy
+    assert [q for q, _ in ctx.tools.tag_searches][:2] == [JUNIOR_GOODS, "dog toys"]
+    assert proxy.chosen_tag_ids == [DOG]  # made-up tag rejected; heuristic pick from the menu
+    assert any("not on the returned menu" in e.title for e in events)
+
+
+# --------------------------------------------------------------------------------------
+# (4) fetch: paging, feedback, code fallback, give-up
+# --------------------------------------------------------------------------------------
+
+
+async def test_fetch_pages_until_target_found(client: FixtureClient) -> None:
+    page = lambda p: ai_tools(  # noqa: E731
+        tool_call("qloo_insights_entities", seed_entity_ids=[JD], filter_tags=[DOG], page=p)
+    )
+    model = ScriptedChatModel(scripts={"fetch": [page(1), "done", page(2), "done"]})
+    ctx, events = make_ctx(client, model)
+    state = {
+        "resolution": proxied_resolution(),
+        "routing": RoutingDecision(analyses=["overlap"], rationale={}),
+    }
+    out = await fetch.run(state, ctx)
+    raw = out["raw"]
+    peers = raw.senior_seed_junior_universe
+    assert peers.pages_fetched == 2
+    assert len(peers.entities) == 60
+    assert {e.entity_id: e.rank for e in peers.entities}[BB] == 55
+    assert raw.junior_target_entity_ids == [BB, KG]
+
+    calls = [
+        e for e in events if e.type == "tool_call" and e.data["tool"] == "qloo_insights_entities"
+    ]
+    assert [c.data["params"]["page"] for c in calls[:2]] == [1, 2]
+    assert any(e.type == "tool_result" for e in events)
+    assert any(e.type == "note" and "Completeness check 1" in e.title for e in events)
+    # the model never fetched the reverse direction or compare: code did
+    assert any(e.type == "decision" and e.title.startswith("Code fallback") for e in events)
+    assert raw.compare is not None
+    # junior→senior (comparators seeded, whiskey universe) has no fixture: single tag ⇒ give up
+    assert any(n.startswith("Gave up") for n in raw.notes)
+    assert raw.junior_seed_senior_universe.entities == []
+    # the second page of the model's call reported the targets
+    tool_msgs = [m for m in model.calls[-1][1] if m.type == "tool"]
+    assert '"targets_found":[{"id":"E-BB"' in tool_msgs[1].content
+
+
+async def test_retry_with_broadest_tag(tmp_path: Path) -> None:
+    write_fixtures(tmp_path)
+    wide = "insights_brand_seed_jack_daniels_filter_urn_tag_genre_brand_wine_and_spirits.json"
+    body = {"results": {"entities": [_ent("E-X", "Jim Beam", [SPIRITS])]}}
+    (tmp_path / wide).write_text(json.dumps(body), encoding="utf-8")
+    events: list[TraceEvent] = []
+
+    async def emit(e: TraceEvent) -> None:
+        events.append(e)
+
+    tc = ToolContext(FixtureClient(tmp_path), emit)
+    ents, _ = await tc.insights_entities([JD], [WHISKEY, SPIRITS])
+    assert [e.name for e in ents] == ["Jim Beam"]
+    assert tc.resolve_filter([JD], [WHISKEY, SPIRITS]) == ((JD,), (SPIRITS,))
+    assert any("widened" in n for n in tc.notes)
+    assert any(e.type == "warning" and "broadest" in e.title for e in events)
+    assert len(tc.queries) == 2
+
+
+async def test_tool_summary_is_compact_but_context_keeps_everything(
+    client: FixtureClient,
+) -> None:
+    ctx, events = make_ctx(client, ScriptedChatModel())
+    tools = {t.name: t for t in make_tools(ctx.tools)}
+    out = json.loads(
+        await tools["qloo_insights_entities"].ainvoke(
+            {"seed_entity_ids": [JD], "filter_tags": [DOG], "page": 1}
+        )
+    )
+    assert out["count"] == 50 and len(out["top"]) == 10 and out["ref"] == "q1"
+    assert len(ctx.tools.pages[((JD,), (DOG,))][1]) == 50
+    assert [e.type for e in events] == ["tool_call", "tool_result"]
+    assert events[1].data["query"]["endpoint"] == "/v2/insights"
+
+
+# --------------------------------------------------------------------------------------
+# (5) full run through GraphEngine + follow-up
+# --------------------------------------------------------------------------------------
+
+
+def full_script() -> ScriptedChatModel:
+    return ScriptedChatModel(
+        scripts={
+            "Extraction": [EXTRACTION],
+            "RoutingDecision": [{"analyses": ["overlap"], "rationale": {"overlap": "confusion"}}],
+            "resolve": [
+                *RESOLVE_LOOP,
+                # follow-up round: the comparators must be searched again in the new context
+                ai_tools(
+                    tool_call("qloo_search", query="BarkBox"),
+                    tool_call("qloo_search", query="KONG"),
+                    tool_call("qloo_tags_search", query="pet supplies"),
+                ),
+                "done",
+            ],  # fmt: skip
+            "ResolveDecision": [
+                RESOLVE_DECISION,
+                {
+                    "senior": RESOLVE_DECISION["senior"],
+                    "junior": {
+                        **RESOLVE_DECISION["junior"],
+                        "proxy_goods_phrase": "pet supplies",
+                        "proxy_chosen_tag_ids": [PETS],
+                        "comparator_entity_ids": [BB, KG],
+                    },
+                },
+            ],
+            "Interpretation": [INTERPRETATION, INTERPRETATION],
+            "MemoDraft": [MEMO_DRAFT, MEMO_DRAFT],
+            "FollowupPlan": [
+                {
+                    "action": "re_resolve_junior_goods",
+                    "instruction": "Treat the junior's goods as pet supplies.",
+                    "junior_goods_phrase": "pet supplies",
+                }
+            ],
+        }
+    )
+
+
+def new_handle() -> RunHandle:
+    return RunHandle(
+        AnalysisResult(run_id="r1", status="queued", mode="fixture", input_excerpt=TEXT[:600])
+    )
+
+
+async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> None:
+    model = full_script()
+    engine = GraphEngine(client=client, model_factory=lambda strong=False: model)
+    handle = new_handle()
+    status_at_event: list[str] = []
+
+    async def consume() -> None:
+        async for _ in handle.events():
+            status_at_event.append(handle.result.status)
+
+    consumer = asyncio.create_task(consume())
+    await engine.run(handle, TEXT)
+    await asyncio.wait_for(consumer, 5)
+
+    r = handle.result
+    assert r.status == "finished", r.error
+    assert len(r.trace) >= 10
+    assert "running" in status_at_event  # events arrived while the run was in progress
+    assert r.trace[0].type == "run_started" and r.trace[-1].type == "run_finished"
+    assert [e.seq for e in r.trace] == list(range(1, len(r.trace) + 1))
+    nodes_started = [e.node for e in r.trace if e.type == "node_started"]
+    assert nodes_started == ["extract", "route", "resolve", "fetch", "score", "interpret", "memo"]
+
+    assert r.extraction and r.routing and r.resolution
+    assert set(r.routing.analyses) == {"overlap", "bridging", "fame"}
+    assert r.evidence is not None and r.evidence.overlap is not None
+    memo = r.memo
+    assert memo is not None
+    assert memo.headline == "Jack Daniel's fans show little affinity for dog-toy brands."
+    assert memo.limitations[-5:] == list(FIXED_LIMITATIONS)
+    assert memo.limitations[0] == INTERPRETATION["limitations"][0]
+    assert [s.id for s in memo.sections] == ["summary", "factors", "method", "limitations"]
+    assert len(memo.appendix_queries) >= 10
+    assert memo.appendix_queries == engine.state_of("r1")["queries"]
+
+
+async def test_followup_reruns_from_resolve_and_accumulates_queries(
+    client: FixtureClient,
+) -> None:
+    model = full_script()
+    engine = GraphEngine(client=client, model_factory=lambda strong=False: model)
+    handle = new_handle()
+    await engine.run(handle, TEXT)
+    first_queries = len(handle.result.memo.appendix_queries)
+
+    await engine.followup(handle, "What if the junior's goods are pet supplies generally?")
+    r = handle.result
+    assert r.status == "finished", r.error
+    assert r.resolution.junior_proxy.goods_phrase == "pet supplies"
+    assert r.resolution.junior_proxy.chosen_tag_ids == [PETS]
+    assert len(r.memo.appendix_queries) > first_queries
+    followup_nodes = [e.node for e in r.trace if e.type == "node_started"][7:]
+    assert followup_nodes == ["followup", "resolve", "fetch", "score", "interpret", "memo"]
+    assert "pet supplies" in model.prompts_for("ResolveDecision")[-1]
+
+
+async def test_run_failure_sets_failed_status(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={})  # no Extraction scripted ⇒ extract fails
+    engine = GraphEngine(client=client, model_factory=lambda strong=False: model)
+    handle = new_handle()
+    await engine.run(handle, TEXT)
+    assert handle.result.status == "failed"
+    assert handle.result.error and handle.result.error.startswith("extract:")
+    assert handle.result.trace[-1].type == "run_failed"
+
+
+@pytest.mark.skipif(
+    not (BACKEND_DIR / "fixtures" / "qloo" / "search_brand_jack_daniels.json").exists(),
+    reason="shared fixtures not present",
+)
+async def test_smoke_run_on_shared_fixtures() -> None:
+    client = FixtureClient(BACKEND_DIR / "fixtures" / "qloo")
+    ex = json.loads(json.dumps(EXTRACTION))
+    ex["junior"]["goods"] = ["dog toys"]
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["junior"]["comparator_entity_ids"] = ["FA4E0000-0000-4000-A000-000000000004"]
+    decision["junior"]["proxy_goods_phrase"] = "dog toys"
+    decision["junior"]["proxy_chosen_tag_ids"] = [DOG]
+    decision["senior"]["entity_id"] = "FA4E0000-0000-4000-A000-000000000001"
+    decision["senior"]["universe_tag_ids"] = [SPIRITS]
+    model = ScriptedChatModel(
+        scripts={
+            "Extraction": [ex],
+            "RoutingDecision": [{"analyses": ["overlap"], "rationale": {}}],
+            "resolve": [
+                ai_tools(
+                    tool_call("qloo_search", query="Jack Daniel's"),
+                    tool_call("qloo_search", query="Bad Spaniels"),
+                    tool_call("qloo_tags_search", query="dog toys"),
+                    tool_call("qloo_search", query="BarkBox"),
+                    tool_call("qloo_tags_search", query="whiskey"),
+                ),
+            ],  # fmt: skip
+            "ResolveDecision": [decision],
+            "Interpretation": [INTERPRETATION],
+            "MemoDraft": [MEMO_DRAFT],
+        }
+    )
+    engine = GraphEngine(client=client, model_factory=lambda strong=False: model)
+    handle = new_handle()
+    await engine.run(handle, TEXT)
+    r = handle.result
+    assert r.status == "finished", r.error
+    assert r.resolution.junior_proxy.comparator_brand_names == ["BarkBox"]
+    assert r.evidence is not None and r.memo is not None
+
+
+# --------------------------------------------------------------------------------------
+# (6) blind mode
+# --------------------------------------------------------------------------------------
+
+
+async def test_blind_mode_replaces_names_in_interpret_prompt(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={"Interpretation": [INTERPRETATION]})
+    ctx, events = make_ctx(client, model)
+    state = {
+        "extraction": Extraction.model_validate(EXTRACTION),
+        "routing": RoutingDecision(analyses=["overlap", "fame"], rationale={}),
+        "resolution": proxied_resolution(),
+        "evidence": Evidence(),
+        "blind": True,
+    }
+    out = await interpret.run(state, ctx)
+    prompt = model.prompts_for("Interpretation")[0]
+    for name in ("Jack Daniel", "Bad Spaniels", "VIP Products", "JACK DANIEL"):
+        assert name.lower() not in prompt.lower()
+    assert "Brand A (senior)" in prompt and "Brand B (junior)" in prompt
+    assert "BarkBox" in prompt  # comparators are not parties and stay named
+    # no evidence at all ⇒ guardrail forces insufficient_data
+    assert {f.lean for f in out["findings"]} == {"insufficient_data"}
+    assert any(e.type == "warning" and "insufficient_data" in e.title for e in events)
+
+
+async def test_not_blind_keeps_names(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={"Interpretation": [INTERPRETATION]})
+    ctx, _ = make_ctx(client, model)
+    state = {
+        "extraction": Extraction.model_validate(EXTRACTION),
+        "routing": RoutingDecision(analyses=["overlap"], rationale={}),
+        "evidence": Evidence(),
+        "blind": False,
+    }
+    await interpret.run(state, ctx)
+    assert "Bad Spaniels" in model.prompts_for("Interpretation")[0]

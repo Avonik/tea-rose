@@ -50,8 +50,15 @@ docs/                         this file, qloo-api-notes.md, survey-cost-sources.
 ## Agent graph (LangGraph)
 
 State: `AgentState` (TypedDict) holding `input_text`, `extraction`, `routing`, `resolution`,
-`raw` (fetched data keyed by analysis), `evidence`, `memo`, `queries: list[QlooQuery]`,
-`events: list[TraceEvent]`, `mode`, `run_id`.
+`raw` (RawData), `evidence`, `memo`, `queries: list[QlooQuery]` (accumulating reducer),
+`followup_question`, `blind`, `errors`, `mode`, `run_id`. Trace events are NOT in the state:
+nodes and tools emit them straight to the `RunHandle`, so they reach the SSE stream live.
+Every `QlooQuery` gets a stable `id` ("q7") when recorded; evidence refs and `tool_result`
+events carry that id, and the memo appendix lists queries by it.
+
+Entry: a conditional edge sends a run with `followup_question` set to the `followup` node,
+which re-enters at `resolve` (re-resolve goods / add comparator / change universe) or at
+`score` (recompute only).
 
 Nodes, in order:
 

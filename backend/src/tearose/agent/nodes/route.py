@@ -60,8 +60,11 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
         SystemMessage(load_prompt("route")),
         HumanMessage(
             "EXTRACTION:\n"
-            + to_json(ex.model_dump(mode="json", include={"document_type", "claims", "senior",
-                                                          "junior", "summary"}))
+            + to_json(
+                ex.model_dump(
+                    mode="json", include={"document_type", "claims", "senior", "junior", "summary"}
+                )
+            )
         ),
     ]
     try:

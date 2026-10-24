@@ -185,7 +185,8 @@ class FixtureClient:
         a, b = self._seed_slug(a_entity_ids), self._seed_slug(b_entity_ids)
         body, fx = self._find(f"compare_{a}_vs_{b}", f"compare_{b}_vs_{a}")
         cmp = parse_compare(body)
-        return cmp, self._query("/v2/analysis/compare", params, fx, len(cmp.entities))
+        n = len(cmp.tags) + len(cmp.entities)
+        return cmp, self._query("/v2/analysis/compare", params, fx, n)
 
     async def raw(self, endpoint: str, params: dict[str, Any]) -> tuple[dict[str, Any], QlooQuery]:
         body, fx = self._find("empty_results")
