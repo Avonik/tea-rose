@@ -1,0 +1,475 @@
+SOURCE URL: https://storage.courtlistener.com/recap/gov.uscourts.azd.883010.1.0.pdf ; https://storage.courtlistener.com/recap/gov.uscourts.azd.883010/gov.uscourts.azd.883010.12.0.pdf
+DOCUMENT TYPE: Complaint for declaratory judgment (VIP Products v. Jack Daniel's Properties, D. Ariz. No. 2:14-cv-02057, Doc. 1) followed by Jack Daniel's Answer and Counterclaims (Doc. 12); full text of both, PDF-extracted (line numbers/page headers removed; images and exhibit pictures not included)
+DATE: 2014-09-16 (complaint); 2014-12-03 (answer and counterclaims)
+
+===== DOCUMENT 1: VIP PRODUCTS, LLC COMPLAINT (DECLARATORY JUDGMENT), FILED 2014-09-16 =====
+
+Firm E-Mail: courtdocs@dickinsonwright.com David G. Bray (#014346) dbray@dickinsonwright.com DICKINSON WRIGHT, PLLC 1850 North Central Avenue, Suite 1400 Phoenix, Arizona 85004 Phone: (602) 285-5000 Fax: (602) 285-5100 Attorneys for VIP Products, LLC
+
+IN THE UNITED STATES DISTRICT COURT
+
+DISTRICT OF ARIZONA
+
+VIP Products, LLC, an Arizona limited liability company, Plaintiff, v.
+
+No.
+
+COMPLAINT (Declaratory Judgment) Jack Daniel’s Properties, Inc., a Delaware corporation Defendant.
+
+Plaintiff, VIP Products, LLC for its complaint against defendant Jack Daniel’s Properties, Inc., by and through its undersigned counsel, Dickinson Wright PLLC, hereby alleges and states as follows:
+
+I.
+
+THE PARTIES
+
+1. Plaintiff VIP Products, LLC (“Plaintiff”) is an Arizona limited liability company corporation with its principal place of business at 16515 S. 40th Street, Suite 121, Phoenix, Arizona 85048.
+
+2. Upon information and belief, defendant Jack Daniel’s Properties, Inc. (“Defendant” or “Jack Daniel’s”) is a Delaware corporation with its principal place of business at 4040 Civic Center Drive, Suite 528, San Rafael, California, 94903.
+
+3. Defendant is a citizen of a state other than Arizona, within the meaning of U.S.C. § 1332(c)(1). Defendant has caused events to occur in Maricopa County, Arizona out of which this complaint derives.
+
+II.
+
+JURISDICTION
+
+4. This Court has subject matter jurisdiction over this claim for declaratory judgment pursuant to 28 U.S.C. § 2201 and Rule 57, Fed. R. Civ. P., as this is a case of actual controversy within the Court’s jurisdiction. The Court has subject matter jurisdiction over the underlying claim pursuant to (a) 28 U.S.C § 1331, as it involves the right to use a trademark and threatened claims under the Lanham Act.
+
+III.
+
+VENUE
+
+5. Venue is proper in this district under 28 U.S.C. § 1391(a) and (c), as Defendant is subject to personal jurisdiction in this state.
+
+IV.
+
+JURY DEMAND
+
+6. Plaintiff demands a trial by jury on all claims so triable.
+
+V.
+
+FACTS COMMON TO ALL CLAIMS
+
+7. Plaintiff is engaged primarily in the business of designing, manufacturing, and marketing chew toys for dogs.
+
+8. Plaintiff sells several lines of dog chew toys, including the “Tuffy’s” line (durable sewn/soft toys), the “Mighty” line (durable toys made of a different material than the Tuffy’s line), and the “Silly Squeakers” line (durable rubber squeaky novelty dog toys).
+
+9. In approximately July of 2013, VIP introduced its “Bad Spaniels” durable rubber squeaky novelty dog toy.
+
+10. Plaintiff is the owner of all rights in its “Bad Spaniels” trademark and trade dress for its durable rubber squeaky novelty dog toy.
+
+11. Upon information and belief, Defendant is the owner of a number of United States trademarks that incorporate the words “Jack Daniel’s.” The Jack Daniel’s mark is primarily associated with Tennessee sour mash whisky.
+
+12. VIP designed the “Bad Spaniels” label to incorporate a few elements of the Jack Daniel’s label design; for example VIP included a label with black background and white lettering. On the other hand, VIP included drastic differences from the Jack Daniel’s marks and label design in its “Bad Spaniels” label to make it clear that the product is a parody. For example, VIP selected the words “Bad Spaniels” because they are clearly not “Jack Daniel’s”, included the phrase “Silly Squeakers” on the toy in three locations on the product hanger tag, and placed a prominent disclaimer on the packaging that plainly states: “The product and its design belong to VIP products. This product is not affiliated with Jack Daniel’s.”
+
+13. On or about September 9, 2014, VIP received a demand letter from Defendant dated September 5, 2014 which demanded that VIP, among other things, stop all sales of its parody “Bad Spaniels” novelty dog toy.
+
+VI.
+
+CLAIM FOR RELIEF
+
+(Declaratory Judgment)
+
+14. Plaintiff incorporates and realleges herein by this reference Paragraphs through 13, inclusive, as though set forth in full herein.
+
+15. There is an actual and justiciable controversy between Plaintiff and Defendant regarding Plaintiff’s use of its “Bad Spaniels” trademark and trade dress for its novelty dog toy.
+
+16. As a matter of law, Plaintiff’s use of its “Bad Spaniels” name and mark does not infringe or dilute any claimed trademark rights that Defendant may claim in any “Jack Daniel’s” trademark for its Tennessee sour mash whiskey and/or any other product. WHEREFORE Plaintiff respectfully requests that the Court:
+
+A. Issue a judgment declaring that Plaintiff’s use of its “Bad Spaniels” name and mark for its novelty dog toy does not infringe or dilute any trademark rights claimed by Defendant in the name and mark “Jack Daniel’s”; and
+
+B. Grant such additional or other relief as the Court deems just and proper. RESPECTFULLY SUBMITTED this 16th day of September, 2014.
+
+DICKINSON WRIGHT, PLLC
+
+By: s/ David G. Bray David G. Bray 1850 North Central Avenue, Suite 1400 Phoenix, Arizona 85012-2705 Attorneys for VIP Products, LLC PHOENIX 53913-10 169056v1
+
+===== DOCUMENT 2: JACK DANIEL'S PROPERTIES, INC. ANSWER AND COUNTERCLAIMS, FILED 2014-12-03 =====
+
+QUARLES & BRADY LLP Gregory P. Sitrick (SBN 028756) E-mail: Gregory.sitrick@quarles.com Isaac S. Crum (SBN 026510) E-mail: Isaac.Crum@quarles.com One Renaissance Square Two North Central Avenue Phoenix, Arizona 85004-2391 Telephone: (602) 229-5317 Facsimile: (602) 420-5198 Attorneys for Defendant and Counterclaimant
+
+JACK DANIEL’S PROPERTIES, INC.
+
+UNITED STATES DISTRICT COURT
+
+DISTRICT OF ARIZONA
+
+VIP PRODUCTS, LLC, an Arizona limited liability company, Plaintiff, v.
+
+Case No. CV 14-02057 PHX DGC ANSWER AND COUNTERCLAIMS OF DEFENDANT AND COUNTERCLAIMANT JACK DANIEL’S PROPERTIES, INC. JACK DANIEL’S PROPERTIES, INC., a Delaware corporation, Defendant.
+
+Defendant and counterclaimant Jack Daniel’s Properties, Inc. (“JDPI”) answers the complaint filed by plaintiff VIP Products, LLC (“VIP”) and counterclaims as follows.
+
+QB\136435.00005\31586488.1
+
+ANSWER AND COUNTERCLAIMS
+
+ANSWER TO COMPLAINT
+
+1. JDPI lacks knowledge or information sufficient to form a belief as to the truth of the allegations in paragraph 1 of the Complaint, and on that basis denies those allegations.
+
+2. JDPI admits the allegations in paragraph 2 of the Complaint.
+
+3. JDPI denies the allegations in paragraph 3 of the Complaint, except JDPI admits that it is a citizen of a state other than Arizona.
+
+4. JDPI admits the allegations in paragraph 4 of the Complaint.
+
+5. JDPI admits the allegations in paragraph 5 of the Complaint.
+
+6. JDPI admits that VIP purports to demand a trial by jury, but denies that VIP is entitled to a jury trial on any of its claims for relief.
+
+7. JDPI lacks knowledge or information sufficient to form a belief as to the truth of the allegations in paragraph 7 of the Complaint, and on that basis denies those allegations, except JDPI admits that VIP has marketed and sold certain chew toys for dogs, including the toy at issue in this action.
+
+8. JDPI lacks knowledge or information sufficient to form a belief as to the truth of the allegations in paragraph 8 of the Complaint, and on that basis denies those allegations, except JDPI admits that VIP has marketed and sold certain chew toys for dogs, including the toy at issue in this action, which is identified as being part of a “Silly Squeakers” line.
+
+9. JDPI lacks knowledge or information sufficient to form a belief as to the truth of the allegations in paragraph 9 of the Complaint, and on that basis denies those allegations.
+
+10. JDPI denies the allegations in paragraph 10 of the Complaint.
+
+11. JDPI denies the allegations in paragraph 11 of the Complaint, except JDPI admits that it owns various registrations of, or containing, the trademark JACK 2
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+DANIEL’S in the United States and that the JACK DANIEL’S trademark has been used for many years for Tennessee whiskey in the United States.
+
+12. JDPI denies the allegations in paragraph 12 of the Complaint, except JDPI admits that VIP incorporated elements of the trade dress of Jack Daniel’s Tennessee whiskey on VIP’s “Bad Spaniels” dog toy, including a label with a black background and white lettering, and that VIP placed a statement reading “The product and its design belong to VIP Products. This product is not affiliated with Jack Daniel Distillery.” in small print at the bottom of a detachable cardboard tag affixed to the Bad Spaniels toy, as shown in JDPI’s counterclaims below.
+
+13. JDPI lacks knowledge or information sufficient to form a belief as to the truth of the allegations in paragraph 13 of the Complaint, and on that basis denies those allegations, except JDPI admits that it sent VIP a letter dated September 5, 2014 demanding that VIP cease all further sales of the Bad Spaniels toy.
+
+ANSWERING THE SINGLE CLAIM FOR RELIEF
+
+14. JDPI repeats its responses above to the allegations in paragraphs 1-13 of the Complaint in response to the allegations in paragraph 14 of the Complaint.
+
+15. JDPI admits the allegations in paragraph 15 of the Complaint.
+
+16. JDPI denies the allegations in paragraph 16 of the Complaint.
+
+AFFIRMATIVE DEFENSES
+
+1. The Complaint fails to state a claim upon which relief can be granted.
+
+2. VIP has infringed, diluted, and competed unfairly with respect to, JDPI’s trademarks and trade dress, as more fully alleged in JDPI’s counterclaims below, and thus comes before the Court with unclean hands and is not entitled to the equitable relief of a declaratory judgment.
+
+COUNTERCLAIMS
+
+Counterclaimant JDPI counterclaims as follows:
+
+3
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+1. These counterclaims arise under §§ 32(1) and 43(a)(1) and (c) of the United States Trademark Act, 15 U.S.C. §§ 1114 and 1125(a)(1) and (c), and under the statutory and common law of the State of Arizona. The Court has jurisdiction over the subject matter of JDPI’s counterclaims under § 39(a) of the United States Trademark Act, U.S.C. § 1121(a), and under 28 U.S.C. §§ 1331 and 1338(a). The Court has jurisdiction over the subject matter of JDPI’s counterclaims under the law of the State of Arizona under 28 U.S.C. §§ 1338(b) and 1367.
+
+PARTIES
+
+2. JDPI is the defendant in this action and is a Delaware corporation with its principal place of business in San Rafael, California.
+
+3. VIP is the plaintiff in this action and has alleged in its Complaint that it is an Arizona limited liability company with its principal place of business in Phoenix, Arizona.
+
+JURISDICTION AND VENUE
+
+4. The Court has personal jurisdiction over VIP because it initiated this action and thus subjected itself to personal jurisdiction in this Court on JDPI’s counterclaims and because it alleges that it resides in the State of Arizona. Venue is proper in this Judicial District under 28 U.S.C. § 1391(b)(1) because VIP alleges that it resides in this Judicial District.
+
+ALLEGATIONS COMMON TO ALL CLAIMS FOR RELIEF
+
+The Jack Daniel’s Trademarks and Trade Dress
+
+5. JDPI owns and licenses the use of the trademarks and trade dress used in connection with Jack Daniel’s Tennessee whiskey and other products in the Jack Daniel’s line. Tennessee whiskey has been sold in the United States under the JACK DANIEL’S mark continuously since 1875, except during Prohibition, making Jack Daniel’s Tennessee whiskey one of the oldest, longest-selling, and most iconic consumer products in American history. In addition to the JACK DANIEL’S trademark, Jack Daniel’s 4
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+Tennessee whiskey has borne the OLD NO. 7 trademark since 1875 (jointly the “JDPI Trademarks”).
+
+6. Since long prior to the commencement of VIP’s acts of infringement, dilution, and unfair competition complained of herein, and continuously to the present, Jack Daniel’s Tennessee whiskey has been sold in packaging embodying an iconic trade dress consisting of a square bottle with a ribbed neck, a black cap, a black neck wrap closure with white printing bearing the OLD NO. 7 mark, and a black front label with white printing and a filigreed border bearing the JACK DANIEL’S mark depicted in arched lettering at the top of the label, the OLD NO. 7 mark contained within a filigreed oval design in the middle portion of the label beneath the JACK DANIEL’S mark, and the words Tennessee Sour Mash Whiskey in the lower portion of the label, with the word “Tennessee” depicted in script (the “Jack Daniel’s Trade Dress”). The Jack Daniel’s Trade Dress is depicted below:
+
+5
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+7. JDPI’s predecessors-in-interest and licensees have expended many hundreds of millions of dollars over many decades advertising and promoting Tennessee whiskey sold under the JDPI Trademarks and the Jack Daniel’s Trade Dress in the United States. Such advertising and promotion have taken place in the print and electronic media, over the Internet, on billboards, on stadium signage, and in a variety of other manners. The primary print advertising campaign for Jack Daniel’s Tennessee whiskey, which has prominently featured the Jack Daniel’s Trade Dress, commenced in 1955 and has continued since then, making the campaign one of the longest continuous consumer advertising campaigns in American history. Jack Daniel’s Tennessee whiskey featuring the Jack Daniel’s Trade Dress has also been seen in numerous motion pictures and television programs viewed by many millions of Americans, and has also received extensive unsolicited media coverage and public exposure as the unofficial drink of choice of celebrities such as Frank Sinatra, George Clooney and Keith Richards.
+
+8. JDPI’s predecessors-in-interest and licensees have achieved billions of dollars in sales of Jack Daniel’s Tennessee whiskey in the United States under the JDPI Trademarks and in the Jack Daniel’s Trade Dress. Jack Daniel’s Tennessee whiskey is currently the best-selling whiskey in the United States and the JACK DANIEL’S brand has consistently been ranked among the world’s most successful and valuable alcoholic beverage brands.
+
+9. The Jack Daniel’s Trade Dress is inherently distinctive, or acquired distinctiveness long prior to the commencement of VIP’s acts of infringement, dilution, and unfair competition complained of herein by virtue of extensive sales and advertising of Jack Daniel’s Tennessee whiskey featuring the Jack Daniel’s Trade Dress, decades of consumption by the public of Jack Daniel’s Tennessee whiskey packaged in the Jack Daniel’s Trade Dress, extensive consumer recognition of the Jack Daniel’s Trade Dress, and association of the Jack Daniel’s Trade Dress with Jack Daniel’s Tennessee whiskey. The combination of elements comprising the Jack Daniel’s Trade Dress is non-functional 6
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+because it is not essential to the use or purpose of Jack Daniel’s Tennessee whiskey and does not affect the cost or quality of the product.
+
+10. The JDPI Trademarks and the Jack Daniel’s Trade Dress are famous for whiskey in the United States and became famous long prior to the commencement of VIP’s acts of infringement, dilution, and unfair competition complained of herein.
+
+11. JDPI owns numerous federal registrations of the JDPI Trademarks and the Jack Daniel’s Trade Dress for whiskey, including United States Trademark Registration No. 4,106,178 for the three-dimensional configuration of a square shape bottle container shown below for distilled spirits, United States Trademark Registration No. 2,789,278 for the mark shown below for Tennessee sour mash whiskey, 7
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+United States Trademark Registration No. 1,923,981 for the mark JACK DANIEL’S for whiskey, United States Trademark Registration No. 582,789 for the stylized mark JACK DANIEL’S shown below for whiskey, and United States Trademark Registration No. 42,663 for the stylized mark OLD NO. shown below for whiskies.
+
+Copies of the certificates of registration of these marks and related maintenance documents are attached hereto as Exhibit 1. These registrations are valid and subsisting and all but No. 4,106,178 have become incontestable.
+
+12. The JDPI Trademarks and various elements of the Jack Daniel’s Trade Dress, including the label design depicted below, have been used for many years in connection with a wide variety of goods in addition to Tennessee whiskey and other alcoholic beverages.
+
+8
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+2 JDPI owns United States Trademark Registration No. 4,372,885 for the label design 3 shown above for decorative magnets, decorative switch plates, and cell phone cases; 4 United States Trademark Registration No. 4,481,424 for the label design shown above for 5 ornamental lapel pins, clocks, watches, cuff links, necklaces, and bracelets; United States 6 Trademark Registration No. 3,055,481 for the label design shown above (without the 7 words SOUR MASH) for posters; United States Trademark Registration No. 4,478,408 8 for the label design shown above for umbrellas, luggage, duffel bags, athletic bags, 9 backpacks, luggage tags, key cases, knapsacks, tote bags, and all-purpose canvas carrying 10 bags, United States Trademark Registration No. 2,867,158 for the label design shown 11 above (without the words SOUR MASH) for glass and plastic drinking containers, 12 namely flasks, ceramic mugs, ceramic pitchers, ceramic jugs; sponges for household 13 purposes, wood coasters, cork coasters, swizzle sticks, bowls, decorative boxes made of 14 non-precious metal, food containers and thermal insulated containers for food or 15 beverages, glassware for beverages, and serving trays of non-precious metals; United 16 States Trademark Registration No. 4,526,056 for the label design shown above for 17 footwear; headwear including caps, hats, cowboy hats, headbands, straw hats, visors, 18 bandannas; clothing, namely, aprons, sleeve garters, t-shirts, golf shirts, work shirts, 19 baseball shirts, woven shirts, shirts, tops, tank tops, sweatshirts, sweatpants, jogging suits, 20 pants, dresses, skirts, sleep pants, pajamas, robes, shorts, jeans, jackets, coats, belts, 21 neckties, neckwear, scarves, suspenders, leather jackets, rain suits, vests, parkas, gloves; 22 United States Trademark Registration No. 4,481,425 for the label design shown above for 23 belt buckles and clasps for clothing all made of non-precious metal and ornamental 24 novelty pins; United States Trademark Registration No. 4,354,330 for the label design for 25 floor mats and rugs; and United States Trademark Registration No. 4,491,564 for the 26 label design for cigarette lighters not of precious metals. Copies of the certificates of 27 registration of these of JDPI’s Trademarks are attached hereto as Exhibit 2. These
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+registrations are valid and subsisting and Registrations Nos. 2,867,158 and 3,055,481 have become incontestable.
+
+VIP’S Unlawful Conduct
+
+13. VIP has alleged in its Complaint that it is engaged primarily in the business of designing, manufacturing, and marketing chew toys for dogs, that it sells various lines of dog chew toys, and that among those dog chew toys is a toy referred to by the brand “Bad Spaniels.”
+
+The “Bad Spaniels” dog chew toy is depicted below:
+
+14. VIP has admitted in its Complaint that it “designed the ‘Bad Spaniel’s’ label to incorporate a few elements of the Jack Daniel’s label design,” including “a label with 10
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+black background and white lettering,” but the Bad Spaniel’s toy goes far beyond incorporating a few elements of the Jack Daniel’s label. The Bad Spaniels toy imitates the JDPI Trademarks and slavishly copies virtually every element of the Jack Daniel’s Trade Dress, as the toy embodies the following combination of features: (a) the shape of a square bottle with a ribbed neck, in almost the exact proportions of a 750 ml. bottle of Jack Daniel’s Tennessee whiskey and colored to imitate the color of Jack Daniel’s Tennessee whiskey when it is packaged in the bottle; (b) a black “cap” and black neck wrap “closure” with white printing bearing the stylized mark THE OLD NO. 2; (c) a front black label with white printing and a filigreed border, bearing the BAD SPANIELS mark depicted in arched lettering over the mark THE OLD NO. 2 contained within a filigreed oval design, and the words Tennessee CARPET in the lower portion of the label, with the word “Tennessee” depicted in script. The toy bears an immediate and striking resemblance to a bottle of Jack Daniel’s Tennessee whiskey bearing the Jack Daniel’s Trade Dress when the toy is viewed from virtually any vantage point, including those shown on the pages from VIP’s website attached hereto as Exhibit 3. When viewed from any significant distance, the toy appears, at least at first glance, actually to be a bottle of Jack Daniel’s Tennessee whiskey bearing the Jack Daniel’s Trade Dress.
+
+15. VIP has alleged in its Complaint that it has “placed a prominent disclaimer on the packaging that plainly states: ‘The product and its design belong to VIP products. This product is not affiliated with Jack Daniel’s’.” The alleged disclaimer language does not appear on the toy itself, but instead at the very bottom of what appears to be the back of a two-sided cardboard hangtag, beneath the bar code for the product. The hangtag mimics the front label portion of the Jack Daniel’s Trade Dress, as it is sized in almost the exact proportions of the label and embodies a white-on-black color scheme and a filigreed border. Depictions of the front and back portions of the hangtag are set forth below:
+
+11
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+16. Upon information and belief, the alleged disclaimer is not noticed, much less understood, by the vast majority of purchasers of the toy. On the page from VIP’s website attached hereto as Exhibit 3, the hangtag is shown as being affixed to the product when it is sold, but upon information and belief, it is not shown when the Bad Spaniels toy is displayed on the websites of on- line retailers. Upon information and belief, the hangtag is immediately detached and discarded after the product is purchased or received, and, as shown in the page from VIP’s website attached hereto as Exhibit 4, does not remain affixed to the toy when it is used.
+
+17. VIP has alleged in its Complaint that the Bad Spaniels toy is a “parody” because it allegedly “include[s] drastic differences from the Jack Daniel’s marks and label design . . .,” but the toy is not a parody because it does not ridicule, criticize, or otherwise comment upon, Jack Daniel’s Tennessee whiskey, the business practices of the producer of Jack Daniel’s Tennessee whiskey, or anything else. Instead, the toy imitates the JDPI Trademarks and slavishly copies the Jack Daniel’s Trade Dress to capitalize on their fame and instant recognizability for VIP’s commercial gain, by drawing attention to 12
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+the toy and enabling it to stand out from the numerous competitive dog toys available in the marketplace, including the other toys alleged to be in VIP’s line.
+
+18. Regardless of whether the Bad Spaniels toy parodies the JDPI Trademarks and the Jack Daniel’s Trade Dress, VIP’s use of the Bad Spaniel’s trademark and trade dress in connection with the sale, offering for sale, distribution, and advertising of the Bad Spaniels toy is likely to cause initial interest confusion pre-sale, confusion at the point of sale, and post-sale confusion because prospective purchasers of the toy, purchasers and users of the toy, and observers of the toy while it is in use, are all likely to believe mistakenly that it originates with, or is licensed, sponsored or authorized by,
+
+JDPI.
+
+19. VIP’s use of the Bad Spaniels trademark and trade dress is also likely to dilute the famous JDPI Trademarks and Jack Daniel’s Trade Dress by tarnishment. The Bad Spaniels toy label bears the language “The Old No. 2 On Your Tennessee Carpet,” “43% Poo By Vol.,” and “100% Smelly.” These references to a dog defecating and leaving its stinking excrement on a carpet associate the JDPI Trademarks and the Jack Daniel’s Trade Dress with gross and disgusting imagery that harms their reputation.
+
+FIRST COUNTERCLAIM FOR RELIEF
+
+(Infringement of Federally-Registered JDPI Trademarks and Federally-Registered Jack Daniel’s Trade Dress)
+
+20. JDPI repeats and realleges the allegations in preceding paragraphs 1-19 as if fully set forth herein.
+
+21. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid constitutes the use in commerce, on or in connection with VIP’s goods, of reproductions, copies, or colorable imitations of the federally- registered JDPI Trademarks and the federally-registered the Jack Daniel’s Trade Dress, 13
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+which use is likely to cause confusion, to cause mistake, or to deceive, in violation of § 32(1) of the United States Trademark Act, 15 U.S.C. § 1114(1).
+
+22. VIP infringement of JDPI’s federally-registered marks as aforesaid has caused and is likely to continue to cause substantial injury to the public and to JDPI, and JDPI is entitled to injunctive relief and its attorneys’ fees and costs under §§ 32, 34, 35, and 36 of the United States Trademark Act, 15 U.S.C. §§ 1114, 1116, 1117, and 1118.
+
+23. VIP’s infringement of JDPI’s federally-registered marks as aforesaid has caused and is likely to continue to cause irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its infringement, thereby causing JDPI further irreparable harm.
+
+24. JDPI has no adequate remedy at law.
+
+SECOND COUNTERCLAIM FOR RELIEF
+
+(Trade Dress Infringement in Violation of Federal Law)
+
+25. JDPI repeats and realleges the allegations in preceding paragraphs 1-24 as if fully set forth herein.
+
+26. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid constitutes infringement of the Jack Daniel’s Trade Dress through use in commerce, in connection with VIP’s goods, of a combination of symbols or devices, a false designation or origin, and a false or misleading description of fact, that is likely to cause confusion, or to cause mistake, or to deceive, as to the origin, sponsorship, or approval of VIP’s Bad Spaniels toy and commercial activities with or by JDPI, in violation of § 43(a)(1) of the United States Trademark Act, 15 U.S.C. § 1125(a)(1).
+
+27. VIP’s infringement of the Jack Daniel’s Trade Dress as aforesaid has caused and is likely to continue to cause substantial injury to the public and to JDPI, and JDPI is entitled to injunctive relief and its attorneys’ fees and costs under §§ 32, 34, 35, and 36 of 14
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+the United States Trademark Act, 15 U.S.C. §§ 1114, 1116, 1117, and 1118.
+
+28. VIP’s infringement of the Jack Daniel’s Trade Dress as aforesaid has caused irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its infringement as aforesaid, thereby causing JDPI further irreparable harm.
+
+29. JDPI has no adequate remedy at law.
+
+THIRD COUNTERCLAIM FOR RELIEF
+
+(Dilution of JDPI Trademarks in Violation of Federal Law)
+
+30. JDPI repeats and realleges the allegations in preceding paragraphs 1-29 as if fully set forth herein.
+
+31. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid is likely to cause dilution by tarnishment of the JDPI Trademarks, which became famous in Arizona and throughout the United States before VIP commenced its use of the Bad Spaniel’s trademark and trade dress, by eroding the public’s exclusive identification of the famous JDPI Trademarks with JDPI, tarnishing and degrading the positive associations and prestigious connotations of the JDPI Trademarks, and otherwise lessening the capacity of the JDPI Trademarks to identify and distinguish the goods and services sold under and connection with it, in violation of § 43(c) of the United States Trademark Act, 15 U.S.C. § 1125(c).
+
+32. Upon information and belief, VIP willfully and deliberately intended to trade on the reputation and goodwill of the JDPI Trademarks, or to cause dilution of the JDPI Trademarks.
+
+33. VIP’s dilution of the JDPI Trademarks as aforesaid has caused and is likely to continue to cause substantial injury to JDPI’s goodwill and business reputation, and dilution of the distinctiveness of the famous JDPI Trademarks, and JDPI is entitled to injunctive relief and its attorneys’ fees and costs under §§ 34, 35, 36, and 43(c) of the United States Trademark Act, 15 U.S.C. §§ 1116, 1117, 1118, and 1125(c). 15
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+34. VIP’s dilution of the JDPI Trademarks as aforesaid has caused and continues to cause irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its dilution, thereby causing JDPI further irreparable harm.
+
+35. JDPI has no adequate remedy at law.
+
+FOURTH COUNTERCLAIM FOR RELIEF
+
+(Dilution of Jack Daniel’s Trade Dress in Violation of Federal Law)
+
+36. JDPI repeats and realleges the allegations in preceding paragraphs 1-35 as if fully set forth herein.
+
+37. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid is likely to cause dilution by tarnishment of the Jack Daniel’s Trade Dress, which became famous in Arizona and throughout the United States before VIP commenced its use of the Bad Spaniel’s trademark and trade dress, by eroding the public’s exclusive identification of the famous Jack Daniel’s Trade Dress with JDPI, tarnishing and degrading the positive associations and prestigious connotations of the Jack Daniel’s Trade Dress, and otherwise lessening the capacity of the Jack Daniel’s Trade Dress to identify and distinguish the goods and services sold under and connection with it, in violation of § 43(c) of the United States Trademark Act, 15 U.S.C. § 1125(c).
+
+38. Upon information and belief, VIP willfully and deliberately intended to trade on the reputation and goodwill of the Jack Daniel’s Trade Dress, or to cause dilution of the Jack Daniel’s Trade Dress.
+
+39. VIP’s dilution of the Jack Daniel’s Trade Dress as aforesaid has caused and is likely to continue to cause substantial injury to JDPI’s goodwill and business reputation, and dilution of the distinctiveness of the famous Jack Daniel’s Trade Dress, and JDPI is entitled to injunctive relief and its attorneys’ fees and costs under §§ 34, 35, 16
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+36, and 43(c) of the United States Trademark Act, 15 U.S.C. §§ 1116, 1117, 1118, and 1125(c).
+
+40. VIP’s dilution of the Jack Daniel’s Trade Dress as aforesaid has caused and continues to cause irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its dilution, thereby causing JDPI further irreparable harm.
+
+41. JDPI has no adequate remedy at law.
+
+FIFTH COUNTERCLAIM FOR RELIEF
+
+(Trademark Infringement in Violation of Arizona Law)
+
+42. JDPI repeats and realleges the allegations in preceding paragraphs 1-41 as if fully set forth herein.
+
+43. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid constitutes infringement of the JDPI Trademarks that is likely to cause mistake and deception in the minds of the public, in violation of A.R.S. §§ 44-1451, et seq.
+
+44. VIP’s trademark infringement as aforesaid has caused irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its trademark infringement as aforesaid, thereby causing JDPI further irreparable harm.
+
+45. JDPI has no adequate remedy at law.
+
+SIXTH COUNTERCLAIM FOR RELIEF
+
+(Common Law Trademark Infringement and Unfair Competition)
+
+46. JDPI repeats and realleges the allegations in preceding paragraphs 1-45 as if fully set forth herein.
+
+47. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid constitutes infringement of the JDPI Trademarks and unfair competition at common law.
+
+17
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+48. VIP’s trademark infringement and unfair competition as aforesaid has caused irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its trademark infringement and unfair competition as aforesaid, thereby causing JDPI further irreparable harm.
+
+49. JDPI has no adequate remedy at law.
+
+SEVENTH COUNTERCLAIM FOR RELIEF
+
+(Common Law Trade Dress Infringement)
+
+50. JDPI repeats and realleges the allegations in preceding paragraphs 1-49 as if fully set forth herein.
+
+51. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid constitutes infringement of the Jack Daniel’s Trade Dress at common law.
+
+52. VIP’s trade dress infringement as aforesaid has caused irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its trade dress infringement as aforesaid, thereby causing JDPI further irreparable harm.
+
+53. JDPI has no adequate remedy at law.
+
+EIGHTH COUNTERCLAIM FOR RELIEF
+
+(Trademark Dilution in Violation of Arizona Law)
+
+54. JDPI repeats and realleges the allegations in preceding paragraphs 1-53 as if fully set forth herein.
+
+55. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid in commerce in Arizona began long after the JDPI Trademarks became well-known, distinctive, and famous in Arizona and throughout the United States, and dilutes the distinctive quality of the JDPI Trademarks, in violation of
+
+A.R.S. § 44-1448.01.
+
+18
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+56. Upon information and belief, VIP willfully intended to trade on the reputation and goodwill associated with the JDPI Trademarks.
+
+57. VIP’s dilution of the JDPI Trademarks as aforesaid has caused irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its dilution, thereby causing JDPI further irreparable harm.
+
+58. JDPI has no adequate remedy at law.
+
+NINTH COUNTERCLAIM FOR RELIEF
+
+(Trade Dress Dilution in Violation of Arizona Law)
+
+59. JDPI repeats and realleges the allegations in preceding paragraphs 1-58 as if fully set forth herein.
+
+60. VIP’s use of the Bad Spaniels trademark and trade dress in the manufacture, advertisement, promotion, display, shipment, offering for sale, sale, and distribution of the Bad Spaniels toy as aforesaid in commerce in Arizona began long after the Jack Daniel’s Trade Dress became well-known, distinctive, and famous in Arizona and throughout the United States, and dilutes the distinctive quality of the Jack Daniel’s Trade Dress, in violation of A.R.S. § 44-1448.01.
+
+61. Upon information and belief, VIP willfully intended to trade on the reputation and goodwill associated with the Jack Daniel’s Trade Dress.
+
+62. VIP’s dilution of the Jack Daniel’s Trade Dress as aforesaid has caused irreparable harm to JDPI. Unless restrained and enjoined by this Court, VIP will persist in its dilution, thereby causing JDPI further irreparable harm.
+
+63. JDPI has no adequate remedy at law.
+
+PRAYER FOR RELIEF
+
+WHEREFORE, defendant and counterclaimant JDPI prays for judgment as follows:
+
+1. That VIP’s declaratory judgment complaint be dismissed with prejudice; 19
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+2. That VIP and its officers, agents, servants, employees, and attorneys, and all other persons in active concert or participation with them, or any of them, who receive actual notice of the injunctions prayed for herein by personal service or otherwise, be preliminarily and then permanently restrained and enjoined from: (a) Manufacturing, advertising, promoting, displaying, shipping, offering for sale, selling, or distributing the Bad Spaniels dog toy;
+
+(b) Manufacturing, advertising, promoting, displaying, shipping, offering for sale, selling, or distributing any other dog toy that reproduces, copies, colorably imitates, or is confusingly similar to, the JDPI Trademarks and/or the Jack Daniel’s Trade Dress; (c) Manufacturing, advertising, promoting, displaying, shipping, offering for sale, selling, or distributing any other dog toy that dilutes the distinctiveness of the famous JDPI Trademarks and/or the Jack Daniel’s Trade Dress; and (d) Doing any other act or thing that is likely to cause persons to believe that VIP’s goods or commercial activities originate with, or are licensed, sponsored, or authorized by, JDPI;
+
+3. That VIP be ordered, pursuant to 15 U.S.C. § 1116, to file with the Court and to serve on counsel for JDPI, within 30 days after the entry of judgment herein, a written report under oath setting forth in detail the manner in which it has complied with the injunction ordered by the Court;
+
+4. That VIP be ordered, pursuant to 15 U.S.C. § 1118 and A.R.S. § 44- 1451(B)(5), to deliver up to the Court for destruction or other disposition all Bad Spaniels toys, all labels, signs, prints, packages, wrappers, receptacles, and advertisements bearing the trade dress of the Bad Spaniels toy, and all plates, molds, matrices, and other means of making the same;
+
+5. That VIP be ordered, pursuant to 15 U.S.C. § 1117(a), to pay to JDPI its attorneys’ fees and the costs of this action; and 20
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
+
+6. That JDPI be granted such other and further relief as the Court may deem just and proper.
+
+Respectfully submitted,
+
+QUARLES & BRADY LLP
+
+Dated: December 3, 2014 By: /s/ Gregory P. Sitrick Gregory P. Sitrick Isaac S. Crum Attorneys for Defendant and Counterclaimant JACK DANIEL’S PROPERTIES, INC.
+
+CERTIFICATE OF SERVICE
+
+I hereby certify that on December 3, 2014, I electronically filed the foregoing with the Clerk of Court using the CM/ECF system, which will send a notification of such filing to all counsel of record in this case.
+
+/s/ Gregory P. Sitrick Gregory P. Sitrick 21
+
+ANSWER AND COUNTERCLAIMS
+
+QB\136435.00005\31586488.1
