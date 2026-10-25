@@ -1,84 +1,84 @@
 {
   "status": "complete",
   "harness_version": 2,
-  "note": "On 6 decided cases, Qloo's symmetric overlap percentile correlates with the courts' relatedness/purchaser findings at rho = n/a (95% CI n/a) versus n/a for a same-category heuristic. With n = 6 < 15 this metric is underpowered; read it as anecdotal. The affinity ratio (second Qloo signal, n = 7) gives rho = 0.20 (95% CI -0.43 to 0.85). Run 2026-10-25; labels and mapping pre-registered (mapping sha256 84ca89df9428). Harness v2: universe = the brand's own category tags, censored ranks reported as censored with a direct affinity lookup, one taxonomy synonym corrected (post-hoc deviations from pre-registration, documented; run 1 kept as the record).",
+  "note": "On 13 decided cases, Qloo's symmetric overlap percentile correlates with the courts' relatedness/purchaser findings at rho = 0.31 (95% CI 0.08 to 0.64) versus 0.28 for a same-category heuristic. With n = 13 < 15 this metric is underpowered; read it as anecdotal. The affinity ratio (second Qloo signal, n = 14) gives rho = 0.30 (95% CI -0.07 to 0.66). Run 2026-10-25; labels and mapping pre-registered (mapping sha256 98af901eb167). Harness v2: universe = the brand's own category tags, censored ranks reported as censored with a direct affinity lookup, one taxonomy synonym corrected (post-hoc deviations from pre-registration, documented; run 1 kept as the record).",
   "rows": [
     {
-      "n": 2,
+      "n": 5,
       "metric": "Spearman ρ: rank percentile vs court's channels/purchasers finding",
       "value": "n/a (95% CI n/a) · underpowered",
       "ci": [
         null,
         null
       ],
-      "baseline": "Same-category heuristic: n/a",
-      "baseline_value": null
+      "baseline": "Same-category heuristic: -0.32",
+      "baseline_value": -0.31622776601683794
     },
     {
-      "n": 6,
+      "n": 13,
       "metric": "AUC: rank percentile predicts \"favors plaintiff\"",
-      "value": "n/a (95% CI n/a) · underpowered",
+      "value": "0.83 (95% CI 0.58 to 1.00) · underpowered",
       "ci": [
-        null,
-        null
+        0.583,
+        1.0
       ],
-      "baseline": "Popularity-only: 0.50; same-category: 0.50",
-      "baseline_value": 0.5
+      "baseline": "Popularity-only: 0.38; same-category: 0.67",
+      "baseline_value": 0.375
     },
     {
-      "n": 6,
+      "n": 13,
       "metric": "Spearman ρ: rank percentile vs court's relatedness finding",
-      "value": "n/a (95% CI n/a) · underpowered",
+      "value": "0.31 (95% CI 0.08 to 0.64) · underpowered",
       "ci": [
-        null,
-        null
+        0.078,
+        0.637
       ],
-      "baseline": "Same-category heuristic: n/a",
-      "baseline_value": null
+      "baseline": "Same-category heuristic: 0.28",
+      "baseline_value": 0.28426762180748055
     },
     {
-      "n": 6,
+      "n": 13,
       "metric": "Spearman ρ: rank percentile vs combined relatedness/purchaser finding (primary)",
-      "value": "n/a (95% CI n/a) · underpowered",
+      "value": "0.31 (95% CI 0.08 to 0.64) · underpowered",
       "ci": [
-        null,
-        null
+        0.078,
+        0.637
       ],
-      "baseline": "Same-category heuristic: n/a; popularity-only: 0.00",
-      "baseline_value": null
+      "baseline": "Same-category heuristic: 0.28; popularity-only: -0.15",
+      "baseline_value": 0.28426762180748055
     },
     {
-      "n": 7,
+      "n": 14,
       "metric": "Spearman ρ: affinity ratio vs combined relatedness/purchaser finding (primary)",
-      "value": "0.20 (95% CI -0.43 to 0.85) · underpowered",
+      "value": "0.30 (95% CI -0.07 to 0.66) · underpowered",
       "ci": [
-        -0.428,
-        0.851
+        -0.065,
+        0.656
       ],
-      "baseline": "Rank percentile: n/a; same-category: n/a",
-      "baseline_value": null
+      "baseline": "Rank percentile: 0.31; same-category: 0.28",
+      "baseline_value": 0.28426762180748055
     },
     {
-      "n": 7,
+      "n": 14,
       "metric": "AUC: affinity ratio predicts \"favors plaintiff\"",
-      "value": "0.67 (95% CI 0.25 to 1.00) · underpowered",
+      "value": "0.75 (95% CI 0.45 to 1.00) · underpowered",
       "ci": [
-        0.25,
+        0.455,
         1.0
       ],
-      "baseline": "Rank percentile: n/a; popularity-only: 0.50",
-      "baseline_value": 0.5
+      "baseline": "Rank percentile: 0.83; popularity-only: 0.38",
+      "baseline_value": 0.375
     },
     {
-      "n": 12,
+      "n": 14,
       "metric": "AUC: fame breadth predicts court's fame finding",
-      "value": "1.00 (95% CI 1.00 to 1.00) · underpowered",
+      "value": "0.62 (95% CI 0.15 to 1.00) · underpowered",
       "ci": [
-        1.0,
+        0.154,
         1.0
       ],
-      "baseline": "Popularity-only: 0.64",
-      "baseline_value": 0.6363636363636364
+      "baseline": "Popularity-only: 0.62",
+      "baseline_value": 0.625
     },
     {
       "n": "pending",
