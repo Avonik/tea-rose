@@ -129,7 +129,7 @@ def test_real_mapping_builds_without_blocked_rows() -> None:
     assert {r["junior_query"] for r in rows if r["case_id"].startswith("starbucks")} == {
         "Black Bear Micro Roastery"}  # fmt: skip
     assert by_id["vans_inc_v_mschf_product_studio_inc_2023"]["junior_query"] == "MSCHF"
-    assert sum(r["senior_type"] != "brand" or r["junior_type"] != "brand" for r in rows) == 1
+    assert sum(r["senior_type"] != "brand" or r["junior_type"] != "brand" for r in rows) == 2  # Aqua and Survivor are artists
 
     # goods overrides land in goods_note; every phrase is a short category phrase
     mm = by_id["makers_mark_distillery_inc_v_diageo_north_america_inc_2012"]
