@@ -49,3 +49,7 @@ backend/eval/_fixture/
 # Internal planning notes, not part of the submission (decide at the public flip)
 TEA_ROSE_CONCEPT.md
 backend/data/runs/
+
+# Pre-computed showcase results contain Qloo response data: generated on the server, never committed
+backend/data/showcase/*.json
+!backend/data/showcase/manifest.json
