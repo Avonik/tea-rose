@@ -63,9 +63,11 @@ class Entity(BaseModel):
 class Tag(BaseModel):
     tag_id: str
     name: str
-    tag_type: str | None = None  # e.g. "urn:tag:category:brand" (UNVERIFIED naming)
-    affinity: float | None = None
+    tag_type: str | None = None  # e.g. "urn:tag:genre:brand" (subtype preferred over "urn:tag")
+    affinity: float | None = None  # query.affinity (insights) or query.score (compare), 0..1
     rank: int | None = None
+    score: float | None = None  # compare only: raw query.score of a shared tag
+    count: int | None = None  # compare a/b lists only: query.count (sent as a string)
 
 
 class HeatmapPoint(BaseModel):
@@ -101,10 +103,24 @@ class CompareEntity(BaseModel):
 
 
 class CompareResult(BaseModel):
-    """Output of /v2/analysis/compare: how two seed groups differ in taste."""
+    """Output of /v2/analysis/compare.
+
+    Live shape: results.tags = tags the two audiences share, each with query.score (plus the a/b
+    seed entities); results.a / results.b = each seed group's own tags (query.count);
+    results.matchEntities. For a thin brand `b` and `tags` come back empty: that is
+    "insufficient data", not "no overlap".
+    """
 
     entities: list[CompareEntity] = Field(default_factory=list)
-    tags: list[Tag] = Field(default_factory=list)
+    tags: list[Tag] = Field(default_factory=list)  # shared tags, `score` set
+    a_tags: list[Tag] = Field(default_factory=list)
+    b_tags: list[Tag] = Field(default_factory=list)
+    match_entities: list[dict[str, Any]] = Field(default_factory=list)
+
+    @property
+    def insufficient_data(self) -> bool:
+        """No shared tags and no entities: nothing to say about how the audiences relate."""
+        return not self.tags and not self.entities
 
     def shared(self, top_n: int = 10) -> list[CompareEntity]:
         both = [e for e in self.entities if e.a_affinity is not None and e.b_affinity is not None]

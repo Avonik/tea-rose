@@ -12,6 +12,7 @@ from tearose.config import get_settings
 from tearose.eval.backtest import prepare, report, resolve, score_step, stats
 from tearose.eval.backtest.common import Recorder, read_csv
 from tearose.qloo.fixtures import FixtureClient
+from tearose.qloo.models import Entity
 
 CASE_COLUMNS = [
     "case_name", "citation", "court", "year", "senior_mark", "senior_goods", "junior_mark",
@@ -238,11 +239,21 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     case = resolved["cases"][0]
     sen, jun = case["senior"], case["junior"]
     assert sen["status"] == "resolved" and sen["entity_name"] == "Jack Daniel's"
-    assert sen["pick_rule"] == "exact name match"
-    assert "urn:tag:genre:brand:pet_supplies" in sen["universe"]["tag_ids"]
+    assert sen["pick_rule"] == "exact"
+    # universe = the brand's own genre:brand insights tags (filter.tag.types was sent)
+    assert sen["universe"]["tag_ids"][0] == "urn:tag:genre:brand:wine_and_spirits:spirits"
+    assert "genre:brand" in sen["universe"]["source"]
+    tag_q = [q for q in case["queries"] if q["call"] == "insights_tags"]
+    assert tag_q[0]["params"]["filter.tag.types"] == "urn:tag:genre:brand"
+    # junior: no search hit -> proxy via the brand taxonomy, "nearest" (no toy/pet-supply node)
     assert jun["status"] == "proxy" and jun["entity_id"] is None
-    assert jun["proxy"]["phrases_tried"] == ["dog toys"]
-    assert "urn:tag:genre:brand:pet_supplies:dog_toys" in jun["proxy"]["chosen_tag_ids"]
+    assert jun["pick_rule"] == "no results"
+    assert jun["proxy"]["chosen_tag_ids"] == ["urn:tag:genre:brand:food_and_beverage:pet_food"]
+    assert jun["proxy"]["fit"] == "nearest"
+    assert "nearest category" in jun["proxy"]["fit_note"]
+    assert jun["proxy"]["rule"].startswith("brand taxonomy")
+    assert not any(q["call"] == "tags_search" for q in case["queries"])  # no free-text lookup
+    assert any(q["call"] == "brand_taxonomy" for q in case["queries"])
     assert any(q["call"] == "search" for q in case["queries"])
 
     scores = await score_step.run(rec, resolved)
@@ -287,6 +298,55 @@ async def test_resolve_and_score_honour_entity_type() -> None:
     old = {k: v for k, v in _mapping_row().items() if not k.endswith("_type")}
     doc = await resolve.run(rec, [old], "fixture", "sha")
     assert doc["cases"][0]["junior"]["type"] == "brand"
+
+
+def _ent(eid: str, name: str) -> Entity:
+    return Entity(entity_id=eid, name=name, subtype="urn:entity:brand")
+
+
+@pytest.mark.parametrize(
+    ("query", "garbage"),
+    [
+        ("VIP Products", "EOS Products"),
+        ("Haute Diggity Dog", "The Last of Us Part II"),
+        ("Triumph Learning", "Triumph Motorcycles"),
+        ("Black Bear Micro Roastery", "Black Bear Diner"),
+    ],
+)
+def test_pick_entity_rejects_unrelated_top_hit(query: str, garbage: str) -> None:
+    assert resolve.pick_entity(query, [_ent("G", garbage)]) == (None, "miss")
+
+
+def test_pick_entity_exact_after_normalisation_beats_rank() -> None:
+    results = [_ent("A", "Jack Daniel's Tennessee Honey"), _ent("B", "Jack Daniel's")]
+    entity, rule = resolve.pick_entity("Jack Daniels", results)
+    assert (entity.entity_id, rule) == ("B", "exact")  # type: ignore[union-attr]
+    assert resolve.pick_entity("x", []) == (None, "no results")
+
+
+async def test_resolve_side_same_entity_guard_makes_junior_a_miss() -> None:
+    rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
+    senior = await resolve.resolve_side(rec, "Jack Daniel's", "Tennessee whiskey")
+    junior = await resolve.resolve_side(
+        rec, "Jack Daniels", "bourbon whiskey", avoid_entity_id=senior["entity_id"]
+    )
+    assert senior["status"] == "resolved"
+    assert junior["entity_id"] is None and junior["pick_rule"] == "picked the other side's entity"
+    assert junior["status"] == "proxy"
+    assert junior["proxy"]["chosen_tag_names"][0] == "Whiskey"
+    assert junior["proxy"]["fit"] == "exact"
+
+
+async def test_tags_for_phrase_falls_back_to_free_text_without_taxonomy(tmp_path: Path) -> None:
+    (tmp_path / "tags_search_dog_toys.json").write_text(
+        json.dumps({"results": {"tags": [{"id": "urn:tag:x:dog_toys", "name": "Dog Toys"}]}}),
+        encoding="utf-8",
+    )
+    rec = Recorder(FixtureClient(tmp_path), live=False)
+    out = await resolve.tags_for_phrase(rec, "dog toys")
+    assert out["chosen_tag_ids"] == ["urn:tag:x:dog_toys"]
+    assert out["rule"].startswith("brand taxonomy unavailable; free-text")
+    assert out["fit"] == "partial"
 
 
 # --------------------------------------------------------------------------------------

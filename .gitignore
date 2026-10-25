@@ -9,11 +9,11 @@
 *.key
 
 # Qloo response caches and recorded live data (Qloo forbids publishing response data)
-data/cache/
+**/data/cache/
 *.sqlite
 *.sqlite3
 *.db
-data/live/
+**/data/live/
 
 # Python
 __pycache__/
@@ -48,3 +48,4 @@ backend/eval/_fixture/
 
 # Internal planning notes, not part of the submission (decide at the public flip)
 TEA_ROSE_CONCEPT.md
+backend/data/runs/

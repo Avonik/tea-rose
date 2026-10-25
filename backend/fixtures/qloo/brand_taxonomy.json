@@ -1,0 +1,186 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Synthetic brand-genre taxonomy (15 nodes, 3 families). Shape follows /v2/tags with filter.tag.types=urn:tag:genre:brand (id, name, type, parents, popularity). The FixtureClient serves any brand-genre /v2/tags query from this file by case-insensitive substring match on the name, like the live API. Paths are plausible; popularity values are invented. Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "path": "/v2/tags",
+      "params": {
+        "filter.query": "<letter>",
+        "filter.tag.types": "urn:tag:genre:brand",
+        "take": 50
+      }
+    }
+  },
+  "success": true,
+  "results": {
+    "tags": [
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits",
+        "name": "Wine & Spirits",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.71
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits",
+        "name": "Spirits",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.66
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey",
+        "name": "Whiskey",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.58
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey:bourbon",
+        "name": "Bourbon",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.41
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:beer",
+        "name": "Beer",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.63
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:wine",
+        "name": "Wine",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.6
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage",
+        "name": "Food & Beverage",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.8
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:pet_food",
+        "name": "Pet Food",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.37
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:coffee_and_tea",
+        "name": "Coffee & Tea",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.55
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:snacks",
+        "name": "Snacks",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.52
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion",
+        "name": "Fashion",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.83
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:accessories",
+        "name": "Accessories",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.61
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:luxury",
+        "name": "Luxury",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.57
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:footwear",
+        "name": "Footwear",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.64
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:footwear:sneakers",
+        "name": "Sneakers",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.5
+      }
+    ]
+  },
+  "duration": 5
+}

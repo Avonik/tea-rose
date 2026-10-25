@@ -13,7 +13,8 @@ backend/
     qloo/                     models.py (normalized types), parse.py (tolerant parsers),
                               client.py (QlooClient protocol + factory), params.py (exact query
                               params), live.py (HTTP + cache + retries + raw recording),
-                              fixtures.py (FixtureClient), cache.py (sqlite)
+                              fixtures.py (FixtureClient), cache.py (sqlite), names.py (brand
+                              name matching), taxonomy.py (brand-genre tree + goods mapper)
     scoring/                  score.py (pure functions, NO model calls), universe.py
     agent/                    LangGraph graph: state.py, graph.py, nodes/*.py, tools.py, prompts/*.md,
                               llm.py (OpenAI-compatible chat model factory + fake model for tests)
@@ -36,9 +37,10 @@ docs/                         this file, qloo-api-notes.md, survey-cost-sources.
    words; it never produces or adjusts a score.
 2. **Every number cites a query.** Each Qloo call returns `(data, QlooQuery)`. Queries accumulate
    in the run state and appear in the memo appendix and in the trace.
-3. **Proxy path is mechanical.** When a brand is not in Qloo, the goods phrase from the document
-   goes verbatim to `/v2/tags`; the agent picks only among returned tags; options and choice are
-   recorded in `ProxyResolution`.
+3. **Proxy path is mechanical.** When a brand is not in Qloo, the goods phrase is mapped onto
+   Qloo's brand taxonomy (`urn:tag:genre:brand`); the agent picks only taxonomy nodes, each with
+   a fit label (exact | partial | nearest); options, choice and fit are recorded in
+   `ProxyResolution`. Free-text `/v2/tags` on the verbatim phrase is only the last resort.
 4. **Ranks, not raw affinities.** Qloo normalizes affinity per query. Overlap is expressed as the
    junior's rank among its category peers when seeded by the senior (and vice versa).
 5. **Fixtures today, live Monday.** Nothing above `qloo/` knows which client it is talking to.
@@ -66,7 +68,7 @@ Nodes, in order:
 | --- | --- | --- |
 | `extract` | 1 LLM call, structured output `Extraction` | document text → parties, marks, goods (verbatim), channels, claims |
 | `route` | 1 LLM call, structured output `RoutingDecision` (with deterministic guardrails: dilution pleaded ⇒ fame; priority ⇒ zone; confusion ⇒ overlap + bridging) | extraction → analyses to run |
-| `resolve` | tool-calling loop (search, tags_search, insights_entities for comparators) | parties → `Resolution` incl. proxies and universes |
+| `resolve` | tool-calling loop (search, tags_search, insights_entities for comparators) + brand taxonomy in the prompt | parties → `Resolution` incl. proxies and universes |
 | `fetch` | tool-calling loop; the agentic core; retries wider queries on empty results; records give-ups | resolution + routing → `raw` data |
 | `score` | pure Python, no LLM | raw → `Evidence` |
 | `interpret` | 1 LLM call (optionally stronger model), structured output `list[FactorFinding]` + limitations | evidence → factor findings; blinded names in eval mode |
@@ -77,6 +79,29 @@ Nodes, in order:
 the factor leans alone: how many confusion factors support or cut against the senior mark, then fame
 and zone, always ending "It is silent on mark similarity, intent and actual confusion." No model
 writes it; it never names an outcome. Runs stored before the field existed load with `""`.
+
+### Resolve, proxy and universe (after the live spike)
+
+- **Hit or miss.** `/search` returns unrelated top hits for small brands, so nobody takes "the
+  first result". Agent: the model judges hit vs miss from name, disambiguation, popularity and
+  categories; no entity id ⇒ proxy path. `qloo/names.py` is only a guardrail there: a pick whose
+  normalised name is not similar to the party's marks/name is kept but flagged ("Name check" in
+  `disambiguation_note` and a trace warning). Back-test: strict code rule `pick_by_name`
+  (normalised exact, else fuzzy: all query tokens + at most one extra token or difflib ≥ 0.9,
+  else miss; recorded as `exact` / `fuzzy:<ratio>` / `miss`). Both: same entity on both sides ⇒
+  junior miss.
+- **Brand taxonomy.** `qloo/taxonomy.py` harvests the ~177-node `urn:tag:genre:brand` tree with
+  26 letter queries to `/v2/tags` (cached, memoised per client). `map_goods_phrase` scores nodes
+  by token overlap with name and path plus a small synonym table and labels the fit: `exact`
+  (head noun names the node), `partial`, `nearest` (no node fits, e.g. dog toys → Pet Food: the
+  memo limitations then say "nearest category, no exact match in Qloo's brand taxonomy"). The
+  agent sees the whole tree plus code suggestions and returns `proxy_taxonomy_choices`; code
+  validates ids and falls back to the mapper, then to free-text `/v2/tags`.
+- **Universe of a resolved brand.** Insights tags with `filter.tag.types=urn:tag:genre:brand`
+  (unrestricted taste tags are noise); `pick_category_tags` prefers genre:brand tags.
+- **Compare.** `/v2/analysis/compare` returns shared `tags` (query.score), each side's own `a` /
+  `b` tags and `matchEntities`. Empty shared tags (a thin brand) is "insufficient data", never
+  "no overlap".
 
 Each node emits `TraceEvent`s (`node_started`, `tool_call`, `tool_result`, `decision`, `warning`,
 `node_finished`). The API streams them over SSE as they are appended.

@@ -6,6 +6,7 @@ Two implementations: FixtureClient (today) and LiveClient (from Monday). Both re
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from typing import Any, Protocol, runtime_checkable
 
 from tearose.qloo.models import (
@@ -21,6 +22,8 @@ BRAND = "urn:entity:brand"
 HEATMAP = "urn:heatmap"
 DEMOGRAPHICS = "urn:demographics"
 TAG = "urn:tag"
+GENRE_BRAND = "urn:tag:genre:brand"  # the brand-category taxonomy (~177 nodes, 27 families)
+DEFAULT_INSIGHTS_TAG_TYPES: tuple[str, ...] = (GENRE_BRAND,)
 INSIGHTS_MAX_TAKE = 50
 
 
@@ -46,9 +49,14 @@ class QlooClient(Protocol):
         """GET /v2/insights filter.type=<entity type> — ranked entities for a seed set."""
 
     async def insights_tags(
-        self, seed_entity_ids: list[str], *, take: int = INSIGHTS_MAX_TAKE
+        self,
+        seed_entity_ids: list[str],
+        *,
+        take: int = INSIGHTS_MAX_TAKE,
+        tag_types: Sequence[str] | None = DEFAULT_INSIGHTS_TAG_TYPES,
     ) -> tuple[list[Tag], QlooQuery]:
-        """GET /v2/insights filter.type=urn:tag — taste tags describing a seed set."""
+        """GET /v2/insights filter.type=urn:tag — taste tags describing a seed set.
+        `tag_types` -> filter.tag.types (default: brand genres only; None = unrestricted)."""
 
     async def demographics(self, seed_entity_ids: list[str]) -> tuple[Demographics, QlooQuery]:
         """GET /v2/insights filter.type=urn:demographics — age/gender affinity."""
@@ -64,7 +72,7 @@ class QlooClient(Protocol):
         """GET /v2/insights filter.type=urn:heatmap — geographic affinity."""
 
     async def tags_search(
-        self, query: str, *, tag_types: list[str] | None = None, take: int = 20
+        self, query: str, *, tag_types: Sequence[str] | None = None, take: int = 20
     ) -> tuple[list[Tag], QlooQuery]:
         """GET /v2/tags — find tag ids for a free-text category phrase."""
 

@@ -380,6 +380,95 @@ async def test_resolve_code_enforces_verbatim_goods_lookup(client: FixtureClient
     assert any("not on the returned menu" in e.title for e in events)
 
 
+TAX_PET_FOOD = "urn:tag:genre:brand:food_and_beverage:pet_food"
+
+
+def _with_taxonomy(d: Path) -> FixtureClient:
+    shared = BACKEND_DIR / "fixtures" / "qloo" / "brand_taxonomy.json"
+    (d / "brand_taxonomy.json").write_text(shared.read_text(encoding="utf-8"), encoding="utf-8")
+    body = {"results": [_ent("E-CH", "Chewy Treats", [TAX_PET_FOOD])]}
+    (d / "search_brand_chewy_treats.json").write_text(json.dumps(body), encoding="utf-8")
+    return FixtureClient(d)
+
+
+async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> None:
+    client = _with_taxonomy(write_fixtures(tmp_path))
+    loop = [
+        ai_tools(tool_call("qloo_search", query="Jack Daniel's"),
+                 tool_call("qloo_search", query="Bad Spaniels"),
+                 tool_call("qloo_search", query="Chewy Treats")),
+        "done",
+    ]  # fmt: skip
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["junior"].update(
+        proxy_chosen_tag_ids=[],
+        proxy_taxonomy_choices=[
+            {"tag_id": TAX_PET_FOOD, "fit": "nearest"},
+            {"tag_id": "urn:tag:genre:brand:toys", "fit": "exact"},  # not in the taxonomy
+        ],
+        comparator_entity_ids=["E-CH", BB],
+    )
+    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
+    ctx, events = make_ctx(client, model)
+    out = await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx)
+    proxy = out["resolution"].junior_proxy
+    assert proxy.chosen_tag_ids == [TAX_PET_FOOD]
+    assert proxy.fit == "nearest" and "no exact match" in (proxy.fit_note or "")
+    assert proxy.comparator_brand_ids == ["E-CH"]  # BarkBox carries no pet_food tag
+    assert ctx.tools.tag_searches == []  # no free-text /v2/tags needed
+    prompt = model.prompts_for("resolve")[0]
+    assert "BRAND TAXONOMY (15 nodes" in prompt
+    assert "food_and_beverage/pet_food = Pet Food" in prompt
+    assert any("not in Qloo's brand taxonomy" in e.title for e in events)
+    assert {u.side: u.tag_ids for u in out["resolution"].universes}["junior"] == [TAX_PET_FOOD]
+    # the memo states the approximation in code
+    from tearose.agent.nodes.memo import proxy_limitations
+
+    lims = proxy_limitations({"resolution": out["resolution"]})
+    assert lims and "nearest category, no exact match" in lims[0] and "Pet Food" in lims[0]
+
+
+async def test_resolve_without_model_decision_is_a_miss_not_first_hit(
+    client: FixtureClient,
+) -> None:
+    loop = [ai_tools(tool_call("qloo_search", query="Jack Daniel's")), "done"]
+    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": []})  # decision fails
+    ctx, events = make_ctx(client, model)
+    out = await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx)
+    res = out["resolution"]
+    assert res.senior.entity_id is None and res.senior_proxy is not None
+    assert not any("first search hit" in e.title for e in events)
+
+
+async def test_resolve_flags_low_name_similarity_and_guards_same_entity(
+    client: FixtureClient,
+) -> None:
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["senior"]["entity_id"] = BB  # the model picks a dissimilar name: kept, flagged
+    decision["junior"].update(entity_id=BB, query="BarkBox")  # same entity on both sides
+    loop = [ai_tools(tool_call("qloo_search", query="Jack Daniel's"),
+                     tool_call("qloo_search", query="BarkBox")), "done"]  # fmt: skip
+    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
+    ctx, events = make_ctx(client, model)
+    res = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
+        "resolution"
+    ]
+    assert res.senior.entity_id == BB
+    assert "Name check" in (res.senior.disambiguation_note or "")
+    assert any(e.type == "warning" and "low name similarity" in e.title for e in events)
+    assert res.junior.entity_id is None and res.junior_proxy is not None
+    assert any("other side's entity" in e.title for e in events)
+
+
+async def test_search_summary_shows_categories(client: FixtureClient) -> None:
+    ctx, _ = make_ctx(client, ScriptedChatModel())
+    tools = {t.name: t for t in make_tools(ctx.tools)}
+    out = json.loads(await tools["qloo_search"].ainvoke({"query": "BarkBox"}))
+    first = out["results"][0]
+    assert {"id", "name", "popularity", "tags", "categories"} <= set(first)
+    assert "dog toys" in first["categories"]
+
+
 # --------------------------------------------------------------------------------------
 # (4) fetch: paging, feedback, code fallback, give-up
 # --------------------------------------------------------------------------------------

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from tearose.config import BACKEND_DIR, REPO_DIR
-from tearose.qloo.client import QlooClient
+from tearose.qloo.client import DEFAULT_INSIGHTS_TAG_TYPES, QlooClient
 from tearose.qloo.models import QlooQuery
 
 EVAL_DIR = BACKEND_DIR / "eval"
@@ -131,13 +131,18 @@ class Recorder:
             "tags_search", [], lambda: self.client.tags_search(query), query=query
         )
 
-    async def insights_tags(self, seeds: list[str], take: int = 50) -> Any:
+    async def insights_tags(
+        self, seeds: list[str], take: int = 50, tag_types: tuple[str, ...] | None = None
+    ) -> Any:
+        """Brand-genre tags by default (filter.tag.types=urn:tag:genre:brand)."""
+        types = list(tag_types or DEFAULT_INSIGHTS_TAG_TYPES)
         return await self.call(
             "insights_tags",
             [],
-            lambda: self.client.insights_tags(seeds, take=take),
+            lambda: self.client.insights_tags(seeds, take=take, tag_types=types),
             seeds=seeds,
             take=take,
+            tag_types=types,
         )
 
     async def insights_entities(

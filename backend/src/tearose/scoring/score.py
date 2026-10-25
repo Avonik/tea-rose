@@ -250,8 +250,13 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
     shared: list[dict[str, Any]] = []
     d_senior: list[dict[str, Any]] = []
     d_junior: list[dict[str, Any]] = []
-    if raw.compare is None or (not raw.compare.entities and not raw.compare.tags):
+    if raw.compare is None:
         notes.append("No compare data: shared/distinct affinities are empty.")
+    elif raw.compare.insufficient_data:
+        notes.append(
+            "Compare: insufficient data (no shared tags; typical for a thin brand). "
+            "Not evidence of zero overlap."
+        )
     elif raw.compare.entities:
         shared = [_compare_row(e) for e in raw.compare.shared()]
         d_senior = [_compare_row(e) for e in raw.compare.distinct_to_a()]
@@ -260,7 +265,12 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
         # Documented live shape: /v2/analysis/compare returns tags with query.score that
         # characterize how the two audiences differ. Surface them as "shared affinities".
         shared = [
-            {"tag_id": t.tag_id, "name": t.name, "type": t.tag_type, "score": t.affinity}
+            {
+                "tag_id": t.tag_id,
+                "name": t.name,
+                "type": t.tag_type,
+                "score": t.score if t.score is not None else t.affinity,
+            }
             for t in raw.compare.tags[:15]
         ]
         notes.append("Compare returned audience tags (documented shape); no per-entity lists.")

@@ -1,0 +1,237 @@
+"""Qloo layer: test-safety settings, name matching, brand taxonomy, parsers. No network."""
+
+from __future__ import annotations
+
+import os
+from typing import Any
+
+import pytest
+
+from tearose.config import BACKEND_DIR, get_settings
+from tearose.qloo import params as P
+from tearose.qloo.client import GENRE_BRAND, get_qloo_client
+from tearose.qloo.fixtures import FixtureClient
+from tearose.qloo.models import Entity, QlooQuery, Tag
+from tearose.qloo.names import match_rule, normalize_name, pick_by_name
+from tearose.qloo.parse import parse_compare
+from tearose.qloo.taxonomy import (
+    NEAREST_NOTE,
+    load_brand_taxonomy,
+    map_goods_phrase,
+    node_from_tag_id,
+)
+
+FIXTURES = BACKEND_DIR / "fixtures" / "qloo"
+
+# --------------------------------------------------------------------------------------
+# tests never run against live Qloo or a real LLM, whatever backend/.env says
+# --------------------------------------------------------------------------------------
+
+
+def test_settings_are_forced_to_fixture_mode() -> None:
+    s = get_settings()
+    assert s.qloo_mode == "fixture"
+    assert s.qloo_api_key == "" and s.llm_api_key == ""
+    assert os.environ["QLOO_MODE"] == "fixture"
+    assert isinstance(get_qloo_client(), FixtureClient)
+
+
+# --------------------------------------------------------------------------------------
+# FIX A: name matching
+# --------------------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("raw", "norm"),
+    [
+        ("Jack Daniel's", "jack daniels"),
+        ("Jack Daniel’s Properties, Inc.", "jack daniels properties"),
+        ("adidas", "adidas"),
+        ("Häagen-Dazs", "haagen dazs"),
+        ("Barnes & Noble", "barnes and noble"),
+        ("Acme Co.", "acme"),
+        ("Foo Holdings LLC", "foo holdings"),
+        ("Company", "company"),  # a lone corporate word is not stripped to nothing
+    ],
+)
+def test_normalize_name(raw: str, norm: str) -> None:
+    assert normalize_name(raw) == norm
+
+
+def test_match_rule_exact_fuzzy_miss() -> None:
+    assert match_rule("Jack Daniels", "Jack Daniel's") == "exact"
+    assert match_rule("Adidas", "adidas") == "exact"
+    assert match_rule("Bark Box", "BarkBox") == "exact"
+    assert match_rule("Jack Daniel's", "Jack Daniel's Distillery").startswith("fuzzy:")
+    assert match_rule("Smashburgers", "Smashburger").startswith("fuzzy:0.9")
+    assert match_rule("Jack Daniel's", "Jack Daniel's Tennessee Honey") == "miss"  # 2 extra
+    for q, garbage in [
+        ("VIP Products", "EOS Products"),
+        ("Haute Diggity Dog", "The Last of Us Part II"),
+        ("Triumph Learning", "Triumph Motorcycles"),
+        ("Black Bear Micro Roastery", "Black Bear Diner"),
+    ]:
+        assert match_rule(q, garbage) == "miss", (q, garbage)
+
+
+def _e(eid: str, name: str) -> Entity:
+    return Entity(entity_id=eid, name=name)
+
+
+def test_pick_by_name_never_takes_the_first_hit() -> None:
+    assert pick_by_name("MSCHF", []) == (None, "miss")
+    assert pick_by_name("Triumph Learning", [_e("1", "Triumph Motorcycles")]) == (None, "miss")
+    ents = [_e("1", "Jack Daniel's Distillery"), _e("2", "Jack Daniel's")]
+    assert pick_by_name("Jack Daniels", ents) == (ents[1], "exact")
+    # several query strings (mark + company name); avoid_ids skips an entity
+    hit, rule = pick_by_name(["Bad Spaniels", "Jack Daniel's"], ents, avoid_ids=["2"])
+    assert hit is ents[0] and rule.startswith("fuzzy:")
+
+
+# --------------------------------------------------------------------------------------
+# FIX B: insights tags restricted to brand genres
+# --------------------------------------------------------------------------------------
+
+
+async def test_insights_tags_sends_genre_brand_filter_by_default() -> None:
+    client = FixtureClient(FIXTURES)
+    tags, q = await client.insights_tags(["FA4E0000-0000-4000-A000-000000000001"])
+    assert q.params["filter.tag.types"] == GENRE_BRAND
+    assert tags and all(t.tag_type == GENRE_BRAND for t in tags)
+    _, q2 = await client.insights_tags(["x"], tag_types=None)
+    assert "filter.tag.types" not in q2.params
+    assert P.insights_tags_params(["a", "b"], 50, ["t1", "t2"])["filter.tag.types"] == "t1,t2"
+
+
+# --------------------------------------------------------------------------------------
+# FIX C: brand taxonomy
+# --------------------------------------------------------------------------------------
+
+
+class _LetterClient:
+    """Answers letter queries from a node list by name substring; counts calls."""
+
+    def __init__(self, nodes: list[tuple[str, str]]) -> None:
+        self.nodes = nodes
+        self.calls: list[tuple[str, Any]] = []
+
+    async def tags_search(self, query: str, *, tag_types: Any = None, take: int = 20):
+        self.calls.append((query, tag_types))
+        hits = [
+            Tag(tag_id=i, name=n, tag_type=GENRE_BRAND) for i, n in self.nodes if query in n.lower()
+        ][:take]
+        return hits, QlooQuery(endpoint="/v2/tags", params={})
+
+
+async def test_load_brand_taxonomy_harvests_dedupes_and_memoises() -> None:
+    client = _LetterClient(
+        [
+            (f"{GENRE_BRAND}:wine_and_spirits", "Wine & Spirits"),
+            (f"{GENRE_BRAND}:wine_and_spirits:spirits:whiskey", "Whiskey"),
+            (f"{GENRE_BRAND}:food_and_beverage:pet_food", "Pet Food"),
+            ("urn:tag:keyword:qloo:whiskey", "Whiskey"),  # not a brand genre: ignored
+        ]
+    )
+    nodes = await load_brand_taxonomy(client)
+    assert len(client.calls) == 26
+    assert {c[0] for c in client.calls} == set("abcdefghijklmnopqrstuvwxyz")
+    assert all(c[1] == [GENRE_BRAND] for c in client.calls)
+    assert [n.name for n in nodes] == ["Pet Food", "Wine & Spirits", "Whiskey"]  # deduped
+    whiskey = nodes[2]
+    assert whiskey.path == ("wine_and_spirits", "spirits", "whiskey") and whiskey.depth == 3
+    assert whiskey.parent == f"{GENRE_BRAND}:wine_and_spirits:spirits"
+    assert nodes[1].parent is None
+    assert await load_brand_taxonomy(client) is nodes and len(client.calls) == 26  # memo
+
+
+async def test_fixture_taxonomy_is_harvested_from_letter_queries() -> None:
+    nodes = await load_brand_taxonomy(FixtureClient(FIXTURES))
+    assert len(nodes) == 15
+    assert len({n.path[0] for n in nodes}) == 3
+    assert node_from_tag_id("urn:tag:keyword:x", "X") is None
+
+
+@pytest.fixture
+async def taxonomy() -> list[Any]:
+    return await load_brand_taxonomy(FixtureClient(FIXTURES))
+
+
+async def test_map_dog_toy_to_pet_food_as_nearest(taxonomy: list[Any]) -> None:
+    m = map_goods_phrase("squeaky dog chew toy", taxonomy)
+    assert [(x.node.name, x.fit) for x in m] == [("Pet Food", "nearest")]
+    assert m[0].node.tag_id == f"{GENRE_BRAND}:food_and_beverage:pet_food"
+    assert "nearest category" in NEAREST_NOTE
+
+
+async def test_map_bourbon_whiskey_exact(taxonomy: list[Any]) -> None:
+    m = map_goods_phrase("bourbon whiskey", taxonomy)
+    assert (m[0].node.name, m[0].fit) == ("Whiskey", "exact")
+    assert (m[1].node.name, m[1].fit) == ("Bourbon", "partial")
+    assert map_goods_phrase("Tennessee whisky", taxonomy)[0].fit == "exact"
+
+
+async def test_map_luxury_handbags_and_no_match(taxonomy: list[Any]) -> None:
+    m = map_goods_phrase("luxury handbags", taxonomy)
+    assert [(x.node.name, x.fit) for x in m] == [("Luxury", "partial"), ("Accessories", "nearest")]
+    assert map_goods_phrase("financial services", taxonomy) == []
+    assert map_goods_phrase("", taxonomy) == []
+    assert map_goods_phrase("whiskey", []) == []
+    assert len(map_goods_phrase("wine beer spirits whiskey bourbon", taxonomy)) == 3
+
+
+async def test_map_prefers_deeper_node_on_ties(taxonomy: list[Any]) -> None:
+    m = map_goods_phrase("athletic sneakers", taxonomy)
+    assert m[0].node.name == "Sneakers" and m[0].fit == "exact"
+
+
+# --------------------------------------------------------------------------------------
+# FIX D: compare shape
+# --------------------------------------------------------------------------------------
+
+_SEED_A = [{"entity_id": "A1", "name": "Brand A", "subtype": "urn:entity:brand"}]
+_SEED_B = [{"entity_id": "B1", "name": "Brand B", "subtype": "urn:entity:brand"}]
+
+
+def _own(tid: str, count: str) -> dict[str, Any]:
+    return {"tag_id": tid, "name": tid, "type": "urn:tag", "subtype": "urn:tag:keyword:qloo",
+            "entity_id": "X", "popularity": 0.5, "query": {"count": count}}  # fmt: skip
+
+
+def test_parse_compare_live_shape() -> None:
+    raw = {
+        "duration": 3,
+        "results": {
+            "tags": [
+                {
+                    "tag_id": "urn:tag:adjective:qloo:bold",
+                    "name": "Bold",
+                    "type": "urn:tag",
+                    "subtype": "urn:tag:adjective:qloo",
+                    "entity_id": "T1",
+                    "popularity": 0.4,
+                    "query": {
+                        "score": 0.71,
+                        "a.signal.interests.entities": _SEED_A,
+                        "b.signal.interests.entities": _SEED_B,
+                    },
+                }
+            ],
+            "a": [_own("t1", "12"), _own("t2", "7")],
+            "b": [_own("t3", "5")],
+            "matchEntities": [],
+        },
+    }
+    cmp = parse_compare(raw)
+    assert not cmp.insufficient_data
+    assert [(t.name, t.score, t.tag_type) for t in cmp.tags] == [
+        ("Bold", 0.71, "urn:tag:adjective:qloo")
+    ]
+    assert [t.count for t in cmp.a_tags] == [12, 7] and cmp.b_tags[0].count == 5
+    assert cmp.entities == [] and cmp.match_entities == []
+
+
+def test_parse_compare_thin_brand_is_insufficient_data() -> None:
+    cmp = parse_compare({"results": {"tags": [], "a": [_own("t1", "3")], "b": [],
+                                     "matchEntities": []}})  # fmt: skip
+    assert cmp.insufficient_data and cmp.tags == [] and len(cmp.a_tags) == 1
+    assert parse_compare({}).insufficient_data

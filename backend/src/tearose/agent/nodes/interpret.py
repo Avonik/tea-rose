@@ -141,14 +141,17 @@ def case_payload(state: dict[str, Any]) -> dict[str, Any]:
             "senior": res.senior.entity_name or "NOT IN QLOO (proxy path)",
             "junior": res.junior.entity_name or "NOT IN QLOO (proxy path)",
             "senior_proxy": res.senior_proxy.model_dump(
-                include={"goods_phrase", "chosen_tag_ids", "comparator_brand_names"}
+                include=_PROXY_FIELDS
             ) if res.senior_proxy else None,
             "junior_proxy": res.junior_proxy.model_dump(
-                include={"goods_phrase", "chosen_tag_ids", "comparator_brand_names"}
+                include=_PROXY_FIELDS
             ) if res.junior_proxy else None,
             "universes": [u.model_dump() for u in res.universes],
         }  # fmt: skip
     return out
+
+
+_PROXY_FIELDS = {"goods_phrase", "chosen_tag_ids", "fit", "fit_note", "comparator_brand_names"}
 
 
 def section_has_data(evidence: Evidence | None, section: str) -> bool:

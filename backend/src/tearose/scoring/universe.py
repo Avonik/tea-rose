@@ -1,9 +1,10 @@
 """Universe helpers: human labels for comparison sets and a deterministic tag-picking heuristic.
 
 `pick_category_tags` is a FALLBACK / sanity check only. The agent's own choice of category tags
-(made in the `resolve` node from the `/v2/tags` menu) is authoritative and is logged separately
-in `ProxyResolution.chosen_tag_ids` and the trace; this heuristic never overrides it. The graph
-may log a warning when the agent's choice and this heuristic disagree completely.
+(made in the `resolve` node from the brand taxonomy or the `/v2/tags` menu) is authoritative
+and is logged separately in `ProxyResolution.chosen_tag_ids` and the trace; this heuristic
+never overrides it. The graph may log a warning when the agent's choice and this heuristic
+disagree completely. Brand-genre tags (urn:tag:genre:brand) are preferred over all others.
 """
 
 from __future__ import annotations
@@ -38,8 +39,16 @@ def tokenize(text: str) -> list[str]:
     return [_singular(t) for t in _TOKEN_RE.findall(text.lower()) if t not in _STOPWORDS]
 
 
+GENRE_BRAND = "urn:tag:genre:brand"
+
+
 def _is_category(tag: Tag) -> bool:
     return "category" in (tag.tag_type or "").lower()
+
+
+def is_brand_genre(tag: Tag) -> bool:
+    """A node of Qloo's brand-category taxonomy (urn:tag:genre:brand[:...])."""
+    return (tag.tag_type or "").startswith(GENRE_BRAND) or tag.tag_id.startswith(GENRE_BRAND)
 
 
 def build_universe_description(tags: list[Tag]) -> str:
@@ -67,21 +76,32 @@ def pick_category_tags(tags: list[Tag], goods_phrase: str, max_n: int = 3) -> li
     """Deterministically pick up to `max_n` tags whose names best match `goods_phrase`.
 
     Score per tag: number of distinct (singularized, stopword-free) goods tokens that appear in
-    the tag name. Only tags with score > 0 qualify. Ties break, in order, by: category-type tags
-    first (`"category"` in `tag_type`), then broader tags (fewer name tokens), then the original
-    menu order. Returns [] when nothing overlaps - the caller then relies on the agent's choice.
+    the tag name. Only tags with score > 0 qualify. Brand-genre tags (`urn:tag:genre:brand...`,
+    the clean category taxonomy) rank before every other tag; within each group: higher score,
+    then category-type tags (`"category"` in `tag_type`), then broader tags (fewer name tokens),
+    then the original menu order. Returns [] when nothing overlaps - the caller then relies on
+    the agent's choice.
     """
     if max_n <= 0 or not tags:
         return []
     goods = set(tokenize(goods_phrase or ""))
     if not goods:
         return []
-    scored: list[tuple[int, int, int, int, Tag]] = []
+    scored: list[tuple[int, int, int, int, int, Tag]] = []
     for idx, tag in enumerate(tags):
         name_tokens = tokenize(tag.name or "")
         overlap = len(goods & set(name_tokens))
         if overlap == 0:
             continue
-        scored.append((-overlap, 0 if _is_category(tag) else 1, len(name_tokens), idx, tag))
-    scored.sort(key=lambda s: s[:4])
-    return [s[4] for s in scored[:max_n]]
+        scored.append(
+            (
+                0 if is_brand_genre(tag) else 1,
+                -overlap,
+                0 if _is_category(tag) else 1,
+                len(name_tokens),
+                idx,
+                tag,
+            )
+        )
+    scored.sort(key=lambda s: s[:5])
+    return [s[5] for s in scored[:max_n]]

@@ -225,6 +225,20 @@ def test_overlap_symmetric_mean_and_compare_lists():
     assert ev.used_proxy is False
 
 
+def test_overlap_compare_tags_use_score_and_thin_brand_is_insufficient():
+    shared = CompareResult(
+        tags=[Tag(tag_id="t", name="Bold", tag_type="urn:tag:adjective:qloo", score=0.71)]
+    )
+    ev = overlap_evidence(RawData(compare=shared), resolution())
+    assert ev.shared_affinities == [
+        {"tag_id": "t", "name": "Bold", "type": "urn:tag:adjective:qloo", "score": 0.71}
+    ]
+    thin = CompareResult(a_tags=[Tag(tag_id="a", name="A", count=3)])  # b and tags empty
+    ev = overlap_evidence(RawData(compare=thin), resolution())
+    assert ev.shared_affinities == []
+    assert any("insufficient data" in n for n in ev.notes)
+
+
 def test_overlap_empty_inputs():
     ev = overlap_evidence(RawData())
     assert ev.symmetric_percentile is None
@@ -415,6 +429,20 @@ def test_pick_category_tags_deterministic():
     assert pick_category_tags(tags, "financial services") == []
     assert pick_category_tags([], "dog toys") == []
     assert pick_category_tags(tags, "dog toys", max_n=0) == []
+
+
+def test_pick_category_tags_prefers_brand_genre_tags():
+    tags = [
+        Tag(tag_id="urn:tag:keyword:media:dog_toy", name="Dog Toy", tag_type="urn:tag:keyword"),
+        Tag(tag_id="urn:tag:category:place:pet_store", name="Pet Store",
+            tag_type="urn:tag:category:place"),
+        Tag(tag_id="urn:tag:genre:brand:food_and_beverage:pet_food", name="Pet Food",
+            tag_type="urn:tag:genre:brand"),
+    ]  # fmt: skip
+    picked = pick_category_tags(tags, "dog toys and pet treats", max_n=3)
+    assert picked[0].tag_id == "urn:tag:genre:brand:food_and_beverage:pet_food"
+    # fallback kept: without any genre tag the keyword overlap still decides
+    assert [t.name for t in pick_category_tags(tags[:2], "dog toys")] == ["Dog Toy"]
 
 
 # --------------------------------------------------------------------------------------

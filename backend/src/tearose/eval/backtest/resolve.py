@@ -3,17 +3,21 @@
 Deterministic rules (no model):
 - Entity pick: /search(query, types=<side type>, take=10), the side type coming from the
   mapping's senior_type / junior_type column ("brand" unless pre-registered otherwise, e.g.
-  "artist" for Aqua); the first result whose name equals the query case-insensitively, else the
-  first result. All candidate names and the type are recorded.
+  "artist" for Aqua); the candidate is chosen by `qloo.names.pick_by_name`: normalised exact
+  name match, else a strict fuzzy rule, else MISS (never "the first result": /search returns
+  unrelated top hits for small brands). The rule ("exact" | "fuzzy:<ratio>" | "miss"), all
+  candidate names and the type are recorded.
 - Same entity on both sides (e.g. a junior query that only finds the senior) -> the junior is
   treated as not found.
-- Not found -> proxy path: the goods phrase goes VERBATIM to /v2/tags; if that returns nothing,
-  one shortened phrase is tried (first clause, parentheticals removed, last two words).
-  `pick_category_tags` (scoring/universe.py) picks up to 3 tags; when it finds no keyword
-  overlap, the first tag of the menu is used. Menu, phrases tried and choice are recorded.
-- Universe tags of a resolved brand: insights tags seeded by the brand (take 50), keeping tags
-  whose type contains "category" or "genre", top 5 in response order. If none, fall back to
-  /v2/tags on the brand's goods phrase + pick_category_tags (recorded as the source).
+- Not found -> proxy path: the goods phrase is mapped onto Qloo's brand taxonomy
+  (urn:tag:genre:brand, harvested once via 26 letter queries) by `qloo.taxonomy.map_goods_phrase`:
+  up to 3 nodes, each labelled exact | partial | nearest. Only when the taxonomy is unavailable
+  or nothing maps does the old last resort run: the phrase VERBATIM to free-text /v2/tags, then
+  one shortened phrase, then `pick_category_tags` (first menu tag when nothing overlaps).
+- Universe tags of a resolved brand: insights tags seeded by the brand restricted to
+  filter.tag.types=urn:tag:genre:brand (take 50), top 5 in response order (any category/genre
+  tag qualifies, as a fallback for unrestricted responses). If none, fall back to the goods
+  phrase mapping above (recorded as the source).
 """
 
 from __future__ import annotations
@@ -23,7 +27,15 @@ from typing import Any
 
 from tearose.eval.backtest.common import DEFAULT_ENTITY_TYPE, Recorder, entity_urn
 from tearose.qloo.models import Entity, Tag
-from tearose.scoring.universe import pick_category_tags
+from tearose.qloo.names import pick_by_name
+from tearose.qloo.taxonomy import (
+    NEAREST_NOTE,
+    TaxonomyNode,
+    best_fit,
+    load_brand_taxonomy,
+    map_goods_phrase,
+)
+from tearose.scoring.universe import is_brand_genre, pick_category_tags
 
 SEARCH_TAKE = 10
 TAGS_TAKE = 50
@@ -32,14 +44,10 @@ PROXY_TAGS_TOP = 3
 
 
 def pick_entity(query: str, results: list[Entity]) -> tuple[Entity | None, str]:
-    """(entity, rule): exact case-insensitive name match first, else the first result."""
+    """(entity, rule): rule is "exact", "fuzzy:<ratio>", "miss", or "no results"."""
     if not results:
         return None, "no results"
-    q = query.strip().casefold()
-    for e in results:
-        if e.name.strip().casefold() == q:
-            return e, "exact name match"
-    return results[0], "first result (no exact name match)"
+    return pick_by_name(query, results)
 
 
 def shorten_phrase(phrase: str) -> str | None:
@@ -62,8 +70,50 @@ def is_universe_tag(t: Tag) -> bool:
     return "category" in kind or "genre" in kind
 
 
+async def brand_taxonomy(rec: Recorder) -> list[TaxonomyNode]:
+    """The brand taxonomy (memoised per client), logged as one query entry per use."""
+    try:
+        nodes = await load_brand_taxonomy(rec.client)
+    except Exception as exc:  # noqa: BLE001 - degrade to free-text /v2/tags
+        status = getattr(exc, "status", None)
+        if status in (401, 403):
+            raise
+        rec.notes.append(f"brand taxonomy unavailable ({status}): {repr(exc)[:160]}")
+        return []
+    rec.queries.append(
+        {
+            "call": "brand_taxonomy",
+            "endpoint": "/v2/tags",
+            "params": {"filter.query": "a..z", "filter.tag.types": "urn:tag:genre:brand",
+                       "take": 50},
+            "result_count": len(nodes),
+        }
+    )  # fmt: skip
+    return nodes
+
+
 async def tags_for_phrase(rec: Recorder, phrase: str) -> dict[str, Any]:
-    """/v2/tags on the verbatim phrase (then one shortened phrase) -> menu + deterministic pick."""
+    """Goods phrase -> brand-taxonomy nodes (exact|partial|nearest); free-text /v2/tags only as
+    the last resort."""
+    taxonomy = await brand_taxonomy(rec) if phrase.strip() else []
+    matches = map_goods_phrase(phrase, taxonomy)
+    if matches:
+        fit = best_fit([m.fit for m in matches])
+        return {
+            "goods_phrase": phrase,
+            "phrases_tried": [phrase],
+            "tag_options": [m.as_dict() for m in matches],
+            "chosen_tag_ids": [m.node.tag_id for m in matches],
+            "chosen_tag_names": [m.node.name for m in matches],
+            "fit": fit,
+            "fit_note": NEAREST_NOTE if fit == "nearest" else None,
+            "rule": f"brand taxonomy ({len(taxonomy)} nodes) -> map_goods_phrase",
+        }
+    return await _free_text_tags(rec, phrase, taxonomy_size=len(taxonomy))
+
+
+async def _free_text_tags(rec: Recorder, phrase: str, taxonomy_size: int) -> dict[str, Any]:
+    """Last resort: /v2/tags on the verbatim phrase (then one shortened phrase)."""
     tried: list[str] = []
     options: list[Tag] = []
     used = phrase
@@ -79,13 +129,23 @@ async def tags_for_phrase(rec: Recorder, phrase: str) -> dict[str, Any]:
     rule = "pick_category_tags (keyword overlap)"
     if not chosen and options:
         chosen, rule = options[:1], "first tag of the menu (no keyword overlap)"
+    fit = None
+    if chosen:
+        fit = "partial" if rule.startswith("pick_category_tags") else "nearest"
+    prefix = (
+        f"no brand-taxonomy match ({taxonomy_size} nodes); free-text /v2/tags -> "
+        if taxonomy_size
+        else "brand taxonomy unavailable; free-text /v2/tags -> "
+    )
     return {
         "goods_phrase": phrase,
         "phrases_tried": tried,
         "tag_options": [_tag_dict(t) for t in options],
         "chosen_tag_ids": [t.tag_id for t in chosen],
         "chosen_tag_names": [t.name for t in chosen],
-        "rule": rule if chosen else "no tags returned",
+        "fit": fit,
+        "fit_note": NEAREST_NOTE if fit == "nearest" else None,
+        "rule": prefix + (rule if chosen else "no tags returned"),
     }
 
 
@@ -138,12 +198,14 @@ async def resolve_side(
 
     side["status"] = "resolved"
     tags = list(await rec.insights_tags([entity.entity_id], take=TAGS_TAKE))
-    uni = [t for t in tags if is_universe_tag(t)][:UNIVERSE_TOP]
+    genre = [t for t in tags if is_brand_genre(t)]
+    uni = (genre or [t for t in tags if is_universe_tag(t)])[:UNIVERSE_TOP]
     if uni:
+        kind = "genre:brand" if genre else "category/genre"
         side["universe"] = {
             "tag_ids": [t.tag_id for t in uni],
             "tag_names": [t.name for t in uni],
-            "source": "brand's own category/genre tags (insights tags, top 5)",
+            "source": f"brand's own {kind} tags (insights tags, top 5)",
         }
     else:
         fb = await tags_for_phrase(rec, goods_phrase)
@@ -151,7 +213,7 @@ async def resolve_side(
             side["universe"] = {
                 "tag_ids": fb["chosen_tag_ids"],
                 "tag_names": fb["chosen_tag_names"],
-                "source": "fallback: goods phrase -> /v2/tags -> " + fb["rule"],
+                "source": "fallback: goods phrase -> " + fb["rule"],
                 "tag_options": fb["tag_options"],
             }
         else:

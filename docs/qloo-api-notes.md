@@ -1,6 +1,6 @@
-# Qloo API notes (pre-key, documentation-only)
+# Qloo API notes
 
-Status: compiled 2026-10-24 from official sources only, **before** we had an API key. Every item marked **UNVERIFIED** is a gap or contradiction in the docs and must be checked in Monday's live test (see the last section).
+Status: compiled 2026-10-24 from official sources only, **before** we had an API key. Every item marked **UNVERIFIED** is a gap or contradiction in the docs and was checked in the 2026-10-25 live spike where the next section says so; the rest stays open.
 
 Sources read:
 
@@ -10,6 +10,22 @@ Sources read:
 - `github.com/qloo/qloo-hackathon-kit`: README, docs/*, starters. The kit wraps the API in the `@qloo/qloo-harness` CLI/MCP, which returns its **own** envelope (`status`, `summary`, `results`, `result_count`, `error{code,retryable,recovery}`). That envelope is **not** the raw REST shape, so don't confuse the two.
 
 ---
+
+## Verified live on 2026-10-25 (hackathon key, ~75 small calls)
+
+Facts below supersede any UNVERIFIED note further down. Numbers and names of real results stay in the local recordings (`backend/data/live/`, gitignored); only shapes and behaviours are written here.
+
+- **`/search`** with `types=urn:entity:brand` works; ~200 ms per call. Entity keys on the wire: `disambiguation, entity_id, external, name, popularity, properties, subtype, tags, type`. Names differ from our queries in punctuation (apostrophes dropped, capitalisation), so matching must normalise. For small companies the top hit is unrelated (a different "X Products", a video game for a dog-toy maker), so **"first result" is not an acceptable fallback**: no normalised or close match means a miss. One query with no hits returned HTTP 200 and an empty `results`. `types=urn:entity:artist` works the same way (a band resolves first).
+- **Showcase coverage:** 15 of 20 showcase brands resolve exactly after normalisation. The five misses are all small accused users (dog-toy maker, micro roastery, test-prep publisher, art collective, parody-toy maker). The go/no-go threshold of 70% is met.
+- **`/v2/insights` `filter.type=urn:entity:brand`** with `signal.interests.entities=<brand>` and `filter.tags=<brand genre tag>` returns a ranked brand list within that category, `query.affinity` 0.9+ for the seed's own category and visibly lower (0.5 to 0.8) for an unrelated category seeded by the same brand. Entity `query` keys: `affinity, explainability, measurements`. Ranks are stable between `take=20` and `take=50`. A small category can have only ~11 brands with data.
+- **`/v2/insights` `filter.type=urn:tag`** without a tag-type filter is noise (hotel ratings, credit cards, place attributes). With **`filter.tag.types=urn:tag:genre:brand`** it returns a clean category list for the brand (its own family, siblings, sub-genres) with `query.affinity`. Use this for the universe.
+- **Brand-genre taxonomy:** ~177 nodes under `urn:tag:genre:brand`, 27 top families (academic, attraction, automotive, cultural_arts, dining, electronics, energy, entertainment, fashion, financial_services, food_and_beverage, games, government, health_and_beauty, healthcare, household, industrials, mobile_app, ngo, professional_services, retail, software, sports_organization, telecom, travel, website, wine_and_spirits), depth 1 to 4. The docs spelling `food_and_beverage` is the real one. **There is no pet-supplies or toy node**; the nearest for a dog-toy maker is `food_and_beverage:pet_food`, which the memo must label as an approximate proxy.
+- **`/v2/tags`** returns nothing without `filter.query`. `filter.query` matches on the tag name (prefix/substring: "whisk" finds Whiskey). Querying one letter at a time with `filter.tag.types=urn:tag:genre:brand&take=50` returns fewer than 50 per letter, so 26 calls harvest the whole brand taxonomy. Free-text goods phrases mostly return 0 or place tags ("dog toy" gives dog parks and toy stores unless type-filtered, then 0). Tag objects on this endpoint use `id` and `type`; on insights `tag_id` and `type`/`tag_type`.
+- **Heatmap** `filter.type=urn:heatmap` with `filter.location.query=United States` is accepted and returns 5,000 to 6,600 cells (4-character geohashes) for the US. Points: `latitude, longitude, geohash, affinity, affinity_rank, popularity`. Structure is clearly regional: a Tennessee whiskey peaks in Kentucky/Tennessee, a California burger chain in Los Angeles, a Texas chain in south Texas.
+- **Demographics** `filter.type=urn:demographics`: `{"age": {six buckets}, "gender": {"male","female"}}`, values roughly -1..1. Brands differ visibly (a whiskey skews male and 55+, a sports brand male and young, a handbag brand female and young).
+- **`/v2/analysis/compare`**: `results` has `tags` (each with `tag_id, name, type, query.score, query["a.signal.interests.entities"], ...`), `a` and `b` (tag lists per side) and `matchEntities`. For a thin brand `b` and `tags` are empty while `a` still has ~78 entries, so empty `tags` means insufficient data, not an error. Two mass brands give ~44 scored tags.
+- **Caching:** repeat calls are served from the local sqlite cache (`cache_hit=True`), so the back-test and showcase precompute cost one call per distinct request.
+
 
 ## 0. Global facts
 

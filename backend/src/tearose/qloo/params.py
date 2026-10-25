@@ -6,10 +6,11 @@ QlooQuery stored in a memo is identical regardless of mode.
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from typing import Any
 
 
-def _csv(xs: list[str] | None) -> str | None:
+def _csv(xs: Sequence[str] | None) -> str | None:
     return ",".join(xs) if xs else None
 
 
@@ -45,9 +46,18 @@ def insights_entities_params(
     )
 
 
-def insights_tags_params(seed_entity_ids: list[str], take: int) -> dict[str, Any]:
+def insights_tags_params(
+    seed_entity_ids: list[str], take: int, tag_types: Sequence[str] | None = None
+) -> dict[str, Any]:
+    """Unrestricted taste tags are mostly noise; `filter.tag.types=urn:tag:genre:brand` turns
+    them into a clean category list (live spike)."""
     return _clean(
-        {"filter.type": "urn:tag", "signal.interests.entities": _csv(seed_entity_ids), "take": take}
+        {
+            "filter.type": "urn:tag",
+            "filter.tag.types": _csv(tag_types),
+            "signal.interests.entities": _csv(seed_entity_ids),
+            "take": take,
+        }
     )
 
 
@@ -71,7 +81,7 @@ def heatmap_params(
     )
 
 
-def tags_search_params(query: str, tag_types: list[str] | None, take: int) -> dict[str, Any]:
+def tags_search_params(query: str, tag_types: Sequence[str] | None, take: int) -> dict[str, Any]:
     return _clean({"filter.query": query, "filter.tag.types": _csv(tag_types), "take": take})
 
 

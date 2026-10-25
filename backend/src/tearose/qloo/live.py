@@ -6,6 +6,7 @@ from __future__ import annotations
 import asyncio
 import json
 import time
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
@@ -20,7 +21,7 @@ from tenacity import (
 from tearose.config import Settings
 from tearose.qloo import params as P
 from tearose.qloo.cache import ResponseCache, cache_key
-from tearose.qloo.client import BRAND, INSIGHTS_MAX_TAKE
+from tearose.qloo.client import BRAND, DEFAULT_INSIGHTS_TAG_TYPES, INSIGHTS_MAX_TAKE
 from tearose.qloo.models import (
     CompareResult,
     Demographics,
@@ -166,9 +167,14 @@ class LiveClient:
         return ents, q
 
     async def insights_tags(
-        self, seed_entity_ids: list[str], *, take: int = INSIGHTS_MAX_TAKE
+        self,
+        seed_entity_ids: list[str],
+        *,
+        take: int = INSIGHTS_MAX_TAKE,
+        tag_types: Sequence[str] | None = DEFAULT_INSIGHTS_TAG_TYPES,
     ) -> tuple[list[Tag], QlooQuery]:
-        body, q = await self._get("/v2/insights", P.insights_tags_params(seed_entity_ids, take))
+        params = P.insights_tags_params(seed_entity_ids, take, tag_types)
+        body, q = await self._get("/v2/insights", params)
         tags = parse_tags(body)
         q.result_count = len(tags)
         return tags, q
@@ -194,7 +200,7 @@ class LiveClient:
         return pts, q
 
     async def tags_search(
-        self, query: str, *, tag_types: list[str] | None = None, take: int = 20
+        self, query: str, *, tag_types: Sequence[str] | None = None, take: int = 20
     ) -> tuple[list[Tag], QlooQuery]:
         body, q = await self._get("/v2/tags", P.tags_search_params(query, tag_types, take))
         tags = parse_tags(body)

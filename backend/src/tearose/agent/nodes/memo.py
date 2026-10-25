@@ -70,6 +70,28 @@ def _code_section(sid: str, findings: list[FactorFinding], limitations: list[str
     return "\n".join(f"- {x}" for x in limitations)
 
 
+def proxy_limitations(state: dict[str, Any]) -> list[str]:
+    """Code-written: how well a proxied side's category matches its goods."""
+    res = state.get("resolution")
+    out: list[str] = []
+    for proxy in (getattr(res, "senior_proxy", None), getattr(res, "junior_proxy", None)):
+        if proxy is None or proxy.fit not in ("nearest", "partial"):
+            continue
+        names = ", ".join(
+            str(o.get("name")) for o in proxy.tag_options if o.get("id") in proxy.chosen_tag_ids
+        )
+        what = (
+            "nearest category, no exact match in Qloo's brand taxonomy"
+            if proxy.fit == "nearest"
+            else "a related or broader category, not an exact match"
+        )
+        out.append(
+            f"The {proxy.side}'s goods ({proxy.goods_phrase!r}) are represented by "
+            f"{names or 'proxy categories'}: {what}."
+        )
+    return out
+
+
 def dedupe(xs: list[str]) -> list[str]:
     seen: set[str] = set()
     return [x for x in xs if x.strip() and not (x.strip() in seen or seen.add(x.strip()))]
@@ -79,7 +101,9 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     ev = NodeEvents(ctx.emit, "memo")
     findings: list[FactorFinding] = list(state.get("findings") or [])
     queries = list(state.get("queries") or [])
-    limitations = dedupe([*(state.get("case_limitations") or []), *FIXED_LIMITATIONS])
+    limitations = dedupe(
+        [*(state.get("case_limitations") or []), *proxy_limitations(state), *FIXED_LIMITATIONS]
+    )
     body = to_json(
         {
             "case": case_payload(state),

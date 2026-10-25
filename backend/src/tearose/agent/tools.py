@@ -30,12 +30,14 @@ from tearose.qloo.models import (
     QlooQuery,
     Tag,
 )
+from tearose.qloo.taxonomy import TaxonomyNode
 from tearose.schemas import TraceEvent
 
 Emit = Callable[[TraceEvent], Awaitable[Any]]
 Key = tuple[tuple[str, ...], tuple[str, ...]]  # (seed ids, filter tag ids)
 
 MAX_PAGES = 3
+GENRE_BRAND_PREFIX = "urn:tag:genre:brand:"
 NATIONAL = "United States"
 NATIONAL_FALLBACK = "USA"
 
@@ -79,6 +81,7 @@ class ToolContext:
         self.demos: dict[tuple[str, ...], Demographics] = {}
         self.heatmaps: dict[tuple[tuple[str, ...], str | None], list[HeatmapPoint]] = {}
         self.compares: dict[tuple[tuple[str, ...], tuple[str, ...]], CompareResult] = {}
+        self.taxonomy: list[TaxonomyNode] = []  # brand-genre tree, loaded by resolve
 
     # --- provenance ------------------------------------------------------------------
 
@@ -308,6 +311,9 @@ class ToolContext:
             d["disambiguation"] = e.disambiguation
         if with_tags and e.tags:
             d["tags"] = e.tags[:6]
+            cats = [self._tag_label(t) for t in e.tags if t.startswith(GENRE_BRAND_PREFIX)]
+            if cats:
+                d["categories"] = cats[:4]
         desc = (e.properties or {}).get("description")
         if with_tags and isinstance(desc, str):
             d["description"] = desc[:140]
@@ -315,6 +321,12 @@ class ToolContext:
         if with_tags and comp:
             d["competitive_set"] = comp[:8] if isinstance(comp, list) else comp
         return d
+
+    def _tag_label(self, tag_id: str) -> str:
+        t = self.tags.get(tag_id)
+        if t is not None and t.name:
+            return t.name
+        return tag_id.rsplit(":", 1)[-1].replace("_", " ")
 
     @staticmethod
     def _tag_brief(t: Tag) -> dict[str, Any]:
@@ -461,8 +473,12 @@ def make_tools(ctx: ToolContext, names: tuple[str, ...] = ALL_TOOLS) -> list[Bas
             {
                 "ref": ref,
                 "tags": len(cmp.tags),
-                "top_tags": [{"name": t.name, "score": _r(t.affinity)} for t in cmp.tags[:8]],
+                "top_tags": [
+                    {"name": t.name, "score": _r(t.score if t.score is not None else t.affinity)}
+                    for t in cmp.tags[:8]
+                ],
                 "entities": len(cmp.entities),
+                "insufficient_data": cmp.insufficient_data,
             }
         )
 

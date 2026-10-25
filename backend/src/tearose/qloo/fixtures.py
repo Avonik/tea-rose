@@ -12,6 +12,8 @@ Fixture file naming (see fixtures/qloo/README.md):
   insights_heatmap_<slug>.json
   tags_search_<slug>.json
   compare_<slugA>_vs_<slugB>.json
+  brand_taxonomy.json   all urn:tag:genre:brand nodes; serves /v2/tags calls that pass
+                        filter.tag.types=urn:tag:genre:brand (substring match on the name)
   empty_results.json
 """
 
@@ -19,11 +21,12 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
 from tearose.qloo import params as P
-from tearose.qloo.client import BRAND, INSIGHTS_MAX_TAKE
+from tearose.qloo.client import BRAND, DEFAULT_INSIGHTS_TAG_TYPES, GENRE_BRAND, INSIGHTS_MAX_TAKE
 from tearose.qloo.models import (
     CompareResult,
     Demographics,
@@ -40,6 +43,8 @@ from tearose.qloo.parse import (
     parse_search,
     parse_tags,
 )
+
+TAXONOMY_FIXTURE = "brand_taxonomy.json"
 
 
 def slugify(text: str) -> str:
@@ -141,9 +146,13 @@ class FixtureClient:
         return page_ents, self._query("/v2/insights", params, fx, len(page_ents))
 
     async def insights_tags(
-        self, seed_entity_ids: list[str], *, take: int = INSIGHTS_MAX_TAKE
+        self,
+        seed_entity_ids: list[str],
+        *,
+        take: int = INSIGHTS_MAX_TAKE,
+        tag_types: Sequence[str] | None = DEFAULT_INSIGHTS_TAG_TYPES,
     ) -> tuple[list[Tag], QlooQuery]:
-        params = P.insights_tags_params(seed_entity_ids, take)
+        params = P.insights_tags_params(seed_entity_ids, take, tag_types)
         body, fx = self._find(f"insights_tag_seed_{self._seed_slug(seed_entity_ids)}")
         tags = parse_tags(body)[:take]
         return tags, self._query("/v2/insights", params, fx, len(tags))
@@ -173,9 +182,16 @@ class FixtureClient:
         return pts, self._query("/v2/insights", params, fx, len(pts))
 
     async def tags_search(
-        self, query: str, *, tag_types: list[str] | None = None, take: int = 20
+        self, query: str, *, tag_types: Sequence[str] | None = None, take: int = 20
     ) -> tuple[list[Tag], QlooQuery]:
         params = P.tags_search_params(query, tag_types, take)
+        if tag_types and GENRE_BRAND in tag_types and (self._dir / TAXONOMY_FIXTURE).exists():
+            # Like the live API: a brand-genre lookup matches the query against node NAMES.
+            body = self._load(self._dir / TAXONOMY_FIXTURE)
+            needle = query.strip().casefold()
+            tags = [t for t in parse_tags(body) if needle and needle in t.name.casefold()]
+            tags = [t.model_copy(update={"rank": i + 1}) for i, t in enumerate(tags[:take])]
+            return tags, self._query("/v2/tags", params, TAXONOMY_FIXTURE, len(tags))
         body, fx = self._find(f"tags_search_{slugify(query)}")
         tags = parse_tags(body)[:take]
         return tags, self._query("/v2/tags", params, fx, len(tags))

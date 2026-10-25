@@ -71,13 +71,19 @@ class ResolvedBrand(BaseModel):
 
 
 class ProxyResolution(BaseModel):
-    """Used when a party's brand is not in Qloo. The goods phrase goes to /v2/tags verbatim;
-    the agent may only pick among the returned tags, and every option is recorded."""
+    """Used when a party's brand is not in Qloo. The goods phrase is mapped onto Qloo's brand
+    taxonomy (urn:tag:genre:brand); the agent may only pick taxonomy nodes (or, as a last
+    resort, tags a free-text /v2/tags lookup returned), and every option is recorded.
+
+    `fit` says how well the chosen category matches the goods: "exact", "partial", or
+    "nearest" (no exact match in Qloo's brand taxonomy; the category is an approximation)."""
 
     side: Side
     goods_phrase: str
-    tag_options: list[dict[str, Any]]  # the raw menu returned by /v2/tags (id, name, type)
+    tag_options: list[dict[str, Any]]  # menu shown/considered (id, name, type|path, fit)
     chosen_tag_ids: list[str]
+    fit: Literal["exact", "partial", "nearest"] | None = None
+    fit_note: str | None = None  # e.g. "nearest category, no exact match in Qloo's ..."
     comparator_brand_ids: list[str] = Field(default_factory=list)  # category-leading brands
     comparator_brand_names: list[str] = Field(default_factory=list)
     rationale: str

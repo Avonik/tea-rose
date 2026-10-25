@@ -115,13 +115,28 @@ def parse_tag(item: dict[str, Any], rank: int | None = None) -> Tag:
     # Prefer the specific subtype over the generic "urn:tag" type.
     specific_type = ttype if ttype and ttype != "urn:tag" else None
     tag_type = subtype or specific_type or (types[0] if types else ttype)
+    score = _float(q.get("score"))
     return Tag(
         tag_id=str(_first(item, "tag_id", "id")),
         name=str(_first(item, "name", default="")),
         tag_type=tag_type,
         affinity=_norm_affinity(_first(q, "affinity", "score", default=item.get("affinity"))),
         rank=rank,
+        score=score,
+        count=_int(q.get("count")),
     )
+
+
+def _float(value: Any) -> float | None:
+    try:
+        return None if value is None else float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _int(value: Any) -> int | None:
+    f = _float(value)
+    return None if f is None else int(f)
 
 
 def parse_tags(raw: dict[str, Any]) -> list[Tag]:
@@ -174,11 +189,21 @@ def parse_demographics(raw: dict[str, Any]) -> Demographics:
     return Demographics(age=age, gender=gender)
 
 
+def _tag_list(items: Any) -> list[Tag]:
+    if not isinstance(items, list):
+        return []
+    return [parse_tag(t, i + 1) for i, t in enumerate(items) if isinstance(t, dict)]
+
+
 def parse_compare(raw: dict[str, Any]) -> CompareResult:
-    """Documented shape: results.tags[{tag_id, name, subtype, query{score}}] — the endpoint
-    returns TAGS that characterize how the two groups differ. Entities are parsed too in case
-    the live API adds them; today that list is expected to be empty."""
+    """Live shape (spike): results = {tags, a, b, matchEntities}. `tags` are the shared tags,
+    each {tag_id, name, type, subtype, query{score, "a.signal.interests.entities": [...],
+    "b.signal.interests.entities": [...]}}; `a` / `b` are each group's own tags with
+    query.count (a string); `matchEntities` a list. A thin brand gives empty `b` and `tags`.
+    Entities are parsed too (older documented variant); normally that list is empty."""
     res = _results(raw)
+    if not isinstance(res.get("entities", []), list):
+        res = {**res, "entities": []}
     ents: list[CompareEntity] = []
     for it in _first(res, "entities", default=[]) or []:
         if not isinstance(it, dict):
@@ -200,5 +225,11 @@ def parse_compare(raw: dict[str, Any]) -> CompareResult:
                 delta=float(delta) if delta is not None else None,
             )
         )
-    tags = [parse_tag(t, i + 1) for i, t in enumerate(_first(res, "tags", default=[]) or [])]
-    return CompareResult(entities=ents, tags=tags)
+    match = [m for m in (res.get("matchEntities") or []) if isinstance(m, dict)]
+    return CompareResult(
+        entities=ents,
+        tags=_tag_list(res.get("tags")),
+        a_tags=_tag_list(res.get("a")),
+        b_tags=_tag_list(res.get("b")),
+        match_entities=match,
+    )
