@@ -30,7 +30,8 @@ For EACH side (senior and junior):
      empty, and put the chosen menu ids in `proxy_chosen_tag_ids`.
    - Propose 3-5 category-leading brands in that category (if a resolved brand lists a
      `competitive_set`, prefer those names), `qloo_search` EACH by name, and keep only those that
-     resolve and carry at least one chosen tag. These comparators stand in for the missing brand.
+     resolve and carry at least one chosen tag (or a narrower node under it). These comparators
+     stand in for the missing brand; if you keep fewer than 2, code tops them up to 3.
 4. UNIVERSE: the comparison set for the side's category, as tag ids. For a resolved brand use
    its own brand-category tags (its search result `categories`/`tags`, `qloo_insights_tags`, or
    taxonomy nodes); for a proxied side use the chosen proxy nodes. Use only tag ids that appeared

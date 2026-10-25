@@ -100,6 +100,10 @@ writes it; it never names an outcome. Runs stored before the field existed load 
   memo limitations then say "nearest category, no exact match in Qloo's brand taxonomy"). The
   agent sees the whole tree plus code suggestions and returns `proxy_taxonomy_choices`; code
   validates ids and falls back to the mapper, then to free-text `/v2/tags`.
+- **Comparators.** The model's searched brands count if they carry a chosen tag or a descendant
+  of it. With fewer than 2 kept, code fills up to 3 by the back-test's rule
+  (`scoring/comparators.py`: brands seeded by the other side, filtered to the proxy tags, top 3
+  by popularity); `ProxyResolution.comparator_source` records `agent` / `rule` / `mixed`.
 - **Universe of a resolved brand** (`scoring/universe.py`, shared by the agent's `resolve` node
   and the back-test). The brand's OWN `urn:tag:genre:brand` tags from its `/search` result (what
   the brand IS: a sneaker brand carries fashion, fashion:footwear, fashion:footwear:sneakers),

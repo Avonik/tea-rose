@@ -10,7 +10,10 @@ The model searches, disambiguates and proposes; code enforces the rules:
   validates the ids and, if none is valid, maps the goods phrase itself (map_goods_phrase). Only
   when the taxonomy is unavailable or nothing maps does the old free-text path run: the goods
   phrase VERBATIM to /v2/tags, one shorter phrase if empty, tags chosen from the returned menu;
-- comparators must resolve via /search and share a chosen tag (when Qloo returns tags);
+- comparators must resolve via /search and carry a chosen tag or a descendant of it (when Qloo
+  returns tags); with fewer than 2 kept, code fills up to 3 by the back-test's rule
+  (scoring/comparators.py: brands seeded by the other side, filtered to the proxy tags, top 3 by
+  popularity), so the product never depends on the model's comparator search;
 - universes use only tag ids that some Qloo response actually returned. A resolved brand's
   universe is its OWN category (scoring.universe.own_category_tags on the brand-genre tags of
   its /search result, source "entity own tags"); only a brand without such tags falls back to
@@ -56,6 +59,7 @@ from tearose.schemas import (
     Side,
     Universe,
 )
+from tearose.scoring.comparators import COMPARATOR_COUNT, COMPARATOR_RULE, rule_comparators
 from tearose.scoring.universe import (
     INSIGHTS_FALLBACK_SOURCE,
     OWN_TAGS_SOURCE,
@@ -67,6 +71,7 @@ from tearose.scoring.universe import (
 
 MAX_CALLS = 20
 MAX_COMPARATORS = 5
+MIN_AGENT_COMPARATORS = 2  # fewer kept -> code fills up to COMPARATOR_COUNT by the rule
 MAX_PROXY_NODES = 3
 LOW_NAME_SIMILARITY = 0.6
 UNIVERSE_NOMINAL = MAX_PAGES * INSIGHTS_MAX_TAKE  # ranks considered per direction
@@ -260,6 +265,11 @@ async def _free_text_choice(
     return options, chosen, fit, f"free-text tag searches: {tried}" if tried else "free-text"
 
 
+def _carries_tag(e: Entity, chosen: list[str]) -> bool:
+    """A chosen tag or a descendant of it (same prefix) among the entity's own tags."""
+    return any(t == c or t.startswith(c + ":") for t in e.tags for c in chosen)
+
+
 async def _proxy(
     side: Side, party: Party, d: SideDecision, tc: ToolContext, ev: NodeEvents
 ) -> ProxyResolution:
@@ -296,7 +306,7 @@ async def _proxy(
         e = tc.entities.get(cid)
         if e is None:
             notes.append(f"dropped {cid}: not returned by any brand search")
-        elif e.tags and not set(e.tags) & set(chosen):
+        elif e.tags and not _carries_tag(e, chosen):
             notes.append(f"dropped {e.name}: shares no chosen category tag")
         else:
             if not e.tags:
@@ -307,8 +317,11 @@ async def _proxy(
     for n in notes:
         if n.startswith("dropped"):
             await ev.warning(f"{side}: comparator {n}")
-    if not kept:
-        await ev.warning(f"{side}: no usable comparator brands; this side cannot seed queries")
+    if len(kept) < MIN_AGENT_COMPARATORS:
+        await ev.note(
+            f"{side}: {len(kept)} usable comparator(s) from the model; code rule fills up to "
+            f"{COMPARATOR_COUNT}"
+        )
 
     fit_note = NEAREST_NOTE if fit == "nearest" else None
     names = ", ".join(str(options[t]["name"]) for t in chosen if t in options)
@@ -331,6 +344,7 @@ async def _proxy(
         fit_note=fit_note,
         comparator_brand_ids=[e.entity_id for e in kept],
         comparator_brand_names=[e.name for e in kept],
+        comparator_source="agent" if kept else None,
         rationale=rationale or "Proxy path: brand not found in Qloo.",
     )
     await ev.decision(
@@ -420,6 +434,68 @@ async def _universe(
         source=source,
     )
     return Universe(side=side, description=desc, tag_ids=tag_ids, size=UNIVERSE_NOMINAL)
+
+
+async def _fill_comparators(
+    side: Side,
+    proxy: ProxyResolution,
+    other: ResolvedBrand,
+    other_proxy: ProxyResolution | None,
+    tc: ToolContext,
+    ev: NodeEvents,
+) -> ProxyResolution:
+    """Fewer than 2 comparators kept: fill up to 3 by the code rule (scoring/comparators.py),
+    seeded by the other side's entity (or its comparators when it is proxied too)."""
+    have = len(proxy.comparator_brand_ids)
+    if have >= MIN_AGENT_COMPARATORS or not proxy.chosen_tag_ids:
+        if not have:
+            await ev.warning(f"{side}: no usable comparator brands; this side cannot seed queries")
+        return proxy
+    if other.entity_id:
+        seeds = [other.entity_id]
+    else:
+        seeds = list(other_proxy.comparator_brand_ids) if other_proxy else []
+
+    async def fetch(s: list[str], tags: list[str]) -> list[Entity]:
+        return (await tc.insights_entities(s, tags, 1))[0]
+
+    try:
+        picked, notes = await rule_comparators(
+            fetch,
+            seeds,
+            list(proxy.chosen_tag_ids),
+            exclude=proxy.comparator_brand_ids,
+            n=COMPARATOR_COUNT - have,
+        )
+    except Exception as exc:  # noqa: BLE001 — the side keeps what it has
+        picked, notes = [], [f"comparators: rule query failed ({exc!r})."]
+    if not picked:
+        detail = " ".join(notes) or "the rule query returned no brands"
+        if not have:
+            await ev.warning(
+                f"{side}: no usable comparator brands; this side cannot seed queries", detail
+            )
+        else:
+            await ev.note(f"{side}: code rule found no further comparators", detail)
+        return proxy
+    names = ", ".join(e.name for e in picked)
+    await ev.note(
+        f"{side}: comparators filled by code rule: {names}",
+        f"{COMPARATOR_RULE}. {' '.join(notes)}".strip(),
+        comparators=[e.name for e in picked],
+        comparator_ids=[e.entity_id for e in picked],
+        popularity=[e.popularity for e in picked],
+        seeds=seeds,
+        filter_tags=list(proxy.chosen_tag_ids),
+    )
+    return proxy.model_copy(
+        update={
+            "comparator_brand_ids": [*proxy.comparator_brand_ids, *(e.entity_id for e in picked)],
+            "comparator_brand_names": [*proxy.comparator_brand_names, *(e.name for e in picked)],
+            "comparator_source": "mixed" if have else "rule",
+            "rationale": f"{proxy.rationale} Comparators filled by code rule: {names}.",
+        }
+    )
 
 
 def _name_check(party: Party, entity: Entity) -> tuple[str, float]:
@@ -585,6 +661,10 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     j_brand, j_proxy, j_uni = await _finalize_side(
         "junior", ex.junior, decision.junior, tc, ev, avoid_entity_id=s_brand.entity_id
     )
+    if s_proxy is not None:
+        s_proxy = await _fill_comparators("senior", s_proxy, j_brand, j_proxy, tc, ev)
+    if j_proxy is not None:
+        j_proxy = await _fill_comparators("junior", j_proxy, s_brand, s_proxy, tc, ev)
     resolution = Resolution(
         senior=s_brand,
         junior=j_brand,

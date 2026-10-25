@@ -38,21 +38,18 @@ from tearose.eval.backtest.common import DEFAULT_ENTITY_TYPE, Recorder, entity_u
 from tearose.qloo.client import INSIGHTS_MAX_TAKE
 from tearose.qloo.models import Demographics, Entity
 from tearose.schemas import ProxyResolution, Resolution, ResolvedBrand
+from tearose.scoring.comparators import (
+    COMPARATOR_COUNT,
+    COMPARATOR_RULE,
+    broadest_tag,
+    rule_comparators,
+)
 from tearose.scoring.raw import DirectionalPeers, RawData
 from tearose.scoring.score import fame_evidence, overlap_evidence
 
 MAX_PAGES = 3
-COMPARATORS = 3
+COMPARATORS = COMPARATOR_COUNT  # rule and helpers live in scoring/comparators.py
 HEATMAP_LOCATION = "United States"
-COMPARATOR_RULE = (
-    "top 3 by popularity (ties by rank) among brands seeded by the other side's entity and "
-    "filtered to the proxy tags; not by rank, to avoid a built-in senior->junior overlap"
-)
-
-
-def broadest_tag(tag_ids: list[str]) -> str:
-    """Fewest path segments wins (same rule as the agent's ToolContext)."""
-    return min(tag_ids, key=lambda t: (t.count(":"), len(t)))
 
 
 async def fetch_direction(
@@ -115,19 +112,12 @@ async def fetch_direction(
 async def comparators_for(
     rec: Recorder, other_entity_id: str, proxy_tags: list[str]
 ) -> tuple[list[Entity], list[str]]:
-    batch: list[Entity] = list(await rec.insights_entities([other_entity_id], proxy_tags, 1))
-    notes: list[str] = []
-    if not batch and len(proxy_tags) > 1:
-        broad = broadest_tag(proxy_tags)
-        notes.append(f"comparators: empty with {len(proxy_tags)} tags; retried with {broad}.")
-        batch = list(await rec.insights_entities([other_entity_id], [broad], 1))
-    pool = [
-        (e.popularity if e.popularity is not None else -1.0, i, e)
-        for i, e in enumerate(batch)
-        if e.entity_id != other_entity_id
-    ]
-    pool.sort(key=lambda t: (-t[0], t[1]))
-    return [e for _, _, e in pool[:COMPARATORS]], notes
+    """The shared code rule (scoring.comparators), seeded by the other side's entity."""
+
+    async def fetch(seeds: list[str], tags: list[str]) -> list[Entity]:
+        return list(await rec.insights_entities(seeds, tags, 1))
+
+    return await rule_comparators(fetch, [other_entity_id], proxy_tags)
 
 
 async def _add_fame_inputs(
@@ -175,8 +165,9 @@ def _uni_tags(s: dict[str, Any]) -> list[str]:
 
 
 AGENT_COMPARATOR_RULE = (
-    "the comparators the product's resolve node chose and validated (agent resolver), as the "
-    "product's fetch node uses them"
+    "the comparators the product's resolve node chose and validated (agent resolver; with "
+    "fewer than 2 kept the node fills up to 3 by the same code rule), as the product's fetch "
+    "node uses them"
 )
 
 
@@ -253,7 +244,9 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         if s["status"] == "resolved":
             seeds[side] = [s["entity_id"]]
             continue
-        comps, source = agent_comparators(case, s), "agent"
+        comps = agent_comparators(case, s)
+        # the node records "agent", "rule" (its own fill by the same code rule) or "mixed"
+        source = (s.get("proxy") or {}).get("comparator_source") or "agent"
         rule_text = AGENT_COMPARATOR_RULE
         if not comps:
             comps, cnotes = await comparators_for(rec, other["entity_id"], _uni_tags(s))

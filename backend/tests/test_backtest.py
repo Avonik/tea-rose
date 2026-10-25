@@ -578,7 +578,10 @@ async def test_resolve_agent_records_picks_and_continues_after_failure() -> None
     assert sen["rule_pick"]["entity_id"] == JD_ID and sen["agrees_with_rule"] is True
     assert (jun["status"], jun["entity_id"]) == ("proxy", None)
     assert jun["proxy"]["chosen_tag_ids"] == [PET_FOOD] and jun["proxy"]["fit"] == "nearest"
-    assert jun["proxy"]["comparator_entity_ids"] == []
+    # the model kept no comparators: the node filled 3 by the shared code rule
+    assert len(jun["proxy"]["comparator_entity_ids"]) == 3
+    assert jun["proxy"]["comparator_source"] == "rule"
+    assert None not in jun["proxy"]["comparator_popularity"]
     assert jun["universe"]["tag_ids"] == [PET_FOOD]
     assert jd["tool_calls"] == 2 and jd["llm_calls"] >= 2  # scripted structured calls bypass
     assert jd["model"] == "scripted-test" and jd["error"] is None and jd["resolver"] == "agent"
@@ -617,8 +620,10 @@ async def test_resolve_agent_records_picks_and_continues_after_failure() -> None
     assert scores["resolver"] == "agent" and scores["model"] == "scripted-test"
     s1 = scores["cases"][0]
     assert s1["status"] == "scored" and s1["proxy_sides"] == ["junior"]
-    assert s1["comparator_source"] == {"junior": "rule"}  # the agent kept no comparators
-    assert any("agent kept no comparators" in n for n in s1["notes"])
+    # the agent kept no comparators: the node filled them by the code rule, score_step reuses them
+    assert s1["comparator_source"] == {"junior": "rule"}
+    assert s1["comparators"]["junior"]["ids"] == jun["proxy"]["comparator_entity_ids"]
+    assert not any("agent kept no comparators" in n for n in s1["notes"])
     assert s1["pick_vs_rule"]["senior"] == {"agent": "Jack Daniel's", "rule": "Jack Daniel's",
                                             "differs": False}  # fmt: skip
     assert scores["cases"][2]["resolver_error"]
@@ -691,14 +696,17 @@ async def test_score_uses_agent_comparators_when_agent_resolved() -> None:
     doc = await resolve.run(rec, [_agent_rows()[0]], "fixture", "sha", resolver="agent",
                             model_factory=lambda strong=False: model)  # fmt: skip
     proxy = doc["cases"][0]["junior"]["proxy"]
-    assert proxy["comparator_entity_ids"] == [barkbox]
-    assert proxy["comparator_popularity"] == [pytest.approx(0.9312)]
+    # one agent comparator; the node topped it up to 3 by the code rule
+    assert proxy["comparator_entity_ids"][0] == barkbox
+    assert len(proxy["comparator_entity_ids"]) == 3 and proxy["comparator_source"] == "mixed"
+    assert proxy["comparator_popularity"][0] == pytest.approx(0.9312)
 
     scores = await score_step.run(rec, doc)
     s = scores["cases"][0]
-    assert s["comparator_source"] == {"junior": "agent"}
+    assert s["comparator_source"] == {"junior": "mixed"}
     comps = s["comparators"]["junior"]
-    assert (comps["source"], comps["ids"], comps["names"]) == ("agent", [barkbox], ["BarkBox"])
+    assert comps["source"] == "mixed" and comps["ids"] == proxy["comparator_entity_ids"]
+    assert comps["names"][0] == "BarkBox"
     assert not any("code rule used" in n for n in s["notes"])
     assert barkbox in {p["filter.results.entities"] for p in _params(s, "target_affinity")}
     assert "agent resolver" in scores["comparator_rule"]

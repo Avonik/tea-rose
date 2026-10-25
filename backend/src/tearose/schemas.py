@@ -86,6 +86,9 @@ class ProxyResolution(BaseModel):
     fit_note: str | None = None  # e.g. "nearest category, no exact match in Qloo's ..."
     comparator_brand_ids: list[str] = Field(default_factory=list)  # category-leading brands
     comparator_brand_names: list[str] = Field(default_factory=list)
+    # who picked the comparators: the model ("agent"), the code rule in scoring/comparators.py
+    # ("rule", the model kept fewer than 2), or both ("mixed")
+    comparator_source: Literal["agent", "rule", "mixed"] | None = None
     rationale: str
 
 

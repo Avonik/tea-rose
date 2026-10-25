@@ -21,7 +21,9 @@ Per mapping row:
   aborts the run: the node's code fallbacks apply, or the case is recorded as unresolved.
 The same-entity guard (both sides on one entity -> junior miss) is the node's own guard.
 Scoring arithmetic stays in code (score_step); a proxied side is seeded with the agent's
-comparators, as the product's fetch node does (the code comparator rule only when it kept none).
+comparators, as the product's fetch node does (the node itself fills them by the shared code
+rule, scoring/comparators.py, when the model kept fewer than 2; score_step applies the rule only
+when the record still has none).
 """
 
 from __future__ import annotations
@@ -134,6 +136,18 @@ def _tag_names(tc: ToolContext, ids: list[str], extra: list[Tag] | None = None) 
     return out
 
 
+def _popularity(tc: ToolContext, entity_id: str) -> float | None:
+    """From the /search store, else from any insights page (rule-filled comparators)."""
+    if entity_id in tc.entities:
+        return tc.entities[entity_id].popularity
+    for pages in tc.pages.values():
+        for ents in pages.values():
+            for e in ents:
+                if e.entity_id == entity_id:
+                    return e.popularity
+    return None
+
+
 def _universe_event(events: list[TraceEvent], side: str) -> TraceEvent | None:
     hits = [
         e
@@ -236,13 +250,11 @@ def _side_record(
             "fit_note": proxy.fit_note,
             "comparator_entity_ids": proxy.comparator_brand_ids,
             "comparator_entity_names": proxy.comparator_brand_names,
-            "comparator_popularity": [
-                tc.entities[c].popularity if c in tc.entities else None
-                for c in proxy.comparator_brand_ids
-            ],
+            "comparator_popularity": [_popularity(tc, c) for c in proxy.comparator_brand_ids],
+            "comparator_source": proxy.comparator_source,
             "rationale": proxy.rationale,
-            "rule": "agent (resolve node); score_step seeds with these comparators, the code "
-            "rule only when the agent kept none",
+            "rule": "agent (resolve node; with fewer than 2 kept, the node fills up to 3 by the "
+            "shared code rule); score_step seeds with these comparators",
         }
         if proxy.chosen_tag_ids:
             rec["status"] = "proxy"

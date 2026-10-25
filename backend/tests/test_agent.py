@@ -417,7 +417,9 @@ async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> Non
     proxy = out["resolution"].junior_proxy
     assert proxy.chosen_tag_ids == [TAX_PET_FOOD]
     assert proxy.fit == "nearest" and "no exact match" in (proxy.fit_note or "")
-    assert proxy.comparator_brand_ids == ["E-CH"]  # BarkBox carries no pet_food tag
+    # BarkBox carries no pet_food tag; one kept comparator is topped up to 3 by the code rule
+    assert proxy.comparator_brand_ids[0] == "E-CH" and len(proxy.comparator_brand_ids) == 3
+    assert proxy.comparator_source == "mixed"
     assert ctx.tools.tag_searches == []  # no free-text /v2/tags needed
     prompt = model.prompts_for("resolve")[0]
     assert "BRAND TAXONOMY (67 nodes" in prompt
@@ -432,6 +434,86 @@ async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> Non
 
     lims = proxy_limitations({"resolution": out["resolution"]})
     assert lims and "nearest category, no exact match" in lims[0] and "Pet Food" in lims[0]
+
+
+def _rule_fixture_popularity(d: Path) -> None:
+    """Two page-1 brands (ranks 11 and 4) become the most popular in the pet universe; BarkBox
+    and KONG (page 2, beyond the rule's single page) would be even more popular."""
+    p = d / "insights_brand_seed_jack_daniels_filter_pet_tags.json"
+    body = json.loads(p.read_text(encoding="utf-8"))
+    for e in body["results"]["entities"]:
+        e["popularity"] = {"E-F10": 0.97, "E-F03": 0.96, BB: 0.99, KG: 0.99}.get(
+            e["entity_id"], 0.5
+        )
+    p.write_text(json.dumps(body), encoding="utf-8")
+
+
+async def test_resolve_fills_comparators_by_code_rule_when_model_keeps_none(
+    tmp_path: Path,
+) -> None:
+    """Live bug (Bad Spaniels): proxy category right, no comparator kept -> no overlap at all.
+    Code now fills up to 3 by the back-test rule and the overlap is computed."""
+    _rule_fixture_popularity(write_fixtures(tmp_path))
+    client = FixtureClient(tmp_path)
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["junior"]["comparator_entity_ids"] = []
+    model = ScriptedChatModel(
+        scripts={"resolve": list(RESOLVE_LOOP), "ResolveDecision": [decision], "fetch": ["done"]}
+    )
+    ctx, events = make_ctx(client, model)
+    res = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
+        "resolution"
+    ]
+    proxy = res.junior_proxy
+    # top 3 by popularity (ties by rank) among JD-seeded brands filtered to the proxy tag
+    assert proxy.comparator_brand_ids == ["E-F10", "E-F03", "E-F00"]
+    assert proxy.comparator_brand_names == ["Pet brand 10", "Pet brand 3", "Pet brand 0"]
+    assert proxy.comparator_source == "rule"
+    rule_calls = [
+        e.data["params"]
+        for e in events
+        if e.type == "tool_call" and e.data["tool"] == "qloo_insights_entities"
+    ]
+    assert rule_calls == [{"seed_entity_ids": [JD], "filter_tags": [DOG], "page": 1}]
+    assert any(
+        e.type == "note"
+        and "comparators filled by code rule: Pet brand 10, Pet brand 3, Pet brand 0" in e.title
+        for e in events
+    )
+    # fetch seeds/targets the filled comparators; overlap is computed, describe names them
+    out = await fetch.run(
+        {"resolution": res, "routing": RoutingDecision(analyses=["overlap"], rationale={})}, ctx
+    )
+    raw = out["raw"]
+    assert raw.junior_target_entity_ids == ["E-F10", "E-F03", "E-F00"]
+    ov = overlap_evidence(raw, res)
+    assert ov.senior_to_junior_rank is not None
+    assert ov.symmetric_percentile is not None
+    facts = " ".join(describe_evidence(Evidence(overlap=ov), res)["overlap"])
+    assert "Pet brand 10" in facts and "comparator brands" in facts
+
+
+async def test_resolve_keeps_model_comparators_when_it_supplies_three(tmp_path: Path) -> None:
+    write_fixtures(tmp_path)
+    chew = _ent("E-CB", "ChewBark", [f"{DOG}:chew_toys"])  # descendant of the chosen tag
+    (tmp_path / "search_brand_chewbark.json").write_text(
+        json.dumps({"results": [chew]}), encoding="utf-8"
+    )
+    loop = list(RESOLVE_LOOP)
+    loop.insert(-1, ai_tools(tool_call("qloo_search", query="ChewBark")))
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["junior"]["comparator_entity_ids"] = [BB, KG, "E-CB"]
+    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
+    ctx, events = make_ctx(FixtureClient(tmp_path), model)
+    proxy = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
+        "resolution"
+    ].junior_proxy
+    assert proxy.comparator_brand_ids == [BB, KG, "E-CB"]
+    assert proxy.comparator_source == "agent"
+    assert not any("filled by code rule" in e.title for e in events)
+    assert not any(
+        e.type == "tool_call" and e.data["tool"] == "qloo_insights_entities" for e in events
+    )
 
 
 async def test_resolve_universe_is_the_brands_own_category(client: FixtureClient) -> None:
@@ -774,7 +856,9 @@ async def test_smoke_run_on_shared_fixtures() -> None:
     await engine.run(handle, TEXT)
     r = handle.result
     assert r.status == "finished", r.error
-    assert r.resolution.junior_proxy.comparator_brand_names == ["BarkBox"]
+    jp = r.resolution.junior_proxy
+    assert jp.comparator_brand_names[0] == "BarkBox" and len(jp.comparator_brand_names) == 3
+    assert jp.comparator_source == "mixed"  # one from the model, two by the code rule
     assert r.evidence is not None and r.memo is not None
 
 
