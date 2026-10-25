@@ -499,7 +499,8 @@ def skew_description(d: Demographics | None) -> str:
     parts: list[str] = []
     if d.age and max(ages) - min(ages) >= BROAD_AGE_SPREAD:
         # Only buckets that over-index (> 0) count as a skew; the second is dropped when negative.
-        top2 = sorted((i for i in range(len(AGE_BUCKETS)) if ages[i] > 0), key=lambda i: (-ages[i], i))[:2]
+        positive = (i for i in range(len(AGE_BUCKETS)) if ages[i] > 0)
+        top2 = sorted(positive, key=lambda i: (-ages[i], i))[:2]
         if len(top2) == 1:
             parts.append(_fmt_range(*_AGE_RANGES[AGE_BUCKETS[top2[0]]]))
         elif len(top2) == 2:
