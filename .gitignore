@@ -53,3 +53,7 @@ backend/data/runs/
 # Pre-computed showcase results contain Qloo response data: generated on the server, never committed
 backend/data/showcase/*.json
 !backend/data/showcase/manifest.json
+
+# Back-test intermediate files hold Qloo response data; only the report under backend/eval/results/ is committed
+backend/eval/resolved.json
+backend/eval/scores.json

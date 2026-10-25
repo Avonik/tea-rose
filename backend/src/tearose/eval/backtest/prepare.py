@@ -372,7 +372,10 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
     },
     "kraft_foods_group_brands_llc_v_cracker_barrel_old_country_store_inc_2013": {
         "senior": ("Cracker Barrel Cheese", "Kraft's cheese brand; plain name hits the junior"),
-        "junior": ("Cracker Barrel Old Country Store", "the restaurant/retail chain"),
+        "junior": (
+            "Cracker Barrel",
+            "restaurant chain, Qloo name; long form missed 2026-10-25, pre-scoring",
+        ),
     },
     "fiji_water_co_v_fiji_mineral_water_usa_llc_2010": {
         "senior": ("Fiji Water", "brand name"),
@@ -414,7 +417,7 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
     },
     "adidas_america_inc_v_payless_shoesource_inc_2008": {
         "senior": ("adidas", "brand, not the stripe mark"),
-        "junior": ("Payless ShoeSource", "accused user's brand"),
+        "junior": ("Payless Shoes", "Qloo name; ShoeSource missed 2026-10-25, pre-scoring"),
     },
     "adidas_america_inc_v_skechers_usa_inc_2018": {
         "senior": ("adidas", "brand, not the trade dress"),
@@ -440,7 +443,10 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
         "junior": ("Pucker Vodka", "accused brand without the lips design"),
     },
     "fortune_dynamic_inc_v_victorias_secret_stores_brand_management_inc_2010": {
-        "junior": ("Victoria's Secret Pink", "accused user's line (PINK)"),
+        "junior": (
+            "Victoria's Secret",
+            "seller brand (PINK is its line); missed 2026-10-25, pre-scoring",
+        ),
     },
     "jack_wolfskin_ausrustung_fur_draussen_gmbh_v_new_millennium_sports_s_l_u_2015": {
         "senior": ("Kelme", "brand, not the paw-print design"),
@@ -448,6 +454,10 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
     },
     "kate_spade_llc_v_saturdays_surf_llc_2013": {
         "senior": ("Saturdays NYC", "trading name of SATURDAYS SURF NYC"),
+        "junior": (
+            "Kate Spade New York",
+            "seller brand (Saturday was its line); missed 2026-10-25, pre-scoring",
+        ),
     },
     "multi_time_machine_inc_v_amazon_com_inc_2015": {
         "junior": ("Amazon", "accused user; the junior use is search results"),
