@@ -1,11 +1,67 @@
 {
-  "status": "pending",
-  "note": "Labels are pre-registered in eval/cases_candidates.csv before any score is computed. Results land here after the back-test run.",
+  "status": "complete",
+  "note": "On 7 decided cases, Qloo's symmetric overlap percentile correlates with the courts' relatedness/purchaser findings at rho = 0.42 (95% CI 0.25 to 0.85) versus n/a for a same-category heuristic. With n = 7 < 15 this metric is underpowered; read it as anecdotal. Run 2026-10-25; labels and mapping pre-registered (mapping sha256 84ca89df9428).",
   "rows": [
-    { "n": "pending", "metric": "Spearman ρ: overlap score vs court's channels/purchasers finding", "value": "pending", "baseline": "Same-category heuristic: pending" },
-    { "n": "pending", "metric": "AUC: overlap score predicts \"favors plaintiff\"", "value": "pending", "baseline": "Popularity-only: pending" },
-    { "n": "pending", "metric": "Spearman ρ: overlap score vs court's relatedness finding", "value": "pending", "baseline": "Same-category heuristic: pending" },
-    { "n": "pending", "metric": "AUC: fame breadth predicts court's fame finding", "value": "pending", "baseline": "Popularity-only: pending" },
-    { "n": "pending", "metric": "Agreement: LLM-only baseline (contaminated; reported for reference)", "value": "pending", "baseline": "n/a" }
+    {
+      "n": 3,
+      "metric": "Spearman ρ: overlap score vs court's channels/purchasers finding",
+      "value": "0.50 (95% CI 0.50 to 1.00) · underpowered",
+      "ci": [
+        0.5,
+        1.0
+      ],
+      "baseline": "Same-category heuristic: n/a",
+      "baseline_value": null
+    },
+    {
+      "n": 7,
+      "metric": "AUC: overlap score predicts \"favors plaintiff\"",
+      "value": "0.83 (95% CI 0.62 to 1.00) · underpowered",
+      "ci": [
+        0.625,
+        1.0
+      ],
+      "baseline": "Popularity-only: 0.50; same-category: 0.50",
+      "baseline_value": 0.5
+    },
+    {
+      "n": 7,
+      "metric": "Spearman ρ: overlap score vs court's relatedness finding",
+      "value": "0.42 (95% CI 0.25 to 0.85) · underpowered",
+      "ci": [
+        0.255,
+        0.855
+      ],
+      "baseline": "Same-category heuristic: n/a",
+      "baseline_value": null
+    },
+    {
+      "n": 7,
+      "metric": "Spearman ρ: overlap score vs combined relatedness/purchaser finding (primary)",
+      "value": "0.42 (95% CI 0.25 to 0.85) · underpowered",
+      "ci": [
+        0.255,
+        0.855
+      ],
+      "baseline": "Same-category heuristic: n/a; popularity-only: 0.00",
+      "baseline_value": null
+    },
+    {
+      "n": 12,
+      "metric": "AUC: fame breadth predicts court's fame finding",
+      "value": "1.00 (95% CI 1.00 to 1.00) · underpowered",
+      "ci": [
+        1.0,
+        1.0
+      ],
+      "baseline": "Popularity-only: 0.64",
+      "baseline_value": 0.6363636363636364
+    },
+    {
+      "n": "pending",
+      "metric": "Agreement: LLM-only baseline (contaminated; reported for reference)",
+      "value": "not run (outside this Qloo-only harness)",
+      "baseline": "n/a"
+    }
   ]
 }
