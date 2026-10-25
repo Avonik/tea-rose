@@ -143,18 +143,39 @@ def _display(tag: Tag) -> Tag:
     return tag
 
 
+def fold_other(tag: Tag, by_id: dict[str, Tag] | None = None) -> Tag:
+    """A catch-all leaf ("...:whiskey:other") stands for its parent ("...:whiskey"): the
+    parent's tag from `by_id` when present, else a tag named after the parent segment.
+    A top-level "other" (no parent below urn:tag:genre:brand) and every other node: unchanged."""
+    segs = tag.tag_id[len(_GENRE_PREFIX) :].split(":") if genre_depth(tag.tag_id) >= 2 else []
+    if not segs or segs[-1] != "other":
+        return tag
+    parent_id = _GENRE_PREFIX + ":".join(segs[:-1])
+    if by_id and parent_id in by_id:
+        return by_id[parent_id]
+    return tag.model_copy(
+        update={"tag_id": parent_id, "name": segs[-2].replace("_", " ").capitalize()}
+    )
+
+
 def own_category_tags(tags: list[Tag], max_n: int = OWN_TAGS_MAX) -> list[Tag]:
     """The most specific brand-genre nodes among an entity's own tags.
 
-    Keep tags whose id is a urn:tag:genre:brand:* node; drop any node that is an ancestor of
-    another node in the set; prefer depth >= 2 (a lone top family such as "fashion" is used only
-    when nothing deeper exists); keep up to `max_n` in the response order. [] when the entity
-    carries no brand-genre tag (the caller then falls back to insights tags).
+    Keep tags whose id is a urn:tag:genre:brand:* node; replace a catch-all "other" leaf by its
+    parent (whiskey:other -> whiskey, so the universe is all whiskey brands, not the few
+    "other whiskey" ones); drop any node that is an ancestor of another node in the set; prefer
+    depth >= 2 (a lone top family such as "fashion" is used only when nothing deeper exists);
+    keep up to `max_n` in the response order. [] when the entity carries no brand-genre tag
+    (the caller then falls back to insights tags).
     """
+    by_id = {t.tag_id: t for t in tags if genre_depth(t.tag_id) >= 1}
     seen: set[str] = set()
     genre: list[Tag] = []
-    for t in tags:
-        if genre_depth(t.tag_id) >= 1 and t.tag_id not in seen:
+    for raw in tags:
+        if genre_depth(raw.tag_id) < 1:
+            continue
+        t = fold_other(raw, by_id)
+        if t.tag_id not in seen:
             seen.add(t.tag_id)
             genre.append(t)
     leaves = [t for t in genre if not any(o.tag_id.startswith(t.tag_id + ":") for o in genre)]

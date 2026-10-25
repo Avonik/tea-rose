@@ -109,7 +109,9 @@ writes it; it never names an outcome. Runs stored before the field existed load 
   the brand IS: a sneaker brand carries fashion, fashion:footwear, fashion:footwear:sneakers),
   most specific nodes only: any node that is an ancestor of another is dropped, depth >= 2 is
   preferred (a lone top family such as "fashion" only when nothing deeper exists), up to 3.
-  Source recorded as "entity own tags"; the model's own universe proposal is not used then.
+  A catch-all leaf whose last segment is `other` is first replaced by its parent
+  (`...:whiskey:other` -> `...:whiskey`), so the universe is all whiskey brands, not the few
+  "other whiskey" ones. Source recorded as "entity own tags"; the model's own universe proposal is not used then.
   Fallback only for a brand without own brand-genre tags: its top 5 insights tags with
   `filter.tag.types=urn:tag:genre:brand` (source "insights tags (fallback)"). Those describe what
   the brand's AUDIENCE likes, which is why they stopped being the primary rule after back-test

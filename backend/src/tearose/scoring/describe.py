@@ -54,10 +54,13 @@ def _join(names: list[str]) -> str:
 class _Parties:
     """Display names, proxies and universe descriptions for both sides."""
 
-    def __init__(self, resolution: Resolution | None) -> None:
+    def __init__(self, resolution: Resolution | None, names: dict[str, str] | None = None) -> None:
         self.res = resolution
+        self.names = names or {}
 
     def name(self, side: str) -> str:
+        if self.names.get(side):
+            return self.names[side]
         if self.res is not None:
             b = getattr(self.res, side)
             if b.entity_name or b.query:
@@ -345,11 +348,14 @@ def describe_zone(ev: ZoneEvidence | None, p: _Parties) -> list[str]:
 
 
 def describe_evidence(
-    evidence: Evidence | None, resolution: Resolution | None
+    evidence: Evidence | None,
+    resolution: Resolution | None,
+    names: dict[str, str] | None = None,
 ) -> dict[str, list[str]]:
-    """Exact fact sentences per analysis: keys overlap, bridging, fame, zone."""
+    """Exact fact sentences per analysis: keys overlap, bridging, fame, zone. `names`
+    ({side: display name}) overrides the resolution's names, e.g. the document's spelling."""
     ev = evidence or Evidence()
-    p = _Parties(resolution)
+    p = _Parties(resolution, names)
     return {
         "overlap": describe_overlap(ev.overlap, p),
         "bridging": describe_bridging(ev.bridging, p),

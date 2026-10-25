@@ -21,7 +21,8 @@ from tearose.agent.nodes.base import (
     load_prompt,
     to_json,
 )
-from tearose.schemas import Evidence, Extraction, FactorFinding, Resolution
+from tearose.qloo.names import CORPORATE_SUFFIXES, normalize_name
+from tearose.schemas import Evidence, Extraction, FactorFinding, Party, Resolution
 from tearose.scoring.describe import describe_evidence, facts_block
 
 SENIOR_LABEL = "Brand A (senior)"
@@ -113,9 +114,78 @@ def _round2(x: Any) -> Any:
     return x
 
 
+# --- display names ------------------------------------------------------------------
+
+
+_HOLDING_WORDS = CORPORATE_SUFFIXES | {"properties", "holdings", "group"}
+
+
+def brand_name(name: str | None) -> str:
+    """Display brand from a party name, original casing kept: trailing corporate words go
+    ("Jack Daniel's Properties, Inc." -> "Jack Daniel's", "VIP Products LLC" -> "VIP Products")."""
+    tokens = (name or "").split()
+    while len(tokens) > 1 and tokens[-1].strip(".,;:").casefold() in _HOLDING_WORDS:
+        tokens.pop()
+    return " ".join(tokens).rstrip(".,;: ")
+
+
+def party_names(state: dict[str, Any]) -> tuple[str | None, str | None]:
+    """(senior, junior) names for the bottom line: the resolved Qloo entity name (in the
+    document's spelling when the two are the same name, see `display_name`), else the
+    extracted party's brand. A proxied side is named by its party, never by the comparators."""
+    res = state.get("resolution")
+    ex = state.get("extraction")
+    out: list[str | None] = []
+    for side in ("senior", "junior"):
+        brand = getattr(res, side, None)
+        proxied = getattr(res, f"{side}_proxy", None) is not None
+        party = getattr(ex, side, None)
+        name = None
+        if brand is not None and brand.entity_id and brand.entity_name and not proxied:
+            name = display_name(brand.entity_name, party)
+        if not name and party is not None:
+            name = brand_name(party.name)
+        if not name and brand is not None:
+            name = brand_name(brand.query)
+        out.append(name or None)
+    return out[0], out[1]
+
+
+def display_name(entity_name: str, party: Party | None) -> str:
+    """The resolved entity's name, but in the document's spelling when both are the same name
+    after normalisation (Qloo "Jack Daniels" vs the document's "Jack Daniel's"). A different,
+    possibly more complete entity name ("The Hershey Company" for "Hershey's") is kept."""
+    if party is not None:
+        target = normalize_name(entity_name)
+        for doc in (brand_name(party.name), *party.marks):
+            if doc and normalize_name(doc) == target:
+                return doc
+    return entity_name
+
+
+def display_names(state: dict[str, Any]) -> dict[str, str]:
+    """{side: preferred display name} for each side resolved to a Qloo entity (not proxied):
+    the override for the FACTS sentences, so they and the bottom line use the same spelling."""
+    res = state.get("resolution")
+    ex = state.get("extraction")
+    out: dict[str, str] = {}
+    for side in ("senior", "junior"):
+        brand = getattr(res, side, None)
+        if brand is None or not brand.entity_id or not brand.entity_name:
+            continue
+        if getattr(res, f"{side}_proxy", None) is not None:
+            continue
+        out[side] = display_name(brand.entity_name, getattr(ex, side, None))
+    return out
+
+
 def fact_sentences(state: dict[str, Any]) -> str:
     """The code-written FACTS block (scoring/describe.py) for the interpret and memo prompts."""
-    return facts_block(describe_evidence(state.get("evidence"), state.get("resolution")))
+    return facts_block(
+        describe_evidence(
+            state.get("evidence"), state.get("resolution"), names=display_names(state)
+        )
+    )
 
 
 def compact_evidence(evidence: Evidence | None) -> dict[str, Any]:

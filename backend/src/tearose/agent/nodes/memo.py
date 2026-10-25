@@ -17,13 +17,14 @@ from tearose.agent.nodes.base import (
     load_prompt,
     to_json,
 )
-from tearose.agent.nodes.interpret import (
+from tearose.agent.nodes.interpret import (  # noqa: F401 - brand_name re-exported
+    brand_name,
     case_payload,
     compact_evidence,
     fact_sentences,
     maybe_blind,
+    party_names,
 )
-from tearose.qloo.names import CORPORATE_SUFFIXES
 from tearose.schemas import FactorFinding, Memo, MemoSection
 from tearose.scoring import synthesize_bottom_line
 
@@ -96,39 +97,6 @@ def proxy_limitations(state: dict[str, Any]) -> list[str]:
             f"{names or 'proxy categories'}: {what}."
         )
     return out
-
-
-_HOLDING_WORDS = CORPORATE_SUFFIXES | {"properties", "holdings", "group"}
-
-
-def brand_name(name: str | None) -> str:
-    """Display brand from a party name, original casing kept: trailing corporate words go
-    ("Jack Daniel's Properties, Inc." -> "Jack Daniel's", "VIP Products LLC" -> "VIP Products")."""
-    tokens = (name or "").split()
-    while len(tokens) > 1 and tokens[-1].strip(".,;:").casefold() in _HOLDING_WORDS:
-        tokens.pop()
-    return " ".join(tokens).rstrip(".,;: ")
-
-
-def party_names(state: dict[str, Any]) -> tuple[str | None, str | None]:
-    """(senior, junior) names for the bottom line: the resolved Qloo entity name, else the
-    extracted party's brand. A proxied side is named by its party, never by the comparators."""
-    res = state.get("resolution")
-    ex = state.get("extraction")
-    out: list[str | None] = []
-    for side in ("senior", "junior"):
-        brand = getattr(res, side, None)
-        proxied = getattr(res, f"{side}_proxy", None) is not None
-        party = getattr(ex, side, None)
-        name = None
-        if brand is not None and brand.entity_id and brand.entity_name and not proxied:
-            name = brand.entity_name
-        if not name and party is not None:
-            name = brand_name(party.name)
-        if not name and brand is not None:
-            name = brand_name(brand.query)
-        out.append(name or None)
-    return out[0], out[1]
 
 
 def dedupe(xs: list[str]) -> list[str]:

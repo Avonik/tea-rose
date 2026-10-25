@@ -552,11 +552,34 @@ def test_own_category_tags_keeps_most_specific_nodes():
         _gt("fashion:accessories:watch"),
     ]
     out = own_category_tags(tags)
+    # footwear:other folds into footwear, which is an ancestor of sneakers and drops out
     assert [t.tag_id.removeprefix("urn:tag:genre:brand:") for t in out] == [
-        "fashion:footwear:sneakers", "fashion:footwear:other", "fashion:athletic"
+        "fashion:footwear:sneakers", "fashion:athletic", "fashion:accessories:watch"
     ]  # fmt: skip
-    assert out[1].name == "Other footwear"  # readable label for an "Other" leaf
     assert genre_depth(tags[0].tag_id) == 1 and genre_depth("urn:tag:keyword:x") == 0
+
+
+def test_own_category_tags_folds_other_leaf_into_parent():
+    whiskey = own_category_tags(
+        [
+            _gt("wine_and_spirits"),
+            _gt("wine_and_spirits:spirits"),
+            _gt("wine_and_spirits:spirits:whiskey", "Whiskey"),
+            _gt("wine_and_spirits:spirits:whiskey:other", "Other"),
+        ]
+    )
+    assert [(t.tag_id, t.name) for t in whiskey] == [
+        ("urn:tag:genre:brand:wine_and_spirits:spirits:whiskey", "Whiskey")
+    ]
+    # parent absent from the entity's tags: synthesised from the path segment
+    beer = own_category_tags([_gt("food_and_beverage:beer:other", "Other")])
+    assert [(t.tag_id, t.name) for t in beer] == [
+        ("urn:tag:genre:brand:food_and_beverage:beer", "Beer")
+    ]
+    # a top-level "other" has no parent to fold into; non-"other" leaves are untouched
+    assert [t.tag_id for t in own_category_tags([_gt("other")])] == ["urn:tag:genre:brand:other"]
+    sneaker = own_category_tags([_gt("fashion:footwear:sneaker:running")])
+    assert sneaker[0].tag_id.endswith("fashion:footwear:sneaker:running")
 
 
 def test_own_category_tags_top_family_only_when_nothing_deeper_and_empty_without_genre():

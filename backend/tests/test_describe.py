@@ -179,6 +179,23 @@ def resolved_pair() -> Resolution:
     )
 
 
+def test_names_override_replaces_resolved_names() -> None:
+    ev = OverlapEvidence(
+        senior_to_junior_rank=3, senior_to_junior_universe=150,
+        senior_to_junior_percentile=0.9866667,
+        junior_to_senior_rank=12, junior_to_senior_universe=150,
+        junior_to_senior_percentile=0.9266667, symmetric_percentile=0.9566667,
+    )  # fmt: skip
+    plain = " ".join(describe_evidence(Evidence(overlap=ev), resolved_pair())["overlap"])
+    named = " ".join(
+        describe_evidence(Evidence(overlap=ev), resolved_pair(), names={"senior": "Oak Barrel"})[
+            "overlap"
+        ]
+    )
+    assert SENIOR in plain and SENIOR not in named and "Oak Barrel" in named
+    assert JUNIOR in named  # a side without an override keeps its resolved name
+
+
 def test_censored_direction_reports_affinity_not_last_place() -> None:
     ev = OverlapEvidence(
         senior_to_junior_rank=None, senior_to_junior_universe=150,

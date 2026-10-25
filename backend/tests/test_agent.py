@@ -18,6 +18,7 @@ from tearose.agent.graph import GraphEngine
 from tearose.agent.llm import ScriptedChatModel, ai_tools, ainvoke_structured, tool_call
 from tearose.agent.nodes import extract, fetch, interpret, resolve, route
 from tearose.agent.nodes.base import RunContext
+from tearose.agent.nodes.interpret import display_name, display_names
 from tearose.agent.nodes.memo import FIXED_LIMITATIONS, brand_name, party_names
 from tearose.agent.runs import RunHandle
 from tearose.agent.tools import ToolContext, make_tools
@@ -99,7 +100,7 @@ def write_fixtures(d: Path, *, peers: int = 60) -> Path:
         "search_brand_jack_daniels",
         {
             "results": [
-                {**_ent(JD, "Jack Daniel's", [WHISKEY]), "popularity": 0.99},
+                {**_ent(JD, "Jack Daniels", [WHISKEY]), "popularity": 0.99},
                 _ent(JDH, "Jack Daniel's Tennessee Honey", [WHISKEY]),
             ]
         },
@@ -779,10 +780,15 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert memo.appendix_queries == engine.state_of("r1")["queries"]
 
     # both prompts carry the code-written fact sentences, and no float with > 2 decimals
-    facts = describe_evidence(r.evidence, r.resolution)
+    # the fixture's Qloo entity is spelled "Jack Daniels"; the facts use the document's spelling
+    assert r.resolution.senior.entity_name == "Jack Daniels"
+    assert display_names(state) == {"senior": "Jack Daniel's"}
+    facts = describe_evidence(r.evidence, r.resolution, names=display_names(state))
     for schema in ("Interpretation", "MemoDraft"):
         prompt = model.prompts_for(schema)[0]
         assert "FACTS (computed in code; the only source for numbers)" in prompt
+        facts_part = prompt[prompt.index("FACTS (computed in code") :].split("\n\n", 1)[0]
+        assert "Jack Daniels" not in facts_part, schema
         for sentence in facts["overlap"] + facts["fame"]:
             assert sentence in prompt
         human = prompt[prompt.index("FACTS (computed in code") :]
@@ -915,5 +921,17 @@ def test_bottom_line_party_names() -> None:
     )
     # nothing resolved yet: both sides from the extraction
     assert party_names({"extraction": ex}) == ("Jack Daniel's", "VIP Products")
+    # same name after normalisation: the document's spelling wins over Qloo's "Jack Daniels";
+    # a different entity name ("Jack Daniel's Tennessee Honey") is kept as resolved
+    res = proxied_resolution()
+    res.senior.entity_name = "Jack Daniels"
+    state = {"extraction": ex, "resolution": res}
+    assert party_names(state) == ("Jack Daniel's", "VIP Products")
+    assert display_names(state) == {"senior": "Jack Daniel's"}  # proxied junior: no override
+    assert display_name("Jack Daniels", ex.senior) == "Jack Daniel's"
+    assert display_name("Jack Daniel's Tennessee Honey", ex.senior) == (
+        "Jack Daniel's Tennessee Honey"
+    )
+    assert display_name("Jack Daniels", None) == "Jack Daniels"
     # nothing known: role phrases in the bottom line
     assert party_names({}) == (None, None)
