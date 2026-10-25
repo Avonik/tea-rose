@@ -1,0 +1,1223 @@
+{
+  "generated": "2026-10-25",
+  "harness_version": 3,
+  "resolver": "agent",
+  "model": "gpt-6-luna",
+  "qloo_mode": "live",
+  "mapping_sha256": "98af901eb167a37fe0df0eb22769d2b26408bba5e0150bb604c7b867a4574ce6",
+  "comparator_rule": "agent resolver: the comparators the product's resolve node chose and validated (agent resolver), as the product's fetch node uses them; when the agent kept none: top 3 by popularity (ties by rank) among brands seeded by the other side's entity and filtered to the proxy tags; not by rank, to avoid a built-in senior->junior overlap",
+  "cases_total": 80,
+  "relatedness": {
+    "primary": {
+      "qloo": {
+        "n": 13,
+        "n_favors_plaintiff": 12,
+        "n_other": 1,
+        "spearman": {
+          "value": 0.1543033499620919,
+          "ci": [
+            -0.15095411674212317,
+            0.5163814333955418
+          ],
+          "valid_resamples": 1300
+        },
+        "auc": {
+          "value": 0.6666666666666666,
+          "ci": [
+            0.4,
+            0.9166666666666666
+          ],
+          "valid_resamples": 1300
+        },
+        "underpowered": true
+      },
+      "qloo_ratio": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": 0.45573271518765,
+          "ci": [
+            0.17295817388759027,
+            0.7692015174231527
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.875,
+          "ci": [
+            0.6666666666666666,
+            1.0
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      },
+      "same_category": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": 0.28426762180748055,
+          "ci": [
+            -0.21320071635561044,
+            1.0
+          ],
+          "valid_resamples": 1697
+        },
+        "auc": {
+          "value": 0.6666666666666666,
+          "ci": [
+            0.34615384615384615,
+            1.0
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      },
+      "popularity_product": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": -0.15191090506255,
+          "ci": [
+            -0.5127527999903573,
+            0.2039023946988902
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.375,
+          "ci": [
+            0.09090909090909091,
+            0.6666666666666666
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      }
+    },
+    "with_proxies": {
+      "qloo": {
+        "n": 41,
+        "n_favors_plaintiff": 29,
+        "n_other": 12,
+        "spearman": {
+          "value": 0.14453635194851466,
+          "ci": [
+            -0.1444023687124341,
+            0.427602583774255
+          ],
+          "valid_resamples": 2000
+        },
+        "auc": {
+          "value": 0.5890804597701149,
+          "ci": [
+            0.4047235023041475,
+            0.7697494172494169
+          ],
+          "valid_resamples": 2000
+        },
+        "underpowered": false
+      },
+      "qloo_ratio": {
+        "n": 45,
+        "n_favors_plaintiff": 32,
+        "n_other": 13,
+        "spearman": {
+          "value": 0.14662754183266194,
+          "ci": [
+            -0.14060949749480592,
+            0.4156337172248228
+          ],
+          "valid_resamples": 2000
+        },
+        "auc": {
+          "value": 0.59375,
+          "ci": [
+            0.40908323095823096,
+            0.7706954887218044
+          ],
+          "valid_resamples": 2000
+        },
+        "underpowered": false
+      },
+      "same_category": {
+        "n": 45,
+        "n_favors_plaintiff": 32,
+        "n_other": 13,
+        "spearman": {
+          "value": 0.47175090432423544,
+          "ci": [
+            0.18978073555792177,
+            0.71196915430964
+          ],
+          "valid_resamples": 2000
+        },
+        "auc": {
+          "value": 0.7596153846153846,
+          "ci": [
+            0.6122660427807487,
+            0.8857158251231526
+          ],
+          "valid_resamples": 2000
+        },
+        "underpowered": false
+      },
+      "popularity_product": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": -0.15191090506255,
+          "ci": [
+            -0.5127527999903573,
+            0.2039023946988902
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.375,
+          "ci": [
+            0.09090909090909091,
+            0.6666666666666666
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      }
+    },
+    "dedup_by_dispute": {
+      "qloo": {
+        "n": 13,
+        "n_favors_plaintiff": 12,
+        "n_other": 1,
+        "spearman": {
+          "value": 0.1543033499620919,
+          "ci": [
+            -0.15095411674212317,
+            0.5163814333955418
+          ],
+          "valid_resamples": 1300
+        },
+        "auc": {
+          "value": 0.6666666666666666,
+          "ci": [
+            0.4,
+            0.9166666666666666
+          ],
+          "valid_resamples": 1300
+        },
+        "underpowered": true
+      },
+      "qloo_ratio": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": 0.45573271518765,
+          "ci": [
+            0.17295817388759027,
+            0.7692015174231527
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.875,
+          "ci": [
+            0.6666666666666666,
+            1.0
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      },
+      "same_category": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": 0.28426762180748055,
+          "ci": [
+            -0.21320071635561044,
+            1.0
+          ],
+          "valid_resamples": 1697
+        },
+        "auc": {
+          "value": 0.6666666666666666,
+          "ci": [
+            0.34615384615384615,
+            1.0
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      },
+      "popularity_product": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": -0.15191090506255,
+          "ci": [
+            -0.5127527999903573,
+            0.2039023946988902
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.375,
+          "ci": [
+            0.09090909090909091,
+            0.6666666666666666
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      }
+    },
+    "relatedness_factor_only": {
+      "qloo": {
+        "n": 13,
+        "n_favors_plaintiff": 12,
+        "n_other": 1,
+        "spearman": {
+          "value": 0.1543033499620919,
+          "ci": [
+            -0.15095411674212317,
+            0.5163814333955418
+          ],
+          "valid_resamples": 1300
+        },
+        "auc": {
+          "value": 0.6666666666666666,
+          "ci": [
+            0.4,
+            0.9166666666666666
+          ],
+          "valid_resamples": 1300
+        },
+        "underpowered": true
+      },
+      "qloo_ratio": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": 0.45573271518765,
+          "ci": [
+            0.17295817388759027,
+            0.7692015174231527
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.875,
+          "ci": [
+            0.6666666666666666,
+            1.0
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      },
+      "same_category": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": 0.28426762180748055,
+          "ci": [
+            -0.21320071635561044,
+            1.0
+          ],
+          "valid_resamples": 1697
+        },
+        "auc": {
+          "value": 0.6666666666666666,
+          "ci": [
+            0.34615384615384615,
+            1.0
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      },
+      "popularity_product": {
+        "n": 14,
+        "n_favors_plaintiff": 12,
+        "n_other": 2,
+        "spearman": {
+          "value": -0.15191090506255,
+          "ci": [
+            -0.5127527999903573,
+            0.2039023946988902
+          ],
+          "valid_resamples": 1760
+        },
+        "auc": {
+          "value": 0.375,
+          "ci": [
+            0.09090909090909091,
+            0.6666666666666666
+          ],
+          "valid_resamples": 1760
+        },
+        "underpowered": true
+      }
+    },
+    "channels_factor_only": {
+      "qloo": {
+        "n": 6,
+        "n_favors_plaintiff": 6,
+        "n_other": 0,
+        "spearman": {
+          "value": null,
+          "ci": [
+            null,
+            null
+          ],
+          "valid_resamples": 0
+        },
+        "auc": {
+          "value": null,
+          "ci": [
+            null,
+            null
+          ],
+          "valid_resamples": 0
+        },
+        "underpowered": true
+      },
+      "qloo_ratio": {
+        "n": 7,
+        "n_favors_plaintiff": 6,
+        "n_other": 1,
+        "spearman": {
+          "value": 0.40824829046386296,
+          "ci": [
+            0.0,
+            0.9074852129730302
+          ],
+          "valid_resamples": 1349
+        },
+        "auc": {
+          "value": 0.8333333333333334,
+          "ci": [
+            0.5,
+            1.0
+          ],
+          "valid_resamples": 1349
+        },
+        "underpowered": true
+      },
+      "same_category": {
+        "n": 7,
+        "n_favors_plaintiff": 6,
+        "n_other": 1,
+        "spearman": {
+          "value": -0.25819888974716115,
+          "ci": [
+            -0.6688170920852903,
+            -0.16666666666666666
+          ],
+          "valid_resamples": 1190
+        },
+        "auc": {
+          "value": 0.3333333333333333,
+          "ci": [
+            0.16666666666666666,
+            0.5
+          ],
+          "valid_resamples": 1349
+        },
+        "underpowered": true
+      },
+      "popularity_product": {
+        "n": 7,
+        "n_favors_plaintiff": 6,
+        "n_other": 1,
+        "spearman": {
+          "value": -0.6123724356957945,
+          "ci": [
+            -0.9354143466934853,
+            -0.6179143806533246
+          ],
+          "valid_resamples": 1349
+        },
+        "auc": {
+          "value": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "valid_resamples": 1349
+        },
+        "underpowered": true
+      }
+    },
+    "excluded": {
+      "proxy (reported in the secondary 'with proxies' line)": 31,
+      "not_discussed": 20,
+      "unread": 3,
+      "unresolved": 7,
+      "mixed": 5
+    }
+  },
+  "fame": {
+    "breadth": {
+      "n": 16,
+      "n_yes": 13,
+      "n_no": 3,
+      "auc": {
+        "value": 0.7435897435897436,
+        "ci": [
+          0.23076923076923078,
+          1.0
+        ],
+        "valid_resamples": 1925
+      },
+      "underpowered": false
+    },
+    "popularity": {
+      "n": 16,
+      "n_yes": 13,
+      "n_no": 3,
+      "auc": {
+        "value": 0.5897435897435898,
+        "ci": [
+          0.3078321678321678,
+          0.8461538461538461
+        ],
+        "valid_resamples": 1925
+      },
+      "underpowered": false
+    },
+    "candidates": 17,
+    "missing": 1
+  },
+  "per_case": [
+    {
+      "case_id": "coach_services_inc_v_triumph_learning_llc_2012",
+      "case_name": "Coach Services, Inc. v. Triumph Learning LLC",
+      "year": "2012",
+      "senior": "Coach",
+      "junior": "Triumph Learning",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.9466666666666668,
+      "residual": -0.9466666666666668,
+      "symmetric_affinity_ratio": 0.9287337429510991,
+      "residual_ratio": -0.9287337429510991,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "kellogg_co_v_toucan_golf_inc_2003",
+      "case_name": "Kellogg Co. v. Toucan Golf, Inc.",
+      "year": "2003",
+      "senior": "Froot Loops",
+      "junior": "Toucan Gold",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.86,
+      "residual": -0.86,
+      "symmetric_affinity_ratio": 0.9187157704919898,
+      "residual_ratio": -0.9187157704919898,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "freedom_card_inc_v_jpmorgan_chase_and_co_2005",
+      "case_name": "Freedom Card, Inc. v. JPMorgan Chase & Co.",
+      "year": "2005",
+      "senior": "Freedom Card",
+      "junior": "Chase",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.8591666666666666,
+      "residual": -0.8591666666666666,
+      "symmetric_affinity_ratio": 0.9620294787792019,
+      "residual_ratio": -0.9620294787792019,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "junior: Chase Bank (rule: miss)"
+    },
+    {
+      "case_id": "tommy_hilfiger_licensing_inc_v_nature_labs_llc_2002",
+      "case_name": "Tommy Hilfiger Licensing, Inc. v. Nature Labs, LLC",
+      "year": "2002",
+      "senior": "Tommy Hilfiger",
+      "junior": "Timmy Holedigger",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.7966666666666666,
+      "residual": -0.7966666666666666,
+      "symmetric_affinity_ratio": 0.941835109485107,
+      "residual_ratio": -0.941835109485107,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "am_general_llc_v_activision_blizzard_inc_2020",
+      "case_name": "AM General LLC v. Activision Blizzard, Inc.",
+      "year": "2020",
+      "senior": "Humvee",
+      "junior": "Activision",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.7963636363636364,
+      "residual": -0.7963636363636364,
+      "symmetric_affinity_ratio": 0.8820905446381884,
+      "residual_ratio": -0.8820905446381884,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "junior: Activision Publishing (rule: miss)"
+    },
+    {
+      "case_id": "kate_spade_llc_v_saturdays_surf_llc_2013",
+      "case_name": "Kate Spade LLC v. Saturdays Surf LLC",
+      "year": "2013",
+      "senior": "Saturdays NYC",
+      "junior": "Kate Spade New York",
+      "label": "favors_defendant",
+      "symmetric_percentile": null,
+      "residual": null,
+      "symmetric_affinity_ratio": 0.7473960796017971,
+      "residual_ratio": -0.7473960796017971,
+      "same_category": "yes",
+      "popularity_product": 0.8789977527763949,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "new_york_stock_exchange_inc_v_new_york_new_york_hotel_llc_2002",
+      "case_name": "New York Stock Exchange, Inc. v. New York, New York Hotel, LLC",
+      "year": "2002",
+      "senior": "New York Stock Exchange",
+      "junior": "New York-New York Hotel & Casino",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.7455555555555555,
+      "residual": -0.7455555555555555,
+      "symmetric_affinity_ratio": 0.881194142762465,
+      "residual_ratio": -0.881194142762465,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "senior: NYSE (rule: miss)"
+    },
+    {
+      "case_id": "louis_vuitton_malletier_s_a_v_my_other_bag_inc_2016",
+      "case_name": "Louis Vuitton Malletier, S.A. v. My Other Bag, Inc.",
+      "year": "2016",
+      "senior": "Louis Vuitton",
+      "junior": "My Other Bag",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.74,
+      "residual": -0.74,
+      "symmetric_affinity_ratio": 0.9288429767007016,
+      "residual_ratio": -0.9288429767007016,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "louis_vuitton_malletier_s_a_v_haute_diggity_dog_llc_2007",
+      "case_name": "Louis Vuitton Malletier S.A. v. Haute Diggity Dog, LLC",
+      "year": "2007",
+      "senior": "Louis Vuitton",
+      "junior": "Chewy Vuiton",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.7272727272727273,
+      "residual": -0.7272727272727273,
+      "symmetric_affinity_ratio": 0.8461244266703349,
+      "residual_ratio": -0.8461244266703349,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "therma_scan_inc_v_thermoscan_inc_2002",
+      "case_name": "Therma-Scan, Inc. v. Thermoscan, Inc.",
+      "year": "2002",
+      "senior": "Therma-Scan",
+      "junior": "Braun",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.6666666666666667,
+      "residual": -0.6666666666666667,
+      "symmetric_affinity_ratio": 0.7991627279635508,
+      "residual_ratio": -0.7991627279635508,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "caterpillar_inc_v_walt_disney_co_2003",
+      "case_name": "Caterpillar Inc. v. Walt Disney Co.",
+      "year": "2003",
+      "senior": "Caterpillar",
+      "junior": "Disney",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.62,
+      "residual": -0.62,
+      "symmetric_affinity_ratio": 0.8435201341742607,
+      "residual_ratio": -0.8435201341742607,
+      "same_category": "no",
+      "popularity_product": 0.9540577512361779,
+      "used_proxy": false,
+      "pick_vs_rule": "junior: The Walt Disney Company (rule: Disney+)"
+    },
+    {
+      "case_id": "easy_spirit_llc_v_skechers_u_s_a_inc_2021",
+      "case_name": "Easy Spirit, LLC v. Skechers U.S.A., Inc.",
+      "year": "2021",
+      "senior": "Easy Spirit",
+      "junior": "Skechers",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.4066666666666667,
+      "residual": 0.5933333333333333,
+      "symmetric_affinity_ratio": 0.7832833422891554,
+      "residual_ratio": 0.21671665771084458,
+      "same_category": "yes",
+      "popularity_product": 0.4231778620689774,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "hershey_co_v_art_van_furniture_inc_2008",
+      "case_name": "Hershey Co. v. Art Van Furniture, Inc.",
+      "year": "2008",
+      "senior": "Hershey's",
+      "junior": "Art Van Furniture",
+      "label": "favors_defendant",
+      "symmetric_percentile": 0.5733333333333333,
+      "residual": -0.5733333333333333,
+      "symmetric_affinity_ratio": 0.7326949848580577,
+      "residual_ratio": -0.7326949848580577,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "senior: The Hershey Company (rule: miss)"
+    },
+    {
+      "case_id": "adidas_america_inc_v_skechers_usa_inc_2018",
+      "case_name": "adidas America, Inc. v. Skechers USA, Inc.",
+      "year": "2018",
+      "senior": "adidas",
+      "junior": "Skechers",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.5166666666666666,
+      "residual": 0.4833333333333334,
+      "symmetric_affinity_ratio": 0.8461003521361997,
+      "residual_ratio": 0.15389964786380028,
+      "same_category": "yes",
+      "popularity_product": 0.9794681263468148,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "tempur_sealy_international_inc_v_mattress_firm_inc_2017",
+      "case_name": "Tempur Sealy International, Inc. v. Mattress Firm, Inc.",
+      "year": "2017",
+      "senior": "Tempur-Pedic",
+      "junior": "Mattress Firm",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.5333333333333333,
+      "residual": 0.4666666666666667,
+      "symmetric_affinity_ratio": 0.924503422442579,
+      "residual_ratio": 0.07549657755742101,
+      "same_category": "no",
+      "popularity_product": 0.5791730062682112,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "jack_wolfskin_ausrustung_fur_draussen_gmbh_v_new_millennium_sports_s_l_u_2015",
+      "case_name": "Jack Wolfskin Ausrustung fur Draussen GmbH v. New Millennium Sports, S.L.U.",
+      "year": "2015",
+      "senior": "Kelme",
+      "junior": "Jack Wolfskin",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": null,
+      "residual": null,
+      "symmetric_affinity_ratio": 0.5353387304747913,
+      "residual_ratio": 0.4646612695252087,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "junior: Jack Wolfskin (rule: Jack Wolfskin)"
+    },
+    {
+      "case_id": "tiffany_and_co_v_costco_wholesale_corp_2020",
+      "case_name": "Tiffany & Co. v. Costco Wholesale Corp.",
+      "year": "2020",
+      "senior": "Tiffany & Co.",
+      "junior": "Costco",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.5566666666666666,
+      "residual": 0.44333333333333336,
+      "symmetric_affinity_ratio": 0.8548759548649816,
+      "residual_ratio": 0.14512404513501842,
+      "same_category": "yes",
+      "popularity_product": 0.9378564894068873,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "tillamook_country_smoker_inc_v_tillamook_county_creamery_assn_2004",
+      "case_name": "Tillamook Country Smoker, Inc. v. Tillamook County Creamery Ass'n",
+      "year": "2004",
+      "senior": "Tillamook",
+      "junior": "Tillamook Country Smoker",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.5877777777777777,
+      "residual": 0.41222222222222227,
+      "symmetric_affinity_ratio": 0.9231130334452926,
+      "residual_ratio": 0.07688696655470739,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "pom_wonderful_llc_v_hubbard_2014",
+      "case_name": "Pom Wonderful LLC v. Hubbard",
+      "year": "2014",
+      "senior": "Pom Wonderful",
+      "junior": "Pur Beverages",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.625,
+      "residual": 0.375,
+      "symmetric_affinity_ratio": 0.8016956989105924,
+      "residual_ratio": 0.19830430108940755,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "starbucks_corp_v_wolfes_borough_coffee_inc_2009",
+      "case_name": "Starbucks Corp. v. Wolfe's Borough Coffee, Inc.",
+      "year": "2009",
+      "senior": "Starbucks",
+      "junior": "Black Bear Micro Roastery",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.6688888888888889,
+      "residual": 0.33111111111111113,
+      "symmetric_affinity_ratio": 0.8049220261739742,
+      "residual_ratio": 0.19507797382602576,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "a_and_h_sportswear_inc_v_victorias_secret_stores_inc_2000",
+      "case_name": "A & H Sportswear, Inc. v. Victoria's Secret Stores, Inc.",
+      "year": "2000",
+      "senior": "Miraclesuit",
+      "junior": "Victoria's Secret",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.68,
+      "residual": 0.31999999999999995,
+      "symmetric_affinity_ratio": 0.8499681019605998,
+      "residual_ratio": 0.1500318980394002,
+      "same_category": "no",
+      "popularity_product": 0.525993283901766,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "thane_international_inc_v_trek_bicycle_corp_2002",
+      "case_name": "Thane International, Inc. v. Trek Bicycle Corp.",
+      "year": "2002",
+      "senior": "Trek",
+      "junior": "Thane",
+      "label": "neutral",
+      "symmetric_percentile": 0.8088888888888889,
+      "residual": -0.3088888888888889,
+      "symmetric_affinity_ratio": 0.8864944186446024,
+      "residual_ratio": -0.38649441864460243,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "senior: Trek Bicycle Corporation (rule: miss)"
+    },
+    {
+      "case_id": "hansen_beverage_co_v_national_beverage_corp_2007",
+      "case_name": "Hansen Beverage Co. v. National Beverage Corp.",
+      "year": "2007",
+      "senior": "Monster Energy",
+      "junior": "Freek",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.7115830115830115,
+      "residual": 0.2884169884169885,
+      "symmetric_affinity_ratio": 0.8336273013583269,
+      "residual_ratio": 0.16637269864167314,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "hermes_international_v_rothschild_2023",
+      "case_name": "Hermès International v. Rothschild",
+      "year": "2023",
+      "senior": "Hermès",
+      "junior": "MetaBirkins",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": null,
+      "residual": null,
+      "symmetric_affinity_ratio": 0.7284117197875126,
+      "residual_ratio": 0.2715882802124874,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "star_industries_inc_v_bacardi_and_co_2005",
+      "case_name": "Star Industries, Inc. v. Bacardi & Co.",
+      "year": "2005",
+      "senior": "Georgi",
+      "junior": "Bacardi",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.7397891963109355,
+      "residual": 0.26021080368906446,
+      "symmetric_affinity_ratio": 0.9279711440640277,
+      "residual_ratio": 0.0720288559359723,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "board_of_supervisors_for_lsu_v_smack_apparel_co_2008",
+      "case_name": "Board of Supervisors for LSU v. Smack Apparel Co.",
+      "year": "2008",
+      "senior": "LSU",
+      "junior": "Smack Apparel",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.7466666666666666,
+      "residual": 0.2533333333333334,
+      "symmetric_affinity_ratio": 0.8601718890345091,
+      "residual_ratio": 0.13982811096549086,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "senior: Louisiana State University (rule: miss)"
+    },
+    {
+      "case_id": "recot_inc_v_becton_2000",
+      "case_name": "Recot, Inc. v. Becton",
+      "year": "2000",
+      "senior": "Frito-Lay",
+      "junior": "Fido Lay",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.7551515151515151,
+      "residual": 0.24484848484848487,
+      "symmetric_affinity_ratio": 0.9187814396851157,
+      "residual_ratio": 0.08121856031488428,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "fortune_dynamic_inc_v_victorias_secret_stores_brand_management_inc_2010",
+      "case_name": "Fortune Dynamic, Inc. v. Victoria's Secret Stores Brand Management, Inc.",
+      "year": "2010",
+      "senior": "Delicious",
+      "junior": "Victoria's Secret",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.7611111111111111,
+      "residual": 0.23888888888888893,
+      "symmetric_affinity_ratio": 0.947982407803798,
+      "residual_ratio": 0.052017592196201945,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "senior: miss (rule: Delicious)"
+    },
+    {
+      "case_id": "stone_brewing_co_v_millercoors_llc_2022",
+      "case_name": "Stone Brewing Co. v. MillerCoors LLC",
+      "year": "2022",
+      "senior": "Stone Brewing",
+      "junior": "Keystone Light",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.8333333333333333,
+      "residual": 0.16666666666666674,
+      "symmetric_affinity_ratio": 0.899595432067584,
+      "residual_ratio": 0.10040456793241603,
+      "same_category": "yes",
+      "popularity_product": 0.45386048580098287,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "adidas_america_inc_v_payless_shoesource_inc_2008",
+      "case_name": "adidas-America, Inc. v. Payless Shoesource, Inc.",
+      "year": "2008",
+      "senior": "adidas",
+      "junior": "Payless Shoes",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.84,
+      "residual": 0.16000000000000003,
+      "symmetric_affinity_ratio": 0.7213631404619614,
+      "residual_ratio": 0.27863685953803863,
+      "same_category": "yes",
+      "popularity_product": 0.15451817460081987,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "vip_products_llc_v_jack_daniels_properties_inc_2018",
+      "case_name": "VIP Products, LLC v. Jack Daniel's Properties, Inc.",
+      "year": "2018",
+      "senior": "Jack Daniel's",
+      "junior": "VIP Products",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.8548951048951049,
+      "residual": 0.1451048951048951,
+      "symmetric_affinity_ratio": 0.9151043179893299,
+      "residual_ratio": 0.0848956820106701,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "vip_products_llc_v_jack_daniels_properties_inc_on_remand_2025",
+      "case_name": "VIP Products, LLC v. Jack Daniel's Properties, Inc. (on remand)",
+      "year": "2025",
+      "senior": "Jack Daniel's",
+      "junior": "VIP Products",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.8548951048951049,
+      "residual": 0.1451048951048951,
+      "symmetric_affinity_ratio": 0.9151043179893299,
+      "residual_ratio": 0.0848956820106701,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "palm_bay_imports_inc_v_veuve_clicquot_ponsardin_maison_fondee_en_1772_2005",
+      "case_name": "Palm Bay Imports, Inc. v. Veuve Clicquot Ponsardin Maison Fondee en 1772",
+      "year": "2005",
+      "senior": "Veuve Clicquot",
+      "junior": "Veuve Royale",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.87,
+      "residual": 0.13,
+      "symmetric_affinity_ratio": 0.9242107164800699,
+      "residual_ratio": 0.07578928351993008,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "vans_inc_v_walmart_inc_2022",
+      "case_name": "Vans, Inc. v. Walmart, Inc.",
+      "year": "2022",
+      "senior": "Vans",
+      "junior": "Walmart",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.88,
+      "residual": 0.12,
+      "symmetric_affinity_ratio": 0.8755460887142092,
+      "residual_ratio": 0.12445391128579075,
+      "same_category": "yes",
+      "popularity_product": 0.9954413473370074,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "innovation_ventures_llc_v_n_v_e_inc_2012",
+      "case_name": "Innovation Ventures, LLC v. N.V.E., Inc.",
+      "year": "2012",
+      "senior": "5-Hour Energy",
+      "junior": "NVE Pharmaceuticals",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.8934313725490196,
+      "residual": 0.10656862745098039,
+      "symmetric_affinity_ratio": 0.922763658394944,
+      "residual_ratio": 0.07723634160505599,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "makers_mark_distillery_inc_v_diageo_north_america_inc_2012",
+      "case_name": "Maker's Mark Distillery, Inc. v. Diageo North America, Inc.",
+      "year": "2012",
+      "senior": "Maker's Mark",
+      "junior": "Jose Cuervo",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.911904761904762,
+      "residual": 0.088095238095238,
+      "symmetric_affinity_ratio": 0.9832950258167032,
+      "residual_ratio": 0.01670497418329675,
+      "same_category": "yes",
+      "popularity_product": 0.8260363244520613,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "bose_corp_v_qsc_audio_products_inc_2002",
+      "case_name": "Bose Corp. v. QSC Audio Products, Inc.",
+      "year": "2002",
+      "senior": "Bose",
+      "junior": "QSC",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.9166666666666667,
+      "residual": 0.08333333333333326,
+      "symmetric_affinity_ratio": 0.9728415893024642,
+      "residual_ratio": 0.027158410697535773,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "adidas_salomon_ag_v_target_corp_2002",
+      "case_name": "adidas-Salomon AG v. Target Corp.",
+      "year": "2002",
+      "senior": "adidas",
+      "junior": "Target",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.9266666666666667,
+      "residual": 0.07333333333333325,
+      "symmetric_affinity_ratio": 0.8901089185415085,
+      "residual_ratio": 0.10989108145849147,
+      "same_category": "yes",
+      "popularity_product": 0.9959071314866881,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "fiji_water_co_v_fiji_mineral_water_usa_llc_2010",
+      "case_name": "FIJI Water Co. v. FIJI Mineral Water USA, LLC",
+      "year": "2010",
+      "senior": "Fiji Water",
+      "junior": "Viti",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": null,
+      "residual": null,
+      "symmetric_affinity_ratio": 0.9290872812428852,
+      "residual_ratio": 0.0709127187571148,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "united_states_polo_assn_v_prl_usa_holdings_inc_2011",
+      "case_name": "United States Polo Ass'n v. PRL USA Holdings, Inc.",
+      "year": "2011",
+      "senior": "Ralph Lauren",
+      "junior": "U.S. Polo Assn.",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.9299999999999999,
+      "residual": 0.07000000000000006,
+      "symmetric_affinity_ratio": 0.9783542775959917,
+      "residual_ratio": 0.021645722404008305,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "vans_inc_v_mschf_product_studio_inc_2023",
+      "case_name": "Vans, Inc. v. MSCHF Product Studio, Inc.",
+      "year": "2023",
+      "senior": "Vans",
+      "junior": "MSCHF",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.9344444444444444,
+      "residual": 0.06555555555555559,
+      "symmetric_affinity_ratio": 0.9575068156973798,
+      "residual_ratio": 0.04249318430262017,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "gucci_america_inc_v_guess_inc_2012",
+      "case_name": "Gucci America, Inc. v. Guess?, Inc.",
+      "year": "2012",
+      "senior": "Gucci",
+      "junior": "Guess",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.94,
+      "residual": 0.06000000000000005,
+      "symmetric_affinity_ratio": 0.977535275911896,
+      "residual_ratio": 0.02246472408810396,
+      "same_category": "yes",
+      "popularity_product": 0.9982457516892812,
+      "used_proxy": false,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "vital_pharmaceuticals_inc_v_monster_energy_co_2021",
+      "case_name": "Vital Pharmaceuticals, Inc. v. Monster Energy Co.",
+      "year": "2021",
+      "senior": "Bang Energy",
+      "junior": "Reign",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.972972972972973,
+      "residual": 0.027027027027026973,
+      "symmetric_affinity_ratio": 0.9688811829631108,
+      "residual_ratio": 0.031118817036889235,
+      "same_category": "yes",
+      "popularity_product": 0.8660881470005674,
+      "used_proxy": false,
+      "pick_vs_rule": "senior: Bang (rule: miss); junior: Reign Body Fuel (rule: miss)"
+    },
+    {
+      "case_id": "t_mobile_us_inc_v_aio_wireless_llc_2014",
+      "case_name": "T-Mobile US, Inc. v. Aio Wireless LLC",
+      "year": "2014",
+      "senior": "T-Mobile",
+      "junior": "Aio Wireless",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.9766666666666666,
+      "residual": 0.023333333333333428,
+      "symmetric_affinity_ratio": 0.9703488089680767,
+      "residual_ratio": 0.029651191031923263,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
+      "case_id": "nautilus_group_inc_v_icon_health_and_fitness_inc_2004",
+      "case_name": "Nautilus Group, Inc. v. ICON Health & Fitness, Inc.",
+      "year": "2004",
+      "senior": "Bowflex",
+      "junior": "CrossBow",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 1.0,
+      "residual": 0.0,
+      "symmetric_affinity_ratio": 1.0,
+      "residual_ratio": 0.0,
+      "same_category": "yes",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    }
+  ]
+}
