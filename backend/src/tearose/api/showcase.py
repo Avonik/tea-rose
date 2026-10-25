@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import re
-import json
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
