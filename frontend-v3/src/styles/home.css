@@ -1,0 +1,735 @@
+/* Home, in SITE_STORY order: pinned hero, three questions, live preview, back-test, five fights,
+   limits, timeline, analyze band. */
+
+/* ---------------------------------------------------------------- 1. pinned hero */
+
+/* The section is a ~300vh track; the stage sticks for the whole track and the beats are driven by
+   scroll progress (motion/PinnedHero.tsx). No band padding: the stage owns the viewport. */
+.band.hero-pin {
+  padding-block: 0;
+}
+
+.hero-pin__track {
+  position: relative;
+  height: 300vh;
+  height: 300svh;
+}
+
+.hero-pin__stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  height: 100svh;
+  padding: clamp(5rem, 12vh, 7rem) var(--gutter) clamp(3rem, 8vh, 5rem);
+  overflow: clip;
+}
+
+/* All beats share one grid cell, so the cross-fades never shift layout. */
+.hero-pin__layer {
+  grid-area: 1 / 1;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  width: 100%;
+  max-width: 62rem;
+  text-align: center;
+  will-change: opacity, transform;
+}
+
+.hero-pin__eyebrow {
+  margin-bottom: var(--s-2);
+}
+
+.hero-pin__money {
+  font-size: clamp(2.75rem, 1rem + 6.5vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.hero-pin__to {
+  font-weight: 400;
+  color: var(--text-2);
+  letter-spacing: -0.02em;
+}
+
+/* The rolling duration: two lines in one cell, clipped so the roll reads as an odometer. */
+.hero-pin__morph {
+  display: grid;
+  overflow: clip;
+  overflow-clip-margin: 0.2em;
+  padding-block: 0.08em;
+}
+
+.hero-pin__dur {
+  grid-area: 1 / 1;
+  will-change: opacity, transform, filter;
+}
+
+.hero-pin__lines {
+  display: grid;
+  max-width: 40rem;
+}
+
+.hero-pin__line {
+  grid-area: 1 / 1;
+  display: grid;
+  align-content: start;
+  gap: var(--s-4);
+}
+
+.hero-pin__source {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.hero-pin__title {
+  max-width: 14ch;
+}
+
+.hero-pin__promise {
+  max-width: 40rem;
+}
+
+.hero-pin__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.hero-pin__hint {
+  position: absolute;
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
+  transform: translateX(-50%);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hero-pin__hint-line {
+  width: 1px;
+  height: 2rem;
+  background: linear-gradient(var(--text-3), transparent);
+}
+
+@media (max-height: 560px) {
+  .hero-pin__source {
+    display: none;
+  }
+}
+
+/* Reduced motion: the three beats stacked in normal flow, no pinning. */
+.hero-static {
+  padding-top: clamp(8.5rem, 16vh, 11rem);
+}
+
+.hero-static__beats {
+  display: grid;
+  gap: clamp(3.5rem, 9vw, 6rem);
+}
+
+.hero-static__beat {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  text-align: center;
+}
+
+.hero-static__beat > .t-subtitle {
+  max-width: 40rem;
+}
+
+/* ---------------------------------------------------------------- 2. the three questions */
+
+.qrows {
+  --inset: 4.5rem;
+}
+
+.qrow {
+  gap: var(--s-4);
+  padding: var(--s-6) var(--s-5);
+}
+
+.qrow__glyph {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--fill);
+  color: var(--text);
+}
+
+.qrow__main {
+  gap: var(--s-4);
+}
+
+.qrow__q {
+  font-size: var(--fs-title);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.qrow__facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: var(--s-3) var(--s-6);
+}
+
+.qrow__facts > div {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+}
+
+.qrow__facts dt {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.qrow__facts dd {
+  margin: 0;
+  font-size: var(--fs-callout);
+  text-wrap: pretty;
+}
+
+@media (max-width: 760px) {
+  .qrows {
+    --inset: var(--s-5);
+  }
+  .qrow {
+    flex-direction: column;
+  }
+  .qrow__facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------- 3. device frame */
+
+.frame {
+  padding: 0.625rem;
+  border-radius: var(--r-card);
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-filter-thick);
+  backdrop-filter: var(--glass-filter-thick);
+  box-shadow: var(--shadow-frame), inset 0 0 0 1px var(--glass-line), inset 0 1px 0 var(--glass-edge);
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
+.frame__screen {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  min-height: 30rem;
+  padding: clamp(1.25rem, 3.5vw, 2.75rem);
+  border-radius: calc(var(--r-card) - 0.5rem);
+  background: var(--page);
+}
+
+.frame__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+}
+
+.frame__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.frame__live {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 3px var(--ok-tint);
+}
+
+.frame__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  font-size: var(--fs-callout);
+}
+
+.frame__lead {
+  display: grid;
+  gap: var(--s-3);
+  max-width: 48rem;
+}
+
+.frame__headline {
+  font-size: var(--fs-title);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.frame__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin-top: var(--s-2);
+}
+
+.frame__finding {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+}
+
+.frame__gauges {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+/* One plain-words gauge: label, value, bar with a "high" tick, end labels, meaning. */
+.pgauge {
+  display: grid;
+  align-content: start;
+  gap: var(--s-2);
+  padding: var(--s-5);
+  border-radius: var(--r-group);
+  background: var(--surface-on-page);
+}
+
+.pgauge__label {
+  font-size: var(--fs-callout);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pgauge__value {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+}
+
+.pgauge__num {
+  font-size: clamp(2rem, 1.4rem + 1.8vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.pgauge__unit {
+  font-size: var(--fs-footnote);
+}
+
+.pgauge__bar {
+  padding-top: 1.125rem;
+}
+
+.pgauge__bar .hgauge {
+  display: block;
+}
+
+/* "what counts as high": a hairline tick with a tiny label above the bar */
+.pgauge__high {
+  position: absolute;
+  top: -0.3rem;
+  bottom: -0.3rem;
+  width: 1px;
+  background: var(--text-3);
+}
+
+.pgauge__high-label {
+  position: absolute;
+  bottom: calc(100% + 0.125rem);
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+}
+
+.pgauge__meaning {
+  margin-top: var(--s-1);
+  text-wrap: pretty;
+}
+
+/* horizontal gauge */
+.hgauge {
+  position: relative;
+  height: 0.5rem;
+  border-radius: var(--r-pill);
+  background: var(--fill-2);
+}
+
+.hgauge__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--senior);
+  transform-origin: left center;
+  opacity: 0.9;
+}
+
+.hgauge__marker {
+  position: absolute;
+  top: 50%;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: -0.5625rem 0 0 -0.5625rem;
+  border-radius: 50%;
+  background: var(--page);
+  box-shadow: 0 0 0 2.5px var(--senior), 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hgauge__scale {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.frame__foot {
+  margin-top: calc(-1 * var(--s-2));
+}
+
+@media (max-width: 900px) {
+  .frame__gauges {
+    grid-template-columns: 1fr;
+  }
+  .frame__headline {
+    font-size: var(--fs-title-2);
+  }
+}
+
+/* ---------------------------------------------------------------- 4. back-test */
+
+.bt__body {
+  font-size: var(--fs-subtitle);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.bt__note {
+  margin-top: var(--s-4);
+}
+
+.bt__more {
+  margin-top: var(--s-5);
+}
+
+/* ---------------------------------------------------------------- 5. five famous fights */
+
+.case-row {
+  align-items: center;
+  padding-block: var(--s-5);
+  padding-inline: var(--s-5) var(--s-4);
+}
+
+.case-row .group__main {
+  gap: 0.25rem;
+}
+
+.case-row__title {
+  font-size: var(--fs-title-2);
+  font-weight: 600;
+  letter-spacing: var(--tr-title-2);
+}
+
+.case-row__meta {
+  color: var(--text-2);
+  font-size: var(--fs-callout);
+}
+
+.case-row__line {
+  margin-top: 0.25rem;
+  color: var(--text);
+  font-size: var(--fs-callout);
+  max-width: 44rem;
+  text-wrap: pretty;
+}
+
+.case-row__k {
+  font-weight: 600;
+}
+
+.case-row__twist {
+  margin-top: var(--s-1);
+  font-style: italic;
+}
+
+.case-list {
+  --inset: var(--s-5);
+}
+
+/* ---------------------------------------------------------------- 6. limitations */
+
+.limits-group {
+  --inset: 3.25rem;
+}
+
+.limits-group__n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--fill);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.limits-group .group__row {
+  padding-block: var(--s-4);
+}
+
+.limits-closing {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  text-wrap: balance;
+}
+
+.limits-more {
+  margin-top: var(--s-3);
+}
+
+/* ---------------------------------------------------------------- 7. timeline */
+
+.tl {
+  position: relative;
+  --node: 2.5rem;
+}
+
+.tl__track {
+  position: absolute;
+  top: calc(var(--node) / 2);
+  left: calc(100% / 14);
+  right: calc(100% / 14);
+  height: 2px;
+  background: var(--hairline-2);
+  border-radius: 1px;
+}
+
+.tl__progress {
+  position: absolute;
+  inset: 0;
+  background: var(--text);
+  border-radius: inherit;
+  transform-origin: left center;
+}
+
+.tl__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.tl__step {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: var(--s-2);
+  text-align: center;
+}
+
+.tl__node {
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  font-size: var(--fs-footnote);
+  font-weight: 600;
+  box-shadow: 0 0 0 6px var(--band);
+}
+
+.tl__node--agent {
+  background: var(--text);
+  color: var(--page);
+}
+
+.tl__node--code {
+  background: var(--band);
+  color: var(--text);
+  box-shadow: inset 0 0 0 2px var(--text), 0 0 0 6px var(--band);
+}
+
+.tl__node--both {
+  background: linear-gradient(90deg, var(--text) 50%, var(--band) 50%);
+  color: transparent;
+  box-shadow: inset 0 0 0 2px var(--text), 0 0 0 6px var(--band);
+}
+
+.tl__label {
+  margin-top: var(--s-2);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tl__n {
+  display: none;
+}
+
+/* step details: collapsed by default, one toggle for the whole timeline */
+.tl__text {
+  display: block;
+  max-width: 11rem;
+  overflow: hidden;
+}
+
+.tl__text--print {
+  display: none;
+}
+
+.tl__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4) var(--s-6);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.tl__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.tl__toggle-chev {
+  display: inline-grid;
+}
+
+.tl__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-6);
+}
+
+.tl__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tl__key {
+  display: inline-grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.tl__key.tl__node--code,
+.tl__key.tl__node--both {
+  box-shadow: inset 0 0 0 1.5px var(--text);
+}
+
+@media (max-width: 900px) {
+  .tl__track {
+    top: calc(var(--node) / 2);
+    bottom: calc(var(--node) / 2);
+    left: calc(var(--node) / 2 - 1px);
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .tl__progress {
+    transform-origin: center top;
+  }
+  .tl__steps {
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+  }
+  .tl[data-open] .tl__steps {
+    gap: var(--s-6);
+  }
+  .tl__step {
+    grid-template-columns: var(--node) 1fr;
+    justify-items: start;
+    align-items: center;
+    column-gap: var(--s-4);
+    row-gap: 0.125rem;
+    text-align: left;
+  }
+  .tl__node {
+    grid-row: 1 / span 2;
+  }
+  .tl__label {
+    margin-top: 0;
+  }
+  .tl__text {
+    grid-column: 2;
+    max-width: none;
+  }
+  .tl__foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------------------------------------------------------------- 8. analyze your own */
+
+.analyze-band__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-6) var(--s-8);
+}
+
+.analyze-band__copy {
+  display: grid;
+  gap: var(--s-3);
+  max-width: 40rem;
+}
+
+/* ---------------------------------------------------------------- print: hero flattened, details shown */
+
+@media print {
+  .hero-pin__track {
+    height: auto;
+  }
+  .hero-pin__stage {
+    position: static;
+    height: auto;
+    display: grid;
+    gap: var(--s-8);
+  }
+  .hero-pin__layer {
+    grid-area: auto;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-pin__dur:last-child,
+  .hero-pin__hint {
+    display: none;
+  }
+  .hero-pin__dur,
+  .hero-pin__line {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .hero-pin__lines {
+    gap: var(--s-4);
+  }
+  .hero-pin__line {
+    grid-area: auto;
+  }
+  .tl__text--print {
+    display: block;
+  }
+}

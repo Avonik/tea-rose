@@ -1,0 +1,322 @@
+/* Agent trace: stepper, event list, tool rows. Lives in the desktop dock or the phone sheet. */
+
+.trace {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  font-size: var(--fs-footnote);
+}
+
+.trace__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-4) var(--s-2) var(--s-5);
+}
+
+.trace__title {
+  flex: 1;
+  font-size: var(--fs-body);
+  letter-spacing: -0.01em;
+}
+
+.trace__collapse {
+  min-height: 2rem;
+  width: 2rem;
+}
+
+.trace__progress {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-5) var(--s-3);
+}
+
+.trace__counts {
+  padding: 0 var(--s-5) var(--s-3);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.trace__conn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: var(--s-2) var(--s-5);
+  background: var(--warn-tint);
+}
+
+.trace__list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--s-2) var(--s-4) var(--s-5) var(--s-5);
+}
+
+.trace__empty {
+  padding: var(--s-4) 0;
+}
+
+.trace--compact {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.trace__summary {
+  display: block;
+  font-size: var(--fs-footnote);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trace__summary-title {
+  font-weight: 600;
+}
+
+/* sheet body: the sheet supplies its own padding */
+.sheet__body .trace__head {
+  padding-inline: 0;
+}
+.sheet__body .trace__counts,
+.sheet__body .trace__list,
+.sheet__body .trace__conn {
+  padding-inline: 0;
+}
+.sheet__body .trace__list {
+  overflow: visible;
+}
+
+/* ---------------------------------------------------------------- stepper (dots + line) */
+
+.stepper__row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1rem;
+}
+
+.stepper__line {
+  position: absolute;
+  left: 0.3125rem;
+  right: 0.3125rem;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--fill-3);
+  border-radius: 1px;
+}
+
+.stepper__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--text);
+  transform-origin: left center;
+  border-radius: inherit;
+}
+
+.stepper__dot {
+  position: relative;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--page);
+  box-shadow: inset 0 0 0 1.5px var(--fill-3);
+}
+
+.stepper__dot[data-state='done'] {
+  background: var(--text);
+  box-shadow: none;
+}
+
+.stepper__dot[data-state='active'] {
+  background: var(--page);
+  box-shadow: inset 0 0 0 2.5px var(--text);
+}
+
+.stepper__dot[data-state='failed'] {
+  background: var(--error);
+  box-shadow: none;
+}
+
+.stepper__halo {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--text);
+  z-index: -1;
+}
+
+.trace__active {
+  display: block;
+}
+
+/* ---------------------------------------------------------------- live indicators */
+
+.live-dot {
+  display: inline-block;
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.375rem;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 3px var(--ok-tint);
+  vertical-align: 0.0625rem;
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: var(--r-pill);
+  background: var(--ok-tint);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- rows */
+
+.trace-row + .trace-row {
+  margin-top: 0.125rem;
+}
+
+.trace-row__node {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0.25rem;
+}
+
+.trace-row__nodename {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+.trace-row__body {
+  display: grid;
+  grid-template-columns: 1.125rem minmax(0, 1fr);
+  gap: 0.375rem;
+  align-items: start;
+}
+
+.trace-row__icon {
+  display: grid;
+  place-items: center;
+  height: 1.25rem;
+  color: var(--text-3);
+}
+
+.trace-row__icon--warning {
+  color: var(--warn);
+}
+
+.trace-row__icon--run_failed {
+  color: var(--error);
+}
+
+.trace-row__icon--node_finished,
+.trace-row__icon--run_finished {
+  color: var(--ok);
+}
+
+.trace-row__text {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+  padding-block: 0.0625rem;
+}
+
+.trace-row__title {
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.trace-row__detail {
+  color: var(--text-2);
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.trace-row--warning .trace-row__title {
+  font-weight: 600;
+}
+
+.trace-tool .disclosure__summary {
+  align-items: flex-start;
+  min-height: 0;
+  padding: 0.0625rem 0;
+  color: var(--text);
+  font-size: var(--fs-footnote);
+}
+
+.trace-tool .disclosure__chev {
+  margin-top: 0.1875rem;
+  color: var(--text-3);
+}
+
+.trace-tool__main {
+  display: grid;
+  gap: 0.1875rem;
+  min-width: 0;
+}
+
+.trace-tool__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  color: var(--text-2);
+  font-size: var(--fs-caption);
+}
+
+.trace-tool__qid {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.trace-tool__endpoint {
+  font-size: 0.6875rem;
+  overflow-wrap: anywhere;
+}
+
+.trace-tool__result {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.trace-tool__result.is-empty {
+  color: var(--warn-ink);
+}
+
+.trace-tool__body {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--r-sm);
+  background: var(--fill);
+}
+
+.trace-tool__kv > div {
+  grid-template-columns: minmax(4rem, 34%) 1fr;
+}
+
+.trace-tool__kv dd {
+  font-size: 0.6875rem;
+}
+
+.sheet__body .trace__head {
+  display: none;
+}
+.sheet__body .trace__counts {
+  padding-top: var(--s-3);
+}

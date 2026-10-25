@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "bad_spaniels",
+    "title": "Bad Spaniels",
+    "parties": "Jack Daniel's v. VIP Products",
+    "year": 2023,
+    "one_liner": "Whiskey fans sit near the median for pet-supply brands; the mark's audience is broad across every age group but one.",
+    "tags": ["parody", "dilution", "proxy path"]
+  },
+  {
+    "slug": "taco_tuesday",
+    "title": "Taco Tuesday",
+    "parties": "Taco Bell v. Taco John's",
+    "year": 2023,
+    "one_liner": "Both chains resolve in Qloo and each ranks in the other's top decile of fast-food peers: shared purchasers are obvious.",
+    "tags": ["genericness", "both in graph", "sanity check"]
+  },
+  {
+    "slug": "in_n_out_smashburger",
+    "title": "Triple Double",
+    "parties": "In-N-Out v. Smashburger",
+    "year": 2017,
+    "one_liner": "In-N-Out's affinity is concentrated west of the Rockies while Smashburger's is national: a textbook zone-of-reputation map.",
+    "tags": ["zone of reputation", "heatmap"]
+  },
+  {
+    "slug": "coach_triumph",
+    "title": "Coach, not famous",
+    "parties": "Coach Services v. Triumph Learning",
+    "year": 2012,
+    "one_liner": "The court found Coach not famous for dilution; its audience skews narrowly female and 25–44, unlike a household mark.",
+    "tags": ["fame", "dilution", "favors junior"]
+  }
+]

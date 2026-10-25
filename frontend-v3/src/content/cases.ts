@@ -1,0 +1,69 @@
+/**
+ * Hand-written context for the five showcase cases: what the court decided and what the taste
+ * data shows. Plain English, brand names instead of "senior"/"junior". Facts verified against the
+ * opinions on 2026-10-24/25 (see backend/eval/cases_candidates.csv for sources). Live runs have no
+ * entry here and render without the court line.
+ */
+export type CaseStory = {
+  /** Short display name for tiles and the home page list. */
+  short: string
+  /** The two brands as the reader knows them, older brand first. */
+  brands: [string, string]
+  /** One sentence: what the court decided. */
+  court: string
+  /** One sentence: what the taste data shows (from the pre-computed run). */
+  data: string
+  /** Optional one-line twist, used on the home page list. */
+  twist?: string
+  /** Where the dispute ended, for the header chip. */
+  outcome: 'older brand won' | 'newcomer won' | 'mixed' | 'settled'
+}
+
+export const CASE_STORIES: Record<string, CaseStory> = {
+  bad_spaniels: {
+    short: 'Jack Daniel’s v. Bad Spaniels',
+    brands: ['Jack Daniel’s', 'Bad Spaniels dog toy'],
+    court:
+      'The court found that whiskey drinkers and pet-product buyers do overlap, and the dog toy still won: a parody, no confusion.',
+    data: 'The taste data supports Jack Daniel’s on two of three confusion factors and on fame, and is silent on parody.',
+    twist: 'Overlap was there. It did not decide the case.',
+    outcome: 'newcomer won',
+  },
+  charbucks: {
+    short: 'Starbucks v. Charbucks',
+    brands: ['Starbucks', 'Charbucks (Black Bear Micro Roastery)'],
+    court:
+      'The factors favoured Starbucks, yet the court denied the dilution claim: the marks were not similar enough.',
+    data: 'The taste data puts audience overlap at the 80th percentile and supports Starbucks on both measured factors and on fame.',
+    twist: 'Strong audience evidence, lost on similarity.',
+    outcome: 'newcomer won',
+  },
+  chewy_vuiton: {
+    short: 'Louis Vuitton v. Chewy Vuiton',
+    brands: ['Louis Vuitton', 'Chewy Vuiton dog toys'],
+    court: 'The court ruled for the parody: the joke works because everyone knows Louis Vuitton.',
+    data: 'The taste data finds overlap, but only through a nearest-category stand-in (pet food), so the memo stays neutral and says why.',
+    twist: 'The fame that makes the joke land is the fame the data confirms.',
+    outcome: 'newcomer won',
+  },
+  coach_triumph: {
+    short: 'Coach v. Triumph Learning',
+    brands: ['Coach', 'COACH test-prep books'],
+    court: 'The Federal Circuit found handbags and test-prep materials unrelated and Coach not famous enough for dilution.',
+    data: 'The taste data agrees on the goods: Coach’s audience does not extend to educational publishing.',
+    twist: 'Same word, different worlds, and the data sees it.',
+    outcome: 'newcomer won',
+  },
+  vans_mschf: {
+    short: 'Vans v. MSCHF',
+    brands: ['Vans', 'Wavy Baby sneakers (MSCHF)'],
+    court: 'The Second Circuit upheld the injunction: a distorted sneaker sold as a sneaker is not a protected parody.',
+    data: 'The taste data puts audience overlap at the 98th percentile and supports Vans on both confusion factors.',
+    twist: 'Same shoppers, same shelves, and the court agreed.',
+    outcome: 'older brand won',
+  },
+}
+
+export function caseStory(slug: string | undefined | null): CaseStory | undefined {
+  return slug ? CASE_STORIES[slug] : undefined
+}

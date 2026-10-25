@@ -1,11 +1,90 @@
 {
-  "status": "pending",
-  "note": "Labels are pre-registered in eval/cases_candidates.csv before any score is computed. Results land here after the back-test run.",
+  "status": "complete",
+  "harness_version": 3,
+  "note": "On 13 decided cases, Qloo's symmetric overlap percentile correlates with the courts' relatedness/purchaser findings at rho = 0.15 (95% CI -0.15 to 0.52) versus 0.28 for a same-category heuristic. With n = 13 < 15 this metric is underpowered; read it as anecdotal. The affinity ratio (second Qloo signal, n = 14) gives rho = 0.46 (95% CI 0.17 to 0.77). Run 2026-10-25; labels and mapping pre-registered (mapping sha256 98af901eb167). Harness v2: universe = the brand's own category tags, censored ranks reported as censored with a direct affinity lookup, one taxonomy synonym corrected (post-hoc deviations from pre-registration, documented; run 1 kept as the record). Harness v3: brands identified by the product's resolver (agent, model gpt-6-luna); scoring unchanged.",
   "rows": [
-    { "n": "pending", "metric": "Spearman ρ: overlap score vs court's channels/purchasers finding", "value": "pending", "baseline": "Same-category heuristic: pending" },
-    { "n": "pending", "metric": "AUC: overlap score predicts \"favors plaintiff\"", "value": "pending", "baseline": "Popularity-only: pending" },
-    { "n": "pending", "metric": "Spearman ρ: overlap score vs court's relatedness finding", "value": "pending", "baseline": "Same-category heuristic: pending" },
-    { "n": "pending", "metric": "AUC: fame breadth predicts court's fame finding", "value": "pending", "baseline": "Popularity-only: pending" },
-    { "n": "pending", "metric": "Agreement: LLM-only baseline (contaminated; reported for reference)", "value": "pending", "baseline": "n/a" }
+    {
+      "n": 6,
+      "metric": "Spearman ρ: rank percentile vs court's channels/purchasers finding",
+      "value": "n/a (95% CI n/a) · underpowered",
+      "ci": [
+        null,
+        null
+      ],
+      "baseline": "Same-category heuristic: -0.26",
+      "baseline_value": -0.25819888974716115
+    },
+    {
+      "n": 13,
+      "metric": "AUC: rank percentile predicts \"favors plaintiff\"",
+      "value": "0.67 (95% CI 0.40 to 0.92) · underpowered",
+      "ci": [
+        0.4,
+        0.917
+      ],
+      "baseline": "Popularity-only: 0.38; same-category: 0.67",
+      "baseline_value": 0.375
+    },
+    {
+      "n": 13,
+      "metric": "Spearman ρ: rank percentile vs court's relatedness finding",
+      "value": "0.15 (95% CI -0.15 to 0.52) · underpowered",
+      "ci": [
+        -0.151,
+        0.516
+      ],
+      "baseline": "Same-category heuristic: 0.28",
+      "baseline_value": 0.28426762180748055
+    },
+    {
+      "n": 13,
+      "metric": "Spearman ρ: rank percentile vs combined relatedness/purchaser finding (primary)",
+      "value": "0.15 (95% CI -0.15 to 0.52) · underpowered",
+      "ci": [
+        -0.151,
+        0.516
+      ],
+      "baseline": "Same-category heuristic: 0.28; popularity-only: -0.15",
+      "baseline_value": 0.28426762180748055
+    },
+    {
+      "n": 14,
+      "metric": "Spearman ρ: affinity ratio vs combined relatedness/purchaser finding (primary)",
+      "value": "0.46 (95% CI 0.17 to 0.77) · underpowered",
+      "ci": [
+        0.173,
+        0.769
+      ],
+      "baseline": "Rank percentile: 0.15; same-category: 0.28",
+      "baseline_value": 0.28426762180748055
+    },
+    {
+      "n": 14,
+      "metric": "AUC: affinity ratio predicts \"favors plaintiff\"",
+      "value": "0.88 (95% CI 0.67 to 1.00) · underpowered",
+      "ci": [
+        0.667,
+        1.0
+      ],
+      "baseline": "Rank percentile: 0.67; popularity-only: 0.38",
+      "baseline_value": 0.375
+    },
+    {
+      "n": 16,
+      "metric": "AUC: fame breadth predicts court's fame finding",
+      "value": "0.74 (95% CI 0.23 to 1.00)",
+      "ci": [
+        0.231,
+        1.0
+      ],
+      "baseline": "Popularity-only: 0.59",
+      "baseline_value": 0.5897435897435898
+    },
+    {
+      "n": "pending",
+      "metric": "Agreement: LLM-only baseline (contaminated; reported for reference)",
+      "value": "not run (outside this Qloo-only harness)",
+      "baseline": "n/a"
+    }
   ]
 }
