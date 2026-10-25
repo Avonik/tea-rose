@@ -342,7 +342,7 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
     "caterpillar_inc_v_walt_disney_co_2003": {
         "junior": (
             "Disney",
-            "seller brand (film distributor); mark column describes the depiction; round-2 row, 2026-10-25, pre-scoring",
+            "film distributor; mark column describes the depiction; round-2, 2026-10-25, pre-scoring",
         ),
     },
     "sullivan_v_cbs_corp_2004": {
@@ -397,7 +397,7 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
     "am_general_llc_v_activision_blizzard_inc_2020": {
         "junior": (
             "Activision",
-            "seller brand (publisher of the game); mark column describes the depiction; round-2 row, 2026-10-25, pre-scoring",
+            "game publisher; mark column describes the depiction; round-2, 2026-10-25, pre-scoring",
         ),
     },
     "easy_spirit_llc_v_skechers_u_s_a_inc_2021": {

@@ -106,7 +106,7 @@ def test_prepare_mapping(five_row_csv: Path, tmp_path: Path) -> None:
 
 def test_real_mapping_builds_without_blocked_rows() -> None:
     rows = prepare.build_mapping(read_csv(prepare.CASES_CSV))
-    assert len(rows) == 52
+    assert len(rows) == 80  # 52 round-1 + 28 round-2 rows
     assert all(r["senior_query"].strip() and r["junior_query"].strip() for r in rows)
     coach = next(r for r in rows if r["case_id"].startswith("coach_services"))
     assert coach["junior_query"] == "Triumph Learning"
