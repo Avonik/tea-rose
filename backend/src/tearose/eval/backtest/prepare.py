@@ -10,9 +10,16 @@ whose content differs from what it would generate (pass --force to regenerate de
 Everything here is deterministic:
 - query strings: a generic cleaning rule (strip parentheticals, keep the first "/", ";" or ","
   segment, drop trailing descriptor words such as "word marks" / "trade dress", title-case
-  all-caps names) plus an explicit override table (`QUERY_OVERRIDES`) for rows where the mark
-  text is not a searchable brand name (descriptions of the accused use, product-line marks,
-  same-name parties). Each override carries its reason into the `query_note` column.
+  all-caps names but keep vowel-less acronyms of 2-4 letters such as MTM upper-case) plus an
+  explicit override table (`QUERY_OVERRIDES`) for rows where the mark text is not a searchable
+  brand name (descriptions of the accused use, product-line marks, same-name parties). Each
+  override carries its reason into the `query_note` column. Accused side: the brand the
+  accused goods were sold under (the seller brand), not the product name.
+- entity types: each side is searched as a Qloo "brand" unless `TYPE_OVERRIDES` says otherwise
+  (e.g. "artist" for Aqua); written to `senior_type` / `junior_type`, reason in `query_note`.
+- goods phrases: they go verbatim to /v2/tags when a brand is not found, so they must be short
+  category phrases. Generic cleaning (`clean_goods`: parentheticals, $-prices, quotes, URLs,
+  text after the first ";", whitespace) plus `GOODS_OVERRIDES` (reason in `goods_note`).
 - same_category: a keyword lexicon over the two goods phrases; the bucket of the EARLIEST
   matching keyword (after removing parentheticals) is the phrase's category.
 - labels: relatedness and channels/purchasers labels are combined; disagreement -> "mixed",
@@ -28,7 +35,13 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-from tearose.eval.backtest.common import CASES_CSV, MAPPING_CSV, read_csv
+from tearose.eval.backtest.common import (
+    CASES_CSV,
+    DEFAULT_ENTITY_TYPE,
+    MAPPING_CSV,
+    entity_urn,
+    read_csv,
+)
 from tearose.qloo.fixtures import slugify
 
 DECIDED = ("favors_plaintiff", "neutral", "favors_defendant")
@@ -42,9 +55,12 @@ MAPPING_COLUMNS = [
     "confidence",
     "senior_query",
     "junior_query",
+    "senior_type",
+    "junior_type",
     "query_note",
     "senior_goods_phrase",
     "junior_goods_phrase",
+    "goods_note",
     "senior_category",
     "junior_category",
     "same_category",
@@ -153,14 +169,26 @@ _DESCRIPTOR_TAIL = {
 _QUOTES = "\"'“”‘’"
 
 
+_VOWELS = set("AEIOUY")
+
+
+def _is_acronym(token: str) -> bool:
+    """2-4 upper-case letters with no vowel (MTM, QSC): cannot be read as a word, so it stays
+    upper-case. Words like JACK or POM have vowels and are title-cased as before."""
+    return token.isalpha() and token.isupper() and 2 <= len(token) <= 4 and not set(token) & _VOWELS
+
+
+def _title_part(part: str) -> str:
+    return part if _is_acronym(part) else part[:1].upper() + part[1:].lower()
+
+
 def _smart_title(text: str) -> str:
-    """Title-case an all-caps name, keeping apostrophes intact: JACK DANIEL'S -> Jack Daniel's."""
+    """Title-case an all-caps name, keeping apostrophes intact: JACK DANIEL'S -> Jack Daniel's;
+    vowel-less acronyms stay upper-case: MTM SPECIAL OPS -> MTM Special Ops."""
     letters = [c for c in text if c.isalpha()]
     if not letters or not all(c.isupper() for c in letters):
         return text
-    return " ".join(
-        "-".join(p[:1].upper() + p[1:].lower() for p in w.split("-")) for w in text.split()
-    )
+    return " ".join("-".join(_title_part(p) for p in w.split("-")) for w in text.split())
 
 
 def clean_mark(mark: str) -> str:
@@ -173,11 +201,117 @@ def clean_mark(mark: str) -> str:
     return _smart_title(" ".join(words).strip(_QUOTES + " "))
 
 
+# --------------------------------------------------------------------------------------
+# Goods phrases
+# --------------------------------------------------------------------------------------
+
+_URL_RE = re.compile(r"https?://\S+|www\.\S+|\b[\w-]+\.(?:com|net|org|io|co|us)\b", re.I)
+_PRICE_RE = re.compile(r"\$\s?\d[\d,.]*(?:\s*(?:-|–|—|to)\s*\$?\s?\d[\d,.]*)?", re.I)
+_DQUOTE_RE = re.compile(r"[\"“”]")
+# a single quote that is not an apostrophe inside a word ("'wavy'" goes, "men's" stays)
+_SQUOTE_RE = re.compile(r"(?<![A-Za-z])['‘’]|['‘’](?![A-Za-z])")
+
+
+def clean_goods(phrase: str) -> str:
+    """Generic rule: goods text -> short /v2/tags category phrase.
+
+    Strips parentheticals, keeps the text before the first ";", removes URLs, $-prices and
+    price ranges, quote marks (not in-word apostrophes), collapses whitespace and trims dangling
+    punctuation. No vocabulary changes (whisky -> whiskey is an override, not a rule).
+    """
+    text = strip_parentheticals(phrase).split(";")[0]
+    text = _URL_RE.sub(" ", text)
+    text = _PRICE_RE.sub(" ", text)
+    text = _DQUOTE_RE.sub(" ", text)
+    text = _SQUOTE_RE.sub(" ", text).replace("’", "'")
+    return " ".join(text.split()).strip(" ,;:/-")
+
+
+def goods_needs_review(phrase: str) -> bool:
+    """More than 6 words or a digit: too specific for a category tag search."""
+    return len(phrase.split()) > 6 or any(c.isdigit() for c in phrase)
+
+
+# Explicit, reviewed goods phrases: case_id -> {side: (phrase, reason)}. Applied instead of
+# the generic rule; the reason is copied into `goods_note`.
+_BAD_SPANIELS_GOODS = {
+    "senior": ("Tennessee whiskey", "category of the senior goods; merchandise list dropped"),
+    "junior": ("squeaky dog chew toy", "category of the accused goods; product line dropped"),
+}
+GOODS_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
+    "vip_products_llc_v_jack_daniels_properties_inc_2018": _BAD_SPANIELS_GOODS,
+    "vip_products_llc_v_jack_daniels_properties_inc_on_remand_2025": _BAD_SPANIELS_GOODS,
+    "taco_bell_ip_holder_llc_v_spicy_seasonings_llc_taco_johns_taco_tuesday_2023": {
+        "junior": ("Mexican fast food restaurant", "category phrase without the brand name"),
+    },
+    "louis_vuitton_malletier_s_a_v_haute_diggity_dog_llc_2007": {
+        "senior": ("luxury handbags", "core goods; list and pet-accessory aside dropped"),
+    },
+    "hermes_international_v_rothschild_2023": {
+        "junior": ("NFT digital collectibles", "category phrase; brand name and URL dropped"),
+    },
+    "makers_mark_distillery_inc_v_diageo_north_america_inc_2012": {
+        "senior": ("bourbon whiskey", "price dropped; whisky -> whiskey (US spelling)"),
+        "junior": ("premium tequila", "price dropped"),
+    },
+    "louis_vuitton_malletier_s_a_v_my_other_bag_inc_2016": {
+        "junior": ("canvas tote bag", "price range dropped"),
+    },
+    "rolex_watch_usa_inc_v_beckertime_l_l_c_2024": {
+        "junior": ("refurbished pre-owned watches", "category phrase without the brand name"),
+    },
+    "tiffany_and_co_v_costco_wholesale_corp_2020": {
+        "junior": ("diamond engagement rings", "category phrase without the retailer name"),
+    },
+    "vans_inc_v_mschf_product_studio_inc_2023": {
+        "junior": ("sneakers", "category; quoted model nickname and drop detail removed"),
+    },
+    "dr_seuss_enterprises_l_p_v_comicmix_llc_2020": {
+        "junior": ("illustrated book", "category; the Star Trek franchise name dropped"),
+    },
+    "rosetta_stone_ltd_v_google_inc_2012": {
+        "junior": ("search advertising", "category; parenthetical aside dropped"),
+    },
+    "playboy_enterprises_inc_v_netscape_communications_corp_2004": {
+        "junior": ("keyword search advertising", "category phrase; too long verbatim"),
+    },
+    "fortune_dynamic_inc_v_victorias_secret_stores_brand_management_inc_2010": {
+        "junior": ("women's apparel", "category; promotional-item parenthetical dropped"),
+    },
+    "kate_spade_llc_v_saturdays_surf_llc_2013": {
+        "senior": ("men's apparel", "core goods; accessories and surf shop/cafe dropped"),
+    },
+    "kraft_foods_group_brands_llc_v_cracker_barrel_old_country_store_inc_2013": {
+        "junior": ("packaged hams", "over 6 words verbatim; core accused goods kept"),
+    },
+    "the_pennsylvania_state_university_v_vintage_brand_llc_2024": {
+        "senior": (
+            "collegiate licensed apparel",
+            "the dispute is over merchandise, not university services; category becomes "
+            "apparel/footwear instead of media/entertainment (keyword 'university')",
+        ),
+    },
+}
+
+# Entity type per side when it is not a brand: case_id -> {side: (type, reason)}.
+TYPE_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
+    "mattel_inc_v_mca_records_inc_2002": {
+        "junior": ("artist", "Aqua is a band; searched and ranked among artists"),
+    },
+}
+
 # Explicit, reviewed overrides: case_id -> {side: (query, reason)}. Applied instead of the
 # generic rule. They exist because the mark column describes the accused USE rather than naming
 # the junior BRAND, names a product line or design instead of the brand, or both parties share a
 # name (Coach). Fixed before any score is computed (see module docstring).
+_VIP_PRODUCTS = {
+    "junior": ("VIP Products", "seller brand of the accused goods, not the product Bad Spaniels"),
+}
 QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
+    "vip_products_llc_v_jack_daniels_properties_inc_2018": _VIP_PRODUCTS,
+    "jack_daniels_properties_inc_v_vip_products_llc_2023": _VIP_PRODUCTS,
+    "vip_products_llc_v_jack_daniels_properties_inc_on_remand_2025": _VIP_PRODUCTS,
+    "vip_products_llc_v_jack_daniels_properties_inc_2026": _VIP_PRODUCTS,
     "taco_bell_ip_holder_llc_v_spicy_seasonings_llc_taco_johns_taco_tuesday_2023": {
         "senior": ("Taco John's", "registrant brand, not the phrase"),
         "junior": ("Taco Bell", "petitioner; mark column is 'n/a'"),
@@ -244,14 +378,21 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
         "senior": ("Fiji Water", "brand name"),
     },
     "mattel_inc_v_mca_records_inc_2002": {
-        "junior": ("MCA Records", "accused user; the junior use is a song title"),
+        "junior": (
+            "Aqua",
+            "the accused use is the song 'Barbie Girl' by the band Aqua; MCA Records is defunct",
+        ),
     },
     "dr_seuss_enterprises_l_p_v_comicmix_llc_2020": {
         "senior": ("Dr. Seuss", "brand; the mark is a book title"),
         "junior": ("ComicMix", "accused user's brand"),
     },
     "playboy_enterprises_inc_v_netscape_communications_corp_2004": {
-        "junior": ("Netscape", "accused user; the junior use is keyword advertising"),
+        "junior": (
+            "Netscape",
+            "accused user; the junior use is keyword advertising; defunct brand; expect a "
+            "search miss",
+        ),
     },
     "kellogg_co_v_toucan_golf_inc_2003": {
         "senior": ("Froot Loops", "consumer brand carrying the Toucan Sam mark"),
@@ -362,7 +503,8 @@ def combine_labels(relatedness: str, channels: str) -> tuple[str, str]:
 def build_mapping(cases: list[dict[str, str]]) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     seen: dict[str, int] = {}
-    unused = set(QUERY_OVERRIDES)
+    tables = {"QUERY": QUERY_OVERRIDES, "GOODS": GOODS_OVERRIDES, "TYPE": TYPE_OVERRIDES}
+    unused = {f"{name}_OVERRIDES:{cid}" for name, table in tables.items() for cid in table}
     for case in cases:
         cid = case_id_for(case)
         seen[cid] = seen.get(cid, 0) + 1
@@ -370,15 +512,25 @@ def build_mapping(cases: list[dict[str, str]]) -> list[dict[str, str]]:
             cid = f"{cid}_{seen[cid]}"
         senior_q, junior_q = clean_mark(case["senior_mark"]), clean_mark(case["junior_mark"])
         notes: list[str] = []
+        unused -= {f"{name}_OVERRIDES:{cid}" for name in tables}
         over = QUERY_OVERRIDES.get(cid, {})
-        unused.discard(cid)
         if "senior" in over:
             senior_q = over["senior"][0]
             notes.append(f"senior override: {over['senior'][1]}")
         if "junior" in over:
             junior_q = over["junior"][0]
             notes.append(f"junior override: {over['junior'][1]}")
-        s_goods, j_goods = case["senior_goods"].strip(), case["junior_goods"].strip()
+        types = {"senior": DEFAULT_ENTITY_TYPE, "junior": DEFAULT_ENTITY_TYPE}
+        for side, (etype, reason) in TYPE_OVERRIDES.get(cid, {}).items():
+            entity_urn(etype)  # validates the short name
+            types[side] = etype
+            notes.append(f"{side} type {etype}: {reason}")
+        goods = {side: clean_goods(case[f"{side}_goods"]) for side in ("senior", "junior")}
+        goods_notes: list[str] = []
+        for side, (phrase, reason) in GOODS_OVERRIDES.get(cid, {}).items():
+            goods[side] = phrase
+            goods_notes.append(f"{side} override: {reason}")
+        s_goods, j_goods = goods["senior"], goods["junior"]
         s_cat, j_cat, same = same_category(s_goods, j_goods)
         label, excl = combine_labels(
             case["factor_relatedness_of_goods"], case["factor_channels_purchasers"]
@@ -393,9 +545,12 @@ def build_mapping(cases: list[dict[str, str]]) -> list[dict[str, str]]:
                 "confidence": case["confidence"].strip(),
                 "senior_query": senior_q,
                 "junior_query": junior_q,
+                "senior_type": types["senior"],
+                "junior_type": types["junior"],
                 "query_note": "; ".join(notes) or "generic rule",
                 "senior_goods_phrase": s_goods,
                 "junior_goods_phrase": j_goods,
+                "goods_note": "; ".join(goods_notes) or "generic rule",
                 "senior_category": s_cat,
                 "junior_category": j_cat,
                 "same_category": same,
@@ -411,7 +566,7 @@ def build_mapping(cases: list[dict[str, str]]) -> list[dict[str, str]]:
     if unused and len(cases) == len({case_id_for(c) for c in cases}) and len(cases) > 40:
         # Only checked on the full case file: an override that matches no case is a silent
         # mapping bug (e.g. a renamed case) and must be loud instead.
-        raise ValueError(f"QUERY_OVERRIDES entries match no case: {sorted(unused)}")
+        raise ValueError(f"override entries match no case: {sorted(unused)}")
     return rows
 
 
@@ -451,6 +606,16 @@ def summarize(rows: list[dict[str, str]]) -> dict[str, Any]:
             (r["senior_category"] == "unknown") + (r["junior_category"] == "unknown") for r in rows
         ),
         "query_overrides": sum(r["query_note"] != "generic rule" for r in rows),
+        "goods_overrides": sum(r["goods_note"] != "generic rule" for r in rows),
+        "non_brand_types": sum(
+            (r["senior_type"] != "brand") + (r["junior_type"] != "brand") for r in rows
+        ),
+        "goods_phrases_to_review": [
+            f"{r['case_id']} {side}: {r[f'{side}_goods_phrase']}"
+            for r in rows
+            for side in ("senior", "junior")
+            if goods_needs_review(r[f"{side}_goods_phrase"])
+        ],
     }
 
 

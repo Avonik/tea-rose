@@ -5,7 +5,7 @@ without a key. Unknown requests return an empty result (which is also what the l
 for unknown entities), so the agent's "thin data" paths get exercised too.
 
 Fixture file naming (see fixtures/qloo/README.md):
-  search_brand_<slug>.json
+  search_brand_<slug>.json                   search_<type>_<slug>.json (e.g. search_artist_aqua)
   insights_brand_seed_<slug>.json            insights_brand_seed_<slug>_filter_<tagslug>.json
   insights_tag_seed_<slug>.json
   insights_demographics_<slug>.json
@@ -58,8 +58,9 @@ class FixtureClient:
 
     def _index_ids(self) -> None:
         """Map synthetic entity ids to slugs by reading every search fixture."""
-        for f in self._dir.glob("search_brand_*.json"):
-            slug = f.stem.removeprefix("search_brand_")
+        for f in sorted(self._dir.glob("search_*.json")):
+            kind = f.stem.removeprefix("search_").split("_", 1)[0]
+            slug = f.stem.removeprefix(f"search_{kind}_")
             try:
                 for e in parse_search(self._load(f)):
                     self._id_to_slug.setdefault(e.entity_id, slug)
@@ -94,7 +95,8 @@ class FixtureClient:
 
     async def search(self, query: str, *, types: str = BRAND, take: int = 10):
         params = P.search_params(query, types, take)
-        body, fx = self._find(f"search_brand_{slugify(query)}")
+        kind = types.rsplit(":", 1)[-1]  # urn:entity:artist -> search_artist_<slug>.json
+        body, fx = self._find(f"search_{kind}_{slugify(query)}")
         ents = parse_search(body)[:take]
         return ents, self._query("/search", params, fx, len(ents))
 

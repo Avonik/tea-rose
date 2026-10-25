@@ -11,9 +11,11 @@ Per case with at least one side resolved (the other resolved or proxied):
   measures "category leaders" without peeking at the outcome. Proxy cases are still reported
   separately from the primary metric.
 - Overlap, both directions, exactly as the agent's fetch node: seed = one side's seeds,
-  filter_tags = the other side's universe tags, take 50, page until every target is found or
-  3 pages; an empty first page with several tags is retried once with the broadest tag
-  (fewest path segments). Targets = the other side's entity id or its comparators.
+  filter_tags = the other side's universe tags, filter.type = the TARGET side's entity type
+  (resolved.json `type`, default brand; e.g. Mattel -> Aqua ranks Aqua among artists),
+  take 50, page until every target is found or 3 pages; an empty first page with several tags
+  is retried once with the broadest tag (fewest path segments). Targets = the other side's
+  entity id or its comparators.
   `overlap_evidence(raw, resolution)` turns that into percentiles.
 - Fame (senior only, and only when the senior is a resolved brand): demographics + national
   heatmap (location_query "United States"; empty -> no coverage) -> `fame_evidence(raw)`.
@@ -23,7 +25,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from tearose.eval.backtest.common import Recorder
+from tearose.eval.backtest.common import DEFAULT_ENTITY_TYPE, Recorder, entity_urn
 from tearose.qloo.client import INSIGHTS_MAX_TAKE
 from tearose.qloo.models import Demographics, Entity
 from tearose.schemas import ProxyResolution, Resolution, ResolvedBrand
@@ -45,7 +47,12 @@ def broadest_tag(tag_ids: list[str]) -> str:
 
 
 async def fetch_direction(
-    rec: Recorder, seeds: list[str], filter_tags: list[str], targets: list[str], label: str
+    rec: Recorder,
+    seeds: list[str],
+    filter_tags: list[str],
+    targets: list[str],
+    label: str,
+    result_type: str = "urn:entity:brand",
 ) -> tuple[DirectionalPeers | None, list[str]]:
     notes: list[str] = []
     if not seeds:
@@ -58,12 +65,14 @@ async def fetch_direction(
     exhausted = False
     gave_up = False
     for page in range(1, MAX_PAGES + 1):
-        batch: list[Entity] = list(await rec.insights_entities(seeds, used, page))
+        batch: list[Entity] = list(
+            await rec.insights_entities(seeds, used, page, result_type=result_type)
+        )
         if page == 1 and not batch and len(used) > 1:
             broad = broadest_tag(used)
             notes.append(f"{label}: empty with {len(used)} tags; retried with {broad}.")
             used = [broad]
-            batch = list(await rec.insights_entities(seeds, used, page))
+            batch = list(await rec.insights_entities(seeds, used, page, result_type=result_type))
         pages = page
         ents.extend(batch)
         if page == 1 and not batch:
@@ -138,6 +147,15 @@ def _side_brand(side: str, s: dict[str, Any]) -> ResolvedBrand:
     )
 
 
+def _type_urn(s: dict[str, Any]) -> str:
+    """filter.type when this side is the target: its resolved entity type (older resolved.json
+    files: brand). A proxied side is represented by comparator BRANDS (proxy path unchanged),
+    so its targets are brands whatever the pre-registered type."""
+    if s.get("status") != "resolved":
+        return entity_urn(DEFAULT_ENTITY_TYPE)
+    return entity_urn(s.get("type") or DEFAULT_ENTITY_TYPE)
+
+
 def _uni_tags(s: dict[str, Any]) -> list[str]:
     return list((s.get("universe") or {}).get("tag_ids") or [])
 
@@ -207,10 +225,10 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
     out["used_proxy"] = bool(proxies)
 
     s2j, n1 = await fetch_direction(
-        rec, seeds["senior"], _uni_tags(jun), seeds["junior"], "senior->junior"
+        rec, seeds["senior"], _uni_tags(jun), seeds["junior"], "senior->junior", _type_urn(jun)
     )
     j2s, n2 = await fetch_direction(
-        rec, seeds["junior"], _uni_tags(sen), seeds["senior"], "junior->senior"
+        rec, seeds["junior"], _uni_tags(sen), seeds["senior"], "junior->senior", _type_urn(sen)
     )
     notes.extend(n1 + n2)
 

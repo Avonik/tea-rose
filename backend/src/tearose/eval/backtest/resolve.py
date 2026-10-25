@@ -1,8 +1,10 @@
 """Step 2, `resolve`: mapping.csv -> resolved.json. Qloo: /search, /v2/tags, insights tags.
 
 Deterministic rules (no model):
-- Brand pick: /search(query, types=brand, take=10); the first result whose name equals the
-  query case-insensitively, else the first result. All candidate names are recorded.
+- Entity pick: /search(query, types=<side type>, take=10), the side type coming from the
+  mapping's senior_type / junior_type column ("brand" unless pre-registered otherwise, e.g.
+  "artist" for Aqua); the first result whose name equals the query case-insensitively, else the
+  first result. All candidate names and the type are recorded.
 - Same entity on both sides (e.g. a junior query that only finds the senior) -> the junior is
   treated as not found.
 - Not found -> proxy path: the goods phrase goes VERBATIM to /v2/tags; if that returns nothing,
@@ -19,7 +21,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from tearose.eval.backtest.common import Recorder
+from tearose.eval.backtest.common import DEFAULT_ENTITY_TYPE, Recorder, entity_urn
 from tearose.qloo.models import Entity, Tag
 from tearose.scoring.universe import pick_category_tags
 
@@ -88,10 +90,16 @@ async def tags_for_phrase(rec: Recorder, phrase: str) -> dict[str, Any]:
 
 
 async def resolve_side(
-    rec: Recorder, query: str, goods_phrase: str, avoid_entity_id: str | None = None
+    rec: Recorder,
+    query: str,
+    goods_phrase: str,
+    avoid_entity_id: str | None = None,
+    entity_type: str = DEFAULT_ENTITY_TYPE,
 ) -> dict[str, Any]:
     notes: list[str] = []
-    results = list(await rec.search(query, take=SEARCH_TAKE)) if query.strip() else []
+    entity_type = (entity_type or DEFAULT_ENTITY_TYPE).strip() or DEFAULT_ENTITY_TYPE
+    urn = entity_urn(entity_type)
+    results = list(await rec.search(query, take=SEARCH_TAKE, types=urn)) if query.strip() else []
     entity, rule = pick_entity(query, results)
     if entity is not None and avoid_entity_id and entity.entity_id == avoid_entity_id:
         notes.append(
@@ -101,6 +109,8 @@ async def resolve_side(
         entity, rule = None, "picked the other side's entity"
     side: dict[str, Any] = {
         "query": query,
+        "type": entity_type,
+        "type_urn": urn,
         "goods_phrase": goods_phrase,
         "candidates_considered": [e.name for e in results],
         "pick_rule": rule,
@@ -150,9 +160,18 @@ async def resolve_side(
 
 
 async def resolve_case(rec: Recorder, row: dict[str, str]) -> dict[str, Any]:
-    senior = await resolve_side(rec, row["senior_query"], row["senior_goods_phrase"])
+    senior = await resolve_side(
+        rec,
+        row["senior_query"],
+        row["senior_goods_phrase"],
+        entity_type=row.get("senior_type") or DEFAULT_ENTITY_TYPE,
+    )
     junior = await resolve_side(
-        rec, row["junior_query"], row["junior_goods_phrase"], avoid_entity_id=senior["entity_id"]
+        rec,
+        row["junior_query"],
+        row["junior_goods_phrase"],
+        avoid_entity_id=senior["entity_id"],
+        entity_type=row.get("junior_type") or DEFAULT_ENTITY_TYPE,
     )
     return {
         "case_id": row["case_id"],

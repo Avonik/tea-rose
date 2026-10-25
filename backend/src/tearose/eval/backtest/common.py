@@ -24,6 +24,18 @@ SCORES_NAME = "scores.json"
 
 LIVE_SLEEP_S = 0.25  # extra pause between uncached live calls (LiveClient also rate-limits)
 
+# Qloo entity types a mapping side may be searched as (short names; "brand" is the default).
+ENTITY_TYPES = ("brand", "artist", "movie", "book", "tv_show", "person", "place", "podcast")
+DEFAULT_ENTITY_TYPE = "brand"
+
+
+def entity_urn(short: str | None) -> str:
+    """Short name -> URN (artist -> urn:entity:artist); empty/None -> brand (old mappings)."""
+    t = (short or DEFAULT_ENTITY_TYPE).strip() or DEFAULT_ENTITY_TYPE
+    if t not in ENTITY_TYPES:
+        raise ValueError(f"unknown entity type {t!r}; expected one of {ENTITY_TYPES}")
+    return f"urn:entity:{t}"
+
 
 def default_out_dir(mode: str) -> Path:
     """Where resolve/score/report write: backend/eval/ for live, backend/eval/_fixture/ else."""
@@ -104,9 +116,14 @@ class Recorder:
             await asyncio.sleep(LIVE_SLEEP_S)
         return data
 
-    async def search(self, query: str, take: int = 10) -> Any:
+    async def search(self, query: str, take: int = 10, types: str = "urn:entity:brand") -> Any:
         return await self.call(
-            "search", [], lambda: self.client.search(query, take=take), query=query, take=take
+            "search",
+            [],
+            lambda: self.client.search(query, types=types, take=take),
+            query=query,
+            types=types,
+            take=take,
         )
 
     async def tags_search(self, query: str) -> Any:
@@ -124,15 +141,21 @@ class Recorder:
         )
 
     async def insights_entities(
-        self, seeds: list[str], filter_tags: list[str] | None, page: int, take: int = 50
+        self,
+        seeds: list[str],
+        filter_tags: list[str] | None,
+        page: int,
+        take: int = 50,
+        result_type: str = "urn:entity:brand",
     ) -> Any:
         return await self.call(
             "insights_entities",
             [],
             lambda: self.client.insights_entities(
-                seeds, filter_tags=filter_tags, page=page, take=take
+                seeds, result_type=result_type, filter_tags=filter_tags, page=page, take=take
             ),
             seeds=seeds,
+            result_type=result_type,
             filter_tags=filter_tags,
             page=page,
             take=take,

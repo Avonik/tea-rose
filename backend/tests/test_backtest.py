@@ -70,7 +70,11 @@ def test_prepare_mapping(five_row_csv: Path, tmp_path: Path) -> None:
 
     assert (a["senior_query"], a["junior_query"]) == ("Jack Daniel's", "Bad Spaniels")
     assert g["senior_query"] == "Gamma" and e["senior_query"] == "Eps"
-    assert a["junior_goods_phrase"] == "squeaky dog chew toy (Silly Squeakers line)"
+    # goods phrases: generic cleaning (parenthetical gone, text after ";" dropped)
+    assert a["senior_goods_phrase"] == "Tennessee whiskey"
+    assert a["junior_goods_phrase"] == "squeaky dog chew toy"
+    assert (a["goods_note"], a["query_note"]) == ("generic rule", "generic rule")
+    assert all(r["senior_type"] == r["junior_type"] == "brand" for r in rows.values())
 
     # same-category: earliest keyword wins (whiskey before dog), parentheticals ignored
     assert (a["senior_category"], a["junior_category"], a["same_category"]) == (
@@ -105,6 +109,67 @@ def test_real_mapping_builds_without_blocked_rows() -> None:
     assert all(r["senior_query"].strip() and r["junior_query"].strip() for r in rows)
     coach = next(r for r in rows if r["case_id"].startswith("coach_services"))
     assert coach["junior_query"] == "Triumph Learning"
+    by_id = {r["case_id"]: r for r in rows}
+
+    # query overrides land in query_note; entity type columns
+    mattel = by_id["mattel_inc_v_mca_records_inc_2002"]
+    assert (mattel["junior_query"], mattel["junior_type"], mattel["senior_type"]) == (
+        "Aqua", "artist", "brand")  # fmt: skip
+    assert "Barbie Girl" in mattel["query_note"] and "junior type artist" in mattel["query_note"]
+    playboy = by_id["playboy_enterprises_inc_v_netscape_communications_corp_2004"]
+    assert playboy["junior_query"] == "Netscape"
+    assert "defunct brand; expect a search miss" in playboy["query_note"]
+    mtm = by_id["multi_time_machine_inc_v_amazon_com_inc_2015"]
+    assert mtm["senior_query"] == "MTM Special Ops"
+    # accused side = seller brand, not the product name
+    spaniels = [r for r in rows if r["junior_query"] == "VIP Products"]
+    assert len(spaniels) == 4 and len({r["dispute_id"] for r in spaniels}) == 1
+    assert all("seller brand" in r["query_note"] for r in spaniels)
+    assert {r["junior_query"] for r in rows if r["case_id"].startswith("starbucks")} == {
+        "Black Bear Micro Roastery"}  # fmt: skip
+    assert by_id["vans_inc_v_mschf_product_studio_inc_2023"]["junior_query"] == "MSCHF"
+    assert sum(r["senior_type"] != "brand" or r["junior_type"] != "brand" for r in rows) == 1
+
+    # goods overrides land in goods_note; every phrase is a short category phrase
+    mm = by_id["makers_mark_distillery_inc_v_diageo_north_america_inc_2012"]
+    assert (mm["senior_goods_phrase"], mm["junior_goods_phrase"]) == (
+        "bourbon whiskey", "premium tequila")  # fmt: skip
+    assert "whisky -> whiskey" in mm["goods_note"]
+    penn = by_id["the_pennsylvania_state_university_v_vintage_brand_llc_2024"]
+    assert (penn["senior_goods_phrase"], penn["senior_category"]) == (
+        "collegiate licensed apparel", "apparel/footwear")  # fmt: skip
+    for r in rows:
+        for side in ("senior", "junior"):
+            phrase = r[f"{side}_goods_phrase"]
+            assert phrase and not prepare.goods_needs_review(phrase), (r["case_id"], phrase)
+            assert not any(ch in phrase for ch in '();$"“”') and "http" not in phrase
+    assert prepare.summarize(rows)["goods_phrases_to_review"] == []
+
+
+def test_clean_goods_generic_rule() -> None:
+    cg = prepare.clean_goods
+    assert cg("squeaky dog chew toy (Silly Squeakers line)") == "squeaky dog chew toy"
+    assert cg("Tennessee whiskey; licensed merchandise incl. dog collars") == "Tennessee whiskey"
+    assert cg("$30-$55 canvas tote bags") == "canvas tote bags"
+    assert cg("bourbon whisky ($24)") == "bourbon whisky"  # no vocabulary change
+    assert cg("premium tequila $100 to $150 per bottle") == "premium tequila per bottle"
+    assert cg("distorted 'wavy' sneaker, limited drop") == "distorted wavy sneaker, limited drop"
+    assert cg('“limited” "drop" sneakers') == "limited drop sneakers"
+    assert cg("women’s apparel") == "women's apparel" and cg("men's apparel") == "men's apparel"
+    assert cg("NFT bags sold at https://example.com/x and metabirkins.com") == (
+        "NFT bags sold at and")  # fmt: skip
+    assert cg("  luxury   handbags ,") == "luxury handbags"
+    assert prepare.goods_needs_review("hams and other packaged foods in grocery stores")
+    assert prepare.goods_needs_review("Old No. 7 whiskey")
+    assert not prepare.goods_needs_review("Mexican fast food restaurant")
+
+
+def test_clean_mark_keeps_acronyms() -> None:
+    assert prepare.clean_mark("MTM SPECIAL OPS") == "MTM Special Ops"
+    assert prepare.clean_mark("QSC POWERWAVE") == "QSC Powerwave"
+    assert prepare.clean_mark("JACK DANIEL'S (Old No. 7 word marks)") == "Jack Daniel's"
+    assert prepare.clean_mark("POM WONDERFUL") == "Pom Wonderful"  # vowels -> a word
+    assert prepare.clean_mark("LSU") == "Lsu"  # has a vowel: not treated as an acronym
 
 
 # --------------------------------------------------------------------------------------
@@ -191,6 +256,37 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     assert s["junior_to_senior"]["percentile"] is None  # comparators have no fixture
     assert s["breadth_score"] is not None and s["senior_popularity"] == pytest.approx(0.9981)
     assert s["queries"]
+
+
+def _params(case_or_score: dict[str, object], call: str) -> list[dict[str, object]]:
+    return [q["params"] for q in case_or_score["queries"] if q["call"] == call]  # type: ignore[index,union-attr]
+
+
+async def test_resolve_and_score_honour_entity_type() -> None:
+    rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
+    row = {
+        **_mapping_row(), "case_id": "mattel_v_aqua", "senior_query": "Jack Daniel's",
+        "junior_query": "Aqua", "senior_type": "brand", "junior_type": "artist",
+        "junior_goods_phrase": "dog toys",  # a phrase the fixtures can serve as a universe
+    }  # fmt: skip
+    resolved = await resolve.run(rec, [row], "fixture", "sha")
+    case = resolved["cases"][0]
+    sen, jun = case["senior"], case["junior"]
+    assert (jun["status"], jun["entity_name"], jun["type"]) == ("resolved", "Aqua", "artist")
+    assert jun["type_urn"] == "urn:entity:artist" and sen["type"] == "brand"
+    searches = {p["query"]: p["types"] for p in _params(case, "search")}
+    assert searches == {"Jack Daniel's": "urn:entity:brand", "Aqua": "urn:entity:artist"}
+
+    s = (await score_step.run(rec, resolved))["cases"][0]
+    by_seed = {p["signal.interests.entities"]: p["filter.type"]
+               for p in _params(s, "insights_entities")}  # fmt: skip
+    assert by_seed[sen["entity_id"]] == "urn:entity:artist"  # senior->junior ranks artists
+    assert by_seed[jun["entity_id"]] == "urn:entity:brand"  # junior->senior ranks brands
+
+    # no type column (older mapping) -> brand
+    old = {k: v for k, v in _mapping_row().items() if not k.endswith("_type")}
+    doc = await resolve.run(rec, [old], "fixture", "sha")
+    assert doc["cases"][0]["junior"]["type"] == "brand"
 
 
 # --------------------------------------------------------------------------------------

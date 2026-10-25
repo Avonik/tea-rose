@@ -1,0 +1,32 @@
+{
+  "_fixture": {
+    "synthetic": true,
+    "note": "Artist search for the back-test (Mattel v. MCA Records: the accused use is the song 'Barbie Girl' by Aqua, so the junior side is searched as an artist). Numbers are invented for development; field names follow docs.qloo.com / github.com/qloo/docs-public (see docs/qloo-api-notes.md). Strip this key before parsing.",
+    "request": {
+      "method": "GET",
+      "base_url": "https://hackathon.api.qloo.com",
+      "path": "/search",
+      "params": {
+        "query": "Aqua",
+        "types": "urn:entity:artist",
+        "take": 10
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "Aqua",
+      "entity_id": "FA4E0000-0000-4000-A000-0000000000A1",
+      "types": [
+        "urn:entity:artist"
+      ],
+      "popularity": 0.8714,
+      "properties": {
+        "description": "Danish-Norwegian dance-pop group (synthetic fixture description).",
+        "image": {
+          "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-0000000000A1-420x-auto.jpg"
+        }
+      }
+    }
+  ]
+}
