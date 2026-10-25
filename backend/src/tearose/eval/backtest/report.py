@@ -1,9 +1,12 @@
 """Step 4, `report`: mapping.csv + scores.json -> results/backtest_<YYYYMMDD>[_v<N>].{md,json}.
 
 Harness version: run 1 (v1, the pre-registered rules) wrote backtest_<date>.md/.json and is kept
-as the record; harness v2 writes backtest_<date>_v2.md/.json and adds the "Deviations from
-pre-registration" section. Two Qloo signals are reported side by side for every subset: the
-symmetric rank percentile (censored ranks excluded) and the symmetric affinity ratio.
+as the record; harness v2 wrote backtest_<date>_v2.md/.json and added the "Deviations from
+pre-registration" section; harness v3 writes backtest_<date>_v3.md/.json, adds a dated v3
+paragraph (identification by the product's model-driven resolver), a "Resolver" header line and
+a per-case note where the agent's pick differs from the name rule's pick. Two Qloo signals are
+reported side by side for every subset: the symmetric rank percentile (censored ranks excluded)
+and the symmetric affinity ratio.
 
 Metric formulas (stats.py has the implementations):
 
@@ -61,6 +64,21 @@ DEVIATIONS_V2 = [
     "",
     "Labels (`cases_candidates.csv`) and `mapping.csv` are unchanged (same mapping sha256). "
     "Run 1 is kept as the record; the v2 numbers are post-hoc and should be read as such.",
+]
+
+DEVIATIONS_V3 = [
+    "**Harness v3 (2026-10-25): identification by the product's resolver.** Up to v2 each "
+    "brand was identified by a code-only name rule (normalised exact or strict fuzzy name "
+    "match on /search, else a miss). That rule rejected matches the shipped product resolves "
+    'correctly ("Hershey\'s" vs "The Hershey Company", "Chase" vs "Chase Bank", '
+    '"Trek" vs "Trek Bicycle Corporation", "New York Stock Exchange" vs "NYSE"), '
+    "so v2 measured a stricter pipeline than the one shipped. Now `resolve` runs the product's "
+    "model-driven resolve node (`agent/nodes/resolve.py`) on the frozen mapping (queries, goods "
+    "phrases, entity-type hints, case name and year; no court labels or factor columns in the "
+    "input). The pick, the name-rule guardrail result, the proxy and the universe are recorded "
+    "per case in `resolved.json`, together with the name rule's pick for comparison. Scoring "
+    "is unchanged and stays in code. Labels (`cases_candidates.csv`) and `mapping.csv` are "
+    "unchanged; the v1 and v2 reports are kept.",
 ]
 
 
@@ -168,6 +186,26 @@ def dedupe_by_dispute(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [r for r in rows if best[r["dispute_id"]] is r]
 
 
+def pick_note(score: dict[str, Any]) -> str | None:
+    """'senior: Agent pick (rule: Rule pick)' for each side where the agent's pick differs."""
+    cmp = score.get("pick_vs_rule") or {}
+    parts = [
+        f"{side}: {c.get('agent') or 'miss'} (rule: {c.get('rule') or 'miss'})"
+        for side, c in cmp.items()
+        if c.get("differs")
+    ]
+    return "; ".join(parts) or None
+
+
+def resolver_line(res: dict[str, Any]) -> str:
+    if res.get("resolver") == "agent":
+        return (
+            f"Resolver: **agent** (the product's resolve node, model `{res.get('model')}`); the "
+            "name rule's pick is computed alongside, differences in the per-case table."
+        )
+    return "Resolver: **rule** (code-only name rule, no model)."
+
+
 def _main_residual(c: dict[str, Any]) -> float:
     r = c["residual"] if c["residual"] is not None else c.get("residual_ratio")
     return float(r) if r is not None else 0.0
@@ -232,6 +270,7 @@ def build(mapping: list[dict[str, str]], scores: dict[str, Any]) -> dict[str, An
                 "same_category": r["same_category"],
                 "popularity_product": _popprod(r),
                 "used_proxy": r["score"]["used_proxy"],
+                "pick_vs_rule": pick_note(r["score"]),
             }
         )
     per_case.sort(key=lambda c: -abs(_main_residual(c)))
@@ -239,6 +278,8 @@ def build(mapping: list[dict[str, str]], scores: dict[str, Any]) -> dict[str, An
     return {
         "generated": dt.date.today().isoformat(),
         "harness_version": scores.get("harness_version", 1),
+        "resolver": scores.get("resolver", "rule"),
+        "model": scores.get("model"),
         "qloo_mode": scores.get("qloo_mode"),
         "mapping_sha256": scores.get("mapping_sha256"),
         "comparator_rule": scores.get("comparator_rule"),
@@ -340,9 +381,13 @@ def render_markdown(res: dict[str, Any]) -> str:
         f"Qloo mode: **{res['qloo_mode']}**. Harness version: **{version}**. Mapping sha256: "
         f"`{res['mapping_sha256']}`. Cases in mapping: {res['cases_total']}.",
         "",
+        resolver_line(res),
+        "",
     ]
     if version >= 2:
         out += ["## Deviations from pre-registration", "", *DEVIATIONS_V2, ""]
+    if version >= 3:
+        out += [*DEVIATIONS_V3, ""]
     if res["qloo_mode"] != "live":
         out += [
             "> **Fixture run.** These numbers come from synthetic fixtures and say nothing about "
@@ -391,8 +436,8 @@ def render_markdown(res: dict[str, Any]) -> str:
         "finding.",
         "",
         "| case | year | senior / junior | label | rank pct | residual | affinity ratio | "
-        "residual (ratio) | same cat | proxy |",
-        "|---|---|---|---|---:|---:|---:|---:|---|---|",
+        "residual (ratio) | same cat | proxy | pick vs rule |",
+        "|---|---|---|---|---:|---:|---:|---:|---|---|---|",
     ]
     for i, c in enumerate(res["per_case"]):
         flag = " **(failure)**" if i < 5 and abs(_main_residual(c)) >= 0.5 else ""
@@ -400,10 +445,11 @@ def render_markdown(res: dict[str, Any]) -> str:
             f"| {c['case_name']}{flag} | {c['year']} | {c['senior']} / {c['junior']} | "
             f"{c['label']} | {_fmt(c['symmetric_percentile'])} | {_fmt(c['residual'])} | "
             f"{_fmt(c.get('symmetric_affinity_ratio'))} | {_fmt(c.get('residual_ratio'))} | "
-            f"{c['same_category']} | {'yes' if c['used_proxy'] else 'no'} |"
+            f"{c['same_category']} | {'yes' if c['used_proxy'] else 'no'} | "
+            f"{c.get('pick_vs_rule') or ''} |"
         )
     if not res["per_case"]:
-        out.append("| (no scored cases) | | | | | | | | | |")
+        out.append("| (no scored cases) | | | | | | | | | | |")
     out += ["", "## Exclusions (primary relatedness metric)", ""]
     for reason, n in sorted(rel["excluded"].items(), key=lambda kv: -kv[1]):
         out.append(f"- {reason}: {n}")
@@ -416,7 +462,12 @@ def render_markdown(res: dict[str, Any]) -> str:
         "- 95% CIs: percentile bootstrap, 2000 resamples of cases, fixed seed; resamples where "
         "the statistic is undefined are skipped.",
         f"- Proxy comparators: {res.get('comparator_rule') or 'n/a'}.",
-        "- No language model is used anywhere in this harness.",
+        "- Scoring and statistics use no language model. "
+        + (
+            "Identification used the product's model-driven resolve node (harness v3)."
+            if res.get("resolver") == "agent"
+            else "Identification used the code-only name rule."
+        ),
         "",
     ]
     return "\n".join(out)
@@ -488,12 +539,19 @@ def frontend_doc(res: dict[str, Any], current: dict[str, Any]) -> dict[str, Any]
                     if llm.get("value") == "pending" else llm)  # fmt: skip
     version = res.get("harness_version", 1)
     deviation = (
-        f" Harness v{version}: universe = the brand's own category tags, censored ranks "
+        " Harness v2: universe = the brand's own category tags, censored ranks "
         "reported as censored with a direct affinity lookup, one taxonomy synonym corrected "
         "(post-hoc deviations from pre-registration, documented; run 1 kept as the record)."
         if version >= 2
         else ""
     )
+    if version >= 3:
+        deviation += (
+            f" Harness v3: brands identified by the product's resolver "
+            f"({res.get('resolver', 'rule')}"
+            + (f", model {res.get('model')}" if res.get("resolver") == "agent" else "")
+            + "); scoring unchanged."
+        )
     return {
         "status": "complete",
         "harness_version": version,

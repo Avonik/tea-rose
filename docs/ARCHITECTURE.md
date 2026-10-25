@@ -88,10 +88,11 @@ writes it; it never names an outcome. Runs stored before the field existed load 
   first result". Agent: the model judges hit vs miss from name, disambiguation, popularity and
   categories; no entity id ⇒ proxy path. `qloo/names.py` is only a guardrail there: a pick whose
   normalised name is not similar to the party's marks/name is kept but flagged ("Name check" in
-  `disambiguation_note` and a trace warning). Back-test: strict code rule `pick_by_name`
+  `disambiguation_note` and a trace warning). Back-test (harness v3): the same resolve node by
+  default (`--resolver agent`); `--resolver rule` = strict code rule `pick_by_name`
   (normalised exact, else fuzzy: all query tokens + at most one extra token or difflib ≥ 0.9,
-  else miss; recorded as `exact` / `fuzzy:<ratio>` / `miss`). Both: same entity on both sides ⇒
-  junior miss.
+  else miss; recorded as `exact` / `fuzzy:<ratio>` / `miss`), which the agent resolver also
+  records next to its pick for comparison. Both: same entity on both sides ⇒ junior miss.
 - **Brand taxonomy.** `qloo/taxonomy.py` harvests the ~177-node `urn:tag:genre:brand` tree with
   26 letter queries to `/v2/tags` (cached, memoised per client). `map_goods_phrase` scores nodes
   by token overlap with name and path plus a small synonym table and labels the fit: `exact`

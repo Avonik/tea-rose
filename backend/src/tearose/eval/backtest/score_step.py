@@ -2,7 +2,10 @@
 
 Per case with at least one side resolved (the other resolved or proxied):
 
-- Seeds: a resolved side seeds with its entity id. A proxied side seeds with COMPARATORS: the
+- Seeds: a resolved side seeds with its entity id. A proxied side resolved by the agent resolver
+  (harness v3) seeds with the comparators the product's resolve node chose, as the product's
+  fetch node does (`comparator_source` "agent"). Otherwise (rule resolver, or the agent kept
+  none; `comparator_source` "rule") a proxied side seeds with COMPARATORS: the
   brands returned by insights entities seeded by the OTHER side's entity and filtered to the
   proxy tags (page 1, take 50), top 3 by POPULARITY (ties by rank), excluding the seed itself.
   Deviation from "top 3 by rank", on purpose: picking the brands that rank highest for the
@@ -171,6 +174,46 @@ def _uni_tags(s: dict[str, Any]) -> list[str]:
     return list((s.get("universe") or {}).get("tag_ids") or [])
 
 
+AGENT_COMPARATOR_RULE = (
+    "the comparators the product's resolve node chose and validated (agent resolver), as the "
+    "product's fetch node uses them"
+)
+
+
+def agent_comparators(case: dict[str, Any], s: dict[str, Any]) -> list[Entity]:
+    """Agent resolver only: the node's comparator brands for a proxied side (empty otherwise)."""
+    if case.get("resolver") != "agent":
+        return []
+    p = s.get("proxy") or {}
+    ids = list(p.get("comparator_entity_ids") or [])
+    names = list(p.get("comparator_entity_names") or [])
+    pops = list(p.get("comparator_popularity") or [])
+    return [
+        Entity(
+            entity_id=eid,
+            name=names[i] if i < len(names) else eid,
+            popularity=pops[i] if i < len(pops) else None,
+        )
+        for i, eid in enumerate(ids)
+    ]
+
+
+def pick_comparison(case: dict[str, Any]) -> dict[str, Any]:
+    """Agent resolver only: per side, the agent's pick next to the name rule's pick."""
+    if case.get("resolver") != "agent":
+        return {}
+    out: dict[str, Any] = {}
+    for side in ("senior", "junior"):
+        s = case[side]
+        rp = s.get("rule_pick") or {}
+        out[side] = {
+            "agent": s.get("entity_name"),
+            "rule": rp.get("entity_name"),
+            "differs": s.get("agrees_with_rule") is False,
+        }
+    return {"pick_vs_rule": out, "resolver_error": case.get("error")}
+
+
 async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
     sen, jun = case["senior"], case["junior"]
     out: dict[str, Any] = {
@@ -187,8 +230,10 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         "used_proxy": False,
         "proxy_sides": [],
         "comparators": {},
+        "comparator_source": {},
         "notes": [],
         "queries": [],
+        **pick_comparison(case),
     }
     notes: list[str] = out["notes"]
     statuses = (sen["status"], jun["status"])
@@ -208,12 +253,20 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         if s["status"] == "resolved":
             seeds[side] = [s["entity_id"]]
             continue
-        comps, cnotes = await comparators_for(rec, other["entity_id"], _uni_tags(s))
-        notes.extend(f"{side} {n}" for n in cnotes)
+        comps, source = agent_comparators(case, s), "agent"
+        rule_text = AGENT_COMPARATOR_RULE
+        if not comps:
+            comps, cnotes = await comparators_for(rec, other["entity_id"], _uni_tags(s))
+            notes.extend(f"{side} {n}" for n in cnotes)
+            source, rule_text = "rule", COMPARATOR_RULE
+            if case.get("resolver") == "agent":
+                notes.append(f"{side}: the agent kept no comparators; code rule used.")
         seeds[side] = [c.entity_id for c in comps]
         out["proxy_sides"].append(side)
+        out["comparator_source"][side] = source
         out["comparators"][side] = {
-            "rule": COMPARATOR_RULE,
+            "source": source,
+            "rule": rule_text,
             "ids": [c.entity_id for c in comps],
             "names": [c.name for c in comps],
             "popularity": [c.popularity for c in comps],
@@ -225,7 +278,7 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
             chosen_tag_ids=s["proxy"]["chosen_tag_ids"],
             comparator_brand_ids=[c.entity_id for c in comps],
             comparator_brand_names=[c.name for c in comps],
-            rationale=f"Back-test proxy: {COMPARATOR_RULE}.",
+            rationale=f"Back-test proxy: {rule_text}.",
         )
         if comps:
             notes.append(
@@ -295,9 +348,15 @@ async def run(rec: Recorder, resolved: dict[str, Any]) -> dict[str, Any]:
     cases = [await score_case(rec, c) for c in resolved["cases"]]
     return {
         "harness_version": HARNESS_VERSION,
+        "resolver": resolved.get("resolver", "rule"),
+        "model": resolved.get("model"),
         "qloo_mode": resolved.get("qloo_mode"),
         "mapping_sha256": resolved.get("mapping_sha256"),
-        "comparator_rule": COMPARATOR_RULE,
+        "comparator_rule": (
+            f"agent resolver: {AGENT_COMPARATOR_RULE}; when the agent kept none: {COMPARATOR_RULE}"
+            if resolved.get("resolver") == "agent"
+            else COMPARATOR_RULE
+        ),
         "cases": cases,
     }
 

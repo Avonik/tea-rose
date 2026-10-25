@@ -50,6 +50,11 @@ def main(argv: list[str] | None = None) -> None:
     )  # fmt: skip
     ap.add_argument("--force", action="store_true", help="prepare: overwrite a differing mapping")
     ap.add_argument("--all", action="store_true", help="resolve: also rows outside every metric")
+    ap.add_argument(
+        "--resolver", choices=list(resolve.RESOLVERS), default="agent",
+        help="resolve: 'agent' = the product's model-driven resolve node (default, harness v3); "
+        "'rule' = the v2 code-only name rule",
+    )  # fmt: skip
     ap.add_argument("--frontend", action="store_true", help="report: update backtest.json even "
                     "when not a live run")  # fmt: skip
     ap.add_argument("--no-frontend", action="store_true", help="report: never touch frontend")
@@ -69,7 +74,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.step == "resolve":
         rows = resolve.selected_rows(mapping, args.all)
         doc = asyncio.run(
-            _with_client(lambda rec: resolve.run(rec, rows, mode, sha256_file(args.mapping)))
+            _with_client(
+                lambda rec: resolve.run(
+                    rec, rows, mode, sha256_file(args.mapping), resolver=args.resolver
+                )
+            )
         )
         write_json(out_dir / RESOLVED_NAME, doc)
         _print("resolve", {"mode": mode, "out": str(out_dir / RESOLVED_NAME),

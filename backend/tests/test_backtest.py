@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 
+from tearose.agent.llm import ScriptedChatModel, ai_tools, tool_call
 from tearose.config import get_settings
 from tearose.eval.backtest import HARNESS_VERSION, prepare, report, resolve, score_step, stats
 from tearose.eval.backtest.common import Recorder, read_csv
@@ -242,7 +243,8 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     sen, jun = case["senior"], case["junior"]
     assert sen["status"] == "resolved" and sen["entity_name"] == "Jack Daniel's"
     assert sen["pick_rule"] == "exact"
-    assert resolved["harness_version"] == HARNESS_VERSION == 2
+    assert resolved["harness_version"] == HARNESS_VERSION == 3
+    assert resolved["resolver"] == case["resolver"] == "rule" and resolved["model"] is None
     # harness v2 universe = the brand's OWN most specific genre:brand tags from /search
     # (wine_and_spirits and spirits are ancestors of whiskey and drop out); no insights call
     assert sen["universe"]["tag_ids"] == ["urn:tag:genre:brand:wine_and_spirits:spirits:whiskey"]
@@ -266,6 +268,7 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     assert s["status"] == "scored" and s["used_proxy"] is True
     assert s["proxy_sides"] == ["junior"]
     assert s["comparators"]["junior"]["names"] == ["Ruffwear", "Petco", "Greenies"]
+    assert s["comparator_source"] == {"junior": "rule"}  # rule resolver: always the code rule
     # pet universe has 15 brands (BarkBox ranks 14 of 15); comparator ranks 13, 3, 10
     assert s["senior_to_junior"]["universe"] == 15
     assert s["symmetric_percentile"] == pytest.approx(1 - (26 / 3 - 1) / 15)
@@ -279,7 +282,8 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     assert {p["filter.results.entities"] for p in lookups} == set(s["comparators"]["junior"]["ids"])
     assert all(p["filter.tags"] == "urn:tag:genre:brand:food_and_beverage:pet_food"
                for p in lookups)  # fmt: skip
-    assert scores["harness_version"] == 2
+    assert scores["harness_version"] == 3 and scores["resolver"] == "rule"
+    assert "pick_vs_rule" not in s  # rule resolver: nothing to compare
     assert s["breadth_score"] is not None and s["senior_popularity"] == pytest.approx(0.9981)
     assert s["queries"]
 
@@ -418,8 +422,19 @@ def _synthetic(n: int) -> tuple[list[dict[str, str]], dict[str, object]]:
             "symmetric_percentile": None if k == 1 else (k * 7 % n) / n,
             "symmetric_affinity_ratio": 0.4 + (k * 3 % n) / (2 * n), "senior_popularity": 0.9,
             "junior_popularity": 0.5 + k / (2 * n), "breadth_score": k / n,
+            "pick_vs_rule": {
+                "senior": {"agent": "The Hershey Company", "rule": None, "differs": k == 2},
+                "junior": {"agent": "Chase Bank", "rule": "Chase Bank", "differs": False},
+            },
         })  # fmt: skip
-    doc = {"harness_version": 2, "qloo_mode": "fixture", "mapping_sha256": "abc", "cases": cases}
+    doc = {
+        "harness_version": 3,
+        "resolver": "agent",
+        "model": "test-model",
+        "qloo_mode": "fixture",
+        "mapping_sha256": "abc",
+        "cases": cases,
+    }
     return mapping, doc
 
 
@@ -434,7 +449,7 @@ def test_report_sections(tmp_path: Path) -> None:
     for section in ("## Headline", "#### Primary (no proxy)", "Baseline: same-category",
                     "Baseline: popularity product", "## Fame", "## Per-case table",
                     "## Exclusions", "Fixture run", "## Deviations from pre-registration",
-                    "Harness version: **2**", "Qloo symmetric affinity ratio",
+                    "Harness version: **3**", "Qloo symmetric affinity ratio",
                     "Qloo symmetric rank percentile (censored ranks excluded)",
                     "affinity ratio | residual (ratio)"):  # fmt: skip
         assert section in md, section
@@ -443,9 +458,18 @@ def test_report_sections(tmp_path: Path) -> None:
     for change in ("Universe rule", "Censored ranks", "Taxonomy synonym",
                    "Labels (`cases_candidates.csv`) and `mapping.csv` are unchanged"):  # fmt: skip
         assert change in md
-    # v2 files; run 1 names are never written by harness v2
-    assert Path(out["markdown"]).name.endswith("_v2.md")
-    assert Path(out["json"]).name.endswith("_v2.json")
+    # harness v3: dated paragraph, resolver header line, per-case pick-vs-rule note
+    assert "**Harness v3 (2026-10-25): identification by the product's resolver.**" in md
+    for phrase in ("model-driven resolve node", "Scoring is unchanged",
+                   "`mapping.csv` are unchanged; the v1 and v2 reports are kept"):  # fmt: skip
+        assert phrase in md, phrase
+    assert "Resolver: **agent** (the product's resolve node, model `test-model`)" in md
+    assert "| pick vs rule |" in md
+    assert "senior: The Hershey Company (rule: miss)" in md
+    assert md.count("(rule: ") == 1  # only the differing side of the differing case
+    # v3 files; run 1 and v2 names are never written by harness v3
+    assert Path(out["markdown"]).name.endswith("_v3.md")
+    assert Path(out["json"]).name.endswith("_v3.json")
     written = sorted(p.name for p in (tmp_path / "results").iterdir())
     assert written == sorted([Path(out["markdown"]).name, Path(out["json"]).name])
     # case 1 has no rank percentile but an affinity ratio: still in the subset, per-signal n
@@ -453,7 +477,8 @@ def test_report_sections(tmp_path: Path) -> None:
     assert "affinity ratio (second Qloo signal, n = 19)" in md
     assert "proxy (reported in the secondary 'with proxies' line): 1" in md
     res = json.loads(Path(out["json"]).read_text(encoding="utf-8"))
-    assert res["harness_version"] == 2
+    assert res["harness_version"] == 3 and res["resolver"] == "agent"
+    assert res["model"] == "test-model"
     wp = res["relatedness"]["with_proxies"]
     assert (wp["qloo"]["n"], wp["qloo_ratio"]["n"]) == (19, 20)
     for subset in ("primary", "with_proxies", "dedup_by_dispute", "relatedness_factor_only",
@@ -462,15 +487,218 @@ def test_report_sections(tmp_path: Path) -> None:
     case1 = next(c for c in res["per_case"] if c["case_id"] == "c1")
     assert case1["residual"] is None and case1["residual_ratio"] is not None
     fe = json.loads(frontend.read_text(encoding="utf-8"))
-    assert fe["status"] == "complete" and len(fe["rows"]) == 8 and fe["harness_version"] == 2
+    assert fe["status"] == "complete" and len(fe["rows"]) == 8 and fe["harness_version"] == 3
     assert all({"n", "metric", "value", "baseline"} <= set(r) for r in fe["rows"])
     assert sum("affinity ratio" in r["metric"] for r in fe["rows"]) == 2
-    assert "Harness v2" in fe["note"]
+    assert "Harness v2" in fe["note"] and "Harness v3" in fe["note"]
 
-    # a v1 scores.json is refused instead of overwriting run 1's file names
-    with pytest.raises(SystemExit):
-        report.run(mapping, {**scores, "harness_version": 1}, tmp_path / "r1", False)
+    # v1 / v2 scores.json are refused instead of overwriting earlier runs' file names
+    for old in (1, 2):
+        with pytest.raises(SystemExit):
+            report.run(mapping, {**scores, "harness_version": old}, tmp_path / f"r{old}", False)
+    # rule resolver: header says so
+    assert "Resolver: **rule**" in report.render_markdown(
+        report.build(mapping, {**scores, "resolver": "rule", "model": None})
+    )
 
     small_map, small_scores = _synthetic(6)
     small = report.build(small_map, small_scores)
     assert "underpowered" in report.headline(small)
+
+
+# --------------------------------------------------------------------------------------
+# harness v3: the product's resolve node as the resolver (scripted model, fixtures)
+# --------------------------------------------------------------------------------------
+
+JD_ID = "FA4E0000-0000-4000-A000-000000000001"
+INO_ID = "FA4E0000-0000-4000-A000-000000000005"
+SMASH_ID = "FA4E0000-0000-4000-A000-000000000006"
+AQUA_ID = "FA4E0000-0000-4000-A000-0000000000A1"
+PET_FOOD = "urn:tag:genre:brand:food_and_beverage:pet_food"
+
+
+def _agent_rows() -> list[dict[str, str]]:
+    base = {**_mapping_row(), "senior_type": "brand", "junior_type": "brand"}
+    return [
+        {**base, "junior_query": "Bad Spaniels"},
+        {**base, "case_id": "ino_v_smash", "dispute_id": "ino", "case_name": "In-N-Out v. Smash",
+         "year": "2025", "senior_query": "In-N-Out", "junior_query": "Smashburger",
+         "senior_goods_phrase": "hamburger restaurants",
+         "junior_goods_phrase": "hamburger restaurants"},
+        {**base, "case_id": "mattel_v_aqua", "junior_query": "Aqua", "junior_type": "artist",
+         "case_name": "Mattel v. MCA", "year": "2002"},
+    ]  # fmt: skip
+
+
+def _side(entity_id: str | None = None, **kw: object) -> dict[str, object]:
+    return {"entity_id": entity_id, "rationale": "scripted", **kw}
+
+
+def _agent_model() -> ScriptedChatModel:
+    def loop(a: str, b: str) -> list[object]:
+        return [ai_tools(tool_call("qloo_search", query=a), tool_call("qloo_search", query=b)),
+                "done"]  # fmt: skip
+
+    return ScriptedChatModel(
+        scripts={
+            "resolve": [*loop("Jack Daniel's", "Bad Spaniels"), *loop("In-N-Out", "Smashburger"),
+                        *loop("Jack Daniel's", "Aqua")],
+            "ResolveDecision": [
+                {"senior": _side(JD_ID, query="Jack Daniel's"),
+                 "junior": _side(proxy_goods_phrase="dog toys",
+                                 proxy_taxonomy_choices=[{"tag_id": PET_FOOD, "fit": "nearest"}])},
+                {"senior": _side(INO_ID), "junior": _side(SMASH_ID)},
+                # third case: no decision left -> structured output fails -> recorded, continue
+            ],
+        }
+    )  # fmt: skip
+
+
+async def test_resolve_agent_records_picks_and_continues_after_failure() -> None:
+    rows = _agent_rows()
+    model = _agent_model()
+    rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
+    doc = await resolve.run(
+        rec, rows, "fixture", "sha", resolver="agent",
+        model_factory=lambda strong=False: model, model_name="scripted-test",
+    )  # fmt: skip
+    assert (doc["harness_version"], doc["resolver"], doc["model"]) == (3, "agent", "scripted-test")
+    jd, ino, aqua = doc["cases"]
+
+    # case 1: senior picked by the model, junior proxied via the brand taxonomy
+    sen, jun = jd["senior"], jd["junior"]
+    assert (sen["status"], sen["entity_id"], sen["entity_name"]) == (
+        "resolved", JD_ID, "Jack Daniel's")  # fmt: skip
+    assert sen["popularity"] is not None
+    assert "Jack Daniel's Tennessee Honey" in sen["candidates_considered"]
+    assert sen["name_check"]["rule"] == "exact" and sen["name_check"]["similarity"] == 1.0
+    assert "name-rule guardrail" in sen["name_check"]["note"]
+    assert sen["universe"]["source"] == "entity own tags"
+    assert sen["universe"]["tag_names"] == ["Whiskey"]
+    assert sen["rule_pick"]["entity_id"] == JD_ID and sen["agrees_with_rule"] is True
+    assert (jun["status"], jun["entity_id"]) == ("proxy", None)
+    assert jun["proxy"]["chosen_tag_ids"] == [PET_FOOD] and jun["proxy"]["fit"] == "nearest"
+    assert jun["proxy"]["comparator_entity_ids"] == []
+    assert jun["universe"]["tag_ids"] == [PET_FOOD]
+    assert jd["tool_calls"] == 2 and jd["llm_calls"] >= 2  # scripted structured calls bypass
+    assert jd["model"] == "scripted-test" and jd["error"] is None and jd["resolver"] == "agent"
+
+    # case 2: both sides picked; the rule pick is computed alongside
+    assert (ino["senior"]["entity_id"], ino["junior"]["entity_id"]) == (INO_ID, SMASH_ID)
+    assert ino["senior"]["entity_name"] == "In-N-Out Burger"
+    assert ino["senior"]["agrees_with_rule"] == (
+        ino["senior"]["rule_pick"]["entity_id"] == INO_ID)  # fmt: skip
+
+    # case 3: structured decision failed -> error recorded, code fallbacks, run continued;
+    # the artist side was searched as an artist (type hint); the rule finds Aqua there
+    assert aqua["error"] and aqua["error"].startswith("Resolution decision failed")
+    assert aqua["junior"]["type"] == "artist" and aqua["junior"]["entity_id"] is None
+    assert aqua["junior"]["rule_pick"]["entity_id"] == AQUA_ID
+    assert aqua["junior"]["agrees_with_rule"] is False
+    agent_types = {
+        q["params"].get("types")
+        for q in aqua["queries"]
+        if q["call"] == "agent:/search" and "aqua" in str(q["params"]).lower()
+    }
+    assert agent_types == {"urn:entity:artist"}
+
+    # no label or factor column reaches the model; case name/year and the type hint do
+    prompts = "\n".join(model.prompts_for("resolve"))
+    assert "favors_plaintiff" not in prompts and "label_relatedness" not in prompts
+    assert "Mattel v. MCA (2002)" in prompts and "is a Qloo artist" in prompts
+
+    summary = resolve.summarize(doc)
+    assert summary["resolver"] == "agent" and summary["errors"] == 1
+    assert summary["llm_calls"] == sum(c["llm_calls"] for c in doc["cases"]) >= 6
+    assert summary["picks_differing_from_rule"] >= 1
+
+    # scoring stays in code and accepts the agent's resolved.json; picks pass through
+    scores = await score_step.run(rec, doc)
+    assert scores["resolver"] == "agent" and scores["model"] == "scripted-test"
+    s1 = scores["cases"][0]
+    assert s1["status"] == "scored" and s1["proxy_sides"] == ["junior"]
+    assert s1["comparator_source"] == {"junior": "rule"}  # the agent kept no comparators
+    assert any("agent kept no comparators" in n for n in s1["notes"])
+    assert s1["pick_vs_rule"]["senior"] == {"agent": "Jack Daniel's", "rule": "Jack Daniel's",
+                                            "differs": False}  # fmt: skip
+    assert scores["cases"][2]["resolver_error"]
+
+
+async def test_resolve_agent_same_entity_guard() -> None:
+    row = {**_mapping_row(), "junior_query": "Jack Daniels", "junior_goods_phrase": "bourbon"}
+    model = ScriptedChatModel(scripts={
+        "resolve": [ai_tools(tool_call("qloo_search", query="Jack Daniel's")), "done"],
+        "ResolveDecision": [{"senior": _side(JD_ID), "junior": _side(JD_ID)}],
+    })  # fmt: skip
+    rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
+    doc = await resolve.run(rec, [row], "fixture", "sha", resolver="agent",
+                            model_factory=lambda strong=False: model)  # fmt: skip
+    case = doc["cases"][0]
+    assert case["senior"]["entity_id"] == JD_ID
+    assert case["junior"]["entity_id"] is None and case["junior"]["status"] != "resolved"
+    assert any("other side's entity" in n for n in case["notes"])
+
+
+def _write_mapping(path: Path, rows: list[dict[str, str]]) -> Path:
+    with path.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w.writeheader()
+        w.writerows(rows)
+    return path
+
+
+def test_cli_resolver_choice_and_version_check(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from tearose.agent import llm
+    from tearose.eval.backtest.__main__ import main
+
+    mapping = _write_mapping(tmp_path / "mapping.csv", [_agent_rows()[0]])
+    out = tmp_path / "out"
+
+    main(["resolve", "--resolver", "rule", "--mapping", str(mapping), "--out", str(out)])
+    doc = json.loads((out / "resolved.json").read_text(encoding="utf-8"))
+    assert doc["resolver"] == "rule" and doc["harness_version"] == 3
+    assert doc["cases"][0]["senior"]["pick_rule"] == "exact"
+
+    # default resolver = agent; the configured model is replaced by the scripted one
+    model = _agent_model()
+    monkeypatch.setattr(llm, "get_chat_model", lambda strong=False: model)
+    main(["resolve", "--mapping", str(mapping), "--out", str(out)])
+    doc = json.loads((out / "resolved.json").read_text(encoding="utf-8"))
+    assert doc["resolver"] == "agent" and doc["model"] == get_settings().llm_model
+    assert doc["cases"][0]["senior"]["entity_id"] == JD_ID
+
+    # score refuses a resolved.json from harness v2
+    v2 = {**doc, "harness_version": 2}
+    (out / "resolved.json").write_text(json.dumps(v2), encoding="utf-8")
+    with pytest.raises(SystemExit, match="harness v2"):
+        main(["score", "--mapping", str(mapping), "--out", str(out)])
+
+
+async def test_score_uses_agent_comparators_when_agent_resolved() -> None:
+    barkbox = "FA4E0000-0000-4000-A000-000000000004"
+    loop = [ai_tools(tool_call("qloo_search", query="Jack Daniel's"),
+                     tool_call("qloo_search", query="Bad Spaniels"),
+                     tool_call("qloo_search", query="BarkBox")), "done"]  # fmt: skip
+    decision = {
+        "senior": _side(JD_ID),
+        "junior": _side(proxy_taxonomy_choices=[{"tag_id": PET_FOOD, "fit": "nearest"}],
+                        comparator_entity_ids=[barkbox]),
+    }  # fmt: skip
+    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
+    rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
+    doc = await resolve.run(rec, [_agent_rows()[0]], "fixture", "sha", resolver="agent",
+                            model_factory=lambda strong=False: model)  # fmt: skip
+    proxy = doc["cases"][0]["junior"]["proxy"]
+    assert proxy["comparator_entity_ids"] == [barkbox]
+    assert proxy["comparator_popularity"] == [pytest.approx(0.9312)]
+
+    scores = await score_step.run(rec, doc)
+    s = scores["cases"][0]
+    assert s["comparator_source"] == {"junior": "agent"}
+    comps = s["comparators"]["junior"]
+    assert (comps["source"], comps["ids"], comps["names"]) == ("agent", [barkbox], ["BarkBox"])
+    assert not any("code rule used" in n for n in s["notes"])
+    assert barkbox in {p["filter.results.entities"] for p in _params(s, "target_affinity")}
+    assert "agent resolver" in scores["comparator_rule"]

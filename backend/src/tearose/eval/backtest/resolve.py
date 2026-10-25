@@ -1,6 +1,11 @@
 """Step 2, `resolve`: mapping.csv -> resolved.json. Qloo: /search, /v2/tags, insights tags.
 
-Deterministic rules (no model):
+Two resolvers (`--resolver agent|rule`, CLI default agent since harness v3):
+- agent: the product's model-driven resolve node, see `agent_resolver.py`. The rule pick below
+  is computed alongside for comparison only.
+- rule: the v2 code-only rules below.
+
+Deterministic rules of the `rule` resolver (no model):
 - Entity pick: /search(query, types=<side type>, take=10), the side type coming from the
   mapping's senior_type / junior_type column ("brand" unless pre-registered otherwise, e.g.
   "artist" for Aqua); the candidate is chosen by `qloo.names.pick_by_name`: normalised exact
@@ -266,14 +271,43 @@ def selected_rows(rows: list[dict[str, str]], include_all: bool) -> list[dict[st
     return [r for r in rows if "yes" in (r["include_relatedness"], r["include_fame"])]
 
 
+RESOLVERS = ("agent", "rule")
+
+
 async def run(
-    rec: Recorder, rows: list[dict[str, str]], mode: str, mapping_sha256: str | None
+    rec: Recorder,
+    rows: list[dict[str, str]],
+    mode: str,
+    mapping_sha256: str | None,
+    resolver: str = "rule",
+    model_factory: Any = None,
+    model_name: str | None = None,
 ) -> dict[str, Any]:
+    """resolver "rule": the v2 code-only name rule (resolve_case). resolver "agent" (harness v3
+    default on the CLI): the product's resolve node driven by the model (agent_resolver)."""
+    if resolver not in RESOLVERS:
+        raise ValueError(f"unknown resolver {resolver!r}; expected one of {RESOLVERS}")
     cases = []
-    for row in rows:
-        cases.append(await resolve_case(rec, row))
+    if resolver == "agent":
+        from tearose.eval.backtest import agent_resolver as ar
+
+        if model_factory is None:
+            from tearose.agent.llm import get_chat_model
+            from tearose.config import get_settings
+
+            model_factory = get_chat_model
+            model_name = model_name or get_settings().llm_model
+        counter = ar.LLMCallCounter()
+        factory = ar.counted_factory(model_factory, counter)
+        for row in rows:
+            cases.append(await ar.resolve_case_agent(rec, row, factory, counter, model_name))
+    else:
+        for row in rows:
+            cases.append({**(await resolve_case(rec, row)), "resolver": "rule"})
     return {
         "harness_version": HARNESS_VERSION,
+        "resolver": resolver,
+        "model": model_name if resolver == "agent" else None,
         "qloo_mode": mode,
         "mapping_sha256": mapping_sha256,
         "cases": cases,
@@ -286,8 +320,19 @@ def summarize(doc: dict[str, Any]) -> dict[str, Any]:
         for side in ("senior", "junior"):
             k = f"{side}_{c[side]['status']}"
             out[k] = out.get(k, 0) + 1
-    return {
-        "cases": len(doc["cases"]),
+    cs = doc["cases"]
+    summary: dict[str, Any] = {
+        "resolver": doc.get("resolver", "rule"),
+        "model": doc.get("model"),
+        "cases": len(cs),
         **dict(sorted(out.items())),
-        "queries": sum(len(c["queries"]) for c in doc["cases"]),
+        "queries": sum(len(c["queries"]) for c in cs),
     }
+    if doc.get("resolver") == "agent":
+        summary["llm_calls"] = sum(c.get("llm_calls") or 0 for c in cs)
+        summary["tool_calls"] = sum(c.get("tool_calls") or 0 for c in cs)
+        summary["errors"] = sum(bool(c.get("error")) for c in cs)
+        summary["picks_differing_from_rule"] = sum(
+            c[s].get("agrees_with_rule") is False for c in cs for s in ("senior", "junior")
+        )
+    return summary
