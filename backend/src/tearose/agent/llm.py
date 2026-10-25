@@ -35,6 +35,9 @@ def reasoning_rejected(exc: BaseException) -> bool:
 
 
 @cache
+LLM_TIMEOUT_S = 180
+
+
 def _fallback_chat_class() -> type[BaseChatModel]:
     """ChatOpenAI that drops `reasoning_effort` once when the provider rejects it: the call is
     retried without it, the model keeps it off, and a note is queued for the run trace."""
@@ -102,6 +105,8 @@ def get_chat_model(strong: bool = False) -> BaseChatModel:
         model=model,
         api_key=s.llm_api_key or None,
         base_url=s.llm_base_url,
+        timeout=LLM_TIMEOUT_S,  # a hung provider call must fail, not stall a run for an hour
+        max_retries=2,
         **kwargs,  # type: ignore[arg-type]
     )
 
