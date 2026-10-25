@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+import json
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
@@ -22,7 +23,25 @@ def load_showcase(directory: Path) -> dict[str, AnalysisResult]:
     if not directory.is_dir():
         log.info("showcase dir %s not found; no showcase cases", directory)
         return results
-    for path in sorted(directory.glob("*.json")):
+    # The manifest decides what is shown; computed files for dropped cases stay on disk but are
+    # not listed. Without a manifest every *.json counts (tests, ad-hoc directories).
+    manifest = directory / "manifest.json"
+    order: list[str] | None = None
+    if manifest.is_file():
+        try:
+            order = [
+                c["slug"] for c in json.loads(manifest.read_text(encoding="utf-8")).get("cases", [])
+            ]
+        except Exception as exc:  # a broken manifest must not hide everything
+            log.warning("showcase manifest unreadable (%s); listing every file", exc)
+    paths = (
+        [directory / f"{slug}.json" for slug in order]
+        if order is not None
+        else sorted(directory.glob("*.json"))
+    )
+    for path in paths:
+        if path.name == "manifest.json" or not path.is_file():
+            continue
         try:
             res = AnalysisResult.model_validate_json(path.read_text(encoding="utf-8"))
         except Exception as exc:  # one broken file must not take the app down
