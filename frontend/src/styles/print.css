@@ -124,4 +124,10 @@
   .table-scroll {
     overflow: visible;
   }
+
+  .memo__bottom-line,
+  .bottom-line__summary {
+    font-size: 10.5pt;
+    color: var(--text-2);
+  }
 }

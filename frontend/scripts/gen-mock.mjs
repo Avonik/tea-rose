@@ -282,6 +282,9 @@ const evidence = {
 const memo = {
   headline:
     "Jack Daniel's fans sit near the median for pet-supply brands, so the taste graph neither shows nor rules out shared purchasers; the mark's audience is broad across ages and both genders.",
+  // Same rules as backend scoring/bottom_line.py synthesize_bottom_line (computed in code there).
+  bottom_line:
+    "Taste data is neutral on all 3 confusion factors but supports the senior mark on fame. It is silent on mark similarity, intent and actual confusion.",
   findings: [
     { factor: 'relatedness_of_goods', lean: 'neutral', confidence: 'low', finding: "Whiskey and dog toys are different goods; the taste graph places Pet Supplies at #184 of 400 of the senior brand's taste tags (percentile 0.54), close to the middle. Nothing here suggests consumers would expect the senior to make dog toys.", evidence_refs: ['Q11', 'bridging.percentile'] },
     { factor: 'channels_and_purchasers', lean: 'neutral', confidence: 'medium', finding: "Seeded by Jack Daniel's, the dog-toy comparators rank #131 of 300 pet-supply brands; seeded by the comparators, Jack Daniel's ranks #64 of 120 whiskey brands. A symmetric percentile of 0.52 is median overlap: shared purchasers exist but are not concentrated.", evidence_refs: ['Q5', 'Q6', 'Q7', 'Q8', 'overlap.symmetric_percentile'] },

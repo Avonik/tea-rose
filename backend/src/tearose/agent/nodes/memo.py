@@ -1,4 +1,5 @@
-"""memo: findings + evidence -> Memo (one LLM call for prose; appendix and limitations in code)."""
+"""memo: findings + evidence -> Memo (one LLM call for prose; bottom line, appendix and
+limitations in code)."""
 
 from __future__ import annotations
 
@@ -18,6 +19,7 @@ from tearose.agent.nodes.base import (
 )
 from tearose.agent.nodes.interpret import case_payload, compact_evidence, maybe_blind
 from tearose.schemas import FactorFinding, Memo, MemoSection
+from tearose.scoring import synthesize_bottom_line
 
 FIXED_LIMITATIONS: tuple[str, ...] = (
     "Affinity is not confusion; this is evidence on the relatedness and purchaser factors, "
@@ -115,6 +117,7 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
 
     memo = Memo(
         headline=first_sentence(draft.headline),
+        bottom_line=synthesize_bottom_line(findings),  # code, not the model
         findings=findings,
         sections=sections,
         limitations=limitations,

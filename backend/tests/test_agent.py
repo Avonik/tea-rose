@@ -33,6 +33,7 @@ from tearose.schemas import (
     TraceEvent,
     Universe,
 )
+from tearose.scoring import synthesize_bottom_line
 
 # --------------------------------------------------------------------------------------
 # Minimal synthetic Qloo world
@@ -534,6 +535,13 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     memo = r.memo
     assert memo is not None
     assert memo.headline == "Jack Daniel's fans show little affinity for dog-toy brands."
+    # computed in code from the leans (relatedness favors junior, fame favors senior), not scripted
+    assert memo.bottom_line == (
+        "Taste data cuts against the senior mark on the one confusion factor measured but "
+        "supports the senior mark on fame. It is silent on mark similarity, intent and actual "
+        "confusion."
+    )
+    assert memo.bottom_line == synthesize_bottom_line(memo.findings)
     assert memo.limitations[-5:] == list(FIXED_LIMITATIONS)
     assert memo.limitations[0] == INTERPRETATION["limitations"][0]
     assert [s.id for s in memo.sections] == ["summary", "factors", "method", "limitations"]

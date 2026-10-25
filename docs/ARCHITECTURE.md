@@ -70,8 +70,13 @@ Nodes, in order:
 | `fetch` | tool-calling loop; the agentic core; retries wider queries on empty results; records give-ups | resolution + routing → `raw` data |
 | `score` | pure Python, no LLM | raw → `Evidence` |
 | `interpret` | 1 LLM call (optionally stronger model), structured output `list[FactorFinding]` + limitations | evidence → factor findings; blinded names in eval mode |
-| `memo` | 1 LLM call → sections; appendix built in code | findings + evidence → `Memo` |
+| `memo` | 1 LLM call → headline + sections; `bottom_line`, appendix and limitations built in code | findings + evidence → `Memo` |
 | `followup` | re-enters at `resolve` with an instruction; reruns affected downstream nodes | question → updated result |
+
+`Memo.bottom_line` is one sentence computed by `scoring/bottom_line.py` (`synthesize_bottom_line`) from
+the factor leans alone: how many confusion factors support or cut against the senior mark, then fame
+and zone, always ending "It is silent on mark similarity, intent and actual confusion." No model
+writes it; it never names an outcome. Runs stored before the field existed load with `""`.
 
 Each node emits `TraceEvent`s (`node_started`, `tool_call`, `tool_result`, `decision`, `warning`,
 `node_finished`). The API streams them over SSE as they are appended.

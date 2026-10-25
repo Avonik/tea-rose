@@ -20,6 +20,7 @@ from tearose.schemas import (
     RoutingDecision,
     TraceEvent,
 )
+from tearose.scoring import synthesize_bottom_line
 
 
 class AnalysisEngine(Protocol):
@@ -83,16 +84,18 @@ class ScriptedEngine:
         await self._step(handle, "fetch", "7 Qloo queries, 1 retry with a wider tag")
         await self._step(handle, "score", "Symmetric overlap percentile 0.18")
         await self._step(handle, "interpret", "Relatedness: favors junior; fame: favors senior")
+        findings = [
+            FactorFinding(
+                factor="relatedness_of_goods",
+                lean="favors_junior",
+                confidence="medium",
+                finding="Scripted placeholder finding.",
+            ),
+        ]
         r.memo = Memo(
             headline="Jack Daniel's purchasers show little affinity for pet-supply brands.",
-            findings=[
-                FactorFinding(
-                    factor="relatedness_of_goods",
-                    lean="favors_junior",
-                    confidence="medium",
-                    finding="Scripted placeholder finding.",
-                ),
-            ],
+            bottom_line=synthesize_bottom_line(findings),
+            findings=findings,
             sections=[MemoSection(id="summary", title="Summary", markdown="Scripted placeholder.")],
             limitations=["Affinity is not confusion.", "No survey percentages."],
             appendix_queries=[],

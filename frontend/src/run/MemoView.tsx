@@ -133,6 +133,7 @@ export default function MemoView({ memo, title }: { memo: Memo; title?: string }
         <h2 id="memo-title" className="memo__headline">
           {memo.headline}
         </h2>
+        {memo.bottom_line && <p className="memo__bottom-line">{memo.bottom_line}</p>}
       </header>
 
       {memo.findings.length > 0 && (

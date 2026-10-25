@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import itertools
+import re
+
 import pytest
 
 from tearose.qloo.models import (
@@ -14,12 +17,14 @@ from tearose.qloo.models import (
 )
 from tearose.schemas import (
     Evidence,
+    FactorFinding,
+    Memo,
     ProxyResolution,
     Resolution,
     ResolvedBrand,
     RoutingDecision,
 )
-from tearose.scoring import DirectionalPeers, RawData, compute_evidence
+from tearose.scoring import DirectionalPeers, RawData, compute_evidence, synthesize_bottom_line
 from tearose.scoring.score import (
     bin_points,
     breadth_score,
@@ -410,3 +415,117 @@ def test_pick_category_tags_deterministic():
     assert pick_category_tags(tags, "financial services") == []
     assert pick_category_tags([], "dog toys") == []
     assert pick_category_tags(tags, "dog toys", max_n=0) == []
+
+
+# --------------------------------------------------------------------------------------
+# bottom line (synthesised in code from the factor leans)
+# --------------------------------------------------------------------------------------
+
+SILENT = "It is silent on mark similarity, intent and actual confusion."
+FORBIDDEN = ("win", "lose", "verdict", "likely", "probability")
+
+
+def ff(factor: str, lean: str) -> FactorFinding:
+    return FactorFinding(factor=factor, lean=lean, confidence="medium", finding="x")
+
+
+def confusion(*leans: str) -> list[FactorFinding]:
+    names = ("relatedness_of_goods", "channels_and_purchasers", "bridging_the_gap")
+    return [ff(n, lean) for n, lean in zip(names, leans, strict=False)]
+
+
+def test_bottom_line_all_neutral() -> None:
+    assert synthesize_bottom_line(confusion("neutral", "neutral", "neutral")) == (
+        f"Taste data is neutral on all 3 confusion factors. {SILENT}"
+    )
+
+
+def test_bottom_line_all_insufficient() -> None:
+    leans = ("insufficient_data",) * 3
+    assert synthesize_bottom_line(confusion(*leans)) == (
+        "Taste data is inconclusive on the confusion factors "
+        f"(3 factors have insufficient data). {SILENT}"
+    )
+
+
+def test_bottom_line_counts_and_insufficient_note() -> None:
+    assert synthesize_bottom_line(confusion("favors_senior", "favors_senior", "neutral")) == (
+        f"Taste data supports the senior mark on 2 of 3 confusion factors. {SILENT}"
+    )
+    assert synthesize_bottom_line(confusion("favors_junior", "neutral", "favors_junior")) == (
+        f"Taste data cuts against the senior mark on 2 of 3 confusion factors. {SILENT}"
+    )
+    assert synthesize_bottom_line(confusion("favors_senior", "neutral", "insufficient_data")) == (
+        "Taste data supports the senior mark on 1 of 2 confusion factors "
+        f"(1 factor has insufficient data). {SILENT}"
+    )
+
+
+def test_bottom_line_mixed() -> None:
+    assert synthesize_bottom_line(confusion("favors_senior", "favors_junior", "neutral")) == (
+        "Taste data supports the senior mark on 1 confusion factor and the junior user on 1. "
+        f"{SILENT}"
+    )
+
+
+def test_bottom_line_fame_and_zone() -> None:
+    base = confusion("favors_senior", "favors_senior", "neutral")
+    assert synthesize_bottom_line([*base, ff("fame", "favors_senior")]) == (
+        f"Taste data supports the senior mark on 2 of 3 confusion factors and on fame. {SILENT}"
+    )
+    assert synthesize_bottom_line([*base, ff("fame", "favors_junior")]) == (
+        f"Taste data supports the senior mark on 2 of 3 confusion factors but not on fame. {SILENT}"
+    )
+    assert synthesize_bottom_line([*base, ff("fame", "neutral")]) == (
+        "Taste data supports the senior mark on 2 of 3 confusion factors and is neutral on fame. "
+        f"{SILENT}"
+    )
+    # insufficient fame is omitted; zone is phrased from the lean only
+    assert synthesize_bottom_line(
+        [*base, ff("fame", "insufficient_data"), ff("zone_of_reputation", "favors_senior")]
+    ) == (
+        "Taste data supports the senior mark on 2 of 3 confusion factors, and shows a wide zone "
+        f"of reputation. {SILENT}"
+    )
+    assert synthesize_bottom_line(
+        [
+            *confusion("neutral", "neutral", "neutral"),
+            ff("fame", "favors_senior"),
+            ff("zone_of_reputation", "favors_junior"),
+        ]
+    ) == (
+        "Taste data is neutral on all 3 confusion factors but supports the senior mark on fame, "
+        f"and shows a narrow zone of reputation. {SILENT}"
+    )
+    assert synthesize_bottom_line([*base, ff("zone_of_reputation", "neutral")]) == (
+        f"Taste data supports the senior mark on 2 of 3 confusion factors. {SILENT}"
+    )
+
+
+def test_bottom_line_without_confusion_factors() -> None:
+    assert synthesize_bottom_line([ff("fame", "favors_junior")]) == (
+        f"Taste data cuts against the senior mark on fame. {SILENT}"
+    )
+    assert synthesize_bottom_line([]) == f"Taste data produced no factor findings. {SILENT}"
+
+
+def test_bottom_line_never_uses_outcome_words() -> None:
+    leans = ("favors_senior", "neutral", "favors_junior", "insufficient_data")
+    for a, b, c, fame, zone in itertools.product(leans, repeat=5):
+        findings = [
+            *confusion(a, b, c),
+            ff("fame", fame),
+            ff("zone_of_reputation", zone),
+        ]
+        line = synthesize_bottom_line(findings)
+        assert line.endswith(SILENT) and line.startswith("Taste data ")
+        words = set(re.findall(r"[a-z]+", line.lower()))
+        assert not words & set(FORBIDDEN), line
+        assert line.count(".") == 2  # one synthesised sentence + the fixed clause
+
+
+def test_memo_without_bottom_line_still_loads() -> None:
+    memo = Memo.model_validate(
+        {"headline": "h", "findings": [], "sections": [], "limitations": [], "appendix_queries": []}
+    )
+    assert memo.bottom_line == ""

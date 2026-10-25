@@ -235,6 +235,8 @@ export interface MemoSection {
 
 export interface Memo {
   headline: string
+  /** Computed in code from the factor leans, never by the model. "" on runs stored before it existed. */
+  bottom_line: string
   findings: FactorFinding[]
   sections: MemoSection[]
   limitations: string[]

@@ -30,6 +30,7 @@ export default function BottomLine({ memo, expected }: { memo: Memo | null; expe
               Bottom line
             </p>
             <p className="bottom-line__headline serif">{memo.headline}</p>
+            {memo.bottom_line && <p className="bottom-line__summary">{memo.bottom_line}</p>}
             {memo.findings.length > 0 && (
               <ul className="bottom-line__leans" aria-label="Factor findings">
                 {memo.findings.map((f) => (

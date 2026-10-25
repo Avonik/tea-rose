@@ -259,6 +259,7 @@ export default function MemoView({ memo, title }: { memo: Memo; title?: string }
         <h2 id="memo-title" className="memo__headline serif">
           {memo.headline}
         </h2>
+        {memo.bottom_line && <p className="memo__bottom-line">{memo.bottom_line}</p>}
         <p className="memo__dateline footnote secondary">
           <span>
             Prepared from <span className="num">{n}</span> Qloo {n === 1 ? 'query' : 'queries'}

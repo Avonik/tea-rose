@@ -193,6 +193,9 @@ class MemoSection(BaseModel):
 
 class Memo(BaseModel):
     headline: str  # one sentence
+    # Computed in code from the factor leans (scoring/bottom_line.py), never by the model.
+    # Default "" only so runs stored before the field existed still load.
+    bottom_line: str = ""
     findings: list[FactorFinding]
     sections: list[MemoSection]
     limitations: list[str]  # the fixed "what this cannot tell you" plus case-specific items

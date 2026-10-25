@@ -126,6 +126,17 @@ button.tb__item:hover:not(:disabled) {
   text-wrap: pretty;
 }
 
+/* The code-computed bottom line: body text under the serif headline */
+.bottom-line__summary {
+  margin-top: calc(-1 * var(--s-2));
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--text-2);
+  max-width: 44rem;
+  text-wrap: pretty;
+}
+
 .bottom-line__leans {
   display: flex;
   flex-wrap: wrap;

@@ -1487,6 +1487,15 @@
   gap: var(--s-8);
 }
 
+.memo__bottom-line {
+  margin: var(--s-2) 0 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--text-2);
+  max-width: 44rem;
+}
+
 .memo__headline {
   margin-top: var(--s-2);
   font-family: var(--font-serif);
@@ -1792,6 +1801,16 @@ a.ref-chip:hover {
   font-size: var(--fs-title3);
   line-height: 1.35;
   letter-spacing: -0.005em;
+  max-width: 48rem;
+}
+
+/* The code-computed bottom line: body text under the serif headline */
+.bottom-line__summary {
+  margin: calc(-1 * var(--s-1)) 0 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--text-2);
   max-width: 48rem;
 }
 

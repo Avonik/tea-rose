@@ -9,5 +9,6 @@ where `raw` is a `RawData` bundle of normalized Qloo results fetched by the agen
 score.py for the definitions (ARCHITECTURE.md, "Scoring definitions").
 """
 
+from tearose.scoring.bottom_line import synthesize_bottom_line  # noqa: F401
 from tearose.scoring.raw import DirectionalPeers, RawData  # noqa: F401
 from tearose.scoring.score import compute_evidence  # noqa: F401

@@ -124,6 +124,12 @@
     font-size: 18pt;
   }
 
+  .memo__bottom-line,
+  .bottom-line__summary {
+    font-size: 11pt;
+    color: var(--text-2);
+  }
+
   .prose {
     font-size: 11pt;
     margin-left: 0;
