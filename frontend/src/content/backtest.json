@@ -1,50 +1,73 @@
 {
   "status": "complete",
-  "note": "On 7 decided cases, Qloo's symmetric overlap percentile correlates with the courts' relatedness/purchaser findings at rho = 0.42 (95% CI 0.25 to 0.85) versus n/a for a same-category heuristic. With n = 7 < 15 this metric is underpowered; read it as anecdotal. Run 2026-10-25; labels and mapping pre-registered (mapping sha256 84ca89df9428).",
+  "harness_version": 2,
+  "note": "On 6 decided cases, Qloo's symmetric overlap percentile correlates with the courts' relatedness/purchaser findings at rho = n/a (95% CI n/a) versus n/a for a same-category heuristic. With n = 6 < 15 this metric is underpowered; read it as anecdotal. The affinity ratio (second Qloo signal, n = 7) gives rho = 0.20 (95% CI -0.43 to 0.85). Run 2026-10-25; labels and mapping pre-registered (mapping sha256 84ca89df9428). Harness v2: universe = the brand's own category tags, censored ranks reported as censored with a direct affinity lookup, one taxonomy synonym corrected (post-hoc deviations from pre-registration, documented; run 1 kept as the record).",
   "rows": [
     {
-      "n": 3,
-      "metric": "Spearman ρ: overlap score vs court's channels/purchasers finding",
-      "value": "0.50 (95% CI 0.50 to 1.00) · underpowered",
+      "n": 2,
+      "metric": "Spearman ρ: rank percentile vs court's channels/purchasers finding",
+      "value": "n/a (95% CI n/a) · underpowered",
       "ci": [
-        0.5,
-        1.0
+        null,
+        null
       ],
       "baseline": "Same-category heuristic: n/a",
       "baseline_value": null
     },
     {
-      "n": 7,
-      "metric": "AUC: overlap score predicts \"favors plaintiff\"",
-      "value": "0.83 (95% CI 0.62 to 1.00) · underpowered",
+      "n": 6,
+      "metric": "AUC: rank percentile predicts \"favors plaintiff\"",
+      "value": "n/a (95% CI n/a) · underpowered",
       "ci": [
-        0.625,
-        1.0
+        null,
+        null
       ],
       "baseline": "Popularity-only: 0.50; same-category: 0.50",
       "baseline_value": 0.5
     },
     {
-      "n": 7,
-      "metric": "Spearman ρ: overlap score vs court's relatedness finding",
-      "value": "0.42 (95% CI 0.25 to 0.85) · underpowered",
+      "n": 6,
+      "metric": "Spearman ρ: rank percentile vs court's relatedness finding",
+      "value": "n/a (95% CI n/a) · underpowered",
       "ci": [
-        0.255,
-        0.855
+        null,
+        null
       ],
       "baseline": "Same-category heuristic: n/a",
       "baseline_value": null
     },
     {
-      "n": 7,
-      "metric": "Spearman ρ: overlap score vs combined relatedness/purchaser finding (primary)",
-      "value": "0.42 (95% CI 0.25 to 0.85) · underpowered",
+      "n": 6,
+      "metric": "Spearman ρ: rank percentile vs combined relatedness/purchaser finding (primary)",
+      "value": "n/a (95% CI n/a) · underpowered",
       "ci": [
-        0.255,
-        0.855
+        null,
+        null
       ],
       "baseline": "Same-category heuristic: n/a; popularity-only: 0.00",
       "baseline_value": null
+    },
+    {
+      "n": 7,
+      "metric": "Spearman ρ: affinity ratio vs combined relatedness/purchaser finding (primary)",
+      "value": "0.20 (95% CI -0.43 to 0.85) · underpowered",
+      "ci": [
+        -0.428,
+        0.851
+      ],
+      "baseline": "Rank percentile: n/a; same-category: n/a",
+      "baseline_value": null
+    },
+    {
+      "n": 7,
+      "metric": "AUC: affinity ratio predicts \"favors plaintiff\"",
+      "value": "0.67 (95% CI 0.25 to 1.00) · underpowered",
+      "ci": [
+        0.25,
+        1.0
+      ],
+      "baseline": "Rank percentile: n/a; popularity-only: 0.50",
+      "baseline_value": 0.5
     },
     {
       "n": 12,
