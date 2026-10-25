@@ -383,6 +383,7 @@ export interface ShowcaseSummary {
   year: number | null
   one_liner: string
   tags: string[]
+  read_line?: string
 }
 
 // ---------------------------------------------------------------- API envelopes (docs/ARCHITECTURE.md)

@@ -16,6 +16,7 @@ import FamePanel from './FamePanel'
 import FollowupBox from './FollowupBox'
 import { MemoLimits, MemoMeaning, QueryAppendix, useQueryNav } from './MemoView'
 import OverlapPanel from './OverlapPanel'
+import PreliminaryReadCard from './PreliminaryRead'
 import ResolutionCard from './ResolutionCard'
 import TracePanel, { TraceAnnouncer, traceProgress } from './TracePanel'
 import ZonePanel from './ZonePanel'
@@ -270,6 +271,7 @@ export default function RunView({
   usePublishSections(
     [
       { id: 'case', label: 'The case', show: true },
+      { id: 'read', label: 'Preliminary read', show: !!r.memo?.preliminary_read },
       { id: 'bottom-line', label: 'Bottom line', show: !!r.memo || memoExpected },
       { id: 'questions', label: 'Three questions', show: showQuestions },
       { id: 'meaning', label: 'What it means', show: !!r.memo || running },
@@ -323,7 +325,7 @@ export default function RunView({
   // will exist is reserved (skeleton), so the alternation never flips under the reader.
   const bands: { key: string; id?: string; label?: string; className?: string; wide?: boolean; node: ReactNode }[] = []
 
-  // 1 + 2: the header and the bottom line
+  // 1 + 2: the header, the preliminary read and the bottom line
   bands.push({
     key: 'case',
     id: 'case',
@@ -339,7 +341,7 @@ export default function RunView({
         )}
         <Slot state={r.extraction ? 'case' : running ? 'case-skeleton' : 'case-input'}>
           {r.extraction ? (
-            <CaseOpening extraction={r.extraction} names={names} story={story} year={year}>
+            <CaseOpening extraction={r.extraction} names={names} story={story} year={year} readLine={r.memo?.read_line}>
               <Toolbar live={live} r={r} running={running} />
             </CaseOpening>
           ) : (
@@ -351,6 +353,7 @@ export default function RunView({
             </div>
           )}
         </Slot>
+        <PreliminaryReadCard memo={r.memo} names={names} />
         <BottomLine memo={r.memo} expected={memoExpected} names={names} />
       </>
     ),

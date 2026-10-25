@@ -53,6 +53,7 @@ def summarize(slug: str, res: AnalysisResult) -> ShowcaseSummary:
         year=int(year_match.group(0)) if year_match else None,
         one_liner=one_liner,
         tags=tags,
+        read_line=(res.memo.read_line if res.memo else ""),
     )
 
 

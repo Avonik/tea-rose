@@ -25,6 +25,7 @@ import { factorLabel, sideNames } from '../lib/format'
 import { useAsync } from '../lib/useAsync'
 import { AnimatedNumber } from '../motion/AnimatedNumber'
 import { PinnedHero } from '../motion/PinnedHero'
+import { ReadChips, readSentence } from '../run/PreliminaryRead'
 import { Page, Reveal } from '../motion/Reveal'
 import { fade, springQuick, springSlow } from '../motion/springs'
 import type { AnalysisResult, ShowcaseSummary } from '../types'
@@ -208,7 +209,11 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
     return !(a && routed && !routed.includes(a))
   })
 
-  const lead = memo?.bottom_line || memo?.headline || summary.one_liner
+  // Lead with the preliminary read (from the complaint), then the code-computed bottom line.
+  const read = memo?.preliminary_read ?? null
+  const readLine = readSentence(memo?.read_line)
+  const bottom = memo?.bottom_line || memo?.headline || summary.one_liner
+  const lead = readLine || bottom
   const trace = result.trace
   const facts = runFacts(memo?.appendix_queries.length ?? 0, trace[0]?.ts, trace[trace.length - 1]?.ts)
   const docType = result.extraction?.document_type
@@ -227,8 +232,10 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
       </div>
 
       <div className="frame__lead">
-        <p className="caption tertiary">The bottom line</p>
+        <p className="caption tertiary">{readLine ? 'Preliminary read' : 'The bottom line'}</p>
         <p className="frame__headline serif">{lead}</p>
+        {readLine && read && <ReadChips read={read} names={chipNames} size="sm" />}
+        {readLine && bottom && <p className="frame__second">{bottom}</p>}
         {findings.length > 0 && (
           <ul className="frame__chips" aria-label="How each factor leans">
             {findings.map((f) => (
@@ -313,6 +320,7 @@ function Preview(props: { list: ShowcaseSummary[] | null | undefined; loadingLis
           <p className="t-subtitle">{PREVIEW.sub}</p>
         </div>
         <DeviceFrame {...props} />
+        <p className="caption tertiary frame__caption">Read from the filed complaint, never the court’s decision.</p>
       </div>
     </section>
   )
@@ -349,7 +357,17 @@ function Backtest() {
 
 // ------------------------------------------------------------------ 5. eight famous fights
 
-function Fights() {
+/**
+ * TODO(backend): ShowcaseSummary has no read_line yet. Add `read_line: str = ""` (Memo.read_line of the
+ * pre-computed run) to ShowcaseSummary in backend/src/tearose/schemas.py and src/types.ts; until then each
+ * row shows the court line only (fetching api.showcaseCase per slug is too heavy for the list).
+ */
+function listReadLine(list: ShowcaseSummary[] | null | undefined, slug: string): string {
+  const hit = list?.find((c) => c.slug === slug) as (ShowcaseSummary & { read_line?: string }) | undefined
+  return readSentence(hit?.read_line)
+}
+
+function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
   return (
     <section className="band band--alt" aria-labelledby="cases-title">
       <div className="wrap">
@@ -374,9 +392,11 @@ function Fights() {
                       <span className="case-row__line">
                         <span className="case-row__k">Court:</span> {c.court}
                       </span>
-                      <span className="case-row__line">
-                        <span className="case-row__k">Data:</span> {c.data}
-                      </span>
+                      {listReadLine(list, slug) && (
+                        <span className="case-row__line">
+                          <span className="case-row__k">Tea Rose read:</span> {listReadLine(list, slug)}
+                        </span>
+                      )}
                       {c.twist && <span className="caption tertiary case-row__twist">{c.twist}</span>}
                     </span>
                     <span className="group__chev" aria-hidden="true">
@@ -554,7 +574,7 @@ export default function HomePage() {
       <Questions />
       <Preview list={list.data} loadingList={list.loading} />
       <Backtest />
-      <Fights />
+      <Fights list={list.data} />
       <WillNot />
       <HowItWorks />
       <AnalyzeBand />

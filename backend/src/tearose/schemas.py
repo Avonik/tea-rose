@@ -364,3 +364,4 @@ class ShowcaseSummary(BaseModel):
     year: int | None = None
     one_liner: str  # the headline finding
     tags: list[str] = Field(default_factory=list)  # e.g. ["parody", "dilution", "proxy path"]
+    read_line: str = ""  # the memo's computed preliminary-read sentence

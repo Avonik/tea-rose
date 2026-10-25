@@ -2,6 +2,7 @@
 
 .memo {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(2.5rem, 5vw, 4rem);
   border-radius: var(--r-card);
 }
@@ -106,6 +107,7 @@
 }
 
 .prose code {
+  overflow-wrap: anywhere;
   padding: 0.0625em 0.3em;
   border-radius: var(--r-xs);
   background: var(--fill);
@@ -176,6 +178,8 @@
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-decoration: none;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .ref-chip:hover {

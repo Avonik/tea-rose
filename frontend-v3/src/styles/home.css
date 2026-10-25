@@ -824,3 +824,17 @@
     display: block;
   }
 }
+
+/* The code-computed bottom line, second under the preliminary read */
+.frame__second {
+  font-size: var(--fs-callout);
+  line-height: 1.5;
+  color: var(--text-2);
+  max-width: 44rem;
+  text-wrap: pretty;
+}
+
+.frame__caption {
+  margin-top: var(--s-4);
+  text-align: center;
+}

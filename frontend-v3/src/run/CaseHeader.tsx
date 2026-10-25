@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { IconCheck } from '../components/icons'
 import { Disclosure } from '../components/ui'
 import type { CaseStory } from '../content/cases'
+import { readSentence } from './PreliminaryRead'
 import { CLAIM_LABEL, humanize } from '../lib/format'
 import type { Extraction, Party, RoutingDecision } from '../types'
 
@@ -35,14 +36,20 @@ export function CaseOpening({
   names,
   story,
   year,
+  readLine,
   children,
 }: {
   extraction: Extraction
   names: { senior: string; junior: string }
   story?: CaseStory
   year?: number | null
+  /** Memo.read_line: replaces the data half while the hand-written data sentence is still a placeholder. */
+  readLine?: string
   children?: ReactNode
 }) {
+  // The hand-written data sentence is a placeholder until the run is in; never show it.
+  const dataPending = !story?.data || /^DATA PENDING/i.test(story.data)
+  const read = readSentence(readLine)
   const kicker = [year ? String(year) : null, x.court_or_forum].filter(Boolean).join(' · ') || humanize(x.document_type)
   return (
     <header className="opening" aria-labelledby="case-title">
@@ -72,10 +79,17 @@ export function CaseOpening({
             <dt className="eyebrow">The court decided</dt>
             <dd>{story.court}</dd>
           </div>
-          <div className="opening__split-half">
-            <dt className="eyebrow">The taste data shows</dt>
-            <dd>{story.data}</dd>
-          </div>
+          {!dataPending ? (
+            <div className="opening__split-half">
+              <dt className="eyebrow">The taste data shows</dt>
+              <dd>{story.data}</dd>
+            </div>
+          ) : read ? (
+            <div className="opening__split-half">
+              <dt className="eyebrow">Tea Rose read, from the complaint only</dt>
+              <dd>{read}</dd>
+            </div>
+          ) : null}
         </dl>
       ) : (
         <p className="t-subtitle opening__summary">{x.summary}</p>
