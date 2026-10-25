@@ -105,3 +105,70 @@ def pick_category_tags(tags: list[Tag], goods_phrase: str, max_n: int = 3) -> li
         )
     scored.sort(key=lambda s: s[:5])
     return [s[5] for s in scored[:max_n]]
+
+
+# --------------------------------------------------------------------------------------
+# Universe rule (harness v2, also the product path): the brand's OWN category
+# --------------------------------------------------------------------------------------
+#
+# A brand's universe is the category the brand IS in, read from its own urn:tag:genre:brand
+# tags on the /search result (a sneaker brand: fashion, fashion:footwear,
+# fashion:footwear:sneakers). The pre-registered v1 rule took the top insights tags seeded by
+# the brand, which describe what the brand's AUDIENCE likes (a sneaker brand came out as
+# "Food & Beverage"); that rule survives only as the fallback for brands without own tags.
+
+OWN_TAGS_SOURCE = "entity own tags"
+INSIGHTS_FALLBACK_SOURCE = "insights tags (fallback)"
+OWN_TAGS_MAX = 3
+INSIGHTS_TAGS_TOP = 5
+_GENRE_PREFIX = GENRE_BRAND + ":"
+
+
+def genre_depth(tag_id: str) -> int:
+    """Segments below urn:tag:genre:brand (fashion = 1, fashion:footwear = 2); 0 otherwise."""
+    if not tag_id.startswith(_GENRE_PREFIX):
+        return 0
+    return len([p for p in tag_id[len(_GENRE_PREFIX) :].split(":") if p])
+
+
+def _display(tag: Tag) -> Tag:
+    """'Other' leaves get their parent in the name ("Other footwear") so labels stay readable."""
+    name = " ".join((tag.name or "").split())
+    if name.casefold() in {"", "other"}:
+        segs = tag.tag_id[len(_GENRE_PREFIX) :].split(":")
+        parent = segs[-2].replace("_", " ") if len(segs) > 1 else ""
+        leaf = segs[-1].replace("_", " ")
+        label = f"Other {parent}".strip() if leaf == "other" else (name or leaf)
+        return tag.model_copy(update={"name": label})
+    return tag
+
+
+def own_category_tags(tags: list[Tag], max_n: int = OWN_TAGS_MAX) -> list[Tag]:
+    """The most specific brand-genre nodes among an entity's own tags.
+
+    Keep tags whose id is a urn:tag:genre:brand:* node; drop any node that is an ancestor of
+    another node in the set; prefer depth >= 2 (a lone top family such as "fashion" is used only
+    when nothing deeper exists); keep up to `max_n` in the response order. [] when the entity
+    carries no brand-genre tag (the caller then falls back to insights tags).
+    """
+    seen: set[str] = set()
+    genre: list[Tag] = []
+    for t in tags:
+        if genre_depth(t.tag_id) >= 1 and t.tag_id not in seen:
+            seen.add(t.tag_id)
+            genre.append(t)
+    leaves = [t for t in genre if not any(o.tag_id.startswith(t.tag_id + ":") for o in genre)]
+    deep = [t for t in leaves if genre_depth(t.tag_id) >= 2]
+    return [_display(t) for t in (deep or leaves)[:max_n]]
+
+
+def is_universe_tag(t: Tag) -> bool:
+    kind = (t.tag_type or "").lower() or t.tag_id.lower()
+    return "category" in kind or "genre" in kind
+
+
+def insights_universe_tags(tags: list[Tag], top: int = INSIGHTS_TAGS_TOP) -> list[Tag]:
+    """v1 rule, now the fallback: top `top` brand-genre insights tags seeded by the brand
+    (any category/genre tag when the response has no brand-genre tag)."""
+    genre = [t for t in tags if is_brand_genre(t)]
+    return (genre or [t for t in tags if is_universe_tag(t)])[:top]

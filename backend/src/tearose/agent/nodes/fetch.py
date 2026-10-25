@@ -4,6 +4,10 @@ The model decides order and when to stop (tool loop, max 20 calls). Code then ru
 completeness check (`missing()`) and feeds the gaps back to the model up to 2 times; anything
 still missing is fetched by code directly, so the scoring input never depends on the model
 being diligent. The empty-result retry policy lives in ToolContext.insights_entities.
+
+Per overlap direction the plan also holds one direct affinity lookup per target
+(filter.results.entities, same seeds and filter): code-only, run after the paging, so the
+scorer can report a censored rank together with the target's affinity ratio.
 """
 
 from __future__ import annotations
@@ -42,6 +46,7 @@ class Need:
     text: str
     tool: str
     args: dict[str, Any]
+    code_only: bool = False  # no model tool for it: code runs it after the model's loop
 
 
 @dataclass
@@ -78,9 +83,26 @@ def _directions(plan: Plan) -> list[tuple[str, list[str], Universe | None, list[
     ]
 
 
+def _pending_affinities(
+    tc: ToolContext, seeds: list[str], uni: Universe, targets: list[str]
+) -> list[str]:
+    """Targets whose direct affinity lookup is still missing for this direction (none once the
+    paging came back empty: without a top-ranked brand there is no ratio to compute)."""
+    key = tc.resolve_filter(seeds, uni.tag_ids)
+    if key in tc.gave_up or (tuple(seeds), tuple(uni.tag_ids)) in tc.gave_up:
+        return []
+    ents, pages, _ = tc.concat_pages(key)
+    if pages and not ents:
+        return []
+    done = {t for (s, f, t) in tc.target_affs if s == key[0] and f == key[1]}
+    return [t for t in dict.fromkeys(targets) if t and t not in done]
+
+
 def missing(plan: Plan, tc: ToolContext) -> list[Need]:
-    """Everything the routed analyses still need, as concrete tool calls."""
+    """Everything the routed analyses still need, as concrete tool calls. Code-only needs
+    (direct target affinities) come last so the paging they depend on runs first."""
     needs: list[Need] = []
+    late: list[Need] = []
     s, j = plan.senior_seeds, plan.junior_seeds
     if "overlap" in plan.analyses:
         for label, seeds, uni, targets in _directions(plan):
@@ -101,6 +123,22 @@ def missing(plan: Plan, tc: ToolContext) -> list[Need]:
                         "qloo_insights_entities",
                         {"seed_entity_ids": seeds, "filter_tags": uni.tag_ids, "page": page},
                     )
+                )
+            pending = _pending_affinities(tc, seeds, uni, targets)
+            if pending:
+                late.append(
+                    Need(
+                        f"affinity:{label}",
+                        f"Overlap {label}: direct affinity of {len(pending)} target(s) to the "
+                        "seed audience (works beyond the paged depth)",
+                        "qloo_target_affinity",
+                        {
+                            "seed_entity_ids": seeds,
+                            "target_entity_ids": pending,
+                            "filter_tags": uni.tag_ids,
+                        },
+                        code_only=True,
+                    )  # fmt: skip
                 )
         if s and j and (tuple(s), tuple(j)) not in tc.compares:
             needs.append(
@@ -136,7 +174,11 @@ def missing(plan: Plan, tc: ToolContext) -> list[Need]:
         if seeds and (tuple(seeds), None) not in tc.heatmaps:
             needs.append(Need(f"heatmap:{side}", f"{side.capitalize()} national heatmap",
                               "qloo_heatmap", {"seed_entity_ids": seeds}))  # fmt: skip
-    return needs
+    return needs + late
+
+
+def for_model(needs: list[Need]) -> list[Need]:
+    return [n for n in needs if not n.code_only]
 
 
 async def execute(tc: ToolContext, need: Need) -> None:
@@ -151,11 +193,17 @@ async def execute(tc: ToolContext, need: Need) -> None:
         await tc.demographics(a["seed_entity_ids"])
     elif need.tool == "qloo_heatmap":
         await tc.heatmap(a["seed_entity_ids"])
+    elif need.tool == "qloo_target_affinity":
+        key = tc.resolve_filter(a["seed_entity_ids"], a["filter_tags"])  # after any widening
+        for t in a["target_entity_ids"]:
+            await tc.target_affinity(a["seed_entity_ids"], t, list(key[1]))
     else:  # pragma: no cover — missing() only emits the tools above
         raise ValueError(need.tool)
 
 
-def _peers(tc: ToolContext, seeds: list[str], uni: Universe | None) -> DirectionalPeers | None:
+def _peers(
+    tc: ToolContext, seeds: list[str], uni: Universe | None, targets: list[str]
+) -> DirectionalPeers | None:
     if not seeds or uni is None:
         return None
     key = tc.resolve_filter(seeds, uni.tag_ids)
@@ -175,6 +223,11 @@ def _peers(tc: ToolContext, seeds: list[str], uni: Universe | None) -> Direction
         exhausted=exhausted,
         gave_up=gave_up,
         filter_tag_ids_used=list(key[1]),
+        target_affinities={
+            t: tc.target_affs[(key[0], key[1], t)]
+            for t in targets
+            if (key[0], key[1], t) in tc.target_affs
+        },
     )
 
 
@@ -186,8 +239,8 @@ def assemble(plan: Plan, resolution: Resolution, tc: ToolContext) -> RawData:
     )
     notes: list[str] = []
     if "overlap" in plan.analyses:
-        raw.senior_seed_junior_universe = _peers(tc, s, plan.junior_universe)
-        raw.junior_seed_senior_universe = _peers(tc, j, plan.senior_universe)
+        raw.senior_seed_junior_universe = _peers(tc, s, plan.junior_universe, j)
+        raw.junior_seed_senior_universe = _peers(tc, j, plan.senior_universe, s)
         raw.junior_target_entity_ids = list(j)
         raw.senior_target_entity_ids = list(s)
         raw.compare = tc.compares.get((tuple(s), tuple(j)))
@@ -240,7 +293,9 @@ def _payload(plan: Plan, tc: ToolContext, needs: list[Need]) -> str:
             "junior_seeds": named(plan.junior_seeds),
             "senior_universe": plan.senior_universe.model_dump() if plan.senior_universe else None,
             "junior_universe": plan.junior_universe.model_dump() if plan.junior_universe else None,
-            "checklist": [{"item": n.text, "tool": n.tool, "args": n.args} for n in needs],
+            "checklist": [
+                {"item": n.text, "tool": n.tool, "args": n.args} for n in for_model(needs)
+            ],
         }
     )
 
@@ -266,7 +321,7 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     ]
     calls = await run_tool_loop(model, tools, messages, max_calls=MAX_CALLS, ev=ev)
     for rnd in range(1, FEEDBACK_ROUNDS + 1):
-        needs = missing(plan, tc)
+        needs = for_model(missing(plan, tc))
         if not needs or calls >= MAX_CALLS:
             break
         await ev.note(

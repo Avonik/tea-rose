@@ -166,6 +166,26 @@ class Recorder:
             take=take,
         )
 
+    async def target_affinity(
+        self,
+        seeds: list[str],
+        target: str,
+        filter_tags: list[str] | None,
+        result_type: str = "urn:entity:brand",
+    ) -> Any:
+        """One target's query.affinity to the seeds (filter.results.entities), or None."""
+        return await self.call(
+            "target_affinity",
+            None,
+            lambda: self.client.target_affinity(
+                seeds, target, result_type=result_type, filter_tags=filter_tags
+            ),
+            seeds=seeds,
+            target=target,
+            result_type=result_type,
+            filter_tags=filter_tags,
+        )
+
     async def demographics(self, seeds: list[str]) -> Any:
         return await self.call(
             "demographics", None, lambda: self.client.demographics(seeds), seeds=seeds

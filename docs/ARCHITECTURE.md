@@ -99,8 +99,17 @@ writes it; it never names an outcome. Runs stored before the field existed load 
   memo limitations then say "nearest category, no exact match in Qloo's brand taxonomy"). The
   agent sees the whole tree plus code suggestions and returns `proxy_taxonomy_choices`; code
   validates ids and falls back to the mapper, then to free-text `/v2/tags`.
-- **Universe of a resolved brand.** Insights tags with `filter.tag.types=urn:tag:genre:brand`
-  (unrestricted taste tags are noise); `pick_category_tags` prefers genre:brand tags.
+- **Universe of a resolved brand** (`scoring/universe.py`, shared by the agent's `resolve` node
+  and the back-test). The brand's OWN `urn:tag:genre:brand` tags from its `/search` result (what
+  the brand IS: a sneaker brand carries fashion, fashion:footwear, fashion:footwear:sneakers),
+  most specific nodes only: any node that is an ancestor of another is dropped, depth >= 2 is
+  preferred (a lone top family such as "fashion" only when nothing deeper exists), up to 3.
+  Source recorded as "entity own tags"; the model's own universe proposal is not used then.
+  Fallback only for a brand without own brand-genre tags: its top 5 insights tags with
+  `filter.tag.types=urn:tag:genre:brand` (source "insights tags (fallback)"). Those describe what
+  the brand's AUDIENCE likes, which is why they stopped being the primary rule after back-test
+  run 1 (a sneaker brand came out as "Food & Beverage"). Then the model's choice, then the goods
+  phrase. `pick_category_tags` prefers genre:brand tags on the free-text path.
 - **Compare.** `/v2/analysis/compare` returns shared `tags` (query.score), each side's own `a` /
   `b` tags and `matchEntities`. Empty shared tags (a thin brand) is "insufficient data", never
   "no overlap".
@@ -110,17 +119,31 @@ Each node emits `TraceEvent`s (`node_started`, `tool_call`, `tool_result`, `deci
 
 Tools exposed to the loops (thin wrappers over `QlooClient`; each appends its `QlooQuery` to
 state): `qloo_search`, `qloo_tags_search`, `qloo_insights_entities`, `qloo_insights_tags`,
-`qloo_demographics`, `qloo_heatmap`, `qloo_compare`.
+`qloo_demographics`, `qloo_heatmap`, `qloo_compare`. The direct target-affinity lookup
+(`qloo_target_affinity` in the trace) is code-only: the fetch node's data plan holds one per
+overlap direction and target, run after the paging.
 
 ## Scoring definitions (v1; tune after the live test)
 
 - **Overlap, one direction:** seed = senior entity id; results = brands filtered to the junior's
   category tags (its universe), `take=50`, pages until the junior appears or 3 pages (150) are
   exhausted. `rank` = 1-based position of the junior entity (or, on the proxy path, the mean rank
-  of the comparator brands). `percentile = 1 - (rank - 1) / universe_size`. Not found in 150 ⇒
-  percentile 0 and a note.
-- **Symmetric overlap** = mean of both directions' percentiles; if only one is computable, use it
-  and note it.
+  of the comparator brands). `percentile = 1 - (rank - 1) / universe_size`.
+- **Censoring (harness v2).** A target not in the scanned list (not within 150, or not in an
+  exhausted list) has an unknown rank beyond the depth: `rank` and `percentile` are None and
+  `*_censored = true` (v1 counted it as rank 151, percentile 0). On the proxy path one missing
+  comparator censors the direction.
+- **Direct target affinity and affinity ratio (harness v2).** Per direction and target one extra
+  call: `/v2/insights` with the same `filter.type`, `signal.interests.entities` and `filter.tags`
+  plus `filter.results.entities=<target>` returns that one entity with its `query.affinity`,
+  whatever its rank (live check: rank 399). Stored per direction: `target_affinity` (mean over
+  comparators on the proxy path), `top1_affinity` and `last_scanned_affinity` of the paged list,
+  `depth_scanned`. `affinity_ratio = target_affinity / top1_affinity`, clipped to 0..1, is
+  available whenever the lookup succeeds, censored or not ("affinity 0.66 to X's audience, 0.61
+  of the strongest brand in the category, beyond the 150 strongest").
+- **Symmetric overlap** = mean of both directions' (uncensored) rank percentiles; if only one is
+  available, use it and note it; None if neither. `symmetric_affinity_ratio` = mean of the
+  available direction ratios.
 - **Bridging:** seed = senior; `insights_tags` → position of the junior's category tag(s) among
   the senior's taste tags (top 50 brand-genre tags); percentile as above. With a ~177-node
   taxonomy, absence of the leaf is weak evidence, so when no leaf is present the code climbs the

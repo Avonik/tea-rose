@@ -75,6 +75,7 @@ def parse_entity(item: dict[str, Any], rank: int | None = None) -> Entity:
         str(_first(t, "tag_id", "id", default=t)) if isinstance(t, dict) else str(t)
         for t in tags_raw
     ]
+    tag_details = [parse_tag(t, rank=i + 1) for i, t in enumerate(tags_raw) if isinstance(t, dict)]
     types = item.get("types") or []
     subtype = _first(item, "subtype", default=(types[0] if types else None))
     return Entity(
@@ -86,6 +87,7 @@ def parse_entity(item: dict[str, Any], rank: int | None = None) -> Entity:
         rank=rank,
         explainability=_explainability(q),
         tags=tag_ids,
+        tag_details=tag_details,
         properties=item.get("properties") or {},
         disambiguation=_first(item, "disambiguation"),
     )

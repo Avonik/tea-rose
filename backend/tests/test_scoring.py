@@ -39,7 +39,13 @@ from tearose.scoring.score import (
     skew_description,
     zone_evidence,
 )
-from tearose.scoring.universe import build_universe_description, pick_category_tags
+from tearose.scoring.universe import (
+    build_universe_description,
+    genre_depth,
+    insights_universe_tags,
+    own_category_tags,
+    pick_category_tags,
+)
 
 # --------------------------------------------------------------------------------------
 # builders
@@ -163,39 +169,107 @@ def test_overlap_target_found_on_page_3():
     assert ev.symmetric_percentile == pytest.approx(1 - 119 / 150)
 
 
-def test_overlap_not_found_exhausted_universe_is_list_length():
+def test_overlap_not_found_exhausted_universe_is_censored():
     raw = RawData(
         senior_seed_junior_universe=peers(40, exhausted=True), junior_target_entity_ids=["JUN"]
     )
     ev = overlap_evidence(raw)
-    assert ev.senior_to_junior_universe == 40
-    assert ev.senior_to_junior_rank == 41
-    assert ev.symmetric_percentile == 0.0
+    assert ev.senior_to_junior_universe == 40 and ev.senior_to_junior_depth_scanned == 40
+    assert ev.senior_to_junior_rank is None and ev.senior_to_junior_percentile is None
+    assert ev.senior_to_junior_censored is True
+    assert ev.symmetric_percentile is None  # censored, not 0 (harness v1 counted rank 41)
+    assert ev.senior_to_junior_affinity_ratio is None  # no lookup made
     assert any("complete list" in n for n in ev.notes)
 
 
-def test_overlap_not_found_not_exhausted_uses_search_cap():
-    raw = RawData(senior_seed_junior_universe=peers(100), junior_target_entity_ids=["JUN"])
-    ev = overlap_evidence(raw)
+def test_overlap_censored_rank_has_no_percentile_but_an_affinity_ratio():
+    p = peers(150).model_copy(update={"target_affinities": {"JUN": 0.5}})
+    ev = overlap_evidence(RawData(senior_seed_junior_universe=p, junior_target_entity_ids=["JUN"]))
+    top, last = p.entities[0].affinity, p.entities[-1].affinity
     assert ev.senior_to_junior_universe == 150
-    assert ev.senior_to_junior_rank == 151
-    assert ev.symmetric_percentile == 0.0
-    assert any("search depth 150" in n for n in ev.notes)
+    assert ev.senior_to_junior_rank is None and ev.senior_to_junior_percentile is None
+    assert ev.senior_to_junior_censored is True and ev.symmetric_percentile is None
+    assert ev.senior_to_junior_target_affinity == pytest.approx(0.5)
+    assert ev.senior_to_junior_top1_affinity == pytest.approx(top)
+    assert ev.senior_to_junior_last_scanned_affinity == pytest.approx(last)
+    assert ev.senior_to_junior_affinity_ratio == pytest.approx(0.5 / top)
+    assert ev.symmetric_affinity_ratio == pytest.approx(0.5 / top)
+    assert any("search depth 150" in n and "rank censored" in n for n in ev.notes)
 
 
-def test_overlap_proxy_three_comparators_one_missing():
+def test_overlap_found_target_uses_lookup_else_listed_affinity():
+    p = peers(150, ids={3: "JUN"})
+    listed = p.entities[2].affinity
+    ev = overlap_evidence(RawData(senior_seed_junior_universe=p, junior_target_entity_ids=["JUN"]))
+    assert ev.senior_to_junior_censored is False and ev.senior_to_junior_rank == 3
+    assert ev.senior_to_junior_affinity_ratio == pytest.approx(listed / p.entities[0].affinity)
+    looked = p.model_copy(update={"target_affinities": {"JUN": 0.97}})
+    ev2 = overlap_evidence(
+        RawData(senior_seed_junior_universe=looked, junior_target_entity_ids=["JUN"])
+    )
+    assert ev2.senior_to_junior_target_affinity == pytest.approx(0.97)
+    assert ev2.senior_to_junior_affinity_ratio == pytest.approx(0.97 / p.entities[0].affinity)
+
+
+def test_overlap_ratio_is_clipped_and_needs_a_top_affinity():
+    p = peers(10).model_copy(update={"target_affinities": {"JUN": 5.0}})
+    ev = overlap_evidence(RawData(senior_seed_junior_universe=p, junior_target_entity_ids=["JUN"]))
+    assert ev.senior_to_junior_affinity_ratio == 1.0
+    empty = peers(0, exhausted=True).model_copy(update={"target_affinities": {"JUN": 0.4}})
+    ev = overlap_evidence(
+        RawData(senior_seed_junior_universe=empty, junior_target_entity_ids=["JUN"])
+    )
+    assert ev.senior_to_junior_affinity_ratio is None and ev.symmetric_affinity_ratio is None
+
+
+def test_overlap_proxy_three_comparators_one_missing_is_censored():
+    p = peers(150, ids={2: "C1", 10: "C2"}).model_copy(
+        update={"target_affinities": {"C1": 0.9, "C2": 0.8, "C3": 0.4}}
+    )
     raw = RawData(
-        senior_seed_junior_universe=peers(150, ids={2: "C1", 10: "C2"}),
+        senior_seed_junior_universe=p,
         junior_target_entity_ids=["C1", "C2", "C3"],
         used_proxy_junior=True,
     )
     ev = overlap_evidence(raw)
-    mr = (2 + 10 + 151) / 3
-    assert ev.senior_to_junior_rank == round(mr)
-    assert ev.symmetric_percentile == pytest.approx(1 - (mr - 1) / 150)
+    assert ev.senior_to_junior_rank is None and ev.senior_to_junior_censored is True
+    assert ev.symmetric_percentile is None
+    assert ev.senior_to_junior_target_affinity == pytest.approx(0.7)  # mean over comparators
+    assert ev.senior_to_junior_affinity_ratio == pytest.approx(0.7 / p.entities[0].affinity)
     assert ev.used_proxy is True
     assert any("C3" in n and "1 of 3" in n for n in ev.notes)
     assert any("mean over 3 comparator" in n for n in ev.notes)
+
+
+def test_overlap_proxy_all_comparators_found_mean_rank():
+    raw = RawData(
+        senior_seed_junior_universe=peers(150, ids={2: "C1", 10: "C2", 30: "C3"}),
+        junior_target_entity_ids=["C1", "C2", "C3"],
+        used_proxy_junior=True,
+    )
+    ev = overlap_evidence(raw)
+    assert ev.senior_to_junior_rank == 14
+    assert ev.symmetric_percentile == pytest.approx(1 - 13 / 150)
+
+
+def test_overlap_symmetric_means_with_one_side_censored():
+    s2j = peers(150).model_copy(update={"target_affinities": {"JUN": 0.4}})  # censored
+    j2s = peers(50, exhausted=True, ids={26: "SEN"}).model_copy(
+        update={"target_affinities": {"SEN": 0.6}}
+    )
+    raw = RawData(
+        senior_seed_junior_universe=s2j,
+        junior_seed_senior_universe=j2s,
+        junior_target_entity_ids=["JUN"],
+        senior_target_entity_ids=["SEN"],
+    )
+    ev = overlap_evidence(raw)
+    assert ev.senior_to_junior_percentile is None and ev.junior_to_senior_percentile == 0.5
+    assert ev.symmetric_percentile == pytest.approx(0.5)  # the one available rank percentile
+    r1 = 0.4 / s2j.entities[0].affinity
+    r2 = 0.6 / j2s.entities[0].affinity
+    assert ev.symmetric_affinity_ratio == pytest.approx((r1 + r2) / 2)
+    assert any("Only one direction has a rank percentile" in n for n in ev.notes)
 
 
 def test_overlap_symmetric_mean_and_compare_lists():
@@ -456,6 +530,49 @@ def test_compute_evidence_none_inputs():
 # --------------------------------------------------------------------------------------
 # universe.py
 # --------------------------------------------------------------------------------------
+
+
+def _gt(path: str, name: str = "") -> Tag:
+    return Tag(
+        tag_id=f"urn:tag:genre:brand:{path}",
+        name=name or path.rsplit(":", 1)[-1].title(),
+        tag_type="urn:tag:genre:brand",
+    )
+
+
+def test_own_category_tags_keeps_most_specific_nodes():
+    tags = [
+        _gt("fashion"),
+        Tag(tag_id="urn:tag:wikipedia_category:x", name="X", tag_type="urn:tag:wikipedia_category"),
+        _gt("fashion:footwear"),
+        _gt("fashion:footwear:sneakers"),
+        _gt("fashion:footwear:other", "Other"),
+        _gt("fashion:athletic"),
+        _gt("retail"),  # a depth-1 leaf loses to deeper nodes
+        _gt("fashion:accessories:watch"),
+    ]
+    out = own_category_tags(tags)
+    assert [t.tag_id.removeprefix("urn:tag:genre:brand:") for t in out] == [
+        "fashion:footwear:sneakers", "fashion:footwear:other", "fashion:athletic"
+    ]  # fmt: skip
+    assert out[1].name == "Other footwear"  # readable label for an "Other" leaf
+    assert genre_depth(tags[0].tag_id) == 1 and genre_depth("urn:tag:keyword:x") == 0
+
+
+def test_own_category_tags_top_family_only_when_nothing_deeper_and_empty_without_genre():
+    assert [t.tag_id for t in own_category_tags([_gt("dining")])] == ["urn:tag:genre:brand:dining"]
+    two = own_category_tags([_gt("dining"), _gt("retail")])
+    assert len(two) == 2
+    assert own_category_tags([Tag(tag_id="urn:tag:keyword:x", name="x")]) == []
+    assert own_category_tags([]) == []
+
+
+def test_insights_universe_tags_fallback_rule():
+    tags = [Tag(tag_id="urn:tag:keyword:a", name="A")] + [_gt(f"f{i}") for i in range(7)]
+    assert [t.name for t in insights_universe_tags(tags)] == ["F0", "F1", "F2", "F3", "F4"]
+    other = [Tag(tag_id="x", name="X", tag_type="urn:tag:category:place")]
+    assert insights_universe_tags(other) == other  # any category/genre tag as a last resort
+    assert insights_universe_tags([Tag(tag_id="k", name="K", tag_type="urn:tag:keyword")]) == []
 
 
 def test_build_universe_description():

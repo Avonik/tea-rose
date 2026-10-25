@@ -48,6 +48,17 @@ class QlooClient(Protocol):
     ) -> tuple[list[Entity], QlooQuery]:
         """GET /v2/insights filter.type=<entity type> — ranked entities for a seed set."""
 
+    async def target_affinity(
+        self,
+        seed_entity_ids: list[str],
+        target_entity_id: str,
+        *,
+        result_type: str = BRAND,
+        filter_tags: list[str] | None = None,
+    ) -> tuple[float | None, QlooQuery]:
+        """GET /v2/insights filter.results.entities=<target> — that one entity's query.affinity
+        to the seed set (None when Qloo does not return it), independent of its rank."""
+
     async def insights_tags(
         self,
         seed_entity_ids: list[str],

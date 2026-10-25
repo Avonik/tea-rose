@@ -11,7 +11,11 @@ The model searches, disambiguates and proposes; code enforces the rules:
   when the taxonomy is unavailable or nothing maps does the old free-text path run: the goods
   phrase VERBATIM to /v2/tags, one shorter phrase if empty, tags chosen from the returned menu;
 - comparators must resolve via /search and share a chosen tag (when Qloo returns tags);
-- universes use only tag ids that some Qloo response actually returned.
+- universes use only tag ids that some Qloo response actually returned. A resolved brand's
+  universe is its OWN category (scoring.universe.own_category_tags on the brand-genre tags of
+  its /search result, source "entity own tags"); only a brand without such tags falls back to
+  its top insights tags (source "insights tags (fallback)"), then to the model's choice and the
+  goods phrase. Insights tags describe what the AUDIENCE likes, not what the brand is.
 """
 
 from __future__ import annotations
@@ -52,7 +56,14 @@ from tearose.schemas import (
     Side,
     Universe,
 )
-from tearose.scoring.universe import build_universe_description, pick_category_tags
+from tearose.scoring.universe import (
+    INSIGHTS_FALLBACK_SOURCE,
+    OWN_TAGS_SOURCE,
+    build_universe_description,
+    insights_universe_tags,
+    own_category_tags,
+    pick_category_tags,
+)
 
 MAX_CALLS = 20
 MAX_COMPARATORS = 5
@@ -344,19 +355,39 @@ async def _universe(
     tc: ToolContext,
     ev: NodeEvents,
 ) -> Universe | None:
+    code_tags: list[Tag] = []  # universe built in code: its description comes from these
     if proxy is not None:
         tag_ids, source = list(proxy.chosen_tag_ids), "proxy tags"
     else:
-        known = _known_tag_ids(tc)
-        tag_ids = [t for t in _dedupe(d.universe_tag_ids) if t in known]
-        unknown = [t for t in d.universe_tag_ids if t not in known]
-        if unknown:
-            await ev.warning(
-                f"{side}: universe tags never returned by Qloo were dropped", ", ".join(unknown)
+        own = own_category_tags(entity.tag_details) if entity is not None else []
+        if not own and entity is not None:
+            seed_tags = tc.seed_tags.get((entity.entity_id,))
+            if seed_tags is None:
+                try:
+                    seed_tags, _ = await tc.insights_tags([entity.entity_id])
+                except Exception as exc:  # noqa: BLE001 — later fallbacks still apply
+                    await ev.warning(f"{side}: insights tags for the universe failed", repr(exc))
+                    seed_tags = []
+            own = insights_universe_tags(seed_tags)
+            source = INSIGHTS_FALLBACK_SOURCE
+        else:
+            source = OWN_TAGS_SOURCE
+        code_tags = own
+        tag_ids = [t.tag_id for t in own]
+        if own and d.universe_tag_ids and set(d.universe_tag_ids) != set(tag_ids):
+            await ev.note(
+                f"{side}: universe from {source}; the model's universe choice is not used",
+                f"model: {d.universe_tag_ids}; code: {tag_ids}",
             )
-        source = "agent choice"
-        if not tag_ids and entity is not None and entity.tags:
-            tag_ids, source = entity.tags[:3], "the brand's own tags"
+        if not tag_ids:
+            known = _known_tag_ids(tc)
+            tag_ids = [t for t in _dedupe(d.universe_tag_ids) if t in known]
+            unknown = [t for t in d.universe_tag_ids if t not in known]
+            if unknown:
+                await ev.warning(
+                    f"{side}: universe tags never returned by Qloo were dropped", ", ".join(unknown)
+                )
+            source = "agent choice"
         if not tag_ids and party.goods and tc.taxonomy:
             mapped = map_goods_phrase(party.goods[0], tc.taxonomy)
             tag_ids = [m.node.tag_id for m in mapped]
@@ -377,8 +408,11 @@ async def _universe(
     if not tag_ids:
         await ev.warning(f"{side}: no category universe could be built")
         return None
-    tags = [_tag_obj(tc, t) for t in tag_ids]
-    desc = (d.universe_description or "").strip() or build_universe_description(tags)
+    if code_tags:
+        desc = build_universe_description(code_tags)
+    else:
+        tags = [_tag_obj(tc, t) for t in tag_ids]
+        desc = (d.universe_description or "").strip() or build_universe_description(tags)
     await ev.decision(
         f"{side} universe: {desc}",
         f"{len(tag_ids)} tag(s) from {source}",

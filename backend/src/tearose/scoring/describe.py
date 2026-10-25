@@ -100,37 +100,61 @@ def _small(size: int | None) -> list[str]:
 # --------------------------------------------------------------------------------------
 
 
-def _direction(
-    p: _Parties,
-    seed: str,
-    target: str,
-    rank: int | None,
-    size: int | None,
-    pct: float | None,
-    notes: list[str],
-) -> list[str]:
-    """Seed = whose audience; target = who is ranked, among the TARGET side's category."""
+def _ratio_clause(aff: float | None, ratio: float | None) -> str:
+    return (
+        f"{num(aff)}, {num(ratio)} of the strongest brand in the category"
+        if (aff is not None and ratio is not None)
+        else ""
+    )
+
+
+def _direction(p: _Parties, seed: str, target: str, ev: OverlapEvidence) -> list[str]:
+    """Seed = whose audience; target = who is ranked, among the TARGET side's category.
+
+    Two signals: the rank percentile (censored when the target lies beyond the scanned depth)
+    and the direct affinity, also as a ratio to the strongest brand of the same ranking."""
+    key = f"{seed}_to_{target}"
+    rank: int | None = getattr(ev, f"{key}_rank")
+    size: int | None = getattr(ev, f"{key}_universe")
+    pct: float | None = getattr(ev, f"{key}_percentile")
+    censored: bool = getattr(ev, f"{key}_censored")
+    depth: int | None = getattr(ev, f"{key}_depth_scanned")
+    aff: float | None = getattr(ev, f"{key}_target_affinity")
+    ratio: float | None = getattr(ev, f"{key}_affinity_ratio")
     universe = p.universe(target)
+    seed_txt = f"{poss(p.name(seed))} audience"
+    if p.proxy(seed) is not None:
+        seed_txt = f"the audience of {p.stand_in(seed)}"
+    plural = p.proxy(target) is not None
+    who = p.stand_in(target) if plural else p.name(target)
+    ratio_txt = _ratio_clause(aff, ratio)
+
+    if censored:
+        beyond = f"beyond the {depth} strongest" if depth else "not among the brands returned"
+        if aff is not None and ratio is not None:
+            mean = "mean affinity" if plural else "affinity"
+            return [
+                f"{who[0].upper() + who[1:]}: {mean} {num(aff)} to {seed_txt}, {num(ratio)} of "
+                f"the strongest brand in the category ({universe}), {beyond} (rank censored, "
+                "no rank percentile)."
+            ]
+        return [
+            f"Among {universe}, ranked by affinity to {seed_txt}, {who} "
+            f"{'are' if plural else 'is'} {beyond} (rank censored, no rank percentile; no "
+            "direct affinity available)."
+        ]
     if rank is None or size is None or pct is None:
         return [
             f"Overlap seeded by {poss(p.name(seed))} audience, ranking {p.name(target)} among "
             f"{universe}: no data."
         ]
-    seed_txt = f"{poss(p.name(seed))} audience"
-    if p.proxy(seed) is not None:
-        seed_txt = f"the audience of {p.stand_in(seed)}"
-    if p.proxy(target) is not None:
-        who = p.stand_in(target)
-        verb = "rank"
-        how = f"{rank} of {size} on average"
-    else:
-        who = p.name(target)
-        verb = "ranks"
-        how = f"{rank} of {size}"
-    if pct <= 0:
+    verb, how = (
+        ("rank", f"{rank} of {size} on average") if plural else ("ranks", f"{rank} of {size}")
+    )
+    if pct <= 0:  # harness v1 records: a missing target was counted as last
         out = (
             f"Among {size} {universe}, ranked by affinity to {seed_txt}, {who} did not appear "
-            f"in the results and {'are' if verb == 'rank' else 'is'} counted as last "
+            f"in the results and {'are' if plural else 'is'} counted as last "
             f"({pct_text(pct)})."
         )
     else:
@@ -138,29 +162,28 @@ def _direction(
             f"Among {size} {universe}, ranked by affinity to {seed_txt}, {who} {verb} {how} "
             f"({pct_text(pct)})."
         )
-    label = f"{seed}->{target}:"
-    if pct > 0 and any(n.startswith(label) and "counted as rank" in n for n in notes):
-        out += f" Targets not found in the results count as rank {size + 1}."
+    if ratio_txt:
+        out += f" {'Mean affinity' if plural else 'Affinity'} {ratio_txt}."
     return [out, *_small(size)]
 
 
 def describe_overlap(ev: OverlapEvidence | None, p: _Parties) -> list[str]:
     if ev is None:
         return ["Overlap: not measured in this run."]
-    out = _direction(
-        p, "senior", "junior", ev.senior_to_junior_rank, ev.senior_to_junior_universe,
-        ev.senior_to_junior_percentile, ev.notes,
-    )  # fmt: skip
-    out += _direction(
-        p, "junior", "senior", ev.junior_to_senior_rank, ev.junior_to_senior_universe,
-        ev.junior_to_senior_percentile, ev.notes,
-    )  # fmt: skip
+    out = _direction(p, "senior", "junior", ev)
+    out += _direction(p, "junior", "senior", ev)
     both = [
         x for x in (ev.senior_to_junior_percentile, ev.junior_to_senior_percentile)
         if x is not None
     ]  # fmt: skip
-    if ev.symmetric_percentile is None:
+    ratios = [
+        x for x in (ev.senior_to_junior_affinity_ratio, ev.junior_to_senior_affinity_ratio)
+        if x is not None
+    ]  # fmt: skip
+    if ev.symmetric_percentile is None and ev.symmetric_affinity_ratio is None:
         out.append("Overlap: no data in either direction.")
+    elif ev.symmetric_percentile is None:
+        out.append("No rank percentile in either direction (censored or missing).")
     elif len(both) == 2:
         out.append(
             f"Averaged over both directions, audience overlap is at the "
@@ -168,8 +191,18 @@ def describe_overlap(ev: OverlapEvidence | None, p: _Parties) -> list[str]:
         )
     else:
         out.append(
-            "Only one direction was computable; audience overlap is at the "
+            "Only one direction has a rank percentile; audience overlap is at the "
             f"{pct_text(ev.symmetric_percentile)}."
+        )
+    if ev.symmetric_affinity_ratio is not None:
+        scope = (
+            "Averaged over both directions"
+            if len(ratios) == 2
+            else "In the one direction available"
+        )
+        out.append(
+            f"{scope}, the target's affinity is {num(ev.symmetric_affinity_ratio)} of the "
+            "strongest brand in its category (affinity ratio, 0-1)."
         )
     if any("Compare: insufficient data" in n for n in ev.notes):
         out.append(

@@ -23,6 +23,10 @@ class DirectionalPeers(BaseModel):
     exhausted: bool = False  # True when the API returned fewer than `take` on the last page
     gave_up: bool = False  # True when results stayed empty after the widened-filter retry
     filter_tag_ids_used: list[str] = Field(default_factory=list)  # actual filter after widening
+    # direct lookup (filter.results.entities=<target>, same seeds/filter/type): target entity id
+    # -> its query.affinity to the seeds wherever it ranks; None = lookup returned nothing.
+    # Absent key = no lookup was made (older runs).
+    target_affinities: dict[str, float | None] = Field(default_factory=dict)
 
 
 class RawData(BaseModel):

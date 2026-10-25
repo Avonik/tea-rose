@@ -26,7 +26,19 @@
         "image": {
           "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000005-420x-auto.jpg"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "Dining",
+          "tag_id": "urn:tag:genre:brand:dining",
+          "type": "urn:tag:genre:brand"
+        },
+        {
+          "name": "Synthetic burger chains",
+          "tag_id": "urn:tag:wikipedia_category:synthetic_burger_chains",
+          "type": "urn:tag:wikipedia_category"
+        }
+      ]
     }
   ]
 }

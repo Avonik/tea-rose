@@ -166,6 +166,23 @@ class LiveClient:
         q.result_count = len(ents)
         return ents, q
 
+    async def target_affinity(
+        self,
+        seed_entity_ids: list[str],
+        target_entity_id: str,
+        *,
+        result_type: str = BRAND,
+        filter_tags: list[str] | None = None,
+    ) -> tuple[float | None, QlooQuery]:
+        params = P.target_affinity_params(
+            seed_entity_ids, target_entity_id, result_type, filter_tags
+        )
+        body, q = await self._get("/v2/insights", params)
+        ents = parse_entities(body)
+        q.result_count = len(ents)
+        hit = next((e for e in ents if e.entity_id == target_entity_id), None)
+        return (hit.affinity if hit is not None else None), q
+
     async def insights_tags(
         self,
         seed_entity_ids: list[str],

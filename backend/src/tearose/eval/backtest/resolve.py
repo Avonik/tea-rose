@@ -14,10 +14,14 @@ Deterministic rules (no model):
   up to 3 nodes, each labelled exact | partial | nearest. Only when the taxonomy is unavailable
   or nothing maps does the old last resort run: the phrase VERBATIM to free-text /v2/tags, then
   one shortened phrase, then `pick_category_tags` (first menu tag when nothing overlaps).
-- Universe tags of a resolved brand: insights tags seeded by the brand restricted to
-  filter.tag.types=urn:tag:genre:brand (take 50), top 5 in response order (any category/genre
-  tag qualifies, as a fallback for unrestricted responses). If none, fall back to the goods
-  phrase mapping above (recorded as the source).
+- Universe tags of a resolved brand (harness v2, `scoring.universe.own_category_tags`): the
+  brand's OWN urn:tag:genre:brand tags from its /search result, most specific nodes only (an
+  ancestor of another node is dropped), depth >= 2 preferred, up to 3; source
+  "entity own tags". Only when the entity carries no brand-genre tag: the v1 rule, insights tags
+  seeded by the brand restricted to filter.tag.types=urn:tag:genre:brand (take 50), top 5
+  (source "insights tags (fallback)"); v1 used that rule for every brand and so measured what
+  the brand's AUDIENCE likes, not what the brand is. If that is empty too, the goods phrase
+  mapping above (recorded as the source).
 """
 
 from __future__ import annotations
@@ -25,6 +29,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from tearose.eval.backtest import HARNESS_VERSION
 from tearose.eval.backtest.common import DEFAULT_ENTITY_TYPE, Recorder, entity_urn
 from tearose.qloo.models import Entity, Tag
 from tearose.qloo.names import pick_by_name
@@ -35,11 +40,18 @@ from tearose.qloo.taxonomy import (
     load_brand_taxonomy,
     map_goods_phrase,
 )
-from tearose.scoring.universe import is_brand_genre, pick_category_tags
+from tearose.scoring.universe import (
+    INSIGHTS_FALLBACK_SOURCE,
+    OWN_TAGS_SOURCE,
+    genre_depth,
+    insights_universe_tags,
+    own_category_tags,
+    pick_category_tags,
+)
 
 SEARCH_TAKE = 10
 TAGS_TAKE = 50
-UNIVERSE_TOP = 5
+UNIVERSE_TOP = 5  # insights-tags fallback only
 PROXY_TAGS_TOP = 3
 
 
@@ -63,11 +75,6 @@ def shorten_phrase(phrase: str) -> str | None:
 
 def _tag_dict(t: Tag) -> dict[str, Any]:
     return {"id": t.tag_id, "name": t.name, "type": t.tag_type}
-
-
-def is_universe_tag(t: Tag) -> bool:
-    kind = (t.tag_type or "").lower() or t.tag_id.lower()
-    return "category" in kind or "genre" in kind
 
 
 async def brand_taxonomy(rec: Recorder) -> list[TaxonomyNode]:
@@ -197,15 +204,23 @@ async def resolve_side(
         return side
 
     side["status"] = "resolved"
+    own_genre = [t.tag_id for t in entity.tag_details if genre_depth(t.tag_id) >= 1]
+    own = own_category_tags(entity.tag_details)
+    if own:
+        side["universe"] = {
+            "tag_ids": [t.tag_id for t in own],
+            "tag_names": [t.name for t in own],
+            "source": OWN_TAGS_SOURCE,
+            "own_genre_tag_ids": own_genre,
+        }
+        return side
     tags = list(await rec.insights_tags([entity.entity_id], take=TAGS_TAKE))
-    genre = [t for t in tags if is_brand_genre(t)]
-    uni = (genre or [t for t in tags if is_universe_tag(t)])[:UNIVERSE_TOP]
+    uni = insights_universe_tags(tags, top=UNIVERSE_TOP)
     if uni:
-        kind = "genre:brand" if genre else "category/genre"
         side["universe"] = {
             "tag_ids": [t.tag_id for t in uni],
             "tag_names": [t.name for t in uni],
-            "source": f"brand's own {kind} tags (insights tags, top 5)",
+            "source": INSIGHTS_FALLBACK_SOURCE,
         }
     else:
         fb = await tags_for_phrase(rec, goods_phrase)
@@ -257,7 +272,12 @@ async def run(
     cases = []
     for row in rows:
         cases.append(await resolve_case(rec, row))
-    return {"qloo_mode": mode, "mapping_sha256": mapping_sha256, "cases": cases}
+    return {
+        "harness_version": HARNESS_VERSION,
+        "qloo_mode": mode,
+        "mapping_sha256": mapping_sha256,
+        "cases": cases,
+    }
 
 
 def summarize(doc: dict[str, Any]) -> dict[str, Any]:

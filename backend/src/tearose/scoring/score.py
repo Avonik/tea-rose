@@ -10,6 +10,7 @@ from __future__ import annotations
 import logging
 import math
 from collections.abc import Callable, Iterable, Sequence
+from dataclasses import dataclass, field
 from typing import Any
 
 from tearose.qloo.models import (
@@ -159,48 +160,97 @@ def _top_peers(peers: DirectionalPeers | None) -> list[RankedPeer]:
     return out[:TOP_PEERS]
 
 
-def direction_rank(
-    peers: DirectionalPeers | None, target_ids: Sequence[str], label: str
-) -> tuple[float | None, int | None, float | None, list[str]]:
-    """Rank of `target_ids` within one seeded peer list.
+@dataclass
+class Direction:
+    """One overlap direction: where the target ranks among the seeded category brands
+    (censored beyond the scanned depth) plus its directly looked-up affinity."""
 
-    Returns (mean_rank, universe_size, percentile, notes). With several targets (proxy
-    comparators) the rank is the mean of their ranks; a target not found counts as
-    universe_size + 1 (so percentile 0 when all are missing).
+    rank: float | None = None  # mean rank over targets; None when censored or not computable
+    size: int | None = None  # universe size used for the percentile
+    percentile: float | None = None  # rank percentile; None when censored
+    censored: bool = False  # some target lies beyond the scanned list
+    depth_scanned: int | None = None  # brands actually returned (pages x take, or fewer)
+    target_affinity: float | None = None  # mean over targets with a known affinity
+    top1_affinity: float | None = None
+    last_scanned_affinity: float | None = None
+    affinity_ratio: float | None = None  # target_affinity / top1_affinity, clipped to 0..1
+    notes: list[str] = field(default_factory=list)
+
+
+def _target_affinity(
+    peers: DirectionalPeers, targets: list[str], ranks: dict[str, int]
+) -> tuple[float | None, int]:
+    """Mean affinity over targets: the direct lookup, else the affinity in the scanned list."""
+    listed = {e.entity_id: e.affinity for e in peers.entities}
+    vals: list[float] = []
+    for t in targets:
+        a = peers.target_affinities.get(t)
+        if a is None and t in ranks:
+            a = listed.get(t)
+        if a is not None:
+            vals.append(float(a))
+    return (sum(vals) / len(vals) if vals else None), len(vals)
+
+
+def direction_stats(
+    peers: DirectionalPeers | None, target_ids: Sequence[str], label: str
+) -> Direction:
+    """Rank of `target_ids` within one seeded peer list, plus the direct affinity signal.
+
+    Rank: with several targets (proxy comparators) the mean of their ranks. A target that is
+    not in the scanned list is CENSORED: its rank is only known to lie beyond the depth, so
+    rank and percentile are None (harness v1 counted it as rank size + 1, i.e. percentile 0).
+    Affinity ratio: mean target affinity (direct lookup, else the listed affinity) divided by
+    the affinity of the top-ranked brand of the same seeded list, clipped to 0..1.
     """
-    notes: list[str] = []
+    d = Direction()
     if peers is None:
-        return None, None, None, [f"{label}: no peer list was fetched."]
+        d.notes.append(f"{label}: no peer list was fetched.")
+        return d
     targets = [t for t in dict.fromkeys(target_ids) if t]
     if not targets:
-        return None, None, None, [f"{label}: no target entity ids to locate."]
+        d.notes.append(f"{label}: no target entity ids to locate.")
+        return d
     size = universe_size(peers)
-    if size <= 0:
-        return None, None, None, [f"{label}: the peer universe came back empty."]
+    d.depth_scanned = len(peers.entities)
+    if peers.entities:
+        d.top1_affinity = peers.entities[0].affinity
+        d.last_scanned_affinity = peers.entities[-1].affinity
     ranks = _entity_ranks(peers)
-    found: list[float] = []
-    missing: list[str] = []
-    for t in targets:
-        if t in ranks:
-            found.append(float(ranks[t]))
-        else:
-            missing.append(t)
-            found.append(float(size + 1))
+    d.target_affinity, n_aff = _target_affinity(peers, targets, ranks)
+    top = d.top1_affinity
+    if d.target_affinity is not None and top is not None and top > _EPS:
+        d.affinity_ratio = _clip01(d.target_affinity / top)
+        looked = f"; {n_aff} of {len(targets)} targets" if len(targets) > 1 else ""
+        d.notes.append(
+            f"{label}: affinity ratio {d.affinity_ratio:.2f} (target affinity "
+            f"{d.target_affinity:.2f} / top-ranked {top:.2f}{looked})."
+        )
+    elif peers.target_affinities:
+        d.notes.append(f"{label}: affinity ratio not computable (no target or top affinity).")
+    if size <= 0:
+        d.notes.append(f"{label}: the peer universe came back empty.")
+        return d
+    d.size = size
+    missing = [t for t in targets if t not in ranks]
     if missing:
+        d.censored = True
         how = (
             f"not among the {len(peers.entities)} peers returned (complete list)"
             if peers.exhausted
             else f"not found within the first {len(peers.entities)} results "
-            f"(search depth {SEARCH_CAP}; universe taken as {size})"
+            f"(search depth {SEARCH_CAP})"
         )
-        notes.append(
-            f"{label}: {len(missing)} of {len(targets)} target(s) {how}; "
-            f"counted as rank {size + 1}: {', '.join(missing)}."
+        d.notes.append(
+            f"{label}: {len(missing)} of {len(targets)} target(s) {how}; rank censored "
+            f"(beyond {len(peers.entities)}), no rank percentile: {', '.join(missing)}."
         )
+    else:
+        d.rank = mean_rank([float(ranks[t]) for t in targets])
+        d.percentile = percentile_from_rank(d.rank, size)
     if len(targets) > 1:
-        notes.append(f"{label}: rank is the mean over {len(targets)} comparator brands.")
-    mr = mean_rank(found)
-    return mr, size, percentile_from_rank(mr, size), notes
+        d.notes.append(f"{label}: rank is the mean over {len(targets)} comparator brands.")
+    return d
 
 
 def _compare_row(e: CompareEntity) -> dict[str, Any]:
@@ -225,34 +275,44 @@ def _fallback_targets(resolution: Resolution | None, side: str) -> list[str]:
     return []
 
 
+def _direction_fields(prefix: str, d: Direction) -> dict[str, Any]:
+    return {
+        f"{prefix}_censored": d.censored,
+        f"{prefix}_depth_scanned": d.depth_scanned,
+        f"{prefix}_target_affinity": d.target_affinity,
+        f"{prefix}_top1_affinity": d.top1_affinity,
+        f"{prefix}_last_scanned_affinity": d.last_scanned_affinity,
+        f"{prefix}_affinity_ratio": d.affinity_ratio,
+    }
+
+
 def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> OverlapEvidence:
     """Rank-based shared-purchaser evidence in both directions (see ARCHITECTURE.md).
 
     Target ids come from `raw.*_target_entity_ids`; if empty, from the resolution (entity id,
-    else proxy comparators). `symmetric_percentile` = mean of the available directions.
+    else proxy comparators). `symmetric_percentile` = mean of the available (uncensored) rank
+    percentiles; `symmetric_affinity_ratio` = mean of the available affinity ratios.
     Rank fields are the (rounded) mean ranks; percentiles use the unrounded mean.
     """
     notes: list[str] = []
     junior_targets = list(raw.junior_target_entity_ids) or _fallback_targets(resolution, "junior")
     senior_targets = list(raw.senior_target_entity_ids) or _fallback_targets(resolution, "senior")
 
-    s2j_rank, s2j_size, s2j_pct, n1 = direction_rank(
-        raw.senior_seed_junior_universe, junior_targets, "senior->junior"
-    )
-    j2s_rank, j2s_size, j2s_pct, n2 = direction_rank(
-        raw.junior_seed_senior_universe, senior_targets, "junior->senior"
-    )
-    notes += n1 + n2
+    s2j = direction_stats(raw.senior_seed_junior_universe, junior_targets, "senior->junior")
+    j2s = direction_stats(raw.junior_seed_senior_universe, senior_targets, "junior->senior")
+    notes += s2j.notes + j2s.notes
 
-    pcts = [p for p in (s2j_pct, j2s_pct) if p is not None]
+    pcts = [p for p in (s2j.percentile, j2s.percentile) if p is not None]
     symmetric = sum(pcts) / len(pcts) if pcts else None
     if len(pcts) == 1:
-        notes.append("Only one direction was computable; symmetric percentile uses it alone.")
+        notes.append("Only one direction has a rank percentile; the symmetric one uses it alone.")
     elif not pcts:
-        notes.append("Overlap could not be computed in either direction.")
-    for label, pct in (("senior->junior", s2j_pct), ("junior->senior", j2s_pct)):
+        notes.append("No rank percentile in either direction (not computable or censored).")
+    for label, pct in (("senior->junior", s2j.percentile), ("junior->senior", j2s.percentile)):
         if pct is not None:
             notes.append(f"{label} percentile: {pct:.2f}.")
+    ratios = [r for r in (s2j.affinity_ratio, j2s.affinity_ratio) if r is not None]
+    symmetric_ratio = sum(ratios) / len(ratios) if ratios else None
 
     shared: list[dict[str, Any]] = []
     d_senior: list[dict[str, Any]] = []
@@ -289,13 +349,16 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
         notes.append(f"Proxy path used for {' and '.join(sides)} (category comparators).")
 
     return OverlapEvidence(
-        senior_to_junior_rank=round(s2j_rank) if s2j_rank is not None else None,
-        senior_to_junior_universe=s2j_size,
-        senior_to_junior_percentile=s2j_pct,
-        junior_to_senior_rank=round(j2s_rank) if j2s_rank is not None else None,
-        junior_to_senior_universe=j2s_size,
-        junior_to_senior_percentile=j2s_pct,
+        senior_to_junior_rank=round(s2j.rank) if s2j.rank is not None else None,
+        senior_to_junior_universe=s2j.size,
+        senior_to_junior_percentile=s2j.percentile,
+        junior_to_senior_rank=round(j2s.rank) if j2s.rank is not None else None,
+        junior_to_senior_universe=j2s.size,
+        junior_to_senior_percentile=j2s.percentile,
         symmetric_percentile=symmetric,
+        **_direction_fields("senior_to_junior", s2j),
+        **_direction_fields("junior_to_senior", j2s),
+        symmetric_affinity_ratio=symmetric_ratio,
         top_peers_senior_seed=_top_peers(raw.senior_seed_junior_universe),
         top_peers_junior_seed=_top_peers(raw.junior_seed_senior_universe),
         shared_affinities=shared,

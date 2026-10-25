@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from tearose.config import get_settings
-from tearose.eval.backtest import prepare, report, resolve, score_step
+from tearose.eval.backtest import HARNESS_VERSION, prepare, report, resolve, score_step
 from tearose.eval.backtest.common import (
     CASES_CSV,
     MAPPING_CSV,
@@ -78,6 +78,11 @@ def main(argv: list[str] | None = None) -> None:
         resolved = read_json(out_dir / RESOLVED_NAME)
         if resolved.get("mapping_sha256") != sha256_file(args.mapping):
             raise SystemExit("resolved.json was built from a different mapping.csv; re-run resolve")
+        if resolved.get("harness_version", 1) != HARNESS_VERSION:
+            raise SystemExit(
+                f"resolved.json was built by harness v{resolved.get('harness_version', 1)}; "
+                f"re-run resolve (current harness v{HARNESS_VERSION})"
+            )
         doc = asyncio.run(_with_client(lambda rec: score_step.run(rec, resolved)))
         write_json(out_dir / SCORES_NAME, doc)
         _print("score", {"mode": mode, "out": str(out_dir / SCORES_NAME),

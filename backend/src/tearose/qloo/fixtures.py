@@ -7,6 +7,7 @@ for unknown entities), so the agent's "thin data" paths get exercised too.
 Fixture file naming (see fixtures/qloo/README.md):
   search_brand_<slug>.json                   search_<type>_<slug>.json (e.g. search_artist_aqua)
   insights_brand_seed_<slug>.json            insights_brand_seed_<slug>_filter_<tagslug>.json
+  insights_brand_seed_<slug>_target_<slug>.json  (optional) one target's affinity lookup
   insights_tag_seed_<slug>.json
   insights_demographics_<slug>.json
   insights_heatmap_<slug>.json
@@ -127,6 +128,17 @@ class FixtureClient:
             page,
             explainability,
         )
+        body, fx = self._find(*self._entity_candidates(seed_entity_ids, result_type, filter_tags))
+        ents = parse_entities(body)
+        if exclude_entity_ids:
+            ents = [e for e in ents if e.entity_id not in set(exclude_entity_ids)]
+        start = (page - 1) * take
+        page_ents = ents[start : start + take]
+        return page_ents, self._query("/v2/insights", params, fx, len(page_ents))
+
+    def _entity_candidates(
+        self, seed_entity_ids: list[str], result_type: str, filter_tags: list[str] | None
+    ) -> list[str]:
         seed = self._seed_slug(seed_entity_ids)
         kind = result_type.rsplit(":", 1)[-1]
         candidates: list[str] = []
@@ -137,13 +149,32 @@ class FixtureClient:
                 candidates.append(f"insights_{kind}_seed_{seed}_filter_pet_tags")
             candidates.append(f"insights_{kind}_seed_{seed}_filter_{slugify(filter_tags[0])}")
         candidates.append(f"insights_{kind}_seed_{seed}")
-        body, fx = self._find(*candidates)
-        ents = parse_entities(body)
-        if exclude_entity_ids:
-            ents = [e for e in ents if e.entity_id not in set(exclude_entity_ids)]
-        start = (page - 1) * take
-        page_ents = ents[start : start + take]
-        return page_ents, self._query("/v2/insights", params, fx, len(page_ents))
+        return candidates
+
+    async def target_affinity(
+        self,
+        seed_entity_ids: list[str],
+        target_entity_id: str,
+        *,
+        result_type: str = BRAND,
+        filter_tags: list[str] | None = None,
+    ) -> tuple[float | None, QlooQuery]:
+        """A dedicated insights_<kind>_seed_<seed>_target_<target>.json when present (lets a
+        fixture model a target beyond the paged depth), else the target's entry in the same
+        ranked fixture insights_entities would serve (all pages)."""
+        params = P.target_affinity_params(
+            seed_entity_ids, target_entity_id, result_type, filter_tags
+        )
+        seed = self._seed_slug(seed_entity_ids)
+        kind = result_type.rsplit(":", 1)[-1]
+        target = self._id_to_slug.get(target_entity_id, slugify(target_entity_id))
+        body, fx = self._find(
+            f"insights_{kind}_seed_{seed}_target_{target}",
+            *self._entity_candidates(seed_entity_ids, result_type, filter_tags),
+        )
+        hit = next((e for e in parse_entities(body) if e.entity_id == target_entity_id), None)
+        aff = hit.affinity if hit is not None else None
+        return aff, self._query("/v2/insights", params, fx, 0 if hit is None else 1)
 
     async def insights_tags(
         self,

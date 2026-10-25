@@ -81,6 +81,8 @@ class ToolContext:
         self.demos: dict[tuple[str, ...], Demographics] = {}
         self.heatmaps: dict[tuple[tuple[str, ...], str | None], list[HeatmapPoint]] = {}
         self.compares: dict[tuple[tuple[str, ...], tuple[str, ...]], CompareResult] = {}
+        # (seeds, filter tags, target id) -> direct affinity lookup (None = nothing returned)
+        self.target_affs: dict[tuple[tuple[str, ...], tuple[str, ...], str], float | None] = {}
         self.taxonomy: list[TaxonomyNode] = []  # brand-genre tree, loaded by resolve
 
     # --- provenance ------------------------------------------------------------------
@@ -245,6 +247,20 @@ class ToolContext:
                 break
         ranked = [e.model_copy(update={"rank": i + 1}) for i, e in enumerate(out)]
         return ranked, n, exhausted
+
+    async def target_affinity(
+        self, seeds: list[str], target: str, filter_tags: list[str] | None
+    ) -> tuple[float | None, str]:
+        """One target's affinity to the seeds wherever it ranks (filter.results.entities)."""
+        filt = list(filter_tags or []) or None
+        aff, ref = await self._call(
+            "qloo_target_affinity",
+            f"seed={len(seeds)}, target={self.names.get(target, target)}",
+            {"seed_entity_ids": seeds, "target_entity_id": target, "filter_tags": filt},
+            lambda: self.client.target_affinity(seeds, target, filter_tags=filt),
+        )
+        self.target_affs[(tuple(seeds), tuple(filt or ()), target)] = aff
+        return aff, ref
 
     async def insights_tags(self, seeds: list[str]) -> tuple[list[Tag], str]:
         tags, ref = await self._call(

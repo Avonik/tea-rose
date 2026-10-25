@@ -46,6 +46,24 @@ def insights_entities_params(
     )
 
 
+def target_affinity_params(
+    seed_entity_ids: list[str],
+    target_entity_id: str,
+    result_type: str,
+    filter_tags: list[str] | None,
+) -> dict[str, Any]:
+    """One target's affinity to a seed set, wherever it ranks (live check: a brand at rank 399
+    comes back alone with its query.affinity). Same filter.tags as the paged ranking."""
+    return _clean(
+        {
+            "filter.type": result_type,
+            "signal.interests.entities": _csv(seed_entity_ids),
+            "filter.results.entities": target_entity_id,
+            "filter.tags": _csv(filter_tags),
+        }
+    )
+
+
 def insights_tags_params(
     seed_entity_ids: list[str], take: int, tag_types: Sequence[str] | None = None
 ) -> dict[str, Any]:

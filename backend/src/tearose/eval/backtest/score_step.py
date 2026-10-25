@@ -17,6 +17,11 @@ Per case with at least one side resolved (the other resolved or proxied):
   is retried once with the broadest tag (fewest path segments). Targets = the other side's
   entity id or its comparators.
   `overlap_evidence(raw, resolution)` turns that into percentiles.
+- Harness v2: after paging, each target's affinity is looked up directly (one /v2/insights call
+  per target with filter.results.entities=<target>, same seeds, filter.tags and filter.type).
+  A target beyond the scanned depth is reported as CENSORED (rank and rank percentile None, v1
+  counted it as percentile 0); the second signal, affinity_ratio = target affinity / affinity
+  of the top-ranked brand, is available whenever the lookup succeeds.
 - Fame (senior only, and only when the senior is a resolved brand): demographics + national
   heatmap (location_query "United States"; empty -> no coverage) -> `fame_evidence(raw)`.
 """
@@ -25,6 +30,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from tearose.eval.backtest import HARNESS_VERSION
 from tearose.eval.backtest.common import DEFAULT_ENTITY_TYPE, Recorder, entity_urn
 from tearose.qloo.client import INSIGHTS_MAX_TAKE
 from tearose.qloo.models import Demographics, Entity
@@ -85,6 +91,10 @@ async def fetch_direction(
         if targets and all(t in found for t in targets):
             break
     ranked = [e.model_copy(update={"rank": i + 1}) for i, e in enumerate(ents)]
+    target_affs: dict[str, float | None] = {}
+    if ranked:  # no ranking, no top-1 affinity: a lookup could not be turned into a ratio
+        for t in dict.fromkeys(targets):
+            target_affs[t] = await rec.target_affinity(seeds, t, used, result_type)
     peers = DirectionalPeers(
         seed_entity_ids=list(seeds),
         universe_tag_ids=list(filter_tags),
@@ -94,6 +104,7 @@ async def fetch_direction(
         exhausted=exhausted,
         gave_up=gave_up,
         filter_tag_ids_used=used,
+        target_affinities=target_affs,
     )
     return peers, notes
 
@@ -166,6 +177,7 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         "case_id": case["case_id"],
         "status": "unresolved",
         "symmetric_percentile": None,
+        "symmetric_affinity_ratio": None,
         "senior_to_junior": None,
         "junior_to_senior": None,
         "breadth_score": None,
@@ -253,16 +265,18 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
     ov = overlap_evidence(raw, resolution)
     notes.extend(ov.notes)
     out["symmetric_percentile"] = ov.symmetric_percentile
-    for key, rank, uni, pct, peers in (
-        ("senior_to_junior", ov.senior_to_junior_rank, ov.senior_to_junior_universe,
-         ov.senior_to_junior_percentile, s2j),
-        ("junior_to_senior", ov.junior_to_senior_rank, ov.junior_to_senior_universe,
-         ov.junior_to_senior_percentile, j2s),
-    ):  # fmt: skip
+    out["symmetric_affinity_ratio"] = ov.symmetric_affinity_ratio
+    for key, peers in (("senior_to_junior", s2j), ("junior_to_senior", j2s)):
         out[key] = {
-            "rank": rank,
-            "universe": uni,
-            "percentile": pct,
+            "rank": getattr(ov, f"{key}_rank"),
+            "universe": getattr(ov, f"{key}_universe"),
+            "percentile": getattr(ov, f"{key}_percentile"),
+            "censored": getattr(ov, f"{key}_censored"),
+            "depth_scanned": getattr(ov, f"{key}_depth_scanned"),
+            "target_affinity": getattr(ov, f"{key}_target_affinity"),
+            "top1_affinity": getattr(ov, f"{key}_top1_affinity"),
+            "last_scanned_affinity": getattr(ov, f"{key}_last_scanned_affinity"),
+            "affinity_ratio": getattr(ov, f"{key}_affinity_ratio"),
             "pages": peers.pages_fetched if peers else 0,
             "exhausted": peers.exhausted if peers else None,
             "filter_tags_used": peers.filter_tag_ids_used if peers else [],
@@ -270,7 +284,8 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         }
     if sen["status"] == "resolved":
         _apply_fame(out, raw, resolution, notes)
-    out["status"] = "scored" if ov.symmetric_percentile is not None else "no_overlap"
+    has_signal = ov.symmetric_percentile is not None or ov.symmetric_affinity_ratio is not None
+    out["status"] = "scored" if has_signal else "no_overlap"
     notes.extend(rec.take_notes())
     out["queries"] = rec.take_queries()
     return out
@@ -279,6 +294,7 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
 async def run(rec: Recorder, resolved: dict[str, Any]) -> dict[str, Any]:
     cases = [await score_case(rec, c) for c in resolved["cases"]]
     return {
+        "harness_version": HARNESS_VERSION,
         "qloo_mode": resolved.get("qloo_mode"),
         "mapping_sha256": resolved.get("mapping_sha256"),
         "comparator_rule": COMPARATOR_RULE,
@@ -292,6 +308,8 @@ def summarize(doc: dict[str, Any]) -> dict[str, Any]:
         "cases": len(cs),
         "scored": sum(c["status"] == "scored" for c in cs),
         "scored_with_proxy": sum(c["status"] == "scored" and c["used_proxy"] for c in cs),
+        "with_rank_percentile": sum(c["symmetric_percentile"] is not None for c in cs),
+        "with_affinity_ratio": sum(c.get("symmetric_affinity_ratio") is not None for c in cs),
         "unresolved": sum(c["status"] == "unresolved" for c in cs),
         "no_overlap": sum(c["status"] == "no_overlap" for c in cs),
         "with_breadth": sum(c["breadth_score"] is not None for c in cs),

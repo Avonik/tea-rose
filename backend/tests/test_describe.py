@@ -161,3 +161,85 @@ def test_no_data_cases_and_resolved_junior() -> None:
                           f"{SENIOR}' audience, {JUNIOR} ranks 3 of 150")  # fmt: skip
     assert "comparator" not in s2j
     assert facts_block({"overlap": ["a", "b"]}) == "[overlap]\n- a\n- b"
+
+
+# --------------------------------------------------------------------------------------
+# harness v2: censored ranks + affinity ratio
+# --------------------------------------------------------------------------------------
+
+
+def resolved_pair() -> Resolution:
+    return Resolution(
+        senior=ResolvedBrand(side="senior", query=SENIOR, entity_id="S1", entity_name=SENIOR),
+        junior=ResolvedBrand(side="junior", query=JUNIOR, entity_id="J1", entity_name=JUNIOR),
+        universes=[
+            Universe(side="senior", description="spirits brands", tag_ids=["s"], size=150),
+            Universe(side="junior", description="pet-supply brands", tag_ids=[LEAF], size=150),
+        ],
+    )
+
+
+def test_censored_direction_reports_affinity_not_last_place() -> None:
+    ev = OverlapEvidence(
+        senior_to_junior_rank=None, senior_to_junior_universe=150,
+        senior_to_junior_censored=True, senior_to_junior_depth_scanned=150,
+        senior_to_junior_target_affinity=0.6612, senior_to_junior_top1_affinity=1.08,
+        senior_to_junior_affinity_ratio=0.6122,
+        junior_to_senior_rank=12, junior_to_senior_universe=150,
+        junior_to_senior_percentile=0.9266667, junior_to_senior_target_affinity=0.91,
+        junior_to_senior_affinity_ratio=0.9381,
+        symmetric_percentile=0.9266667, symmetric_affinity_ratio=0.77515,
+    )  # fmt: skip
+    lines = describe_evidence(Evidence(overlap=ev), resolved_pair())["overlap"]
+    assert lines[0] == (
+        f"{JUNIOR}: affinity 0.66 to {SENIOR}' audience, 0.61 of the strongest brand in the "
+        "category (pet-supply brands), beyond the 150 strongest (rank censored, no rank "
+        "percentile)."
+    )
+    assert "counted as last" not in " ".join(lines) and "0th percentile" not in " ".join(lines)
+    assert lines[1] == (
+        f"Among 150 spirits brands, ranked by affinity to {JUNIOR}' audience, {SENIOR} ranks "
+        "12 of 150 (93rd percentile). Affinity 0.91, 0.94 of the strongest brand in the category."
+    )
+    assert "Only one direction has a rank percentile; audience overlap is at the 93rd " in (
+        " ".join(lines)
+    )
+    assert (
+        "Averaged over both directions, the target's affinity is 0.78 of the strongest brand in "
+        "its category (affinity ratio, 0-1)." in lines
+    )
+    for s in lines:
+        assert not re.search(r"\d\.\d{3,}", s), s
+
+
+def test_censored_without_lookup_and_proxy_mean_affinity() -> None:
+    ev = OverlapEvidence(
+        senior_to_junior_rank=None, senior_to_junior_universe=150,
+        senior_to_junior_censored=True, senior_to_junior_depth_scanned=150,
+        senior_to_junior_target_affinity=0.5, senior_to_junior_affinity_ratio=0.5,
+        junior_to_senior_rank=None, junior_to_senior_universe=40,
+        junior_to_senior_censored=True, junior_to_senior_depth_scanned=40,
+        symmetric_percentile=None, symmetric_affinity_ratio=0.5, used_proxy=True,
+    )  # fmt: skip
+    lines = describe_evidence(Evidence(overlap=ev), proxied_resolution())["overlap"]
+    assert lines[0].startswith(
+        "The comparator brands Comparator One and Comparator Two (standing in for Squeaky Paws, "
+        f"not in Qloo): mean affinity 0.50 to {SENIOR}' audience, 0.50 of the strongest brand"
+    )
+    assert lines[1].endswith(
+        f"{SENIOR} is beyond the 40 strongest (rank censored, no rank percentile; no direct "
+        "affinity available)."
+    )
+    assert "No rank percentile in either direction (censored or missing)." in lines
+    assert any(s.startswith("In the one direction available") for s in lines)
+
+
+def test_old_v1_record_without_v2_fields_still_describes() -> None:
+    v1 = OverlapEvidence.model_validate(
+        {"senior_to_junior_rank": 151, "senior_to_junior_universe": 150,
+         "senior_to_junior_percentile": 0.0, "junior_to_senior_rank": None,
+         "junior_to_senior_universe": None, "symmetric_percentile": 0.0}
+    )  # fmt: skip
+    assert v1.senior_to_junior_censored is False and v1.symmetric_affinity_ratio is None
+    lines = describe_evidence(Evidence(overlap=v1), resolved_pair())["overlap"]
+    assert "counted as last" in lines[0]

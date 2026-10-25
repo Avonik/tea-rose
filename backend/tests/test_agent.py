@@ -36,6 +36,7 @@ from tearose.schemas import (
 )
 from tearose.scoring import synthesize_bottom_line
 from tearose.scoring.describe import describe_evidence
+from tearose.scoring.score import overlap_evidence
 
 # --------------------------------------------------------------------------------------
 # Minimal synthetic Qloo world
@@ -430,6 +431,42 @@ async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> Non
     assert lims and "nearest category, no exact match" in lims[0] and "Pet Food" in lims[0]
 
 
+async def test_resolve_universe_is_the_brands_own_category(client: FixtureClient) -> None:
+    decision = json.loads(json.dumps(RESOLVE_DECISION))
+    decision["senior"]["universe_tag_ids"] = [SPIRITS]  # the model asks for a broader set
+    decision["senior"]["universe_description"] = "all spirits"
+    model = ScriptedChatModel(
+        scripts={"resolve": list(RESOLVE_LOOP), "ResolveDecision": [decision]}
+    )
+    ctx, events = make_ctx(client, model)
+    res = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
+        "resolution"
+    ]
+    senior = next(u for u in res.universes if u.side == "senior")
+    assert senior.tag_ids == [WHISKEY] and senior.description == "whiskey brands"
+    assert any(e.type == "decision" and e.data.get("source") == "entity own tags" for e in events)
+    assert any("model's universe choice is not used" in e.title for e in events)
+
+
+async def test_resolve_universe_falls_back_to_insights_tags(tmp_path: Path) -> None:
+    write_fixtures(tmp_path)
+    body = {"results": [{**_ent(JD, "Jack Daniel's", []), "popularity": 0.99}]}  # no own tags
+    (tmp_path / "search_brand_jack_daniels.json").write_text(json.dumps(body), encoding="utf-8")
+    model = ScriptedChatModel(
+        scripts={"resolve": list(RESOLVE_LOOP), "ResolveDecision": [RESOLVE_DECISION]}
+    )
+    ctx, events = make_ctx(FixtureClient(tmp_path), model)
+    res = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
+        "resolution"
+    ]
+    senior = next(u for u in res.universes if u.side == "senior")
+    assert senior.tag_ids == [DOG]  # the only brand-genre tag among the insights tags
+    assert any(
+        e.type == "decision" and e.data.get("source") == "insights tags (fallback)" for e in events
+    )
+    assert (JD,) in ctx.tools.seed_tags  # fetched once, reusable for bridging
+
+
 async def test_resolve_without_model_decision_is_a_miss_not_first_hit(
     client: FixtureClient,
 ) -> None:
@@ -509,6 +546,22 @@ async def test_fetch_pages_until_target_found(client: FixtureClient) -> None:
     # the second page of the model's call reported the targets
     tool_msgs = [m for m in model.calls[-1][1] if m.type == "tool"]
     assert '"targets_found":[{"id":"E-BB"' in tool_msgs[1].content
+
+    # harness v2: one direct affinity lookup per target, planned up front, run by code after
+    # the paging (the model has no tool for it and never sees it in its checklist)
+    plan = next(e for e in events if e.type == "decision" and e.title.startswith("Data plan"))
+    assert sum("direct affinity" in c for c in plan.data["checklist"]) == 2
+    assert "qloo_target_affinity" not in model.prompts_for("fetch")[0]
+    assert peers.target_affinities == {BB: pytest.approx(0.45), KG: pytest.approx(0.43)}
+    lookups = [
+        e for e in events if e.type == "tool_call" and e.data["tool"] == "qloo_target_affinity"
+    ]
+    assert [c.data["params"]["filter_tags"] for c in lookups[:2]] == [[DOG], [DOG]]
+    ov = overlap_evidence(raw)
+    assert ov.senior_to_junior_rank == 56 and ov.senior_to_junior_censored is False
+    assert ov.senior_to_junior_affinity_ratio == pytest.approx(0.44 / 0.99)
+    # junior→senior gave up (no brands): no lookup, no ratio
+    assert raw.junior_seed_senior_universe.target_affinities == {}
 
 
 async def test_retry_with_broadest_tag(tmp_path: Path) -> None:

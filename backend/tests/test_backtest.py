@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from tearose.config import get_settings
-from tearose.eval.backtest import prepare, report, resolve, score_step, stats
+from tearose.eval.backtest import HARNESS_VERSION, prepare, report, resolve, score_step, stats
 from tearose.eval.backtest.common import Recorder, read_csv
 from tearose.qloo.fixtures import FixtureClient
 from tearose.qloo.models import Entity
@@ -240,11 +240,14 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     sen, jun = case["senior"], case["junior"]
     assert sen["status"] == "resolved" and sen["entity_name"] == "Jack Daniel's"
     assert sen["pick_rule"] == "exact"
-    # universe = the brand's own genre:brand insights tags (filter.tag.types was sent)
-    assert sen["universe"]["tag_ids"][0] == "urn:tag:genre:brand:wine_and_spirits:spirits"
-    assert "genre:brand" in sen["universe"]["source"]
-    tag_q = [q for q in case["queries"] if q["call"] == "insights_tags"]
-    assert tag_q[0]["params"]["filter.tag.types"] == "urn:tag:genre:brand"
+    assert resolved["harness_version"] == HARNESS_VERSION == 2
+    # harness v2 universe = the brand's OWN most specific genre:brand tags from /search
+    # (wine_and_spirits and spirits are ancestors of whiskey and drop out); no insights call
+    assert sen["universe"]["tag_ids"] == ["urn:tag:genre:brand:wine_and_spirits:spirits:whiskey"]
+    assert sen["universe"]["tag_names"] == ["Whiskey"]
+    assert sen["universe"]["source"] == "entity own tags"
+    assert len(sen["universe"]["own_genre_tag_ids"]) == 3
+    assert not [q for q in case["queries"] if q["call"] == "insights_tags"]
     # junior: no search hit -> proxy via the brand taxonomy, "nearest" (no toy/pet-supply node)
     assert jun["status"] == "proxy" and jun["entity_id"] is None
     assert jun["pick_rule"] == "no results"
@@ -265,8 +268,47 @@ async def test_resolve_and_score_fixture_end_to_end() -> None:
     assert s["senior_to_junior"]["universe"] == 15
     assert s["symmetric_percentile"] == pytest.approx(1 - (26 / 3 - 1) / 15)
     assert s["junior_to_senior"]["percentile"] is None  # comparators have no fixture
+    # second signal: each comparator's affinity looked up directly (same seeds/filter/type)
+    s2j = s["senior_to_junior"]
+    assert s2j["censored"] is False and s2j["depth_scanned"] == 15
+    assert s2j["affinity_ratio"] == pytest.approx(s2j["target_affinity"] / s2j["top1_affinity"])
+    assert s["symmetric_affinity_ratio"] == pytest.approx(s2j["affinity_ratio"])
+    lookups = _params(s, "target_affinity")
+    assert {p["filter.results.entities"] for p in lookups} == set(s["comparators"]["junior"]["ids"])
+    assert all(p["filter.tags"] == "urn:tag:genre:brand:food_and_beverage:pet_food"
+               for p in lookups)  # fmt: skip
+    assert scores["harness_version"] == 2
     assert s["breadth_score"] is not None and s["senior_popularity"] == pytest.approx(0.9981)
     assert s["queries"]
+
+
+async def test_resolve_universe_depth1_own_tag_and_insights_fallback(tmp_path: Path) -> None:
+    rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
+    smash = await resolve.resolve_side(rec, "Smashburger", "hamburger restaurants")
+    # only a top family among its own tags: used, since nothing deeper exists
+    assert smash["universe"]["tag_ids"] == ["urn:tag:genre:brand:dining"]
+    assert smash["universe"]["source"] == "entity own tags"
+
+    genre = "urn:tag:genre:brand"
+    search = {
+        "results": [
+            {
+                "entity_id": "E-AC",
+                "name": "Acme",
+                "types": ["urn:entity:brand"],
+                "tags": [{"tag_id": "urn:tag:keyword:x", "name": "X", "type": "urn:tag:keyword"}],
+            }
+        ]
+    }
+    tags = {"results": {"tags": [{"tag_id": f"{genre}:dining", "name": "Dining",
+                                  "subtype": genre}]}}  # fmt: skip
+    (tmp_path / "search_brand_acme.json").write_text(json.dumps(search), encoding="utf-8")
+    (tmp_path / "insights_tag_seed_acme.json").write_text(json.dumps(tags), encoding="utf-8")
+    rec2 = Recorder(FixtureClient(tmp_path), live=False)
+    acme = await resolve.resolve_side(rec2, "Acme", "burgers")
+    assert acme["universe"]["source"] == "insights tags (fallback)"
+    assert acme["universe"]["tag_ids"] == [f"{genre}:dining"]
+    assert any(q["call"] == "insights_tags" for q in rec2.queries)
 
 
 def _params(case_or_score: dict[str, object], call: str) -> list[dict[str, object]]:
@@ -371,10 +413,12 @@ def _synthetic(n: int) -> tuple[list[dict[str, str]], dict[str, object]]:
         mapping.append(m)
         cases.append({
             "case_id": f"c{k}", "status": "scored", "used_proxy": k == 0,
-            "symmetric_percentile": (k * 7 % n) / n, "senior_popularity": 0.9,
+            "symmetric_percentile": None if k == 1 else (k * 7 % n) / n,
+            "symmetric_affinity_ratio": 0.4 + (k * 3 % n) / (2 * n), "senior_popularity": 0.9,
             "junior_popularity": 0.5 + k / (2 * n), "breadth_score": k / n,
         })  # fmt: skip
-    return mapping, {"qloo_mode": "fixture", "mapping_sha256": "abc", "cases": cases}
+    doc = {"harness_version": 2, "qloo_mode": "fixture", "mapping_sha256": "abc", "cases": cases}
+    return mapping, doc
 
 
 def test_report_sections(tmp_path: Path) -> None:
@@ -387,15 +431,43 @@ def test_report_sections(tmp_path: Path) -> None:
     md = Path(out["markdown"]).read_text(encoding="utf-8")
     for section in ("## Headline", "#### Primary (no proxy)", "Baseline: same-category",
                     "Baseline: popularity product", "## Fame", "## Per-case table",
-                    "## Exclusions", "Fixture run"):  # fmt: skip
-        assert section in md
-    assert "On 19 decided cases, Qloo's symmetric overlap percentile correlates" in md
+                    "## Exclusions", "Fixture run", "## Deviations from pre-registration",
+                    "Harness version: **2**", "Qloo symmetric affinity ratio",
+                    "Qloo symmetric rank percentile (censored ranks excluded)",
+                    "affinity ratio | residual (ratio)"):  # fmt: skip
+        assert section in md, section
+    # the dated deviation text: what changed, and that labels/mapping did not
+    assert "On 2026-10-25, after run 1" in md and "kept unchanged as the record" in md
+    for change in ("Universe rule", "Censored ranks", "Taxonomy synonym",
+                   "Labels (`cases_candidates.csv`) and `mapping.csv` are unchanged"):  # fmt: skip
+        assert change in md
+    # v2 files; run 1 names are never written by harness v2
+    assert Path(out["markdown"]).name.endswith("_v2.md")
+    assert Path(out["json"]).name.endswith("_v2.json")
+    written = sorted(p.name for p in (tmp_path / "results").iterdir())
+    assert written == sorted([Path(out["markdown"]).name, Path(out["json"]).name])
+    # case 1 has no rank percentile but an affinity ratio: still in the subset, per-signal n
+    assert "On 18 decided cases, Qloo's symmetric overlap percentile correlates" in md
+    assert "affinity ratio (second Qloo signal, n = 19)" in md
     assert "proxy (reported in the secondary 'with proxies' line): 1" in md
     res = json.loads(Path(out["json"]).read_text(encoding="utf-8"))
-    assert res["relatedness"]["with_proxies"]["qloo"]["n"] == 20
+    assert res["harness_version"] == 2
+    wp = res["relatedness"]["with_proxies"]
+    assert (wp["qloo"]["n"], wp["qloo_ratio"]["n"]) == (19, 20)
+    for subset in ("primary", "with_proxies", "dedup_by_dispute", "relatedness_factor_only",
+                   "channels_factor_only"):  # fmt: skip
+        assert "qloo_ratio" in res["relatedness"][subset]
+    case1 = next(c for c in res["per_case"] if c["case_id"] == "c1")
+    assert case1["residual"] is None and case1["residual_ratio"] is not None
     fe = json.loads(frontend.read_text(encoding="utf-8"))
-    assert fe["status"] == "complete" and len(fe["rows"]) == 6
+    assert fe["status"] == "complete" and len(fe["rows"]) == 8 and fe["harness_version"] == 2
     assert all({"n", "metric", "value", "baseline"} <= set(r) for r in fe["rows"])
+    assert sum("affinity ratio" in r["metric"] for r in fe["rows"]) == 2
+    assert "Harness v2" in fe["note"]
+
+    # a v1 scores.json is refused instead of overwriting run 1's file names
+    with pytest.raises(SystemExit):
+        report.run(mapping, {**scores, "harness_version": 1}, tmp_path / "r1", False)
 
     small_map, small_scores = _synthetic(6)
     small = report.build(small_map, small_scores)

@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import os
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -106,6 +108,61 @@ async def test_insights_tags_sends_genre_brand_filter_by_default() -> None:
 
 
 # --------------------------------------------------------------------------------------
+# harness v2: direct target affinity, own tags on /search results
+# --------------------------------------------------------------------------------------
+
+JD_ID = "FA4E0000-0000-4000-A000-000000000001"
+
+
+def test_target_affinity_params() -> None:
+    p = P.target_affinity_params(["s1", "s2"], "T", "urn:entity:brand", ["t1", "t2"])
+    assert p == {
+        "filter.type": "urn:entity:brand",
+        "signal.interests.entities": "s1,s2",
+        "filter.results.entities": "T",
+        "filter.tags": "t1,t2",
+    }
+    assert "filter.tags" not in P.target_affinity_params(["s"], "T", "urn:entity:artist", None)
+
+
+async def test_fixture_target_affinity_from_ranked_list_and_dedicated_file(tmp_path: Path) -> None:
+    client = FixtureClient(FIXTURES)
+    seeded = "insights_brand_seed_jack_daniels_filter_pet_tags.json"
+    body = json.loads((FIXTURES / seeded).read_text(encoding="utf-8"))
+    first = body["results"]["entities"][0]
+    aff, q = await client.target_affinity(
+        [JD_ID], first["entity_id"], filter_tags=["urn:tag:genre:brand:food_and_beverage:pet_food"]
+    )
+    assert aff == pytest.approx(first["query"]["affinity"])
+    assert q.params["filter.results.entities"] == first["entity_id"] and q.result_count == 1
+    missing, q2 = await client.target_affinity([JD_ID], "NOT-THERE", filter_tags=["x"])
+    assert missing is None and q2.result_count == 0
+    # a dedicated fixture models a target beyond the paged depth
+    for f in FIXTURES.glob("search_brand_jack_daniels.json"):
+        (tmp_path / f.name).write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+    (tmp_path / "insights_brand_seed_jack_daniels_target_far.json").write_text(
+        json.dumps({"results": {"entities": [{"entity_id": "far", "name": "Far",
+                                              "query": {"affinity": 0.42}}]}}),
+        encoding="utf-8",
+    )  # fmt: skip
+    far, q3 = await FixtureClient(tmp_path).target_affinity([JD_ID], "far", filter_tags=["t"])
+    assert far == pytest.approx(0.42) and q3.fixture_file.endswith("_target_far.json")
+
+
+async def test_search_keeps_own_tags_with_names_and_types() -> None:
+    ents, _ = await FixtureClient(FIXTURES).search("Jack Daniel's")
+    jd = ents[0]
+    genre = [t for t in jd.tag_details if t.tag_type == GENRE_BRAND]
+    assert [t.tag_id.rsplit(":", 1)[-1] for t in genre] == [
+        "wine_and_spirits",
+        "spirits",
+        "whiskey",
+    ]
+    assert genre[-1].name == "Whiskey"
+    assert jd.tags == [t.tag_id for t in jd.tag_details]
+
+
+# --------------------------------------------------------------------------------------
 # FIX C: brand taxonomy
 # --------------------------------------------------------------------------------------
 
@@ -205,7 +262,12 @@ async def test_map_bourbon_whiskey_exact(taxonomy: list[Any]) -> None:
         ("bottled mineral water from Fiji", "food_and_beverage/drinks/non_carbonated", "exact"),
         ("children's books", "entertainment/publisher", "exact"),
         ("diamond engagement rings", "fashion/accessories/jewelry", "exact"),
-        ("educational test-preparation materials", "academic", "exact"),
+        # academic = universities; published test-prep goods are a publisher (fixed post-run 1)
+        ("educational test-preparation materials", "entertainment/publisher", "partial"),
+        ("test preparation", "entertainment/publisher", "partial"),
+        ("test-preparation books", "entertainment/publisher", "exact"),
+        ("educational materials", "entertainment/publisher", "partial"),
+        ("educational", "entertainment/publisher", "partial"),
         ("illustrated book", "entertainment/publisher", "exact"),
         ("keyword search advertising", "software", "partial"),
         ("luxury resale", "retail/fashion", "exact"),

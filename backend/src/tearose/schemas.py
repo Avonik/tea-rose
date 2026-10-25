@@ -129,6 +129,23 @@ class OverlapEvidence(BaseModel):
     junior_to_senior_universe: int | None
     junior_to_senior_percentile: float | None = None
     symmetric_percentile: float | None  # 0..1, 1 = strongest overlap; mean of both directions
+    # --- harness v2: censoring + direct target affinity (defaults keep old runs loadable) ---
+    # a target beyond the scanned depth has rank/percentile None and censored=True; the
+    # affinity_ratio = target affinity / affinity of the top-ranked brand (0..1) is always
+    # available when the direct lookup succeeds. For proxied sides: mean over comparators.
+    senior_to_junior_censored: bool = False
+    senior_to_junior_depth_scanned: int | None = None
+    senior_to_junior_target_affinity: float | None = None
+    senior_to_junior_top1_affinity: float | None = None
+    senior_to_junior_last_scanned_affinity: float | None = None
+    senior_to_junior_affinity_ratio: float | None = None
+    junior_to_senior_censored: bool = False
+    junior_to_senior_depth_scanned: int | None = None
+    junior_to_senior_target_affinity: float | None = None
+    junior_to_senior_top1_affinity: float | None = None
+    junior_to_senior_last_scanned_affinity: float | None = None
+    junior_to_senior_affinity_ratio: float | None = None
+    symmetric_affinity_ratio: float | None = None  # mean of the available direction ratios
     top_peers_senior_seed: list[RankedPeer] = Field(default_factory=list)
     top_peers_junior_seed: list[RankedPeer] = Field(default_factory=list)
     shared_affinities: list[dict[str, Any]] = Field(default_factory=list)  # from compare

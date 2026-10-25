@@ -52,6 +52,9 @@ class Entity(BaseModel):
     rank: int | None = None  # 1-based position in the response list
     explainability: dict[str, float] = Field(default_factory=dict)  # seed entity_id -> share
     tags: list[str] = Field(default_factory=list)  # tag ids attached to the entity
+    # the same tags with name/type when the response carried objects (/search does): the
+    # entity's OWN tags, incl. urn:tag:genre:brand:* nodes saying what the brand is
+    tag_details: list[Tag] = Field(default_factory=list)
     properties: dict[str, Any] = Field(default_factory=dict)
     disambiguation: str | None = None
 
@@ -136,6 +139,9 @@ class CompareResult(BaseModel):
         xs = [e for e in self.entities if e.delta is not None]
         xs.sort(key=lambda e: e.delta or 0)
         return xs[:top_n]
+
+
+Entity.model_rebuild()  # Tag is defined after Entity
 
 
 class QlooResponse[T](BaseModel):

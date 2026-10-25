@@ -169,6 +169,21 @@ export interface OverlapEvidence {
   symmetric_percentile: number | null
   senior_to_junior_percentile?: number | null
   junior_to_senior_percentile?: number | null
+  // harness v2: a rank beyond the scanned depth is censored (rank/percentile null); the
+  // affinity ratio = target affinity / affinity of the top-ranked brand (0..1)
+  senior_to_junior_censored?: boolean
+  senior_to_junior_depth_scanned?: number | null
+  senior_to_junior_target_affinity?: number | null
+  senior_to_junior_top1_affinity?: number | null
+  senior_to_junior_last_scanned_affinity?: number | null
+  senior_to_junior_affinity_ratio?: number | null
+  junior_to_senior_censored?: boolean
+  junior_to_senior_depth_scanned?: number | null
+  junior_to_senior_target_affinity?: number | null
+  junior_to_senior_top1_affinity?: number | null
+  junior_to_senior_last_scanned_affinity?: number | null
+  junior_to_senior_affinity_ratio?: number | null
+  symmetric_affinity_ratio?: number | null
   top_peers_senior_seed: RankedPeer[]
   top_peers_junior_seed: RankedPeer[]
   shared_affinities: CompareRow[]

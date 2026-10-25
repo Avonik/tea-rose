@@ -26,7 +26,29 @@
         "image": {
           "url": "https://images.qloo.com/i/FA4E0000-0000-4000-A000-000000000001-420x-auto.jpg"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "Wine & Spirits",
+          "tag_id": "urn:tag:genre:brand:wine_and_spirits",
+          "type": "urn:tag:genre:brand"
+        },
+        {
+          "name": "Synthetic whiskey brands",
+          "tag_id": "urn:tag:wikipedia_category:synthetic_whiskey_brands",
+          "type": "urn:tag:wikipedia_category"
+        },
+        {
+          "name": "Spirits",
+          "tag_id": "urn:tag:genre:brand:wine_and_spirits:spirits",
+          "type": "urn:tag:genre:brand"
+        },
+        {
+          "name": "Whiskey",
+          "tag_id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey",
+          "type": "urn:tag:genre:brand"
+        }
+      ]
     },
     {
       "name": "Jack Daniel's Tennessee Honey",
@@ -37,7 +59,19 @@
       "popularity": 0.9412,
       "properties": {
         "description": "Flavoured whiskey line extension (synthetic fixture description)."
-      }
+      },
+      "tags": [
+        {
+          "name": "Spirits",
+          "tag_id": "urn:tag:genre:brand:wine_and_spirits:spirits",
+          "type": "urn:tag:genre:brand"
+        },
+        {
+          "name": "Whiskey",
+          "tag_id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey",
+          "type": "urn:tag:genre:brand"
+        }
+      ]
     },
     {
       "name": "Jack Daniel's Country Cocktails",
@@ -46,7 +80,14 @@
         "urn:entity:brand"
       ],
       "popularity": 0.8127,
-      "properties": {}
+      "properties": {},
+      "tags": [
+        {
+          "name": "Spirits",
+          "tag_id": "urn:tag:genre:brand:wine_and_spirits:spirits",
+          "type": "urn:tag:genre:brand"
+        }
+      ]
     }
   ]
 }
