@@ -1,5 +1,5 @@
 {
-  "note": "inputs are filed complaints; opinions are used only for the court-outcome reveal Only cases with full question coverage are listed (owner's rule, 2026-10-25); bad_spaniels and adidas_thom_browne were computed but dropped: the agent could not measure audience overlap for them.",
+  "note": "inputs are filed complaints; opinions are used only for the court-outcome reveal bad_spaniels is included deliberately as the small-company example: Qloo has no entry for the dog-toy maker, so the agent must decide what it can and cannot measure (owner's request, 2026-10-25).",
   "cases": [
     {
       "slug": "vans_mschf",
@@ -30,6 +30,11 @@
       "slug": "bang_monster",
       "sample": "bang_monster_complaint",
       "title": "Vital Pharmaceuticals, Inc. (Bang) v. Monster Energy Co. (Reign), S.D. Fla. 2019 / 2021"
+    },
+    {
+      "slug": "bad_spaniels",
+      "sample": "bad_spaniels_complaint",
+      "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC (Bad Spaniels), D. Ariz. 2014 / S. Ct. 2023"
     }
   ]
 }

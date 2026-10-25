@@ -114,11 +114,12 @@ export const CASE_ORDER = [
   'vans_walmart',
   'nike_stockx',
   'bang_monster',
+  'bad_spaniels',
 ] as const
 
 export const FIGHTS = {
   eyebrow: 'Showcase',
-  title: 'Six famous fights.',
+  title: 'Seven famous fights.',
   sub: 'What the court decided, and what the taste data shows. Pre-computed and free to open; every memo cites the Qloo queries it used.',
 }
 
