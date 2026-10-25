@@ -1,7 +1,7 @@
 {
   "_fixture": {
     "synthetic": true,
-    "note": "Synthetic brand-genre taxonomy (15 nodes, 3 families). Shape follows /v2/tags with filter.tag.types=urn:tag:genre:brand (id, name, type, parents, popularity). The FixtureClient serves any brand-genre /v2/tags query from this file by case-insensitive substring match on the name, like the live API. Paths are plausible; popularity values are invented. Strip this key before parsing.",
+    "note": "Synthetic slice (67 nodes) of the urn:tag:genre:brand tree. Paths follow the live taxonomy (category metadata); names are the slug in Title Case; popularity values are invented. Shape follows /v2/tags with filter.tag.types=urn:tag:genre:brand (id, name, type, parents, popularity). The FixtureClient serves any brand-genre /v2/tags query from this file by case-insensitive substring match on the name, like the live API. Strip this key before parsing.",
     "request": {
       "method": "GET",
       "path": "/v2/tags",
@@ -16,52 +16,8 @@
   "results": {
     "tags": [
       {
-        "id": "urn:tag:genre:brand:wine_and_spirits",
-        "name": "Wine & Spirits",
-        "type": "urn:tag:genre:brand",
-        "parents": [
-          {
-            "type": "urn:entity:brand"
-          }
-        ],
-        "popularity": 0.71
-      },
-      {
-        "id": "urn:tag:genre:brand:wine_and_spirits:spirits",
-        "name": "Spirits",
-        "type": "urn:tag:genre:brand",
-        "parents": [
-          {
-            "type": "urn:entity:brand"
-          }
-        ],
-        "popularity": 0.66
-      },
-      {
-        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey",
-        "name": "Whiskey",
-        "type": "urn:tag:genre:brand",
-        "parents": [
-          {
-            "type": "urn:entity:brand"
-          }
-        ],
-        "popularity": 0.58
-      },
-      {
-        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey:bourbon",
-        "name": "Bourbon",
-        "type": "urn:tag:genre:brand",
-        "parents": [
-          {
-            "type": "urn:entity:brand"
-          }
-        ],
-        "popularity": 0.41
-      },
-      {
-        "id": "urn:tag:genre:brand:wine_and_spirits:beer",
-        "name": "Beer",
+        "id": "urn:tag:genre:brand:academic",
+        "name": "Academic",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
@@ -71,59 +27,125 @@
         "popularity": 0.63
       },
       {
-        "id": "urn:tag:genre:brand:wine_and_spirits:wine",
-        "name": "Wine",
+        "id": "urn:tag:genre:brand:automotive",
+        "name": "Automotive",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.6
+        "popularity": 0.53
       },
       {
-        "id": "urn:tag:genre:brand:food_and_beverage",
-        "name": "Food & Beverage",
+        "id": "urn:tag:genre:brand:automotive:car_and_suv",
+        "name": "Car & Suv",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.8
+        "popularity": 0.53
       },
       {
-        "id": "urn:tag:genre:brand:food_and_beverage:pet_food",
-        "name": "Pet Food",
+        "id": "urn:tag:genre:brand:dining",
+        "name": "Dining",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.37
+        "popularity": 0.35
       },
       {
-        "id": "urn:tag:genre:brand:food_and_beverage:coffee_and_tea",
-        "name": "Coffee & Tea",
+        "id": "urn:tag:genre:brand:electronics",
+        "name": "Electronics",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.55
+        "popularity": 0.67
       },
       {
-        "id": "urn:tag:genre:brand:food_and_beverage:snacks",
-        "name": "Snacks",
+        "id": "urn:tag:genre:brand:electronics:home_theater",
+        "name": "Home Theater",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.52
+        "popularity": 0.75
+      },
+      {
+        "id": "urn:tag:genre:brand:electronics:music_instruments",
+        "name": "Music Instruments",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.83
+      },
+      {
+        "id": "urn:tag:genre:brand:entertainment",
+        "name": "Entertainment",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.87
+      },
+      {
+        "id": "urn:tag:genre:brand:entertainment:publisher",
+        "name": "Publisher",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.61
+      },
+      {
+        "id": "urn:tag:genre:brand:entertainment:record_label",
+        "name": "Record Label",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.81
+      },
+      {
+        "id": "urn:tag:genre:brand:entertainment:media",
+        "name": "Media",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.45
+      },
+      {
+        "id": "urn:tag:genre:brand:entertainment:media:fashion",
+        "name": "Fashion",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.75
       },
       {
         "id": "urn:tag:genre:brand:fashion",
@@ -134,7 +156,7 @@
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.83
+        "popularity": 0.49
       },
       {
         "id": "urn:tag:genre:brand:fashion:accessories",
@@ -145,18 +167,73 @@
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.61
+        "popularity": 0.34
       },
       {
-        "id": "urn:tag:genre:brand:fashion:luxury",
-        "name": "Luxury",
+        "id": "urn:tag:genre:brand:fashion:accessories:bags_and_leather",
+        "name": "Bags & Leather",
         "type": "urn:tag:genre:brand",
         "parents": [
           {
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.57
+        "popularity": 0.45
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:accessories:eyewear",
+        "name": "Eyewear",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.63
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:accessories:jewelry",
+        "name": "Jewelry",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.32
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:accessories:watch",
+        "name": "Watch",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.34
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:athletic",
+        "name": "Athletic",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.54
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:casual",
+        "name": "Casual",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.62
       },
       {
         "id": "urn:tag:genre:brand:fashion:footwear",
@@ -167,7 +244,7 @@
             "type": "urn:entity:brand"
           }
         ],
-        "popularity": 0.64
+        "popularity": 0.57
       },
       {
         "id": "urn:tag:genre:brand:fashion:footwear:sneakers",
@@ -178,7 +255,502 @@
             "type": "urn:entity:brand"
           }
         ],
+        "popularity": 0.41
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:footwear:sneaker:running",
+        "name": "Running",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.84
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:footwear:sneaker:skateboarding",
+        "name": "Skateboarding",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.42
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:formalwear",
+        "name": "Formalwear",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.88
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:haute_couture",
+        "name": "Haute Couture",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.4
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:jeans",
+        "name": "Jeans",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.84
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:lingerie_and_sleepwear",
+        "name": "Lingerie & Sleepwear",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.51
+      },
+      {
+        "id": "urn:tag:genre:brand:fashion:swimwear",
+        "name": "Swimwear",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.86
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage",
+        "name": "Food & Beverage",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.34
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:drinks",
+        "name": "Drinks",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.57
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:drinks:coffee_and_tea",
+        "name": "Coffee & Tea",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.37
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:drinks:energy_drink",
+        "name": "Energy Drink",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.47
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:drinks:juice",
+        "name": "Juice",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.35
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:drinks:non_carbonated",
+        "name": "Non Carbonated",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.4
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food",
+        "name": "Food",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.35
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food:breakfast",
+        "name": "Breakfast",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.88
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food:candy_and_confectionery",
+        "name": "Candy & Confectionery",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.39
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food:dairy_and_substitutes",
+        "name": "Dairy & Substitutes",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
         "popularity": 0.5
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food:meat_seafood_and_substitutes",
+        "name": "Meat Seafood & Substitutes",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.76
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food:packaged",
+        "name": "Packaged",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.6
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:food:packaged:snacks",
+        "name": "Snacks",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.79
+      },
+      {
+        "id": "urn:tag:genre:brand:food_and_beverage:pet_food",
+        "name": "Pet Food",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.88
+      },
+      {
+        "id": "urn:tag:genre:brand:games",
+        "name": "Games",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.67
+      },
+      {
+        "id": "urn:tag:genre:brand:health_and_beauty",
+        "name": "Health & Beauty",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.7
+      },
+      {
+        "id": "urn:tag:genre:brand:health_and_beauty:skincare",
+        "name": "Skincare",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.36
+      },
+      {
+        "id": "urn:tag:genre:brand:retail",
+        "name": "Retail",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.42
+      },
+      {
+        "id": "urn:tag:genre:brand:retail:fashion",
+        "name": "Fashion",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.73
+      },
+      {
+        "id": "urn:tag:genre:brand:software",
+        "name": "Software",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.89
+      },
+      {
+        "id": "urn:tag:genre:brand:sports_organization",
+        "name": "Sports Organization",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.87
+      },
+      {
+        "id": "urn:tag:genre:brand:travel",
+        "name": "Travel",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.55
+      },
+      {
+        "id": "urn:tag:genre:brand:travel:airline",
+        "name": "Airline",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.79
+      },
+      {
+        "id": "urn:tag:genre:brand:travel:hotel",
+        "name": "Hotel",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.69
+      },
+      {
+        "id": "urn:tag:genre:brand:website",
+        "name": "Website",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.79
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits",
+        "name": "Wine & Spirits",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.51
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:beer",
+        "name": "Beer",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.78
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits",
+        "name": "Spirits",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.89
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:gin",
+        "name": "Gin",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.48
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:rum",
+        "name": "Rum",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.87
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:tequila",
+        "name": "Tequila",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.75
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:vodka",
+        "name": "Vodka",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.5
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey",
+        "name": "Whiskey",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.37
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey:bourbon",
+        "name": "Bourbon",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.59
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey:rye",
+        "name": "Rye",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.7
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:spirits:whiskey:scotch",
+        "name": "Scotch",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.76
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:wine",
+        "name": "Wine",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.72
+      },
+      {
+        "id": "urn:tag:genre:brand:wine_and_spirits:wine:sparkling",
+        "name": "Sparkling",
+        "type": "urn:tag:genre:brand",
+        "parents": [
+          {
+            "type": "urn:entity:brand"
+          }
+        ],
+        "popularity": 0.42
       }
     ]
   },

@@ -8,9 +8,10 @@ function ProxyBlock({ proxy }: { proxy: ProxyResolution }) {
   return (
     <div className="proxy">
       <p className="proxy__lead footnote">
-        Not in Qloo’s graph. The goods phrase <q className="party__quote">{proxy.goods_phrase}</q> went verbatim to{' '}
-        <code>/v2/tags</code>; the agent could only pick from this menu.
+        Not in Qloo’s graph. The goods phrase <q className="party__quote">{proxy.goods_phrase}</q> was mapped onto Qloo’s
+        brand-category taxonomy; the agent could only pick from these nodes.
       </p>
+      {proxy.fit_note && <p className="footnote faint">Category fit: {proxy.fit_note}.</p>}
       <ul className="tag-menu" aria-label="Tag options returned by /v2/tags">
         {proxy.tag_options.map((t, i) => {
           const id = tagOptionId(t)

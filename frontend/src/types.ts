@@ -111,6 +111,10 @@ export interface ProxyResolution {
   goods_phrase: string
   tag_options: TagOption[]
   chosen_tag_ids: string[]
+  /** How well the chosen brand-taxonomy category matches the goods. */
+  fit?: 'exact' | 'partial' | 'nearest' | null
+  /** e.g. "nearest category, no exact match in Qloo's brand taxonomy" */
+  fit_note?: string | null
   comparator_brand_ids: string[]
   comparator_brand_names: string[]
   rationale: string

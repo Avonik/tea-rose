@@ -15,7 +15,9 @@ from tearose.qloo.models import Entity, QlooQuery, Tag
 from tearose.qloo.names import match_rule, normalize_name, pick_by_name
 from tearose.qloo.parse import parse_compare
 from tearose.qloo.taxonomy import (
+    BIGRAMS,
     NEAREST_NOTE,
+    SYNONYMS,
     load_brand_taxonomy,
     map_goods_phrase,
     node_from_tag_id,
@@ -146,9 +148,31 @@ async def test_load_brand_taxonomy_harvests_dedupes_and_memoises() -> None:
 
 async def test_fixture_taxonomy_is_harvested_from_letter_queries() -> None:
     nodes = await load_brand_taxonomy(FixtureClient(FIXTURES))
-    assert len(nodes) == 15
-    assert len({n.path[0] for n in nodes}) == 3
+    assert len(nodes) == 67
+    assert len({n.path[0] for n in nodes}) == 15
     assert node_from_tag_id("urn:tag:keyword:x", "X") is None
+
+
+def test_synonym_targets_are_taxonomy_paths() -> None:
+    """Every synonym/bigram target is a full path in the (real-slug) fixture tree."""
+    import json
+
+    body = json.loads((FIXTURES / "brand_taxonomy.json").read_text(encoding="utf-8"))
+    paths = {t["id"].removeprefix(GENRE_BRAND + ":") for t in body["results"]["tags"]}
+    targets = {t for tbl in (SYNONYMS, BIGRAMS) for v in tbl.values() for t, _ in v}
+    fixture_gaps = targets - paths  # real nodes this slice leaves out are allowed
+    real_only = {
+        "food_and_beverage:drinks:carbonated", "food_and_beverage:drinks:sport_drinks",
+        "food_and_beverage:food:bakery", "wine_and_spirits:spirits:liqueur",
+        "wine_and_spirits:beer:cider", "fashion:footwear:sandals", "health_and_beauty:hair_care",
+        "health_and_beauty:oral_care", "electronics:headphones", "electronics:phones_and_tablets",
+        "electronics:computers_and_laptops", "electronics:camera_and_video",
+        "electronics:appliances", "entertainment:production_company",
+        "entertainment:video_game_developer", "automotive:commercial", "automotive:motorcycle",
+        "travel:cruise", "travel:car_rental", "sports_organization:league_tournament",
+        "financial_services", "financial_services:credit_card", "mobile_app",
+    }  # fmt: skip
+    assert fixture_gaps <= real_only, fixture_gaps - real_only
 
 
 @pytest.fixture
@@ -158,9 +182,11 @@ async def taxonomy() -> list[Any]:
 
 async def test_map_dog_toy_to_pet_food_as_nearest(taxonomy: list[Any]) -> None:
     m = map_goods_phrase("squeaky dog chew toy", taxonomy)
-    assert [(x.node.name, x.fit) for x in m] == [("Pet Food", "nearest")]
+    assert [(x.node.path_label, x.fit) for x in m] == [("food_and_beverage/pet_food", "nearest")]
     assert m[0].node.tag_id == f"{GENRE_BRAND}:food_and_beverage:pet_food"
     assert "nearest category" in NEAREST_NOTE
+    assert map_goods_phrase("toys", taxonomy)[0].node.path_label == "games"
+    assert map_goods_phrase("toys", taxonomy)[0].fit == "partial"
 
 
 async def test_map_bourbon_whiskey_exact(taxonomy: list[Any]) -> None:
@@ -170,18 +196,37 @@ async def test_map_bourbon_whiskey_exact(taxonomy: list[Any]) -> None:
     assert map_goods_phrase("Tennessee whisky", taxonomy)[0].fit == "exact"
 
 
-async def test_map_luxury_handbags_and_no_match(taxonomy: list[Any]) -> None:
-    m = map_goods_phrase("luxury handbags", taxonomy)
-    assert [(x.node.name, x.fit) for x in m] == [("Luxury", "partial"), ("Accessories", "nearest")]
-    assert map_goods_phrase("financial services", taxonomy) == []
+@pytest.mark.parametrize(
+    ("phrase", "path", "fit"),
+    [
+        ("luxury handbags", "fashion/accessories/bags_and_leather", "exact"),
+        ("audio systems, radios, speakers", "electronics/home_theater", "exact"),
+        ("bottled artesian water", "food_and_beverage/drinks/non_carbonated", "exact"),
+        ("bottled mineral water from Fiji", "food_and_beverage/drinks/non_carbonated", "exact"),
+        ("children's books", "entertainment/publisher", "exact"),
+        ("diamond engagement rings", "fashion/accessories/jewelry", "exact"),
+        ("educational test-preparation materials", "academic", "exact"),
+        ("illustrated book", "entertainment/publisher", "exact"),
+        ("keyword search advertising", "software", "partial"),
+        ("luxury resale", "retail/fashion", "exact"),
+        ("military-style wristwatches", "fashion/accessories/watch", "exact"),
+        ("online marketplace", "website", "exact"),
+        ("search advertising", "software", "partial"),
+        ("athletic sneakers", "fashion/footwear/sneakers", "exact"),
+        ("fashion apparel", "fashion", "exact"),  # not entertainment/media/fashion
+    ],
+)
+async def test_map_backtest_phrases(taxonomy: list[Any], phrase: str, path: str, fit: str) -> None:
+    top = map_goods_phrase(phrase, taxonomy)[0]
+    assert (top.node.path_label, top.fit) == (path, fit)
+
+
+async def test_map_no_match(taxonomy: list[Any]) -> None:
+    assert map_goods_phrase("NFT digital collectibles", taxonomy) == []
+    assert map_goods_phrase("golf putters and equipment", taxonomy) == []
     assert map_goods_phrase("", taxonomy) == []
     assert map_goods_phrase("whiskey", []) == []
     assert len(map_goods_phrase("wine beer spirits whiskey bourbon", taxonomy)) == 3
-
-
-async def test_map_prefers_deeper_node_on_ties(taxonomy: list[Any]) -> None:
-    m = map_goods_phrase("athletic sneakers", taxonomy)
-    assert m[0].node.name == "Sneakers" and m[0].fit == "exact"
 
 
 # --------------------------------------------------------------------------------------

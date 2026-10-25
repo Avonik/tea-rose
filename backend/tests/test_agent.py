@@ -417,7 +417,7 @@ async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> Non
     assert proxy.comparator_brand_ids == ["E-CH"]  # BarkBox carries no pet_food tag
     assert ctx.tools.tag_searches == []  # no free-text /v2/tags needed
     prompt = model.prompts_for("resolve")[0]
-    assert "BRAND TAXONOMY (15 nodes" in prompt
+    assert "BRAND TAXONOMY (67 nodes" in prompt
     assert "food_and_beverage/pet_food = Pet Food" in prompt
     assert any("not in Qloo's brand taxonomy" in e.title for e in events)
     assert {u.side: u.tag_ids for u in out["resolution"].universes}["junior"] == [TAX_PET_FOOD]
