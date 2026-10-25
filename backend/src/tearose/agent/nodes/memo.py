@@ -82,6 +82,10 @@ def proxy_limitations(state: dict[str, Any]) -> list[str]:
     res = state.get("resolution")
     out: list[str] = []
     for proxy in (getattr(res, "senior_proxy", None), getattr(res, "junior_proxy", None)):
+        if proxy is not None and not proxy.measure_overlap and proxy.fit_reason:
+            out.append(
+                f"Audience overlap was not measured for the {proxy.side}: {proxy.fit_reason}"
+            )
         if proxy is None or proxy.fit not in ("nearest", "partial"):
             continue
         names = ", ".join(

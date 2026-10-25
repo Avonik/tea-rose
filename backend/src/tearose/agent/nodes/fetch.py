@@ -65,9 +65,14 @@ def seeds_for(brand: ResolvedBrand, proxy: ProxyResolution | None) -> list[str]:
 
 
 def make_plan(resolution: Resolution, routing: RoutingDecision) -> Plan:
+    """The routed analyses minus overlap when the resolve agent judged a proxied side's
+    stand-in category too far to compare audiences (ProxyResolution.measure_overlap False)."""
     unis = {u.side: u for u in resolution.universes}
+    analyses = set(routing.analyses)
+    if resolution.overlap_blocked():
+        analyses.discard("overlap")
     return Plan(
-        analyses=set(routing.analyses),
+        analyses=analyses,
         senior_seeds=seeds_for(resolution.senior, resolution.senior_proxy),
         junior_seeds=seeds_for(resolution.junior, resolution.junior_proxy),
         senior_universe=unis.get("senior"),
@@ -305,6 +310,12 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     tc = ctx.tools
     resolution: Resolution = state["resolution"]
     plan = make_plan(resolution, state["routing"])
+    for p in resolution.overlap_blocked():
+        await ev.decision(
+            f"Overlap skipped: the agent judged the {p.side}'s stand-in category too far",
+            p.fit_reason,
+            measure_overlap=False,
+        )
     tc.targets = {i: "junior" for i in plan.junior_seeds} | {i: "senior" for i in plan.senior_seeds}
     needs = missing(plan, tc)
     await ev.decision(

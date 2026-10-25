@@ -36,6 +36,7 @@ from tearose.scoring.raw import DirectionalPeers, RawData
 log = logging.getLogger(__name__)
 
 SEARCH_CAP = 150  # 3 pages x take=50: the overlap search depth when not exhausted
+MIN_FOUND_STAND_INS = 2  # proxy path: fewer stand-ins found within the depth => censored
 TOP_PEERS = 10
 TOP_REGIONS = 8
 MIN_MAP_POINTS = 5
@@ -168,7 +169,7 @@ class Direction:
     rank: float | None = None  # mean rank over targets; None when censored or not computable
     size: int | None = None  # universe size used for the percentile
     percentile: float | None = None  # rank percentile; None when censored
-    censored: bool = False  # some target lies beyond the scanned list
+    censored: bool = False  # a target (or 2+ of 3 stand-ins) lies beyond the list
     depth_scanned: int | None = None  # brands actually returned (pages x take, or fewer)
     target_affinity: float | None = None  # mean over targets with a known affinity
     top1_affinity: float | None = None
@@ -200,6 +201,9 @@ def direction_stats(
     Rank: with several targets (proxy comparators) the mean of their ranks. A target that is
     not in the scanned list is CENSORED: its rank is only known to lie beyond the depth, so
     rank and percentile are None (harness v1 counted it as rank size + 1, i.e. percentile 0).
+    With several stand-ins, at least MIN_FOUND_STAND_INS (2) of them found gives the mean over
+    the FOUND ones (noted as "mean over 2 of 3 stand-ins; 1 beyond the 150 strongest"); only
+    fewer found censors the direction. The affinity ratio uses all looked-up targets.
     Affinity ratio: mean target affinity (direct lookup, else the listed affinity) divided by
     the affinity of the top-ranked brand of the same seeded list, clipped to 0..1.
     """
@@ -233,7 +237,21 @@ def direction_stats(
         return d
     d.size = size
     missing = [t for t in targets if t not in ranks]
-    if missing:
+    found = [t for t in targets if t in ranks]
+    if missing and len(targets) > 1 and len(found) >= MIN_FOUND_STAND_INS:
+        # Partial: the mean over the stand-ins that were found; the rest lie beyond the depth.
+        d.rank = mean_rank([float(ranks[t]) for t in found])
+        d.percentile = percentile_from_rank(d.rank, size)
+        beyond = (
+            f"not among the {len(peers.entities)} returned"
+            if peers.exhausted
+            else f"beyond the {SEARCH_CAP} strongest"
+        )
+        d.notes.append(
+            f"{label}: mean over {len(found)} of {len(targets)} stand-ins; "
+            f"{len(missing)} {beyond} (ids: {', '.join(missing)})."
+        )
+    elif missing:
         d.censored = True
         how = (
             f"not among the {len(peers.entities)} peers returned (complete list)"
@@ -248,8 +266,8 @@ def direction_stats(
     else:
         d.rank = mean_rank([float(ranks[t]) for t in targets])
         d.percentile = percentile_from_rank(d.rank, size)
-    if len(targets) > 1:
-        d.notes.append(f"{label}: rank is the mean over {len(targets)} comparator brands.")
+        if len(targets) > 1:
+            d.notes.append(f"{label}: rank is the mean over {len(targets)} comparator brands.")
     return d
 
 
@@ -701,9 +719,13 @@ def _safe[T](name: str, fn: Callable[[], T], fallback: Callable[[str], T]) -> T:
 def compute_evidence(
     raw: RawData | None, resolution: Resolution | None, routing: RoutingDecision | None
 ) -> Evidence:
-    """Run only the analyses in `routing.analyses`; the others stay None."""
+    """Run only the analyses in `routing.analyses`; the others stay None. Overlap also stays
+    None when the resolve agent judged a stand-in category too far to compare audiences
+    (Resolution.overlap_blocked)."""
     data = raw if raw is not None else RawData()
     wanted = set(routing.analyses) if routing is not None else set()
+    if resolution is not None and resolution.overlap_blocked():
+        wanted.discard("overlap")
     ev = Evidence()
     if "overlap" in wanted:
         ev.overlap = _safe(

@@ -3,11 +3,15 @@
 Per case with at least one side resolved (the other resolved or proxied):
 
 - Seeds: a resolved side seeds with its entity id. A proxied side resolved by the agent resolver
-  (harness v3) seeds with the comparators the product's resolve node chose, as the product's
-  fetch node does (`comparator_source` "agent"). Otherwise (rule resolver, or the agent kept
-  none; `comparator_source` "rule") a proxied side seeds with COMPARATORS: the
+  (harness v3) seeds with the stand-ins recorded by the product's resolve node, as the product's
+  fetch node does: the agent's picks from a code-built shortlist (`comparator_source` "agent",
+  "mixed" when code topped up, "rule" when the model returned nothing usable). A case whose
+  agent set `measure_overlap` False for a proxied side is not scored for overlap: status
+  "excluded", `overlap_exclusion` "agent: category too far" (fame still runs). Otherwise (rule
+  resolver, or the record has none) a proxied side seeds with COMPARATORS by the rule: the
   brands returned by insights entities seeded by the OTHER side's entity and filtered to the
-  proxy tags (page 1, take 50), top 3 by POPULARITY (ties by rank), excluding the seed itself.
+  proxy tags (page 1, take 50), top 3 by POPULARITY (ties by rank), excluding the seed itself
+  and any brand with the other side's name.
   Deviation from "top 3 by rank", on purpose: picking the brands that rank highest for the
   senior would make the senior->junior rank 1-3 by construction (percentile ~0.95 for every
   proxy case). Popularity is a property of the brand, not of the senior's audience, so it
@@ -110,14 +114,20 @@ async def fetch_direction(
 
 
 async def comparators_for(
-    rec: Recorder, other_entity_id: str, proxy_tags: list[str]
+    rec: Recorder,
+    other_entity_id: str,
+    proxy_tags: list[str],
+    other_names: list[str] | None = None,
 ) -> tuple[list[Entity], list[str]]:
-    """The shared code rule (scoring.comparators), seeded by the other side's entity."""
+    """The shared code rule (scoring.comparators), seeded by the other side's entity; never the
+    other side's own brand (by id, and by name when `other_names` is given)."""
 
     async def fetch(seeds: list[str], tags: list[str]) -> list[Entity]:
         return list(await rec.insights_entities(seeds, tags, 1))
 
-    return await rule_comparators(fetch, [other_entity_id], proxy_tags)
+    return await rule_comparators(
+        fetch, [other_entity_id], proxy_tags, exclude_names=[n for n in other_names or [] if n]
+    )
 
 
 async def _add_fame_inputs(
@@ -165,14 +175,14 @@ def _uni_tags(s: dict[str, Any]) -> list[str]:
 
 
 AGENT_COMPARATOR_RULE = (
-    "the comparators the product's resolve node chose and validated (agent resolver; with "
-    "fewer than 2 kept the node fills up to 3 by the same code rule), as the product's fetch "
-    "node uses them"
+    "the stand-ins recorded by the product's resolve node (agent resolver): the agent's picks "
+    "from a code-built shortlist of the category, topped up by popularity below 2 valid picks"
 )
+AGENT_TOO_FAR = "agent: category too far"
 
 
 def agent_comparators(case: dict[str, Any], s: dict[str, Any]) -> list[Entity]:
-    """Agent resolver only: the node's comparator brands for a proxied side (empty otherwise)."""
+    """Agent resolver only: the node's stand-in brands for a proxied side (empty otherwise)."""
     if case.get("resolver") != "agent":
         return []
     p = s.get("proxy") or {}
@@ -222,6 +232,8 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         "proxy_sides": [],
         "comparators": {},
         "comparator_source": {},
+        "stand_ins": {},
+        "overlap_exclusion": None,
         "notes": [],
         "queries": [],
         **pick_comparison(case),
@@ -238,6 +250,33 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
         out["queries"] = rec.take_queries()
         return out
 
+    for side, s in (("senior", sen), ("junior", jun)):
+        p = s.get("proxy") or {}
+        if s["status"] == "proxy" and p:
+            out["stand_ins"][side] = {
+                "shortlist": p.get("stand_in_candidates") or [],
+                "picks": list(p.get("comparator_entity_names") or []),
+                "comparator_rationale": p.get("comparator_rationale"),
+                "comparator_source": p.get("comparator_source"),
+                "measure_overlap": p.get("measure_overlap", True),
+                "fit_reason": p.get("fit_reason"),
+            }
+    too_far = [(side, v) for side, v in out["stand_ins"].items() if v["measure_overlap"] is False]
+    if too_far:
+        out["status"] = "excluded"
+        out["overlap_exclusion"] = AGENT_TOO_FAR
+        out["used_proxy"] = True
+        out["proxy_sides"] = [side for side, _ in too_far]
+        for side, v in too_far:
+            notes.append(f"overlap not scored ({AGENT_TOO_FAR}) for the {side}: {v['fit_reason']}")
+        if sen["status"] == "resolved":
+            raw = RawData(senior_popularity=sen.get("popularity"))
+            await _add_fame_inputs(rec, raw, [sen["entity_id"]], notes)
+            _apply_fame(out, raw, None, notes)
+        notes.extend(rec.take_notes())
+        out["queries"] = rec.take_queries()
+        return out
+
     seeds: dict[str, list[str]] = {}
     proxies: dict[str, ProxyResolution] = {}
     for side, s, other in (("senior", sen, jun), ("junior", jun, sen)):
@@ -245,15 +284,17 @@ async def score_case(rec: Recorder, case: dict[str, Any]) -> dict[str, Any]:
             seeds[side] = [s["entity_id"]]
             continue
         comps = agent_comparators(case, s)
-        # the node records "agent", "rule" (its own fill by the same code rule) or "mixed"
-        source = (s.get("proxy") or {}).get("comparator_source") or "agent"
+        # "agent" (the model's picks), "mixed" (topped up by code) or "rule", as recorded
+        source = (s.get("proxy") or {}).get("comparator_source") or "rule"
         rule_text = AGENT_COMPARATOR_RULE
         if not comps:
-            comps, cnotes = await comparators_for(rec, other["entity_id"], _uni_tags(s))
+            comps, cnotes = await comparators_for(
+                rec, other["entity_id"], _uni_tags(s), [other.get("entity_name"), other["query"]]
+            )
             notes.extend(f"{side} {n}" for n in cnotes)
             source, rule_text = "rule", COMPARATOR_RULE
             if case.get("resolver") == "agent":
-                notes.append(f"{side}: the agent kept no comparators; code rule used.")
+                notes.append(f"{side}: the resolve node recorded no stand-ins; code rule used.")
         seeds[side] = [c.entity_id for c in comps]
         out["proxy_sides"].append(side)
         out["comparator_source"][side] = source
@@ -346,7 +387,7 @@ async def run(rec: Recorder, resolved: dict[str, Any]) -> dict[str, Any]:
         "qloo_mode": resolved.get("qloo_mode"),
         "mapping_sha256": resolved.get("mapping_sha256"),
         "comparator_rule": (
-            f"agent resolver: {AGENT_COMPARATOR_RULE}; when the agent kept none: {COMPARATOR_RULE}"
+            f"agent resolver: {AGENT_COMPARATOR_RULE}; when none were recorded: {COMPARATOR_RULE}"
             if resolved.get("resolver") == "agent"
             else COMPARATOR_RULE
         ),
@@ -364,6 +405,7 @@ def summarize(doc: dict[str, Any]) -> dict[str, Any]:
         "with_affinity_ratio": sum(c.get("symmetric_affinity_ratio") is not None for c in cs),
         "unresolved": sum(c["status"] == "unresolved" for c in cs),
         "no_overlap": sum(c["status"] == "no_overlap" for c in cs),
+        "excluded_agent_too_far": sum(c.get("overlap_exclusion") == AGENT_TOO_FAR for c in cs),
         "with_breadth": sum(c["breadth_score"] is not None for c in cs),
         "queries": sum(len(c["queries"]) for c in cs),
     }

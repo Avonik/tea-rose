@@ -53,6 +53,29 @@ def apply_guardrails(
     return RoutingDecision(analyses=ordered, rationale=rationale), added
 
 
+def apply_override(
+    decision: RoutingDecision, override: list[str] | None
+) -> tuple[RoutingDecision, list[Analysis]]:
+    """Full-coverage runs (showcase): also run every analysis in `override`. One the pleading
+    does not call for is recorded as context only ("Measured for context: not pleaded ...");
+    the analyses the pleading did call for keep their rationale."""
+    if not override:
+        return decision, []
+    pleaded = set(decision.analyses)
+    extra: list[Analysis] = [a for a in CANONICAL if a in set(override) and a not in pleaded]
+    if not extra:
+        return decision, []
+    rationale = dict(decision.rationale)
+    for a in extra:
+        why = rationale.get(a, "").strip().removeprefix("Not run: ").rstrip(".")
+        rationale[a] = "Measured for context: not pleaded" + (f" ({why})." if why else ".")
+    ordered = [a for a in CANONICAL if a in pleaded or a in extra]
+    return (
+        RoutingDecision(analyses=ordered, rationale=rationale, context_only=extra),
+        extra,
+    )
+
+
 async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     ev = NodeEvents(ctx.emit, "route")
     ex: Extraction = state["extraction"]
@@ -75,11 +98,22 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     final, added = apply_guardrails(proposed, ex)
     for a, reason in added:
         await ev.decision(f"Guardrail added '{a}'", reason, analysis=a)
+    pleaded = list(final.analyses)
+    final, extra = apply_override(final, state.get("analyses_override"))
+    if extra:
+        await ev.decision(
+            f"Full coverage: also measuring {', '.join(extra)} for context",
+            f"The pleading calls for: {', '.join(pleaded)}. The others are context, not live "
+            "factors.",
+            pleaded=pleaded,
+            context_only=list(extra),
+        )
     await ev.decision(
         f"Analyses: {', '.join(final.analyses)}",
         None,
         analyses=list(final.analyses),
         proposed=list(proposed.analyses),
         rationale=final.rationale,
+        context_only=list(final.context_only),
     )
     return {"routing": final}

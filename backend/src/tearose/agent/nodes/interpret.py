@@ -28,6 +28,9 @@ from tearose.scoring.describe import describe_evidence, facts_block
 SENIOR_LABEL = "Brand A (senior)"
 JUNIOR_LABEL = "Brand B (junior)"
 
+# prefix code guarantees on a finding whose analysis was measured for context only
+CONTEXT_MARK = "Context, not a live factor (not pleaded):"
+
 FACTOR_SECTION = {
     "relatedness_of_goods": "overlap",
     "channels_and_purchasers": "overlap",
@@ -151,14 +154,23 @@ def party_names(state: dict[str, Any]) -> tuple[str | None, str | None]:
     return out[0], out[1]
 
 
+def _all_caps(name: str) -> bool:
+    """True for a mark written in capitals ("LOUIS VUITTON", "COACH", "JACK DANIEL'S"); a
+    possessive "'s" is ignored, so "COACH's" counts as capitals too."""
+    core = re.sub(r"['’]s\b", "", name)
+    return core.isupper()
+
+
 def display_name(entity_name: str, party: Party | None) -> str:
     """The resolved entity's name, but in the document's spelling when both are the same name
     after normalisation (Qloo "Jack Daniels" vs the document's "Jack Daniel's"). A different,
-    possibly more complete entity name ("The Hershey Company" for "Hershey's") is kept."""
+    possibly more complete entity name ("The Hershey Company" for "Hershey's") is kept, and so is
+    the entity name when the document writes the mark in capitals ("LOUIS VUITTON", as opinions
+    often do)."""
     if party is not None:
         target = normalize_name(entity_name)
         for doc in (brand_name(party.name), *party.marks):
-            if doc and normalize_name(doc) == target:
+            if doc and not _all_caps(doc) and normalize_name(doc) == target:
                 return doc
     return entity_name
 
@@ -224,6 +236,8 @@ def case_payload(state: dict[str, Any]) -> dict[str, Any]:
     if routing is not None:
         out["analyses_run"] = list(routing.analyses)
         out["routing_rationale"] = routing.rationale
+        if routing.context_only:
+            out["context_only_analyses"] = list(routing.context_only)
     if res is not None:
         out["resolution"] = {
             "senior": res.senior.entity_name or "NOT IN QLOO (proxy path)",
@@ -239,7 +253,17 @@ def case_payload(state: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
-_PROXY_FIELDS = {"goods_phrase", "chosen_tag_ids", "fit", "fit_note", "comparator_brand_names"}
+_PROXY_FIELDS = {
+    "goods_phrase",
+    "chosen_tag_ids",
+    "fit",
+    "fit_note",
+    "comparator_brand_names",
+    "comparator_source",
+    "comparator_rationale",
+    "measure_overlap",
+    "fit_reason",
+}
 
 
 def section_has_data(evidence: Evidence | None, section: str) -> bool:
@@ -286,9 +310,12 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
         await ev.warning("Interpretation failed; no factor findings", repr(exc))
         return {"findings": [], "case_limitations": [], "errors": [f"interpret: {exc!r}"]}
 
+    context_only = set(state["routing"].context_only) if state.get("routing") else set()
     findings: list[FactorFinding] = []
     for f in out.findings:
         section = FACTOR_SECTION.get(f.factor)
+        if section in context_only and CONTEXT_MARK.lower() not in f.finding.lower():
+            f = f.model_copy(update={"finding": f"{CONTEXT_MARK} {f.finding}"})
         if section and not section_has_data(evidence, section) and f.lean != "insufficient_data":
             await ev.warning(
                 f"{f.factor}: no {section} evidence; lean forced to insufficient_data",

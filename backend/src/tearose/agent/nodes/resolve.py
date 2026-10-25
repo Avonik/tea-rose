@@ -10,10 +10,15 @@ The model searches, disambiguates and proposes; code enforces the rules:
   validates the ids and, if none is valid, maps the goods phrase itself (map_goods_phrase). Only
   when the taxonomy is unavailable or nothing maps does the old free-text path run: the goods
   phrase VERBATIM to /v2/tags, one shorter phrase if empty, tags chosen from the returned menu;
-- comparators must resolve via /search and carry a chosen tag or a descendant of it (when Qloo
-  returns tags); with fewer than 2 kept, code fills up to 3 by the back-test's rule
-  (scoring/comparators.py: brands seeded by the other side, filtered to the proxy tags, top 3 by
-  popularity), so the product never depends on the model's comparator search;
+- the stand-in (comparator) brands of a proxied side are chosen by the AGENT from a shortlist
+  built in code (stand_in_shortlist: up to 10 brands of the chosen category, /v2/insights seeded
+  by the other side's entity, or its stand-ins when it is proxied too, ordered by popularity,
+  the other side's own brand removed by id and by normalised name). After the category decision
+  the model gets the shortlist, picks 3 with a one-sentence `comparator_rationale`, and decides
+  `measure_overlap` (is the category close enough to compare audiences at all) with a
+  `fit_reason`. Code validates the picks against the shortlist and, with fewer than 2 valid
+  picks, tops up by popularity (source "mixed"; "rule" when the model returned nothing usable).
+  Code never overrules the measure_overlap call;
 - universes use only tag ids that some Qloo response actually returned. A resolved brand's
   universe is its OWN category (scoring.universe.own_category_tags on the brand-genre tags of
   its /search result, source "entity own tags"); only a brand without such tags falls back to
@@ -38,7 +43,7 @@ from tearose.agent.nodes.base import (
     run_tool_loop,
     to_json,
 )
-from tearose.agent.tools import MAX_PAGES, ToolContext, make_tools
+from tearose.agent.tools import GENRE_BRAND_PREFIX, MAX_PAGES, ToolContext, make_tools
 from tearose.qloo.client import GENRE_BRAND, INSIGHTS_MAX_TAKE
 from tearose.qloo.fixtures import slugify
 from tearose.qloo.models import Entity, Tag
@@ -59,7 +64,7 @@ from tearose.schemas import (
     Side,
     Universe,
 )
-from tearose.scoring.comparators import COMPARATOR_COUNT, COMPARATOR_RULE, rule_comparators
+from tearose.scoring.comparators import COMPARATOR_COUNT, rule_comparators
 from tearose.scoring.universe import (
     INSIGHTS_FALLBACK_SOURCE,
     OWN_TAGS_SOURCE,
@@ -69,9 +74,9 @@ from tearose.scoring.universe import (
     pick_category_tags,
 )
 
-MAX_CALLS = 20
-MAX_COMPARATORS = 5
-MIN_AGENT_COMPARATORS = 2  # fewer kept -> code fills up to COMPARATOR_COUNT by the rule
+MAX_CALLS = 16
+SHORTLIST_SIZE = 10
+MIN_AGENT_PICKS = 2  # fewer valid picks -> code tops up from the shortlist by popularity
 MAX_PROXY_NODES = 3
 LOW_NAME_SIMILARITY = 0.6
 UNIVERSE_NOMINAL = MAX_PAGES * INSIGHTS_MAX_TAKE  # ranks considered per direction
@@ -102,7 +107,6 @@ class SideDecision(BaseModel):
     proxy_chosen_tag_ids: list[str] = Field(
         default_factory=list, description="only for the free-text tags fallback"
     )
-    comparator_entity_ids: list[str] = Field(default_factory=list)
     universe_description: str | None = None
     universe_tag_ids: list[str] = Field(default_factory=list)
     rationale: str = ""
@@ -111,6 +115,26 @@ class SideDecision(BaseModel):
 class ResolveDecision(BaseModel):
     senior: SideDecision
     junior: SideDecision
+
+
+class StandInDecision(BaseModel):
+    """The agent's stand-in choice for one proxied side, made from the code-built shortlist."""
+
+    picks: list[str] = Field(
+        default_factory=list,
+        description="entity_id of exactly 3 shortlist brands (fewer only if the list is shorter)",
+    )
+    comparator_rationale: str = Field(
+        default="", description="one sentence: why these brands stand in for the party"
+    )
+    measure_overlap: bool = Field(
+        default=True,
+        description="false when the stand-in category is too far from the party's goods to "
+        "compare audiences at all",
+    )
+    fit_reason: str | None = Field(
+        default=None, description="one sentence on the category fit; required when false"
+    )
 
 
 def shorten_phrase(phrase: str) -> str | None:
@@ -265,11 +289,6 @@ async def _free_text_choice(
     return options, chosen, fit, f"free-text tag searches: {tried}" if tried else "free-text"
 
 
-def _carries_tag(e: Entity, chosen: list[str]) -> bool:
-    """A chosen tag or a descendant of it (same prefix) among the entity's own tags."""
-    return any(t == c or t.startswith(c + ":") for t in e.tags for c in chosen)
-
-
 async def _proxy(
     side: Side, party: Party, d: SideDecision, tc: ToolContext, ev: NodeEvents
 ) -> ProxyResolution:
@@ -300,29 +319,6 @@ async def _proxy(
     if not chosen:
         options, chosen, fit, how = await _free_text_choice(side, phrase, d, tc, ev)
 
-    kept: list[Entity] = []
-    notes: list[str] = []
-    for cid in _dedupe(d.comparator_entity_ids):
-        e = tc.entities.get(cid)
-        if e is None:
-            notes.append(f"dropped {cid}: not returned by any brand search")
-        elif e.tags and not _carries_tag(e, chosen):
-            notes.append(f"dropped {e.name}: shares no chosen category tag")
-        else:
-            if not e.tags:
-                notes.append(f"{e.name}: /search returned no tags, category not verifiable")
-            kept.append(e)
-        if len(kept) >= MAX_COMPARATORS:
-            break
-    for n in notes:
-        if n.startswith("dropped"):
-            await ev.warning(f"{side}: comparator {n}")
-    if len(kept) < MIN_AGENT_COMPARATORS:
-        await ev.note(
-            f"{side}: {len(kept)} usable comparator(s) from the model; code rule fills up to "
-            f"{COMPARATOR_COUNT}"
-        )
-
     fit_note = NEAREST_NOTE if fit == "nearest" else None
     names = ", ".join(str(options[t]["name"]) for t in chosen if t in options)
     rationale = " ".join(
@@ -331,7 +327,6 @@ async def _proxy(
             d.rationale.strip(),
             f"Category: {names} ({fit}; {how})." if chosen else f"No category ({how}).",
             f"Fit: {fit_note}." if fit_note else "",
-            f"Comparators: {'; '.join(notes)}." if notes else "",
         )
         if x
     )
@@ -342,20 +337,16 @@ async def _proxy(
         chosen_tag_ids=chosen,
         fit=fit,  # type: ignore[arg-type]
         fit_note=fit_note,
-        comparator_brand_ids=[e.entity_id for e in kept],
-        comparator_brand_names=[e.name for e in kept],
-        comparator_source="agent" if kept else None,
         rationale=rationale or "Proxy path: brand not found in Qloo.",
     )
     await ev.decision(
         f"{side}: proxy via {len(chosen)} categor{'y' if len(chosen) == 1 else 'ies'} "
-        f"({fit or 'no fit'}), {len(kept)} comparator(s)",
+        f"({fit or 'no fit'}); the agent picks stand-ins from a shortlist next",
         fit_note or f"options: {', '.join(str(o['name']) for o in options.values()) or 'none'}",
         goods_phrase=phrase,
         tag_options=proxy.tag_options,
         chosen_tag_ids=chosen,
         fit=fit,
-        comparators=proxy.comparator_brand_names,
     )
     return proxy
 
@@ -436,21 +427,43 @@ async def _universe(
     return Universe(side=side, description=desc, tag_ids=tag_ids, size=UNIVERSE_NOMINAL)
 
 
-async def _fill_comparators(
-    side: Side,
+def _other_names(other: ResolvedBrand, other_party: Party | None) -> list[str]:
+    return [
+        x
+        for x in (
+            other.entity_name,
+            *((other_party.name, *other_party.marks) if other_party is not None else ()),
+        )
+        if x
+    ]
+
+
+def candidate_brief(e: Entity, tc: ToolContext) -> dict[str, Any]:
+    """One shortlist row as the model and the records see it."""
+    d: dict[str, Any] = {"entity_id": e.entity_id, "name": e.name, "popularity": e.popularity}
+    desc = (e.properties or {}).get("description")
+    if isinstance(desc, str) and desc.strip():
+        d["description"] = desc.strip()[:200]
+    if e.disambiguation:
+        d["disambiguation"] = e.disambiguation
+    cats = [tc._tag_label(t) for t in e.tags if t.startswith(GENRE_BRAND_PREFIX)]
+    if cats:
+        d["categories"] = cats[:6]
+    return d
+
+
+async def stand_in_shortlist(
     proxy: ProxyResolution,
     other: ResolvedBrand,
     other_proxy: ProxyResolution | None,
+    other_party: Party | None,
     tc: ToolContext,
-    ev: NodeEvents,
-) -> ProxyResolution:
-    """Fewer than 2 comparators kept: fill up to 3 by the code rule (scoring/comparators.py),
-    seeded by the other side's entity (or its comparators when it is proxied too)."""
-    have = len(proxy.comparator_brand_ids)
-    if have >= MIN_AGENT_COMPARATORS or not proxy.chosen_tag_ids:
-        if not have:
-            await ev.warning(f"{side}: no usable comparator brands; this side cannot seed queries")
-        return proxy
+) -> tuple[list[Entity], list[str], list[str]]:
+    """(shortlist, seeds, notes): up to SHORTLIST_SIZE brands of the proxied side's chosen
+    category, /v2/insights filter.type=brand seeded by the other side's entity (or its
+    stand-ins when it is proxied too), ordered by popularity. The other side's own brand (its
+    entity id, and any brand whose normalised name equals its name or marks) is removed here,
+    before the model sees the list. Nothing resolved on the other side gives ([], [], note)."""
     if other.entity_id:
         seeds = [other.entity_id]
     else:
@@ -459,41 +472,169 @@ async def _fill_comparators(
     async def fetch(s: list[str], tags: list[str]) -> list[Entity]:
         return (await tc.insights_entities(s, tags, 1))[0]
 
+    picked, notes = await rule_comparators(
+        fetch,
+        seeds,
+        list(proxy.chosen_tag_ids),
+        exclude=[other.entity_id] if other.entity_id else [],
+        n=SHORTLIST_SIZE,
+        exclude_names=_other_names(other, other_party),
+    )
+    return picked, seeds, notes
+
+
+async def _choose_stand_ins(
+    side: Side,
+    party: Party,
+    proxy: ProxyResolution,
+    shortlist: list[Entity],
+    seeds: list[str],
+    ex: Extraction,
+    model: Any,
+    tc: ToolContext,
+    ev: NodeEvents,
+) -> StandInDecision | None:
+    """The agent's pick from the shortlist plus its overlap-fit call (None when it failed)."""
+    cats = ", ".join(
+        str(o.get("name")) for o in proxy.tag_options if o.get("id") in proxy.chosen_tag_ids
+    )
+    payload = {
+        "side": side,
+        "party": party.name,
+        "marks": party.marks,
+        "goods_phrase": proxy.goods_phrase,
+        "chosen_category": cats or proxy.chosen_tag_ids,
+        "category_fit_label": proxy.fit,
+        "shortlist_seeded_by": [tc.names.get(s, s) for s in seeds],
+        "shortlist": [candidate_brief(e, tc) for e in shortlist],
+    }
+    messages = [
+        SystemMessage(load_prompt("resolve")),
+        HumanMessage(
+            f"PARTIES:\n{_payload(ex)}\n\nSTAND-IN SHORTLIST (step 3; built in code, the other "
+            f"side already removed):\n{to_json(payload)}\n\nPick exactly "
+            f"{min(COMPARATOR_COUNT, len(shortlist))} stand-ins by `entity_id` from this list "
+            "with one sentence of `comparator_rationale`, and decide `measure_overlap` with a "
+            "one-sentence `fit_reason`."
+        ),
+    ]
     try:
-        picked, notes = await rule_comparators(
-            fetch,
-            seeds,
-            list(proxy.chosen_tag_ids),
-            exclude=proxy.comparator_brand_ids,
-            n=COMPARATOR_COUNT - have,
-        )
-    except Exception as exc:  # noqa: BLE001 — the side keeps what it has
-        picked, notes = [], [f"comparators: rule query failed ({exc!r})."]
-    if not picked:
-        detail = " ".join(notes) or "the rule query returned no brands"
-        if not have:
-            await ev.warning(
-                f"{side}: no usable comparator brands; this side cannot seed queries", detail
-            )
-        else:
-            await ev.note(f"{side}: code rule found no further comparators", detail)
+        return await ainvoke_structured(model, StandInDecision, messages)
+    except Exception as exc:  # noqa: BLE001 — code picks by popularity instead
+        await ev.warning(f"{side}: stand-in choice failed; code picks by popularity", repr(exc))
+        return None
+
+
+_SOURCE_TEXT = {
+    "agent": "chosen by the agent",
+    "mixed": "chosen by the agent, topped up by code by popularity",
+    "rule": "picked by code by popularity (the agent returned no usable pick)",
+}
+
+
+async def _stand_ins(
+    side: Side,
+    party: Party,
+    proxy: ProxyResolution,
+    other: ResolvedBrand,
+    other_proxy: ProxyResolution | None,
+    other_party: Party | None,
+    ex: Extraction,
+    model: Any,
+    tc: ToolContext,
+    ev: NodeEvents,
+) -> ProxyResolution:
+    """Shortlist in code -> the agent picks 3 with a reason and decides measure_overlap ->
+    code validates (picks must be on the shortlist; fewer than 2 valid picks are topped up by
+    popularity) and records everything on the ProxyResolution. Code never overrules the
+    agent's measure_overlap call."""
+    if not proxy.chosen_tag_ids:
+        await ev.warning(f"{side}: no usable comparator brands; this side cannot seed queries")
         return proxy
-    names = ", ".join(e.name for e in picked)
-    await ev.note(
-        f"{side}: comparators filled by code rule: {names}",
-        f"{COMPARATOR_RULE}. {' '.join(notes)}".strip(),
-        comparators=[e.name for e in picked],
-        comparator_ids=[e.entity_id for e in picked],
-        popularity=[e.popularity for e in picked],
+    try:
+        shortlist, seeds, notes = await stand_in_shortlist(
+            proxy, other, other_proxy, other_party, tc
+        )
+    except Exception as exc:  # noqa: BLE001 — the side stays without stand-ins
+        shortlist, seeds, notes = [], [], [f"comparators: shortlist query failed ({exc!r})."]
+    briefs = [candidate_brief(e, tc) for e in shortlist]
+    await ev.decision(
+        f"{side}: stand-in shortlist of {len(shortlist)} brand(s)",
+        " ".join(notes) or ", ".join(e.name for e in shortlist) or None,
+        shortlist=briefs,
         seeds=seeds,
         filter_tags=list(proxy.chosen_tag_ids),
     )
+    if not shortlist:
+        detail = " ".join(notes) or "the shortlist query returned no brands"
+        await ev.warning(
+            f"{side}: no usable comparator brands; this side cannot seed queries", detail
+        )
+        return proxy.model_copy(update={"stand_in_candidates": briefs})
+
+    decision = await _choose_stand_ins(side, party, proxy, shortlist, seeds, ex, model, tc, ev)
+    by_id = {e.entity_id: e for e in shortlist}
+    raw_picks = list(decision.picks) if decision else []
+    valid = [p for p in _dedupe(raw_picks) if p in by_id][:COMPARATOR_COUNT]
+    invalid = [p for p in raw_picks if p not in by_id]
+    if invalid:
+        await ev.warning(
+            f"{side}: stand-in picks not on the shortlist were dropped", ", ".join(invalid)
+        )
+    picked = [by_id[p] for p in valid]
+    topped: list[Entity] = []
+    if len(valid) < MIN_AGENT_PICKS:
+        rest = [e for e in shortlist if e.entity_id not in valid]  # already by popularity
+        topped = rest[: COMPARATOR_COUNT - len(valid)]
+        picked += topped
+    source: Literal["agent", "rule", "mixed"] = (
+        "rule" if not valid else ("mixed" if topped else "agent")
+    )
+    reason = ((decision.comparator_rationale if decision else "") or "").strip()
+    if topped:
+        await ev.note(
+            f"{side}: {len(valid)} valid stand-in pick(s) from the agent; code topped up by "
+            f"popularity: {', '.join(e.name for e in topped)}"
+        )
+    measure = decision.measure_overlap if decision else True
+    fit_reason = ((decision.fit_reason if decision else None) or "").strip() or None
+    if not measure and not fit_reason:
+        fit_reason = (
+            f"the agent judged the stand-in category too far from {party.name}'s goods "
+            f"({proxy.goods_phrase!r}) to compare audiences"
+        )
+    names = ", ".join(e.name for e in picked)
+    who = _SOURCE_TEXT[source]
+    await ev.decision(
+        f"{side}: stand-ins {names} ({who})",
+        reason or None,
+        comparators=[e.name for e in picked],
+        comparator_ids=[e.entity_id for e in picked],
+        popularity=[e.popularity for e in picked],
+        comparator_source=source,
+        comparator_rationale=reason or None,
+        measure_overlap=measure,
+        fit_reason=fit_reason,
+    )
+    if not measure:
+        await ev.decision(
+            f"{side}: the agent judged the stand-in category too far; overlap is skipped",
+            fit_reason,
+            measure_overlap=False,
+        )
+    extra = f" Stand-ins {who}: {names}" + (f" ({reason})." if reason else ".")
+    if not measure:
+        extra += f" Overlap not measured: {fit_reason}"
     return proxy.model_copy(
         update={
-            "comparator_brand_ids": [*proxy.comparator_brand_ids, *(e.entity_id for e in picked)],
-            "comparator_brand_names": [*proxy.comparator_brand_names, *(e.name for e in picked)],
-            "comparator_source": "mixed" if have else "rule",
-            "rationale": f"{proxy.rationale} Comparators filled by code rule: {names}.",
+            "comparator_brand_ids": [e.entity_id for e in picked],
+            "comparator_brand_names": [e.name for e in picked],
+            "comparator_source": source,
+            "stand_in_candidates": briefs,
+            "comparator_rationale": reason or None,
+            "measure_overlap": measure,
+            "fit_reason": fit_reason,
+            "rationale": f"{proxy.rationale}{extra}",
         }
     )
 
@@ -662,9 +803,13 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
         "junior", ex.junior, decision.junior, tc, ev, avoid_entity_id=s_brand.entity_id
     )
     if s_proxy is not None:
-        s_proxy = await _fill_comparators("senior", s_proxy, j_brand, j_proxy, tc, ev)
+        s_proxy = await _stand_ins(
+            "senior", ex.senior, s_proxy, j_brand, j_proxy, ex.junior, ex, model, tc, ev
+        )
     if j_proxy is not None:
-        j_proxy = await _fill_comparators("junior", j_proxy, s_brand, s_proxy, tc, ev)
+        j_proxy = await _stand_ins(
+            "junior", ex.junior, j_proxy, s_brand, s_proxy, ex.senior, ex, model, tc, ev
+        )
     resolution = Resolution(
         senior=s_brand,
         junior=j_brand,

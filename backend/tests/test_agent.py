@@ -334,6 +334,99 @@ async def test_route_adds_fame_when_dilution_pleaded(client: FixtureClient) -> N
     assert any(e.title == "Guardrail added 'fame'" for e in events)
 
 
+async def test_analyses_override_runs_all_and_records_context(client: FixtureClient) -> None:
+    """Full coverage (showcase --all-analyses): zone is not pleaded but measured for context."""
+    model = ScriptedChatModel(
+        scripts={"RoutingDecision": [{"analyses": ["overlap"], "rationale": {"overlap": "x"}}]}
+    )
+    ctx, events = make_ctx(client, model)
+    state = {
+        "extraction": Extraction.model_validate(EXTRACTION),
+        "analyses_override": ["overlap", "bridging", "fame", "zone"],
+    }
+    routing: RoutingDecision = (await route.run(state, ctx))["routing"]
+    assert routing.analyses == ["overlap", "bridging", "fame", "zone"]
+    assert routing.context_only == ["zone"]
+    assert routing.rationale["zone"].startswith("Measured for context: not pleaded")
+    assert routing.rationale["fame"].startswith("Added by guardrail")  # pleaded: unchanged
+    full = next(e for e in events if e.title.startswith("Full coverage"))
+    assert full.data["pleaded"] == ["overlap", "bridging", "fame"]
+    # without the override nothing changes
+    plain, extra = route.apply_override(routing.model_copy(update={"context_only": []}), None)
+    assert extra == [] and plain.context_only == []
+
+
+async def test_zone_runs_for_brand_vs_brand_and_interpret_marks_context(tmp_path: Path) -> None:
+    """Zone with no geographic dispute: both heatmaps and the overlap of the maps; the
+    interpret step says the unpleaded analysis is context, not a live factor."""
+    from tearose.scoring import compute_evidence
+
+    write_fixtures(tmp_path)
+    pts = [
+        {"location": {"latitude": 36.0 + i, "longitude": -86.0 - i}, "query": {"affinity": a}}
+        for i, a in enumerate([0.2, 0.4, 0.6, 0.8, 0.9])
+    ]
+    (tmp_path / "insights_heatmap_barkbox.json").write_text(
+        json.dumps({"results": {"heatmap": pts}}), encoding="utf-8"
+    )
+    client = FixtureClient(tmp_path)
+    res = Resolution(
+        senior=ResolvedBrand(side="senior", query="Jack Daniel's", entity_id=JD,
+                             entity_name="Jack Daniel's"),
+        junior=ResolvedBrand(side="junior", query="BarkBox", entity_id=BB, entity_name="BarkBox"),
+    )  # fmt: skip
+    routing = RoutingDecision(
+        analyses=["zone"],
+        rationale={"zone": "Measured for context: not pleaded."},
+        context_only=["zone"],
+    )
+    model = ScriptedChatModel(
+        scripts={
+            "fetch": ["done"],
+            "Interpretation": [
+                {
+                    "findings": [
+                        {
+                            "factor": "zone_of_reputation",
+                            "lean": "neutral",
+                            "confidence": "low",
+                            "finding": "The two maps overlap broadly.",
+                        }
+                    ],
+                    "limitations": [],
+                }
+            ],
+        }
+    )
+    ctx, _ = make_ctx(client, model)
+    raw = (await fetch.run({"resolution": res, "routing": routing}, ctx))["raw"]
+    assert raw.senior_heatmap and raw.junior_heatmap
+    ev = compute_evidence(raw, res, routing)
+    assert ev.zone is not None and ev.zone.concentration_index is not None
+    assert ev.zone.geographic_overlap is not None
+    state = {
+        "extraction": Extraction.model_validate(EXTRACTION),
+        "routing": routing,
+        "resolution": res,
+        "evidence": ev,
+        "raw": raw,
+    }
+    out = await interpret.run(state, ctx)
+    finding = out["findings"][0].finding
+    assert finding.startswith(interpret.CONTEXT_MARK)
+    prompt = model.prompts_for("Interpretation")[0]
+    assert '"context_only_analyses"' in prompt and "CONTEXT ONLY" in prompt
+
+
+def test_showcase_all_analyses_flag_builds_override_engine() -> None:
+    from tearose.eval import precompute_showcase as pc
+
+    engine = pc.make_engine(True)
+    assert isinstance(engine, GraphEngine)
+    assert engine.analyses_override == ["overlap", "bridging", "fame", "zone"]
+    assert pc.ALL_ANALYSES_FLAG == "--all-analyses"
+
+
 # --------------------------------------------------------------------------------------
 # (3) resolve: proxy path
 # --------------------------------------------------------------------------------------
@@ -355,13 +448,15 @@ async def test_resolve_takes_proxy_path_and_records_tag_options(client: FixtureC
     assert proxy.goods_phrase == JUNIOR_GOODS
     assert {o["id"] for o in proxy.tag_options} == {DOG, "urn:tag:category:place:pet_store"}
     assert proxy.chosen_tag_ids == [DOG]
-    assert proxy.comparator_brand_ids == [BB, KG]  # Purina shares no chosen tag → dropped
-    assert "Purina" in proxy.rationale
+    # no StandInDecision scripted: the agent's pick fails, code picks by popularity ("rule")
+    assert proxy.comparator_brand_ids == ["E-F00", "E-F01", "E-F02"]
+    assert proxy.comparator_source == "rule"
+    assert len(proxy.stand_in_candidates) == 10 and proxy.measure_overlap
+    assert any("stand-in choice failed" in e.title for e in events)
     assert {u.side: u.tag_ids for u in res.universes} == {"senior": [WHISKEY], "junior": [DOG]}
     # the verbatim phrase was queried first, the shortened one second
     queries = [q for q, _ in ctx.tools.tag_searches]
     assert queries.index(JUNIOR_GOODS) < queries.index("dog toys")
-    assert any(e.type == "warning" and "Purina" in e.title for e in events)
     assert any(e.type == "tool_call" for e in events)
 
 
@@ -418,9 +513,9 @@ async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> Non
     proxy = out["resolution"].junior_proxy
     assert proxy.chosen_tag_ids == [TAX_PET_FOOD]
     assert proxy.fit == "nearest" and "no exact match" in (proxy.fit_note or "")
-    # BarkBox carries no pet_food tag; one kept comparator is topped up to 3 by the code rule
-    assert proxy.comparator_brand_ids[0] == "E-CH" and len(proxy.comparator_brand_ids) == 3
-    assert proxy.comparator_source == "mixed"
+    # stand-ins come only from the code-built shortlist (no StandInDecision scripted: rule)
+    assert "E-CH" not in proxy.comparator_brand_ids and BB not in proxy.comparator_brand_ids
+    assert proxy.comparator_source == "rule"
     assert ctx.tools.tag_searches == []  # no free-text /v2/tags needed
     prompt = model.prompts_for("resolve")[0]
     assert "BRAND TAXONOMY (67 nodes" in prompt
@@ -449,72 +544,215 @@ def _rule_fixture_popularity(d: Path) -> None:
     p.write_text(json.dumps(body), encoding="utf-8")
 
 
-async def test_resolve_fills_comparators_by_code_rule_when_model_keeps_none(
-    tmp_path: Path,
-) -> None:
-    """Live bug (Bad Spaniels): proxy category right, no comparator kept -> no overlap at all.
-    Code now fills up to 3 by the back-test rule and the overlap is computed."""
+def _stand_in(picks: list[str], **kw: Any) -> dict[str, Any]:
+    return {"picks": picks, "comparator_rationale": "best-known dog-toy brands", **kw}
+
+
+async def _resolve_with(
+    tmp_path: Path, stand_in: dict[str, Any] | None
+) -> tuple[Resolution, RunContext, list[TraceEvent], ScriptedChatModel]:
     _rule_fixture_popularity(write_fixtures(tmp_path))
-    client = FixtureClient(tmp_path)
-    decision = json.loads(json.dumps(RESOLVE_DECISION))
-    decision["junior"]["comparator_entity_ids"] = []
-    model = ScriptedChatModel(
-        scripts={"resolve": list(RESOLVE_LOOP), "ResolveDecision": [decision], "fetch": ["done"]}
-    )
-    ctx, events = make_ctx(client, model)
+    scripts: dict[str, list[Any]] = {
+        "resolve": list(RESOLVE_LOOP),
+        "ResolveDecision": [RESOLVE_DECISION],
+        "fetch": ["done"],
+    }
+    if stand_in is not None:
+        scripts["StandInDecision"] = [stand_in]
+    model = ScriptedChatModel(scripts=scripts)
+    ctx, events = make_ctx(FixtureClient(tmp_path), model)
     res = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
         "resolution"
     ]
+    return res, ctx, events, model
+
+
+async def test_resolve_agent_picks_stand_ins_from_the_shortlist(tmp_path: Path) -> None:
+    """Code builds the shortlist (JD-seeded brands in the proxy category, by popularity); the
+    agent picks 3 with a reason; picks, reason and shortlist are recorded (source "agent")."""
+    res, ctx, events, model = await _resolve_with(
+        tmp_path, _stand_in(["E-F05", "E-F03", "E-F10"], fit_reason="dog toys sit in pet goods")
+    )
     proxy = res.junior_proxy
-    # top 3 by popularity (ties by rank) among JD-seeded brands filtered to the proxy tag
-    assert proxy.comparator_brand_ids == ["E-F10", "E-F03", "E-F00"]
-    assert proxy.comparator_brand_names == ["Pet brand 10", "Pet brand 3", "Pet brand 0"]
-    assert proxy.comparator_source == "rule"
+    # the shortlist: up to 10, by popularity (ties by rank), as the model saw it
+    ids = [c["entity_id"] for c in proxy.stand_in_candidates]
+    assert ids[:3] == ["E-F10", "E-F03", "E-F00"] and len(ids) == 10
+    assert {"entity_id", "name", "popularity", "categories"} <= set(proxy.stand_in_candidates[0])
+    prompt = model.prompts_for("StandInDecision")[0]
+    assert "STAND-IN SHORTLIST" in prompt and "E-F10" in prompt and "Pick exactly 3" in prompt
+    # the agent's picks, in its order, with its reason
+    assert proxy.comparator_brand_ids == ["E-F05", "E-F03", "E-F10"]
+    assert proxy.comparator_source == "agent"
+    assert proxy.comparator_rationale == "best-known dog-toy brands"
+    assert proxy.measure_overlap and proxy.fit_reason == "dog toys sit in pet goods"
     rule_calls = [
         e.data["params"]
         for e in events
         if e.type == "tool_call" and e.data["tool"] == "qloo_insights_entities"
     ]
     assert rule_calls == [{"seed_entity_ids": [JD], "filter_tags": [DOG], "page": 1}]
-    assert any(
-        e.type == "note"
-        and "comparators filled by code rule: Pet brand 10, Pet brand 3, Pet brand 0" in e.title
-        for e in events
-    )
-    # fetch seeds/targets the filled comparators; overlap is computed, describe names them
+    assert any(e.type == "decision" and "chosen by the agent" in e.title for e in events)
+    # fetch seeds/targets the picks; the facts carry the stand-in line with the reason
     out = await fetch.run(
         {"resolution": res, "routing": RoutingDecision(analyses=["overlap"], rationale={})}, ctx
     )
     raw = out["raw"]
-    assert raw.junior_target_entity_ids == ["E-F10", "E-F03", "E-F00"]
+    assert raw.junior_target_entity_ids == ["E-F05", "E-F03", "E-F10"]
     ov = overlap_evidence(raw, res)
-    assert ov.senior_to_junior_rank is not None
     assert ov.symmetric_percentile is not None
-    facts = " ".join(describe_evidence(Evidence(overlap=ov), res)["overlap"])
-    assert "Pet brand 10" in facts and "comparator brands" in facts
+    facts = describe_evidence(Evidence(overlap=ov), res)
+    assert facts["stand_ins"] == [
+        "Stand-ins for Bad Spaniels: Pet brand 5, Pet brand 3, Pet brand 10 "
+        "(chosen by the agent: best-known dog-toy brands)."
+    ]
+    assert "Pet brand 10" in " ".join(facts["overlap"])
 
 
-async def test_resolve_keeps_model_comparators_when_it_supplies_three(tmp_path: Path) -> None:
+async def test_resolve_tops_up_fewer_than_two_valid_picks(tmp_path: Path) -> None:
+    res, _, events, _ = await _resolve_with(tmp_path, _stand_in(["E-F05", "E-NOT-LISTED"]))
+    proxy = res.junior_proxy
+    # one valid pick kept first, topped up by popularity from the shortlist
+    assert proxy.comparator_brand_ids == ["E-F05", "E-F10", "E-F03"]
+    assert proxy.comparator_source == "mixed"
+    assert any("not on the shortlist were dropped" in e.title for e in events)
+    assert any(e.type == "note" and "code topped up by popularity" in e.title for e in events)
+
+
+async def test_resolve_never_uses_the_other_sides_brand_as_stand_in(tmp_path: Path) -> None:
+    """Vans v. MSCHF: Vans was a stand-in for its own opponent. The other side's entity (by id)
+    and any brand with its normalised name (a duplicate entity) are removed from the shortlist
+    before the model sees it; picking them anyway is invalid (code falls back to the rule)."""
     write_fixtures(tmp_path)
-    chew = _ent("E-CB", "ChewBark", [f"{DOG}:chew_toys"])  # descendant of the chosen tag
-    (tmp_path / "search_brand_chewbark.json").write_text(
-        json.dumps({"results": [chew]}), encoding="utf-8"
+    p = tmp_path / "insights_brand_seed_jack_daniels_filter_pet_tags.json"
+    body = json.loads(p.read_text(encoding="utf-8"))
+    dup = {**_ent("E-JD-DUP", "JACK DANIELS", [DOG]), "popularity": 0.999}
+    same = {**_ent(JD, "Jack Daniel's", [DOG]), "popularity": 1.0}
+    body["results"]["entities"] = [same, dup, *body["results"]["entities"]]
+    p.write_text(json.dumps(body), encoding="utf-8")
+    model = ScriptedChatModel(
+        scripts={
+            "resolve": list(RESOLVE_LOOP),
+            "ResolveDecision": [RESOLVE_DECISION],
+            "StandInDecision": [_stand_in([JD, "E-JD-DUP"])],
+        }
     )
-    loop = list(RESOLVE_LOOP)
-    loop.insert(-1, ai_tools(tool_call("qloo_search", query="ChewBark")))
-    decision = json.loads(json.dumps(RESOLVE_DECISION))
-    decision["junior"]["comparator_entity_ids"] = [BB, KG, "E-CB"]
-    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
-    ctx, events = make_ctx(FixtureClient(tmp_path), model)
+    ctx, _ = make_ctx(FixtureClient(tmp_path), model)
     proxy = (await resolve.run({"extraction": Extraction.model_validate(EXTRACTION)}, ctx))[
         "resolution"
     ].junior_proxy
-    assert proxy.comparator_brand_ids == [BB, KG, "E-CB"]
-    assert proxy.comparator_source == "agent"
-    assert not any("filled by code rule" in e.title for e in events)
-    assert not any(
-        e.type == "tool_call" and e.data["tool"] == "qloo_insights_entities" for e in events
+    listed = {c["entity_id"] for c in proxy.stand_in_candidates}
+    assert JD not in listed and "E-JD-DUP" not in listed
+    assert JD not in model.prompts_for("StandInDecision")[0].split("STAND-IN SHORTLIST")[1]
+    assert len(proxy.comparator_brand_ids) == 3
+    assert JD not in proxy.comparator_brand_ids and "E-JD-DUP" not in proxy.comparator_brand_ids
+    assert proxy.comparator_source == "rule"
+
+
+TOO_FAR = (
+    "Qloo's brand categories have no node for dog-toy novelty goods; the nearest is too far "
+    "to compare audiences"
+)
+
+
+async def test_measure_overlap_false_skips_overlap_and_carries_fit_reason(
+    tmp_path: Path,
+) -> None:
+    from tearose.agent.nodes.memo import proxy_limitations
+    from tearose.scoring import compute_evidence
+
+    res, ctx, events, _ = await _resolve_with(
+        tmp_path, _stand_in(["E-F10", "E-F03", "E-F00"], measure_overlap=False, fit_reason=TOO_FAR)
     )
+    proxy = res.junior_proxy
+    assert proxy.measure_overlap is False and proxy.fit_reason == TOO_FAR
+    assert proxy.comparator_source == "agent"  # the picks still stand (fame, bridging, zone)
+    assert res.overlap_blocked() == [proxy]
+    routing = RoutingDecision(analyses=["overlap", "bridging", "fame"], rationale={})
+    n_before = len(ctx.tools.queries)
+    out = await fetch.run({"resolution": res, "routing": routing}, ctx)
+    new = ctx.tools.queries[n_before:]
+    # no overlap paging and no compare; bridging (insights tags) and fame still fetched
+    assert not any(
+        q.params.get("filter.type") == "urn:entity:brand" or "compare" in q.endpoint for q in new
+    )
+    assert out["raw"].senior_seed_junior_universe is None
+    assert out["raw"].senior_tags and out["raw"].senior_demographics is not None
+    assert any("Overlap skipped" in e.title for e in events)
+    ev = compute_evidence(out["raw"], res, routing)
+    assert ev.overlap is None and ev.bridging is not None and ev.fame is not None
+    facts = describe_evidence(ev, res)
+    assert TOO_FAR in facts["overlap"][0] and facts["overlap"][0].startswith("Overlap: not")
+    lims = proxy_limitations({"resolution": res})
+    assert any(TOO_FAR in x for x in lims)
+
+
+def test_resolve_prompt_describes_the_stand_in_flow() -> None:
+    from tearose.agent.nodes.base import load_prompt
+
+    prompt = load_prompt("resolve")
+    assert "Propose 3-5" not in prompt and "STAND-IN SHORTLIST" in prompt
+    assert "comparator_rationale" in prompt and "measure_overlap" in prompt
+    assert "fit_reason" in prompt
+    assert resolve.MAX_CALLS == 16 and "At most 16 tool calls" in prompt
+
+
+# --------------------------------------------------------------------------------------
+# reasoning effort (LLM_REASONING_EFFORT)
+# --------------------------------------------------------------------------------------
+
+
+def _settings(**kw: Any) -> Any:
+    from tearose.config import Settings
+
+    return Settings(_env_file=None, OPENAI_API_KEY="sk-test", **kw)  # type: ignore[call-arg]
+
+
+def test_reasoning_effort_passed_only_when_set(monkeypatch: pytest.MonkeyPatch) -> None:
+    import tearose.config as config
+    from tearose.agent.llm import get_chat_model
+
+    monkeypatch.setattr(config, "get_settings", lambda: _settings(llm_reasoning_effort="high"))
+    assert get_chat_model().reasoning_effort == "high"  # type: ignore[attr-defined]
+    monkeypatch.setattr(config, "get_settings", lambda: _settings(llm_reasoning_effort=None))
+    assert get_chat_model().reasoning_effort is None  # type: ignore[attr-defined]
+
+
+async def test_reasoning_effort_dropped_once_on_provider_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from langchain_core.messages import AIMessage, HumanMessage
+    from langchain_core.outputs import ChatGeneration, ChatResult
+    from langchain_openai import ChatOpenAI
+
+    import tearose.config as config
+    from tearose.agent.llm import drain_model_notes, get_chat_model
+
+    seen: list[str | None] = []
+
+    async def fake(self: Any, messages: Any, stop: Any = None, run_manager: Any = None, **kw: Any):
+        seen.append(self.reasoning_effort)
+        if self.reasoning_effort is not None:
+            raise ValueError("Unsupported parameter: 'reasoning_effort' is not supported")
+        return ChatResult(generations=[ChatGeneration(message=AIMessage(content="ok"))])
+
+    monkeypatch.setattr(ChatOpenAI, "_agenerate", fake)
+    monkeypatch.setattr(config, "get_settings", lambda: _settings(llm_reasoning_effort="high"))
+    model = get_chat_model()
+    reply = await model.ainvoke([HumanMessage("hi")])
+    assert reply.content == "ok" and seen == ["high", None]
+    notes = drain_model_notes(model)
+    assert len(notes) == 1 and "reasoning_effort='high'" in notes[0]
+    assert drain_model_notes(model) == []
+    await model.ainvoke([HumanMessage("again")])  # stays off: no second failure
+    assert seen == ["high", None, None]
+
+    async def other(self: Any, messages: Any, stop: Any = None, run_manager: Any = None, **kw: Any):
+        raise RuntimeError("connection reset")
+
+    monkeypatch.setattr(ChatOpenAI, "_agenerate", other)
+    fresh = get_chat_model()
+    with pytest.raises(RuntimeError):  # an unrelated error is not swallowed
+        await fresh.ainvoke([HumanMessage("x")])
 
 
 async def test_resolve_universe_is_the_brands_own_category(client: FixtureClient) -> None:
@@ -834,7 +1072,9 @@ async def test_smoke_run_on_shared_fixtures() -> None:
     ex = json.loads(json.dumps(EXTRACTION))
     ex["junior"]["goods"] = ["dog toys"]
     decision = json.loads(json.dumps(RESOLVE_DECISION))
-    decision["junior"]["comparator_entity_ids"] = ["FA4E0000-0000-4000-A000-000000000004"]
+    decision["junior"]["comparator_entity_ids"] = [
+        "FA4E0000-0000-4000-A000-000000000004"
+    ]  # ignored
     decision["junior"]["proxy_goods_phrase"] = "dog toys"
     decision["junior"]["proxy_chosen_tag_ids"] = [DOG]
     decision["senior"]["entity_id"] = "FA4E0000-0000-4000-A000-000000000001"
@@ -863,8 +1103,8 @@ async def test_smoke_run_on_shared_fixtures() -> None:
     r = handle.result
     assert r.status == "finished", r.error
     jp = r.resolution.junior_proxy
-    assert jp.comparator_brand_names[0] == "BarkBox" and len(jp.comparator_brand_names) == 3
-    assert jp.comparator_source == "mixed"  # one from the model, two by the code rule
+    assert len(jp.comparator_brand_names) == 3
+    assert jp.comparator_source == "rule"  # the model's proposal is ignored
     assert r.evidence is not None and r.memo is not None
 
 
@@ -933,5 +1173,14 @@ def test_bottom_line_party_names() -> None:
         "Jack Daniel's Tennessee Honey"
     )
     assert display_name("Jack Daniels", None) == "Jack Daniels"
+    # marks written in capitals (as opinions do) never replace the Qloo name
+    lv = ex.senior.model_copy(
+        update={"name": "Louis Vuitton Malletier", "marks": ["LOUIS VUITTON"]}
+    )
+    assert display_name("Louis Vuitton", lv) == "Louis Vuitton"
+    coach = ex.senior.model_copy(update={"name": "COACH", "marks": ["COACH", "COACH's"]})
+    assert display_name("Coach", coach) == "Coach"
+    caps_jd = ex.senior.model_copy(update={"name": "JACK DANIEL'S", "marks": ["JACK DANIEL'S"]})
+    assert display_name("Jack Daniels", caps_jd) == "Jack Daniels"
     # nothing known: role phrases in the bottom line
     assert party_names({}) == (None, None)

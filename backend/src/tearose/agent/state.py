@@ -39,11 +39,19 @@ class AgentState(TypedDict, total=False):
     followup_action: str | None  # FollowupPlan.action of the last follow-up
     instruction: str | None  # follow-up instruction fed to resolve/fetch/interpret/memo prompts
     blind: bool  # eval harness: prompts see "Brand A (senior)" / "Brand B (junior)"
+    # full-coverage runs (showcase): analyses route runs regardless of the pleading; unpleaded
+    # ones are recorded as context only (RoutingDecision.context_only)
+    analyses_override: list[str] | None
     errors: Annotated[list[str], operator.add]
 
 
 def initial_state(
-    run_id: str, mode: Literal["fixture", "live"], text: str, *, blind: bool = False
+    run_id: str,
+    mode: Literal["fixture", "live"],
+    text: str,
+    *,
+    blind: bool = False,
+    analyses_override: list[str] | None = None,
 ) -> AgentState:
     return AgentState(
         run_id=run_id,
@@ -62,5 +70,6 @@ def initial_state(
         followup_action=None,
         instruction=None,
         blind=blind,
+        analyses_override=list(analyses_override) if analyses_override else None,
         errors=[],
     )

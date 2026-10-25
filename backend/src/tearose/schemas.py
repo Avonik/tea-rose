@@ -53,6 +53,9 @@ Analysis = Literal["overlap", "bridging", "fame", "zone"]
 class RoutingDecision(BaseModel):
     analyses: list[Analysis]
     rationale: dict[str, str]  # analysis -> one sentence why it is (not) run
+    # analyses run only because a full-coverage run forced them (analyses_override), not
+    # because the pleading calls for them: context, not a live factor
+    context_only: list[Analysis] = Field(default_factory=list)
 
 
 # --------------------------------------------------------------------------------------
@@ -86,9 +89,18 @@ class ProxyResolution(BaseModel):
     fit_note: str | None = None  # e.g. "nearest category, no exact match in Qloo's ..."
     comparator_brand_ids: list[str] = Field(default_factory=list)  # category-leading brands
     comparator_brand_names: list[str] = Field(default_factory=list)
-    # who picked the comparators: the model ("agent"), the code rule in scoring/comparators.py
-    # ("rule", the model kept fewer than 2), or both ("mixed")
+    # who picked the stand-ins from the code-built shortlist: the model ("agent"), the model
+    # topped up by code by popularity ("mixed", fewer than 2 valid picks), or code alone
+    # ("rule", the model returned nothing usable)
     comparator_source: Literal["agent", "rule", "mixed"] | None = None
+    # the shortlist the agent picked from (up to 10 brands of the chosen category seeded by the
+    # other side, opponent removed by code): entity_id, name, popularity, description, ...
+    stand_in_candidates: list[dict[str, Any]] = Field(default_factory=list)
+    comparator_rationale: str | None = None  # the agent's one-sentence reason for its picks
+    # the agent's call whether the stand-in category is close enough to compare audiences at
+    # all; False skips the overlap analysis for the run (bridging and fame still run)
+    measure_overlap: bool = True
+    fit_reason: str | None = None  # why (not); carried verbatim into the limitations
     rationale: str
 
 
@@ -108,6 +120,15 @@ class Resolution(BaseModel):
     senior_proxy: ProxyResolution | None = None
     junior_proxy: ProxyResolution | None = None
     universes: list[Universe] = Field(default_factory=list)
+
+    def overlap_blocked(self) -> list[ProxyResolution]:
+        """Proxied sides whose stand-in category the agent judged too far to measure audience
+        overlap (measure_overlap False): the overlap analysis is skipped for the run."""
+        return [
+            p
+            for p, b in ((self.senior_proxy, self.senior), (self.junior_proxy, self.junior))
+            if p is not None and not b.entity_id and not p.measure_overlap
+        ]
 
 
 # --------------------------------------------------------------------------------------

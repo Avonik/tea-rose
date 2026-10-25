@@ -51,6 +51,10 @@ def _wrap(name: str, fn: NodeFn, ctx: RunContext):
         await ctx.emit(TraceEvent(node=name, type="node_started", title=f"{name}: started"))
         t0 = time.perf_counter()
         update = await fn(dict(state), ctx)
+        for note in ctx.model_notes():
+            await ctx.emit(
+                TraceEvent(node=name, type="note", title="Model setting dropped", detail=note)
+            )
         new_queries = ctx.tools.drain_queries()
         if new_queries:
             update["queries"] = new_queries
@@ -124,10 +128,12 @@ class GraphEngine:
         *,
         blind: bool = False,
         keep_states: int = 64,
+        analyses_override: list[str] | None = None,
     ) -> None:
         self._client = client
         self._model_factory = model_factory or get_chat_model
         self.blind = blind
+        self.analyses_override = analyses_override
         self._keep = keep_states
         self._states: OrderedDict[str, AgentState] = OrderedDict()
 
@@ -149,7 +155,13 @@ class GraphEngine:
             self._states.popitem(last=False)
 
     async def run(self, handle: RunHandle, text: str) -> None:
-        state = initial_state(handle.run_id, handle.result.mode, text, blind=self.blind)
+        state = initial_state(
+            handle.run_id,
+            handle.result.mode,
+            text,
+            blind=self.blind,
+            analyses_override=self.analyses_override,
+        )
         await self._execute(handle, state, "extract", "Run started", query_offset=0)
 
     async def followup(self, handle: RunHandle, question: str) -> None:

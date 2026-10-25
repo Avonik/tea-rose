@@ -260,3 +260,19 @@ def test_old_v1_record_without_v2_fields_still_describes() -> None:
     assert v1.senior_to_junior_censored is False and v1.symmetric_affinity_ratio is None
     lines = describe_evidence(Evidence(overlap=v1), resolved_pair())["overlap"]
     assert "counted as last" in lines[0]
+
+
+def test_partial_stand_ins_mean_is_stated() -> None:
+    ev = overlap().model_copy(
+        update={
+            "notes": [
+                "senior->junior: mean over 2 of 3 stand-ins; 1 beyond the 150 strongest (ids: C3)."
+            ]
+        }
+    )
+    s2j = describe_evidence(Evidence(overlap=ev), proxied_resolution())["overlap"][0]
+    assert s2j.endswith(
+        "rank 3 of 13 on average (85th percentile); mean over 2 of 3 stand-ins; 1 beyond the "
+        "150 strongest."
+    )
+    assert "C3" not in s2j

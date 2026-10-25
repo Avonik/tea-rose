@@ -8,6 +8,8 @@ number has at most 2 decimals.
 
 from __future__ import annotations
 
+import re
+
 from tearose.schemas import (
     BridgingEvidence,
     Evidence,
@@ -165,14 +167,64 @@ def _direction(p: _Parties, seed: str, target: str, ev: OverlapEvidence) -> list
             f"Among {size} {universe}, ranked by affinity to {seed_txt}, {who} {verb} {how} "
             f"({pct_text(pct)})."
         )
+    partial = _partial_note(ev.notes, f"{seed}->{target}") if plural else None
+    if partial:
+        out = f"{out[:-1]}; {partial}."
     if ratio_txt:
         out += f" {'Mean affinity' if plural else 'Affinity'} {ratio_txt}."
     return [out, *_small(size)]
 
 
+_PARTIAL = re.compile(r"mean over \d+ of \d+ stand-ins; \d+ [^(.]+?(?= \(ids:|\.$)")
+
+
+def _partial_note(notes: list[str], label: str) -> str | None:
+    """'mean over 2 of 3 stand-ins; 1 beyond the 150 strongest' from the scoring notes."""
+    for n in notes:
+        if n.startswith(f"{label}: "):
+            m = _PARTIAL.search(n)
+            if m:
+                return m.group(0)
+    return None
+
+
+_SOURCE_PHRASE = {
+    "agent": "chosen by the agent",
+    "mixed": "chosen by the agent, topped up by code by popularity",
+    "rule": "picked by code by popularity",
+}
+
+
+def describe_stand_ins(p: _Parties) -> list[str]:
+    """'Stand-ins for X: A, B, C (chosen by the agent: <rationale>)' per proxied side."""
+    out: list[str] = []
+    for side in ("senior", "junior"):
+        proxy = p.proxy(side)
+        if proxy is None:
+            continue
+        how = _SOURCE_PHRASE.get(proxy.comparator_source or "", "stand-in brands")
+        why = (proxy.comparator_rationale or "").strip().rstrip(".")
+        detail = f"{how}: {why}" if why else how
+        out.append(
+            f"Stand-ins for {p.name(side)}: {', '.join(proxy.comparator_brand_names)} ({detail})."
+        )
+    return out
+
+
+def _overlap_skip(p: _Parties) -> list[str]:
+    """Why overlap was skipped, when the resolve agent judged a stand-in category too far."""
+    if p.res is None:
+        return []
+    return [
+        f"Overlap: not measured; the stand-in category for {p.name(x.side)} is too far from its "
+        f"goods to compare audiences ({(x.fit_reason or '').strip().rstrip('.')})."
+        for x in p.res.overlap_blocked()
+    ]
+
+
 def describe_overlap(ev: OverlapEvidence | None, p: _Parties) -> list[str]:
     if ev is None:
-        return ["Overlap: not measured in this run."]
+        return _overlap_skip(p) or ["Overlap: not measured in this run."]
     out = _direction(p, "senior", "junior", ev)
     out += _direction(p, "junior", "senior", ev)
     both = [
@@ -352,11 +404,14 @@ def describe_evidence(
     resolution: Resolution | None,
     names: dict[str, str] | None = None,
 ) -> dict[str, list[str]]:
-    """Exact fact sentences per analysis: keys overlap, bridging, fame, zone. `names`
+    """Exact fact sentences per analysis: keys overlap, bridging, fame, zone (preceded by
+    stand_ins when a side is proxied). `names`
     ({side: display name}) overrides the resolution's names, e.g. the document's spelling."""
     ev = evidence or Evidence()
     p = _Parties(resolution, names)
+    stand_ins = describe_stand_ins(p)
     return {
+        **({"stand_ins": stand_ins} if stand_ins else {}),
         "overlap": describe_overlap(ev.overlap, p),
         "bridging": describe_bridging(ev.bridging, p),
         "fame": describe_fame(ev.fame, p),

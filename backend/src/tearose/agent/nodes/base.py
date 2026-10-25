@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cache
 from pathlib import Path
 from typing import Any
@@ -14,7 +14,7 @@ from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel
 
-from tearose.agent.llm import ModelFactory
+from tearose.agent.llm import ModelFactory, drain_model_notes
 from tearose.agent.tools import Emit, ToolContext, dumps
 from tearose.qloo.client import QlooClient
 from tearose.schemas import TraceEvent
@@ -30,9 +30,17 @@ class RunContext:
     model_factory: ModelFactory
     emit: Emit
     tools: ToolContext
+    models: list[BaseChatModel] = field(default_factory=list)
 
     def model(self, strong: bool = False) -> BaseChatModel:
-        return self.model_factory(strong)
+        m = self.model_factory(strong)
+        if not any(x is m for x in self.models):
+            self.models.append(m)
+        return m
+
+    def model_notes(self) -> list[str]:
+        """Trace notes the models queued since the last call (reasoning_effort fallback)."""
+        return [n for m in self.models for n in drain_model_notes(m)]
 
 
 class NodeEvents:

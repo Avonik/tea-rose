@@ -20,10 +20,13 @@ Per mapping row:
   fallbacks), plus `error` when the structured decision or the node failed. A failure never
   aborts the run: the node's code fallbacks apply, or the case is recorded as unresolved.
 The same-entity guard (both sides on one entity -> junior miss) is the node's own guard.
-Scoring arithmetic stays in code (score_step); a proxied side is seeded with the agent's
-comparators, as the product's fetch node does (the node itself fills them by the shared code
-rule, scoring/comparators.py, when the model kept fewer than 2; score_step applies the rule only
-when the record still has none).
+Scoring arithmetic stays in code (score_step); a proxied side is seeded with the node's
+stand-ins, as the product's fetch node does. The node builds a shortlist in code (brands of
+the chosen category seeded by the other side, opponent removed) and the agent picks 3 with a
+reason and decides `measure_overlap` with a `fit_reason`; all of it is recorded per side
+(`stand_in_candidates`, `comparator_*`, `measure_overlap`, `fit_reason`). score_step applies
+the code rule itself only when the record has no stand-ins, and excludes a case from the
+overlap metrics when the agent set `measure_overlap` False ("agent: category too far").
 """
 
 from __future__ import annotations
@@ -252,9 +255,13 @@ def _side_record(
             "comparator_entity_names": proxy.comparator_brand_names,
             "comparator_popularity": [_popularity(tc, c) for c in proxy.comparator_brand_ids],
             "comparator_source": proxy.comparator_source,
+            "stand_in_candidates": proxy.stand_in_candidates,
+            "comparator_rationale": proxy.comparator_rationale,
+            "measure_overlap": proxy.measure_overlap,
+            "fit_reason": proxy.fit_reason,
             "rationale": proxy.rationale,
-            "rule": "agent (resolve node; with fewer than 2 kept, the node fills up to 3 by the "
-            "shared code rule); score_step seeds with these comparators",
+            "rule": "agent picks from a code-built shortlist (resolve node; fewer than 2 valid "
+            "picks are topped up by popularity); score_step seeds with these stand-ins",
         }
         if proxy.chosen_tag_ids:
             rec["status"] = "proxy"
@@ -301,6 +308,7 @@ async def resolve_case_agent(
             raise
         error = f"resolve node failed: {exc!r}"[:400]
     llm_calls = counter.take()
+    model_notes = ctx.model_notes()
     failed = [e for e in events if e.type == "warning" and e.title.startswith(DECISION_FAILED)]
     if failed and error is None:
         error = f"{DECISION_FAILED}: {failed[-1].detail or ''}"[:400]
@@ -316,9 +324,15 @@ async def resolve_case_agent(
     queries = [
         {**q.model_dump(mode="json"), "call": "agent:" + q.endpoint} for q in tc.queries
     ] + rec.take_queries()
-    notes = rec.take_notes() + [
-        f"{e.title}" + (f" ({e.detail})" if e.detail else "") for e in events if e.type == "warning"
-    ]
+    notes = (
+        rec.take_notes()
+        + [
+            f"{e.title}" + (f" ({e.detail})" if e.detail else "")
+            for e in events
+            if e.type == "warning"
+        ]
+        + model_notes
+    )
     return {
         "case_id": row["case_id"],
         "resolver": "agent",

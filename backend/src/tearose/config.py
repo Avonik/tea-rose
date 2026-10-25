@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     llm_model: str = "gpt-5-mini"
     llm_model_strong: str | None = None  # optional stronger model for the interpret step
     llm_temperature: float | None = None  # None = provider default (gpt-5 rejects explicit values)
+    # reasoning models: low | medium | high, sent as reasoning_effort; None = provider default.
+    # A provider that rejects the parameter gets one retry without it (noted in the trace).
+    llm_reasoning_effort: str | None = None
 
     # --- Access control and budget protection -----------------------------------
     passcode: str = ""  # live mode is disabled when empty

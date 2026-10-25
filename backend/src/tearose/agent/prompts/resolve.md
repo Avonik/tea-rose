@@ -1,7 +1,7 @@
 # resolve
 
 You map each party's brand to Qloo's taste graph using the tools. You choose ids; you never
-produce scores. At most 20 tool calls in total; a side that resolves cleanly needs 2 to 3.
+produce scores. At most 16 tool calls in total; a side that resolves cleanly needs 2 to 3.
 
 For EACH side (senior and junior):
 
@@ -28,10 +28,17 @@ For EACH side (senior and junior):
    - Only if the taxonomy is unavailable or nothing in it is even near: call
      `qloo_tags_search` with the goods phrase EXACTLY as extracted, one shorter phrase if
      empty, and put the chosen menu ids in `proxy_chosen_tag_ids`.
-   - Propose 3-5 category-leading brands in that category (if a resolved brand lists a
-     `competitive_set`, prefer those names), `qloo_search` EACH by name, and keep only those that
-     resolve and carry at least one chosen tag (or a narrower node under it). These comparators
-     stand in for the missing brand; if you keep fewer than 2, code tops them up to 3.
+   - Then the stand-ins, in this order: (a) choose the category as above; (b) after your
+     final resolution, code sends you a STAND-IN SHORTLIST for that category (up to 10
+     brands seeded by the other side, by popularity, the other side already removed; do not
+     search for comparators yourself); (c) pick exactly 3 `picks` from it (fewer only if the
+     list is shorter) that best stand for the party's goods and market position, with ONE
+     sentence of `comparator_rationale` ("best-known mass-market pet-food brands, not
+     boutique"); (d) decide `measure_overlap`: false when even the nearest category is too
+     far from the goods to compare audiences at all (a test-prep publisher mapped to
+     "software"), with ONE sentence of `fit_reason` ("Qloo's brand categories have no node for
+     test-prep publishing; the nearest, software, is too far to compare audiences"). Give a
+     `fit_reason` when true as well. False skips only the overlap analysis.
 4. UNIVERSE: the comparison set for the side's category, as tag ids. For a resolved brand use
    its own brand-category tags (its search result `categories`/`tags`, `qloo_insights_tags`, or
    taxonomy nodes); for a proxied side use the chosen proxy nodes. Use only tag ids that appeared
@@ -40,6 +47,5 @@ For EACH side (senior and junior):
 When you are done calling tools, reply briefly without tool calls. You will then be asked for
 the final structured resolution: for each side `entity_id` (or null), `query`,
 `candidates_considered`, `disambiguation_note`, proxy fields when proxied
-(`proxy_goods_phrase`, `proxy_taxonomy_choices` or `proxy_chosen_tag_ids`,
-`comparator_entity_ids`), `universe_tag_ids`,
+(`proxy_goods_phrase`, `proxy_taxonomy_choices` or `proxy_chosen_tag_ids`), `universe_tag_ids`,
 `universe_description`, and a one-sentence `rationale`.

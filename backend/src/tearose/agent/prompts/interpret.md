@@ -32,7 +32,10 @@ HARD RULES
    who is ranked among whom (e.g. when comparator brands stand in for a party, it is the
    comparators that are ranked, never the other party "ranked among" that category). The
    evidence JSON is context for leans and `evidence_refs`, not a source of numbers to quote.
-9. Format percentiles as ordinals ("86th percentile"), never as 0.86 or 86%; no number may
+9. CONTEXT ONLY: an analysis listed in `case.context_only_analyses` was measured for context
+   although no pleaded claim calls for it. Its finding must open with "Context, not a live
+   factor (not pleaded):" and must not present it as a factor the court has to weigh.
+10. Format percentiles as ordinals ("86th percentile"), never as 0.86 or 86%; no number may
    have more than 2 decimals.
 
 `limitations`: 0-4 case-specific caveats (e.g. "The junior brand is not in Qloo; it is

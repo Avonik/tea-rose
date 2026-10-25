@@ -10,9 +10,11 @@ Structured output goes through `ainvoke_structured`: native `.with_structured_ou
 from __future__ import annotations
 
 import json
+import logging
 import re
 import uuid
 from collections.abc import Callable, Sequence
+from functools import cache
 from typing import Any
 
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -23,11 +25,70 @@ from pydantic import BaseModel, Field
 
 ModelFactory = Callable[[bool], BaseChatModel]
 
+log = logging.getLogger(__name__)
 
-def get_chat_model(strong: bool = False) -> BaseChatModel:
-    """The production model. `strong=True` uses `llm_model_strong` when configured."""
+
+def reasoning_rejected(exc: BaseException) -> bool:
+    """A provider error that plausibly rejects the reasoning_effort parameter."""
+    status = getattr(exc, "status_code", None) or getattr(exc, "status", None)
+    return status in (400, 422) or "reasoning" in str(exc).lower()
+
+
+@cache
+def _fallback_chat_class() -> type[BaseChatModel]:
+    """ChatOpenAI that drops `reasoning_effort` once when the provider rejects it: the call is
+    retried without it, the model keeps it off, and a note is queued for the run trace."""
     from langchain_openai import ChatOpenAI
 
+    class ReasoningFallbackChatOpenAI(ChatOpenAI):
+        fallback_notes: list[str] = Field(default_factory=list, exclude=True)
+
+        def _drop_reasoning(self, exc: BaseException) -> bool:
+            if self.reasoning_effort is None or not reasoning_rejected(exc):
+                return False
+            note = (
+                f"The model provider rejected reasoning_effort={self.reasoning_effort!r} "
+                f"({type(exc).__name__}: {str(exc)[:160]}); retried without it."
+            )
+            log.warning(note)
+            self.fallback_notes.append(note)
+            self.reasoning_effort = None
+            return True
+
+        async def _agenerate(self, messages: Any, stop: Any = None, run_manager: Any = None,
+                             **kwargs: Any) -> ChatResult:  # fmt: skip
+            try:
+                return await super()._agenerate(messages, stop, run_manager, **kwargs)
+            except Exception as exc:
+                if not self._drop_reasoning(exc):
+                    raise
+            return await super()._agenerate(messages, stop, run_manager, **kwargs)
+
+        def _generate(self, messages: Any, stop: Any = None, run_manager: Any = None,
+                      **kwargs: Any) -> ChatResult:  # fmt: skip
+            try:
+                return super()._generate(messages, stop, run_manager, **kwargs)
+            except Exception as exc:
+                if not self._drop_reasoning(exc):
+                    raise
+            return super()._generate(messages, stop, run_manager, **kwargs)
+
+    return ReasoningFallbackChatOpenAI
+
+
+def drain_model_notes(model: Any) -> list[str]:
+    """Notes a model queued for the trace (reasoning_effort fallback), cleared on read."""
+    notes = getattr(model, "fallback_notes", None)
+    if not isinstance(notes, list) or not notes:
+        return []
+    out = list(notes)
+    notes.clear()
+    return out
+
+
+def get_chat_model(strong: bool = False) -> BaseChatModel:
+    """The production model. `strong=True` uses `llm_model_strong` when configured;
+    `llm_reasoning_effort` is passed as `reasoning_effort` when set."""
     from tearose.config import get_settings
 
     s = get_settings()
@@ -35,7 +96,9 @@ def get_chat_model(strong: bool = False) -> BaseChatModel:
     kwargs: dict[str, object] = {}
     if s.llm_temperature is not None:  # gpt-5 family rejects any explicit temperature
         kwargs["temperature"] = s.llm_temperature
-    return ChatOpenAI(
+    if s.llm_reasoning_effort:
+        kwargs["reasoning_effort"] = s.llm_reasoning_effort
+    return _fallback_chat_class()(
         model=model,
         api_key=s.llm_api_key or None,
         base_url=s.llm_base_url,

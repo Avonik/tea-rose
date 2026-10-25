@@ -68,8 +68,8 @@ Nodes, in order:
 | Node | Type | Input → output |
 | --- | --- | --- |
 | `extract` | 1 LLM call, structured output `Extraction` | document text → parties, marks, goods (verbatim), channels, claims |
-| `route` | 1 LLM call, structured output `RoutingDecision` (with deterministic guardrails: dilution pleaded ⇒ fame; priority ⇒ zone; confusion ⇒ overlap + bridging) | extraction → analyses to run |
-| `resolve` | tool-calling loop (search, tags_search, insights_entities for comparators) + brand taxonomy in the prompt | parties → `Resolution` incl. proxies and universes |
+| `route` | 1 LLM call, structured output `RoutingDecision` (with deterministic guardrails: dilution pleaded ⇒ fame; priority ⇒ zone; confusion ⇒ overlap + bridging). Full-coverage runs (`analyses_override`, showcase `--all-analyses`) add every analysis; unpleaded ones go to `RoutingDecision.context_only` with the rationale "Measured for context: not pleaded", and `interpret` opens their findings with "Context, not a live factor (not pleaded):" | extraction → analyses to run |
+| `resolve` | tool-calling loop (search, tags_search; at most 16 calls) + brand taxonomy in the prompt; then, per proxied side, 1 structured call `StandInDecision`: the agent picks 3 stand-ins from a code-built shortlist with a reason and decides `measure_overlap` | parties → `Resolution` incl. proxies (stand-ins, `comparator_rationale`, `measure_overlap`, `fit_reason`) and universes |
 | `fetch` | tool-calling loop; the agentic core; retries wider queries on empty results; records give-ups | resolution + routing → `raw` data |
 | `score` | pure Python, no LLM | raw → `Evidence` |
 | `interpret` | 1 LLM call (optionally stronger model), structured output `list[FactorFinding]` + limitations | evidence → factor findings; blinded names in eval mode |
@@ -100,10 +100,31 @@ writes it; it never names an outcome. Runs stored before the field existed load 
   memo limitations then say "nearest category, no exact match in Qloo's brand taxonomy"). The
   agent sees the whole tree plus code suggestions and returns `proxy_taxonomy_choices`; code
   validates ids and falls back to the mapper, then to free-text `/v2/tags`.
-- **Comparators.** The model's searched brands count if they carry a chosen tag or a descendant
-  of it. With fewer than 2 kept, code fills up to 3 by the back-test's rule
-  (`scoring/comparators.py`: brands seeded by the other side, filtered to the proxy tags, top 3
-  by popularity); `ProxyResolution.comparator_source` records `agent` / `rule` / `mixed`.
+- **Comparators (stand-ins): the agent decides from a code-built shortlist.** Flow per proxied
+  side: the agent chooses the category (above) → code builds the shortlist
+  (`resolve.stand_in_shortlist`: up to 10 brands from `/v2/insights` `filter.type=brand`,
+  `filter.tags=<chosen tags>`, seeded by the other side's entity, or its stand-ins when it is
+  proxied too, ordered by popularity; each with entity id, name, popularity, description,
+  disambiguation and brand-genre categories; the other side's own brand removed by entity id and
+  by normalised name before the model sees it; nothing resolved on the other side ⇒ empty, noted)
+  → one structured call `StandInDecision`: the agent picks exactly 3 (fewer only if the list is
+  shorter) with a one-sentence `comparator_rationale`, and decides `measure_overlap` with a
+  one-sentence `fit_reason` → code validates: picks must be on the shortlist; fewer than 2 valid
+  picks are topped up from the shortlist by popularity. `ProxyResolution` records
+  `stand_in_candidates` (the shortlist), `comparator_brand_ids/names`, `comparator_source`
+  (`agent` = all picks the model's, `mixed` = topped up, `rule` = the model returned nothing
+  usable or failed), `comparator_rationale`, `measure_overlap` (default true) and `fit_reason`.
+  The facts carry "Stand-ins for <party>: A, B, C (chosen by the agent: <rationale>)".
+- **Fit decision (`measure_overlap`).** Code still labels the category fit (exact / partial /
+  nearest) and never overrules the agent's call. With `measure_overlap` false (e.g. a test-prep
+  publisher whose nearest node is "software"), `Resolution.overlap_blocked()` makes `fetch` skip
+  the overlap data (paging, target affinities, compare) and `score` leave `Evidence.overlap`
+  empty; the facts say "Overlap: not measured; ..." and the memo limitations carry `fit_reason`
+  verbatim. Bridging, fame and zone still run.
+- **Reasoning effort.** `LLM_REASONING_EFFORT` (low | medium | high; default unset) is passed to
+  `ChatOpenAI` as `reasoning_effort`. If the provider rejects it, the call is retried once
+  without it, the model keeps it off for the rest of the run, and the node's trace gets a note
+  ("Model setting dropped"); a run never dies on it.
 - **Universe of a resolved brand** (`scoring/universe.py`, shared by the agent's `resolve` node
   and the back-test). The brand's OWN `urn:tag:genre:brand` tags from its `/search` result (what
   the brand IS: a sneaker brand carries fashion, fashion:footwear, fashion:footwear:sneakers),
@@ -138,8 +159,10 @@ overlap direction and target, run after the paging.
   of the comparator brands). `percentile = 1 - (rank - 1) / universe_size`.
 - **Censoring (harness v2).** A target not in the scanned list (not within 150, or not in an
   exhausted list) has an unknown rank beyond the depth: `rank` and `percentile` are None and
-  `*_censored = true` (v1 counted it as rank 151, percentile 0). On the proxy path one missing
-  comparator censors the direction.
+  `*_censored = true` (v1 counted it as rank 151, percentile 0). On the proxy path the rank is the mean over the
+  stand-ins FOUND when at least 2 of 3 are found (note "mean over 2 of 3 stand-ins; 1 beyond the
+  150 strongest"); only with fewer than 2 found is the direction censored. The affinity ratio
+  still uses all looked-up stand-ins.
 - **Direct target affinity and affinity ratio (harness v2).** Per direction and target one extra
   call: `/v2/insights` with the same `filter.type`, `signal.interests.entities` and `filter.tags`
   plus `filter.results.entities=<target>` returns that one entity with its `query.affinity`,

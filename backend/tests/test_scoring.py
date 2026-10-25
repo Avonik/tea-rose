@@ -222,7 +222,7 @@ def test_overlap_ratio_is_clipped_and_needs_a_top_affinity():
     assert ev.senior_to_junior_affinity_ratio is None and ev.symmetric_affinity_ratio is None
 
 
-def test_overlap_proxy_three_comparators_one_missing_is_censored():
+def test_overlap_proxy_two_of_three_found_uses_mean_over_found():
     p = peers(150, ids={2: "C1", 10: "C2"}).model_copy(
         update={"target_affinities": {"C1": 0.9, "C2": 0.8, "C3": 0.4}}
     )
@@ -232,13 +232,34 @@ def test_overlap_proxy_three_comparators_one_missing_is_censored():
         used_proxy_junior=True,
     )
     ev = overlap_evidence(raw)
-    assert ev.senior_to_junior_rank is None and ev.senior_to_junior_censored is True
-    assert ev.symmetric_percentile is None
-    assert ev.senior_to_junior_target_affinity == pytest.approx(0.7)  # mean over comparators
+    assert ev.senior_to_junior_censored is False
+    assert ev.senior_to_junior_rank == 6  # mean of ranks 2 and 10; C3 beyond the depth
+    assert ev.senior_to_junior_percentile == pytest.approx(1 - 5 / 150)
+    assert ev.symmetric_percentile == pytest.approx(1 - 5 / 150)
+    # the affinity ratio still uses all three looked-up stand-ins
+    assert ev.senior_to_junior_target_affinity == pytest.approx(0.7)
     assert ev.senior_to_junior_affinity_ratio == pytest.approx(0.7 / p.entities[0].affinity)
     assert ev.used_proxy is True
-    assert any("C3" in n and "1 of 3" in n for n in ev.notes)
-    assert any("mean over 3 comparator" in n for n in ev.notes)
+    assert any(
+        "mean over 2 of 3 stand-ins; 1 beyond the 150 strongest" in n and "C3" in n
+        for n in ev.notes
+    )
+
+
+def test_overlap_proxy_one_of_three_found_is_censored():
+    p = peers(150, ids={2: "C1"}).model_copy(
+        update={"target_affinities": {"C1": 0.9, "C2": 0.8, "C3": 0.4}}
+    )
+    raw = RawData(
+        senior_seed_junior_universe=p,
+        junior_target_entity_ids=["C1", "C2", "C3"],
+        used_proxy_junior=True,
+    )
+    ev = overlap_evidence(raw)
+    assert ev.senior_to_junior_rank is None and ev.senior_to_junior_censored is True
+    assert ev.senior_to_junior_percentile is None and ev.symmetric_percentile is None
+    assert ev.senior_to_junior_affinity_ratio == pytest.approx(0.7 / p.entities[0].affinity)
+    assert any("2 of 3 target(s)" in n and "C2" in n and "C3" in n for n in ev.notes)
 
 
 def test_overlap_proxy_all_comparators_found_mean_rank():

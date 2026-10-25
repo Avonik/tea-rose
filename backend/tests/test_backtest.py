@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -578,9 +579,10 @@ async def test_resolve_agent_records_picks_and_continues_after_failure() -> None
     assert sen["rule_pick"]["entity_id"] == JD_ID and sen["agrees_with_rule"] is True
     assert (jun["status"], jun["entity_id"]) == ("proxy", None)
     assert jun["proxy"]["chosen_tag_ids"] == [PET_FOOD] and jun["proxy"]["fit"] == "nearest"
-    # the model kept no comparators: the node filled 3 by the shared code rule
+    # no StandInDecision scripted: the agent's pick failed, code picked 3 by popularity
     assert len(jun["proxy"]["comparator_entity_ids"]) == 3
     assert jun["proxy"]["comparator_source"] == "rule"
+    assert len(jun["proxy"]["stand_in_candidates"]) >= 3 and jun["proxy"]["measure_overlap"]
     assert None not in jun["proxy"]["comparator_popularity"]
     assert jun["universe"]["tag_ids"] == [PET_FOOD]
     assert jd["tool_calls"] == 2 and jd["llm_calls"] >= 2  # scripted structured calls bypass
@@ -620,7 +622,7 @@ async def test_resolve_agent_records_picks_and_continues_after_failure() -> None
     assert scores["resolver"] == "agent" and scores["model"] == "scripted-test"
     s1 = scores["cases"][0]
     assert s1["status"] == "scored" and s1["proxy_sides"] == ["junior"]
-    # the agent kept no comparators: the node filled them by the code rule, score_step reuses them
+    # the node's stand-ins (code fallback here) are reused by score_step
     assert s1["comparator_source"] == {"junior": "rule"}
     assert s1["comparators"]["junior"]["ids"] == jun["proxy"]["comparator_entity_ids"]
     assert not any("agent kept no comparators" in n for n in s1["notes"])
@@ -681,35 +683,69 @@ def test_cli_resolver_choice_and_version_check(
         main(["score", "--mapping", str(mapping), "--out", str(out)])
 
 
-async def test_score_uses_agent_comparators_when_agent_resolved() -> None:
-    barkbox = "FA4E0000-0000-4000-A000-000000000004"
+def _pick_last_three(messages: list[object]) -> dict[str, object]:
+    """Scripted StandInDecision: the 3 LEAST popular shortlist brands (so the test can tell the
+    agent's pick from the popularity rule)."""
+    text = "\n".join(str(getattr(m, "content", m)) for m in messages)
+    listed = text.split("STAND-IN SHORTLIST", 1)[1]
+    ids = re.findall(r'"entity_id": "([^"]+)"', listed)
+    return {"picks": ids[-3:], "comparator_rationale": "mass-market pet-food brands",
+            "measure_overlap": True, "fit_reason": "pet food is near dog toys"}  # fmt: skip
+
+
+async def test_score_records_agent_stand_ins_and_excludes_too_far() -> None:
     loop = [ai_tools(tool_call("qloo_search", query="Jack Daniel's"),
-                     tool_call("qloo_search", query="Bad Spaniels"),
-                     tool_call("qloo_search", query="BarkBox")), "done"]  # fmt: skip
+                     tool_call("qloo_search", query="Bad Spaniels")), "done"]  # fmt: skip
     decision = {
         "senior": _side(JD_ID),
-        "junior": _side(proxy_taxonomy_choices=[{"tag_id": PET_FOOD, "fit": "nearest"}],
-                        comparator_entity_ids=[barkbox]),
-    }  # fmt: skip
-    model = ScriptedChatModel(scripts={"resolve": loop, "ResolveDecision": [decision]})
+        "junior": _side(proxy_taxonomy_choices=[{"tag_id": PET_FOOD, "fit": "nearest"}]),
+    }
+    model = ScriptedChatModel(
+        scripts={
+            "resolve": loop,
+            "ResolveDecision": [decision],
+            "StandInDecision": [_pick_last_three],
+        }  # fmt: skip
+    )
     rec = Recorder(FixtureClient(get_settings().fixtures_dir), live=False)
     doc = await resolve.run(rec, [_agent_rows()[0]], "fixture", "sha", resolver="agent",
                             model_factory=lambda strong=False: model)  # fmt: skip
     proxy = doc["cases"][0]["junior"]["proxy"]
-    # one agent comparator; the node topped it up to 3 by the code rule
-    assert proxy["comparator_entity_ids"][0] == barkbox
-    assert len(proxy["comparator_entity_ids"]) == 3 and proxy["comparator_source"] == "mixed"
-    assert proxy["comparator_popularity"][0] == pytest.approx(0.9312)
+    shortlist = [c["entity_id"] for c in proxy["stand_in_candidates"]]
+    assert len(shortlist) > 3 and JD_ID not in shortlist
+    # the agent's picks (not the 3 most popular), its reason and its fit call are recorded
+    assert proxy["comparator_entity_ids"] == shortlist[-3:]
+    assert proxy["comparator_source"] == "agent"
+    assert proxy["comparator_rationale"] == "mass-market pet-food brands"
+    assert proxy["measure_overlap"] is True and proxy["fit_reason"] == "pet food is near dog toys"
+    assert None not in proxy["comparator_popularity"]
 
     scores = await score_step.run(rec, doc)
     s = scores["cases"][0]
-    assert s["comparator_source"] == {"junior": "mixed"}
-    comps = s["comparators"]["junior"]
-    assert comps["source"] == "mixed" and comps["ids"] == proxy["comparator_entity_ids"]
-    assert comps["names"][0] == "BarkBox"
-    assert not any("code rule used" in n for n in s["notes"])
-    assert barkbox in {p["filter.results.entities"] for p in _params(s, "target_affinity")}
+    assert s["status"] == "scored" and s["overlap_exclusion"] is None
+    assert s["comparator_source"] == {"junior": "agent"}
+    assert s["comparators"]["junior"]["ids"] == proxy["comparator_entity_ids"]
+    st = s["stand_ins"]["junior"]
+    assert [c["entity_id"] for c in st["shortlist"]] == shortlist
+    assert st["comparator_rationale"] == "mass-market pet-food brands"
+    assert st["measure_overlap"] is True and st["picks"] == proxy["comparator_entity_names"]
+    targets = {p["filter.results.entities"] for p in _params(s, "target_affinity")}
+    assert set(proxy["comparator_entity_ids"]) <= targets
     assert "agent resolver" in scores["comparator_rule"]
+
+    # the agent judged the category too far: excluded from the overlap metrics, counted
+    far = json.loads(json.dumps(doc))
+    far["cases"][0]["junior"]["proxy"].update(measure_overlap=False, fit_reason="too far")
+    far_scores = await score_step.run(rec, far)
+    sf = far_scores["cases"][0]
+    assert sf["status"] == "excluded" and sf["overlap_exclusion"] == "agent: category too far"
+    assert sf["symmetric_percentile"] is None and sf["senior_to_junior"] is None
+    assert not _params(sf, "target_affinity")
+    assert sf["breadth_score"] is not None  # fame still runs
+    assert any("too far" in n for n in sf["notes"])
+    assert score_step.summarize(far_scores)["excluded_agent_too_far"] == 1
+    built = report.build([_mapping_row()], far_scores)
+    assert built["relatedness"]["excluded"] == {"agent: category too far": 1}
 
 
 def test_cli_resolve_only_merges_and_refuses_mismatch(

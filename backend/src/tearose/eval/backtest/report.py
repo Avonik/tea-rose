@@ -232,6 +232,8 @@ def build(mapping: list[dict[str, str]], scores: dict[str, Any]) -> dict[str, An
             bump("not_resolved (not in scores.json)")
         elif s["status"] == "unresolved":
             bump("unresolved")
+        elif s.get("overlap_exclusion"):
+            bump(s["overlap_exclusion"])
         elif not _has_signal(r):
             bump("no_overlap (no direction computable)")
         else:
