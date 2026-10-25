@@ -1,15 +1,10 @@
 {
-  "note": "inputs are filed complaints; opinions are used only for the court-outcome reveal",
+  "note": "inputs are filed complaints; opinions are used only for the court-outcome reveal Only cases with full question coverage are listed (owner's rule, 2026-10-25); bad_spaniels and adidas_thom_browne were computed but dropped: the agent could not measure audience overlap for them.",
   "cases": [
     {
       "slug": "vans_mschf",
       "sample": "vans_mschf_complaint",
       "title": "Vans, Inc. v. MSCHF Product Studio, Inc. (Wavy Baby), E.D.N.Y. 2022 / 2d Cir. 2023"
-    },
-    {
-      "slug": "bad_spaniels",
-      "sample": "bad_spaniels_complaint",
-      "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC (Bad Spaniels), D. Ariz. 2014 / U.S. 2023"
     },
     {
       "slug": "adidas_skechers",
@@ -25,11 +20,6 @@
       "slug": "vans_walmart",
       "sample": "vans_walmart_complaint",
       "title": "Vans, Inc. v. Walmart, Inc. (Side Stripe), C.D. Cal. 2021 / 2022"
-    },
-    {
-      "slug": "adidas_thom_browne",
-      "sample": "adidas_thom_browne_complaint",
-      "title": "adidas America, Inc. v. Thom Browne, Inc. (Three-Stripe Mark), S.D.N.Y. 2021 / 2023"
     },
     {
       "slug": "nike_stockx",
