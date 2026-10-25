@@ -1,7 +1,8 @@
 /**
- * Hand-written context for the showcase cases (current and former):what the court decided and what the taste
- * data shows. Plain English, brand names instead of "senior"/"junior". Facts verified against the
- * opinions on 2026-10-24/25 (see backend/eval/cases_candidates.csv for sources). Live runs have no
+ * Hand-written context for the showcase cases (current and former): what the court decided and what the taste
+ * data shows. Plain English, brand names instead of "senior"/"junior". The agent's input is always the
+ * filed complaint; opinions and the sources below are used only for the court line. Facts verified on
+ * 2026-10-24/25 (see backend/eval/cases_candidates.csv and each entry's `source`). Live runs have no
  * entry here and render without the court line.
  */
 export type CaseStory = {
@@ -17,6 +18,8 @@ export type CaseStory = {
   twist?: string
   /** Where the dispute ended, for the header chip. */
   outcome: 'older brand won' | 'newcomer won' | 'mixed' | 'settled'
+  /** Where the court sentence was verified (opinion, docket entry or reliable report). */
+  source?: string
 }
 
 export const CASE_STORIES: Record<string, CaseStory> = {
@@ -25,9 +28,10 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     brands: ['Jack Daniel’s', 'Bad Spaniels dog toy'],
     court:
       'The court found that whiskey drinkers and pet-product buyers do overlap, and the dog toy still won: a parody, no confusion.',
-    data: 'The taste data supports Jack Daniel’s on two of three confusion factors and on fame, and is silent on parody.',
+    data: 'DATA PENDING: computed after the run',
     twist: 'Overlap was there. It did not decide the case.',
     outcome: 'newcomer won',
+    source: 'https://www.govinfo.gov/content/pkg/USCOURTS-azd-2_14-cv-02057/pdf/USCOURTS-azd-2_14-cv-02057-3.pdf',
   },
   charbucks: {
     short: 'Starbucks v. Charbucks',
@@ -58,9 +62,10 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     short: 'Vans v. MSCHF',
     brands: ['Vans', 'Wavy Baby sneakers (MSCHF)'],
     court: 'The Second Circuit upheld the injunction: a distorted sneaker sold as a sneaker is not a protected parody.',
-    data: 'The taste data puts audience overlap at the 98th percentile and supports Vans on both confusion factors.',
+    data: 'DATA PENDING: computed after the run',
     twist: 'Same shoppers, same shelves, and the court agreed.',
     outcome: 'older brand won',
+    source: 'https://storage.courtlistener.com/pdf/2023/12/05/vans_inc._v._mschf_product_studio_inc..pdf',
   },
   gucci_guess: {
     short: 'Gucci v. Guess',
@@ -97,6 +102,7 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     data: 'DATA PENDING: computed after the run',
     twist: 'Same goods, same buyers, and still only half a win.',
     outcome: 'mixed',
+    source: 'https://static.case.law/f3d/890/cases/0747-01.json',
   },
   caterpillar_disney: {
     short: 'Caterpillar v. Disney',
@@ -107,6 +113,56 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     twist: 'A famous mark, but no shared customers.',
     outcome: 'newcomer won',
   },
+  hermes_rothschild: {
+    short: 'Hermès v. Rothschild',
+    brands: ['Hermès (Birkin)', 'MetaBirkins NFTs (Mason Rothschild)'],
+    court:
+      'A New York jury found in February 2023 that the MetaBirkins NFTs infringed and diluted the Birkin mark and awarded Hermès $133,000, and the judge refused a new trial and barred further sales.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'A handbag and a digital token, and the jury saw one brand.',
+    outcome: 'older brand won',
+    source: 'https://storage.courtlistener.com/recap/gov.uscourts.nysd.573363/gov.uscourts.nysd.573363.191.0.pdf',
+  },
+  vans_walmart: {
+    short: 'Vans v. Walmart',
+    brands: ['Vans', 'Walmart side-stripe sneakers'],
+    court:
+      'The court granted Vans a preliminary injunction in March 2022, finding its side stripe and shoe designs valid and shoppers likely to be confused, and stopped Walmart selling the look-alike sneakers while the case went on.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Walmart conceded the shoes were related; the fight was over the stripe.',
+    outcome: 'older brand won',
+    source: 'https://storage.courtlistener.com/recap/gov.uscourts.cacd.836756/gov.uscourts.cacd.836756.65.0.pdf',
+  },
+  adidas_thom_browne: {
+    short: 'adidas v. Thom Browne',
+    brands: ['adidas', 'Thom Browne'],
+    court:
+      'A New York jury cleared Thom Browne of infringing or diluting the three stripes in January 2023; the Second Circuit upheld the verdict in 2024 and in April 2026 affirmed the refusal of a new trial.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Stripes on sportswear, stripes on luxury tailoring, and the jury saw two markets.',
+    outcome: 'newcomer won',
+    source: 'https://storage.courtlistener.com/pdf/2026/04/29/adidas_america_inc._v._thom_browne_inc..pdf',
+  },
+  nike_stockx: {
+    short: 'Nike v. StockX',
+    brands: ['Nike', 'StockX Vault NFTs'],
+    court:
+      'In March 2025 the court granted Nike summary judgment that StockX sold counterfeit Nike shoes but denied it on the other claims; the NFT trademark claims were headed for a jury when the parties settled in August 2025.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Sued over NFTs, won on fake shoes.',
+    outcome: 'settled',
+    source: 'https://www.thefashionlaw.com/nike-v-stockx-a-timeline-behind-the-trademark-lawsuit/',
+  },
+  bang_monster: {
+    short: 'Bang v. Monster',
+    brands: ['Bang (VPX)', 'Reign (Monster)'],
+    court:
+      'After a bench trial the court ruled for Monster: both are energy drinks for the same buyers, but Bang’s can design had no secondary meaning and shoppers were unlikely to confuse Reign with Bang.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Same drink, same buyers, and still no confusion.',
+    outcome: 'newcomer won',
+    source: 'https://www.govinfo.gov/content/pkg/USCOURTS-flsd-0_19-cv-60809/pdf/USCOURTS-flsd-0_19-cv-60809-4.pdf',
+  },
 }
 
 export function caseStory(slug: string | undefined | null): CaseStory | undefined {
@@ -115,7 +171,6 @@ export function caseStory(slug: string | undefined | null): CaseStory | undefine
 
 /** Display names for sample documents that are not one of the showcase cases. */
 const SAMPLE_NAMES: Record<string, string> = {
-  adidas_thom_browne: 'Adidas v. Thom Browne',
   taco_tuesday: 'Taco Tuesday',
   jack_daniels_v_vip: 'Jack Daniel’s v. VIP Products',
 }

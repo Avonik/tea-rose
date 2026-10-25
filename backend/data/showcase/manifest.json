@@ -1,39 +1,45 @@
 {
+  "note": "inputs are filed complaints; opinions are used only for the court-outcome reveal",
   "cases": [
     {
       "slug": "vans_mschf",
-      "sample": "vans_mschf_opinion",
-      "title": "Vans, Inc. v. MSCHF Product Studio, Inc. (Wavy Baby), 2d Cir. 2023"
+      "sample": "vans_mschf_complaint",
+      "title": "Vans, Inc. v. MSCHF Product Studio, Inc. (Wavy Baby), E.D.N.Y. 2022 / 2d Cir. 2023"
     },
     {
       "slug": "bad_spaniels",
       "sample": "bad_spaniels_complaint",
-      "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC (Bad Spaniels), 2023"
-    },
-    {
-      "slug": "gucci_guess",
-      "sample": "gucci_guess_opinion",
-      "title": "Gucci America, Inc. v. Guess?, Inc. (Quattro G), S.D.N.Y. 2012"
-    },
-    {
-      "slug": "tiffany_costco",
-      "sample": "tiffany_costco_opinion",
-      "title": "Tiffany & Co. v. Costco Wholesale Corp. (Tiffany setting), 2d Cir. 2020"
-    },
-    {
-      "slug": "makers_mark_cuervo",
-      "sample": "makers_mark_cuervo_opinion",
-      "title": "Maker's Mark Distillery, Inc. v. Diageo North America, Inc. (red dripping wax), 6th Cir. 2012"
+      "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC (Bad Spaniels), D. Ariz. 2014 / U.S. 2023"
     },
     {
       "slug": "adidas_skechers",
-      "sample": "adidas_skechers_opinion",
-      "title": "adidas America, Inc. v. Skechers USA, Inc. (Stan Smith / Onix), 9th Cir. 2018"
+      "sample": "adidas_skechers_complaint",
+      "title": "adidas America, Inc. v. Skechers USA, Inc. (Stan Smith / Onix), D. Or. 2015 / 9th Cir. 2018"
     },
     {
-      "slug": "caterpillar_disney",
-      "sample": "caterpillar_disney_opinion",
-      "title": "Caterpillar Inc. v. Walt Disney Co. (George of the Jungle 2), C.D. Ill. 2003"
+      "slug": "hermes_rothschild",
+      "sample": "hermes_rothschild_complaint",
+      "title": "Hermès International v. Rothschild (MetaBirkins), S.D.N.Y. 2022 / 2023"
+    },
+    {
+      "slug": "vans_walmart",
+      "sample": "vans_walmart_complaint",
+      "title": "Vans, Inc. v. Walmart, Inc. (Side Stripe), C.D. Cal. 2021 / 2022"
+    },
+    {
+      "slug": "adidas_thom_browne",
+      "sample": "adidas_thom_browne_complaint",
+      "title": "adidas America, Inc. v. Thom Browne, Inc. (Three-Stripe Mark), S.D.N.Y. 2021 / 2023"
+    },
+    {
+      "slug": "nike_stockx",
+      "sample": "nike_stockx_complaint",
+      "title": "Nike, Inc. v. StockX LLC (Vault NFTs), S.D.N.Y. 2022 / 2025"
+    },
+    {
+      "slug": "bang_monster",
+      "sample": "bang_monster_complaint",
+      "title": "Vital Pharmaceuticals, Inc. (Bang) v. Monster Energy Co. (Reign), S.D. Fla. 2019 / 2021"
     }
   ]
 }

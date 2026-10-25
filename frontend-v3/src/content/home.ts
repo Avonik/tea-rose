@@ -106,20 +106,21 @@ export const BACKTEST = {
   link: 'See the full report, including the two times we changed our method and why',
 }
 
-/** The seven showcase fights, in manifest order (backend/data/showcase/manifest.json). */
+/** The eight showcase fights, in manifest order (backend/data/showcase/manifest.json). */
 export const CASE_ORDER = [
   'vans_mschf',
   'bad_spaniels',
-  'gucci_guess',
-  'tiffany_costco',
-  'makers_mark_cuervo',
   'adidas_skechers',
-  'caterpillar_disney',
+  'hermes_rothschild',
+  'vans_walmart',
+  'adidas_thom_browne',
+  'nike_stockx',
+  'bang_monster',
 ] as const
 
 export const FIGHTS = {
   eyebrow: 'Showcase',
-  title: 'Seven famous fights.',
+  title: 'Eight famous fights.',
   sub: 'What the court decided, and what the taste data shows. Pre-computed and free to open; every memo cites the Qloo queries it used.',
 }
 
