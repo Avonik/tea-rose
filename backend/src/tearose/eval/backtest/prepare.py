@@ -45,7 +45,14 @@ from tearose.eval.backtest.common import (
 from tearose.qloo.fixtures import slugify
 
 DECIDED = ("favors_plaintiff", "neutral", "favors_defendant")
-LABEL_CODE = {"favors_defendant": 0, "neutral": 1, "favors_plaintiff": 2}
+LABEL_CODE = {
+    "sullivan_v_cbs_corp_2004": {
+        "senior": ("artist", "Survivor is a rock band; round-2 row, 2026-10-25, pre-scoring")
+    },
+    "favors_defendant": 0,
+    "neutral": 1,
+    "favors_plaintiff": 2,
+}
 
 MAPPING_COLUMNS = [
     "case_id",
@@ -308,6 +315,191 @@ _VIP_PRODUCTS = {
     "junior": ("VIP Products", "seller brand of the accused goods, not the product Bad Spaniels"),
 }
 QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
+    "autozone_inc_v_tandy_corp_2004": {
+        "junior": (
+            "RadioShack",
+            "seller brand (PowerZone was a RadioShack line); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "a_and_h_sportswear_inc_v_victorias_secret_stores_inc_2000": {
+        "junior": (
+            "Victoria's Secret",
+            "seller brand (The Miracle Bra is its line); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "goto_com_inc_v_walt_disney_co_2000": {
+        "junior": (
+            "Disney",
+            "seller brand (GO Network was Disney's portal); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "playtex_products_inc_v_georgia_pacific_corp_2004": {
+        "junior": (
+            "Quilted Northern",
+            "brand the wipes were sold under; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "caterpillar_inc_v_walt_disney_co_2003": {
+        "junior": (
+            "Disney",
+            "seller brand (film distributor); mark column describes the depiction; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "sullivan_v_cbs_corp_2004": {
+        "junior": (
+            "CBS",
+            "seller brand (network behind the show); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "thane_international_inc_v_trek_bicycle_corp_2002": {
+        "junior": (
+            "Thane",
+            "seller brand (OrbiTrek is its product); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "innovation_ventures_llc_v_n_v_e_inc_2012": {
+        "junior": (
+            "NVE Pharmaceuticals",
+            "seller brand (6 Hour Power is its product); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "united_states_polo_assn_v_prl_usa_holdings_inc_2011": {
+        "senior": (
+            "Ralph Lauren",
+            "seller brand (Polo is its line); round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": (
+            "U.S. Polo Assn.",
+            "seller brand; mark column names the logo; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "t_mobile_us_inc_v_aio_wireless_llc_2014": {
+        "senior": ("T-Mobile", "brand, not the colour mark; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": (
+            "Aio Wireless",
+            "brand, not the colour mark; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "hansen_beverage_co_v_national_beverage_corp_2007": {
+        "senior": (
+            "Monster Energy",
+            "brand, not the product description; round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": ("Freek", "brand the drink was sold under; round-2 row, 2026-10-25, pre-scoring"),
+    },
+    "variety_stores_inc_v_wal_mart_stores_inc_2018": {
+        "senior": (
+            "Roses",
+            "seller brand (Variety's store chain); round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": ("Walmart", "seller brand; round-2 row, 2026-10-25, pre-scoring"),
+    },
+    "am_general_llc_v_activision_blizzard_inc_2020": {
+        "junior": (
+            "Activision",
+            "seller brand (publisher of the game); mark column describes the depiction; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "easy_spirit_llc_v_skechers_u_s_a_inc_2021": {
+        "senior": (
+            "Easy Spirit",
+            "seller brand (Traveltime is its shoe line); round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": (
+            "Skechers",
+            "seller brand (Commute Time is its line); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "stone_brewing_co_v_millercoors_llc_2022": {
+        "senior": ("Stone Brewing", "brand name in full; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": (
+            "Keystone Light",
+            "brand the beer was sold under (MillerCoors); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "adidas_salomon_ag_v_target_corp_2002": {
+        "senior": ("adidas", "brand, not the stripe mark; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": (
+            "Target",
+            "seller brand; mark column describes the shoe; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "tempur_sealy_international_inc_v_mattress_firm_inc_2017": {
+        "junior": (
+            "Mattress Firm",
+            "seller brand; mark column describes the use; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "checkpoint_systems_inc_v_check_point_software_technologies_inc_2001": {
+        "senior": ("Checkpoint Systems", "full brand name; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": ("Check Point Software", "full brand name; round-2 row, 2026-10-25, pre-scoring"),
+    },
+    "freedom_card_inc_v_jpmorgan_chase_and_co_2005": {
+        "junior": (
+            "Chase",
+            "seller brand (Chase Freedom is its card); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "hershey_co_v_art_van_furniture_inc_2008": {
+        "senior": (
+            "Hershey's",
+            "brand, not the product description; round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": (
+            "Art Van Furniture",
+            "seller brand; mark column describes the truck; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "new_york_stock_exchange_inc_v_new_york_new_york_hotel_llc_2002": {
+        "senior": (
+            "New York Stock Exchange",
+            "full name (NYSE); round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": (
+            "New York-New York Hotel & Casino",
+            "the casino brand; round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "vital_pharmaceuticals_inc_v_monster_energy_co_2021": {
+        "senior": (
+            "Bang Energy",
+            "brand, not the product description; round-2 row, 2026-10-25, pre-scoring",
+        ),
+        "junior": (
+            "Reign",
+            "brand the drink is sold under (Monster); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "vans_inc_v_walmart_inc_2022": {
+        "senior": ("Vans", "brand, not the side-stripe mark; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": ("Walmart", "seller brand; round-2 row, 2026-10-25, pre-scoring"),
+    },
+    "star_industries_inc_v_bacardi_and_co_2005": {
+        "senior": ("Georgi", "brand, not the label; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": (
+            "Bacardi",
+            "seller brand (Bacardi O is its product); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "spangler_candy_co_v_tootsie_roll_industries_llc_2019": {
+        "senior": ("Dum Dums", "brand, not the bag design; round-2 row, 2026-10-25, pre-scoring"),
+        "junior": (
+            "Charms",
+            "brand the pops are sold under (Tootsie Roll); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "therma_scan_inc_v_thermoscan_inc_2002": {
+        "junior": (
+            "Braun",
+            "seller brand (ThermoScan is its product); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
+    "surfvivor_media_inc_v_survivor_productions_2005": {
+        "junior": (
+            "CBS",
+            "seller brand (network behind the show); round-2 row, 2026-10-25, pre-scoring",
+        ),
+    },
     "vip_products_llc_v_jack_daniels_properties_inc_2018": _VIP_PRODUCTS,
     "jack_daniels_properties_inc_v_vip_products_llc_2023": _VIP_PRODUCTS,
     "vip_products_llc_v_jack_daniels_properties_inc_on_remand_2025": _VIP_PRODUCTS,
