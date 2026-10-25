@@ -1,0 +1,739 @@
+===== DOCUMENT 1: Complaint (Doc. 1), filed 2022-01-14 =====
+
+Hermes International and Hermes of Paris, Inc. v. Mason Rothschild, No. 1:22-cv-00384 (S.D.N.Y.), Complaint (Doc. 1), filed 2022-01-14
+Source: https://storage.courtlistener.com/recap/gov.uscourts.nysd.573363/gov.uscourts.nysd.573363.1.0_2.pdf
+
+UNITED STATES DISTRICT COURT
+
+SOUTHERN DISTRICT OF NEW YORK
+
+HERMÈS INTERNATIONAL and
+
+HERMÈS OF PARIS, INC.,
+
+Plaintiffs, -against-
+
+MASON ROTHSCHILD,
+
+Defendant.
+
+CIVIL ACTION NO.
+
+22 CV ____________
+
+COMPLAINT
+
+JURY TRIAL DEMANDED
+
+Plaintiffs Hermès International and Hermès of Paris, Inc. (“Hermès”), through its attorneys Baker & Hostetler LLP, for its Complaint agains t Defendant Mason Rothschild (“Defendant”) alleges and states as follows:
+
+NATURE OF THE CASE
+
+1. As Defendant stated in a recent interv iew with Yahoo Financ e: “There’s nothing more iconic than the Hermès Birkin bag.” Defendant is a digital speculator who is seeking to get rich quick by appropriating the brand METABIRKINS for use in creating, marketing, selling, and facilitating the exchange of dig ital assets known as non-fungible tokens (“NFTs”). Defendant’s METABIRKINS brand simply rips off Hermès’ famous BIRKIN trademark by adding the generic prefix “meta” to the famous trademark BIRKIN. “Meta” and “metaverse” refer to virtual worlds and economies where digital assets such as NFTs can be sold and traded.
+
+2. Defendant has openly revealed his METABIRKINS business plan. He seeks to make his fortune by swapping out Hermès’ “real life” rights for “virtual rights”. As he has explained, Defendant is trying to “create the same kind of illusion that [the Birkin] has in real life as a digital commodity.” The “digital commodities” upon which Defendant is building his business, NFTs, are unique and non-fungible (i.e., non-interchangeable) units of data stored on a blockchain just as cryptocurrencies (which are fungible) are stored on a blockchain. NFTs can be created to transfer ownership of any physical thing or digital media, including an actual handbag or the image of a handbag. NFTs can also be freely bought and sold like any other commodity. As with cryptocurrencies, a highly speculative market has emerged around the trading of NFTs.
+
+3. Defendant has openly acknowledged that he elected to sell his NFTs as METABIRKINS because a BIRKIN handbag is a highly valuable asset in the physical world. Defendant has executed on his plan for replicating the physical world success of the BIRKIN bag in the “metaverse” through pervasive use of the mark METABIRKINS to brand all of his “metaverse” business activities. He identifies his collection of NFTs using the METABIRKINS trademark. He operates e-commerce stores for the sale of NF Ts under the METABIRKINS trademark. He has adopted METABIRKINS for his Twitter handle, Instagram account name, and Discord channel and blanketed social media with the “#MetaBirkins” hash tag. He operates a “MetaBirkins.com” website that advertises and promotes the sale of his METABIRKINS NFTs. He encourages others to create “MetaBirkins” with his “Build-a-MetaBirkin” contest which further da mages and dilutes the BIRKIN Mark. He has announced to his followers his plans to develop his own “decentralized NFT exchange” under the METABIRKINS brand. In fu rtherance of Defendant’s stated plan for replicating the experience of the BIRKIN handbag in the “metaverse”, the NFTs for sale under the METABIRKINS brand currently consist of blurry images of the trade dress of the famous BIRKIN handbag.
+
+4. Defendant’s adoption of the METABIRK INS trademark has brought him great financial success in a matter of weeks. There can be no doubt that this success arises from his confusing and dilutive use of Hermès’ famous trademarks. As one commentator, among many, noted in response to recent media coverage: “If this . . . wasn’t called ‘[B]irkin’ would it be getting any attention?”
+
+5. Defendant seeks to immunize himself from the legal consequences of his appropriation of Hermès’ famous trademarks by proclaiming that he is solely an artist. Although a digital image connected to an NFT may reflect some artistic creativity, just as a t-shirt or a greeting card may reflect some artistic crea tivity, the title of “artist” does not confer a license to use an equivalent to the famous BIRKIN trademark in a manner calculated to mislead consumers and undermine the ability of that mark to identify Hermès as the unique source of goods sold under the BIRKIN mark. Defendant’s ruse must not be sanctioned: He is stealing the goodwill in Hermès’ famous intellectual property to create and sell his own line of products.
+
+6. The fact that Defendant has adopted and is using METABIRKINS as a trademark is evident from the proprietary right s that he is claiming in the METABIRKINS brand. It is not surprising that other digital sp eculators, seeing how easily Defe ndant has made money off the METABIRKINS brand, are now also issuing NFTs that they call METABIRKINS. Defendant has repeatedly complained of “counterfeited” METABIRKINS on NFT marketplaces. The day before his infringing collection of METABIRKINS NFTs released, Defendant reported they were being “counterfeited” and that he saw “more and more fake MetaBirkin s sold every hou r.” In fact, Defendant’s infringing use of the METABIRKINS trademark has spurred others to create hundreds more NFTs claiming to be METABIRKINS NFTs or offshoots of the METABIIRKIN NFTs, all of which infringe on and dilute the BIRKIN Mark.
+
+7. On December 16, 2021, Hermès notified both Defendant and the NFT platform OpenSea of the blatant violation of Hermès’ intellectual property by his use of the METABIRKINS trademark. Shortly after receiving this notic e, OpenSea removed the infringements from its platform. Defendant, however, was not deterred, and reinvigorated his advertising on Discord and his infringing NFTs quickly appeared on the Rarible platform.
+
+8. Defendant’s widespread use of the M ETABIRKINS mark constitutes trademark infringement and dilution of the famous BIRKIN Mark. The METABIRKINS NFTs feature the distinctive design of the BIRKIN handbag, wh ich in conjunction with the use of the METABIRKINS Mark, adds to the likelihood of confusion and dilution. While Hermès has not yet minted and sold its own NFTs, this is a new and burgeoning marketplace. Consumers see a wide variety of brands, including luxury fashion brands exploiting the NFT space and would expect that NFTs featuring famous brands are affiliated with those brands, or wonder why the famous brands are permitting such dilutive use of their valuable assets and think less highly of them.
+
+9. Unless enjoined by this Court, Defendant will continue to advertise and sell NFTs under the METABIRKINS brand, build a company offering a range of virtual products and services under the METABIRKINS brand, and ultimately pr eempt Hermès’ ability to offer products and services in virtual marketplaces that are uniquely associated with Hermès and meet Hermès’ quality standards.
+
+JURISDICTION AND VENUE
+
+10. These claims arise under the Trademark Act of 1946, 15 U.S.C. § 1051, et seq., particularly under 15 U.S.C. § 1114(1). This Court has subject matter jurisdiction over the claims in this action which relate to trademark infringement, dilution, cybersquatting and false designations of origin and false descriptions pursuant to th e provisions of 28 U.S.C. §§ 1331 and 1338 and 15 U.S.C. § 1121.
+
+11. This Court has supplemental jurisdiction over the claims in this Complaint which arise under state statutory and co mmon law pursuant to 28 U.S.C. § 1367(a), since the state law claims are so related to the federal claims that they form part of the same case or controversy and derive from a common nucleus of operative facts.
+
+12. Personal jurisdiction over Defendant is proper pursuant to N.Y. C.P.L.R. § 302(a). Upon information and belief, Defendant created the METABIRKINS Website, https://metabirkins.com, which is accessible to consumers in New York and bears unauthorized and infringing uses of the BIRKIN Mark. Upon information and belief, Defendant targeted New York consumers by operating the METABIRKINS website and setting up storefronts to advertise, sell and offer for sale the METABIRKINS NFTs usi ng “smart” contracts on four different NFT marketplaces. Upon information and belief, th e Defendant used or uses the following NFT marketplaces to facilitate the promotion and sale of the METABIRKINS NFTs to New York consumers: https://opensea.io (“OpenSea”); https://rarible.com (“Rarible”); https://looksrare.org/ (“LooksRare); and https://zora.co/ (“Zora”). OpenSea, an assumed name of Ozone Networks Inc., is a Delaware corporation registered to do business in New York, with a principal place of business in the City and State of New York.
+
+13. These NFT marketplaces operate interactiv e sites which are viewable to and have been accessed by consumers within the United States, including consumers within the State and City New York. Defendant’s decision to set up storefronts on these interactive marketplaces evidences a conscious plan to advertise and ultimately sell the METABIRKINS NFTs in New York. At least one consumer living in the State and City of New York purchased a METABIRKINS NFT from one of these marketplaces. Defendant has personally derived substantial revenue and should reasonably expect to continue receiving substantial revenue from the sale of the METABIRKIN NFTs through the NFT marketplaces by purchasers throughout th e United States, including purchases by New York consumers.
+
+14. Defendant’s conduct causes direct and indirect financial loss to Hermès in New York where Plaintiff Hermès of Paris maintains it s principal place of business for Hermès’ sales operations for the United States. Defendant’s c onduct also is likely to engender confusion and dilution of Hermès’ federally registered trademark rights in New York leading to the diminution of the value of and goodwill associated with these rights.
+
+15. Venue is proper in this Judicial District under 28 U.S.C. § 1391, because a substantial part of the events or omissions giving rise to Hermès’ claims has occurred within this Judicial District and a substantial part of the harm caused by Defendant has occurred in this Judicial District.
+
+THE PARTIES
+
+16. Plaintiff Hermès International is a corporation, organized and existing under the laws of France, having its principal place of business located at 24, rue du Faubourg Saint-Honoré, Paris, France. Hermès does business in the United States, including New York, through its wholly-owned subsidiary Hermès of Paris, Inc.
+
+17. Plaintiff Hermès of Paris, Inc. is a corporation, organized and existing under the laws New York, having its principal place of business located at 55 East 59 th Street, New York, New York 10022. Hermès of Paris, Inc. is the sole authorized distributor of the BIRKIN handbags in the United States and has the exclusive right to sell BIRKIN handbags under the HERMÈS trademark in the United States.
+
+18. Defendant Mason Rothschild is an individu al who is engaged in the manufacture, distribution, sale, and advertisement of the METABIRKINS NFTs. Upon information and belief, Rothschild is a resident and citizen of California. Upon information and belief, Rothschild is the owner and operator of https://metabirkins.com (the “MetaBirkins Website”).
+
+FACTUAL ALLEGATIONS
+
+I. Hermès And Its Famous BIRKIN Handbag
+
+A. Hermès’ Decades Old Luxury Fashion Business
+
+19. Hermès is a world-famous designer a nd producer of high-quality merchandise including, inter alia, handbags, apparel, scarves, jewelry, fashion accessories, and home furnishings.
+
+20. For decades, Hermès has developed its reputation and distinctive image.
+
+21. Hermès’ origins date back to 1837, when it began designing and manufacturing high-quality harnesses for horses. During the twentieth century, Hermès expanded its business to include handbags, personal leather goods, and apparel.
+
+22. Hermès has registered the HERMÈS word mark with the U.S. Trademark and Patent Office in connection with a wide array of goods and services (the “HERMÈS Marks”). A list of the HERMÈS Marks registrations is attached as Exhibit A.
+
+23. Hermès sells some of its products directly to consumers through Hermès-owned retail stores and its website www.Hermes.com, which receives substantial views from consumers in New York. Hermès currently operates stores in 45 coun tries, including the United States, where it has stores in several States, including New York, with four stores in this Judicial District.
+
+24. Hermès is the exclusive distributor or licensor in the United States of its merchandise, all of which bear one or more of Hermès’ Federally Registered Trademarks (as defined herein).
+
+B. The Origin & Fame of Hermès’ BIRKIN Handbag
+
+i. Hermès’ Over 35 Years of Use of the BIRKIN Mark & Its Federal Registration
+
+25. In addition to being known for high-quality merchandise, Hermès is well known for its famous BIRKIN handbag, an exclusive Hermès design that was created in 1984 and first sold in commerce in the U.S. in 1986. The BIRKIN ha ndbag was the outcome of a chance encounter between the late President and Artistic Director of Hermès, Jean-Louis Dumas, and the actress Jane Birkin on a Paris to London flight. Ms. Birkin complained to Dumas that she could not find a bag suitable for her needs as a young mother, so Dumas sketched the design of a spacious rectangular hold all with a burnished flap and saddle stitching. This bag is universally known as the BIRKIN handbag. An image of the BIRKIN handbag is depicted below as Figure 1 and attached hereto as Exhibit B.
+
+Figure 1.
+
+26. Hermès owns the BIRKIN trademark which is registered on the Principal Register of the U.S. Trademark and Patent Office under Registration No. 2991927. It is in full force and effect and incontestable (the “BIRKIN Mark”). A copy of the Certificate of Registration for the BIRKIN Mark is attached as Exhibit C.
+
+27. Hermès owns the trade dress rights in the BIRKIN handbag design which is registered on the Principal Register of the U.S. Trademark and Patent Office under Registration No. 3936105. It is in full force and effect and incontestable (the “BIRKIN Trade Dress”). A copy of the Certificate of Registration for the BIRKIN Trade Dress is att ached as Exhibit D and below as Figure 2 is an image of this registered trade dress.
+
+Figure 2.
+
+28. In addition to being registered in the U.S., Hermès has registered the BIRKIN word mark and trade dress worldwide to identify it s iconic handbag and has continuously used the BIRKIN Mark and BIRKIN Trade Dress since the BIRKIN handbag was first introduced in U.S. commerce in 1986.
+
+ii. Extensive and Widespread Worldwide and U.S. Sales Under the BIRKIN Mark
+
+29. Each BIRKIN handbag is handcrafted from the finest leather by experienced artisans in France. The manufacturing of a single BIRKIN handbag requires more than seventeen hours of an artisan’s time. The intensive labor and craftmanship and high-quality leathers required makes the BIRKIN handbag difficult to pr oduce and expensive. The pr ice of a BIRK IN handbag from thousands of dollars to over one hundred thousand dollars. Demand for BIRKIN handbags is such that Hermès cannot satisfy all requests.
+
+30. As Defendant himself has acknowledged, “[The BIRKIN handbag’s] mysterious waitlist, intimidating price tags and extreme scarcity have made it a highly covetable ‘holy grail’ handbag that doubles as an investment or store of value.” A copy of the METABIRKINS OpenSea page is attached hereto as Exhibit E.
+
+31. Hermès has sold millions of dollars’ wo rth of BIRKIN handbags in significant quantities since its inception in 1986. Such sales have occurred in the United States, France, and throughout the world.
+
+32. “The desirability of an Hermès Birkin handbag - - a symbol of rarefied wealth - - is such that not even a global pandemic can dull demand for it.” See Exhibit F. In the second quarter of 2021, Hermès’ sales for the leather and saddlery division, which includes the Birkin handbags, more than doubled from a year ago and rose by 24% from their pre-pandemic June 2019 levels. See Exhibit G.
+
+33. Despite the price and excl usivity, the BIRKIN handbag has become a household name and well known by the general public, both in name and by its distinctive design. iii. Extensive and Widespread Worldwide and U.S. Advertising & Publicity of the BIRKIN Mark
+
+34. The BIRKIN handbag and BIRKIN Mark ha ve received unsolicited publicity and praise among consumers and in the media. The BIRKIN handbag and BIRKIN Mark have been prominently featured in fash ion publications, the media, and popular culture since 1986, and particularly over the past two decades.
+
+35. By way of example, the March 2021 edition of Harper’s Bazaar contained an editorial dedicated to the BIRKIN handbag titled, “The Mighty, MIGHTY Birk in.” The article discuses “[h]ow the [BIRKIN handbag] withstood trends and WEATHERED SEASONS to become an INDELIBLE PART of the CU LTURE.” A copy of the article is attached hereto as Exhibit H. Examples of additional fashion publication editorials and arti cles on the BIRKIN handbag are attached hereto as Exhibit I.
+
+36. The BIRKIN handbag is a favorite among celebrities who are routinely featured in news and magazine articles carrying the BIRKIN handbag. There ar e entire articles dedicated to identifying the celebrities that love and own BIRKIN handbags.
+
+37. The BIRKIN handbag has also been showcased in U.S. television and film. Most notably, the BIRKIN handbag was a major plot point in the 2001 Sex and the City episode “Coulda, Woulda, Shoulda”. The fictional episode mirrored the exclusivity and prestige associated with the BIRKIN handbag in real life an d documented one of the charac ter’s difficulties in acquiring a BIRKIN handbag. The BIRKIN handbag has also been featured in other television shows, including episodes of Gilmore Girls, Gossip Girl, Will & Grace, and How I Met Your Mother, and in films, such as The Devil Wears Prada, Sex and The City 2, The Royal Tenenbaums, and Don’t Look Up. Articles discussing some of these features are attached hereto as Exhibit J.
+
+38. Since as early as 2000, Hermès has expended millions of dollars in the United States advertising the BIRKIN Mark and BIRKIN Trade Dr ess. Such advertising has been placed in publications based out of the State and City of New York: The New York Times, Elle, and Vogue.
+
+39. As a result of such advertising, since 2000, Hermès has sold thousands of BIRKIN handbags featuring the BIRKIN Mark and BIRKIN Trade Dress in the United States.
+
+iv. Widespread and Extensive Worldwide and U.S. Actual Recognition of the BIRKIN Mark
+
+40. The BIRKIN Mark is recognized throughout the world and U.S. By way of example only, a September 2021 Vanity Fair article noted that, “There is a kind of fashion object so long-lasting, so tirelessly wanted that its name becomes recognizable, a metonym for the brand that made it: the Air Jordan, the Love bracelet. Few brands, successful though they may be, attain that kind of saturation. Hermès has done it tw ice: the Birkin and, arguably the first of th e household-name phenomena, the Kelly.” A copy of the Vanity Fair article is attached hereto as Exhibit K.
+
+41. The BIRKIN Mark is so well-known that one of the very first BIRKIN handbags was placed on display at an art exhibition in the Victoria & Albert Museum in London, England from April 2020 through January 2021. A copy of an article on the exhibition from Contemporain(S) and photographs of the exhibition are attached hereto as Exhibit L.
+
+42. The BIRKIN handbag has been recognized as one of the best investments any person can make with its increasing value beating returns from the stock market and even gold. Copies of articles discussing this recognition as an investment item are attached hereto as Exhibit M.
+
+43. In 2016, Time called the BIRKIN handbag “a Better Investment Than Gold.” See Id. at 1. The article explained “that the annual return on a Birkin [handbag] was 14.2% compared to the S&P [500] average of 8.7% a year and gold’s-1.5%.” Id.
+
+44. In 2019, the BIRKIN handbag was recognized for “its 17% rate of return which outperforms other more traditional forms of investment” and included in an index of other art and luxury goods for investment purposes. See Id. at 5. In the 30 plus years since it was introduced, the BIRKIN handbag “has appreciated in value by 500%.” See Id. at 4.
+
+45. The distinctive shape and notoriety of the BIRKIN handbag has been judicially recognized around the world. Copies of a few of those decisions are attached hereto as Exhibit N.
+
+C. Hermès’ Trademarks Are Symbols of Luxury & Quality
+
+46. Throughout its history and expanding product lines in both domestic and international markets, Hermès has main tained its reputation fo r the manufacture of hi gh-quality goods and its trademarks have become the symbols of modern luxury.
+
+47. Hermès is the owner of not just the famous BIRKIN Mark and HERMÈS Mark, but numerous trademark registrations with the United States Patent & Trademark Office, including but not limited to the three-dimensional design mark for the BIRKIN handbag’s distinctive design and the registrations listed on Exhibit O attached hereto (hereinafter collectively referred to as “Hermès’ Federally Registered Trademarks”).
+
+48. Hermès’ Federally Registered Trademarks are in full force and effect and many have become incontestable pursuant to 15 U.S.C. § 1065.
+
+49. Hermès has used Hermès’ Federally Registered Trademarks for many years, and in some instances decades, on, and in connection with, the advertising and sale of Hermès’ products, in interstate and intrastate commerce, including commerce in New York, and in this Judicial District.
+
+50. Hermès has gone to, and continues to go to, great lengths to enforce Hermès’ Federally Registered Trademarks and protect their valuable goodwill.
+
+51. As a result of their widespread and cons tant use, Hermès’ Federally Registered Trademarks have come to be known as source identifiers for Hermès and for renowned high-quality luxury goods.
+
+II. Defendant’s Infringing METABIRKINS Commercial Venture
+
+A. Defendant Launches 100 Digital Collectibles Under the METABIRKINS Mark
+
+52. According to the METABIRKINS Websi te, “Rothschild began working on MetaBirkins shortly after the success of Ba by Birkin…In response to the community demand, Rothschild developed a new series…”: the METABIRKINS NFTs. A screenshot of the METABIRKINS Website is attached hereto as Exhibit P.
+
+53. The Baby Birkin was a single NFT consisting of an animation of Hermès’ BIRKIN handbag. It featured a 40-week-old fetus on top of a transparent version of a BIRKIN bag (the “Baby Birkin NFT”). A screenshot of the Baby Birkin appears below as Figure 3 and attached hereto as Exhibit Q.
+
+Figure 3.
+
+54. The one-off Baby Birkin NFT was aucti oned on the Basic Space platform in May 2021 and sold for $23,500. It was then resold for $47,000. The Baby Birkin NFT auction listing and ownership history on Basic Space is attached hereto as Exhibit R.
+
+55. The Baby Birkin NFT appeared to many, in cluding Hermès, to be a one-off and bizarre concoction, and Defendant had appeared to cease his activities, until now.
+
+56. The NFTs currently sold under the META BIRKINS are a line of 100 digital collectibles created on the Ethereum blockchain, which feature Hermès’ BIRKIN handbag design covered in fur and offered for sale under the METABIRKINS trademark (herein referred to as the “METABIRKINS NFTs”). Examples of the METABIRKINS NFTs being sold by Defendant and depicted below as Figure 4 and attached hereto as Exhibit S.
+
+Figure 4.
+
+57. Defendant first began advertisi ng the METABIRKINS NFTs under the METABIRKINS trademark on December 2, 2021, at Art Basel in Miami, Florida and offered them for sale under the METABIRKINS trademark to us er directly via a “smart” contract and on the OpenSea NFT marketplace until OpenSea agreed w ith Hermès and removed the infringing sales from its platform. See Exhibit E, a screenshot of the METABIRKINS NFTs page on OpenSea.
+
+B. Defendant Advertises the METABIRKINS Commercial Venture Using Hermès’ Federally Registered Trademarks Without Permission
+
+58. Since December 2, 2021, Defendant has advertised the METABIRKINS NFTs under the METABIRKINS trademark and using the Hermès Federally Registered Trademarks without Hermès’ permission and in violation of Hermès’ trademark rights.
+
+59. Defendant advertises and sells the METABIRKINS NFTs on the following channels: through the METABIRKINS Website, the sole purpose of which is to advertise the METABIRKINS NFTs and link to the latest poi nt of sale; through NFT marketpl aces like OpenSea, Rarible, LooksRare, and Zora; on a Discord channel under the METABIRKINS trademark; and on Twitter and Instagram under handles featuring the METABIRKINS trademark.
+
+60. As of January 10, 2022, Defendant’s METABIRKINS Twitter account is followed by almost 7,000 users, Defendant’s METABIRKIN S Instagram account is followed by over 16,000 users, and Defendant’s METABIRKINS Discord channel is followed by over 16,000 users.
+
+61. Upon information and belief, Defendant is creating his ow n “decentralized” marketplace under the METABIRKINS trademark to sell the METABIRKINS NFTs.
+
+i. The METABIRKINS Website
+
+62. On information and belief, Defendant first registered the METABIRKINS Website domain name (the “Infringing Domain”) on November 7, 2021.
+
+63. The URL for the Infringing Domain consists of the entire BIRKIN Mark and the generic prefix “Meta” (referring to the “metaverse”).
+
+64. Upon information and belief, Defendant first posted on the METABIRKINS Website as early as December 1, 2021, the day before the METABIRKINS NFTs launched. See Exhibit P, a screenshot of the METABIRKINS Website, as it appeared as of December 1, 2021, and depicted below as Figure 5.
+
+Figure 5.
+
+65. Defendant’s use of the Infringing Doma in and the METABIRKINS Website is commercial and to advertise the METABIRKINS NFTs and identify the latest point of sale. As of December 1, 2021, the METABIRKINS Website feat ured the brand METABIRKINS at the top, where consumers would look to identify the source of the products. Defendant included a direct link to the collection of METABIRKINS NFTs on the OpenSea NFT marketplace.
+
+66. In addition to the METABIRKINS tr ademark, the METABIRKINS Website prominently features the BIRKIN Mark, the HE RMÈS Mark, and the advertising slogan “NOT YOUR MOTHER’S BIRKIN.” This advertising slogan, prominently featuring the BIRKIN Mark, appears over some of the images of the METABIRKINS NFTs when a consumer hovers over the images. A screenshot of the “NOT YOUR MOTHER’S BIRKIN” is depicted below as Figure 6 and attached hereto as Exhibit T.
+
+Figure 6.
+
+67. However, the “NOT YOUR MOTHER’S” por tion of the slogan does not always appear and at times only the BIRKIN Mark is pr ominently displayed. A screenshot of just the BIRKIN Mark seen on the METABIRKINS Website is depicted below as Figure 7 and attached hereto as Exhibit U.
+
+Figure 7.
+
+68. In addition to using the BIRKIN Mark on the METABIRKINS Website, Defendant uses the HERMÈS Marks.
+
+69. As early as December 1, 2021, the META BIRKINS Website advertised the METABIRKINS NFTs to invoke the HERMÈS word mark: “MetaBirkins are a tribute to Hermes’ most famous handbag, the Birki n, one of the most exclusive, well-made luxury accessories.” See Exhibit P.
+
+70. On or about December 12, 2021, the METABIRKINS store on the OpenSea marketplace also advertised the METABIRKIN S NFTS to invoke the HERMÈS word mark: “MetaBirkins are a tribute to Hermes’ most famous handbag, the Birkin, one of the most exclusive, well-made luxury accessories.” See Exhibit E.
+
+71. On or about December 20, 2021 and followi ng receipt of Hermès’ letter, the METABIRKINS Website was updated to add a disclaimer that excessively uses the HERMÈS Mark three times. The disclaimer states “We are not affiliated, associated, authorized, endorsed by, or in any way officially connected with the HERMES, or any of its subsidiaries or its affiliates. The official HERMES website can be found at https://www.hermes.com/.” A screenshot of the METABIRKINS Website, as it appeared on or about December 20, 2021, is depicted below as Figure 8 and attached hereto as Exhibit V.
+
+Figure 8.
+
+72. Defendant’s disclaimer unnecessarily links to Hermès’ website and capitalizes the HERMÈS Mark. Defendant’s uses of the HERMÈS Mark in conjunction with his use of the BIRKIN Mark, and the display of the METABIRKIN S bags, serves only to create a confusing impression among consumers as to Hermès’ spons orship of the METABIRKIN NFTs and the METABIRKINS Website.
+
+73. The METABIRKINS Website is the only advertising channel on which Defendant includes this disclaimer. The disclaimer is notably absent from Rarible, the current point of sale for the METABIRKINS NFTs. The disclaimer is also absent from Defendant’s METABIRKINS social media accounts and Discord channel, where the METABIRKINS NFTs are prominently advertised.
+
+74. As of early December 2021, the METABI RKINS Website st ill prominently advertised the sale of the METABIRKIN NFTs on OpenSea: “Buy on Opensea.” See Figure 8 and Exhibit V.
+
+75. On or about December 16, 2021, OpenSea removed the infringing METABIRKIN NTFs upon receipt of notice fro m Hermès. Upon information a nd belief, shortly thereafter, Defendant moved, or caused to have moved, the METABIRKIN NFTs from OpenSea to the Rarible NFT marketplace with full knowledge of Hermès’ rights in the BIRKIN Mark and the BIRKIN Trade Dress.
+
+76. As of January 8, 2022, the METABIRKINS Website still prominently advertises the sale of the METABIRKIN NFTs but on Rarible. com: “Buy on Rarible.” A screenshot of the METABIRKINS Website, as it appeared on or about January 8, 2022, is depicted below as Figure 9 and attached hereto as Exhibit W.
+
+Figure 9.
+
+ii. The Four NFT Marketplaces
+
+77. The METABIRKINS Website links to the point of sale on the NFT marketplaces for the METABIRKINS NFTs. Upon information and be lief, Defendant first li nked to and sold the METABIRKINS NFTs on the OpenSea NFT marketplace (the “METABIRKINS OpenSea Store”).
+
+See Exhibit E, a screenshot of th e METABIRKINS OpenSea Store, as it appeared on or about December 12, 2021, and depicted below as Figure 10.
+
+Figure 10.
+
+78. In December 2021, the METABIRKINS OpenSea Store prominently displayed the METABIRKINS trademark at the top of the page, where any consumer would look for a source identifier. The METABIRKINS OpenSea Store marketplace also advertised the METABIRKINS NFTS to invoke the HERMÈS word mark: “MetaBir kins are a tribute to Hermes’ most famous handbag, the Birkin, one of the most exclusive, well-made luxury accessories.” See Exhibit E.
+
+79. OpenSea later removed the infringing METABIRKINS NFTs from sale on its platform upon receipt of a noti ce of Hermès’ claims. Upon info rmation and beli ef, undeterred, Defendant listed, or caused to have listed, the METABIRKIN NFTs for sale through a store on the Rarible NFT marketplace under the METABIRKINS trademark at https://rarible.com/metabirkinsnft (the “METABIRKINS Rarible Store”).
+
+80. The METABIRKINS Rarible Store pro minently displays the METABIRKINS trademark at the top, where any consumer would l ook for a source identifier. A screenshot of Defendant’s METABIRKINS Rarible Store is below as Figure 11 and attached hereto as Exhibit X.
+
+Figure 11.
+
+81. Each METABIRKINS NFT listing iden tifies the collection using the METABIRKINS trademark. A screenshot of a METABIRKINS NFT listing is depicted below as Figure 12 and attached hereto as Exhibit Y.
+
+Figure 12.
+
+82. Upon information and belief, on or about January 10, 2022, Defendant opened, or caused to have opened, a new store and point of sale for the METABIRKINS NFTs on the LooksRare marketplace under the METABIRKINS trademark. Defendant announced the launch on Twitter: “MetaBirkins is LIVE on @LooksRareNFT, the community-first marketplace that actively rewards traders, collectors and creators. Buy and sell your MetaBirkin today or HODL for your free @ILYYWNFT mint!” A screenshot of this tweet is attached hereto as Exhibit Z.
+
+83. The METABIRKINS LooksRare store pro minently displays the METABIRKINS trademark at the top left, where any consumer would look for a source identifier. A screenshot of Defendant’s METABIRKINS LooksRare store is below as Figure 13 and attached hereto as Exhibit AA.
+
+Figure 13.
+
+84. Upon information and belief, on or about January 11, 2022, Defendant opened, or caused to have opened, a new store and point of sale for the METABIRK INS NFTs on the Zora marketplace under the METABIRKINS trademark. The METABIRKINS Zora store prominently displays the METABIRKINS trademark at the t op, where any consumer would look for a source identifier. A screenshot of Defendant’s META BIRKINS Zora store is below as Figure 14 and attached hereto as Exhibit AB.
+
+Figure 14.
+
+85. As of January 14, 2022, the METABIRKINS Website prominently features links to each of the active METABIRKINS NFT stores on Rarible, LooksRare, and Zora. A screenshot of the METABIRKINS Website, as it appeared on or about January 8, 2022, is depicted below as Figure 15 and attached hereto as Exhibit AC.
+
+Figure 15.
+
+86. The first METABIRKINS NFT sold on or about December 3, 2021 for a cost of 10 Ether or over $42,000 USD, calculated at the exchange rate for Ether as of December 3, 2021.
+
+87. As of January 6, 2022, total volume of sales for the METABIRKINS NFTs surpassed $1.1 million, with a floor price of $15,200, and the highest sale at $45,100. See Exhibit X. iii. The METABIRKINS Discord Channel
+
+88. Defendant further advertises the METABIRKINS NFTs and uses the BIRKIN Mark on www.discord.com (“Discord”) under the META BIRKINS trademark. Discord is an online platform where users can join groups called channels and communi cate with others within the channel. In order to post or view content on Discord, a user must register and verify a valid email address. Through this Discord channel, Defe ndant communicates with consumers about new METABIRKINS NFTs and conducts targeted advertising of the METABIRKINS NFTs.
+
+89. For example, one of Defendant’s adve rtising campaign was called “Build-A- MetaBirkin” on the METABIRKINS Discord cha nnel. The “Build-A-MetaBirkin Challenge” encouraged followers of the METABIRKINS cha nnel to “Build a MetaBirkin using household materials” and to submit their designs on a separate Discord channel, where Defendant would then select two or “maybe more” winners. A screen shot of Defendant’s post regarding the Build-A- MetaBirkin Challenge is attached hereto as E xhibit AD. Defendant would then publish the most popular submissions within the METABIRKINS Discord channel.
+
+iv. The METABIRKINS Social Media Accounts
+
+90. Defendant also publicly advertises the METABIRKINS NFTs on numerous social media platforms, including Instagram and Twitter.
+
+91. Defendant operates a METABIRKINS account on Instagram, w ith a handle that features the METABIRKINS trademark: @metabirkins (the “METABIRKINS Instagram”). The METABIRKINS Instagram advertises the METABIRKINS NFTs and includes a direct link to the METABIRKINS Rarible Store. A screenshot of the METABIRKINS Instagram is depicted below as Figure 16 and attached hereto as Exhibit AE.
+
+Figure 16.
+
+92. The METABIRKINS Instagram uses the entirety of the BIRKIN Mark in hashtags, including #MetaBirkins and #NotYourMothersBir kin. A screenshot of a post featuring both hashtags is depicted below as Figure 17 and attached hereto as Exhibit AF.
+
+Figure 17.
+
+93. The METABIRKINS Instagram also lacks any disclaimer that it not affiliated with or sponsored by Hermès. See Figure 16 and Exhibit AE.
+
+94. Defendant also operates a Twitter under a handle featuring the METABIRKINS trademarks: @MetaBirkins (the “METABIRKINS Twitter”). The METABIRKINS Twitter also advertises the METABIRKINS NFTs and includes a direct link to th e METABIRKINS Rarible Store. A screenshot of the METABIRKINS Twitte r is depicted below as Figure 18 and attached hereto as Exhibit AG.
+
+Figure 18.
+
+95. The METABIRKINS Twitter uses the entirety of the BIRKIN Mark in hashtags, including #MetaBirkins, #NotYourMothersBirkin, and #MintaMetaBirkinHoldAMetaBirkin. See Exhibit AG, a screenshot of a post featuring both hashtags and depicted above in Figure 18.
+
+v. The METABIRKINS Marketplace
+
+96. Through all of these activities, Defendant is using the METABIRKINS trademark to build a market for the resale, trade, and exchange of his METABIRKINS NFTs, a market referred to by Defendant as the METABIRKINS “community.” Upon information and belief, in NFT marketplaces where the METABIRKINS NFTs are currently available, Defendant receives a “royalty” paid in the ether (ETH) cryptocurrency when METABIRKINS NFTs are resold.
+
+97. Defendant has also announced he is creating a “decentralized METABIRKINS exchange” to sell the METABIRKINS NFTs without the need for NFT marketplaces like OpenSea, Rarible, LooksRare, or Zora. Defendant anno unced this plan to expand his METABIRKINS commercial venture on the METABIRKINS Discord channel after the METABIRKINS NFTs were removed from OpenSea pursuant to Hermès’ request to OpenSea to remove the unauthorized use of METABIRKINS from its marketplace. A screenshot of Defendant’s post on Discord is attached hereto as Exhibit AH.
+
+98. Upon information and belief, the sole pur pose of such a decentralized exchange would be for consumers to tr ade the METABIRKINS NFTs with increased royalties to Mr. Rothschild. Many third party NFT marketplaces, such as OpenSea, charge a “service fee” and limit the percentage of royalty payments made to NFT creators and sellers. Upon information and belief, these limitations would not apply on the decentralized exchange being developed by Defendant. Upon information and belief, such an excha nge will prominently feature the METABIRKINS trademark.
+
+C. Defendant Acknowledges the BIRKIN Handbag’s Famous Status
+
+99. At all relevant times, Defendant knew of the BIRKIN handbag and BIRKIN Mark and their well-known status among consumers.
+
+100. In an interview with HighSnobiety regarding the creation of the Baby Birkin NFT, Defendant stated “The Birkin Bag by Hermès is such a status symbol across the globe.” A copy of the article is attached hereto as Exhibit AI.
+
+101. In a December 6, 2021 interview with Yahoo Finance, Defendant stated that for him, “There’s nothing more iconic than the Hermès Birkin bag.” See Exhibit AJ.
+
+102. The description on the METABIRKINS OpenSea page even acknowledged the BIRKIN handbag’s famous status, calling the BIRKIN handbag “Hermès’ most famous handbag” and “one of the most, exclusive, well-made luxury accessories. Its mysterious waitlist, intimidating price tags, and extreme scarcity have made it a highly covetable ‘holy grail’ handbag that doubles as an investment or store of value.” See Exhibit E.
+
+103. Defendant admittedly created the METABIRKINS as an “experiment to see if [he] could create the same kind of i llusion that [the BIRKIN handbag] has in real life as a digital commodity.” And Defendant believes he has “accomplished [his experiment]” and has “put together the kind of digital commodity [the METABIRKINS NFT] everybody loves. . .” See Exhibit AJ.
+
+D. Defendant’s Willful Infringing Activity
+
+104. On December 16, 2021, Hermès’ attorneys sent a cease-and-desist letter to Defendant, putting him on notice that the sale of the METABIRKINS NFTs infringed on the BIRKIN Mark and demanding he cease such infringing activity. A copy of the December 16, 2021 letter is attached hereto as Exhibit AK.
+
+105. In addition to notifying Defendant of his infringing activities, on December 16, 2021, Hermès’ attorneys notified OpenSea. A copy of the December 16, 2021 email is attached hereto as Exhibit AL. Shortly thereafter, OpenSea removed the METABIRKINS NFTs from its platform.
+
+106. Defendant flatly refuses to stop selling the METABIRKINS NFTs. When OpenSea denied him continued access to its platform, Defendant moved the METABIRKINS NFTs to the METABIRKINS Rarible Store and further commenc ed plans to create his own decentralized exchange for the METABIRKINS NFTs.
+
+107. Defendant advertised the change in ma rketplaces on the private METABIRKINS Discord channel, the METABIRKINS Website, and the METABIRKINS social media accounts. See Exhibit AH.
+
+E. Defendant’s Admission that METABIRKINS Is a Trademark
+
+108. Defendant has repeatedly claimed trademark rights in the infringing METABIRKINS trademark by complaining of “counterfeited” METABIRKINS NFTs on NFT marketplaces.
+
+109. The day before Defendant’s infringing collection of METABIRKINS NFTs launched, Defendant claimed they were being “counterfeite d” and that he saw “more and more fake MetaBirkins sold every hour.” See Exhibit AM.
+
+110. In an interview with Yahoo Finance, Defendant stated that “before [his] collection dropped, there was a bunch of like counterfeit NFTs that weren’t from my collection. We’re in the process of like verifying mine on OpenSea. But we had like $35,000, $40,000 in volume of people buying fake versions of my MetaBirkin. So yeah, like counterfeits are definitely there.” See Exhibit AJ.
+
+111. As of January 8, 2021, the OpenSea and Rarible marketplaces featured at least seven different collections, collectiv ely selling 404 NFTs, prominently using variations of the METABIRKINS trademark to sell identical METABIRKINS NFTs.
+
+112. The existence of “fake” or “counterfe it” METABIRKINS NFTs indicates that METABIRKINS is a trademark as an indicator as source. The activities of Defendant complained of herein constitute willful and intentional infringement of the BIRKIN Mark and HERMÈS Marks, are in total disregard of Hermès’ rights, and were commenced and have continued in spite of Defendant’s knowledge that the use of the BIRKIN Mark and any of Hermès’ Federally Registered Trademarks, or copies or colorable imitations thereof, was and is in direct contravention of Hermès’ rights.
+
+113. Defendant has infringed, continues to infringe, and threatens to further infringe the BIRKIN Mark by manufacturing, distributing and selling the unauthorized METABIRKINS NFTs. Defendant’s infringing activities constitute unauthorized public display and distribution of products in connection with the BIRKIN Mark and HERMÈS Marks.
+
+114. Use by Defendant of the BIRKIN Mark and HERMÈS Marks has been without Hermès’ consent, is likely to cause confusion and mistake in the minds of the purchasing public, and, in particular, tends to and does falsely create the impression that the goods sold by Defendant are authorized, sponsored, or approved by Hermès when, in fact, they are not.
+
+FIRST CAUSE OF ACTION
+
+TRADEMARK INFRINGEMENT
+
+15 U.S.C. § 1114
+
+115. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+116. The BIRKIN Mark is fanciful and arbitrary and associated in the mind of the public with Hermès.
+
+117. Based on Hermès’ extensive advertising, sales and the wide popularity of Hermès’ products, including the BIRKIN handbag, the BIRKIN Mark is strong and has acquired secondary meaning so that any product and advertisement bearing the BIRKIN Mark is immediately associated by purchasers and the public as being a product of or affiliated with Hermès.
+
+118. Defendant uses the BIRKIN Mark in connection with Defendant’s sale, distribution and advertising of its METABIRKINS NFTs.
+
+119. Defendant’s activities as aforesaid constitute Defendant’s use in commerce of the BIRKIN Mark.
+
+120. Defendant has used the BIRKIN Mark wit hout Hermès’ consent or authorization. Defendant’s use, including the sa le and distribution of the META BIRKINS NFTs in interstate commerce, is likely to cause confusion and mistake in the minds of the public, leading the public to believe that the METABIRKINS NF Ts emanate or originate from Hermès, or that Hermès has approved, sponsored or otherwise associated itself with Defendant, which is untrue.
+
+121. Defendant’s conduct is intended to explo it the goodwill and reputation associated with the BIRKIN Mark.
+
+122. Defendant’s activities as aforesaid create the false and misleading impression that Defendant is sanctioned, assigned or authorized by Hermès to use the BIRKIN Mark to advertise, manufacture, distribute, appraise, offer for sale or sell infringing products bearing the BIRKIN Mark when Defendant is not so authorized.
+
+123. Defendant’s unauthorized use of the BIRKIN Mark as set forth above has resulted in Defendant unfairly benefiting from Hermès’ advertising and promotion and profiting from Hermès’ reputation and the BIRKIN Mark, to the substantial and irreparable injury of the public, Hermès and the BIRKIN Mark and the substantial goodwill represented thereby.
+
+124. Defendant’s aforesaid acts constitute trademark infringement in violation of Section 32 of the Lanham Act, 15 U.S.C. §1114.
+
+125. Defendant’s acts have caused, and will continue to cause, great and irreparable injury to Hermès, and unless such acts are restrained by this Court, he will c ontinue, thereby causing Hermès to continue to suffer great and irreparable injury. Hermès has no adequate remedy at law.
+
+126. Hermès is informed and believes and thereon alleges that Defendant’s infringement is both intentional and egregious.
+
+127. Hermès has no adequate remedy at law a nd are suffering irreparable harm and damage as a result of the aforesaid acts of Defendant in an amount thus far not determined.
+
+128. Upon information and belief, Defendant has obtained gains, profits and advantages as a result of his wrongful acts and will continue to do so in an amount thus far not determined.
+
+SECOND CAUSE OF ACTION
+
+FALSE DESIGNATIONS OF ORIGIN,
+
+FALSE DESCRIPTIONS AND REPRESENTATIONS
+
+15 U.S.C. § 1125(a)
+
+129. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+130. Defendant has, in connection with his goods, used in commerce, and continues to use in commerce, the BIRKIN Mark, the federally registered HERMÈS word mark, and the federally registered BIRKIN Trade Dress which tend falsely to describe the origin, sponsorship, association or approval by Hermès of the META BIRKINS NFTs sold by Defendant, despite repeated requests from Hermès stop such use.
+
+131. Defendants uses the METABIRKINS trademark, the federally registered HERMÈS word mark, and the federally registered BIRKIN Trade Dress with full knowledge of the falsity of such designations of origin, descriptions and representations, all to the detriment of Hermès.
+
+132. Defendant’s use of the METABIRKINS trademark, the federally registered HERMÈS word mark, and the federally registered BIRKIN Trade Dress in connection with the sale and advertising of the infringing METABIRKINS NFTs constitutes false descriptions and representations tending to falsely describe or represent Defe ndant and METABIRKINS NFTs as being authorized, sponsored, affiliated or associated with Hermès.
+
+133. Defendant’s use of the METABIRKINS trademark, the federally registered HERMÈS word mark, and the federally registered BIRKIN Trade Dress in connection with the sale and advertising of the infringing METABIRKINS NFTs misleads the purchasing public and is intended to trade upon the high-quality reputation of Hermès and to improperly appropriate to himself the valuable trademark rights of Hermès.
+
+134. Defendant’s aforesaid acts constitute the use in commerce of false designations of origin and false and/or misleading descriptions or representations, tending to falsely or misleadingly describe and/or represent the M ETABIRKINS NFTs as those of He rmès in violation of Section 43(a) of the Lanham Act, 15 U.S.C. § 1125(a).
+
+135. Defendant’s wrongful acts will continue unless enjoined by this Court.
+
+136. Hermès has no adequate remedy at law and is suffering irreparable harm and damage as a result of the aforesaid acts of Defendant in an amount thus far not determined.
+
+137. Upon information and belief, Defendant has obtained gains, profits and advantages as a result of his wrongful acts in an amount thus far not determined.
+
+THIRD CAUSE OF ACTION
+
+FEDERAL TRADEMARK DILUTION
+
+15 U.S.C. § 1125(c)
+
+138. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+139. Hermès is the exclusive owner of the BIRKIN Mark as seen in Exhibit X.
+
+140. Defendant’s use of the METABIRKINS trademark in connection with the sale and advertising of the infringing METABIRKINS NFTs constitutes Defendant’s use in commerce of the BIRKIN Mark.
+
+141. The BIRKIN Mark has been used for decades, and is so globally recognized and associated with Hermès as the source of BIRKIN handbags that the BIRKIN mark is entitled to be recognized as famous and distinctive under 15 U.S.C. §1125(c).
+
+142. The BIRKIN Mark has come to have a secondary meaning i ndicative of origin, relationship, sponsorship and/or association with Hermès and its distinctive reputation for high quality. The purchasing public is likely to a ttribute to Hermès, De fendant’s use of the METABIRKINS mark as a source of origin, authorization and/or sponsorship for the METABIRKINS NFTs Defendant sells and further, purchase Defendant’s METABIRKINS NFTs in the erroneous belief that Defendant is associated with, sponsored by or affiliated with Hermès, when Defendant is not.
+
+143. Hermès has not authorized or licensed the use of the BIRKIN Mark to Defendant.
+
+144. Defendant’s unauthorized use of the METABIRKINS trademark in his marketing, sale and distribution of the M ETABIRKINS NFTs dilutes the dist inctive quality of the BIRKIN Mark and the goodwill associated with it in violation of Section 43(a) of the Lanham Act, 15 U.S.C § 1125(c).
+
+145. Such conduct has injured He rmès and said injury will continue unless the Court enjoins Defendant from committing further wrongful acts.
+
+146. Upon information and belief, Defendant intentionally an d willfully utilized the BIRKIN Mark to trade on Hermès’ reputation and goodwill.
+
+147. Hermès has no adequate remedy at law and is suffering irreparable harm and damage as a result of the aforesaid acts of Defendant in an amount thus far not determined.
+
+148. Upon information and belief, Defendant has obtained gains, profits and advantages as a result of their wrongful acts in an amount thus far not determined.
+
+FOURTH CAUSE OF ACTION
+
+CYBERSQUATTING UNDER THE ANTI-CYBERSQUATTING CONSUMER
+
+PROTECTION ACT
+
+15 U.S.C. § 1125(d)
+
+149. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+150. The BIRKIN Mark is distinctive and achieved distinctiveness prior to Defendant’s registering the Infringing Domain and prior to Defendant undertaking his infringing acts.
+
+151. The Infringing Domain name is confusingly similar to the BIRKIN Mark.
+
+152. Defendant registered and us es the Infringing Domain to profit from the BIRKIN Mark by advertising the infri nging METABIRKINS NFTs thr ough the Infringing Domain and creating a likelihood of confusion as to the source, sponsorship, affiliation or e ndorsement of Defendant’s website and the METABIRKINS NFTs by Hermès.
+
+153. Defendant’s registration and use of the Infringing Domain is intended primarily to capitalize on the goodwill associated with the BIRKIN Mark.
+
+154. Defendant registered, trafficked in or used the Infringing Domain with bad faith intent to profit from the BIRKIN Mark and the associated goodwill of the BIRKIN Mark.
+
+155. The likely confusion resulting from Defendant’s use of the Infringing Domain has harmed and continues to harm and dilute the distinctiveness of the BIRKIN Mark.
+
+156. Defendant’s registration and use of the Infringing Domain cause consumers to falsely believe that the METABIRKINS Webiste and the infringing METABIRKINS NFTs sold under and in connection with said website are affiliated with, endorsed or approved by Hermès.
+
+157. Hermès has no adequate remedy at law and is suffering irreparable harm and damage as a result of the aforesaid acts of Defendant in an amount thus far not determined.
+
+158. Upon information and belief, Defendant has obtained gains, profits and advantages as a result of his wrongful acts in an amount thus far not determined.
+
+FIFTH CAUSE OF ACTION
+
+INJURY TO BUSINESS REPUTATION AND DILUTION
+
+NEW YORK GENERAL BUSINESS LAW § 360-1
+
+159. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+160. Hermès, on behalf of the general public, as well as for itself seek recovery from Defendant for violation of New York General Business Law § 360-1, et seq.
+
+161. By virtue of Defendant’s unauthorized use of the METABIRKINS trademark, such use trading on the good will associated with Hermès and its BIRKIN Mark, Defendant has misled and will continue to mislead the public into assuming a connection between Hermès and Defendant’s METABIRKINS NFTs.
+
+162. By falsely suggesting a connection with or sponsorship by Hermès, Defendant is likely to cause public confusion constituting unfair competition within the meaning of New York Business Law § 360-1.
+
+163. If such action on the part of Defendant continues, Hermès will suffer irreparable harm of a continuing nature for which there is no adequate remedy at law.
+
+164. Hermès has no adequate remedy at law and is suffering irreparable harm and damage as a result of the aforesaid acts of Defendant in an amount thus far not determined.
+
+165. Upon information and belief, Defendant has obtained gains, profits and advantages as a result of his wrongful acts in an amount thus far not determined.
+
+SIXTH CAUSE OF ACTION
+
+COMMON LAW TRADEMARK INFRINGEMENT
+
+166. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+167. Defendant’s acts previously alleged herein constitute common law trademark infringement.
+
+168. Hermès is without adequate remedy at law, as Defendant’s acts have caused Hermès irreparable harm to its business reputation, good will and stature in the business community.
+
+169. Hermès is informed and believes and thereon alleges that Defendant committed the above alleged acts oppressively, fraudulently, maliciously and in conscious disregard of Hermès’ rights, and Hermès is therefore entitled to exemplary and punitive damages pursuant to the common law of the State of New York in an amount suffic ient to punish, deter a nd make an example of Defendant.
+
+170. The manufacture, distribution and sale of the unauthorized and infringing METABIRKINS NFTs by Defendant are without any permission, license or other authorization from Hermès. The said unauthorized METABIRKINS NFTs are being distributed and sold in interstate commerce.
+
+171. Hermès has no adequate remedy at law and is suffering irreparable harm and damage as a result of the aforesaid acts of Defendant in an amount thus far not determined.
+
+172. Upon information and belief, Defendant has obtained gains, profits and advantages as a result of his wrongful acts in an amount thus far not determined.
+
+SEVENTH CAUSE OF ACTION
+
+MISAPPROPRIATION AND UNFAIR COMPETITION
+
+UNDER NEW YORK COMMON LAW
+
+173. Hermès repeats and realleges the allegations of the previous paragraphs as though fully set forth herein.
+
+174. Hermès owns protectable common law trademark rights in New York, in and to the BIRKIN Mark.
+
+175. Upon information and belief, Defendant in tended to misappropr iate the BIRKIN Mark when adopting the METABIRKINS trademark to create the association in the minds of consumers that the METABIRKINS NFTs are associated with Hermès’ and its BIRKIN handbags.
+
+176. Defendant’s misappropriation and use of the METABIRKINS trademark without Hermès’ consent or authorization to sell and distribute the METABIRKINS NFTs in New York is likely to cause confusion and mistake in the minds of the public, leading the public to believe that the METABIRKINS NFTs emanate or originate from Hermès, or that Hermès has approved, sponsored or otherwise associated itself with Defendant, which is untrue.
+
+177. Defendant’s aforesaid acts constitute misappropriation and infringement of Hermès’ property rights, goodwill and reputation and unfair competition under the common law of the State of New York.
+
+PRAYER FOR RELIEF
+
+WHEREFORE, Hermès demands judgment against Defendant as follows:
+
+1. Entering a judgment declaring that:
+
+A. Hermès’ Federally Registered Trademarks have been and continue to be infringed by Defendant in violation of 15 U.S.C. §1114(1);
+
+B. Defendant’s use of the METABIRKINS mark constitutes federal unfair competition in violation of 15 U.S.C. §1125(a);
+
+C. Defendant’s use of the METABIRKINS mark constitutes dilution by blurring in violation of 15 U.S.C. §1125(c);
+
+D. Defendant had a bad faith intent to profit from the BIRKIN Mark and Defendant’s use of the Infringing Domain constitutes cybersquatting in violation of 15 U.S.C. §1125(d);
+
+E. Defendant’s use of the METABIRKINS mark violates New York General Business Law § 360-1, New York common law trademark infringement, and New York unfair competition laws;
+
+2. That a permanent injunction be issued enjoining and restraining Defendant and his agents, servants, employees and attorneys and all those in active concert or participation with him, from:
+
+A. Using any reproduction, copy, counterfeit, or colorable imitation of Hermès’ Federally Registered Trademarks to identify any goods or the rendering of any services not authorized by Hermès;
+
+B. Engaging in any course of conduct likely to cause confusion, deception or mistake, or to injure Hermès’ business reputation or dilute the distinctive quality of Hermès’ name and Hermès’ Federally Registered Trademarks;
+
+C. Using a false description or representation including words or other symbols tending to falsely describe or represent Defendant’s unauthorized goods as being those of Hermès or sponsored by or associated with Hermès and from offering such goods into commerce;
+
+D. Further infringing Hermès’ Federa lly Registered Trademarks by manufacturing, producing, distributing, circulating, sell ing, marketing, offering for sale, advertising, promoti ng, renting, displaying or otherwise disposing of any products not authorized by Hermès bearing any simulation, reproduction, counterfeit, copy or colorable imitation of Hermès’ Federally Registered Trademarks;
+
+E. Using any simulation, reproduction, counterfeit, copy or colorable imitation of Hermès’ Federally Registered Trademarks in connection with the rental, promotion, advertisement, display, sa le, offering for sale, manufacture, production, circulation or distribution of any unauthorized products in such fashion as to relate or connect, or tend to relate or connect, such products in any way to Hermès, or to any goods sold, manufactured, sponsored or approved by, or connected with He rmès, including but not limited to publishing links to www.hermes.com;
+
+F. Making any statement or representati on whatsoever, or using any false designation of origin or false description, or performing any act, which can or is likely to lead the trade or public, or individual members thereof, to believe that any products manufactured, distributed, sold or rented by Defendant are in any manner associated or connected with Hermès, or is sold, manufactured, licensed, sponsored, approved or authorized by Hermès;
+
+G. Constituting an infringement of any of Hermès’ Federally Registered Trademarks or of Hermès’ rights in, or to use or to exploit, said Registered Trademarks, or constituting any dilu tion of Hermès’ name, reputation or goodwill;
+
+H. Secreting, destroying, altering, removi ng, or otherwise dealing with the unauthorized products or any books or records which contain any information relating to the importing, manufacturing, producing, distributing, circulating, selling, marketing, offering for sale, advertising, promoting, renting or displaying of all unauthorized produc ts which infringe Hermès’ Federally Registered Trademarks;
+
+I. Selling, offering for sale, or advertising any merchandise bearing Hermès’ Federally Registered Trademarks on the Internet or in e-commerce, including but not limited to all forms of social media; and
+
+J. Effecting assignments or transfers, for ming new entities or associations or utilizing any other device for the purpose of circ umventing or otherwise avoiding the prohibitions set forth in subparagraphs (A) through (I).
+
+3. Directing that Defendant deliver up for destruction to Hermès all unauthorized products and advertisements in his possession or under his control bearing any of Hermès’ Federally Registered Trademarks or any si mulation, reproduction, counterfeit, copy or colorable imitation thereof pursuant to 15 U.S.C. §1118.
+
+4. Directing Defendant to transfer the Infringing Domain name to Hermès.
+
+5. Directing Defendant to refrain from registering, using, or trafficking in any domain names or social media or NFT platform user name s or handles that are id entical or confusingly similar to Hermès’ Federally Registered Trademarks, including but not limited to names containing Hermès’ Federally Registered Trademarks and domain names containing misspellings of Hermès’ Federally Registered Trademarks.
+
+6. Directing such other relief as the Court may deem appropriate to prevent the trade and public from deriving any erroneous impression that any products manufactured, sold or otherwise circulated or promoted by Defendant are authorized by Hermès or related in any way to Hermès’ products.
+
+7. Directing Defendant, within thirty (30) days after the service of judgment upon it, with notice of entry thereof, to file with the Court, and serve upon Hermès, a written report under oath setting forth in detail the manner in which Defendant has complied with paragraphs I through IV above.
+
+8. Awarding to Hermès Defendant’s profits fro m his unlawful acts herein alleged as Defendant’s total sales of the METABIRKINS NFTs less any elements of cost or deductions proved by Defendant and allowed by law.
+
+9. Awarding to Hermès the damages from Defendant’s unlawful acts herein alleged.
+
+10. Awarding to Hermès statut ory damages of $100,000 for Defendant’s violation of 15 U.S.C. § 1125(d)(1) pursuant to 15 U.S.C. § 1117(d).
+
+11. Pursuant to 15 U.S.C. § 1117(a), directing Defendant to pay Hermès all of the profits assessed pursuant to paragraph VI, supra, together with three times the amount of damages assessed pursuant to paragraph VII, supra, with prejudgment interest on the foregoing sums.
+
+12. Ordering that Hermès recover the costs of this action together with reasonable attorneys’ and investigators’ fees and prejudgment interest in accordance with 15 U.S.C. § 1117.
+
+13. Directing that this Court retain jurisdiction of this action for the purpose of enabling Hermès to apply to the Court at any time for such further orders and interpretation or execution of any order entered in this action, for the modification of any such order, for the enforcement or compliance therewith and for the punishment of any violations thereof.
+
+14. Awarding to Hermès such other and further relief as the Court may deem just and proper, together with the costs and disbursements which Hermès has incurred in connection with this action.
+
+DEMAND FOR JURY TRIAL
+
+Plaintiff hereby demands a trial by jury on all claims and issues so triable.
+
+
+===== DOCUMENT 2: Memorandum of Law in Support of Motion to Dismiss the Complaint (Doc. 17; motion at Doc. 16), filed 2022-02-09 =====
+Source: https://storage.courtlistener.com/recap/gov.uscourts.nysd.573363/gov.uscourts.nysd.573363.17.0.pdf
+Note: Mason Rothschild moved to dismiss under Rule 12(b)(6) (Rogers v. Grimaldi / First Amendment) before answering; this is his opening memorandum against the original complaint. Full text, PDF-extracted (table of contents, table of authorities, page headers, ECF stamps and signature block removed).
+
+UNITED STATES DISTRICT COURT
+
+SOUTHERN DISTRICT OF NEW YORK
+
+HERMÈS INTERNATIONAL and
+
+HERMÈS OF PARIS, INC.,
+
+Plaintiffs, v.
+
+MASON ROTHSCHILD,
+
+Defendant.
+
+No. 22-cv-00384-AJN-GWG ECF Case
+
+MEMORANDUM OF LAW IN SUPPORT OF DEFENDANT MASON ROTHSCHILD’S
+
+MOTION TO DISMISS THE COMPLAINT
+
+February 9, 2022 Rebecca Tushnet Rhett O. Millsaps II Christopher J. Sprigman
+
+LEX LUMINA PLLC
+
+745 Fifth Avenue, Suite 500 New York, NY 10151 Tel: (646) 898-2055 Email: rhett@lex-lumina.com Attorneys for Defendant Mason Rothschild
+
+Defendant Mason Rothschild submits this memorandum in support of his motion to dismiss the complaint of Plaintiffs Hermès International and Hermès of Paris, Inc. (“Hermès”) in its entirety for failure to state a claim pursuant to Federal Rule of Civil Procedure 12(b)(6).
+
+PRELIMINARY STATEMENT
+
+Mason Rothschild is an artist who has created a series of digital artworks that depict and comment on Hermès’ “Birkin” handbags. Each of the 100 works in Rothschild’s “MetaBirkins” series is a unique, fanciful interpretation of a Birkin bag. Rothschild’s art is made with pixels, but the bags are depicted as fur covered. This aspect of Rothschild’s MetaBirkins art comments on the animal cruelty inherent in Hermès’ manufacture of its ultra-expensive leather handbags. These images, and the NFTs that authenticate them, are not handbags; they carry nothing but meaning. Hermès asks this Court to suppress Rothschild’s art and to restrain his protected speech in the service of protecting Hermès’ commercial interest in its trademarks. Hermès’ claims should be dismissed as a matter of law. Under well-settled Second Circuit precedent, now followed by many other circuits, Rothschild has every right to make and sell art that depicts branded products. See Rogers v. Grimaldi, 875 F.2d 994 (2d Cir. 1989). That same law gives Rothschild the right to identify his depictions of Birkin bags as “MetaBirkins”— a name that both refers to the context in which he makes the art available (i.e., the online, virtual environment popularly dubbed the “Metaverse”) and alludes to his artwork’s “meta” commentary on the Birkin bag and the fashion industry more generally. Under Rogers, Hermès’ claims are straightforwardly defective. Hermès hopes to confuse matters by emphasizing that Rothschild sells his digital artwork by way of non-fungible tokens (NFTs). But Rothschild’s art does not lose its First Amendment protection just because he sells it: almost every case in which courts have applied Rogers—including Rogers itself—has involved speech that was sold. And the fact that Rothschild sells each digital artwork with an NFT, the technological means by which Rothschild authenticates his artworks, makes no difference: Rothschild’s First Amendment rights do not depend on how he sells his art any more than they depend on whether he sells it.
+
+The bottom line here is that Hermès wants to stop Rothschild from creating fanciful pictures that comment on its handbags, from calling those artworks “MetaBirkins,” and from promoting those artworks. But trademark law does not give Hermès control over Rothschild’s art. Nor can it. The First Amendment guarantees his right to respond in the marketplace of ideas to the inescapable corporate brand messages by which we are bombarded every day, virtually everywhere we look.
+
+FACTUAL BACKGROUND
+
+Hermès is a designer, producer, and international purveyor of luxury goods, including handbags, apparel, scarves, jewelry, fashion accessories, and home furnishings. Complaint (Dkt. No. 1) (“Compl.”) ¶¶ 19-24.1 Hermès sells “Birkin” handbags at prices that range from “from thousands of dollars to over one hundred thousand dollars.” Id. ¶ 29. Hermès boasts that its Birkin handbag has become a “symbol of rarefied wealth” and has “withstood trends and WEATHERED SEASONS to become an INDELIBLE PART of the CULTURE.” Id. ¶¶ 32, 35 & Exs. F, H (emphasis in original). Hermès owns trademark rights in the Hermès and Birkin marks and trade dress rights in the Birkin handbag design. Id. ¶¶ 26-28. Rothschild is an artist who resides in California. In or around May 2021, Rothschild created and sold a digital artwork that he called “Baby Birkin,” a digital image depicting a 40- 1 Solely for the purposes of this motion to dismiss, Rothschild does not dispute facts alleged in the Complaint.
+
+week-old fetus gestating inside of a transparent Birkin handbag. Id. ¶¶ 53-54, Fig. 3. Rothschild sold the “Baby Birkin” artwork as a digital image online connected to a digital non-fungible token (NFT); the work initially sold for $23,500 and then resold for $47,000. Id. NFTs are “unique and non-fungible (i.e., non-interchangeable) units of data stored on a blockchain just as cryptocurrencies (which are fungible) are stored on a blockchain.” Id. ¶ 2. NFTs “can be created to transfer ownership of any physical thing or digital media, including an actual handbag or the image of a handbag.” Id. Merriam-Webster defines an NFT as “a unique digital identifier that cannot be copied, substituted, or subdivided, that is recorded in a blockchain, and that is used to certify authenticity and ownership (as of a specific digital asset and specific rights relating to it),” and also as “the asset that is represented by a non-fungible token.”2 In or around December 2021, Rothschild created and sold a series of digital artworks that he called “MetaBirkins.” Id. ¶¶ 56-57. Each of the 100 images in Rothschild’s “MetaBirkins” series is a unique, fanciful interpretation of a Birkin bag. While Rothschild’s art is made with pixels and exists only online, the images he creates depict the bags as fur covered—in contrast to actual Birkin handbags, which are made from the tanned hides of slaughtered animals. Id. ¶¶ 29, 56-57, Fig. 4 & Ex. S. As with “Baby Birkin,” Rothschild sold his “MetaBirkins” artworks using NFTs. Id. ¶¶ 56-57. Thus, the NFTs at issue here signify ownership of an image of a handbag. Id. Notably, Hermès does not allege that Rothschild has ever made, offered, or distributed any physical handbags using the Birkin name or trade dress. 2 “Non-fungible token.” Merriam-Webster.com Dictionary, Merriam-Webster, https://www.merriam-webster.com/dictionary/non-fungible%20token. Accessed 9 Feb. 2022. See Everdry Marketing and Management, Inc. v. Delves & Giufre Enterprises, Inc., 319 F. Supp. 3d 626, 632 n.1 (W.D.N.Y. 2018) (taking judicial notice of dictionary definitions).
+
+ARGUMENT
+
+I. THE STANDARD FOR A MOTION TO DISMISS
+
+When deciding a motion to dismiss for failure to state a claim pursuant to Federal Rule of Civil Procedure 12(b)(6), the Court must accept as true all well-pleaded facts alleged in the complaint that “plausibly give rise to an entitlement for relief.” Ashcroft v. Iqbal, 556 U.S. 662, 679 (2009). “Threadbare recitals of the elements of a cause of action, supported by mere conclusory statements, do not suffice” to withstand a motion to dismiss. Id. at 678. “In considering a motion to dismiss for failure to state a claim pursuant to Rule 12(b)(6), a district court may consider the facts alleged in the complaint, documents attached to the complaint as exhibits, and documents incorporated by reference in the complaint.” DiFolco v. MSNBC Cable LLC, 622 F.3d 104, 111 (2d Cir. 2010) (citing Chambers v. Time Warner, Inc., 282 F.3d 147, 153 (2d Cir. 2002)). The Court may also consider a document that is not incorporated by reference “where the complaint ‘relies heavily upon its terms and effect,’ thereby rendering the document ‘integral’ to the complaint.” Id. (quoting Mangiafico v. Blumenthal, 471 F.3d 391, 398 (2d Cir. 2006)).
+
+II. HERMÈS’ TRADEMARK INFRINGEMENT CLAIMS MUST BE DISMISSED
+
+UNDER THE SECOND CIRCUIT’S HOLDING IN ROGERS v. GRIMALDI Rothschild’s fanciful depictions of fur-covered Birkin bags and his identification of his artworks as “MetaBirkins” are artistically relevant and do not explicitly mislead about their source or content. Hermès’ claims therefore must be dismissed under Rogers v. Grimaldi. In Rogers, the Second Circuit rejected a claim by legendary actress and dancer Ginger Rogers that the use of her name in the title of the motion picture Ginger and Fred infringed her rights in her name. 875 F.2d 994. The Rogers court held that where the defendant’s product is artistic or expressive, the Lanham Act must be interpreted “narrowly in order to avoid suppressing protected speech under the First Amendment.” Id. at 998; see also id. (“Titles, like the artistic works they identify, are of a hybrid nature, combining artistic expression and commercial promotion. The title of a movie may be both an integral element of the film-maker’s expression as well as a significant means of marketing the film to the public. The artistic and commercial elements of titles are inextricably intertwined.”).3 Rogers offers a clear rule: “[I]n general the [Lanham] Act should be construed to apply to artistic works only where the public interest in avoiding consumer confusion outweighs the public interest in free expression.” Id. at 999. As the Second Circuit explained, “that balance will normally not support application of the [Lanham] Act unless [the use of the trademark] has no artistic relevance to the underlying work whatsoever, or if it has some artistic relevance, unless [the use of the trademark] explicitly misleads as to the source or content of the work.” Id. (emphasis added).
+
+While Rogers focused specifically on the use of a celebrity’s name in the title of a film, the Second Circuit has since held that “the Rogers balancing approach is generally applicable to Lanham Act claims against works of artistic expression.” Cliffs Notes v. Bantam Doubleday Dell Publ. Group, 886 F.2d 490, 495 (2d Cir. 1989) (reversing as a matter of law district court injunction against “Spy Notes” parody of “Cliffs Notes”); see also AM General LLC v.
+
+3 Whenever the commercial aspects of a work are intertwined with artistic content, the First Amendment dictates that the trademark-using speech must be treated as noncommercial. Riley v. Nat’l Fed’n of the Blind of N.C., Inc., 487 U.S. 781, 796 (1988) (“[W]e do not believe that the speech retains its commercial character when it is inextricably intertwined with otherwise fully protected speech”); Mattel, Inc. v. MCA Records, Inc., 296 F.3d 894, 906-07 (9th Cir. 2002) (the commercial purpose of using “Barbie” in a song title was “inextricably intertwined” with the “expressive elements” of the song) (citations omitted); Parks v. LaFace Records, 329 F.3d 437, 449 (6th Cir. 2003) (“[I]f a song is sold, and the title is protected by the First Amendment, the title naturally will be ‘inextricably intertwined’ with the song’s commercial promotion.”) (citations omitted).
+
+Activision Blizzard, Inc., 450 F. Supp. 3d 467, 477 (S.D.N.Y. 2020) (applying Rogers to appearance of distinctive vehicle in videogame and granting summary judgment to defendant); Louis Vuitton Malletier S.A. v. Warner Bros. Entm’t, 868 F. Supp. 2d 172 (S.D.N.Y. 2012) (applying Rogers to use of fake Louis Vuitton bag in a movie, and to character’s reference to that bag as a “Lewis Vuitton,” and granting defendant’s motion to dismiss).4 Rogers has been widely adopted in other circuits, and courts have uniformly extended its rule beyond titles to cover all uses in the content of noncommercial speech—that is, speech that, while sold for profit, does more than simply propose a commercial transaction. Bolger v. Youngs Drug Prod’s Corp., 463 U.S. 60, 66 (1983). See, e.g., VIP Products LLC v. Jack Daniel’s Properties, Inc., 953 F.3d 1170 (9th Cir. 2020) (applying Rogers to for-profit parody dog toys designed to look like Jack Daniel’s bottles); Twentieth Century Fox Television v. Empire Dist. Inc., 875 F.3d 1192, 1198 (9th Cir. 2017) (affirming summary judgment for defendant in case involving use of trademark in name of for-profit television series and related merchandise: “The only threshold requirement for the Rogers test is an attempt to apply the Lanham Act to First Amendment expression”); Radiance Found., Inc. v. NAACP, 786 F.3d 316, 329 (4th Cir. 2015) (vacating district court’s Lanham Act preliminary injunction against use of trademarks to criticize trademark owner); Brown v. Elec. Arts, Inc., 724 F.3d 1235, 1241-42 (9th Cir. 2013) (affirming dismissal of Lanham Act claims involving defendant’s use of plaintiff’s likeness in for-profit video games); Univ. of Alabama Bd. of Tr. v. New Life Art, Inc., 683 F.3d 1266, 1278 (11th Cir. 2012) (rejecting Lanham Act claims against paintings, prints, and calendars that depicted a university’s football uniforms and were sold for profit); Mattel, Inc. v. Walking 4 The movie at issue in Rogers was about fictional characters nicknamed Ginger and Fred, so the movie itself made substantial use of Rogers’ name. Indeed, the content of the movie was the reason the title was artistically relevant. Rogers, 875 F.2d at 1001.
+
+Mountain Prods., 353 F.3d 792, 796 (9th Cir. 2003) (rejecting Lanham Act claims based on use of “Barbie” trademark and trade dress in title and content of photograph series sold for profit); ETW Corp. v. Jireh Publ’g, Inc., 332 F.3d 915, 928 (6th Cir. 2003) (rejecting Lanham Act claims based on use of trademark in for-profit artwork, packaging, and narrative accompanying artwork); E.S.S. Ent 2000, Inc. v. Rock Star Videos, Inc., 547 F.3d 1095, 1099 (9th Cir. 2008) (rejecting Lanham Act claims against for-profit video game: application of Rogers test is not dependent on the identifying material appearing in the title but “also appl[ies] to the use of a trademark in the body of the work”); MCA, 296 F.3d at 902 (rejecting trademark claims based on use of “Barbie” trademark in for-profit song title and content). Courts’ use of Rogers to assess trademark claims relating to the content of expressive works in addition to their titles is only logical. Compared to titles, consumers are even less likely to be misled regarding source or sponsorship by the expressive content of a work, diminishing the consumer protection interest at stake. On the other side of the balance, the First Amendment interest in choosing relevant aspects of the world to depict in the substance of a work is at least as weighty as the interest in choosing a title. Cf. Cohen v. California, 403 U.S. 15, 26 (1971) (“[W]e cannot indulge the facile assumption that one can forbid particular words without also running a substantial risk of suppressing ideas in the process.”) Rogers thus applies to Hermès’ claims regarding Rothschild’s digital artwork depicting and commenting on Birkin bags, his use of “MetaBirkins” as the name of his art project, and his use of that name to refer to his artworks and art projects on Instagram, Twitter, and elsewhere. Under Rogers, all of Rothschild’s uses are protected: they are artistically relevant and not explicitly misleading.
+
+A. Rothschild’s Depictions of Birkin Bags and Use of the “MetaBirkins” Name are Artistically Relevant.
+
+Under the first prong of the Rogers test, “courts must determine whether the use of the trademark has any artistic relevance whatsoever.” AM General, 450 F. Supp. 3d at 477 (quoting Rogers, 875 F.2d at 999). As courts in this Circuit have repeatedly noted, the requirement of minimal artistic relevance “is not unduly rigorous out of the understanding that the ‘overextension of Lanham Act restrictions … might intrude on First Amendment values.’” Id. (quoting Rogers, 875 F.2d at 998); see also Rogers, 875 F.2d at 999 (describing the “appropriately low threshold of minimal artistic relevance”); Louis Vuitton, 868 F. Supp. 2d at 178 (describing the artistic relevance threshold as “purposely low”). According to the Ninth Circuit, which adopted Rogers and has applied it to a wide range of noncommercial speech, artistic relevance must simply be “more than zero.” See, e.g., E.S.S., 547 F.3d 1095. See also Brown, 724 F.3d at 1245 (“This black-and-white rule has the benefit of limiting [a court’s need] to engage in artistic analysis in this context.”). There can be no doubt that Rothschild’s depictions of Birkin bags in his artwork, and the use of the “MetaBirkins” name to explain what he has depicted, easily exceed this low threshold of artistic relevance. Artists generally are free to choose the topics they address and to depict objects that exist in the world as they see them. Rothschild’s fanciful “MetaBirkins” depict furry Birkin bags, reflecting his comment on the fashion industry’s animal cruelty and the movement to find leather alternatives. The digital images invite viewers to consider the difference between the material objects—made of animal skins in reality—and the fantasized, immaterial images with their faux fur. Rothschild’s images show luxury with no function but communication, luxury emptied of anything but its own image, calling into question what it is that luxury lovers actually pay for. Rothschild is not attacking the Birkin, but inviting consideration of its meaning as an image, rather than as a handbag.
+
+Well-known brands have long been the subject of such artistic reflection and commentary. Andy Warhol famously depicted iconic brands, including Campbell’s Soup and Coca-Cola, in stylized but plainly recognizable form.
+
+Warhol was one of many pop artists who depicted branded products, and brands remain highly relevant to contemporary artists. In fact, the significance of branding to popular culture has only grown, making brands even larger parts of our common cultural vocabulary. As Judge Furman recognized in a case about a commercial product that parodied Louis Vuitton, the message of invoking a well-known luxury brand derives from “the features of the [product] itself, society’s larger obsession with status symbols, and the meticulously promoted image of expensive taste (or showy status) that Louis Vuitton handbags have, to many, come to symbolize.” Louis Vuitton Malletier, S.A. v. My Other Bag, Inc., 156 F. Supp. 3d 425, 436 (S.D.N.Y. 2016), aff’d, 674 Fed.Appx. 16 (2d Cir. 2016) (emphasis in original).
+
+An artist’s choice of which brands to depict is itself a reflection of that artist’s view of the world, and art reproducing brands can illuminate how much power brands have over people in our society. See MCA, 296 F.3d at 900 (recognizing the importance of brand references in modern social discourse); Stacey L. Dogan & Mark A. Lemley, Parody as Brand, 47 U.C. DAVIS
+
+L. REV. 473, 486 (2013) (speech about brands is “a valuable form of social commentary” that “invites critical reflection on the role of brands in society and the extent to which we define ourselves by them”) (footnotes omitted); Alex Kozinski, Trademarks Unplugged, 68 N.Y.U. L. REV. 960, 973 (1993) (“Trademarks are often selected for their effervescent qualities, and then injected into the stream of communication with the pressure of a firehose by means of mass media campaigns. Where trademarks come to carry so much communicative freight, allowing the trademark holder to restrict their use implicates our collective interest in free and open communication.”).
+
+As controlling case law in this Circuit makes clear, the artist’s choice of subject matter determines artistic relevance. In Rogers, the Second Circuit held the title “Ginger and Fred” artistically relevant because the central characters in the film were nicknamed “Ginger” and “Fred.” 875 F.2d at 1001. Importantly, the film was not about Ginger Rogers and Fred Astaire— the characters were fictional and the filmmaker could have chosen different names, but the names were “not arbitrarily chosen just to exploit the publicity value of their real-life counterparts but instead ha[d] genuine relevance to the film’s story.” Id.; see also id. at 998 (“Filmmakers and authors frequently rely on word-play, ambiguity, irony, and allusion in titling their works. Furthermore, their interest in freedom of artistic expression is shared by their audience. The subtleties of a title can enrich a reader’s or viewer’s understanding of a work.”). Indeed, because use of Ginger Rogers’ name was clearly artistically relevant and did not explicitly mislead, the court rejected her claim despite survey and anecdotal evidence of consumer confusion. Id. at 1001; see also id. at 997 (discussing publicists’ initial misunderstanding of the movie).
+
+Similarly, in Louis Vuitton, the court considered the use of a knock-off Louis Vuitton bag coupled with a character’s humorous mispronunciation of the brand in the movie The Hangover: Part II. 868 F. Supp. 2d at 178. In concluding that the use met the “low threshold” of artistic relevance, the court noted that the brief scene was able to effectively portray the character as “snobbish” and “socially inept and comically misinformed” precisely “because the public signifies Louis Vuitton . . . with luxury and a high society lifestyle.” Id.; see also Walking Mountain, 353 F.3d at 807 (finding “Food Chain Barbie” and the titles of specific works referencing Barbie artistically relevant because they referred to artist’s photographs, which depicted Barbie and targeted the doll with the artist’s message, which although somewhat vague, was clearly about Barbie).
+
+While NFTs could, in theory, be used to authenticate the ownership of anything— including cars or monkeys or other assets having nothing to do with Hermès—here Hermès pleads that these NFTs are attached to images of MetaBirkins, which are artistic renderings of Birkin bags. This is precisely what artistic relevance is about.
+
+B. Rothschild’s Use is not Explicitly Misleading.
+
+1. Explicitly Means Explicitly.
+
+Where the use of a trademark has some artistic relevance, as it does here, Rogers provides that the Lanham Act can be applied only if the use of the trademark “explicitly misleads as to the source of the work.” 875 F.2d at 999. But where the “artistic relevance” test set a low bar, this exception sets a high bar. Specifically, for the Lanham Act to apply to an expressive work, the use must be explicitly misleading; implicit suggestions are not enough. In Rogers, the Second Circuit gave examples that illustrate the narrowness of the concept of “explicitly misleading.” Explicitly misleading titles would be “Nimmer on Copyright” for a treatise that was not authored by Nimmer, or “Jane Fonda’s Workout Book” for a book Jane Fonda had nothing to do with. Id. Likewise, titles containing references that explicitly signified endorsement—e.g.,“an authorized biography”—might warrant a Lanham Act claim, even if the title had some artistic relevance. Id.
+
+The Rogers court contrasted those explicitly misleading uses with the “many titles” that “include a well-known name without any overt indication of authorship or endorsement—for example, the hit song ‘Bette Davis Eyes,’ and the film ‘Come back to the Five and Dime, Jimmy Dean, Jimmy Dean.’” Id. “To some people, th[o]se titles might implicitly suggest that the named celebrity had endorsed the work or had a role in producing it.” Id. at 999-1000. But, the court made clear, “the slight risk that such use of a celebrity’s name might implicitly suggest endorsement or sponsorship to some people is outweighed by the danger of restricting artistic expression, and the Lanham Act is not applicable.” Id. at 1000. As the Ninth Circuit has explained:
+
+If we see a painting titled ‘Campbell's Chicken Noodle Soup,’ we're unlikely to believe that Campbell's has branched into the art business. Nor, upon hearing Janis Joplin croon “Oh Lord, won't you buy me a Mercedes–Benz?,” would we suspect that she and the carmaker had entered into a joint venture. A title tells us something about the underlying work but seldom speaks to its origin.
+
+MCA, 296 F.3d at 902.
+
+These examples make clear that explicit misleadingness cannot be established by use of the mark alone. Indeed, “if the use of a mark alone were sufficient ‘it would render Rogers a nullity.’” Brown, 724 F.3d at 1245 (quoting MCA, 296 F.3d at 902); see also E.S.S., 547 F.3d at 1100 (“[T]he mere use of a trademark alone cannot suffice to make such use explicitly misleading.”); Dr. Seuss Enters., L.P. v. Comicmix LLC, 983 F.3d 443, 462-63 (9th Cir. 2020) (concluding that the copying of distinctive elements of Dr. Seuss books was not explicitly misleading where the actual creator was disclosed). For these reasons, Rothschild’s titling of his artwork as “MetaBirkins” cannot, in itself, be “explicitly misleading,” even if it were true that some people might take the name to implicitly suggest that Hermès had “endorsed the work or had a role in producing it.” Rogers, 875 F.2d at 999-1000. Rogers specifically held that, where there is a “mixture of meanings, with the possibly misleading meaning not the result of explicit misstatement,” there is no claim under the Lanham Act. Id. at 1001.
+
+In sum, Rogers “insulates from restriction titles [and works] with at least minimal artistic relevance that are ambiguous or only implicitly misleading.” Id. at 1000. And even when the artist is referring to the trademark claimant (as in Rogers itself), a use is ambiguous when it requires the reader to draw an inference that there is a sponsorship or endorsement relationship between the parties, rather than making that assertion explicitly and directly.5 5 Courts’ treatment of this distinction between explicit and implicit claims in Lanham Act § 43(a)(1)(B) false advertising cases is consistent with the treatment of ambiguity in Rogers and can further guide the analysis here. Cf. Time Warner Cable, Inc. v. DIRECTV, Inc., 497 F.3d 144, 158 (2d Cir. 2007) (“[O]nly an unambiguous message can be explicitly false. Therefore, if the language or graphic is susceptible to more than one reasonable interpretation, the[n it] . . . cannot be literally false.”); United Indus. Corp. v. Clorox Co., 140 F.3d 1175, 1181 (8th Cir. 1998) (“The greater the degree to which a message relies upon the viewer or consumer to integrate its components and draw the apparent conclusion, . . . the less likely it is that a finding of literal falsity will be supported. Commercial claims that are implicit, attenuated, or merely suggestive usually cannot be characterized as literally false.”); Suzie’s Brewery Co. v. Anheuser- Busch Cos., 519 F. Supp. 3d 839, 846 (D. Or. 2021) (“[I]f the language . . . is susceptible to more than one reasonable interpretation, the advertisement cannot be literally false.”); Smith-Kline Beecham Consumer Healthcare, L.P. v. Johnson & Johnson-Merck Consumer Pharms. Co., No.
+
+There is nothing explicitly misleading about Rothschild’s depictions of Birkin bags or his use of the “MetaBirkins” name as the title of his art project. Nor is Rothschild’s use of the term on his website, his Instagram page, or his Twitter feed explicitly misleading. Indeed, as the screenshot below shows, the landing page of the MetaBirkins website clearly identifies MetaBirkins as Mason Rothschild’s art project, in partnership with Basic.Space (not Hermès), and it describes the MetaBirkins as “inspired by the acceleration of fashion’s ‘fur free’ initiatives and embrace of alternative textiles.”
+
+Compl. ¶ 64, Fig. 5.
+
+Hermès misrepresents the content of Rothschild’s website by alleging that “the advertising slogan ‘NOT YOUR MOTHER’S BIRKIN,’” which appears as animated text over images of MetaBirkins, “does not always appear and at times only the BIRKIN Mark is prominently displayed.” Compl. ¶¶ 66-67. But as the Court can easily see by visiting www.metabirkins.com/notyourmothersbirkin, the image Hermès includes in its complaint as 1 Civ. 2775 (DAB), 2001 WL 588846, at *8 (S.D.N.Y. June 1, 2001) (same; ads with “several plausible meanings” cannot be explicitly false).
+
+Figure 7 is highly misleading. Because the text of “NOT YOUR MOTHER’S BIRKIN” is animated, and because each of those words appears over a single image, the only way that the screen would appear as represented by Hermès would be if someone hovered over only the two images to the far right of the screen and never moved their cursor. Hermès manufactured an image that is unrepresentative of the website in order to make it appear misleading. See, e.g., Brown v. Showtime Networks, Inc., 394 F. Supp. 3d 418, 436 (S.D.N.Y. 2019) (content of film integral to infringement complaint; “The Court will consider the film itself—not the parties’ characterizations of what it shows.”).
+
+Nor is there anything explicitly misleading about the social media accounts for the MetaBirkins art project:
+
+Compl. ¶¶ 91, 94, Figs. 16, 18.
+
+Any inference a consumer might draw about the relationship between the “MetaBirkins” artworks and Hermès is not due to anything that is “explicitly misleading” in Rothschild’s uses of the term “MetaBirkins,” and, as a consequence, Rothschild’s First Amendment speech rights must take precedence over Hermès’ trademark complaints.6
+
+2. Explicit Misleadingness is Not a Function of Confusion.
+
+Whether the defendant’s use of the mark is explicitly misleading is not a function of the amount of possible confusion. Some lower courts in this Circuit have cited Twin Peaks Productions, Inc. v. Publ’ns Intern., Ltd., 996 F.2d 1366 (2d Cir. 1993), for the proposition that explicit misleadingness must be assessed, in the first instance, by way of the Polaroid factors. See, e.g., Louis Vuitton, 868 F. Supp. 2d at 179. But Twin Peaks involved a situation that Rogers itself clearly exempted from the Rogers rule: cases of title-versus-title conflicts. The Twin Peaks “quick look” Polaroid approach applies, by its own terms, when the plaintiff claims rights in an artistic work, not a consumer good like a handbag. Rogers itself did not perform even a “quick look” Polaroid analysis. Instead, Rogers rejected Rogers’ claim despite survey evidence showing that a not insubstantial percentage of the public did tend to misunderstand Rogers’ involvement in the film, because that misunderstanding was “not engendered by any overt claim.” 875 F.2d at 1001; cf. Brown, 724 F.3d at 1245 (holding that survey evidence showing that the majority of consumers believe that identifying marks cannot be included in games without permission “changes nothing” in the Rogers analysis in the absence of an explicitly misleading affirmative claim).7 As the Ninth Circuit said, “[t]he [Rogers] test requires that the use be explicitly 6 Even if Rogers did not apply, the First Amendment would require a remedy other than suppression of speech, such as a disclaimer. The First Amendment protects similar titles against confusion claims where the speaker provides means to distinguish the works. See Cliffs Notes, 886 F.2d at 496; Yankee Publ’g Inc. v. News America Publ’g Inc., 809 F. Supp. 267, 279-80 (S.D.N.Y. 1992).
+
+7 Even when courts have performed a “quick look” Polaroid analysis, they have been clear that the likelihood of confusion must be “particularly compelling” to outweigh the First Amendment interests in artistic expression. See Twin Peaks, 996 F.2d at 1379.
+
+misleading to consumers. To be relevant, evidence must relate to the nature of the behavior of the identifying material's user, not the impact of the use.” Brown, 724 F.3d at 1245-46; Twentieth Century Fox, 875 F.3d at 1199 (“To fail the second prong of the Rogers test, it is key that the creator must explicitly mislead consumers. We must ask not only about the likelihood of consumer confusion but also whether there was an explicit indication, overt claim, or explicit misstatement that caused such consumer confusion.”) (cleaned up); Univ. of Ala. Bd. of Trustees, 683 F.3d at 1279 (similar).
+
+The First Amendment basis of Rogers explains why the rule here must be strong: noncommercial speech is vulnerable to chilling effects. If the rule required extensive factfinding before upholding artistic freedom, then a trademark owner would be able to deter speech by the threat of a lawsuit, even an unsuccessful one. See William McGeveran, The Imaginary Trademark Parody Crisis (and the Real One), 90 WASH L. REV. 713 (2015) (describing the prohibitive costs of going through litigation on likelihood of confusion, even when the defendant is likely to prevail).
+
+C. Rothschild’s Sale of His Art Does Not Reduce its First Amendment Protection.
+
+The fact that Rothschild sells his art is utterly unremarkable and legally irrelevant. In Rogers, the movie studio defendant sold the motion picture at issue.8 The Hangover Part II, the motion picture at issue in Louis Vuitton, had grossed “roughly $580 million globally as of the date of the complaint.” See 868 F. Supp. 2d at 174. Indeed, in every single case in which courts in the Second Circuit have applied Rogers, the defendant was selling its work. The same is 8 A fact the Rogers court plainly recognized when it distinguished fully First Amendment- protected speech sold in the market from ordinary, non-speech commercial products. 875 F.2d at 998 (“the expressive element of titles requires more protection than the labeling of ordinary commercial products”).
+
+overwhelmingly true in every other circuit, including in cases involving millions of dollars in revenue. See, e.g., MCA, 296 F.3d 894; Twentieth Century Fox, 875 F.3d 1192. Rogers applies because the challenged use is noncommercial speech—i.e., speech that does more than simply propose a commercial transaction. Bolger, 463 U.S. at 66. If speech is not “purely commercial”—that is, if it does more than propose a commercial transaction—then it is entitled to full First Amendment protection. Twentieth Century Fox, 875 F.3d at 1185-86 (cleaned up); see also Riley, 487 U.S. at 796.
+
+As the Supreme Court has noted, noncommercial speech is often sold for profit. See, e.g., Brown v. Ent. Merch. Ass’n, 564 U.S. 786, 790 (2011) (video games); City of Lakewood v. Plain Dealer Publ’g Co., 486 U.S. 750, 756 n.5 (1988) (citing Pittsburgh Press Co. v. Pittsburgh Comm’n on Human Rel., 413 U.S. 376, 385 (1973)) (“Of course, the degree of First Amendment protection is not diminished merely because the newspaper or speech is sold rather than given away.”); Smith v. California, 361 U.S. 147, 150 (1959) (“It is of course no matter that the dissemination [of books] takes place under commercial auspices.”). Selling videogames, movies, or books is a profitable business, but Rogers and the cases that apply it make clear that all of these types of expressive works get full First Amendment protection. The First Amendment limits the reach of the Lanham Act in all these cases because the expression is what is being sold—the expression is what makes these things valuable to audiences—rather than merely being advertising for a separate product.
+
+So too here: Rothschild is selling digital artworks, not physical handbags, just as Andy Warhol sold the 32 paintings in his “Campbell’s Soup Cans” series, not physical cans of soup. Rothschild’s “MetaBirkins,” like Warhol’s “Campbell’s Soup Cans,” attract audiences because of the creative expression they contain, not because they are useful for carrying lipstick or can be eaten for lunch.
+
+Nor does the fact that Rothschild is using a new technological mechanism to authenticate his art change the fact that he’s selling art. An NFT is merely code that points to a digital asset. See p. 3, supra. As Hermès’complaint inconsistently acknowledges, the NFT is not the digital artwork; it is code that points to a place where the associated digital image can be found, and that authenticates that image. Id.9 Rothschild’s use of NFTs to sell his artworks here thus is no different than selling limited edition prints. See, e.g., Walking Mountain, 353 F.3d 792; cf. ETW, 332 F.3d at 937 (protecting artwork featuring Tiger Woods under Rogers where associated promotional material described the content of the work using the name “Tiger Woods”). Using an NFT to authenticate an artwork no more makes the artwork a “commodity” unprotected by the First Amendment, see Compl. ¶ 2, than does selling numbered copies of physical paintings make those paintings commodities for purposes of Rogers. Likewise, the fact that buyers may later transfer ownership of a “MetaBirkins” artwork by reselling the NFT associated with it (which, again, is not the art itself but merely code pointing to the digital image) changes nothing. If a museum sold exclusive viewing access to a painting by requiring physical tokens in order to enter the room where the painting was located, those tokens might become “commodities” in the sense of being transferable for money, just as CDs of “Barbie Girl” or DVDs of Ginger and Fred are transferable for money. See MCA, 296 F.3d 894; Rogers, 875 F.2d 994. The transferability of access to a work has no effect on the First Amendment status and protection of the artwork itself. In other words, that NFTs could be 9 Of course, if the NFTs did contain the images, then they would be directly analogous to the film in Rogers, and Hermès’ claims just as straightforwardly defective.
+
+associated with actual handbags, Compl. ¶ 2, does not make Rothschild’s NFTs non-artistic any more than the existence of other types of authentication documents means that art, handbags, and real estate are the same for constitutional purposes. Hermès does not allege that the relevant NFTs are linked to anything other than Rothschild’s artwork. Neither the marketability of copies of artwork nor the particular technological means of authenticating that artwork are legally meaningful. Hermès has not pleaded any facts about the technology of NFTs that changes the well-settled law governing expressive works.
+
+III. EVEN IF ROGERS DID NOT APPLY, DASTAR WOULD BAR HERMÈS’
+
+INFRINGEMENT CLAIMS HERE
+
+Even if Rogers were not directly on point and dispositive in this case—which it is—the Supreme Court’s decision in Dastar Corp. v. Twentieth Century Fox Film Corp., 539 U.S. 23 (2003), would be fatal to Hermès’ claims here. Hermès’ fundamental complaint is that consumers will believe Rothschild’s MetaBirkins artworks are sponsored by or affiliated with Hermès. Specifically, Hermès complains that, because Rothchild depicts Birkin bags and calls his art MetaBirkins, consumers will believe that Hermès is the origin of the artwork, or that Hermès has some relationship with the art project. That claim is barred by Dastar, which unambiguously holds that only misrepresentations of the origin of physical goods are actionable under the Lanham Act. 539 U.S. at 37. Other sorts of misrepresentations, including but not limited to misrepresentations of the origin of creative content, are not actionable. See id. (holding that “origin of goods” as used in the Lanham Act refers only to “the producer of the tangible goods that are offered for sale, and not to the author of any idea, concept, or communication embodied in those goods”). The MetaBirkins artworks are communicative goods that Dastar places outside the scope of the Lanham Act. To the extent that they have physical existence, Hermès does not allege that the NFTs and the associated URLs identifying where the MetaBirkins images are hosted misrepresent their own physical origin. The alleged confusion comes only from the content and title of the intangible MetaBirkins artworks. Dastar was decided in 2003, after the Second Circuit’s decision in Rogers and several subsequent decisions applying Rogers more broadly to artistic works. But many of the cases resolved under the Rogers framework in this Circuit also implicate Dastar in that they all involved allegations that consumers would be confused about the origin or sponsorship of creative content, rather than about who physically produced the goods at issue. See, e.g., Rogers, 875 F.2d at 997; Twin Peaks, 996 F.2d at 1378; AM General, 450 F. Supp. 3d at 482; Louis Vuitton, 868 F. Supp. 2d at 175.
+
+The same is true here. Even without Rogers, the rule of Dastar is equally clear: confusion as to the origin of intangible creative content is not actionable under the Lanham Act.
+
+IV. HERMÈS’ TRADEMARK DILUTION CLAIMS MUST BE DISMISSED
+
+A. Rogers Applies to Hermès’ Dilution Claims. Rothschild’s First Amendment rights under Rogers preclude Hermès’ dilution claims as well, especially given that dilution implicates no countervailing interest in consumer protection. See AM General, 450 F. Supp. 3d at 488 (dismissing AM General’s federal and state dilution claims as barred by Rogers); Louis Vuitton, 868 F. Supp. 2d at 184 (dismissing Louis Vuitton’s New York anti-dilution claim and common law unfair competition claim because those claims were based on the same permissible conduct as the Lanham Act claim); see also, e.g., Jackson v. Netflix, Inc., 506 F. Supp. 3d 1007, 1014 (C.D. Cal. 2020) (applying Rogers to all Lanham Act claims, including dilution).
+
+B. Noncommercial Uses Do Not Dilute.
+
+Even beyond Rogers and the First Amendment, the federal dilution statute, 15 U.S.C. § 1125(c)(3)(C) (2018), expressly excludes “noncommercial” uses. In doing so, the statute relies on the First Amendment’s definition of noncommercial speech, which extends to all expression that does more than simply propose a transaction, including the digital art at issue here. See section II(A), supra; MCA, 296 F.3d at 905-06 (interpreting statutory language that, while since reformulated, retains the “noncommercial” exemption unchanged and explaining that for-profit speech which is itself the product being sold is noncommercial). State law dilution has the same limit, possibly as a matter of constitutional avoidance. See Louis Vuitton, 868 F. Supp. 2d at 184 (dismissing New York dilution and unfair competition claims against a fictional film where Rogers protected the film); Yankee Publ’g, 809 F. Supp. at 282 (“[T]he same First Amendment considerations that limit a cause of action under the Lanham Act apply also to a cause of action under New York law.”); see also L.L. Bean, Inc. v. Drake Publishers, Inc., 811 F.2d 26, 32 (1st Cir. 1987) (“It offends the Constitution . . . to invoke the [Maine] anti-dilution statute as a basis for enjoining the noncommercial use of a trademark by a defendant engaged in a protected form of expression.”).
+
+C. Referential Uses Do Not Dilute.
+
+Definitionally, dilution does not cover Rothschild’s use of “MetaBirkins” because his use is referential, rather than being commercial use as a separate mark for an unrelated good or service, as the Lanham Act requires. The Act defines dilution by blurring as the “association arising from the similarity between a mark or trade name and a famous mark that impairs the distinctiveness of the famous mark.” 15 U.S.C. § 1125(c)(2)(B) (2018). That definition requires that the defendant use the allegedly-diluting mark as a mark for distinct goods or services.10 The idea is that consumers are not confused by two similar marks such as Delta Dental and Delta Airlines, but the plaintiff’s mark nonetheless is impaired because it becomes “less unique.” The analysis “must ultimately focus on whether an association, arising from the similarity between the subject marks, impairs the distinctiveness of the famous mark—that is, the ability of the famous mark to serve as a unique identifier.” Louis Vuitton, 156 F. Supp. 3d at 434 (citing Starbucks Corp. v. Wolfe’s Borough Coffee, Inc., 736 F.3d 198, 204 (2d Cir. 2013)) (cleaned up). When the defendant invokes a famous mark in reference to the products identified by the mark, this only tends to reinforce, rather than weaken, the distinctiveness of a mark, and there is no blurring. For example, where eBay used “Tiffany” without Tiffany’s permission to advertise that it sold genuine Tiffany products, there was no second mark or product (no second “Tiffany”) that would blur the connection between the “Tiffany” mark and Tiffany & Co. Thus, there was no dilution under state or federal law, even if some of the products on eBay were counterfeit. Tiffany (NJ) Inc. v. eBay Inc., 600 F.3d 93, 111-12 (2d Cir. 2010). Rothschild’s uses are even more clearly referential. Rothschild uses the “MetaBirkins” name to refer to an artistic illustration of a Birkin bag. Far from being “dilutive,” Rothschild’s referential uses further reinforce the distinctiveness of Hermès’ marks.
+
+V. HERMÈS’ OTHER CLAIMS HAVE THE SAME FATAL FLAWS
+
+Rogers also bars all of Hermès’ other causes of action, whether denominated in terms of infringement, dilution, “cybersquatting,” or otherwise. If using an image of the Birkin bag is 10 The statute therefore makes clear that use of “a mark or trade name” is not the core of dilution. Even for purely commercial products, a local ice cream store that advertised its own “Oreo ice cream” would not create a new meaning for Oreos; the meaning would remain linked to that of Oreos.
+
+protected by the First Amendment when a claim is styled as a trademark cause of action, then merely changing the label on the cause of action cannot be enough to circumvent the First Amendment. As the Fourth Circuit has explained: Congress left little doubt that it did not intend for trademark laws to impinge the First Amendment rights of critics and commentators. … Congress directed that in determining whether an individual has engaged in cybersquatting, the courts may consider whether the person’s use of the mark is a “bona fide noncommercial or fair use.” 15 U.S.C. § 1125(d)(1)(B)(i)(IV). The legislature believed this provision necessary to “protect[ ] the rights of Internet users and the interests of all Americans in free speech and protected uses of trademarked names for such things as parody, comment, criticism, comparative advertising, news reporting, etc.”
+
+Lamparello v. Falwell, 420 F.3d 309, 313-14 (4th Cir. 2005). Here, every one of Hermès’claims—federal trademark infringement, false designation of origin and false descriptions and representations, federal trademark dilution, cybersquatting, state dilution and injury to business reputation, common law trademark infringement, and state law misappropriation and unfair competition—focuses on the same speech that is protected under Rogers, which rejects the underlying premise of each claim that artistically relevant depictions of trademarks can be wrongful in the absence of explicit falsity. For example, cybersquatting requires use of a domain name with a bad faith intent to profit. 15 U.S.C. § 1125(d)(1)(A)(i). Rothschild’s use of a domain name that is the title of his art project cannot be bad faith because that title is artistically relevant and not explicitly misleading. When Rogers applies to insulate the title of artwork, it must also apply to bar Hermès’ claims based on use of that title as a domain name for a site about the artwork. See Lamparello, 420 F.3d at 316 (“a court must evaluate an allegedly infringing domain name in conjunction with the content of the website identified by the domain name”); id. at 316 n.4 (“[I]t has long been established that even when alleged infringers use the very marks at issue in titles, courts look to the underlying content to determine whether the titles create a likelihood of confusion as to source”) (citing, inter alia, Rogers, 875 F.2d at 1000-01). The same is true for other attempts by Hermès to relabel their claim here. See, e.g., Rogers v. Grimaldi, 695 F. Supp. 112, 117 (S.D.N.Y. 1988), aff’d, 875 F.2d 994 (2d Cir. 1989) (noting that Rogers’ §1125(a) claim was styled false designation of origin); cf. Parks LLC v. Tyson Foods, Inc., 863 F.3d 220, 227 (3d Cir. 2017) (rejecting false advertising claim that “depend[ed] upon the purported false association between [defendant’s] brand and [plaintiff’s] mark”); Jackson, 506 F. Supp. 3d at 1013 (applying Rogers to infringement, false designation, and dilution claims); Ebony Media Operations, LLC v. Univision Commc’ns Inc., No. 18-cv- 11434-AKH, 2019 WL 8405265 (S.D.N.Y. June 3, 2019) (rejecting false advertising claim based on allegedly misleading use of plaintiff’s trademark in news reporting).
+
+CONCLUSION
+
+For the foregoing reasons, Rothschild respectfully requests that the Court grant his motion to dismiss Hermès’ complaint in its entirety with prejudice pursuant to Federal Rule of Civil Procedure 12(b)(6) for failure to state a claim.

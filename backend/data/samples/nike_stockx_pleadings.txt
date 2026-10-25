@@ -1,0 +1,907 @@
+===== DOCUMENT 1: Complaint (Doc. 1), filed 2022-02-03 =====
+
+Nike, Inc. v. StockX LLC, No. 1:22-cv-00983 (S.D.N.Y.), Complaint (Doc. 1), filed 2022-02-03
+Source: https://storage.courtlistener.com/recap/gov.uscourts.nysd.574411/gov.uscourts.nysd.574411.1.0_3.pdf
+
+UNITED STATES DISTRICT COURT
+
+FOR THE SOUTHERN DISTRICT OF NEW YORK
+
+NIKE, INC.,
+
+Plaintiff, v.
+
+STOCKX LLC,
+
+Defendant.
+
+Case No. 22-cv-___________
+
+COMPLAINT
+
+JURY TRIAL REQUESTED
+
+Plaintiff Nike, Inc. (“Nike” or “Plaintiff”) for its Complaint against Defendant StockX LLC (“StockX” or “Defendant”) for trademark infringement, trademark dilution, and related causes of action alleges as follows:
+
+PRELIMINARY STATEMENT
+
+1. This lawsuit arises from Defendant StockX’s unauthorized and infringing use of Nike’s famous marks in connection with StockX’s entry into the Non-Fungible Token market. Non-Fungible Tokens or “NFTs” have quickly become pervasive in their use by brand owners seeking to enter the nascent marketplace of virtual or digital products connected to a token on the blockchain. NFTs are commonly understood to be blockchain-based virtual products that can be collected, sold, and traded in the marketplace. They are an exciting way for brands to interact with their consumers in and out of the “metaverse,” and diverse commercial applications of NFTs have emerged throughout the past two years. Far more than a fleeting trend, NFTs are part of the future of commerce.
+
+2. Unfortunately, novel product offerings, burgeoning technologies, and gold rush markets tend to create opportunities for third parties to capitalize on the goodwill of reputable brands and create confusion in the marketplace. NFTs are, not surprisingly, no exception to the rule, and this new frontier has swiftly become a virtual playground for infringers to usurp the goodwill of some of the most famous trademarks in the world and use those trademarks without authorization to market their virtual products and generate ill-gotten profits.
+
+3. Enter Defendant StockX, the operator of an online resale platform for various brands of sneakers, apparel, luxury handbags, electronics, and other collectible goods that purports to provide authentication services to its customers. StockX publicly touts the fact that Nike products drive more sales on its e-commerce platform than any other brand, and StockX advertisements and social media accounts are teeming with images of Nike goods. Recognizing firsthand the immense value of Nike’s brands, StockX has chosen to compete in the NFT market not by taking the time to develop its own intellectual property rights, but rather by blatantly freeriding, almost exclusively, on the back of Nike’s famous trademarks and associated goodwill.
+
+4. Specifically, without Nike’s authorization or approval, StockX is “minting” NFTs that prominently use Nike’s trademarks, marketing those NFTs using Nike’s goodwill, and selling those NFTs at heavily inflated prices to unsuspecting consumers who believe or are likely to believe that those “investible digital assets” (as StockX calls them) are, in fact, authorized by Nike when they are not. Unlike its e-commerce business which caters to buyers and sellers of goods originating from various companies, nearly all the NFTs minted by StockX to date are Nike-branded NFTs, yet none of those NFTs originate from Nike. Examples of StockX’s infringing NFTs appear below:
+
+5. StockX claims that its “100% Authentic” Nike-branded “Vault NFTs” do no more than track ownership of a physical Nike product safely secured in its “vault.” But StockX’s Vault NFTs are far more than just physical Nike shoes, and StockX’s claim that a Vault NFT exclusively functions as a traceable digital receipt is belied by its statements. Those statements reflect the fact that StockX’s Nike-branded Vault NFTs, whose purchasers can trade or collect and display in their portfolio, are new virtual products that StockX has bundled with additional StockX services and unspecified benefits (“exclusive access to StockX releases, promotions, events”). Nike does not sell StockX’s services or exclusive access to such benefits. Yet StockX’s new virtual products have been created, marketed, offered for sale, and sold by StockX using Nike’s trademarks without Nike’s consent. And, according to StockX, it is “just getting started.” See https://stockx.com/about/stockx-launches-vault-nfts/.
+
+6. Just as troubling are other StockX statements that appear to negate StockX’s primary claim that a Vault NFT can be readily traded in for the associated physical shoes stored in a StockX facility. For example, while StockX claims that Vault NFT owners may “redeem” the NFT and take possession of the shoes (for an additional fee), it also states that “the redemption process is not currently available” to NFT owners. StockX also, shockingly, retains the right to unilaterally redeem a Vault NFT for a so-called “Experiential Component,” and take away the NFT, completely depriving the Vault NFT owner of possession of the shoes that are supposedly connected to the NFT.
+
+7. Nike did not approve of or authorize StockX’s Nike-branded Vault NFTs. Those unsanctioned products are likely to confuse consumers, create a false association between those products and Nike, and dilute Nike’s famous trademarks. Indeed, consumers are already questioning whether Nike authorized StockX to sell its infringing NFT products, asking how StockX received “the licensing to sell NFTs with [N]ike branding.” See Paragraph 82, infra. StockX’s misappropriation of Nike’s famous trademarks and goodwill to buoy its entry into the lucrative NFT and digital collectible market deprives Nike of its exclusive right to use its marks in connection with this new commercial medium. In addition, the Vault NFTs’ inflated prices and murky terms of purchase and ownership, as discussed further below, have already led to public criticism of StockX and allegations that the Vault NFTs are a scam. StockX’s prominent use of Nike’s trademarks in connection with these dubious virtual products has already generated negative associations with Nike in a way that harms Nike’s reputation and the immense goodwill that Nike has amassed in its brands. Consumers have even attributed StockX’s conduct to Nike, with one consumer expressing that the Vault NFTs are “just a stupid scam for Nike to make money.” See Paragraph 84, infra (emphasis added).
+
+8. Despite StockX’s prominent use of Nike’s trademarks in connection with the Vault NFTs, Nike has no control over the quality of the Vault NFTs whatsoever. Nike has no say in how many Vault NFTs bearing its trademarks are released, where the Vault NFTs are released and traded, when the Vault NFTs are released, how the Vault NFTs are released, traded, or redeemed, and at what price the Vault NFTs are sold.
+
+9. Nike’s widely publicized December 13, 2021 acquisition of RTFKT, a digital art and collectible creative studio, demonstrates its recent investment in NFT technology and services, but Nike has been using its famous trademarks in connection with virtual goods and digital applications for years. Given Nike’s longstanding use in this space, StockX’s unauthorized and unapproved branding of Vault NFTs with Nike trademarks is all the more likely to confuse consumers, create a false association between the parties, jeopardize the capacity of Nike’s famous marks to identify its own digital goods in the metaverse and beyond, and harm Nike’s reputation through an association with inferior digital products. Nike therefore requests that the Court swiftly and permanently stop StockX from continuing to sell Vault NFTs bearing Nike’s famous marks.
+
+THE PARTIES
+
+10. Nike is a corporation organized under the laws of the State of Oregon with a principal place of business at One Bowerman Drive, Beaverton, Oregon 97005.
+
+11. On information and belief, StockX LLC is organized as a Michigan LLC with its principal place of business located at 1046 Woodward Avenue, Detroit, Michigan 48226. StockX LLC is an online marketplace and reseller of sneakers, streetwear, electronics, luxury handbags, and other collectibles. StockX maintains various offices and/or facilities located in New York, California, and Oregon, including a store and drop-off facility located at 237 Lafayette Street, New York, New York 10012.
+
+12. On information and belief, StockX is the owner and operator of https://stockx.com (the “StockX Website”) and StockX mobile application (the “StockX App”), where StockX conducts, inter alia, its online commercial activities.
+
+JURISDICTION AND VENUE
+
+13. This action arises under the trademark and anti-dilution laws of the United States, 15 U.S.C. § 1051, et seq., and under statutory and common law unfair competition. This Court has subject matter jurisdiction at least under 15 U.S.C. § 1121 and 28 U.S.C. §§ 1331 and 1338 because this action arises under federal trademark law. This Court has supplemental jurisdiction over the remaining claims pursuant to 28 U.S.C. § 1367.
+
+14. This Court has personal jurisdiction over StockX because StockX has committed, and continues to commit, acts of infringement and dilution in this District, has conducted, and continues to conduct, business in this District through the StockX Website, StockX App, and a physical store, offices and/or facilities located in this District, and/or has engaged in continuous and systematic activities in this District.
+
+15. Personal jurisdiction is proper pursuant to N.Y. C.P.L.R. § 302(a) because StockX regularly conducts, solicits, or transacts business in New York and in this District. StockX created the StockX Website and StockX App, which are accessible to consumers in New York, and direct unauthorized and infringing uses of Nike’s trademarks into New York and this District. StockX targets New York consumers by operating the StockX Website and StockX App, by operating a physical store and offices and/or facilities in New York, by employing employees in New York, and by advertising, selling, and offering for sale StockX Vault NFTs through the StockX Website, StockX App, and related social media accounts. Moreover, StockX is actively recruiting employees for several open positions located in New York, New York, including a Director, Real Estate, a Sr. Engineering Manager – NFT and Checkout, a Senior Manager, NFT Partnerships, and a Technical Lead – Notifications.
+
+16. Venue is proper in this District pursuant to 28 U.S.C. § 1391(b) because StockX conducts and continues to conduct a substantial and significant amount of business in this District, a substantial part of the events giving rise to these claims arose in this District, and customer confusion is likely to occur in this District. Moreover, on information and belief, the locus of StockX’s Vault NFT and Web3 initiative appears to be in this District. For example, StockX’s Director, Innovation along with the lead software engineer responsible for developing and launching StockX’s NFT offering are, on information and belief, located in New York. Moreover, StockX’s January 18, 2021 announcement of its Vault NFT offering was issued by its Editorial Director based in New York City. See https://stockx.com/news/introducing-nfts-on-stockx/. StockX is also actively recruiting in this District for employees to join its NFT and Web3 program.
+
+As just one example, StockX has postings for the following senior positions located in New York: Sr. Engineering Manager – NFT and Checkout; and Senior Manager, NFT Partnerships. See https://boards.greenhouse.io/stockx/jobs/5783991002; and https://web3.career/senior-manager-nft-partnerships-stockx/15645.
+
+FACTUAL BACKGROUND
+
+NFTs and Blockchain
+
+17. While blockchains have myriad actual and potential uses, a primary use is to serve as an ecosystem and ledger for blockchain-based assets, like cryptocurrencies (such as Bitcoin (BTC) and Ether (ETH)) and NFTs. Much like banks track ownership of money in bank accounts and process transfers from one account to another, storing the information privately, blockchain technology enables the transfer of ownership of cryptocurrencies and NFTs between accounts, storing the information of the transfer of ownership in blocks of data visible for all to see. A distinguishing and touted feature of blockchains is decentralization. Unlike bank or other asset ledgers, which are typically maintained by one or more larger entities, blockchains can be maintained by innumerable individuals and entities, acting relatively independently but participating in a coordinated ecosystem. Today there exist many blockchains, the largest of which supports the Bitcoin cryptocurrency, while the second largest of which, Ethereum, supports a much broader set of assets, including both the Ether cryptocurrency and NFTs that are stored and traded on the Ethereum blockchain network.
+
+18. Many blockchain-based assets, like cryptocurrencies, are “fungible.” Like money in a bank account, each individual coin (or “token”) is not distinguishable from others and is divisible. For this reason, cryptocurrencies may function as a medium of exchange.
+
+19. By contrast, certain tokens, referred to as “non-fungible tokens” or “NFTs,” are both indivisible and uniquely identifiable. Their movement can be tracked from one blockchain address to another via smart contracts. This feature makes it possible to use NFTs to track ownership or licensed rights over assets, similar to a certificate of ownership or real estate title.
+
+20. NFTs have been widely used to track ownership over rights (often a limited license for personal use) to a new type of digital collectible, which may be a digital photograph, video, artwork, sound recording, avatar, digital clothing, footwear and other products, or other type of media. These NFT collectibles can be bought, sold, resold, and generally traded on various platforms.
+
+21. While such NFT collectibles have existed for years, beginning in early 2021 interest exploded. Many prominent apparel and consumer goods brands have successfully launched and sold NFT collections, incorporating their trademarks, trade dress, and other intellectual property into artwork associated with each NFT. These NFTs have taken many different forms but have always closely connected the trademark owner with the digital asset. As further discussed below, Nike is one such market entrant.
+
+Nike’s Business and Valuable Trademark Rights
+
+22. Nike’s principal business activity is the design, development, and worldwide marketing and selling of athletic footwear, apparel, equipment, accessories, and services.
+
+23. As a result of decades of Nike’s advertising, promotional, and marketing efforts, Nike has established itself as a multibillion-dollar brand and the world’s leading designer, marketer, and distributor of athletic footwear and apparel products which are sold in connection with Nike’s famous trademarks. In addition to spending significant amounts in support of advertising and promotion of its products and services, Nike conducts successful marketing campaigns across various social media platforms, including Facebook, Twitter, YouTube, Instagram, TikTok, and Snapchat, to further promote Nike’s products, services, brands, and trademarks.
+
+24. Nike and its brands have achieved widespread recognition and fame throughout the United States and the world. Among the purchasing public, Nike’s products and services are instantly recognizable and are seen as high-quality, innovative, and dependable.
+
+25. Nike is the owner of the right, title, and interest in and to, inter alia, the following trademarks registered on the Principal Register of the United States Patent and Trademark Office (collectively, the “Asserted Marks”):
+
+Reg. No. Title Trademark Design Reg. Date Classes
+
+1,370,283 AIR JORDAN AIR JORDAN
+
+(word mark) 11/12/1985 25-Clothing, footwear 3,725,535 Air Jordan & Wings Design*1 12/15/2009 25-Clothing, footwear, headgear
+
+3,780,236 DUNK DUNK
+
+(word mark) 4/27/2010 25-Footwear
+
+3,627,820 JUMPMAN JUMPMAN
+
+(word mark) 9/11/2007 25-Clothing, footwear, headgear 1,558,100 JumpMan Design 9/26/1989 25-Clothing, Footwear 1,742,019 JumpMan Design 12/22/1992 25-Clothing, footwear, headgear 18-Leather and imitations of leather 978,952 NIKE NIKE 2/19/1974 25-Clothing, 1 * indicates unofficial, descriptive title.
+
+(word mark) footwear, headgear
+
+1,214,930 NIKE NIKE
+
+(word mark) 11/2/1982 25-Footwear
+
+1,243,248 NIKE NIKE
+
+(word mark) 6/21/1983 42-Retail footwear and apparel services
+
+6,124,779 NIKE NIKE
+
+(word mark) 8/11/2020 35-Retail store services and on-line retail store services
+
+1,238,853 NIKE &
+
+Swoosh Design* 5/17/1983 42-Retail footwear and apparel services
+
+1,325,938 NIKE &
+
+Swoosh Design* 3/19/1985 25-Footwear
+
+5,286,596 NIKE AIR
+
+VAPORMAX
+
+NIKE AIR VAPORMAX
+
+(word mark) 9/12/2017 25-Footwear 977,190 Swoosh Design 1/22/1974 25-Footwear 1,264,529 Swoosh Design 1/17/1984 42-Retail footwear and apparel services 1,323,343 Swoosh Design 3/5/1985 25-Footwear 5,794,674 Swoosh Design 7/2/2019 35-Retail store services and on-line retail store services
+
+26. The above U.S. registrations for Nike’s Asserted Marks are valid, subsisting, unrevoked, uncancelled, and in full force and effect.
+
+27. Pursuant to 15 U.S.C. § 1065, of Nike’s Asserted Marks, the following federally registered Nike trademarks are incontestable and constitute prima facie evidence their validity, Nike’s ownership, and Nike’s exclusive right to use these marks:
+
+a. Reg. No. 1,370,283 (AIR JORDAN word mark)
+
+b. Reg. No. 3,725,535 (Air Jordan & Wings Design mark);
+
+c. Reg. No. 3,780,236 (DUNK word mark);
+
+d. Reg. No. 3,627,820 (JUMPMAN word mark);
+
+e. Reg. No. 1,558,100 (JumpMan Design mark);
+
+f. Reg. No. 978,952 (NIKE word mark);
+
+g. Reg. No. 1,214,930 (NIKE word mark);
+
+h. Reg. No. 1,243,248 (NIKE word mark);
+
+i. Reg. No. 977,190 (Swoosh Design mark);
+
+j. Reg. No. 1,264,529 (Swoosh Design mark);
+
+k. Reg. No. 1,323,343 (Swoosh Design mark);
+
+l. Reg. No. 1,238,853 (Swoosh Design mark); and
+
+m. Reg. No. 1,325,938 (Swoosh Design mark).
+
+28. Nike also owns extensive common law rights in the Asserted Marks for use in connection with Nike’s goods and services. Nike uses the Asserted Marks on or in connection with many of its products and services.
+
+29. Nike’s Asserted Marks identify, in the United States and throughout the world, high-quality products and services designed, produced, and offered by Nike.
+
+30. Nike intends to continue to preserve and maintain its rights in the Asserted Marks. Nike has continuously used the Asserted Marks in interstate commerce in connection with the sale, distribution, promotion, and advertising of genuine Nike goods and services since their respective dates of first use as noted on the federal trademark registration certificates. And, as discussed further below, Nike has also used the Asserted Marks in connection with virtual products and intends to further expand such use as reflected in its pending trademark applications.
+
+31. As a result of continuous and long-standing promotion, substantial sales, and consumer recognition, Nike has developed powerful trademarks rights, built substantial goodwill in the Asserted Marks, and has never abandoned that goodwill. As a result, Nike’s Asserted Marks have become distinctive and “famous” within the meaning of Section 43(c) of the Lanham Act, 15 U.S.C. § 1125(c).
+
+32. Having distinctive trademarks that are readily identifiable is an important factor in creating and maintaining a market for Nike’s products, in identifying Nike and its brands, and in distinguishing Nike’s products from the products of others.
+
+33. Nike maintains strict quality control standards for products bearing the Asserted Marks. Genuine Nike products bearing the Asserted Marks are inspected and approved by Nike prior to distribution and sale.
+
+34. Nike also maintains strict control over the use of the Asserted Marks in connection with its products so that the company can maintain control over its reputation and goodwill. Nike, for example, carefully determines how many products bearing the Asserted Marks are released, and when, where, and how those products are sold.
+
+Nike’s Activities in the Virtual Products Market
+
+35. Nike has used the Asserted Marks in connection with a variety of physical goods and associated services for decades. Nike has also for some time incorporated the Asserted Marks into its virtual products. For example, in October 2019, Nike, through its SNKRS mobile application, partnered with 2K Sports, makers of the NBA 2K basketball videogame franchise, to offer “Gamer Exclusives,” limited edition digital and physical Nike sneakers that NBA 2K20 players can unlock through gameplay. See https://news.nike.com/news/nba-2k20-x-nike-gamer-exclusives.
+
+36. On October 27 and 28, 2021, Nike filed applications to register the following trademarks with the United States Patent and Trademark Office for use in connection with, inter alia, “[d]ownloadable virtual goods, namely computer programs featuring footwear,” (i.e., digital sneaker NFTs) and “[r]etail store services featuring virtual goods, namely footwear” (i.e., a digital sneaker NFT trading platform):
+
+a. NIKE (word mark) (Serial No. 97095855);
+
+b. JORDAN (word mark) (Serial No. 97096950);
+
+c. (Serial No. 97096952);
+
+d. (Serial No. 97096945);
+
+e. (Serial No. 97095944); and
+
+f. (Serial No. 97096366).
+
+37. On December 13, 2021, Nike announced that it had acquired RTFKT, a leading digital art and collectible creative studio that has created some of the most popular apparel-related digital artwork NFT releases to date, including the CYBERSNEAKER, METAJACKET, and FEWO Shoes, collectible digital sneakers designed in collaboration with teenage pop artist FEWOCiOUS. See https://news.nike.com/news/nike-acquires-rtfkt.
+
+38. On or around January 18, 2022, Nike announced to its employees the formation of Nike Virtual Studios, a new division that will operate as an independent studio to further develop Nike’s business around virtual products and partner with its core business to deliver best-in-class Web3, metaverse, and blockchain-based experiences.
+
+39. In February 2022, Nike and RTFKT will release a number of virtual products.
+
+40. The Nike initiatives discussed above have been highly publicized and, upon information and belief, StockX has known about Nike’s plans to expand into the NFT market long prior to its January 2022 “Vault NFT” launch. StockX’s Resale Platform
+
+41. StockX, like eBay, operates an online marketplace for the resale of sneakers, streetwear, electronics, luxury handbags, and other collectibles accessible to consumers on the StockX Website and StockX App. Upon information and belief, StockX does not sell goods directly to consumers; rather, StockX’s users buy and sell goods from each other on StockX’s platform. StockX is not an authorized distributor of Nike goods.
+
+42. Unlike the eBay model, however, StockX is an active intermediary for each transaction—the seller ships the item to StockX, StockX receives and purportedly verifies the item’s authenticity, StockX then ships the item to the buyer with a StockX-branded verification badge, and StockX pays the seller (less its transaction fees). See https://stockx.com/about/how-it-works/.
+
+43. According to StockX’s most recent annual report, Nike’s brands and shoes dominate StockX’s marketplace. For example, three of Nike’s brands—JORDAN, NIKE, and CONVERSE—were the among the top five trading footwear brands by volume on StockX’s marketplace in 2021:
+
+StockX’s Vault NFTs
+
+44. On January 18, 2022, StockX’s New York-based Editorial Director announced the launch of StockX Vault NFTs, a collection of NFTs that StockX’s users purchase directly from StockX through the StockX Website and StockX App. See https://stockx.com/news/introducing-nfts-on-stockx/. StockX claims the Vault NFTs are associated with a unique physical product held in StockX’s custody until the NFT owner “redeems” the NFT in exchange for the associated physical product or some other benefit.
+
+45. Unlike the physical goods StockX’s users may sell through its online resale platform—which are manufactured and/or distributed in the first instance by Nike and other brands or their authorized distributors—StockX’s Vault NFTs are virtual products, i.e., digital collectibles, created and first offered for sale by StockX, and available direct to consumers for purchase and trade on the StockX Website and StockX App.
+
+46. Thus far, StockX has sold Nike-branded Vault NFTs at prices many multiples above the price of the physical Nike shoe. For example, the 2022 version of the Nike Dunk Low – Retro White Black (i.e., the physical pair of shoes) will retail for $100 from nike.com:
+
+According to StockX’s marketplace, as of February 2, 2022, the average sale price for the 2021 version of the shoes is $282:
+
+Yet, as of February 2, 2022, the average price of the Vault NFT purportedly linked to these shoes is $809, with the highest trade being $3500:
+
+47. Another example is the sacai x KAWS Blazer Low Neptune Blue size 10 M which retails for $140 from nike.com:
+
+According to StockX’s marketplace, as of February 2, 2022, the average sale price for the shoes is $205:
+
+As of February 2, 2022, the average price, however, of the Vault NFT purportedly linked to these shoes is $590, with the highest trade being $3995:
+
+48. StockX states that the Vault NFTs are minted on the Ethereum blockchain, “offering owners the opportunity to invest in current culture, with cross-platform liquidity on the horizon.” See https://stockx.com/lp/nfts/. StockX also states that Vault NFT owners may be granted exclusive access to StockX benefits, promotions, experiences, and rewards. Id.
+
+49. StockX further states that NFT owners may redeem the token to have the shoes delivered at any time. Simultaneously, StockX states that the “redemption process is not currently available,” but may be sometime in the “near future.” See https://stockx.com/help/articles/How-do-I-withdraw-my-item-from-the-Vault. If and when this process becomes available, upon redemption, StockX will remove the shoes from the vault, charge “a $35 withdrawal fee, a $14 shipping fee, and any applicable sales tax” on top of the price the owner paid for the Vault NFT, and ship them to the owner. See https://stockx.com/help/articles/What-are-Vault-NFTs; https://stockx.com/help/articles/How-do-I-withdraw-my-item-from-the-Vault; and https://stockx.com/help/articles/What-fees-are-associated-with-Vault-NFTs. StockX will then remove the Vault NFT from circulation by deleting it from the owner’s portfolio (i.e., StockX will “burn” the Vault NFT). See, e.g., https://stockx.com/retro-black-and-white-dunk-vault-nft.
+
+50. StockX’s Terms and Conditions include sections titled “Vault Terms” and “NFT Terms” (collectively, the “Vault NFT Terms”) which govern the Vault NFT offerings. See https://stockx.com/terms.
+
+51. According to the Vault NFT Terms, when a consumer purchases a Vault NFT, the consumer gains title to both the purchased Vault NFT ( i.e., the digital collectible) and the Stored Item (i.e., the physical goods) to which the NFT corresponds, and the consumer automatically makes use of StockX’s Vault Services (i.e., storage of the physical goods in StockX’s facility). Id.
+
+52. The Vault NFT Terms also state that (i) a Vault NFT ( i.e., the digital collectible) has no value beyond that of the associated Stored Item (i.e., the physical goods), and (ii) the Vault Services are currently provided by StockX at no additional cost; however, a Vault NFT owner may be required to pay additional fees if they elect to have a Stored Item shipped to them or if they use the Vault Services past January 31, 2023. Id.
+
+53. By purchasing a Vault NFT, owners agree that they will not attempt to sell the physical goods to a buyer other than by selling the associated Vault NFT via the StockX platform. Id.
+
+54. Notably, under the Vault NFT Terms, StockX also retains the right to unilaterally redeem a Vault NFT for a so-called “Experiential Component,” and cancel or take away the NFT, i.e., the Vault NFT owner never receives the physical version of the shoes or loses the opportunity to do so. Specifically, the Vault NFT Terms state, “Note that in some cases, per the applicable Additional NFT Terms, StockX may automatically redeem your NFT for an Experiential Component,2 at its sole discretion, in which case StockX may remove the NFT from your portfolio and you will cease to own the NFT.” See https://stockx.com/terms:
+
+55. Upon information and belief, the provision in Paragraph 52 stating that the Vault NFT has no value apart from the physical shoes directly conflicts with the terms described in Paragraph 54 above: because StockX retains the right to redeem the Vault NFT for an Experiential Component, the Vault NFT does, in fact, have value apart from the physical shoes. The provision likewise directly conflicts with StockX’s other statement that the Vault NFT includes additional 2 The phrase “Experiential Component” is explained and defined under the Vault NFT Terms as follows: “NFTs may take a variety of forms, and the holders of NFTs may be entitled to obtain certain products, benefits or engage in certain experiences, such as unlocking a prize or entry into an exclusive sale (“Experiential Component”), as determined by StockX in its sole discretion, subject to any additional terms provided by StockX with or in connection with the purchase of such NFT (“Additional NFT Terms”).” See https://stockx.com/terms.
+
+benefits beyond the physical shoes, such as “exclusive access to StockX releases, promotions, events, as a result of ownership.” See https://stockx.com/lp/nfts/.
+
+56. As of February 2, 2022, StockX’s Vault NFT collection comprises nine NFTs, as shown below. Eight of the nine prominently display Nike’s marks and are associated with Nike products. Upon information and belief, StockX almost exclusively used Nike’s marks to launch its Vault NFTs because it knew that doing so would garner attention, drive sales, and confuse consumers into believing that Nike collaborated with StockX on the Vault NFTs.
+
+57. To date, upon information and belief, StockX has sold 558 individual Nike-branded Vault NFTs. Some of the Vault NFTs associated with Nike products are editions of 1, others are editions of 100, and some are as many as editions of 250. Given that StockX is not an authorized Nike retailer, to the extent corresponding physical Nike shoes exist at StockX’s “vault” facility, it is not clear where or how StockX acquired that many pairs of Nike shoes.
+
+58. On the StockX product pages for its Vault NFTs, as shown below, StockX prominently displays Nike’s word marks in large, bold text at the top of the page, and couples Nike’s marks with its own “Vault NFT” designation in parentheticals in the same large, bold text.
+
+59. StockX also touts each Vault NFTs as “100% Authentic,” which, upon information and belief, is intended to explicitly mislead consumers that Nike has authorized, approved, sponsored, and/or endorsed StockX’s Vault NFTs.
+
+60. Further down the StockX product page for each Vault NFT, StockX provides “Product Details,” which includes a “Product Description,” that also uses Nike’s marks. For example, StockX’s description for the Nike Dunk Low Retro White Black (Vault NFT) opens with: “One of the most popular Nike Dunks of 2021 is now a part of StockX’s Vault NFT experience.”
+
+If a consumer clicks on the “Read More” button, additional text appears, including “The Fine Print,” which states: “If the physical item associated with this Vault NFT is redeemed by the owner, it is removed from the StockX Vault and shipped to the owner. StockX will then remove the Vault NFT from the owner’s Portfolio and from circulation ( i.e., ‘burn’ the Vault NFT).”
+
+61. As shown above, each of the eight Nike-branded Vault NFT’s is comprised of Nike marks, including the only prominent eye-catching feature, a vivid image of a bespoke Nike shoe. To the extent that the Vault NFT is merely supposed to function as a “digital receipt” for a physical Nike shoe, there is no legitimate reason for StockX to prominently feature Nike’s trademarks on the Vault NFT and the StockX product page. Indeed, when a consumer purchases Nike shoes from the StockX marketplace, the consumer receives a paper receipt from StockX in the package. Unlike a Vault NFT, upon information and belief, this paper receipt prominently uses StockX’s own mark and only uses the Nike name in connection with the purchased shoe, yet somehow still manages to function as a receipt for that Nike shoe:
+
+62. In addition to the vivid image of the Nike shoe each Vault NFT purports to represent, the StockX product page for each Vault NFT also displays a second image, the “back” of the Vault NFT, as shown below:
+
+63. StockX states, in large font, “How It Works,” with four bolded bullet points explaining, in simple terms, what users can do with a Vault NFT. Below the four bullet points, in comically and intentionally small, difficult-to-read font, StockX also states: “The purpose of the NFT is solely to track the ownership of and transactions in connection with the associated product. The NFT does not independently authenticate the associated product, nor is it affiliated or associated with, sponsored by, or officially connected to Nike or any of its subsidiaries or affiliates. For more information on official Nike products, please visit Nike.com.” Putting aside the ineffectiveness of this tiny disclaimer, the “does not independently authenticate” language appears to conflict with the “100% Authentic” on the product page.
+
+64. Upon information and belief, recognizing the tremendous value of the Nike brand to consumers, StockX is also using Nike’s trademarks and images of Nike’s products to promote its Vault NFTs on the StockX Website, StockX App, and on StockX’s social media accounts. For example, StockX promotes its Vault NFTs on its website with the following images incorporating Nike’s products and trademarks:
+
+65. StockX is also using Nike’s trademarks and images of Nike’s products on paid Google Ads to promote its Vault NFTs:
+
+66. As of February 2, 2022, StockX’s Twitter account displays a banner image depicting two Nike shoes, which appears to be the same image used by StockX to promote the Vault NFTs on its website, as shown above:
+
+67. On January 18, 2022, to promote the launch of its Vault NFTs, StockX posted to its Instagram account a series of images depicting Nike’s trademarks and products, including the two shown below:
+
+68. The full caption of the above Instagram post states: “NFTs are on StockX. Introducing #StockXVault: a digital NFT that’s backed by a physical product and stored in a StockX facility. This is just the beginning of our web3 future. Available for trading now. Links to purchase in Product Tags and Stories. Welcome to the future of culture. Learn more at the link in bio.”
+
+69. On January 26, 2022, StockX again promoted its Vault NFTs by posting to its Instagram account a pair of images depicting Nike’s trademarks and product, including the one shown below:
+
+70. The full caption of the above Instagram post states: “A new #StockXVault arrival: The Jordan 1 High Patent Bred. Limited to 250 editions, each size 10, and available for trading immediately. Links to purchase in the Product Tags and Stories. Tap fast to add to your portfolio.”
+
+71. Also on January 26, 2022, StockX tweeted a promotional video for the Jordan 1 Retro High OG Patent Bred Vault NFT:
+
+72. As shown above, StockX is using Nike’s trademarks to market, promote, and attract potential purchasers to its Vault NFTs. StockX’s use of Nike’s marks is, upon information and belief, intentionally deceiving consumers into believing that Nike sponsors or approves of the Vault NFTs.
+
+73. StockX’s Vault NFTs are not Nike products. There is no collaboration between Nike and StockX, Nike did not provide a license to StockX to use its trademarks in connection with the Vault NFTs, Nike did not create or inspect the Vault NFTs or authorize the confusing and misleading Vault NFT Terms, and Nike did not authorize StockX to make, promote, advertise, market, or sell the Vault NFTs.
+
+74. While StockX represents that the Vault NFTs are “backed by” and confer title to genuine Nike products, StockX has bundled them with additional digital goods, services, and unspecified benefits in such a manner that the Vault NFTs constitute new, unauthorized products created, marketed, offered for sale, and sold by StockX, exclusively on the StockX Website and StockX App.
+
+75. Despite StockX’s prominent use of Nike’s trademarks and products in connection with the Vault NFTs, Nike has no control over the quality of the Vault NFTs whatsoever. Nike has no say in how many Vault NFTs bearing its trademarks are released, where the Vault NFTs are released and traded, when the Vault NFTs are released, how the Vault NFTs are released, traded, or redeemed, and at what price the Vault NFTs are sold and traded.
+
+76. As noted in Paragraphs 46-47 above, the Vault NFTs are presently trading for inflated prices that are multiples higher than both the original retail price of the shoes and the current resale price on the secondary market.
+
+77. The Vault NFTs’ inflated prices and murky terms of purchase and ownership have already led to public criticism of StockX and allegations that the Vault NFTs are a scam. For example, on January 19, 2022, Input Magazine published an article on its website entitled “StockX’s ‘sneaker’ NFTs are kind of a scam hidden in plain sight.” The article’s author, Ian Servantes, highlights the Vault NFT Terms that suggest the benefits of Vault NFT ownership may be entirely illusory:
+
+Owner’s [sic] of StockX’s limited series of sneaker NFTs will be given exclusive access to the company’s releases, promotions, and events, according to the announcement page. But if you dig further into the term’s [sic] of service, as Sole Retriever did, you’ll find that StockX has been given license to redeem your NFT for an ‘experiential component’ and even take away your ownership of the NFT as a result of the transaction.
+
+The initial offering for StockX’s NFTs have already sold out, so let’s say you decide to engage in a secondary purchase for an NFT. You purchase, say, the NFT for the Nike x Ben & Jerry’s “Chunky Dunky,” which has an ask of $100,000 and a highest bid of $3,000. Now that it’s yours you don’t get the actual sneaker, and at some point StockX can come in say, Here’s access to an early sale or a discount, and by the way, that NFT is no longer yours. Even in a field as fishy NFTs, StockX’s proposition smells like one of the most obvious grifts you’re likely to see. In a bid to stand out as different as NFTs, StockX has instead made tokens that make it even more clear that you’re the mark.
+
+See https://www.inputmag.com/style/stockx-vault-nfts-sneakers-shoes-nike-off-white-dunk-adidas-bad-bunny.
+
+78. The above impression of StockX’s Vault NFTs demonstrates that they have been received by potential purchasers with suspicion and doubts about the integrity and trustworthiness of StockX’s NFT business model. This example also shows that StockX’s prominent use of Nike’s trademarks and products in connection with the Vault NFTs has already generated negative associations with Nike’s trademarks and products that harm Nike’s business reputation and the goodwill associated with its trademarks, in which Nike has invested immense resources to develop over the past five decades.
+
+79. Upon information and belief, StockX has attempted to capitalize on Nike’s valuable reputation and goodwill by using Nike’s Asserted Marks and/or confusingly similar marks in a manner that is likely to cause consumers to believe that StockX’s Vault NFTs are associated with Nike, when they are not. Indeed, as noted in Paragraph 61 above, if StockX merely intended to use NFTs as digital receipts as it claims, there would be no need to make such extensive and prominent use of Nike’s trademarks. Upon information and belief, this prominent use of Nike’s marks was intended to free ride on Nike’s immense goodwill and satisfy consumer desire to own Nike-branded virtual goods, which owners can display in their portfolios.
+
+80. StockX’s use of Nike’s trademarks and images of Nike’s products to promote its Vault NFTs has already created confusion in the marketplace as to the Vault NFTs’ source and whether Nike is in any way involved or associated with StockX’s Vault NFTs. For example, immediately after StockX announced the Vault NFTs’ release, on January 18, 2022, users on social media questioned the propriety of StockX’s Vault NFTs and whether Nike is “in on it too,” while others “feel safe assuming Nike gets a cut of the fees that StockX takes from each transaction.”
+
+81. Consumer confusion as to whether Nike is associated with StockX’s Vault NFTs was also immediately evident on Twitter, where, on January 18, 2022, a user replied to a StockX tweet promoting the launch of its Vault NFTs, asking whether the Vault NFTS are “endorsed/approved by Nike/Adidas etc?”:
+
+82. The following day, January 19, 2022, Reddit users on another thread under the r/Sneakers subreddit wondered whether Nike had granted StockX a license to use Nike’s “branding”:
+
+83. On that same day, January 19, 2022, and same thread under the r/Sneakers subreddit, another confused user expressed their (incorrect) belief that “Nike gets a small commission every time an NFT is purchased,” and that StockX’s Vault NFTs are “a way for Nike to get a piece of the huge pie of the resale market” while not bringing any added benefit to the buyer:
+
+84. Additionally, on January 21, 2022, in response to a video posted earlier that same day discussing StockX’s Vault NFTs, one confused TikTok user commented: “You can just cash out of the nft for the actual shoe but I think it’s just a stupid scam for Nike to make money.”
+
+85. By virtue of the acts complained of herein, StockX has created a likelihood of injury to Nike’s business reputation and goodwill, caused a likelihood of consumer confusion, mistake, and deception as to the source of origin or relationship of Nike’s products and StockX’s Vault NFTs, and has otherwise competed unfairly by unlawfully trading on and using Nike’s Asserted Marks without Nike’s permission.
+
+86. Unless stopped, StockX’s Vault NFTs and StockX’s use of Nike’s Asserted Marks will continue to confuse consumers in the marketplace and dilute Nike’s famous marks by blurring and tarnishment.
+
+87. As noted above in Paragraph 5 above, StockX has already announced its plans to expand its Vault NFT business, which will likely include additional uses of Nike’s famous trademarks and products. In addition to StockX’s announcement referenced above, StockX confirmed its plans to release additional Vault NFTs on Twitter:
+
+88. This imminent expansion of StockX’s Vault NFT business exacerbates the harm Nike has suffered and will continue to suffer as a consequence of StockX’s unauthorized use of its trademarks.
+
+89. StockX’s acts complained of herein are willful and deliberate.
+
+90. StockX’s acts complained of herein have caused damage to Nike in an amount to be determined at trial, and such damages will continue to increase unless StockX is preliminarily and permanently enjoined from their wrongful acts.
+
+91. StockX’s acts complained of herein have caused Nike to suffer irreparable injury to its business. Plaintiff will suffer substantial loss of goodwill and reputation unless and until StockX is permanently enjoined from the wrongful acts complained of herein.
+
+FIRST CAUSE OF ACTION
+
+TRADEMARK INFRINGEMENT
+
+15 U.S.C. § 1114
+
+92. Nike repeats and realleges each and every allegation in the foregoing Paragraphs 1 to 91 as if fully set forth herein.
+
+93. Nike’s Asserted Marks are on the Principal Register of the United States Patent and Trademark Office.
+
+94. Through extensive and continuous use, Nike’s Asserted Marks and the goodwill of the businesses associated with them in the United States and throughout the world are of significant value, are highly distinctive and arbitrary or fanciful, and have become universally associated in the public mind with Nike, its products and services, and the very highest quality and reputation.
+
+95. StockX has knowingly used and continues to use in commerce, without Nike’s permission or authorization, Nike’s Asserted Marks, and/or confusingly similar marks, in connection with the sale, distribution, and advertising of its Vault NFTs.
+
+96. StockX’s conduct is intended to exploit the goodwill and reputation associated with Nike’s Asserted Marks.
+
+97. StockX’s use of Nike’s Asserted Marks is likely to confuse, mislead, or deceive potential consumers, purchasers, and the general purchasing public as to the source, origin, sponsorship, or affiliation of the Vault NFTs with Nike, and is likely to cause such people to erroneously believe that StockX’s Vault NFTs have been authorized, sponsored, approved, endorsed, or licensed by Nike or that StockX is in some way affiliated with Nike.
+
+98. StockX’s unauthorized use of Nike’s Asserted Marks constitutes trademark infringement of Nike’s federally registered trademarks, which has caused damage to Nike and the substantial business and good will embodied in Nike’s trademarks in violation of Section 32 of the Lanham Act, 15 U.S.C. § 1114.
+
+99. As a direct and proximate result of StockX’s wrongful acts, Nike has suffered, continues to suffer, and/or is likely to suffer damage to its trademarks, business reputation, and good will that money cannot compensate. Unless enjoined, StockX will continue to use Nike’s Asserted Marks and/or confusingly similar marks and will cause irreparable damage to Nike, Nike’s Asserted Marks, and to the business and good will represented thereby, for which Nike has no adequate remedy at law.
+
+100. Nike is further entitled to recover from StockX the actual damages Nike has sustained, is sustaining, and/or is likely to sustain as a result of StockX’s wrongful acts.
+
+101. Upon information and belief, StockX has obtained gains, profits, and advantages as a result of its wrongful acts and will continue to do so in an amount yet to be determined.
+
+102. StockX’s use of Nike’s Asserted Marks and/or confusingly similar marks has been intentional and willful. StockX’s bad faith is evidenced, in part, by the egregious and prominent use of Nike’s Asserted Marks in connection with the sale and promotion of the Vault NFTs, and the extensive nature of the infringement. Because of the willful nature of StockX’s wrongful acts, Nike is entitled to an award of treble damages and increased profits under 15 U.S.C. § 1117.
+
+103. Because this is an exceptional case, Nike is also entitled to recover its costs of suit and its attorneys’ fees pursuant to 15 U.S.C. § 1117.
+
+SECOND CAUSE OF ACTION
+
+FALSE DESIGNATION OF ORIGIN / UNFAIR COMPETITION
+
+15 U.S.C. § 1125(a)
+
+104. Nike repeats and realleges each and every allegation in the foregoing Paragraphs 1 to 91 as if fully set forth herein.
+
+105. StockX’s unauthorized use of Nike’s Asserted Marks and/or confusingly similar marks constitutes a false designation of origin that is likely to cause consumer confusion, mistake, or deception as to the origin, sponsorship, or approval of StockX’s Vault NFTs by creating the false and misleading impression StockX’s Vault NFTs are produced by, authorized by, or otherwise associated with Nike.
+
+106. As a direct and proximate result of StockX’s wrongful acts, Nike has suffered, continues to suffer, and/or is likely to suffer damage to its trademarks, business reputation, and good will that money cannot compensate. Unless enjoined, StockX will continue to use Nike’s Asserted Marks and/or confusingly similar marks and will cause irreparable damage to Nike, Nike’s Asserted Marks, and to the business and good will represented thereby, for which Nike has no adequate remedy at law.
+
+107. Nike is further entitled to recover from StockX the actual damages Nike has sustained, is sustaining, and/or is likely to sustain as a result of StockX’s wrongful acts.
+
+108. StockX’s use of Nike’s Asserted Marks and/or confusingly similar marks has been intentional and willful. StockX’s bad faith is evidenced, in part, by the egregious and prominent use of Nike’s Asserted Marks in connection with the sale and promotion of the Vault NFTs, and the extensive nature of the infringement. Because of the willful nature of StockX’s wrongful acts, Nike is entitled to an award of treble damages and increased profits under 15 U.S.C. § 1117.
+
+109. Because this is an exceptional case, Nike is also entitled to recover its costs of suit and its attorneys’ fees pursuant to 15 U.S.C. § 1117.
+
+THIRD CAUSE OF ACTION
+
+TRADEMARK DILUTION
+
+15 U.S.C. § 1125(c)
+
+110. Nike repeats and realleges each and every allegation in the foregoing Paragraphs 1 to 91 as if fully set forth herein.
+
+111. As a result of the duration, extent, and geographical reach of advertising and publicity, the amount, volume, and geographical extent of Nike’s sales and trading areas, their channels of trade, their degree of recognition, and registration, Nike’s Asserted Marks have become distinctive and “famous” within the meaning of Section 43(c) of the Lanham Act, 15 U.S.C. § 1125(c).
+
+112. Nike’s Asserted Marks have become distinctive and famous prior to StockX’s acts as alleged herein.
+
+113. StockX’s unauthorized and wrongful use of Nike’s Asserted Marks in commerce has diluted and will, unless enjoined, continue to dilute, and is likely to dilute the distinctive quality of Nike’s Asserted Marks, in violation of Nike’s rights under 15 U.S.C. § 1125(c)
+
+114. StockX’s unauthorized and wrongful use of Nike’s Asserted Marks in commerce has tarnished and will, unless enjoined, continue to tarnish, and is likely to tarnish the fame of Nike’s Asserted Marks by undermining and damaging the valuable good will associated therewith, in violation of Nike’s rights under 15 U.S.C. § 1125(c).
+
+115. StockX’s acts as alleged herein are intentional and willful in violation of Section 43(c) of the Lanham Act, 15 U.S.C. § 1125(c), and have already caused Nike irreparable damage and will, unless enjoined, continue to so damage Nike, which has no adequate remedy at law.
+
+116. Nike is further entitled to recover from StockX the actual damages Nike has sustained, is sustaining, and/or is likely to sustain as a result of StockX’s wrongful acts.
+
+117. Upon information and belief, StockX has obtained gains, profits, and advantages as a result of its wrongful acts and will continue to do so in an amount yet to be determined.
+
+118. StockX’s use of Nike’s Asserted Marks and/or confusingly similar marks has been intentional and willful. StockX’s bad faith is evidenced, in part, by the egregious and prominent use of Nike’s Asserted Marks in connection with the sale and promotion of the Vault NFTs, and the extensive nature of the infringement. Because of the willful nature of StockX’s wrongful acts, Nike is entitled to an award of treble damages and increased profits under 15 U.S.C. § 1117.
+
+119. Because this is an exceptional case, Nike is also entitled to recover its costs of suit and its attorneys’ fees pursuant to 15 U.S.C. § 1117.
+
+FOURTH CAUSE OF ACTION
+
+INJURY TO BUSINESS REPUTATION AND DILUTION
+
+NEW YORK GENERAL BUSINESS LAW § 360-1
+
+120. Nike repeats and realleges each and every allegation in the foregoing Paragraphs 1 to 91 as if fully set forth herein.
+
+121. Nike, on behalf of itself and the general consuming public, seek recovery from StockX for violation of New York’s Anti-Dilution Statute, N.Y. Gen. Bus. Law § 360-1, et seq.
+
+122. Nike’s Asserted Marks are commercially and conceptually strong trademarks, which have become distinctive and acquired a secondary meaning capable of dilution.
+
+123. Nike’s Asserted Marks have become distinctive and acquired a secondary meaning capable of dilution prior to StockX’s acts as alleged herein.
+
+124. StockX’s unauthorized and wrongful use of Nike’s Asserted Marks has diluted and will, unless enjoined, continue to dilute, and is likely to dilute the distinctive quality of Nike’s Asserted Marks, thereby diminishing the capacity of Nike’s Asserted Marks to function as unique product identifiers for Nike’s goods and services.
+
+125. StockX’s unauthorized and wrongful use of Nike’s Asserted Marks has tarnished and will, unless enjoined, continue to tarnish, and is likely to tarnish Nike’s Asserted Marks by creating negative associations with Nike, its Asserted Marks, and the associated business reputation and good will.
+
+126. StockX’s acts as alleged herein are intentional and willful in violation of New York’s Anti-Dilution Statute, N.Y. Gen. Bus. Law § 360-1, et seq., and have already caused Nike irreparable damage and will, unless enjoined, continue to so damage Nike, which has no adequate remedy at law.
+
+FIFTH CAUSE OF ACTION
+
+COMMON LAW TRADEMARK INFRINGEMENT
+
+AND UNFAIR COMPETITION
+
+127. Nike repeats and realleges each and every allegation in the foregoing Paragraphs 1 to 91 as if fully set forth herein.
+
+128. Through its prior and continuous use of its Asserted Marks in commerce, Nike’s Asserted Marks have become widely known, and Nike has been identified in the public mind as the manufacturer of the products to which the Nike Asserted Marks are applied.
+
+129. Through its prior and continuous use of its Asserted Marks in commerce, Nike enjoys exclusive common law rights in the Asserted Marks.
+
+130. StockX’s use of Nike’s Asserted Marks is without any permission, license or other authorization from Nike.
+
+131. StockX, with knowledge and intentional disregard of Nike’s rights, continues to advertise, promote, and sell Vault NFTs using Nike’s Asserted Marks and/or confusingly similar marks. StockX’s acts have caused, continue to cause, and/or are likely to cause confusion as to the source and/or sponsorship of the Vault NFTs.
+
+132. StockX’s acts as alleged herein constitute common law trademark infringement, and have already caused Nike irreparable damage and will, unless enjoined, continue to so damage Nike, which has no adequate remedy at law.
+
+133. Upon information and belief, StockX committed the acts alleged herein knowingly, willfully, wantonly, oppressively, fraudulently, maliciously, and in conscious disregard of Nike’s rights, thereby entitling Nike to exemplary and punitive damages pursuant to the common law of the State of New York in an amount sufficient to punish, deter, and make an example of StockX.
+
+JURY DEMAND
+
+Pursuant to Federal Rule of Civil Procedure 38(b), Nike hereby demands a trial by jury of all issues so triable.
+
+PRAYER FOR RELIEF
+
+WHEREFORE, Nike respectfully prays for:
+
+1. A judgment and order that StockX has willfully (A) infringed Nike’s Asserted Marks in violation of 15 U.S.C. §1114, (B) used false designations of origin in violation of 15 U.S.C § 1125(a), (C) diluted at least the Nike Asserted Marks in violation of 15 U.S.C. § 1125(c), (D) injured Nike’s business reputation and diluted at least Nike’s Asserted Marks violation of New York’s Anti-Dilution Statute, N.Y. Gen. Bus. Law § 360-1, et seq. , and (E) violated Nike’s common law rights in Nike’s Asserted Marks;
+
+2. A judgment and order enjoining StockX and StockX’s affiliates, officers, agents, employees, attorneys, and all other persons acting in concert with StockX, during the pendency of this action and permanently thereafter from:
+
+a. Manufacturing, minting, transporting, promoting, advertising, publicizing, distributing, offering for sale, or selling any NFT products (including but not limited to the Vault NFTs) under Nike’s Asserted Marks, any marks substantially indistinguishable therefrom, or any other marks, names, symbols, or logos which are likely to cause confusion or to cause mistake or to deceive persons into the erroneous belief that any products that StockX caused to enter the stream of commerce or any of StockX’s commercial activities are sponsored or licensed by Nike, are authorized by Nike, or are connected or affiliated in some way with Nike or Nike’s Asserted Marks;
+
+b. Manufacturing, minting, transporting, promoting, advertising, publicizing, distributing, offering for sale, or selling any NFT products (including but not limited to the Vault NFTs) under Nike’s Asserted Marks, any marks substantially indistinguishable therefrom, and/or confusingly similar marks;
+
+c. Implying Nike’s approval, endorsement, or sponsorship of, or affiliation or connection with, StockX’s products, services, or commercial activities, passing off StockX’s business as that of Nike, or engaging in any act or series of acts which, either alone or in combination, constitutes unfair methods of competition with Nike and from otherwise interfering with or injuring Nike’s Asserted Marks or the good will associated therewith;
+
+d. Engaging in any act which is likely to dilute the distinctive quality of the Nike Asserted Marks and/or injures Nike’s business reputation;
+
+e. Representing or implying that StockX is in any way sponsored by, currently affiliated with, or licensed by Nike; or
+
+f. Knowingly assisting, inducing, aiding, or abetting any other person or business entity in engaging in or performing any of the activities referred to in paragraphs 2(a) to (e) above;
+
+3. An order that StockX be required to deliver to Nike for destruction any and all Vault NFTs, associated footwear, digital files, packaging, printed graphics, promotional materials, business cards, signs, labels, advertisements, flyers, circulars, and any other items in any of their possession, custody, or control bearing Nike’s Asserted Marks, any marks substantially indistinguishable therefrom, confusingly similar marks;
+
+4. An order granting an award of damages suffered by Nike according to proof at the time of trial;
+
+5. An order that StockX account to Nike for any and all profits earned as a result of StockX’s acts in violation of Nike’s rights;
+
+6. An award of three times the amount of compensatory damages and increased profits pursuant to 15 U.S.C. § 1117;
+
+7. An award of statutory damages pursuant to 15 U.S.C. § 1117(c);
+
+8. An order granting an award of punitive damages for the willful and wanton nature of StockX’s aforesaid acts under the New York General Business Law and the common law;
+
+9. An order granting pre-judgment interest on any recovery by Nike;
+
+10. An order granting an award of Nike’s costs, expenses, and reasonable attorneys’ fees; and
+
+11. Granting such other and further relief as is just and proper.
+
+
+===== DOCUMENT 2: Answer (Doc. 21), filed 2022-03-31 =====
+Source: https://storage.courtlistener.com/recap/gov.uscourts.nysd.574411/gov.uscourts.nysd.574411.21.0.pdf
+Note: StockX LLC's Answer to the original Complaint with Affirmative Defenses and Jury Demand (no counterclaims); full text, PDF-extracted (page headers/ECF stamps removed; signature block and exhibit attachments 21-1 to 21-3 omitted).
+
+Megan K. Bannigan (mkbannigan@debevoise.com) Jyotin Hamid (jhamid@debevoise.com) Justin Ferrone (jcferrone@debevoise.com) Kathryn C. Saba (ksaba@debevoise.com)
+
+DEBEVOISE & PLIMPTON LLP
+
+919 Third Avenue New York, New York 10022 (212) 909-6000 David Mayberry (DMayberry@kilpatricktownsend.com) Rob Potter (RPotter@kilpatricktownsend.com)
+
+KILPATRICK TOWNSEND &
+
+STOCKTON LLP
+
+1114 Avenue of the Americas New York, New York 10036 (212) 775-8733
+
+UNITED STATES DISTRICT COURT
+
+SOUTHERN DISTRICT OF NEW YORK
+
+NIKE, INC.,
+
+Plaintiff, v.
+
+STOCKX LLC,
+
+Defendant.
+
+No. 22-CV-983-VEC
+
+ANSWER
+
+JURY DEMANDED
+
+StockX LLC (“StockX”), by and through its undersigned counsel, hereby submits its Answer to the Complaint, filed by Nike, Inc. (“Nike”) on February 3, 2022.
+
+PRELIMINARY STATEMENT
+
+StockX is an online global marketplace that provides its customers access to items of current culture, including coveted sneakers, apparel, collectibles, trading cards, and accessories, among other products. Customers use StockX’s platform not only to sell or acquire physical products for consumption, but also to trade such physical products for investment purposes. StockX’s recent introduction of non-fungible tokens (“NFTs”) to track ownership of frequently traded physical products is transforming the trading experience on its marketplace by increasing efficiencies and decreasing transaction costs for buyers and sellers. Using NFTs in this manner is lawful and violates no legitimate right of Nike or any of the manufacturers of the underlying goods. Nike’s claims lack merit, disregard settled doctrines of trademark law, including the doctrines of first sale and nominative fair use, and show a fundamental misunderstanding of the various functions NFTs can serve.
+
+Unlike most online marketplaces, which do not authenticate goods sold on their platforms, StockX uses a proprietary, multi-step authentication process for every product sold on its platform. This process ensures that items traded on StockX conform to the product descriptions and condition standards advertised by StockX, and that the products offered for sale are what they claim to be, and are not counterfeit, defective, or used—meaning StockX’s customers can trust that transactions made through StockX are safe. StockX has authenticated tens of millions of products since its formation, combining its authentication team’s expert knowledge with AI- enhanced technology to allow global customers to trade with confidence. While StockX’s authentication process is critically important, it does not come without costs. Upon each sale, the seller ships the product to one of StockX’s eleven authentication centers around the world; StockX performs its multi-step authentication process; and StockX then ships the product to the buyer and ensures that the seller is paid. As a practical matter, this means that for each subsequent trade of the same item, consumers not only incur costs and fees associated with multiple legs of shipping and authentication, but also experience a delay in ownership and payout until the process is complete.
+
+For many reasons, including StockX’s reputation as a place to purchase authentic products, as well as the incorporation of stock market-like mechanics inspired by the world’s financial exchanges, StockX’s platform has attracted a significant number of customers who are interested in acquiring and trading current culture products, without any interest in immediately or ever wearing (or “consuming”) those products or taking physical possession of those products. Nonetheless, until recently, such customers had to incur the transaction costs and shipping times commonly associated with e-commerce experiences, even though physical possession was unnecessary to these customers’ goals and needs. To innovate and expedite the process of trading physical products, StockX recently turned to NFTs. NFTs are traded on a blockchain, which permanently stores records of each NFT transfer, visible to all users in the network. In contrast to most NFT projects to date, which consist of digital images (including JPEGs or GIFs) created for the metaverse, with or without additional utility attached, StockX Vault NFTs are one of the first NFT applications tied to a physical product. StockX’s Vault NFT program enables secondary trading on StockX to be more efficient, track ownership of goods, and cut out unnecessary costs and fees for customers. StockX Vault NFTs are absolutely not “virtual products” or digital sneakers. Rather, each Vault NFT is tied to a specific physical good that has already been authenticated by StockX. Consumers purchase the Vault NFTs and have two choices regarding ongoing possession: (1) retain digital possession of the Vault NFT and leave the authenticated physical good in StockX’s climate-controlled, high-security vault (a “Stored Item”); or (2) take possession of the physical good from the vault at any time, in which case the Vault NFT is removed from the customer’s digital portfolio and permanently removed from circulation. The Vault NFT itself has no intrinsic value—it is effectively a claim ticket, or a “key” to access the underlying Stored Item. Nor can the Vault NFT be traded separately, or decoupled, from ownership of the underlying Stored Item. As explained on StockX’s product pages, a “Vault NFT represents and tracks proof of ownership of the actual sneaker stored within [the] StockX Vault.” The actual product of value is the underlying Stored Item, and there is no mark-up for the actual Vault NFT. While StockX sets the initial price for Vault NFTs, StockX does not set or control prices for subsequent trades, which are dictated completely by StockX users.
+
+The benefit of taking possession of the Vault NFT, rather than the Stored Item, is that the owner can make a future trade without incurring transaction costs, delay, or risk of damage or loss associated with shipping physical sneakers to StockX and then to the ultimate recipients. Instead, the owner need only transfer the Vault NFT, which can be performed almost instantaneously through the Internet. The Stored Item remains safe in the StockX vault, and the transfer of ownership to the buyer is immediate. Because the Stored Item never leaves the StockX vault, the product does not need to be authenticated again. This novel process is ideal for a growing group of consumers (who already make up a significant portion of StockX’s customer base), who trade current culture products and do not want to take physical possession of products for use.1 To date, StockX has released Vault NFTs associated with twenty-eight different types of physical products, including sneakers, trading cards, and collectibles. Eleven of these products are styles of shoes originally manufactured and sold by Nike, adidas, and Puma. In selecting the styles of shoes to include in the Vault NFT program, StockX looked to best-selling products of which sufficient quantities in a certain shoe size were available for purchase. Examples of Vault NFTs and Stored Items that StockX offers for sale are included below. 1 In addition, customers experiencing storage constraints due to their existing physical inventory may choose to purchase StockX Vault NFTs to take advantage of the convenience of storing physical goods in the StockX vault, allowing them to sell or hold the underlying physical goods without the inconvenience of managing the storage logistics or risks.
+
+As shown above, each Vault NFT prominently includes the StockX trademark, as does the product page where the physical goods are offered for sale. In addition, much like a product page or advertisement on any other e-commerce site, Vault NFTs accurately depict and describe the underlying physical goods that the consumer is purchasing. For example, the Vault NFT for the Nike Low Dunk Retro White Black shows an image (generated by StockX) of the Stored Item held in the StockX vault and the relevant product name. Because the owner of the Stored Item need not initially receive the physical goods but can subsequently use the Vault NFT to transfer title to the Stored Item, the image and product name on the Vault NFT play a critical role in describing what goods are actually being bought and sold. Further, the product page for each Vault NFT displays a description of how the StockX Vault NFT functions, as well as a disclaimer of any association or affiliation with product brands, which is depicted below.
+
+At every point in the process, consumers are made aware they are purchasing physical goods that StockX has authenticated, that StockX is storing such physical goods in its vault, that such physical goods may be traded via blockchain and tracked using a StockX-branded Vault NFT, and that the Vault NFT may be redeemed for the physical goods themselves. To date, consumers have enjoyed their experience, successfully completing 2,853 Vault NFT transactions through StockX’s website since the Vault NFT program launched. Consumers have therefore recognized, and will continue to recognize, that StockX’s Vault NFTs are a cutting-edge technology to revolutionize the trading of authenticated physical goods. No one has been—or could be— confused as to the source.
+
+Nike’s Complaint is nothing more than a baseless and misleading attempt to interfere with the application of a new technology to the increasingly popular and lawful secondary market for the sale of its sneakers and other goods. Nike’s position is that resellers of products are legally prohibited from accurately describing the physical products they seek to trade in a digital world, contrary to trademark law. StockX’s use of images of Nike sneakers and descriptions of re-sale Nike products in connection with StockX Vault NFTs is nominative fair use. It is no different than major e-commerce retailers and marketplaces who use images and descriptions of products to sell physical sneakers and other goods, which consumers see (and are not confused by) every single day. Nike’s suit threatens the legitimate use of NFTs not just by StockX, but by other innovators that also use NFTs to track title to physical goods held in a vault, such as fine art, whiskey, and wine. The use of NFTs to digitally track ownership of physical products is not only lawful, but also increases efficiency for and decreases costs to consumers, promotes sustainability, and should not be disturbed.
+
+GENERAL DENIAL
+
+Except as otherwise expressly admitted herein, StockX denies each and every allegation contained in the Complaint, including, without limitation, any allegations contained in the preliminary statement, headings, subheadings, footnotes, or incorporated images within the Complaint, and specifically denies any liability to Nike. Pursuant to Rule 8(b) of the Federal Rules of Civil Procedure, allegations in the Complaint to which no responsive pleading is required shall be considered denied. StockX expressly reserves the right to seek leave to amend and/or supplement this Answer as may be necessary.
+
+RESPONSE TO SPECIFIC ALLEGATIONS
+
+NIKE’S PRELIMINARY STATEMENT
+
+1. Deny, except deny knowledge or information sufficient to form a belief as to whether NFTs are “pervasive in their use by brand owners” or as to how NFTs “are commonly understood,” and admit that NFTs are an exciting technology for which diverse commercial applications have emerged, including tracking title to physical goods, and that NFTs appear to be “[f]ar more than a fleeting trend,” and “part of the future of commerce.”
+
+2. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+3. Deny, and refer to the contents of StockX advertisements and social media content, which speak for themselves, except admit that StockX provides a platform for the resale and authentication of sneakers, apparel, electronics, collectibles, trading cards and accessories, and that StockX lawfully sells Nike goods, as well as goods from brands including, but not limited to New Balance, Puma, adidas, Reebok, Asics, and Converse.
+
+4. Deny, except admit that StockX creates Vault NFTs, which include an image generated by StockX of the associated Stored Item that StockX offers for sale to consumers and to which the NFT is tied. StockX further admits that the images included in paragraph four of the Complaint appear to be images of StockX-branded Vault NFTs depicting the physical Nike SB Dunk Low Ben & Jerry’s Chunky Dunky, Nike Dunk Low Retro White Black, and KAWS Sacai Nike Blazer Low Blue shoes that StockX stores in its physical vault and offers for sale to consumers through the Vault NFT program. StockX further avers that some Vault NFTs are currently trading at values below that of the comparable physical product, not associated with the Vault NFT program; for example, as of March 22, 2022, the last sale price for a Vault NFT tied to an adidas Yeezy Boost 350 V2 Beluga Reflective was $273, whereas the last sale price for the comparable physical product was $282.
+
+5. Deny, and refer to the contents of StockX’s public statements on its website, which speak for themselves, except admit that StockX plans to continue its Vault NFT program, which includes the sale of stored Nike, adidas, and Puma products.
+
+6. Deny, and refer to the contents of StockX’s public statements on its website at the time of Nike’s complaint, and StockX’s current Terms and Conditions of Use, which speak for themselves and are attached hereto as Exhibit A, except admit that Vault NFT owners may redeem the NFT and take possession of the associated physical shoes for a small fee; that StockX has successfully completed redemptions.
+
+7. Paragraph 7 states a legal conclusion to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations regarding consumer perception and otherwise deny.
+
+8. Deny, except admit and aver that Nike is not entitled to play any role in decision- making regarding the StockX-branded Vault NFT program.
+
+9. Paragraph 9 states legal conclusions to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations regarding Nike’s historical use of its trademark and investment in NFT technology and services, and otherwise deny.
+
+THE PARTIES
+
+10. Admit.
+
+11. Admit.
+
+12. Admit.
+
+JURISDICTION AND VENUE
+
+13. Paragraph 13 states a legal conclusion to which no response is required.
+
+14. Paragraph 14 states a legal conclusion to which no response is required.
+
+15. Paragraph 15 states a legal conclusion to which no response is required. To the extent a response is required, admit that the StockX Website and StockX App are accessible to consumers in New York and that StockX is recruiting employees for open positions based in New York, including Sr. Engineering Manager – NFT and Checkout, a Senior Engineering Manager, Category Expansion, and Staff Software Engineer – Marketplace.
+
+16. Paragraph 16 states a legal conclusion to which no response is required. To the extent a response is required, admit that the StockX Editorial Director is based in New York and that StockX is recruiting employees for open positions based in New York.
+
+FACTUAL BACKGROUND
+
+17. Admit.
+
+18. Admit.
+
+19. Admit.
+
+20. Admit.
+
+21. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+22. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+23. Paragraph 23 states a legal conclusion as to the fame of Nike’s trademarks, to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+24. Paragraph 24 states a legal conclusion as to the fame of Nike and its brands, to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+25. Paragraph 25 states a legal conclusion as to Nike’s ownership of the right, title, and interest in and to the listed trademarks (“Asserted Marks”), to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations and, to the extent relevant, refer to the United States Patent and Trademark Office records, which speak for themselves.
+
+26. Paragraph 26 states a legal conclusion as to the validity of the alleged U.S. registrations for the Asserted Marks, to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations and, to the extent relevant, refer to the United States Patent and Trademark Office records, which speak for themselves.
+
+27. Paragraph 27 states a legal conclusion as to the incontestability of the Asserted Marks, to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations and, to the extent relevant, refer to the United States Patent and Trademark Office records, which speak for themselves.
+
+28. Paragraph 28 states a legal conclusion as to common law rights in the Asserted Marks, to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+29. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+30. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+31. Paragraph 31 states a legal conclusion as to the strength and fame of the Asserted Marks, to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+32. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+33. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+34. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+35. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+36. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations and, to the extent relevant, refer to the relevant United States Patent and Trademark Office records, which speak for themselves.
+
+37. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations and refer to the linked announcement, the contents of which speak for themselves.
+
+38. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+39. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+40. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations regarding its initiatives, and otherwise deny.
+
+41. Deny, except admit that StockX provides an online marketplace for the resale of sneakers, apparel, electronics, collectibles, trading cards and accessories; further admit that while StockX users can buy and sell goods from each other, they can also buy goods directly from StockX in limited circumstances; and further admit that StockX is not an authorized distributor of Nike goods but engages in the lawful resale of goods from brands including, but not limited to Nike, Puma, New Balance, adidas, Reebok, Asics, and Converse.
+
+42. Deny, except admit that when a sale of a good that is not associated with the Vault NFT program occurs, the seller ships the item to StockX, StockX authenticates the item using a proprietary, multi-step authentication process, StockX ships the item to the buyer, and StockX pays the seller less a transaction fee. However, when the sale of a Vault NFT and associated Stored Item occurs, several of these steps are unnecessary and do not occur; the seller does not have to ship the product to StockX for authentication because the product is already authenticated and stored in the StockX vault, where it remains until an associated Vault NFT is redeemed for the physical good.
+
+43. Deny, except admit that the Jordan, Nike, and Converse brands were among the top five trading footwear brands by volume on StockX’s marketplace in 2021 and otherwise refer to the contents of StockX’s most recent annual report, which speak for themselves.
+
+44. Admit and refer to the full contents of the January 18, 2022 announcement “StockX Launches Vault NFTs,” which speak for themselves.
+
+45. Deny, except admit that consumers can purchase a Vault NFT that is created and first offered by StockX reflecting the “key” or “claim ticket” to the Stored Item depicted on the Vault NFT and held in StockX’s vault, and further admit that by selling a Vault NFT, a user is transferring title to the associated Stored Item.
+
+46. Deny, except admit that StockX sets the initial price for Vault NFTs and that StockX does not set or control prices for subsequent trades by its users, and that prices for subsequent trades fluctuate; for example, as of March 22, 2022, the last sale price for the Vault NFT product referenced in paragraph 46 of the Complaint was $275.
+
+47. Deny, except admit that StockX sets the initial price for Vault NFTs and that StockX does not set or control prices for subsequent trades by its users, and that prices for subsequent trades fluctuate; for example, as of March 22, 2022, the last sale price for the Vault NFT product referenced in paragraph 47 of the Complaint was $200.
+
+48. Admit that Nike accurately quotes a portion of StockX’s “Collect What’s Next – Introducing NFTs on StockX” webpage, and refer to the full contents of that webpage, which speak for themselves. Aver that Section 28 of the StockX Terms and Conditions of Use, available at https://stockx.com/terms, states that:
+
+Each Vault NFT is backed by a physical item held in StockX’s custody and does not have value beyond that associated with the underlying physical good. Other types of NFTs (“Experiential NFTs”) may grant the NFT holder rights to obtain certain additional products, or benefits or to engage in certain experiences, such as unlocking a reward or access to an exclusive sale (collectively, “Experiences”). All NFTs on the Services may be subject to any additional terms provided by StockX from time to time (“Additional NFT Terms”). In addition, from time to time StockX may offer incentives and rewards for users of StockX Services generally, but not as a component of the value of any particular NFT, unless otherwise expressly stated in the applicable Additional NFT Terms. A copy of the current StockX Terms and Conditions of Use are attached hereto as Exhibit A.
+
+49. Deny, except refer to the contents of StockX’s webpages, which speak for themselves; admit that upon redemption of a StockX Vault NFT, StockX will charge a $35 withdrawal fee and between $5 and $14.95 for shipping and sales tax to send the Stored Item to its owner, and that StockX will remove the associated Vault NFT from the owner’s portfolio; and aver that redemption is now available using the form at <https://stockx.com/help/contact/nft- redeem>, and that redemptions have, in fact, occurred.
+
+50. Admit that the Terms and Conditions of Use include a section on “Vault Terms,” (Section 29), which governs Vault NFTs and relatedly, use of StockX’s vault services, and a section on “NFT Terms,” (Section 28), which more broadly provides terms pertaining to the various types of NFTs that StockX offers or may offer in the future, which include not only Vault NFTs but also Experiential NFTs, which entitle holders to obtain certain additional products, benefits, or access to certain experiences, such as unlocking a reward or access to an exclusive sale, and refer to the full contents of the StockX Terms and Conditions, attached hereto as Exhibit A, which speak for themselves.
+
+51. Deny, except refer to the contents of the StockX Terms & Conditions attached hereto as Exhibit A, which speak for themselves. Further aver that StockX FAQs, available at https://stockx.com/help/articles/What-are-Vault-NFTs, inform consumers that: Vault NFTs are digital tokens that represent ownership of physical items and, therefore, do not have any intrinsic value beyond that of the underlying physical good. Each Vault NFT is backed by a physical item held in StockX’s custody, tied directly one to one via the blockchain. Any item in the StockX Vault is Verified Authentic via StockX's authentication process. This means that if you buy an edition of a Vault NFT, you are the owner of the corresponding physical good which is secured and stored in StockX’s Vault. You can trade that NFT to someone else, which will also transfer ownership of the corresponding physical good, you can hold it for any length of time, or you can redeem the item from the StockX Vault and take possession of the physical item. A copy of the StockX FAQ article “What are Vault NFTs?” is attached hereto as Exhibit B.
+
+52. Deny, except admit that Vault NFTs do not have any intrinsic value beyond that of the associated Stored Item and that Vault Services are currently provided at no additional cost, but that users may be required to pay fees as outlined in the Terms and Conditions, and refer to the contents of the StockX Terms and Conditions, attached hereto as Exhibit A, which speak for themselves.
+
+53. Admit and refer to the full contents of the StockX Terms and Conditions, attached hereto as Exhibit A, for context.
+
+54. Deny, and refer to the contents of the StockX Terms & Conditions attached hereto as Exhibit A, which speak for themselves and now specifically include the following statement: “For the avoidance of doubt, Vault NFTs are not Experiential NFTs and do not contain an Experience that would give rise to automatic redemption, and Vault NFTs do not have an expiration date. A Vault NFT is only removed from your portfolio once it is redeemed for the associated product or sold to another buyer.” Exhibit A, Section 29. Aver that Vault NFTs can be redeemed only for the physical product to which they are tied.
+
+55. Deny.
+
+56. Deny, except admit that as of February 2, 2022, StockX offered Vault NFTs for nine different types of products, and eight of the nine types of products were genuine Nike shoes. Aver that StockX’s Vault NFT collection, as shown on the landing page available at https://stockx.com/lp/nfts/, has continued to evolve as StockX has released more Vault NFTs. A copy of the current Vault NFT landing page is attached hereto as Exhibit C.
+
+57. Deny, except admit that StockX has sold 1,473 individual StockX-branded Vault NFTs; that some of the Vault NFTs associated with Nike products are offered in editions of 1, 3, 100, and 250, with each Vault NFT tied one-to-one to a physical pair of sneakers held in StockX’s vault; and that StockX is not an authorized Nike retailer. Aver that each and every Vault NFT is backed by a physical product. Further, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations as to what is or is not apparent or clear to Nike.
+
+58. Deny, except admit that StockX product pages accurately state the name of the Stored Item and include an image that accurately depicts the Stored Item.
+
+59. Deny, except admit that StockX authenticates the Stored Items that are depicted in and associated with its Vault NFTs, and informs consumers that StockX verifies the authenticity of the Stored Items and that StockX’s authentication process is in no way affiliated with Nike. Aver that an example of a current product description page, available at https://stockx.com/retro- black-and-white-dunk-vault-nft, clearly indicates that the products are “StockX Verified.”
+
+60. Admit that StockX product pages for Vault NFTs include “Product Details” and a “Product Description,” which include a fair use of the Nike brand to accurately describe the underlying Stored Item; further admit that Nike accurately quotes portions of a Vault NFT product page; and refer to the full contents of the Vault NFT product pages, which speak for themselves.
+
+61. Deny, except admit that when a consumer purchases a physical pair of Nike shoes via the StockX marketplace, the consumer receives a paper receipt; aver that a paper receipt is distinct from a Vault NFT, as it accompanies the physical product when shipped rather than acting as a claim ticket for the physical product; and refer to the contents of the Vault NFT product pages, which speak for themselves.
+
+62. Deny; except admit that Vault NFT product pages include a “How it Works” image, which disclaims association with any brand, and refer to the full contents of the Vault NFT product pages, which speak for themselves.
+
+63. Deny, except refer to the contents of the Vault NFT product pages, which speak for themselves.
+
+64. Deny, except refer to the contents of the StockX Website, StockX App, and StockX social media accounts, which speak for themselves. A copy of the current StockX Vault NFT landing page is attached hereto as Exhibit C.
+
+65. Deny, except refer to the contents of StockX Google advertisements, which speak for themselves.
+
+66. Deny, except refer to the contents of the StockX Twitter account (@stockx) and website, which speak for themselves.
+
+67. Deny, except refer to the contents of the referenced StockX Instagram posts, which speak for themselves.
+
+68. Admit that Nike accurately quotes the caption of the referenced StockX Instagram post (which, when viewed in its entirety, displays multiple images of Nike and adidas products) and refer to the full contents of the referenced StockX Instagram post and associated linked pages, which speak for themselves.
+
+69. Deny, except refer to the contents of the referenced StockX Instagram posts, which speak for themselves.
+
+70. Admit that Nike accurately quotes the caption of the referenced StockX Instagram post and refer to the full contents of the referenced StockX Instagram post and associated linked pages, which speak for themselves.
+
+71. Deny, except refer to the contents of the referenced StockX January 26, 2022 tweet, which speak for themselves.
+
+72. Deny.
+
+73. Admit that StockX’s Vault NFTs are not Nike products, but that they are instead keys or claim tickets to access certain Stored Items, which include Nike products. Further admit that StockX’s Vault NFTs are tied to the lawful resale of physical Nike products, and that there is no collaboration between Nike and StockX as to Vault NFTs, StockX did not and does not need to obtain a license or authorization from Nike to accurately describe and depict the Stored Items underlying its Vault NFTs, and StockX disclaims any association or affiliation with Nike (or any other brand) as to its Vault NFT program.
+
+74. Deny, except admit that Vault NFTs confer title to genuine Nike products.
+
+75. Deny, except admit that Nike is not involved in decision-making regarding Vault NFTs, which are tied to physical Nike goods lawfully resold to consumers.
+
+76. StockX repeats and re-alleges each of its responses to Paragraphs 46 and 47.
+
+77. Deny and refer to the contents of the referenced article, which speak for themselves.
+
+78. Deny.
+
+79. Deny.
+
+80. Deny, except refer to the contents of the referenced social media posts, which speak for themselves.
+
+81. Deny, except refer to the contents of the referenced social media post, which speak for themselves.
+
+82. Deny, except refer to the contents of the referenced social media post, which speak for themselves.
+
+83. Deny, except refer to the contents of the referenced social media post, which speak for themselves.
+
+84. Deny, except refer to the contents of the referenced social media post, which speak for themselves.
+
+85. Paragraph 85 states a legal conclusion to which no response is required. To the extent a response is required, deny.
+
+86. Paragraph 86 states a legal conclusion as to dilution to which no response is required. To the extent a response is required, deny.
+
+87. Paragraph 87 states a legal conclusion as to the fame of Nike’s trademarks to which no response is required. Otherwise admit.
+
+88. Paragraph 88 states a legal conclusion to which no response is required. To the extent a response is required, deny.
+
+89. Paragraph 89 states a legal conclusion to which no response is required. To the extent a response is required, deny.
+
+90. Paragraph 90 states a legal conclusion to which no response is required. To the extent a response is required, deny.
+
+91. Paragraph 91 states a legal conclusion to which no response is required. To the extent a response is required, deny.
+
+FIRST CAUSE OF ACTION
+
+TRADEMARK INFRINGEMENT
+
+15 U.S.C. § 1114
+
+92. StockX repeats and re-alleges each of its responses to Paragraphs 1 to 91, as if fully set forth herein.
+
+93. Deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations and, to the extent relevant, refer to the United States Patent and Trademark Office records, which speak for themselves.
+
+94. Paragraph 94 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+95. Paragraph 95 states legal conclusions as to which no response is required. To the extent a response is required, deny, except admit that StockX lawfully describes and depicts Nike products that it sells.
+
+96. Paragraph 96 states a legal conclusion as to which no response is required. To the extent a response is required, deny, except admit that StockX lawfully describes and depicts the Nike products that it sells.
+
+97. Paragraph 97 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+98. Paragraph 98 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+99. Paragraph 99 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+100.Paragraph 100 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+101.Paragraph 101 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+102.Paragraph 102 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+103.Paragraph 103 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+SECOND CAUSE OF ACTION
+
+FALSE DESIGNATION OF ORIGIN / UNFAIR COMPETITION
+
+15 U.S.C. § 1125(a)
+
+104. StockX repeats and re-alleges each of its responses to Paragraphs 1 to 91, as if fully set forth herein.
+
+105. Paragraph 105 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+106. Paragraph 106 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+107.Paragraph 107 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+108. Paragraph 108 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+109.Paragraph 109 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+THIRD CAUSE OF ACTION
+
+TRADEMARK DILUTION
+
+15 U.S.C. § 1125(c)
+
+110.StockX repeats and re-alleges each of its responses to Paragraphs 1 to 91, as if fully set forth herein.
+
+111.Paragraph 111 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+112.Paragraph 112 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+113.Paragraph 113 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+114.Paragraph 114 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+115.Paragraph 115 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+116.Paragraph 116 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+117.Paragraph 117 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+118.Paragraph 118 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+119.Paragraph 119 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+FOURTH CAUSE OF ACTION
+
+INJURY TO BUSINESS REPUTATION AND DILUTION
+
+NEW YORK GENERAL BUSINESS LAW § 360-1
+
+120.StockX repeats and re-alleges each of its responses to Paragraphs 1 to 91, as if fully set forth herein.
+
+121.Deny, except admit that Nike purports to seek, on behalf of itself and the general consuming public, recovery from StockX for violation of New York’s Anti-Dilution Statute, N.Y. Gen. Bus. Law § 360-1, et seq.
+
+122.Paragraph 122 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+123.Paragraph 123 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+124. Paragraph 124 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+125. Paragraph 125 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+126. Paragraph 126 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+FIFTH CAUSE OF ACTION
+
+COMMON LAW TRADEMARK INFRINGEMENT
+
+AND UNFAIR COMPETITION
+
+127.StockX repeats and re-alleges each of its responses to Paragraphs 1 to 91, as if fully set forth herein.
+
+128. Paragraph 128 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+129.Paragraph 122 states a legal conclusion as to which no response is required. To the extent a response is required, deny knowledge or information sufficient to form a belief as to the truth of Nike’s allegations.
+
+130.Admit that permission, license, and/or authorization from Nike are not necessary and, accordingly, StockX has not obtained permission, license, and/or authorization.
+
+131.Paragraph 131 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+132.Paragraph 132 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+133.Paragraph 133 states a legal conclusion as to which no response is required. To the extent a response is required, deny.
+
+ANSWER TO DEMAND FOR JURY TRIAL
+
+No response is required to Nike’s demand for a jury trial.
+
+ANSWER TO PRAYER FOR RELIEF
+
+To the extent paragraphs 1–11 of Nike’s “Prayer For Relief” could be construed as allegations that Nike is entitled to such relief, this is a legal conclusion to which no response is required. To the extent a response is required, deny that Nike is entitled to the relief requested, or to any other relief.
+
+AFFIRMATIVE DEFENSES
+
+StockX sets forth the below affirmative defenses. Each affirmative defense is asserted as to all claims asserted against StockX in the Complaint. By setting forth these defenses, StockX does not assume the burden of proving any fact, issue, or element of claim where such burden properly belongs to Nike. StockX does not in any way waive or limit any defenses that are or may be raised by its denials and averments. These defenses are pled in the alternative, to preserve the rights of StockX to assert such defenses, and are without prejudice to the ability of StockX to raise other and further defenses. StockX reserves the right to seek leave to assert additional affirmative defenses based upon further investigation and discovery.
+
+FIRST AFFIRMATIVE DEFENSE
+
+(Failure to State a Claim)
+
+1. Nike’s claims are barred, in whole or in part, for failure to state a claim upon which relief can be granted.
+
+SECOND AFFIRMATIVE DEFENSE
+
+(Fair Use)
+
+2. Nike’s claims are barred, in whole or in part, as the acts of StockX alleged in the Complaint constitute descriptive fair use and/or nominative fair use.
+
+THIRD AFFIRMATIVE DEFENSE
+
+(First Sale Doctrine)
+
+3. Nike’s claims are barred, in whole or in part, by the first sale doctrine permitting purchasers of lawfully trademarked goods to display, offer, and sell those goods under their original trademark.
+
+FOURTH AFFIRMATIVE DEFENSE
+
+(No Injury)
+
+4. Nike’s claims are barred because it has suffered no harm or damages.
+
+FIFTH AFFIRMATIVE DEFENSE
+
+(Failure to Mitigate)
+
+5. Nike’s claims are barred, in whole or in part, because Nike failed to mitigate damages, if such exist.
+
+SIXTH AFFIRMATIVE DEFENSE
+
+(Adequacy of Remedy at Law)
+
+6. The alleged injury or damage suffered by Nike, if any, would adequately be compensated by damages.
+
+DEMAND FOR JURY TRIAL
+
+Pursuant to Rule 38(b) of the Federal Rules of Civil Procedure, StockX demands a trial by jury of this action.
+
+WHEREFORE, StockX prays for judgment as follows:
+
+1. That Nike take nothing by way of its Complaint;
+
+2. That the Complaint be dismissed in its entirety with prejudice;
+
+3. The StockX be awarded its costs of suit incurred herein in connection with this action, including reasonable attorneys’ fees; and
+
+4. For such other and further relief as the Court deems just and proper.

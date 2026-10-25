@@ -3,7 +3,7 @@
   "cases": [
     {
       "slug": "vans_mschf",
-      "sample": "vans_mschf_complaint",
+      "sample": "vans_mschf_pleadings",
       "title": "Vans, Inc. v. MSCHF Product Studio, Inc. (Wavy Baby), E.D.N.Y. 2022 / 2d Cir. 2023"
     },
     {
@@ -13,7 +13,7 @@
     },
     {
       "slug": "hermes_rothschild",
-      "sample": "hermes_rothschild_complaint",
+      "sample": "hermes_rothschild_pleadings",
       "title": "Hermès International v. Rothschild (MetaBirkins), S.D.N.Y. 2022 / 2023"
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "slug": "nike_stockx",
-      "sample": "nike_stockx_complaint",
+      "sample": "nike_stockx_pleadings",
       "title": "Nike, Inc. v. StockX LLC (Vault NFTs), S.D.N.Y. 2022 / 2025"
     },
     {
@@ -35,6 +35,11 @@
       "slug": "bad_spaniels",
       "sample": "bad_spaniels_complaint",
       "title": "Jack Daniel's Properties, Inc. v. VIP Products LLC (Bad Spaniels), D. Ariz. 2014 / S. Ct. 2023"
+    },
+    {
+      "slug": "adidas_thom_browne",
+      "sample": "adidas_thom_browne_pleadings",
+      "title": "adidas America, Inc. v. Thom Browne, Inc., S.D.N.Y. 2021 / 2d Cir. 2026"
     }
   ]
 }
