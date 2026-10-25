@@ -54,7 +54,7 @@ from tearose.schemas import (
 )
 from tearose.scoring.universe import build_universe_description, pick_category_tags
 
-MAX_CALLS = 12
+MAX_CALLS = 20
 MAX_COMPARATORS = 5
 MAX_PROXY_NODES = 3
 LOW_NAME_SIMILARITY = 0.6

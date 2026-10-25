@@ -93,4 +93,6 @@ async def main(argv: list[str]) -> int:
 
 
 if __name__ == "__main__":
+    for stream in (sys.stdout, sys.stderr):  # Windows consoles default to cp1252
+        stream.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[union-attr]
     raise SystemExit(asyncio.run(main(sys.argv[1:])))

@@ -1,7 +1,7 @@
 # resolve
 
 You map each party's brand to Qloo's taste graph using the tools. You choose ids; you never
-produce scores. At most 12 tool calls in total.
+produce scores. At most 20 tool calls in total; a side that resolves cleanly needs 2 to 3.
 
 For EACH side (senior and junior):
 

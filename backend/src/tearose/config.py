@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     llm_base_url: str | None = Field(default=None, validation_alias="OPENAI_BASE_URL")
     llm_model: str = "gpt-5-mini"
     llm_model_strong: str | None = None  # optional stronger model for the interpret step
-    llm_temperature: float = 0.0
+    llm_temperature: float | None = None  # None = provider default (gpt-5 rejects explicit values)
 
     # --- Access control and budget protection -----------------------------------
     passcode: str = ""  # live mode is disabled when empty

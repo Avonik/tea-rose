@@ -32,11 +32,14 @@ def get_chat_model(strong: bool = False) -> BaseChatModel:
 
     s = get_settings()
     model = (s.llm_model_strong or s.llm_model) if strong else s.llm_model
+    kwargs: dict[str, object] = {}
+    if s.llm_temperature is not None:  # gpt-5 family rejects any explicit temperature
+        kwargs["temperature"] = s.llm_temperature
     return ChatOpenAI(
         model=model,
         api_key=s.llm_api_key or None,
         base_url=s.llm_base_url,
-        temperature=s.llm_temperature,
+        **kwargs,  # type: ignore[arg-type]
     )
 
 
