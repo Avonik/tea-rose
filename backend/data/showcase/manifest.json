@@ -1,5 +1,5 @@
 {
-  "note": "inputs are filed complaints; opinions are used only for the court-outcome reveal bad_spaniels is included deliberately as the small-company example: Qloo has no entry for the dog-toy maker, so the agent must decide what it can and cannot measure (owner's request, 2026-10-25).",
+  "note": "Inputs are filed complaints, plus the defendant's answer or motion to dismiss where the docket has one; opinions are used only for the court-outcome reveal. All computed cases are listed (owner's decision 2026-10-25): where the agent decides it cannot measure a question, the page says so.",
   "cases": [
     {
       "slug": "vans_mschf",

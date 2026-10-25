@@ -930,3 +930,17 @@ def test_read_line_never_carries_outcome_words_or_percentages() -> None:
         assert not FORBIDDEN_WORDS.search(line), line
     assert has_forbidden("they will win") and has_forbidden("60%") and has_forbidden("predicted")
     assert not has_forbidden("86th percentile") and not has_forbidden("winery")
+
+
+def test_turns_on_clause_is_trimmed_not_dropped():
+    from tearose.scoring.read_line import turns_on_clause
+
+    long = (
+        "The case most likely turns on whether the Rogers/First Amendment expressive-use defence "
+        "protects the artworks and their title, and whether the marketing is explicitly misleading "
+        "as to source."
+    )
+    clause = turns_on_clause(long)
+    assert clause.startswith("whether the Rogers/First Amendment expressive-use defence")
+    assert len(clause) <= 150
+    assert turns_on_clause("The case turns on the parody defence.") == "the parody defence"

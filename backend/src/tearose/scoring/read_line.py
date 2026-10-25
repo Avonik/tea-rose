@@ -44,6 +44,9 @@ def lean_target(read: PreliminaryRead, senior: str | None, junior: str | None) -
     return "too close to call"
 
 
+MAX_CLAUSE = 150
+
+
 def turns_on_clause(turns_on: str) -> str:
     """The object of 'turns on' from the model's sentence ("The case most likely turns on the
     parody defence." -> "the parody defence"), or "" when none can be taken safely."""
@@ -52,7 +55,11 @@ def turns_on_clause(turns_on: str) -> str:
     if not m:
         return ""
     clause = re.split(r"[.;:!?](?:\s|$)|;", m.group(1))[0].strip(" ,.;:")
-    if not clause or len(clause) > 140 or has_forbidden(clause):
+    if len(clause) > MAX_CLAUSE:  # long sentence: keep the first idea, cut at a natural boundary
+        head = clause[:MAX_CLAUSE]
+        cut = max(head.rfind(", and "), head.rfind(" and whether "), head.rfind(", "), head.rfind("; "))
+        clause = (head[:cut] if cut > 40 else head.rsplit(" ", 1)[0]).strip(" ,.;:")
+    if not clause or has_forbidden(clause):
         return ""
     return clause
 
