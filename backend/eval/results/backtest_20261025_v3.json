@@ -100,66 +100,66 @@
     },
     "with_proxies": {
       "qloo": {
-        "n": 41,
-        "n_favors_plaintiff": 29,
+        "n": 43,
+        "n_favors_plaintiff": 31,
         "n_other": 12,
         "spearman": {
-          "value": 0.14453635194851466,
+          "value": 0.12463712252000755,
           "ci": [
-            -0.1444023687124341,
-            0.427602583774255
+            -0.1524831327007013,
+            0.3955354494152487
           ],
           "valid_resamples": 2000
         },
         "auc": {
-          "value": 0.5890804597701149,
+          "value": 0.5779569892473119,
           "ci": [
-            0.4047235023041475,
-            0.7697494172494169
+            0.4005539772727273,
+            0.7585641839777867
           ],
           "valid_resamples": 2000
         },
         "underpowered": false
       },
       "qloo_ratio": {
-        "n": 45,
-        "n_favors_plaintiff": 32,
+        "n": 47,
+        "n_favors_plaintiff": 34,
         "n_other": 13,
         "spearman": {
-          "value": 0.14662754183266194,
+          "value": 0.12911298414241615,
           "ci": [
-            -0.14060949749480592,
-            0.4156337172248228
+            -0.1497636770301372,
+            0.39068870195053806
           ],
           "valid_resamples": 2000
         },
         "auc": {
-          "value": 0.59375,
+          "value": 0.583710407239819,
           "ci": [
-            0.40908323095823096,
-            0.7706954887218044
+            0.40384615384615385,
+            0.7540728543278351
           ],
           "valid_resamples": 2000
         },
         "underpowered": false
       },
       "same_category": {
-        "n": 45,
-        "n_favors_plaintiff": 32,
+        "n": 47,
+        "n_favors_plaintiff": 34,
         "n_other": 13,
         "spearman": {
-          "value": 0.47175090432423544,
+          "value": 0.422121798995045,
           "ci": [
-            0.18978073555792177,
-            0.71196915430964
+            0.14436265778817392,
+            0.6695919602593546
           ],
           "valid_resamples": 2000
         },
         "auc": {
-          "value": 0.7596153846153846,
+          "value": 0.7375565610859729,
           "ci": [
-            0.6122660427807487,
-            0.8857158251231526
+            0.5877840289886661,
+            0.8712121212121212
           ],
           "valid_resamples": 2000
         },
@@ -459,10 +459,10 @@
       }
     },
     "excluded": {
-      "proxy (reported in the secondary 'with proxies' line)": 31,
+      "proxy (reported in the secondary 'with proxies' line)": 33,
       "not_discussed": 20,
       "unread": 3,
-      "unresolved": 7,
+      "unresolved": 5,
       "mixed": 5
     }
   },
@@ -788,6 +788,22 @@
       "pick_vs_rule": null
     },
     {
+      "case_id": "variety_stores_inc_v_wal_mart_stores_inc_2018",
+      "case_name": "Variety Stores, Inc. v. Wal-Mart Stores, Inc.",
+      "year": "2018",
+      "senior": "Roses",
+      "junior": "Walmart",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.5958333333333333,
+      "residual": 0.4041666666666667,
+      "symmetric_affinity_ratio": 0.8083612340251018,
+      "residual_ratio": 0.19163876597489815,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": null
+    },
+    {
       "case_id": "pom_wonderful_llc_v_hubbard_2014",
       "case_name": "Pom Wonderful LLC v. Hubbard",
       "year": "2014",
@@ -946,6 +962,22 @@
       "popularity_product": null,
       "used_proxy": true,
       "pick_vs_rule": "senior: miss (rule: Delicious)"
+    },
+    {
+      "case_id": "goto_com_inc_v_walt_disney_co_2000",
+      "case_name": "GoTo.com, Inc. v. Walt Disney Co.",
+      "year": "2000",
+      "senior": "Goto.com",
+      "junior": "Disney",
+      "label": "favors_plaintiff",
+      "symmetric_percentile": 0.8133333333333334,
+      "residual": 0.18666666666666665,
+      "symmetric_affinity_ratio": 0.898363433531174,
+      "residual_ratio": 0.10163656646882602,
+      "same_category": "no",
+      "popularity_product": null,
+      "used_proxy": true,
+      "pick_vs_rule": "junior: The Walt Disney Company (rule: Disney+)"
     },
     {
       "case_id": "stone_brewing_co_v_millercoors_llc_2022",
