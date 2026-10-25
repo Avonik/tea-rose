@@ -766,3 +766,47 @@ def test_memo_without_bottom_line_still_loads() -> None:
         {"headline": "h", "findings": [], "sections": [], "limitations": [], "appendix_queries": []}
     )
     assert memo.bottom_line == ""
+
+
+def test_bottom_line_uses_brand_names() -> None:
+    names = {"senior_name": "Jack Daniel's", "junior_name": "VIP Products"}
+    base = confusion("favors_senior", "favors_senior", "neutral")
+    assert synthesize_bottom_line([*base, ff("fame", "favors_senior")], **names) == (
+        f"Taste data supports Jack Daniel's on 2 of 3 confusion factors and on fame. {SILENT}"
+    )
+    assert synthesize_bottom_line(
+        confusion("favors_senior", "favors_junior", "neutral"), **names
+    ) == (
+        f"Taste data supports Jack Daniel's on 1 confusion factor and VIP Products on 1. {SILENT}"
+    )
+    relat = ff("relatedness_of_goods", "favors_junior", "low")
+    assert synthesize_bottom_line([relat, ff("fame", "favors_senior", "high")], **names) == (
+        "Taste data cuts against Jack Daniel's on the one confusion factor measured "
+        f"(low confidence) but supports Jack Daniel's on fame. {SILENT}"
+    )
+    # notes and the fixed clause are untouched; no role phrase survives once names are given
+    line = synthesize_bottom_line(
+        [*confusion("favors_junior", "neutral", "insufficient_data"), ff("fame", "favors_junior")],
+        **names,
+    )
+    assert line == (
+        "Taste data cuts against Jack Daniel's on 1 of 2 confusion factors "
+        f"(1 factor has insufficient data) and on fame. {SILENT}"
+    )
+    assert "senior mark" not in line and "junior user" not in line
+
+
+def test_bottom_line_name_fallback_and_cleanup() -> None:
+    mixed = confusion("favors_senior", "favors_junior", "neutral")
+    role = synthesize_bottom_line(mixed)
+    assert synthesize_bottom_line(mixed, "", "  ") == role
+    assert synthesize_bottom_line(mixed, None, None) == role
+    assert synthesize_bottom_line(mixed, senior_name="Tea Rose") == (
+        f"Taste data supports Tea Rose on 1 confusion factor and the junior user on 1. {SILENT}"
+    )
+    # a trailing abbreviation dot cannot end the synthesised sentence early
+    line = synthesize_bottom_line(mixed, "Acme Co.", "Rival  Corp.")
+    assert line == (
+        f"Taste data supports Acme Co on 1 confusion factor and Rival Corp on 1. {SILENT}"
+    )
+    assert line.count(".") == 2

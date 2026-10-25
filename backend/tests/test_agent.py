@@ -18,7 +18,7 @@ from tearose.agent.graph import GraphEngine
 from tearose.agent.llm import ScriptedChatModel, ai_tools, ainvoke_structured, tool_call
 from tearose.agent.nodes import extract, fetch, interpret, resolve, route
 from tearose.agent.nodes.base import RunContext
-from tearose.agent.nodes.memo import FIXED_LIMITATIONS
+from tearose.agent.nodes.memo import FIXED_LIMITATIONS, brand_name, party_names
 from tearose.agent.runs import RunHandle
 from tearose.agent.tools import ToolContext, make_tools
 from tearose.config import BACKEND_DIR
@@ -684,11 +684,12 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert memo.headline == "Jack Daniel's fans show little affinity for dog-toy brands."
     # computed in code from the leans (relatedness favors junior, fame favors senior), not scripted
     assert memo.bottom_line == (
-        "Taste data cuts against the senior mark on the one confusion factor measured but "
-        "supports the senior mark on fame. It is silent on mark similarity, intent and actual "
+        "Taste data cuts against Jack Daniel's on the one confusion factor measured but "
+        "supports Jack Daniel's on fame. It is silent on mark similarity, intent and actual "
         "confusion."
     )
-    assert memo.bottom_line == synthesize_bottom_line(memo.findings)
+    state = engine.state_of("r1")
+    assert memo.bottom_line == synthesize_bottom_line(memo.findings, *party_names(state))
     assert memo.limitations[-5:] == list(FIXED_LIMITATIONS)
     assert memo.limitations[0] == INTERPRETATION["limitations"][0]
     assert [s.id for s in memo.sections] == ["summary", "factors", "method", "limitations"]
@@ -814,3 +815,21 @@ async def test_not_blind_keeps_names(client: FixtureClient) -> None:
     }
     await interpret.run(state, ctx)
     assert "Bad Spaniels" in model.prompts_for("Interpretation")[0]
+
+
+def test_bottom_line_party_names() -> None:
+    assert brand_name("Jack Daniel's Properties, Inc.") == "Jack Daniel's"
+    assert brand_name("VIP Products LLC") == "VIP Products"
+    assert brand_name("Acme Co.") == "Acme"
+    assert brand_name("Inc.") == "Inc"  # never stripped to nothing
+    ex = Extraction.model_validate(EXTRACTION)
+    # resolved senior keeps its Qloo name; the proxied junior is named by its party, not the
+    # category comparators (BarkBox, KONG)
+    assert party_names({"extraction": ex, "resolution": proxied_resolution()}) == (
+        "Jack Daniel's",
+        "VIP Products",
+    )
+    # nothing resolved yet: both sides from the extraction
+    assert party_names({"extraction": ex}) == ("Jack Daniel's", "VIP Products")
+    # nothing known: role phrases in the bottom line
+    assert party_names({}) == (None, None)

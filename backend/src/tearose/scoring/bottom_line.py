@@ -1,7 +1,8 @@
 """The memo's synthesised bottom line, computed from factor leans in code (no model call).
 
 Neutral by construction: it counts which side each factor's lean favours, names the senior mark
-and the junior user symmetrically, and always states what the taste graph cannot speak to.
+and the junior user symmetrically (by brand name when known, else by role), and always states
+what the taste graph cannot speak to.
 A clause whose counted findings are all low-confidence carries " (low confidence)".
 """
 
@@ -16,11 +17,22 @@ CONFUSION_FACTORS: tuple[str, ...] = (
 )
 SILENT_CLAUSE = "It is silent on mark similarity, intent and actual confusion."
 
-_VERB: dict[str, str] = {
-    "favors_senior": "supports the senior mark",
-    "favors_junior": "cuts against the senior mark",
-    "neutral": "is neutral",
-}
+SENIOR_ROLE = "the senior mark"
+JUNIOR_ROLE = "the junior user"
+
+
+def _verbs(senior: str) -> dict[str, str]:
+    return {
+        "favors_senior": f"supports {senior}",
+        "favors_junior": f"cuts against {senior}",
+        "neutral": "is neutral",
+    }
+
+
+def _party(name: str | None, role: str) -> str:
+    """The brand name as the sentence's object, or the role phrase when no name is usable.
+    Trailing punctuation is dropped so an abbreviation ("Co.") cannot end the sentence early."""
+    return " ".join((name or "").split()).rstrip(" .,;:") or role
 
 
 def _factors(n: int) -> str:
@@ -53,8 +65,18 @@ def _all_low(findings: list[FactorFinding]) -> bool:
 LOW = " (low confidence)"
 
 
-def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
-    """One deterministic bottom line from the factor leans; see ARCHITECTURE.md, "Memo"."""
+def synthesize_bottom_line(
+    findings: list[FactorFinding],
+    senior_name: str | None = None,
+    junior_name: str | None = None,
+) -> str:
+    """One deterministic bottom line from the factor leans; see ARCHITECTURE.md, "Memo".
+
+    `senior_name` / `junior_name` replace "the senior mark" / "the junior user" when given,
+    e.g. "supports Jack Daniel's on 1 confusion factor and VIP Products on 1"."""
+    senior = _party(senior_name, SENIOR_ROLE)
+    junior = _party(junior_name, JUNIOR_ROLE)
+    verb = _verbs(senior)
     confusion = [f for f in findings if f.factor in CONFUSION_FACTORS]
     measured = [f for f in confusion if f.lean != "insufficient_data"]
     missing = len(confusion) - len(measured)
@@ -68,11 +90,11 @@ def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
     elif n == 0:
         lead = "is inconclusive on the confusion factors"
     elif s and j:
-        lead = f"supports the senior mark on {s} confusion {_factors(s)} and the junior user on {j}"
+        lead = f"supports {senior} on {s} confusion {_factors(s)} and {junior} on {j}"
     elif s:
-        lead, direction = f"{_VERB['favors_senior']} on {_of(s, n)}", "favors_senior"
+        lead, direction = f"{verb['favors_senior']} on {_of(s, n)}", "favors_senior"
     elif j:
-        lead, direction = f"{_VERB['favors_junior']} on {_of(j, n)}", "favors_junior"
+        lead, direction = f"{verb['favors_junior']} on {_of(j, n)}", "favors_junior"
     else:
         lead, direction = f"is neutral on {_of(n, n)}", "neutral"
     low = n > 0 and _all_low(measured)
@@ -87,9 +109,9 @@ def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
     fame_f = _finding(findings, "fame")
     fame = fame_f.lean if fame_f is not None else None
     fame_low = LOW if fame_f is not None and fame_f.confidence == "low" else ""
-    if fame in _VERB:
+    if fame in verb:
         if not lead:
-            parts.append(f"{_VERB[fame]} on fame")
+            parts.append(f"{verb[fame]} on fame")
         elif fame == direction:
             parts.append("and on fame")
         elif fame == "neutral":
@@ -97,9 +119,9 @@ def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
         elif direction == "favors_senior":
             parts.append("but not on fame")
         elif direction in ("favors_junior", "neutral"):
-            parts.append(f"but {_VERB[fame]} on fame")
+            parts.append(f"but {verb[fame]} on fame")
         else:
-            parts.append(f"and {_VERB[fame]} on fame")
+            parts.append(f"and {verb[fame]} on fame")
         parts[-1] += fame_low
 
     body = " ".join(parts)
