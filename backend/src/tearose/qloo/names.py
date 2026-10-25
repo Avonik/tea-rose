@@ -8,8 +8,9 @@ strict similarity rule (fuzzy). Otherwise the side is a MISS and takes the proxy
 Rules, in order (the rule string is recorded with every resolution):
 - "exact": normalised names are equal, or equal once spaces are removed ("bark box" = "barkbox").
 - "fuzzy:<ratio>": with two or more query tokens, every query token appears in the candidate
-  and the candidate adds at most one extra token ("jack daniels" ~ "jack daniels distillery"), or the difflib ratio of the
-  normalised names is >= FUZZY_MIN_RATIO. <ratio> is that difflib ratio, two decimals.
+  and the candidate adds at most one extra token ("jack daniels" ~ "jack daniels
+  distillery"), or the difflib ratio of the normalised names is >= FUZZY_MIN_RATIO. <ratio>
+  is that difflib ratio, two decimals.
 - "miss": nothing qualifies.
 """
 
