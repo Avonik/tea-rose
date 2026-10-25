@@ -57,7 +57,8 @@ def turns_on_clause(turns_on: str) -> str:
     clause = re.split(r"[.;:!?](?:\s|$)|;", m.group(1))[0].strip(" ,.;:")
     if len(clause) > MAX_CLAUSE:  # long sentence: keep the first idea, cut at a natural boundary
         head = clause[:MAX_CLAUSE]
-        cut = max(head.rfind(", and "), head.rfind(" and whether "), head.rfind(", "), head.rfind("; "))
+        boundaries = (", and ", " and whether ", ", ", "; ")
+        cut = max(head.rfind(b) for b in boundaries)
         clause = (head[:cut] if cut > 40 else head.rsplit(" ", 1)[0]).strip(" ,.;:")
     if not clause or has_forbidden(clause):
         return ""
