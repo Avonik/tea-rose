@@ -11,6 +11,12 @@ For EACH side (senior and junior):
    returns an unrelated top hit for small brands (a game, a diner, a motorcycle maker): a
    similar-sounding name in another business is NOT a match. If several fit, prefer the parent brand over
    line extensions. If none fits, choose none: that side takes the PROXY PATH.
+   A retailer, marketplace, platform, media company or parent company IS the right pick when
+   its name matches the party and it plausibly sells, distributes or publishes the goods at
+   issue, even if its description and categories are broader than those goods (a general
+   retailer for "discount sneakers", an entertainment group for its web portal). Note the
+   breadth in `disambiguation_note`; it is never a reason to reject. When the party named is
+   the company itself, prefer the company entity over its sub-brands or product lines.
 3. PROXY PATH (brand not in Qloo):
    - The message lists Qloo's BRAND TAXONOMY (every urn:tag:genre:brand node as
      `path = Name`) and CODE SUGGESTIONS for each side's goods phrase. Choose up to 3 nodes

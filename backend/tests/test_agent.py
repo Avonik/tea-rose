@@ -422,6 +422,9 @@ async def test_resolve_proxy_uses_brand_taxonomy_with_fit(tmp_path: Path) -> Non
     prompt = model.prompts_for("resolve")[0]
     assert "BRAND TAXONOMY (67 nodes" in prompt
     assert "food_and_beverage/pet_food = Pet Food" in prompt
+    # a company broader than the goods (retailer, parent) is a match, not a reject
+    assert "retailer, marketplace, platform, media company or parent company" in prompt
+    assert "never a reason to reject" in prompt and "namesake restaurant" in prompt
     assert any("not in Qloo's brand taxonomy" in e.title for e in events)
     assert {u.side: u.tag_ids for u in out["resolution"].universes}["junior"] == [TAX_PET_FOOD]
     # the memo states the approximation in code

@@ -702,3 +702,44 @@ async def test_score_uses_agent_comparators_when_agent_resolved() -> None:
     assert not any("code rule used" in n for n in s["notes"])
     assert barkbox in {p["filter.results.entities"] for p in _params(s, "target_affinity")}
     assert "agent resolver" in scores["comparator_rule"]
+
+
+def test_cli_resolve_only_merges_and_refuses_mismatch(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    from tearose.eval.backtest.__main__ import main
+
+    mapping = _write_mapping(tmp_path / "mapping.csv", _agent_rows()[:2])
+    out = tmp_path / "out"
+    args = ["--resolver", "rule", "--mapping", str(mapping), "--out", str(out)]
+    main(["resolve", *args])
+    path = out / "resolved.json"
+    before = json.loads(path.read_text(encoding="utf-8"))
+    before["cases"][0]["sentinel"] = "kept"  # an untouched case must survive byte for byte
+    before["cases"][1]["senior"]["entity_id"] = "stale"
+    path.write_text(json.dumps(before), encoding="utf-8")
+    capsys.readouterr()
+
+    main(["resolve", "--only", " ino_v_smash ", *args])
+    summary = capsys.readouterr().out
+    assert '"re_resolved": 1' in summary and '"cases": 2' in summary
+    after = json.loads(path.read_text(encoding="utf-8"))
+    assert [c["case_id"] for c in after["cases"]] == ["jd_v_bad_spaniels", "ino_v_smash"]
+    assert after["cases"][0] == before["cases"][0]
+    ino = after["cases"][1]
+    assert ino["senior"]["entity_id"] == INO_ID and ino["re_resolved_at"]
+    assert {k: v for k, v in after.items() if k != "cases"} == {
+        k: v for k, v in before.items() if k != "cases"}  # fmt: skip
+
+    # score reads the merged file (extra re_resolved_at field) without complaint
+    main(["score", "--mapping", str(mapping), "--out", str(out)])
+    assert len(json.loads((out / "scores.json").read_text(encoding="utf-8"))["cases"]) == 2
+
+    with pytest.raises(SystemExit, match="not in mapping"):
+        main(["resolve", "--only", "nope", *args])
+    for key, bad, msg in (("mapping_sha256", "other", "mapping.csv"),
+                          ("harness_version", 2, "harness version")):  # fmt: skip
+        path.write_text(json.dumps({**after, key: bad}), encoding="utf-8")
+        with pytest.raises(SystemExit, match=msg):
+            main(["resolve", "--only", "ino_v_smash", *args])
+        assert json.loads(path.read_text(encoding="utf-8"))[key] == bad  # file left as it was

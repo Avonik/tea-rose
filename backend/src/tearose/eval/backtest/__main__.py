@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -55,6 +56,11 @@ def main(argv: list[str] | None = None) -> None:
         help="resolve: 'agent' = the product's model-driven resolve node (default, harness v3); "
         "'rule' = the v2 code-only name rule",
     )  # fmt: skip
+    ap.add_argument(
+        "--only", default=None, metavar="CASE_ID[,CASE_ID...]",
+        help="resolve: re-resolve only these cases and merge them into the existing "
+        "resolved.json (same harness version, mapping and resolver; others kept as they are)",
+    )  # fmt: skip
     ap.add_argument("--frontend", action="store_true", help="report: update backtest.json even "
                     "when not a live run")  # fmt: skip
     ap.add_argument("--no-frontend", action="store_true", help="report: never touch frontend")
@@ -72,7 +78,21 @@ def main(argv: list[str] | None = None) -> None:
     mapping = read_csv(args.mapping)
 
     if args.step == "resolve":
-        rows = resolve.selected_rows(mapping, args.all)
+        only = [c.strip() for c in (args.only or "").split(",") if c.strip()]
+        existing = None
+        if only:
+            if not (out_dir / RESOLVED_NAME).exists():
+                raise SystemExit(f"--only needs an existing {out_dir / RESOLVED_NAME}")
+            existing = read_json(out_dir / RESOLVED_NAME)
+            header = {"harness_version": HARNESS_VERSION, "resolver": args.resolver,
+                      "mapping_sha256": sha256_file(args.mapping)}  # fmt: skip
+            try:  # refuse before any Qloo or model call
+                resolve.check_mergeable(existing, header)
+                rows = resolve.only_rows(mapping, only)
+            except ValueError as exc:
+                raise SystemExit(str(exc)) from exc
+        else:
+            rows = resolve.selected_rows(mapping, args.all)
         doc = asyncio.run(
             _with_client(
                 lambda rec: resolve.run(
@@ -80,8 +100,15 @@ def main(argv: list[str] | None = None) -> None:
                 )
             )
         )
+        extra: dict[str, Any] = {}
+        if existing is not None:
+            try:
+                doc = resolve.merge_only(existing, doc, date.today().isoformat())
+            except ValueError as exc:
+                raise SystemExit(str(exc)) from exc
+            extra = {"re_resolved": len(rows), "re_resolved_cases": [r["case_id"] for r in rows]}
         write_json(out_dir / RESOLVED_NAME, doc)
-        _print("resolve", {"mode": mode, "out": str(out_dir / RESOLVED_NAME),
+        _print("resolve", {"mode": mode, "out": str(out_dir / RESOLVED_NAME), **extra,
                            **resolve.summarize(doc)})  # fmt: skip
     elif args.step == "score":
         resolved = read_json(out_dir / RESOLVED_NAME)

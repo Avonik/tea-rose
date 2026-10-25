@@ -271,6 +271,36 @@ def selected_rows(rows: list[dict[str, str]], include_all: bool) -> list[dict[st
     return [r for r in rows if "yes" in (r["include_relatedness"], r["include_fame"])]
 
 
+def only_rows(rows: list[dict[str, str]], case_ids: list[str]) -> list[dict[str, str]]:
+    """Mapping rows for `--only` (any inclusion flag), in mapping order; unknown ids raise."""
+    wanted = set(case_ids)
+    unknown = sorted(wanted - {r["case_id"] for r in rows})
+    if unknown:
+        raise ValueError(f"case ids not in mapping.csv: {', '.join(unknown)}")
+    return [r for r in rows if r["case_id"] in wanted]
+
+
+def check_mergeable(existing: dict[str, Any], header: dict[str, Any]) -> None:
+    """`--only` refuses an existing resolved.json from another harness version, mapping.csv or
+    resolver (`header`: the new run's top-level fields). Raises ValueError."""
+    for key, what in (("harness_version", "harness version"), ("mapping_sha256", "mapping.csv"),
+                      ("resolver", "resolver")):  # fmt: skip
+        if existing.get(key) != header.get(key):
+            raise ValueError(
+                f"existing resolved.json has a different {what} ({existing.get(key)!r} vs "
+                f"{header.get(key)!r}); re-run resolve without --only"
+            )
+
+
+def merge_only(existing: dict[str, Any], fresh: dict[str, Any], today: str) -> dict[str, Any]:
+    """`--only`: replace the re-resolved cases of `existing` in place (new ones appended), mark
+    them `re_resolved_at` = today; every other case is kept as it is."""
+    check_mergeable(existing, fresh)
+    new = {c["case_id"]: {**c, "re_resolved_at": today} for c in fresh["cases"]}
+    cases = [new.pop(c["case_id"], c) for c in existing["cases"]]
+    return {**existing, "cases": cases + list(new.values())}
+
+
 RESOLVERS = ("agent", "rule")
 
 

@@ -59,6 +59,7 @@ Code: `backend/src/tearose/eval/backtest/`. Four idempotent steps, run from `bac
 ```
 uv run python -m tearose.eval.backtest prepare   # cases_candidates.csv -> mapping.csv (no Qloo calls)
 uv run python -m tearose.eval.backtest resolve   # mapping.csv -> resolved.json (--resolver agent|rule, default agent)
+uv run python -m tearose.eval.backtest resolve --only <case_id>[,<case_id>...]   # re-resolve those cases, merge into resolved.json (re_resolved_at)
 uv run python -m tearose.eval.backtest score     # resolved.json -> scores.json (insights + scoring/score.py)
 uv run python -m tearose.eval.backtest report    # -> results/backtest_<YYYYMMDD>_v3.md/.json (+ frontend backtest.json on live runs)
 ```
