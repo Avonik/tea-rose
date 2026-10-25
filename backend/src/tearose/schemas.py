@@ -146,15 +146,23 @@ class BridgingEvidence(BaseModel):
     senior_tag_universe: int | None  # senior brand's taste-tag list
     category_affinity: float | None
     percentile: float | None  # 0..1
+    # the tag actually found: the junior's leaf, or (when the leaf is absent) its nearest
+    # taxonomy ancestor among the senior's tags; ancestor_levels = segments climbed (0 = leaf)
+    matched_tag_id: str | None = None
+    matched_tag_name: str | None = None
+    ancestor_levels: int = 0
     notes: list[str] = Field(default_factory=list)
 
 
 class FameEvidence(BaseModel):
     demographics: Demographics
-    breadth_score: float | None  # 0..1, see ARCHITECTURE.md "Fame breadth"
+    breadth_score: float | None  # 0..1 evenness, see ARCHITECTURE.md "Fame breadth"
+    breadth_age: float | None = None  # same evenness over the 6 age buckets only
+    breadth_gender: float | None = None  # same evenness over the 2 gender values only
     skew_description: str  # e.g. "skews 25-34, male"
     popularity_percentile: float | None
     heatmap_coverage: float | None  # 0..1 share of national cells with above-median affinity
+    fame_score: float | None = None  # mean(breadth, popularity, coverage); None unless all 3
     notes: list[str] = Field(default_factory=list)
 
 

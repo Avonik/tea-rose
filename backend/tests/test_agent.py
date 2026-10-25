@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -34,6 +35,7 @@ from tearose.schemas import (
     Universe,
 )
 from tearose.scoring import synthesize_bottom_line
+from tearose.scoring.describe import describe_evidence
 
 # --------------------------------------------------------------------------------------
 # Minimal synthetic Qloo world
@@ -636,6 +638,16 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert [s.id for s in memo.sections] == ["summary", "factors", "method", "limitations"]
     assert len(memo.appendix_queries) >= 10
     assert memo.appendix_queries == engine.state_of("r1")["queries"]
+
+    # both prompts carry the code-written fact sentences, and no float with > 2 decimals
+    facts = describe_evidence(r.evidence, r.resolution)
+    for schema in ("Interpretation", "MemoDraft"):
+        prompt = model.prompts_for(schema)[0]
+        assert "FACTS (computed in code; the only source for numbers)" in prompt
+        for sentence in facts["overlap"] + facts["fame"]:
+            assert sentence in prompt
+        human = prompt[prompt.index("FACTS (computed in code") :]
+        assert not re.search(r"\d\.\d{3,}", human), schema
 
 
 async def test_followup_reruns_from_resolve_and_accumulates_queries(

@@ -183,6 +183,9 @@ export interface BridgingEvidence {
   category_rank_among_senior_tags: number | null
   senior_tag_universe: number | null
   category_affinity: number | null
+  matched_tag_id?: string | null
+  matched_tag_name?: string | null
+  ancestor_levels?: number
   percentile: number | null
   notes: string[]
 }
@@ -190,9 +193,12 @@ export interface BridgingEvidence {
 export interface FameEvidence {
   demographics: Demographics
   breadth_score: number | null
+  breadth_age?: number | null
+  breadth_gender?: number | null
   skew_description: string
   popularity_percentile: number | null
   heatmap_coverage: number | null
+  fame_score?: number | null
   notes: string[]
 }
 

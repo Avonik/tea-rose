@@ -12,7 +12,14 @@ import math
 from collections.abc import Callable, Iterable, Sequence
 from typing import Any
 
-from tearose.qloo.models import AGE_BUCKETS, GENDERS, CompareEntity, Demographics, HeatmapPoint
+from tearose.qloo.models import (
+    AGE_BUCKETS,
+    GENDERS,
+    CompareEntity,
+    Demographics,
+    HeatmapPoint,
+    Tag,
+)
 from tearose.schemas import (
     BridgingEvidence,
     Evidence,
@@ -245,7 +252,7 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
         notes.append("Overlap could not be computed in either direction.")
     for label, pct in (("senior->junior", s2j_pct), ("junior->senior", j2s_pct)):
         if pct is not None:
-            notes.append(f"{label} percentile: {pct:.3f}.")
+            notes.append(f"{label} percentile: {pct:.2f}.")
 
     shared: list[dict[str, Any]] = []
     d_senior: list[dict[str, Any]] = []
@@ -307,8 +314,10 @@ def overlap_evidence(raw: RawData, resolution: Resolution | None = None) -> Over
 def bridging_evidence(raw: RawData) -> BridgingEvidence:
     """Best (lowest) rank of any junior category tag among the senior's taste tags.
 
-    Universe = len(senior_tags). percentile = 1 - (rank-1)/universe; not found => rank None,
-    percentile 0 and a note. category_affinity = the best-ranked matching tag's affinity.
+    Universe = len(senior_tags). percentile = 1 - (rank-1)/universe. If no leaf is present,
+    the nearest taxonomy ancestor present is used instead (rank reported for the ancestor,
+    percentile x 0.5 per level climbed, note "leaf absent; parent <name> at rank k"). Nothing
+    present => rank None, percentile 0 and a note. category_affinity = the matched tag's.
     """
     cat_ids = [t for t in dict.fromkeys(raw.junior_category_tag_ids) if t]
     if not cat_ids:
@@ -330,14 +339,18 @@ def bridging_evidence(raw: RawData) -> BridgingEvidence:
             notes=["No taste tags returned for the senior seed: bridging not computable."],
         )
     size = len(raw.senior_tags)
-    wanted = set(cat_ids)
-    best: tuple[int, float | None, str] | None = None
-    for idx, tag in enumerate(raw.senior_tags):
-        if tag.tag_id not in wanted:
-            continue
-        r = _rank_of(tag.rank, idx)
-        if best is None or r < best[0]:
-            best = (r, tag.affinity, tag.name)
+    best = _best_tag(raw.senior_tags, set(cat_ids))
+    levels = 0
+    if best is None:
+        # Leaf absent from the senior's top tags (weak evidence with ~177 nodes and take=50):
+        # climb the brand taxonomy one level at a time and take the nearest ancestor present.
+        frontier = list(cat_ids)
+        while best is None:
+            frontier = [p for p in (taxonomy_parent(t) for t in frontier) if p]
+            if not frontier:
+                break
+            levels += 1
+            best = _best_tag(raw.senior_tags, set(frontier))
     if best is None:
         return BridgingEvidence(
             category_tag_ids=cat_ids,
@@ -346,23 +359,60 @@ def bridging_evidence(raw: RawData) -> BridgingEvidence:
             category_affinity=None,
             percentile=0.0,
             notes=[
-                f"None of the junior's category tags appear among the senior's {size} taste "
-                "tags; percentile set to 0."
+                f"None of the junior's category tags (nor any taxonomy parent) appear among the "
+                f"senior's {size} taste tags; percentile set to 0."
             ],
         )
-    rank, aff, name = best
+    rank, aff, name, tag_id = best
     notes: list[str] = []
     if size < 50:
         notes.append(f"Small tag universe ({size} tags); percentile is coarse.")
-    notes.append(f"Best-ranked category tag: {name!r} at rank {rank} of {size}.")
+    pct = percentile_from_rank(rank, size)
+    if levels:
+        pct = pct * ANCESTOR_DISCOUNT**levels if pct is not None else None
+        notes.append(
+            f"leaf absent; parent {name} at rank {rank}"
+            + (f" ({levels} levels up)" if levels > 1 else "")
+            + f"; percentile discounted by {ANCESTOR_DISCOUNT} per level climbed."
+        )
+    else:
+        notes.append(f"Best-ranked category tag: {name!r} at rank {rank} of {size}.")
     return BridgingEvidence(
         category_tag_ids=cat_ids,
         category_rank_among_senior_tags=rank,
         senior_tag_universe=size,
         category_affinity=aff,
-        percentile=percentile_from_rank(rank, size),
+        percentile=pct,
+        matched_tag_id=tag_id,
+        matched_tag_name=name,
+        ancestor_levels=levels,
         notes=notes,
     )
+
+
+BRAND_GENRE_ROOT = "urn:tag:genre:brand"
+ANCESTOR_DISCOUNT = 0.5  # bridging percentile multiplier per taxonomy level climbed
+
+
+def taxonomy_parent(tag_id: str) -> str | None:
+    """Parent brand-genre tag id (strip the last ':' segment); None at a top family or for
+    tags outside `urn:tag:genre:brand` (the bare root is never a meaningful category)."""
+    if not tag_id.startswith(BRAND_GENRE_ROOT + ":"):
+        return None
+    parent = tag_id.rsplit(":", 1)[0]
+    return parent if parent.startswith(BRAND_GENRE_ROOT + ":") else None
+
+
+def _best_tag(tags: Sequence[Tag], wanted: set[str]) -> tuple[int, float | None, str, str] | None:
+    """(rank, affinity, name, tag_id) of the best-ranked tag whose id is in `wanted`."""
+    best: tuple[int, float | None, str, str] | None = None
+    for idx, tag in enumerate(tags):
+        if tag.tag_id not in wanted:
+            continue
+        r = _rank_of(tag.rank, idx)
+        if best is None or r < best[0]:
+            best = (r, tag.affinity, tag.name, tag.tag_id)
+    return best
 
 
 # --------------------------------------------------------------------------------------
@@ -393,27 +443,47 @@ def _has_demo(d: Demographics | None) -> bool:
     return d is not None and bool(d.age or d.gender)
 
 
+def _evenness(values: Sequence[float]) -> float | None:
+    """clip(1 - mean(|v|), 0, 1) with v clipped to [-1, 1]; None for an empty vector."""
+    if not values:
+        return None
+    v = [max(-1.0, min(1.0, x)) for x in values]
+    return _clip01(1.0 - sum(abs(x) for x in v) / len(v))
+
+
 def breadth_score(d: Demographics | None) -> float | None:
-    """Breadth of appeal across the 8 buckets (6 age + 2 gender), in [0, 1].
+    """Evenness of appeal across the 8 buckets (6 age + 2 gender), in [0, 1].
 
-        v_i       = bucket affinity clipped to [-1, 1]   (missing bucket = 0)
-        share_pos = (# buckets with v_i > 0) / 8
-        mass_pos  = sum(max(v_i, 0)) / max(sum(|v_i|), eps)     # ARCHITECTURE's weighted term
-        breadth   = share_pos * mass_pos
+    Qloo demographics are relative indices (over/under-indexing against a baseline, about
+    -1..1), not shares, so a brand everyone knows sits near 0 everywhere:
 
-    `mass_pos` alone (the ARCHITECTURE formula) would score a single positive spike over zeros
-    as 1.0; multiplying by the unweighted share requires both "positive in many buckets" and
-    "the positive side dominates in magnitude". None when no data or all buckets are 0.
+        breadth = clip(1 - mean(|v_i|), 0, 1)     v_i clipped to [-1, 1], missing bucket = 0
+
+    Flat zeros => 1.0; mild deviations score high; a strong skew in either direction scores
+    low. None only when there is no demographic data at all.
     """
     if d is None or not _has_demo(d):
         return None
-    v = [max(-1.0, min(1.0, x)) for x in d.age_vector() + d.gender_vector()]
-    abs_mass = sum(abs(x) for x in v)
-    if abs_mass <= _EPS:
+    return _evenness(d.age_vector() + d.gender_vector())
+
+
+def breadth_parts(d: Demographics | None) -> tuple[float | None, float | None]:
+    """(age evenness over the 6 age buckets, gender evenness over the 2 genders)."""
+    if d is None:
+        return None, None
+    age = _evenness(d.age_vector()) if d.age else None
+    gender = _evenness(d.gender_vector()) if d.gender else None
+    return age, gender
+
+
+def fame_score(
+    breadth: float | None, popularity: float | None, coverage: float | None
+) -> float | None:
+    """Mean of breadth, popularity percentile and heatmap coverage; None unless all three."""
+    parts = (breadth, popularity, coverage)
+    if any(p is None for p in parts):
         return None
-    share_pos = sum(1 for x in v if x > 0) / len(v)
-    mass_pos = sum(max(x, 0.0) for x in v) / max(abs_mass, _EPS)
-    return _clip01(share_pos * mass_pos)
+    return sum(parts) / 3.0  # type: ignore[arg-type]
 
 
 def skew_description(d: Demographics | None) -> str:
@@ -428,13 +498,17 @@ def skew_description(d: Demographics | None) -> str:
     ages = d.age_vector()
     parts: list[str] = []
     if d.age and max(ages) - min(ages) >= BROAD_AGE_SPREAD:
-        top2 = sorted(range(len(AGE_BUCKETS)), key=lambda i: (-ages[i], i))[:2]
-        i, j = sorted(top2)
-        ri, rj = _AGE_RANGES[AGE_BUCKETS[i]], _AGE_RANGES[AGE_BUCKETS[j]]
-        if j == i + 1:
-            parts.append(_fmt_range(ri[0], rj[1]))
-        else:
-            parts.append(f"{_fmt_range(*ri)} and {_fmt_range(*rj)}")
+        # Only buckets that over-index (> 0) count as a skew; the second is dropped when negative.
+        top2 = sorted((i for i in range(len(AGE_BUCKETS)) if ages[i] > 0), key=lambda i: (-ages[i], i))[:2]
+        if len(top2) == 1:
+            parts.append(_fmt_range(*_AGE_RANGES[AGE_BUCKETS[top2[0]]]))
+        elif len(top2) == 2:
+            i, j = sorted(top2)
+            ri, rj = _AGE_RANGES[AGE_BUCKETS[i]], _AGE_RANGES[AGE_BUCKETS[j]]
+            if j == i + 1:
+                parts.append(_fmt_range(ri[0], rj[1]))
+            else:
+                parts.append(f"{_fmt_range(*ri)} and {_fmt_range(*rj)}")
     male, female = d.gender_vector()
     if d.gender and abs(male - female) >= BROAD_GENDER_GAP:
         parts.append(GENDERS[0] if male > female else GENDERS[1])
@@ -457,10 +531,9 @@ def fame_evidence(raw: RawData, resolution: Resolution | None = None) -> FameEvi
     notes: list[str] = []
     demo = raw.senior_demographics
     breadth = breadth_score(demo)
+    breadth_age, breadth_gender = breadth_parts(demo)
     if not _has_demo(demo):
         notes.append("No demographic data for the senior brand.")
-    elif breadth is None:
-        notes.append("All demographic buckets are zero; breadth not computable.")
 
     popularity = raw.senior_popularity
     if popularity is None and resolution is not None and resolution.senior.popularity is not None:
@@ -478,9 +551,12 @@ def fame_evidence(raw: RawData, resolution: Resolution | None = None) -> FameEvi
     return FameEvidence(
         demographics=demo or Demographics(),
         breadth_score=breadth,
+        breadth_age=breadth_age,
+        breadth_gender=breadth_gender,
         skew_description=skew_description(demo),
         popularity_percentile=popularity,
         heatmap_coverage=coverage,
+        fame_score=fame_score(breadth, popularity, coverage),
         notes=notes,
     )
 

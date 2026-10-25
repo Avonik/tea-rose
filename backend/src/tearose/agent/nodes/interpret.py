@@ -22,6 +22,7 @@ from tearose.agent.nodes.base import (
     to_json,
 )
 from tearose.schemas import Evidence, Extraction, FactorFinding, Resolution
+from tearose.scoring.describe import describe_evidence, facts_block
 
 SENIOR_LABEL = "Brand A (senior)"
 JUNIOR_LABEL = "Brand B (junior)"
@@ -101,10 +102,27 @@ def maybe_blind(state: dict[str, Any], text: str) -> str:
 # --- payload ----------------------------------------------------------------------------
 
 
+def _round2(x: Any) -> Any:
+    """Round every float in a JSON-like structure to 2 decimals (no raw floats in prompts)."""
+    if isinstance(x, float):
+        return round(x, 2)
+    if isinstance(x, dict):
+        return {k: _round2(v) for k, v in x.items()}
+    if isinstance(x, list):
+        return [_round2(v) for v in x]
+    return x
+
+
+def fact_sentences(state: dict[str, Any]) -> str:
+    """The code-written FACTS block (scoring/describe.py) for the interpret and memo prompts."""
+    return facts_block(describe_evidence(state.get("evidence"), state.get("resolution")))
+
+
 def compact_evidence(evidence: Evidence | None) -> dict[str, Any]:
+    """Evidence for the prompt: bulky lists trimmed, floats rounded to 2 decimals."""
     if evidence is None:
         return {}
-    d = evidence.model_dump(mode="json")
+    d = _round2(evidence.model_dump(mode="json"))
     if d.get("zone"):
         z = d["zone"]
         z["points"] = f"{len(z.get('points') or [])} cells (omitted)"
@@ -182,11 +200,15 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
         }
     )
     body = maybe_blind(state, body)
+    facts = maybe_blind(state, fact_sentences(state))
     if state.get("blind"):
         await ev.note("Blind mode: party names replaced before prompting")
     messages = [
         SystemMessage(load_prompt("interpret")),
-        HumanMessage(f"CASE AND EVIDENCE:\n{body}{maybe_blind(state, instruction_block(state))}"),
+        HumanMessage(
+            f"FACTS (computed in code; the only source for numbers):\n{facts}\n\n"
+            f"CASE AND EVIDENCE:\n{body}{maybe_blind(state, instruction_block(state))}"
+        ),
     ]
     try:
         out = await ainvoke_structured(ctx.model(strong=True), Interpretation, messages)

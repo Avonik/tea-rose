@@ -2,6 +2,7 @@
 
 Neutral by construction: it counts which side each factor's lean favours, names the senior mark
 and the junior user symmetrically, and always states what the taste graph cannot speak to.
+A clause whose counted findings are all low-confidence carries " (low confidence)".
 """
 
 from __future__ import annotations
@@ -35,8 +36,21 @@ def _of(c: int, n: int) -> str:
     return f"{c} of {n} confusion {_factors(n)}"
 
 
+def _finding(findings: list[FactorFinding], factor: str) -> FactorFinding | None:
+    return next((f for f in findings if f.factor == factor), None)
+
+
 def _lean(findings: list[FactorFinding], factor: str) -> FactorLean | None:
-    return next((f.lean for f in findings if f.factor == factor), None)
+    f = _finding(findings, factor)
+    return f.lean if f is not None else None
+
+
+def _all_low(findings: list[FactorFinding]) -> bool:
+    """True when the clause counts at least one finding and every one has low confidence."""
+    return bool(findings) and all(f.confidence == "low" for f in findings)
+
+
+LOW = " (low confidence)"
 
 
 def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
@@ -61,12 +75,18 @@ def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
         lead, direction = f"{_VERB['favors_junior']} on {_of(j, n)}", "favors_junior"
     else:
         lead, direction = f"is neutral on {_of(n, n)}", "neutral"
+    low = n > 0 and _all_low(measured)
     if missing:
         has = "has" if missing == 1 else "have"
-        lead += f" ({missing} {_factors(missing)} {has} insufficient data)"
+        tag = "low confidence; " if low else ""
+        lead += f" ({tag}{missing} {_factors(missing)} {has} insufficient data)"
+    elif low:
+        lead += LOW
 
     parts = [lead] if lead else []
-    fame = _lean(findings, "fame")
+    fame_f = _finding(findings, "fame")
+    fame = fame_f.lean if fame_f is not None else None
+    fame_low = LOW if fame_f is not None and fame_f.confidence == "low" else ""
     if fame in _VERB:
         if not lead:
             parts.append(f"{_VERB[fame]} on fame")
@@ -80,12 +100,16 @@ def synthesize_bottom_line(findings: list[FactorFinding]) -> str:
             parts.append(f"but {_VERB[fame]} on fame")
         else:
             parts.append(f"and {_VERB[fame]} on fame")
+        parts[-1] += fame_low
 
     body = " ".join(parts)
+    zone_f = _finding(findings, "zone_of_reputation")
     zone = {
         "favors_senior": "shows a wide zone of reputation",
         "favors_junior": "shows a narrow zone of reputation",
-    }.get(_lean(findings, "zone_of_reputation") or "")
+    }.get(zone_f.lean if zone_f is not None else "")
+    if zone and zone_f is not None and zone_f.confidence == "low":
+        zone += LOW
     if zone:
         body = f"{body}, and {zone}" if body else zone
 

@@ -27,6 +27,13 @@ HARD RULES
    favors_junior when it cuts against it, neutral when mixed or middling.
 6. `finding`: 2-4 sentences, neutral lawyer language, numbers quoted exactly as given.
 7. Brand names may be replaced by "Brand A (senior)" / "Brand B (junior)"; use them as given.
+8. FACTS: the `FACTS` block holds fact sentences written in code. Use ONLY these sentences for
+   numbers: copy them verbatim or paraphrase without changing any number. Never re-describe
+   who is ranked among whom (e.g. when comparator brands stand in for a party, it is the
+   comparators that are ranked, never the other party "ranked among" that category). The
+   evidence JSON is context for leans and `evidence_refs`, not a source of numbers to quote.
+9. Format percentiles as ordinals ("86th percentile"), never as 0.86 or 86%; no number may
+   have more than 2 decimals.
 
 `limitations`: 0-4 case-specific caveats (e.g. "The junior brand is not in Qloo; it is
 represented by two category comparators"). Do not repeat generic caveats about affinity vs confusion,

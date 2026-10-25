@@ -17,7 +17,12 @@ from tearose.agent.nodes.base import (
     load_prompt,
     to_json,
 )
-from tearose.agent.nodes.interpret import case_payload, compact_evidence, maybe_blind
+from tearose.agent.nodes.interpret import (
+    case_payload,
+    compact_evidence,
+    fact_sentences,
+    maybe_blind,
+)
 from tearose.schemas import FactorFinding, Memo, MemoSection
 from tearose.scoring import synthesize_bottom_line
 
@@ -117,7 +122,11 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     messages = [
         SystemMessage(load_prompt("memo")),
         HumanMessage(
-            "MATERIAL:\n" + maybe_blind(state, body) + maybe_blind(state, instruction_block(state))
+            "FACTS (computed in code; the only source for numbers):\n"
+            + maybe_blind(state, fact_sentences(state))
+            + "\n\nMATERIAL:\n"
+            + maybe_blind(state, body)
+            + maybe_blind(state, instruction_block(state))
         ),
     ]
     try:

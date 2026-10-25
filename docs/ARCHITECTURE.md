@@ -15,7 +15,8 @@ backend/
                               params), live.py (HTTP + cache + retries + raw recording),
                               fixtures.py (FixtureClient), cache.py (sqlite), names.py (brand
                               name matching), taxonomy.py (brand-genre tree + goods mapper)
-    scoring/                  score.py (pure functions, NO model calls), universe.py
+    scoring/                  score.py (pure functions, NO model calls), universe.py,
+                              bottom_line.py, describe.py (fact sentences for the prompts)
     agent/                    LangGraph graph: state.py, graph.py, nodes/*.py, tools.py, prompts/*.md,
                               llm.py (OpenAI-compatible chat model factory + fake model for tests)
     api/                      FastAPI: app.py, auth.py, limits.py, routes_*.py, sse.py, showcase.py
@@ -77,7 +78,8 @@ Nodes, in order:
 
 `Memo.bottom_line` is one sentence computed by `scoring/bottom_line.py` (`synthesize_bottom_line`) from
 the factor leans alone: how many confusion factors support or cut against the senior mark, then fame
-and zone, always ending "It is silent on mark similarity, intent and actual confusion." No model
+and zone, always ending "It is silent on mark similarity, intent and actual confusion." A clause
+whose counted findings all have `low` confidence carries " (low confidence)". No model
 writes it; it never names an outcome. Runs stored before the field existed load with `""`.
 
 ### Resolve, proxy and universe (after the live spike)
@@ -120,13 +122,27 @@ state): `qloo_search`, `qloo_tags_search`, `qloo_insights_entities`, `qloo_insig
 - **Symmetric overlap** = mean of both directions' percentiles; if only one is computable, use it
   and note it.
 - **Bridging:** seed = senior; `insights_tags` → position of the junior's category tag(s) among
-  the senior's taste tags; percentile as above.
-- **Fame breadth:** from `demographics`, over the 8 buckets (6 age + 2 gender), each value
-  clipped to [-1, 1]: `share_pos = #(v > 0) / 8`, `mass_pos = Σ max(v, 0) / max(Σ |v|, eps)`,
-  `breadth = clip(share_pos × mass_pos, 0, 1)`. A brand must be positive in many buckets AND
-  positive overall to score high (a single positive spike scores low). Plus `popularity`
-  percentile and heatmap coverage (share of returned cells with affinity above the median of
-  the response; None below 5 cells).
+  the senior's taste tags (top 50 brand-genre tags); percentile as above. With a ~177-node
+  taxonomy, absence of the leaf is weak evidence, so when no leaf is present the code climbs the
+  taxonomy (strip the last `:` segment, repeatedly, never to the bare `urn:tag:genre:brand`
+  root) and takes the nearest ancestor present: `category_rank_among_senior_tags` = the
+  ancestor's rank k, `percentile = (1 - (k - 1) / N) × 0.5^levels`, `matched_tag_*` and
+  `ancestor_levels` record it, note "leaf absent; parent <name> at rank k". Only when no
+  ancestor appears either is the percentile 0 (with a note).
+- **Fame breadth:** Qloo demographics are relative indices (over/under-indexing against a
+  baseline, about -1..1), not shares, so breadth is an evenness measure over the 8 values
+  (6 age buckets + 2 genders), each clipped to [-1, 1], missing = 0:
+  `breadth = clip(1 - mean(|v|), 0, 1)`. Flat zeros ⇒ 1.0, mild deviations score high, a strong
+  skew in any bucket (+0.9 in one, -0.9 elsewhere) scores low. `breadth_age` / `breadth_gender`
+  are the same formula over the age or gender values alone. Plus `popularity` percentile and
+  heatmap coverage (share of returned cells with affinity above the median of the response;
+  None below 5 cells). `fame_score` = mean(breadth, popularity, coverage), None unless all
+  three are present. `skew_description` names the strongest age buckets / gender.
+- **Fact sentences:** `scoring/describe.py` (`describe_evidence(evidence, resolution)`) turns
+  every number into plain-English sentences per analysis (who is ranked among whom, comparators
+  "standing in for" a proxied party, universe sizes, ordinal percentiles, 2-decimal scores,
+  "no data", and "small category, rank is coarse" below 20 brands). The interpret and memo
+  prompts get these as their FACTS block and may take numbers only from them.
 - **Zone concentration:** Gini coefficient of heatmap affinities across cells (0 = uniform,
   1 = concentrated); `top_regions` = cells aggregated by `label` or by 1-decimal lat/lon bins.
   `geographic_overlap` = cosine similarity of the two sides' binned affinity vectors.

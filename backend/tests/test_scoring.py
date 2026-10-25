@@ -27,6 +27,7 @@ from tearose.schemas import (
 from tearose.scoring import DirectionalPeers, RawData, compute_evidence, synthesize_bottom_line
 from tearose.scoring.score import (
     bin_points,
+    breadth_parts,
     breadth_score,
     bridging_evidence,
     cosine,
@@ -278,9 +279,42 @@ def test_bridging_best_rank_wins():
     assert ev.category_affinity == pytest.approx(0.95)
 
 
+BRAND = "urn:tag:genre:brand"
+LEAF = f"{BRAND}:household:pets:toys"
+PARENT = f"{BRAND}:household:pets"
+GRANDPARENT = f"{BRAND}:household"
+
+
+def test_bridging_leaf_present_is_undiscounted():
+    raw = RawData(senior_tags=_tags(50, {4: PARENT, 10: LEAF}), junior_category_tag_ids=[LEAF])
+    ev = bridging_evidence(raw)
+    assert ev.category_rank_among_senior_tags == 10 and ev.ancestor_levels == 0
+    assert ev.matched_tag_id == LEAF
+    assert ev.percentile == pytest.approx(1 - 9 / 50)
+    assert not any("leaf absent" in n for n in ev.notes)
+
+
+def test_bridging_parent_present_is_discounted_per_level():
+    raw = RawData(senior_tags=_tags(50, {11: PARENT}), junior_category_tag_ids=[LEAF])
+    ev = bridging_evidence(raw)
+    assert ev.category_rank_among_senior_tags == 11
+    assert ev.matched_tag_id == PARENT and ev.ancestor_levels == 1
+    assert ev.percentile == pytest.approx((1 - 10 / 50) * 0.5)
+    assert any(n.startswith("leaf absent; parent Tag 11 at rank 11") for n in ev.notes)
+    # two levels up: discount 0.25; the bare brand-genre root never counts
+    ev2 = bridging_evidence(
+        RawData(senior_tags=_tags(50, {1: GRANDPARENT, 2: BRAND}), junior_category_tag_ids=[LEAF])
+    )
+    assert ev2.ancestor_levels == 2 and ev2.percentile == pytest.approx(0.25)
+    raw3 = RawData(senior_tags=_tags(50, {1: BRAND}), junior_category_tag_ids=[LEAF])
+    ev3 = bridging_evidence(raw3)
+    assert ev3.percentile == 0.0 and ev3.category_rank_among_senior_tags is None
+
+
 def test_bridging_not_found_and_empty():
-    ev = bridging_evidence(RawData(senior_tags=_tags(20, {}), junior_category_tag_ids=["pet"]))
+    ev = bridging_evidence(RawData(senior_tags=_tags(20, {}), junior_category_tag_ids=[LEAF]))
     assert ev.percentile == 0.0 and ev.category_rank_among_senior_tags is None and ev.notes
+    assert ev.matched_tag_id is None and ev.ancestor_levels == 0
     ev2 = bridging_evidence(RawData())
     assert ev2.percentile is None and ev2.notes
     ev3 = bridging_evidence(RawData(junior_category_tag_ids=["pet"]))
@@ -292,13 +326,29 @@ def test_bridging_not_found_and_empty():
 # --------------------------------------------------------------------------------------
 
 
-def test_breadth_broad_vs_narrow():
-    broad = breadth_score(demo([0.1, 0.12, 0.1, 0.08, 0.1, 0.09], 0.05, 0.06))
-    narrow = breadth_score(demo([-0.3, 0.6, 0.5, -0.2, -0.4, -0.5], 0.4, -0.4))
-    assert broad == pytest.approx(1.0)
-    assert narrow is not None and narrow < 0.3
+def test_breadth_flat_zeros_is_one():
+    assert breadth_score(demo([0.0] * 6, 0.0, 0.0)) == pytest.approx(1.0)
+    assert breadth_parts(demo([0.0] * 6, 0.0, 0.0)) == (pytest.approx(1.0), pytest.approx(1.0))
     assert breadth_score(None) is None
     assert breadth_score(Demographics()) is None
+
+
+def test_breadth_single_strong_spike_is_low():
+    spike = breadth_score(demo([0.9, -0.9, -0.9, -0.9, -0.9, -0.9], 0.9, -0.9))
+    assert spike is not None and spike == pytest.approx(0.1)
+    # mild deviations everywhere score high
+    mild = breadth_score(demo([0.1, 0.12, -0.1, 0.08, -0.1, 0.09], 0.05, -0.06))
+    assert mild is not None and mild > 0.9
+
+
+def test_breadth_mixed_real_world_like_pattern():
+    # one bucket +0.4, the others between -0.1 and -0.7, a moderate gender gap
+    d = demo([-0.2, -0.1, -0.7, -0.6, -0.5, 0.4], 0.4, -0.4)
+    b = breadth_score(d)
+    assert b is not None and 0.5 <= b <= 0.6
+    assert b == pytest.approx(1 - 3.3 / 8)
+    age, gender = breadth_parts(d)
+    assert age == pytest.approx(1 - 2.5 / 6) and gender == pytest.approx(0.6)
 
 
 def test_skew_description_wording():
@@ -323,6 +373,10 @@ def test_fame_evidence_coverage_and_popularity():
     assert ev.popularity_percentile == 0.98
     assert ev.heatmap_coverage == pytest.approx(0.5)
     assert ev.skew_description == "broad"
+    assert ev.breadth_score == pytest.approx(0.9)
+    assert ev.fame_score == pytest.approx((0.9 + 0.98 + 0.5) / 3)
+    # fame_score needs all three inputs
+    assert fame_evidence(RawData(senior_demographics=demo([0.1] * 6, 0.1, 0.1))).fame_score is None
 
 
 def test_fame_empty_inputs():
@@ -453,8 +507,40 @@ SILENT = "It is silent on mark similarity, intent and actual confusion."
 FORBIDDEN = ("win", "lose", "verdict", "likely", "probability")
 
 
-def ff(factor: str, lean: str) -> FactorFinding:
-    return FactorFinding(factor=factor, lean=lean, confidence="medium", finding="x")
+def ff(factor: str, lean: str, confidence: str = "medium") -> FactorFinding:
+    return FactorFinding(factor=factor, lean=lean, confidence=confidence, finding="x")
+
+
+def test_bottom_line_low_confidence_clauses() -> None:
+    relat = ff("relatedness_of_goods", "favors_junior", "low")
+    chan = ff("channels_and_purchasers", "neutral", "low")
+    bridge = ff("bridging_the_gap", "neutral", "low")
+    fame = ff("fame", "favors_senior", "high")
+    assert synthesize_bottom_line([relat, chan, bridge, fame]) == (
+        "Taste data cuts against the senior mark on 1 of 3 confusion factors (low confidence) "
+        f"but supports the senior mark on fame. {SILENT}"
+    )
+    # one non-low counted finding: no tag on that clause; low fame and zone get their own tag
+    chan_med = ff("channels_and_purchasers", "neutral", "medium")
+    zone = ff("zone_of_reputation", "favors_senior", "low")
+    assert synthesize_bottom_line(
+        [relat, chan_med, bridge, ff("fame", "favors_senior", "low"), zone]
+    ) == (
+        "Taste data cuts against the senior mark on 1 of 3 confusion factors but supports the "
+        "senior mark on fame (low confidence), and shows a wide zone of reputation "
+        f"(low confidence). {SILENT}"
+    )
+    # insufficient findings are not counted; tag merges with the insufficient-data note
+    missing = ff("bridging_the_gap", "insufficient_data", "low")
+    assert synthesize_bottom_line([relat, ff("channels_and_purchasers", "favors_junior", "low"),
+                                   missing]) == (
+        "Taste data cuts against the senior mark on both confusion factors measured "
+        f"(low confidence; 1 factor has insufficient data). {SILENT}"
+    )  # fmt: skip
+    # all insufficient: inconclusive, no confidence tag
+    assert "low confidence" not in synthesize_bottom_line(
+        [ff(f.factor, "insufficient_data", "low") for f in (relat, chan, bridge)]
+    )
 
 
 def confusion(*leans: str) -> list[FactorFinding]:
@@ -539,13 +625,19 @@ def test_bottom_line_without_confusion_factors() -> None:
 
 def test_bottom_line_never_uses_outcome_words() -> None:
     leans = ("favors_senior", "neutral", "favors_junior", "insufficient_data")
-    for a, b, c, fame, zone in itertools.product(leans, repeat=5):
+    combos = itertools.product(leans, leans, leans, leans, leans, ("low", "medium"))
+    for a, b, c, fame, zone, conf in combos:
         findings = [
-            *confusion(a, b, c),
-            ff("fame", fame),
-            ff("zone_of_reputation", zone),
+            *(f.model_copy(update={"confidence": conf}) for f in confusion(a, b, c)),
+            ff("fame", fame, conf),
+            ff("zone_of_reputation", zone, conf),
         ]
         line = synthesize_bottom_line(findings)
+        counted = any(x != "insufficient_data" for x in (a, b, c, fame)) or zone in (
+            "favors_senior",
+            "favors_junior",
+        )
+        assert ("(low confidence" in line) == (conf == "low" and counted), line
         assert line.endswith(SILENT) and line.startswith("Taste data ")
         words = set(re.findall(r"[a-z]+", line.lower()))
         assert not words & set(FORBIDDEN), line
