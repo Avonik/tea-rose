@@ -67,3 +67,49 @@ export const CASE_STORIES: Record<string, CaseStory> = {
 export function caseStory(slug: string | undefined | null): CaseStory | undefined {
   return slug ? CASE_STORIES[slug] : undefined
 }
+
+/** Display names for sample documents that are not one of the five showcase cases. */
+const SAMPLE_NAMES: Record<string, string> = {
+  adidas_thom_browne: 'Adidas v. Thom Browne',
+  taco_tuesday: 'Taco Tuesday',
+  jack_daniels_v_vip: 'Jack Daniel’s v. VIP Products',
+}
+
+/** Trailing document kinds in sample file names, longest first, and how they are captioned. */
+const SAMPLE_KINDS: [string, string][] = [
+  ['cease_and_desist', 'Cease-and-desist letter'],
+  ['counterclaims', 'Counterclaims'],
+  ['complaint', 'Complaint'],
+  ['opinion', 'Opinion'],
+  ['petition', 'Petition'],
+  ['letter', 'Letter'],
+]
+
+/** "cedar_hollow" → "Cedar Hollow", "a_v_b" → "A v. B". */
+function humanise(id: string): string {
+  return id
+    .split(/[_\s-]+/)
+    .filter(Boolean)
+    .map((w) => (w === 'v' || w === 'vs' ? 'v.' : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ')
+}
+
+/**
+ * A clean tile label for a sample document id such as "bad_spaniels_complaint" or
+ * "cedar_hollow_cease_and_desist.txt": the case's short name where Tea Rose knows it, else the
+ * humanised id, with the document kind split off as a caption. The backend's own titles are the
+ * documents' first lines (docket numbers, banners), so they are not used.
+ */
+export function sampleLabel(name: string): { title: string; kind: string | null } {
+  let id = name.replace(/\.(txt|md|pdf)$/i, '').toLowerCase()
+  let kind: string | null = null
+  for (const [suffix, label] of SAMPLE_KINDS) {
+    if (id === suffix || id.endsWith(`_${suffix}`)) {
+      kind = label
+      id = id.slice(0, Math.max(0, id.length - suffix.length - 1))
+      break
+    }
+  }
+  const title = CASE_STORIES[id]?.short ?? SAMPLE_NAMES[id] ?? (id ? humanise(id) : humanise(name))
+  return { title, kind }
+}

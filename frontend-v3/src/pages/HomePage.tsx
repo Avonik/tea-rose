@@ -14,6 +14,7 @@ import {
   FIGHTS,
   HOW,
   PREVIEW,
+  QUESTION_COLUMNS,
   QUESTIONS,
   QUESTIONS_HEAD,
   WILL_NOT,
@@ -29,7 +30,8 @@ import { fade, springQuick, springSlow } from '../motion/springs'
 import type { AnalysisResult, ShowcaseSummary } from '../types'
 import '../styles/home.css'
 
-const LEAD_SLUG = 'bad_spaniels'
+/** The case in the device frame and behind "Open a case": clean overlap, every confusion factor, court agreed. */
+const LEAD_SLUG = 'vans_mschf'
 const HIGH = 0.75
 
 const Q_ICON: Record<QuestionKey, ReactNode> = {
@@ -38,7 +40,7 @@ const Q_ICON: Record<QuestionKey, ReactNode> = {
   zone: <IconMap size={18} />,
 }
 
-/** Bad Spaniels when the showcase lists it, else the first showcase case, else Bad Spaniels anyway. */
+/** Vans v. MSCHF when the showcase lists it, else the first showcase case. */
 function leadCase(list: ShowcaseSummary[] | null | undefined): ShowcaseSummary | undefined {
   if (!list?.length) return undefined
   return list.find((c) => c.slug === LEAD_SLUG) ?? list[0]
@@ -56,30 +58,37 @@ function Questions() {
             {QUESTIONS_HEAD.title}
           </h2>
         </div>
-        <ul className="group qrows">
-          {QUESTIONS.map((q, i) => (
-            <li key={q.key}>
-              <Reveal index={i} className="group__row group__row--top qrow">
-                <span className="qrow__glyph" aria-hidden="true">
-                  {Q_ICON[q.key]}
-                </span>
-                <div className="group__main qrow__main">
-                  <h3 className="qrow__q">{q.q}</h3>
-                  <dl className="qrow__facts">
+        <div className="group qgrid">
+          <div className="qgrid__row qgrid__head caption tertiary" aria-hidden="true">
+            <span>{QUESTION_COLUMNS.q}</span>
+            <span>{QUESTION_COLUMNS.measure}</span>
+            <span>{QUESTION_COLUMNS.court}</span>
+          </div>
+          <ul className="qgrid__list">
+            {QUESTIONS.map((q, i) => (
+              <li key={q.key}>
+                <Reveal index={i} className="qgrid__row">
+                  <h3 className="qgrid__q">
+                    <span className="qgrid__glyph" aria-hidden="true">
+                      {Q_ICON[q.key]}
+                    </span>
+                    {q.q}
+                  </h3>
+                  <dl className="qgrid__facts">
                     <div>
-                      <dt className="caption tertiary">What we measure</dt>
+                      <dt className="caption tertiary qgrid__dt">{QUESTION_COLUMNS.measure}</dt>
                       <dd>{q.measure}</dd>
                     </div>
                     <div>
-                      <dt className="caption tertiary">What a court does with it</dt>
+                      <dt className="caption tertiary qgrid__dt">{QUESTION_COLUMNS.court}</dt>
                       <dd className="secondary">{q.court}</dd>
                     </div>
                   </dl>
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )
@@ -119,49 +128,54 @@ type GaugeProps = {
   left: string
   right: string
   meaning: string | null
+  /** Shown instead of the gauge when there is no value. */
+  missing: string
   note?: string
 }
 
 /** A 0–100 gauge with end labels, the value, one sentence of meaning and a "high starts here" tick. */
-function PlainGauge({ label, value, kind, left, right, meaning, note }: GaugeProps) {
+function PlainGauge({ label, value, kind, left, right, meaning, missing, note }: GaugeProps) {
   const reduce = useReducedMotion()
-  const pos = value == null ? 0 : clamp01(value)
-  const shown = value == null ? null : to100(value)
+  if (value == null) {
+    return (
+      <figure className="pgauge pgauge--empty">
+        <figcaption className="pgauge__label">{label}</figcaption>
+        <p className="pgauge__none">{PREVIEW.notMeasured}</p>
+        <p className="pgauge__meaning footnote secondary">{missing}</p>
+      </figure>
+    )
+  }
+  const pos = clamp01(value)
+  const shown = to100(value)
   const fmt = (v: number) => (kind === 'percentile' ? ordinalSuffix(v) : String(Math.round(v)))
-  const spoken =
-    shown == null
-      ? `${label}: not measured for this case.`
-      : `${label}: ${kind === 'percentile' ? `${ordinalSuffix(shown)} percentile` : `${shown} out of 100`}, on a scale from ${left} at 0 to ${right} at 100. High starts at ${to100(HIGH)}.`
+  const reading = kind === 'percentile' ? `${ordinalSuffix(shown)} percentile` : `${shown} out of 100`
+  const spoken = `${label}: ${reading}, on a scale from ${left} at 0 to ${right} at 100. High starts at ${to100(HIGH)}.`
   return (
     <figure className="pgauge">
       <figcaption className="pgauge__label">{label}</figcaption>
       <p className="pgauge__value">
         <AnimatedNumber value={shown} format={fmt} className="pgauge__num" />
-        {shown != null && <span className="pgauge__unit secondary">{kind === 'percentile' ? 'percentile' : 'out of 100'}</span>}
+        <span className="pgauge__unit secondary">{kind === 'percentile' ? 'percentile' : 'out of 100'}</span>
       </p>
       <div className="pgauge__bar" role="img" aria-label={spoken}>
         <span className="hgauge">
           <span className="pgauge__high" style={{ left: `${HIGH * 100}%` }}>
             <span className="pgauge__high-label caption tertiary">{PREVIEW.high}</span>
           </span>
-          {value != null && (
-            <>
-              <motion.span className="hgauge__fill" initial={{ scaleX: 0 }} animate={{ scaleX: pos }} transition={reduce ? fade : springSlow} />
-              <motion.span
-                className="hgauge__marker"
-                initial={{ left: '0%' }}
-                animate={{ left: `${pos * 100}%` }}
-                transition={reduce ? fade : springSlow}
-              />
-            </>
-          )}
+          <motion.span className="hgauge__fill" initial={{ scaleX: 0 }} animate={{ scaleX: pos }} transition={reduce ? fade : springSlow} />
+          <motion.span
+            className="hgauge__marker"
+            initial={{ left: '0%' }}
+            animate={{ left: `${pos * 100}%` }}
+            transition={reduce ? fade : springSlow}
+          />
         </span>
       </div>
       <div className="hgauge__scale caption tertiary" aria-hidden="true">
         <span>{left}</span>
         <span>{right}</span>
       </div>
-      <p className="pgauge__meaning footnote secondary">{meaning ?? 'Not measured for this case.'}</p>
+      {meaning && <p className="pgauge__meaning footnote secondary">{meaning}</p>}
       {note && <p className="caption tertiary">{note}</p>}
     </figure>
   )
@@ -173,15 +187,32 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
   const names = sideNames(result)
   const story = CASE_STORIES[summary.slug]
   const older = story?.brands[0] ?? names.senior
+  const newer = story?.brands[1] ?? names.junior
+  // Lean chips name the brand that a factor favours, never "senior"/"junior".
+  const [olderShort, newerShort] = story?.short.split(' v. ') ?? [names.senior, names.junior]
+  const chipNames = { senior: olderShort ?? names.senior, junior: newerShort ?? names.junior }
 
   const overlap = ev?.overlap?.symmetric_percentile ?? null
   const fameRaw = ev?.fame?.fame_score ?? ev?.fame?.breadth_score ?? null
   const conc = ev?.zone?.concentration_index ?? null
   const nationwide = conc == null ? null : 1 - clamp01(conc)
 
+  // Why a gauge is empty: the question was never part of this dispute, or Qloo had too little data.
+  const routed = result.routing?.analyses
+  const missing = (a: 'overlap' | 'fame' | 'zone') => (routed && !routed.includes(a) ? PREVIEW.notPleaded[a] : PREVIEW.tooThin)
+
+  // Chips only for questions this dispute raised; an unpleaded one already says so in its gauge card.
+  const FACTOR_ANALYSIS: Record<string, 'fame' | 'zone'> = { fame: 'fame', zone_of_reputation: 'zone' }
+  const findings = (memo?.findings ?? []).filter((f) => {
+    const a = FACTOR_ANALYSIS[f.factor]
+    return !(a && routed && !routed.includes(a))
+  })
+
   const lead = memo?.bottom_line || memo?.headline || summary.one_liner
   const trace = result.trace
   const facts = runFacts(memo?.appendix_queries.length ?? 0, trace[0]?.ts, trace[trace.length - 1]?.ts)
+  const docType = result.extraction?.document_type
+  const readFrom = (docType && PREVIEW.readFrom[docType]) || PREVIEW.readFromDefault
 
   return (
     <Reveal from="none" className="frame__screen">
@@ -198,12 +229,12 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
       <div className="frame__lead">
         <p className="caption tertiary">The bottom line</p>
         <p className="frame__headline serif">{lead}</p>
-        {memo && memo.findings.length > 0 && (
+        {findings.length > 0 && (
           <ul className="frame__chips" aria-label="How each factor leans">
-            {memo.findings.map((f) => (
+            {findings.map((f) => (
               <li key={f.factor} className="frame__finding">
                 <span className="caption secondary">{factorLabel(f.factor)}</span>
-                <LeanChip lean={f.lean} size="sm" />
+                <LeanChip lean={f.lean} size="sm" names={chipNames} />
               </li>
             ))}
           </ul>
@@ -218,7 +249,8 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
           left="separate crowds"
           right="same crowd"
           meaning={overlap == null ? null : readOverlap(overlap)}
-          note={ev?.overlap?.used_proxy ? `Measured through a stand-in category for ${names.junior}.` : undefined}
+          missing={missing('overlap')}
+          note={ev?.overlap?.used_proxy ? `Measured through a stand-in category for ${newer}.` : undefined}
         />
         <PlainGauge
           label="Known by everyone"
@@ -227,6 +259,7 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
           left="one crowd"
           right="everyone"
           meaning={fameRaw == null ? null : `${older}: ${readFame(fameRaw)}`}
+          missing={missing('fame')}
         />
         <PlainGauge
           label="Known where"
@@ -235,11 +268,12 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
           left="one region"
           right="nationwide"
           meaning={nationwide == null ? null : `${older}: ${readNationwide(nationwide)}`}
+          missing={missing('zone')}
         />
       </div>
 
       <p className="frame__foot caption tertiary num">
-        {PREVIEW.foot}
+        {readFrom}, {PREVIEW.foot}
         {facts && ` ${facts}.`}
       </p>
     </Reveal>

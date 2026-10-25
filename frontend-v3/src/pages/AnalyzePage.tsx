@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { api, ApiError, MOCK } from '../api'
 import { IconClose, IconDoc, IconLock, IconScale, IconSparkle, IconUpload } from '../components/icons'
 import { ErrorState, Notice, StateView, errorMessage } from '../components/ui'
+import { sampleLabel } from '../content/cases'
 import { bytes } from '../lib/format'
 import { useAsync } from '../lib/useAsync'
 import { Page, Reveal } from '../motion/Reveal'
@@ -313,28 +314,36 @@ function Intake({ me, limits, onSignedOut }: { me: AuthMe; limits?: Limits; onSi
           <span className="caption secondary" id={samplesId}>
             Start from a sample
           </span>
-          <div className="chips">
-            {samples.loading && <span className="chip chip--quiet">Loading samples…</span>}
-            {!samples.loading && !!samples.error && <span className="chip chip--quiet">Samples unavailable</span>}
-            {!samples.loading && !samples.error && !samples.data?.length && <span className="chip chip--quiet">No samples</span>}
-            {samples.data?.map((s) => {
-              const on = sampleName === s.name
-              const loading = loadingSample === s.name
-              return (
-                <button
-                  key={s.name}
-                  type="button"
-                  className="chip"
-                  aria-pressed={on}
-                  disabled={!!loadingSample}
-                  onClick={() => void loadSample(s.name)}
-                >
-                  {loading ? <span className="spinner spinner--sm" aria-hidden="true" /> : <IconDoc size={13} />}
-                  {s.title ?? s.name}
-                </button>
-              )
-            })}
-          </div>
+          {samples.loading && <span className="chip chip--quiet">Loading samples…</span>}
+          {!samples.loading && !!samples.error && <span className="chip chip--quiet">Samples unavailable</span>}
+          {!samples.loading && !samples.error && !samples.data?.length && <span className="chip chip--quiet">No samples</span>}
+          {!!samples.data?.length && (
+            <div className="sample-tiles">
+              {samples.data.map((s) => {
+                const on = sampleName === s.name
+                const loading = loadingSample === s.name
+                const { title, kind } = sampleLabel(s.name)
+                return (
+                  <button
+                    key={s.name}
+                    type="button"
+                    className="sample-tile pressable"
+                    aria-pressed={on}
+                    disabled={!!loadingSample}
+                    onClick={() => void loadSample(s.name)}
+                  >
+                    <span className="sample-tile__icon" aria-hidden="true">
+                      {loading ? <span className="spinner spinner--sm" /> : <IconDoc size={14} />}
+                    </span>
+                    <span className="sample-tile__text">
+                      <span className="sample-tile__title">{title}</span>
+                      {kind && <span className="sample-tile__kind caption">{kind}</span>}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          )}
         </div>
 
         {file ? (

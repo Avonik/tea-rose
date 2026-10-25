@@ -3,7 +3,7 @@
 
 /* ---------------------------------------------------------------- 1. pinned hero */
 
-/* The section is a ~300vh track; the stage sticks for the whole track and the beats are driven by
+/* The section is a ~320vh track; the stage sticks for the whole track and the beats are driven by
    scroll progress (motion/PinnedHero.tsx). No band padding: the stage owns the viewport. */
 .band.hero-pin {
   padding-block: 0;
@@ -11,8 +11,8 @@
 
 .hero-pin__track {
   position: relative;
-  height: 300vh;
-  height: 300svh;
+  height: 320vh;
+  height: 320svh;
 }
 
 .hero-pin__stage {
@@ -22,7 +22,7 @@
   place-items: center;
   height: 100vh;
   height: 100svh;
-  padding: clamp(5rem, 12vh, 7rem) var(--gutter) clamp(3rem, 8vh, 5rem);
+  padding: clamp(5rem, 12vh, 7rem) var(--gutter) clamp(4rem, 10vh, 6rem);
   overflow: clip;
 }
 
@@ -31,58 +31,81 @@
   grid-area: 1 / 1;
   display: grid;
   justify-items: center;
-  gap: var(--s-5);
+  gap: clamp(1.25rem, 3vh, 2rem);
   width: 100%;
   max-width: 62rem;
   text-align: center;
   will-change: opacity, transform;
 }
 
-.hero-pin__eyebrow {
-  margin-bottom: var(--s-2);
-}
-
-.hero-pin__money {
-  font-size: clamp(2.75rem, 1rem + 6.5vw, 6.5rem);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 1;
-  text-wrap: balance;
-}
-
-.hero-pin__to {
-  font-weight: 400;
-  color: var(--text-2);
-  letter-spacing: -0.02em;
-}
-
-/* The rolling duration: two lines in one cell, clipped so the roll reads as an odometer. */
-.hero-pin__morph {
+/* Two texts stacked in one cell (stake / answer); the cell is as tall as the taller one. */
+.hero-pin__swap {
   display: grid;
-  overflow: clip;
-  overflow-clip-margin: 0.2em;
-  padding-block: 0.08em;
-}
-
-.hero-pin__dur {
-  grid-area: 1 / 1;
-  will-change: opacity, transform, filter;
-}
-
-.hero-pin__lines {
-  display: grid;
+  width: 100%;
   max-width: 40rem;
 }
 
-.hero-pin__line {
+.hero-pin__swap > * {
   grid-area: 1 / 1;
+}
+
+.hero-pin__eyebrows .eyebrow {
+  max-width: 30rem;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+/* The clock. The number sits right-aligned in a box two tabular digits wide, the unit left-aligned
+   in a box as wide as "minutes": the whole line has one width for every tick, so nothing jitters. */
+.hero-clock {
+  --clock: clamp(3.75rem, 1rem + 9.5vw, 9rem);
+  display: grid;
+  grid-template-columns: 1.24em 3.75em;
+  column-gap: 0.22em;
+  align-items: baseline;
+  font-size: var(--clock);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.hero-clock__n {
+  justify-self: end;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-clock__unit {
+  justify-self: start;
+  font-weight: 400;
+  color: var(--text-2);
+  letter-spacing: -0.03em;
+}
+
+.hero-pin__line {
   display: grid;
   align-content: start;
   gap: var(--s-4);
 }
 
+.hero-pin__money {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* The two halves of the stake line break between each other, never inside. */
+.hero-pin__money,
+.hero-pin__weeks {
+  white-space: nowrap;
+}
+
+.hero-pin__answer {
+  max-width: 32rem;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
 .hero-pin__source {
-  max-width: 36rem;
+  max-width: 34rem;
   margin-inline: auto;
 }
 
@@ -121,13 +144,13 @@
   background: linear-gradient(var(--text-3), transparent);
 }
 
-@media (max-height: 560px) {
+@media (max-height: 600px) {
   .hero-pin__source {
     display: none;
   }
 }
 
-/* Reduced motion: the three beats stacked in normal flow, no pinning. */
+/* Reduced motion: the beats stacked in normal flow, no pinning. */
 .hero-static {
   padding-top: clamp(8.5rem, 16vh, 11rem);
 }
@@ -150,71 +173,134 @@
 
 /* ---------------------------------------------------------------- 2. the three questions */
 
-.qrows {
-  --inset: 4.5rem;
+/* One grid for the header and all three rows: question / what we measure / what a court does.
+   Every row has the same padding and the same column template, so the columns line up. */
+.qgrid {
+  --q-cols: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1fr);
+  --q-pad: var(--s-8) var(--s-6);
 }
 
-.qrow {
-  gap: var(--s-4);
-  padding: var(--s-6) var(--s-5);
-}
-
-.qrow__glyph {
-  flex: none;
+.qgrid__row {
   display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: var(--fill);
-  color: var(--text);
+  grid-template-columns: var(--q-cols);
+  column-gap: var(--s-8);
+  align-items: start;
+  padding: var(--q-pad);
 }
 
-.qrow__main {
-  gap: var(--s-4);
-}
-
-.qrow__q {
-  font-size: var(--fs-title);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-.qrow__facts {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: var(--s-3) var(--s-6);
-}
-
-.qrow__facts > div {
-  display: grid;
-  align-content: start;
-  gap: 0.25rem;
-}
-
-.qrow__facts dt {
+.qgrid__head {
+  padding-block: var(--s-4);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 600;
 }
 
-.qrow__facts dd {
+/* Equal rows: the tallest row sets the height for all three, so the rhythm is identical. */
+.qgrid__list {
+  display: grid;
+  grid-auto-rows: 1fr;
+}
+
+.qgrid__list > li {
+  position: relative;
+  display: grid;
+}
+
+.qgrid__list > li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--s-6);
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+  z-index: 1;
+}
+
+.qgrid__q {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--fs-title-2);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.qgrid__glyph {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--fill);
+  color: var(--text);
+}
+
+/* The two facts sit in columns two and three of the row grid. */
+.qgrid__facts {
+  display: contents;
+}
+
+.qgrid__facts > div {
+  display: grid;
+  align-content: start;
+  gap: var(--s-1);
+  padding-top: 0.375rem;
+}
+
+.qgrid__facts dd {
   margin: 0;
   font-size: var(--fs-callout);
+  line-height: 1.47;
   text-wrap: pretty;
 }
 
-@media (max-width: 760px) {
-  .qrows {
-    --inset: var(--s-5);
+/* Column labels live in the header row on wide screens; per row they stay for screen readers. */
+.qgrid__dt {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .qgrid {
+    --q-pad: var(--s-6) var(--s-5);
   }
-  .qrow {
-    flex-direction: column;
+  .qgrid__head {
+    display: none;
   }
-  .qrow__facts {
-    grid-template-columns: 1fr;
+  /* Stacked rows keep identical padding instead of equal heights, which would leave holes. */
+  .qgrid__list {
+    grid-auto-rows: auto;
+  }
+  .qgrid__list > li:first-child::before {
+    display: none;
+  }
+  .qgrid__list > li::before {
+    left: var(--s-5);
+  }
+  .qgrid__row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--s-4);
+  }
+  .qgrid__facts > div {
+    padding-top: 0;
+  }
+  .qgrid__dt {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
   }
 }
 
@@ -364,6 +450,15 @@
   text-wrap: pretty;
 }
 
+/* A question this case did not measure: no empty bar, just the plain statement and why. */
+.pgauge__none {
+  font-size: var(--fs-title-2);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.24;
+  color: var(--text-2);
+}
+
 /* horizontal gauge */
 .hgauge {
   position: relative;
@@ -425,6 +520,14 @@
 
 .bt__more {
   margin-top: var(--s-5);
+}
+
+/* Long link labels wrap on narrow screens instead of pushing the page sideways. */
+.bt__more .btn--link,
+.limits-more .btn--link {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
 }
 
 /* ---------------------------------------------------------------- 5. five famous fights */
@@ -713,21 +816,9 @@
     opacity: 1 !important;
     transform: none !important;
   }
-  .hero-pin__dur:last-child,
+  .hero-pin__figure,
   .hero-pin__hint {
     display: none;
-  }
-  .hero-pin__dur,
-  .hero-pin__line {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-  .hero-pin__lines {
-    gap: var(--s-4);
-  }
-  .hero-pin__line {
-    grid-area: auto;
   }
   .tl__text--print {
     display: block;

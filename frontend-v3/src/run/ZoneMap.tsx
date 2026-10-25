@@ -1,5 +1,5 @@
 import type { FeatureCollection, Point } from 'geojson'
-import { AttributionControl, LngLatBounds, Map as MlMap, NavigationControl, Popup, setWorkerUrl, type MapLayerMouseEvent } from 'maplibre-gl'
+import { AttributionControl, Map as MlMap, NavigationControl, Popup, setWorkerUrl, type GeoJSONSource, type LngLatBoundsLike, type MapLayerMouseEvent } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import { useEffect, useRef, useState } from 'react'
@@ -27,6 +27,55 @@ function toGeoJSON(points: HeatmapPoint[]): FeatureCollection<Point> {
         properties: { w: (p.affinity ?? 0) / max, affinity: p.affinity ?? null, label: p.label ?? null },
       })),
   }
+}
+
+/** Contiguous United States: the view when there is nothing to fit, and the box most points fall in. */
+const US: [[number, number], [number, number]] = [
+  [-125, 24],
+  [-66, 50],
+]
+
+const inUS = (p: HeatmapPoint) =>
+  p.longitude >= US[0][0] && p.longitude <= US[1][0] && p.latitude >= US[0][1] && p.latitude <= US[1][1]
+
+/** The q-quantile of a sorted list. */
+function quantile(sorted: number[], q: number) {
+  const i = Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))
+  return sorted[i]
+}
+
+/**
+ * The bounds to fit for a set of heatmap cells. Qloo returns a few cells in Alaska, Hawaii, Guam or
+ * abroad; fitting all of them spans half the globe and centres the map on the Atlantic. So: keep the
+ * contiguous-US cells when they are the clear majority, trim the outer half percent on each axis, and fall
+ * back to the US view when there is nothing to fit.
+ */
+function heatBounds(all: HeatmapPoint[]): LngLatBoundsLike {
+  const valid = all.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude))
+  if (!valid.length) return US
+  const us = valid.filter(inUS)
+  const pts = us.length >= valid.length * 0.6 ? us : valid
+  const lons = pts.map((p) => p.longitude).sort((a, b) => a - b)
+  const lats = pts.map((p) => p.latitude).sort((a, b) => a - b)
+  const trim = pts.length >= 50 ? 0.005 : 0
+  let [w, e] = [quantile(lons, trim), quantile(lons, 1 - trim)]
+  let [south, north] = [quantile(lats, trim), quantile(lats, 1 - trim)]
+  // A single city still gets a readable regional view.
+  if (e - w < 4) [w, e] = [(w + e) / 2 - 2, (w + e) / 2 + 2]
+  if (north - south < 3) [south, north] = [(south + north) / 2 - 1.5, (south + north) / 2 + 1.5]
+  return [
+    [w, south],
+    [e, north],
+  ]
+}
+
+/** Breathing room around the data; extra at the top, where the layer toggles float over the map. */
+function fitPadding(map: MlMap) {
+  const c = map.getContainer()
+  const p = Math.round(Math.max(20, Math.min(48, Math.min(c.clientWidth, c.clientHeight) * 0.07)))
+  // On narrow maps the toggles wrap to two rows and the attribution spans two lines.
+  const narrow = c.clientWidth < 480
+  return { top: p + (narrow ? 76 : 40), bottom: p + (narrow ? 40 : 0), left: p, right: p }
 }
 
 function addSide(map: MlMap, id: 'senior' | 'junior', points: HeatmapPoint[], ramp: Ramp, visible: boolean) {
@@ -83,6 +132,8 @@ export default function ZoneMap({
   const mapRef = useRef<MlMap | null>(null)
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState<string | null>(null)
+  const userMoved = useRef(false)
+  const fitted = useRef<{ points: HeatmapPoint[]; juniorPoints: HeatmapPoint[] } | null>(null)
   const vis = useRef({ showSenior, showJunior })
   vis.current = { showSenior, showJunior }
 
@@ -93,9 +144,10 @@ export default function ZoneMap({
       map = new MlMap({
         container: el.current,
         style: STYLE,
-        center: [-96.5, 38.6],
-        zoom: 3,
-        minZoom: 2,
+        bounds: US,
+        fitBoundsOptions: { padding: 24 },
+        // 1, not 2: on a phone-width map the whole US only fits below zoom 2.
+        minZoom: 1,
         maxZoom: 10,
         attributionControl: false,
         cooperativeGestures: true,
@@ -115,12 +167,8 @@ export default function ZoneMap({
     map.on('load', () => {
       addSide(map, 'junior', juniorPoints, JUNIOR, vis.current.showJunior)
       addSide(map, 'senior', points, SENIOR, vis.current.showSenior)
-      const all = [...points, ...juniorPoints]
-      if (all.length) {
-        const b = new LngLatBounds()
-        all.forEach((p) => b.extend([p.longitude, p.latitude]))
-        map.fitBounds(b, { padding: 36, maxZoom: 5, duration: 0 })
-      }
+      map.fitBounds(heatBounds([...points, ...juniorPoints]), { padding: fitPadding(map), maxZoom: 5, duration: 0 })
+      fitted.current = { points, juniorPoints }
       const popup = new Popup({ closeButton: false, closeOnClick: false, offset: 10, className: 'map-pop' })
       for (const side of ['senior', 'junior'] as const) {
         const layer = `${side}-points`
@@ -140,6 +188,17 @@ export default function ZoneMap({
           popup.remove()
         })
       }
+      // Re-fit when the container changes size (layout settling, rotation), until the reader moves the map.
+      map.on('movestart', (e) => {
+        if ((e as { originalEvent?: unknown }).originalEvent) userMoved.current = true
+      })
+      const ro = new ResizeObserver(() => {
+        if (userMoved.current || !fitted.current) return
+        map.resize()
+        map.fitBounds(heatBounds([...fitted.current.points, ...fitted.current.juniorPoints]), { padding: fitPadding(map), maxZoom: 5, duration: 0 })
+      })
+      ro.observe(map.getContainer())
+      map.once('remove', () => ro.disconnect())
       setReady(true)
     })
     map.on('error', (e) => {
@@ -150,9 +209,22 @@ export default function ZoneMap({
       map.remove()
       mapRef.current = null
     }
-    // Points are fixed for a mounted map; the panel remounts the map if the evidence object changes.
+    // The map is created once; new data is pushed in by the effect below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // New heatmap data: swap the sources and re-fit to the new bounds.
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !ready) return
+    const last = fitted.current
+    if (last && last.points === points && last.juniorPoints === juniorPoints) return
+    ;(map.getSource('senior') as GeoJSONSource | undefined)?.setData(toGeoJSON(points))
+    ;(map.getSource('junior') as GeoJSONSource | undefined)?.setData(toGeoJSON(juniorPoints))
+    map.fitBounds(heatBounds([...points, ...juniorPoints]), { padding: fitPadding(map), maxZoom: 5, duration: 0 })
+    fitted.current = { points, juniorPoints }
+    userMoved.current = false
+  }, [points, juniorPoints, ready])
 
   useEffect(() => {
     const map = mapRef.current
