@@ -34,10 +34,10 @@ def reasoning_rejected(exc: BaseException) -> bool:
     return status in (400, 422) or "reasoning" in str(exc).lower()
 
 
-@cache
 LLM_TIMEOUT_S = 180
 
 
+@cache
 def _fallback_chat_class() -> type[BaseChatModel]:
     """ChatOpenAI that drops `reasoning_effort` once when the provider rejects it: the call is
     retried without it, the model keeps it off, and a note is queued for the run trace."""
