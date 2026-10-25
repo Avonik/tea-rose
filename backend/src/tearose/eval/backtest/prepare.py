@@ -46,9 +46,6 @@ from tearose.qloo.fixtures import slugify
 
 DECIDED = ("favors_plaintiff", "neutral", "favors_defendant")
 LABEL_CODE = {
-    "sullivan_v_cbs_corp_2004": {
-        "senior": ("artist", "Survivor is a rock band; round-2 row, 2026-10-25, pre-scoring")
-    },
     "favors_defendant": 0,
     "neutral": 1,
     "favors_plaintiff": 2,
@@ -302,6 +299,9 @@ GOODS_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
 
 # Entity type per side when it is not a brand: case_id -> {side: (type, reason)}.
 TYPE_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
+    "sullivan_v_cbs_corp_2004": {
+        "senior": ("artist", "Survivor is a rock band; round-2, 2026-10-25, pre-scoring"),
+    },
     "mattel_inc_v_mca_records_inc_2002": {
         "junior": ("artist", "Aqua is a band; searched and ranked among artists"),
     },
@@ -342,7 +342,7 @@ QUERY_OVERRIDES: dict[str, dict[str, tuple[str, str]]] = {
     "caterpillar_inc_v_walt_disney_co_2003": {
         "junior": (
             "Disney",
-            "film distributor; mark column describes the depiction; round-2, 2026-10-25, pre-scoring",
+            "film distributor; mark column is the depiction; round-2, 2026-10-25, pre-scoring",
         ),
     },
     "sullivan_v_cbs_corp_2004": {
