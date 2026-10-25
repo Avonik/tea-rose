@@ -1,0 +1,819 @@
+Tiffany & Co. v. Costco Wholesale Corp., 971 F.3d 74 (2d Cir. 2020)
+Source: https://storage.courtlistener.com/pdf/2020/08/17/tiffany_v._costco.pdf
+
+[Full text, PDF-extracted: page numbers and counsel listing removed; original line breaks kept; footnotes appear inline where they fell on the page.]
+
+17-2798-cv (L)
+Tiffany, et al. v. Costco
+UNITED STATES COURT OF APPEALS
+FOR THE SECOND CIRCUIT
+August Term 2019
+(Argued: January 21, 2020  Decided: August 17, 2020)
+Nos. 17-2798-cv, 19-338, 19-404
+––––––––––––––––––––––––––––––––––––
+TIFFANY AND COMPANY; TIFFANY (NJ) LLC
+Plaintiffs-Counter-Defendants-Appellees
+-v.-
+COSTCO WHOLESALE CORPORATION,
+Defendant-Counter-Claimant-Appellant
+––––––––––––––––––––––––––––––––––––
+Before:  LEVAL, RAGGI, and LIVINGSTON, Circuit Judges.
+Tiffany brought suit against Costco under the Lanham Act  and New York
+law, alleging that Costco was liable for , inter alia , trademark infringement and
+counterfeiting in connection with its sale of diamond engagement rings identified
+by point-of-sale signs containing the word “Tiffany.” Though Costco does not
+dispute that Tiffany has a valid, registered  trademark for the word “Tiffany,” it
+argued before the district court that it was using that word in a different, widely
+recognized sense to refer to a particular style of pronged diamond setting  not
+exclusive to rings affiliated with Tiffany.  It therefore claimed that its use of the
+term was not likely to confuse consumers —the essence of a claim for
+infringement—and that even if some degree of confusion was likely, it was entitled
+under the Lanham Act to the descriptive fair use of an otherwise protected mark.
+The district court (Swain, J.) granted summary judgment for Tiffany, holding that
+no reasonable jury could credit either of Costco’s arguments  and further
+concluding that Costco’s  infringement constituted counterfeiting as a matter of
+law. Following an advisory jury trial on the question of damages, the district court
+awarded Tiffany Costco’s trebled profits along with punitive damages and
+prejudgment interest, for a total of $21,010,438.35. On appeal, Costco argues that
+the district court’s determination of liability was inappropriate at the summary
+judgment stage. We agree. A ccordingly, the judgment of  the district court  is
+VACATED and the case is REMANDED for trial.
+DEBRA ANN LIVINGSTON, Circuit Judge:
+Defendant-Counter-Claimant-Appellant Costco Wholesale Corporation
+(“Costco”) appeals from an August 25, 2017 judgment of the United States District
+Court for the Southern District of New York (Swain, J.) awarding Plaintiffs -
+Counter-Defendants-Appellees Tif fany and Company and Tiffany (NJ) LLC
+(together, “Tiffany”) trebled profits, prejudgment interest, and punitive damages
+totaling $21,010,438.35, resulting from a determination on summary judgment that
+Costco was liable to Tiffany for trademark infringement  and counterfeiting in
+violation of the Lanham Act, 15 U.S.C. § § 1114(1) and 1117(a) and (b), and unfair
+competition in violation of New York law. 1 This suit arose from Costco’s sale of
+otherwise unbranded diamond engagement rings identified by point-of-sale signs
+containing the word “Tiffany.” Tiffany claimed, and the district court agreed, that
+Costco’s use of a term identical to Tiffany’s trademark in connection with the sale
+of engagement rings violated the Lanham Act as a matter of law.
+In response, Costco argues that “Tiffany” is not only a brand name, but also
+a widely recognized descriptive term for a particular style of pronged ring setting,
+and that it used the word on point-of-sale signs solely to identify engagement rings
+incorporating such settings . It emphasizes, among other things, that it also sold
+1 The Lanham Act provides, in relevant part, that “Any person who shall, without
+consent of the registrant . . . use in commerce any reproduction, counterfeit, copy, or
+colorable imitation of a registered mark in connection with the sale . . . of any goods or
+services on or in connection with which such use is likely to cause confusion, or to cause
+mistake, or to deceive . . . shall be liable in a civil action by the registrant.” 15 U.S.C.
+§ 1114(1)(a). A defendant found liable for the foregoing infringement must typically pay
+to the plaintiff “(1) [its] profits, (2) any damages sustained by the plaintiff, and (3) the
+costs of the action.” Id. § 1117(a). “In a case involving [knowing and intentional] use of a
+counterfeit mark” the defendant will instead be liable for “three times such profits or
+damages, whichever amount is greater, together with a reasonable attorney’s fee.” Id.
+§ 1117(b). In a case involving a counterfeit mark, a plaintiff may also elect to receive
+statutory damages in lieu of profits and/or damages. Id. § 1117(c).
+several other styles of unbranded diamond engagement ring identified by similar
+point-of-sale signs, each of which indicated the name of the corresponding ring’s
+setting style and none of which used the word “Tiffany.” In light of this and other
+related evidence, Costco contends that a reasonable jury could conclude that its
+use of the word “Tiffany” was not likely to confuse its customers and that, even if
+some confusion was likely, Costco was entitled under the Lanham Act to use the
+term “in good faith only to describe”  the style of its rings. 15 U.S.C. §  1115(b)(4).
+We agree and  accordingly VACATE the judgment of the district court and
+REMAND the case for trial.
+BACKGROUND
+I. Factual Background
+Founded in 1837 by Charles Lewis Tiffany, Tiffany is a major producer of
+fine jewelry, including diamond engagement rings. Tiffany holds 97 separate
+trademarks related to the company name, including registrations for the use of the
+word “Tiffany” in connection with “Decorative Art Objects Made in Whole or in
+Part of Precious or Semiprecious Metals,” TIFFANY, Registration No. 1,228,409,
+and for the stylized word mark “Tiffany” in connection with “Jewelry for Personal
+Wear,” TIFFANY, Registration No. 133,063.  At some point in the late nineteenth
+century, Charles Lewis Tiffany developed and sold an engagement ring
+incorporating a particular style of six -prong diamond setting. Since that time,
+numerous advertisements, dictionaries, trade publications, and other documents
+have referred to diamond settings reminiscent of that style as “Tiffany settings.”
+One enterprise that claims to have  adopted that century -old practice is
+Costco, which operates a chain of membership -only warehouse stores at which
+shoppers may purchase various brand -name, store -brand, and generic goods
+across numerous product categories. Among these products are diamond
+engagement rings, which Costco displays along with other jewelry in display cases
+near the entrance to its stores.  Costco refers to its engagement rings, which are
+produced specially for Costco by a supplier called R.B. Diamond Inc., as
+“unbranded.” Costco sells engagement rings with a variety of  setting styles, a n
+assortment that during the relevant time period included a bezel setting, cathedral
+setting, channel setting, and the so-called Tiffany setting.
+Costco identified each of its engagement rings using small, white point-of-
+sale signs that displayed certain information about the rings (ostensibly including
+setting style) in uniform black text, along with their price s in larger, bold text. In
+general format, but not necessarily in size, these signs resemble d other point-of-
+sale signs that identified  virtually all items for sale thro ughout Costco stores.
+Costco attests that it drew the information for the point-of-sale signs in its jewelry
+cases directly from descriptions supplied by vendors like R.B. Diamond.
+According to Costco, the various point-of-sale signs identifying rings with a
+Tiffany setting at times identified the ring setting using  the phrases “Tiffany
+setting,” “Tiffany set,” or “Tiffany style,” and at other times used only the word
+“Tiffany” for that purpose.  Costco apparently identified other setting styles in a
+similarly variable manner.
+In November 2012, a Costco customer alerted Tiffany that she had observed
+engagement rings that she believed were being advertised as Tiffany rings at a
+Costco store in Huntington Beach, California. Tiffany engaged an investigation
+service to visit that store, where investigators observed a jewelry display case
+containing, among other items, one engagement ring displayed next to a sign
+reading “639911 / PLATINUM TIFFANY / .70 VS2, I ROUND / DIAMOND RING
+/ 3199.99” and a second ring displayed next to a sign reading “605880 /
+PLATINUM TIFFANY VS2 ,I / 1.00CT ROUND BRILLIANT / DIAMOND
+SOLITAIRE RING / 6399.99.”2 J.A. 2,914 (emphasis in original).
+2  The slashes in the foregoing quotations indicate line breaks in the original
+On December 10, 2012, Tiffany contacted Costco regarding the two rings its
+investigators observed, asserting that “[t]he designation of the ring[s] by Costco
+as ‘Tiffany’ was not only a misrepresentation of the product, but it also constitutes
+infringement and counterfeiting .” J.A. 2 ,509. Costco maintains that w ithin one
+week, it voluntarily removed all uses of the word “Tiffany” from the signs in its
+jewelry display cases and that since  that time, it  has not listed a setting style on
+signs identifying any rings bearing the so-called Tiffany setting.
+Several months later, after Tiffany had filed the operative complaint in this
+case, Costco sent a letter to all customers who had purchased engagement rings
+with Tiffany settings  to alert them  that Tiffany had initiated the suit now on
+appeal. The letter explained that Costco’s point-of-sale signs had “used the word
+‘Tiffany’ to indicate that [the associated] ring had a Tiffany-style pronged setting,”
+asserted that Costco “do[es] not believe [its] signs were inaccurate,” and reminded
+buyers that Costc o’s return policy entitled them to return their rings for a full
+refund at any time. A pproximately 1.3% of customers who received this letter
+returned their rings to Costco.
+document.
+II. Procedural History
+On Valentine’s Day 2013, approximately two months after Costco ceased
+using the word “Tiffany” on any signs in its jewelry display cases, Tiffany
+commenced the present action against Costco  in the United States District Court
+for the Southern District of New York. Tiffany’s complaint alleged that Costco was
+liable for trademark infringement, dilution, counterfeiting, unfair competition,
+false and deceptive business practices, and false advertising in violation of the
+Lanham Act and New York law. Notably, Ti ffany’s complaint alleged these
+various trademark violations only in connection with those of Costco’s point -of-
+sale signs that included the word “Tiffany” unaccompanied by the words
+“setting,” “style,” or “set.”
+In response, Costco argued that its use of  the word “Tiffany” to describe
+certain rings’ setting styles was not infringement and raised, inter alia, a “fair use”
+affirmative defense under the Lanham Act, asserting that it used the term
+“otherwise than as a mark, . . . in good faith only to describe” its ring settings. J.A.
+89 (quoting 15 U.S.C. § 1115(b)(4)). Costco also filed a counterclaim seeking to
+modify or partially cancel any federal trademark registrations that might prevent
+retailers from using the word “Tiffany” to indicate that a ring has a Tiffany setting.
+The case proceeded to discovery, during which time Tiffany filed an
+unsuccessful summary judgment motion  seeking to dismiss Costco’s
+counterclaim. During discovery, the parties compiled a voluminous  evidentiary
+record including the declarations and deposition testimony of Costco customers
+and employees, expert declarations, sales records, and physical specimens of both
+parties’ engagement rings and ring packaging. Following the completion of
+discovery, Tiffany again moved for summary judgment, this time seeking not only
+to dismiss Costco’s counterclaim but also to hold Costco liable for trademark
+infringement and counterfeiting as a matter of law. Costco cross -moved for
+summary judgment seeking, inter alia, dismissal of Tiffany’s  counterfeiting and
+punitive damages claims.
+On September 8, 2015, the district court issued an opinion and order
+granting Tiffany’s summary judgment motion in its entirety, concluding that
+Costco had failed to raise a genuine issue of material fact as to any of the factors
+relevant to the infringeme nt analysis, that Costco’s fair use defense failed as a
+matter of law, and that Costco’s infringement constituted counterfeiting as a
+matter of law. In the same order, the district court ruled that punitive damages
+would not be available to Tiffany  under the Lanham Act, but that they would be
+available under New York law.
+Following its determination of Costco’s liability, the district court held a trial
+from September 19 through October 5, 2016 on the issue of Tiffany’s entitlement
+to recovery in the form of profits and statutory damages pursuant to 15 U.S.C.
+§ 1117. At trial, the district court instructed the jury that it had already found
+Costco liable for trademark infringement, unfair competition under New York
+law, and counterfeiting, and that Costco’s conduct was willful. The jury awarded
+Tiffany $3.7 million in an accounting of Costco’s profits, a further $1.8 million on
+the grounds that the award of profits was inadequate compensation, and an
+additional $8.25 million in punitive damages.
+In a subseq uent order, the district court characterized the accounting of
+Costco’s profits as an equitable remedy and deemed the jury’s verdict on that score
+to be advisory. Making its own determination as to damages, the district court
+awarded Tiffany trebled profit s in the amount of $11.1 million (based on the
+advisory jury’s award of $3.7 million), along with the additional $8.25 million in
+punitive damages awarded by the jury. 3  The district court entered its final
+3 15 U.S.C. § 1117(b) instructs the court to award treble profits or damages for a
+knowing and intentional violation involving the use of a counterfeit mark.
+judgment and damages award, which ran to $21,010, 438.35 including
+prejudgment interest, on August 25, 2017.
+Costco appealed the judgment on September 8, 2017. Then, on September
+22, Costco requested that the district court amend its findings under Federal Rule
+of Civil Procedure 52(b); amend the judgment under Rule 59(e); and grant Costco
+judgment as a matter of law or, in the alternative, a new trial under Rule 50(b).
+Pursuant to Federal Rule of Appellate Procedure 4(a)(4), we stayed Costco’s
+appeal pending the district court’s resolution of Costco’s mo tions. The district
+court denied each of these motions on January 7, 2019. We removed the stay on
+January 23, 2019, and this appeal followed.
+DISCUSSION
+We review the district court’s rulings on summary judgment de novo ,
+resolving all ambiguities and drawing all permissible inferences in favor of the
+nonmoving party. Jones v. County of Suffolk , 936 F.3d 108, 114 (2d Cir. 2019).
+Pursuant to Rule 56(a) of th e Federal Rules of Civil Procedure, we will affirm a
+grant of summary judgment “only where there are no genuine disputes
+concerning any material facts, and where the moving party is entitled to judgment
+as a matter of law,” id. (internal quotation marks om itted), or in other words,
+where no reasonable jury could return a verdict for the nonmoving party, see Holtz
+v. Rockefeller & Co., 258 F.3d 62, 69 (2d Cir. 2001).
+On appeal, Costco argues that the district court erroneously granted
+Tiffany’s motion for s ummary judgment on its infringement and counterfeiting
+claims, improperly depriving Costco of the opportunity to present its case  to a
+jury. In particular, Costco contends that after resolving several critical facets of the
+trademark infringement analysis in Tiffany’s favor without sufficiently crediting
+Costco’s contrary evidence, the district court erroneously rejected Costco’s fair use
+defense and held Costco liable for trademark infringement and counterfeiting as a
+matter of law. For the reasons that fo llow, we agree that Costco has raised a
+question of material fact as to its liability for trademark infringement and
+counterfeiting and, relatedly, its entitlement to present its fair use defense to a jury.
+Accordingly, we vacate the district court’s grant  of summary judgment, and
+remand the case for trial.
+I. Tiffany’s Trademark Infringement Claim
+The district court concluded that no reasonable jury could find either that
+Costco’s use of the word “Tiffany” was not likely to cause confusion with Tiffany’s
+registered mark or that Costco’s use of the word constituted fair use. We conclude
+that the district court erred on both points.
+A. Tiffany’s Infringement Claim
+Under the Lanham Act, a plaintiff alleging trademark infringement must
+demonstrate that (1) “it has a valid mark that is entitled to protection” and that (2)
+the defendant’s “actions are likely to cause confusion with [that] mark.” The Sports
+Auth., Inc. v. Prime Hospitality Corp., 89 F.3d 955, 960 (2d Cir. 1996). “[A] plaintiff
+does not have to show necessarily that consumers would believe that the
+defendant’s goods or services are from the same source as those of the plaintiff.”
+Id. Rather, a defendant may also be liable for trademark infringement if its “actions
+are ‘likely to cause confusion, or to cause mistake, or to deceive as to the affiliation,
+connection, or association’ of the defendant's goods or services with those of the
+plaintiff.” Id. (quoting 15 U.S.C. §  1125(a)(1)(A)); see also Int’l Info. Sys. Sec.
+Certification Consortium, Inc. v. Sec. Univ., LLC, 823 F.3d 153, 161–63 (2d Cir. 2016).
+That said, t he mere possibility of confusion is not enough. To prevail in a
+trademark infringement action, a plaintiff must prove “ a probability of confusion
+. . . affecting numerous ordinary prudent purchasers.” Star Indus., Inc. v. Bacardi &
+Co. Ltd., 412 F.3d 373, 383 (2d Cir. 2005)  (emphasis added) ( internal quotation
+marks omitted).
+With the first prong of the infringement inquiry presumptively satisfied, 4
+the principal question in this appeal is whether Costco’s use of the word “Tiffany”
+was likely to cause confusion with Tiffany’s registered mark. We evaluate this
+question using the test articulated in Polaroid Corp. v. Polarad Elecs. Corp., 287 F.2d
+492 (2d Cir. 1961) (“ Polaroid”), which balances the following eight factors: (1) the
+strength of the trademark; (2) the degree of similarity between the plaintiff’s mark
+and the defendant’s allegedly imitative use;5 (3) the proximity of the products and
+their competitiveness with each other; (4) the likelihood that the plaintiff will
+“bridge the gap” by developing a product for sale in the defendant’s market;6 (5)
+4 The Lanham Act treats trademark registration as “conclusive evidence of the
+validity of the registered mark . . . , of the registrant’s ownership of the mark, and of the
+registrant’s exclusive right to use the registered mark in commerce,” 15 U.S.C. § 1115, and
+Costco does not contest that Tiffany has registered “Tiffany” as a mark in connection with
+the sale of jewelry.
+5 We have often referred to this factor as examining the similarity between the
+plaintiff’s and defendant’s marks . See, e.g., Starbucks Corp. v. Wolfe’s Borough Coffee, Inc. ,
+588 F.3d 97, 115 (2d Cir. 2009). But a defendant that uses a term identical to a plaintiff’s
+registered mark may be liable for infringement even if it cannot be said to use that term
+“as a mark,” that is, “as a symbol to attract public attention.” Kelly-Brown v. Winfrey, 717
+F.3d 295, 308 (2d Cir. 2013) (internal quotation marks omitted); see also id.  at 306–07
+(explaining that customer confusion may exist even where  the defendant was not
+attempting to establish a competing mark, and identifying cases in which we have
+“allowed certain claims to proceed even where the defendant is not using the plaintiff's
+mark as a mark”).
+6 The district court did not consider the likelihood that Tiffany would “bridge the
+gap” into Costco’s market below, and neither party argues that this factor  is relevant on
+appeal. As the district court correctly explained, Costco’s and Tiffany’s diamond
+evidence of actual consumer confusion; (6) evidence that the defendant adopted
+the imitative term in bad faith; (7) the respective quality of the products; and (8)
+the sophistication of the relevant population of consumers. See Polaroid, 287 F.2d
+at 495; Starbucks Corp. v. Wolfe’s Borough Coffee, Inc., 588 F.3d 97, 115 (2d Cir. 2009).
+The “evaluation of the Polaroid factors is not a mechanical process where the party
+with the greatest number of factors weighing in its favor wins. Rather, a court
+should focus on the ultimate question of whether consumers are likely to be
+confused.” Nabisco, Inc. v. War ner-Lambert Co. , 220 F.3d 43, 46 (2d Cir. 2000)
+(internal quotation marks omitted).
+Though our past cases have always recognized that the “district court’s
+balancing of the Polaroid factors is subject to de novo review,” some of these cases
+have purported  to afford “considerable deference” to district courts’ findings
+“with respect to predicate facts underlying each Polaroid factor,” Playtex Prods., Inc.
+v. Ga.-Pac. Corp., 390 F.3d 158, 162 (2d Cir. 2004), or even to its “finding on each
+factor” generally, Natural Organics, Inc. v. Nutraceutical Corp., 426 F.3d 576, 578 (2d
+engagement rings are already in competitive proximity. See, e.g., Paddington Corp. v. Attiki
+Importers & Distribs., Inc. , 996 F.2d 577, 586 (2d Cir. 1993) (“Since the [products] . . .
+compete in the same market, the district court correctly found that the likelihood- of-
+bridging-the-gap factor . . . was irrelevant.”).
+Cir. 2005); see also Cadbury Beverages, Inc. v. Cott Corp., 73 F.3d 474, 478 (2d Cir.
+1996). These cases should not be read to suggest that “a district court deciding a
+motion for summary judgment in a trademark infringement case has .  . . greater
+discretion than it would have in a non- trademark case to resolve disputed issues
+of fact or draw inferences against the non- moving party.” Patsy’s Brand, Inc. v.
+I.O.B. Realty, Inc., 317 F.3d 209, 216 (2d Cir. 2003), abrogated on other grounds by 4
+Pillar Dynasty LLC v. N.Y. & Co., 933 F.3d 202 (2d Cir. 2019); see also Kelly-Brown v.
+Winfrey, 659 F. App’x 55, 58 n.3 (2d Cir. 2016) (summary order) (noting the
+inconsistency between a “considerable deference” standard and our responsibility
+to review a district court’s summary judgment ruling de novo).
+Though “considerable deference” has become an oft -repeated incantation
+since we first observed in Lois Sportswear, U.S.A., Inc. v. Levi Strauss & Co. “that the
+district court’s detailed findings on each of the Polaroid factors are entitled to
+considerable deference,” 799 F.2d 867, 873 (2d Cir. 1986) (citing Anderson v. Liberty
+Lobby, Inc., 477 U.S. 242, 250 & n.6 (1986), for the proposition that a “district court’s
+findings of fact on summary judgment, although not required, ‘are extremely
+helpful to a reviewing court’”), we have never purported to expand a district
+court’s license to make  factual findings at summary judgment beyond those very
+limited circumstances in which “the uncontroverted evidence and the reasonable
+inferences to be drawn in the nonmoving party’s favor” support only a single
+conclusion, see Hunt v. Cromartie, 526 U.S. 541, 553 (1999). In other words, a district
+court will be authorized to find the sorts of facts that are entitled to deference only
+in circumstances in which the traditiona l summary judgment standard has been
+satisfied. And even when it is so authorized, “its subsidiary conclusions as to each
+Polaroid factor . . . are not immune from appellate review.” Patsy’s Brand, 317 F.3d
+at 216.
+As in any other area of law, then, “[i]f a factual inference must be drawn to
+arrive at a particular finding on a Polaroid  factor, and if a reasonable trier of fact
+could reach a different conclusion, the district court may not properly resolve that
+issue on summary judgment.” Cadbury , 73 F.3d at  478; see also Liberty Lobby, 477
+U.S. at 249 (“[A]t the summary judgment stage the judge’s function is not himself
+to weigh the evidence and determine the truth . . . but to determine whether there
+is a genuine issue for trial.”). Moreover, insofar as the determination of whether
+one of the Polaroid factors favors one party or another involves a legal judgment—
+which it often does 7—we must review that determination de novo. See Knight v.
+7 “For example, there is a considerable component of law in the determination
+State Univ. of N.Y. at Stony Brook , 880 F.3d 636, 640 (2d Cir. 2018) (“We review
+questions of law de novo.”). Accordingly, in the majority of cases, we should review
+de novo  both a district court’s determinations as to each Polaroid  factor and its
+ultimate balancing of those factors.
+Here, the district court found that “Costco has proffered no evidence that
+raises a disputed issue of material fact with respect to any of the Polaroid factors”
+and that Tiffany therefore “demonstrated a likelihood of confusion” sufficient to
+warrant summary judgment in its favor as to its trademark infringement claims.
+Tiffany & Co. v. Costco Wholesale Corp., 127 F. Supp. 3d 241, 247 (S.D.N.Y. 2015). On
+appeal, Costco principally contests the district cour t’s analysis of three of these
+factors: whether Costco’s customers were actually confused, whether Costco
+adopted Tiffany’s mark in bad faith, and whether the relevant population of
+consumers was sufficiently sophisticated to avoid confusion. We conclude t hat
+Costco has raised a triable question as to each of these factors and, by extension,
+the ultimate issue of whether Costco’s actions generated a likelihood of customer
+confusion.
+whether a mark has the degree of strength necessary to weigh in favor of the party
+claiming infringement.” Patsy’s Brand, 317 F.3d at 216.
+1. Actual Confusion
+Concluding that Tiffany had established actual customer confusion as a
+matter of law, the district court pointed to two categories of evidence proffered by
+Tiffany. First, it referred to the deposition testimony of six Costco customers, each
+of whom alleged that he or she was confused by Costco’s point -of-sale signs.
+Second, it described the results of a customer confusion survey and report created
+by Tiffany’s expert, Dr. Jacob Jacoby. Dr. Jacoby’s report included responses from
+944 people surveyed through the internet, 606 of whom identified themselve s as
+Costco patrons who thought that “they [or their significant other] would consider
+buying a diamond engagement ring at Costco that cost at least $2,500.” J.A. 1,452.
+Jacoby estimated that of these 606 responders—each of whom was shown a photo
+of a diam ond engagement ring alongside one of Cos tco’s poi nt-of-sale signs, 8
+either in isolation or after seeing photos of other branded items sold by Costco —
+“more than two out of five . . . were likely confused into believing that Tiffany &
+Co. was the source of the rings.” Id.  at 1,454. The district court deemed this
+evidence unrebutted and concluded that Costco had failed to raise a factual
+8 The sign in Dr. Jac oby’s survey read “639911 / PLATINUM  TIFFANY / .70CT
+VS2,I ROUND / DIAMOND RING / 3199.99.” J.A. 1,539 (emphasis in original).
+question as to whether customers were actually confused by its use of the word
+“Tiffany” on its signs. For the following reasons, we disagree.
+To begin, Costco did seek to rebut Tiffany’s evidence of confusion. First, it
+argued that the testimony of six customers —out of the 3,349 customers who
+purchased Tiffany -set rings at Costco during the relevant period —was only de
+minimis evidence of confusion and insufficient to resolve the issue definitively
+against Costco. Second, and more importantly, it submitted a report from its own
+expert, Dr. Russel S. Winer, criticizing  Dr. Jacoby’s survey methodology and
+results. Dr. Winer  opined that Dr. Jacoby should have targeted only customers
+with a “present purchase interest in buying a diamond ring,” and that Dr. Jacoby’s
+actual survey respondents “could not have been a group who se perceptions
+provided any valid or reliable predictor of past or future Costco diamond ring
+purchaser beliefs.” Id. at 4,226. Dr. Winer further asserted that Dr. Jacoby’s study
+was fatally flawed due to “artificial, contrived and biasing” stimuli that “ignore[d]
+the reality of the customer purchase process.” Id. at 4,228. For example, Dr. Winer
+noted that rather than showing survey responders a point-of-sale sign as it would
+have appeared to customers —in a display case surrounded by other rings
+identified by “other tags . . . , some of which would have other setting and style
+types indicated” —Jacoby’s survey showed them only a single ring and sign  in
+isolation.9 Id. at 4,305. Winer also assessed that on top of these flawed survey
+conditions, Dr. Jacoby’s screening questions, which required responders to sort
+words into brand names and descriptive words, “trained” those responders to
+“bias[] the responses in favor of selecting Tiffany as a brand identifier.” Id. at 4,303.
+We conclude that this evid ence was sufficient to raise a question as to
+whether potential buyers of Costco’s diamond engagement rings were actually
+confused by the appearance of the word “Tiffany” on Costco’s signs. In concluding
+otherwise, the district court observed that Dr. Winer’s criticisms go to the weight
+of Tiffany’s evidence rather than its admissibility and that he did not perform his
+own survey to demonstrate affirmatively that Costco’s customers were not
+confused. But the weight to be given to a particular piece of evide nce can be
+determinative of whether the moving party is entitled to summary judgment or
+9 Dr. Winer asserted  in his report that although both of the images Dr. Jacoby
+provided in his survey—one depicting only a single  point-of-sale sign and the other
+depicting a small section of a Costco display case —provided insufficient context to
+replicate the experience of actual customers in a Costco store, the decrease in putative
+confusion among the survey respondents who saw th e more contextual image was
+“striking.” J.A. 4,305. A jury was entitled to consider, as Dr. Winer did, “how the
+percentage [of customers identifying ‘Tiffany’ as a descriptive word rather than a brand]
+might have changed had the context provided been compa rable to the real world
+experience.” Id. at 4,307.
+whether a jury could find a material fact favorable to the non- moving party. And
+in the circumstances here, neither of the putative shortcomings  on which the
+district court relied  is sufficient to resolve the customer -confusion factor in
+Tiffany’s favor as a matter of law. Tiffany bears the burden of proof on its own
+motion for summary judgment. Resolving all factual inferences in Costco’s favor,
+a reasonable jury could find that Tiffany failed to present sufficiently persuasive
+evidence to meet that burden.
+2. Costco’s Good Faith.
+In analyzing whether a defendant has acted in bad faith, the question is
+whether the defendant attempted “to exploit the good will and reputation of a
+senior user by adopting the mark with the intent to sow confusion between the
+two companies’ products.” Star Indus.,  412 F.3d at 388. We have cautioned that
+“where the allegedly infringi ng mark is identical to the registered mark, and its
+use began subsequent to the plaintiff’s trade- mark registration, the defendant
+must carry the burden of explanation and persuasion.” Kiki Undies Corp., v.
+Promenade Hosiery Mills, Inc., 411 F.2d 1097, 11 01 (2d Cir. 1969). But “[p]rior
+knowledge of a senior user’s trade mark does not necessarily give rise to an
+inference of bad faith and may  [actually] be consistent with good faith.” Sports
+Auth., 89 F.3d at 964 (quoting Arrow Fastener Co. v. Stanley Works, 59 F.3d 384, 397
+(2d Cir. 1995)). Indeed, “the intent to compete by imitating the successful features
+of another’s product is vastly different from the intent to deceive purchasers as to
+the source of [one’s own] product.” Nora Beverages, Inc. v. Perrier Grp. of Am., Inc.,
+269 F.3d 114, 123 (2d Cir. 2001) (internal quotation marks and alterations omitted);
+see also George Basch Co. v. Blue Coral, Inc., 968 F.2d 1532, 1541 (2d Cir. 1992)
+(“Absent confusion, imitation of certain successful features in another’s product is
+not unlawful . . . .”). And as we have consistently observed, “subjective issues such
+as good faith are singularly inappropriate for determination on summary
+judgment.” Cadbury, 73 F.3d at 483 (internal quotation marks and alteration s
+omitted) (declining to grant summary judgment on the matter of good faith even
+where the plaintiff’s “registered mark is identical—in style as well as in name—to
+[the defendant’s] adopted logo . . . [and the defendant’s] explanation is not
+particularly persuasive”).
+The district court concluded that “no rational finder of fact could conclude
+that Costco acted in good faith in adopting the Tiffany mark.” Tiffany, 127 F. Supp.
+3d at 252 (emphasis added). It cited several pieces of evidence proffered by Tiffany,
+including an email from a Costco employee indicating that Costco’s jewelry boxes
+should have a more “Tiffany or upscale look,” the deposition testimony of a Costco
+inventory control specialist who acknowledged that she took no action in response
+to two emails ostensibly indicating customer and employ ee confusion over the
+source of Costco’s rings, and photographs and emails that suggest efforts by
+Costco to “copy Tiffany’s designs by making references to Tiffany designs and
+sharing links to Tiffany’s website  [in communications with vendors].” Id. at 251–
+52.
+The district court acknowledged Costco’s contrary evidence that it had
+never attempted to adopt the Tiffany mark, that its signs actually used the word
+“Tiffany” as a brand- independent description of a particular style of diamond
+setting, and that those signs merely reflected information p rovided by its own
+suppliers. Id. at 252. The court  nonetheless concluded that a jury could not
+reasonably credit an argument that “Costco jewelry buyers used the word
+‘Tiffany’ in a generic sense when communicating with vendors, while at the same
+time asking those vendors to copy Tiffany & Co. designs, and that signage
+incorporating the word ‘Tiffany’ on the resulting merchandise was nothing more
+than clerical duplication of a generic reference from an invoice .” Id. Again, we
+disagree.
+Although a jury could reasonably draw the conclusion that Costco’s interest
+in emulating Tiffany’s designs spilled over into an intent to mislead buyers as to
+the origins of its own jewelry, it could also reasonably conclude that Costco
+intended to borrow “certain successful features [from Tiffany’s] product” without
+implying that Tiffany actually produced or endorsed the jewelry at issue. George
+Basch Co., 968 F.2d at 1541. We have consistently recognized that intent to copy  a
+product’s useful, nonprotecte d attributes should not  be equated  automatically
+with an intent to deceive. See Nora Beverages, 269 F.3d at 123.  Therefore, Costco’s
+admitted intent to sell jewelry that looks like Tiffany’s—as opposed to an intent to
+have its jewelry pass as Tiffany’s —cannot be enough to justify a finding that
+Costco acted in bad faith in connection with Tiffany’s trademark infringement
+claim.
+In concluding otherwise, the district court overlooked substantial evidence
+that Costco did not attempt to sow confusion among its customers. As the district
+court recognized  in its good faith analysis , two Costco representatives —a
+diamond buyer and an assistant general merchandise manager —submitted
+declarations affirming that Costco inventory control personnel took the term
+“Tiffany” directly from vendor descriptions, that the representatives understood
+Tiffany as a “generic style name,” and that indeed it was “the only name . . . used
+to denote [that] type of pronged setting.”10 J.A. 2,927. Costco backed these claims
+with evidence that the term “Tiffany” has been used as a generic descriptor—both
+explicitly in conjunction with a word like “setting” and implicitly by itself—in
+thousands of advertisements, dictionaries, trade publications, and other public
+documents since the late 1800s. And as the district court recognized elsewhere in
+its decision,  Costco presented evidence that its rings were not branded with
+Tiffany’s mark (and indeed were branded with R.B. Diamond’s logo instead); that
+the rings came in unbranded containers bearing no resemblance to Tiffany’s
+distinctive robin’s -egg blue packaging; that buyers received Costco -branded
+receipts, appraisal forms, and other sales documents; and that Costco’s return
+policy permitted customers to return their rings any time after purchase. 11
+10 As far as we can tell, Tiffany’s only reply to this evidence is that after Costco
+voluntarily stopped using the name “Tiffany” on its signs, it was still able to describe
+those rings’ settings as “Solita ire.” But “Solitaire,” which describes any single gem in a
+simple setting, is undeniably a less descriptive term than “Tiffany,” which ostensibly
+describes a specific type of six-prong setting.
+11 Both Tiffany and Costco point to a customer email asking whether the word
+“Tiffany” on the label referred to the “Tiffany setting or Tiffany brand,” J.A. 15,333.
+Consistent with Costco’s argument that it acted in good faith, a Costco employee
+responded to the customer’s email that “[i]t means Tiffany setting.” Id. at 15,334. Notably,
+the jury could also consider this email as evidence of an absence of actual customer
+confusion. See Nora Beverages, 269 F.3d at 124 (“Inquiries about the relationship between
+the owner of a mark and an alleged infringer do not amount to actual confusion. Indeed,
+Crediting this evidence, a reasonable jury could conclude that Cost co did not
+intend to mislead its customers  and that signs bearing the word “Tiffany” were
+the product of a good -faith attempt to communicate to its customers the setting
+style of certain rings that it sold.12
+3. Consumer Sophistication
+“Our analysis of consumer sophistication ‘consider[s] the general
+impression of the ordinary purchaser, buying under the normally prevalent
+conditions of the market and giving the attention such purchasers usually give in
+buying that class of goods.’”  Star Indus., 412 F.3d at 390 (quoting Sports Auth., 89
+F.3d at 965); see also Streetwise Maps, Inc. v. VanDam, Inc., 159 F.3d 739, 746 (2d Cir.
+1998). In general, “the more sophisticated the purchaser, the less likely he or she
+will be confused by the presence of similar marks in the marketplace.” Savin Corp.
+such inquiries are arguably premised upon a lack of confusion between the products such
+as to inspire the inquiry itself.” (emphasis in original)).
+12 A jury would also be entitled to infer good faith from Costco’s conduct after
+Tiffany asserted that Costco’s had infringed its trademark. Costco offered evidence that
+it voluntarily ceased using the word “Tiffany”  on its product signs within a week of
+receiving Tiffany’s demand letter. And after Tiffany filed its complaint, Costco wrote to
+all purchasers of Costco rings bearing a Tiffany- style setting alerting them to Tiffany’s
+claim and reminding them of their right to return their purchase at any time for a full
+refund. While Tiffany disputes certain of these facts, we assume in assessing Tiffany’s
+motion for summary judgment that a jury would resolve those disputes in Costco’s favor.
+v. Savin Grp., 391 F.3d 439, 461 (2d Cir. 2004). Likewise, “[t]he greater the value of
+an article[,] the more careful the typical consumer can be expected to be.”
+Manhattan Indus., Inc. v. Sweater Bee by Banff, Ltd., 627 F.2d 628, 631 (2d Cir. 1980)
+(internal quotation marks omitted). Although sophistication may usually be
+proven by direct evidence, including expert opinions or surveys, “in some cases a
+court is entitled to reach a conclusion about consumer sophistication based solely
+on the nature of the product or its price.” Star Indus., 412 F.3d at 390.
+The district court correctly identified the competing expert reports
+submitted by Dr. Jacoby and Dr. Winer as the principal evidence on the question
+of customer sophistication. As indicated above, Dr. Jacoby’s study assumed that
+survey responders who said they “would consider buying a diamond engagement
+ring at Costco” were representative of customers who would likely interact with
+Costco’s allegedly infringing point-of-sale signs. Tiffany offered no other evidence
+regarding the sophistication of the relevant consumer population. In response, Dr.
+Winer countered that the purchase of an engagement ring is a “high involvement”
+transaction, and that actual purchasers—as opposed to those who merely “would
+consider buying an engagement ring” —have, or acquire, substantial “subject
+matter knowledge and familiarity with the relevant vocabulary.” J.A. 4,226.
+The district court nonetheless determined that Costco failed to raise a
+question as to whether its customers were sufficiently sophisticated that its use of
+the word “Tiffany” would not create confusion. As in its analysis of actual
+confusion, the district  court concluded that Costco’s evidence goes only to “the
+weight that Tiffany’s evidence should be accorded, and fails to provide competing
+affirmative evidence regarding the relevant population of consumers.” Tiffany, 127
+F. Supp. 3d at 254. Once again, its appraisal erroneously shifted Tiffany’s burden
+onto Costco.  As explained above , the weight of a piece of evidence can be
+determinative as to whether summary judgment is appropriate. What’s more, it is
+simply incorrect to say  that Costco proffered no aff irmative evidence regarding
+customer sophistication. As the district court otherwise described, Costco did offer
+evidence, in the form of Dr. Winer’s declaration, that “[i]n the case of purchasing
+a diamond ring, .  . . actual prospective purchasers proxima l to the purchase
+decision definitely know more than people not in the market.”  J.A. 4,300. And as
+Dr. Winer’s report further opined:
+[A] group of ‘actively in the market’ prospective diamond ring buyers
+would clearly be more attuned to the marketing of diamond rings, the
+jargon associated with diamond rings, and the shopping process and
+experience associated with diamond rings, and thus be more
+knowledgeable about whether the word Tiffany in the context of the
+small product labels referred to the ‘Tiffany & Co.’ brand or was being
+used to describe a particular type of ring setting.
+Id. Indeed, we have previously recognized that “[t]he purchaser of a
+diamond ring, particularly of a wedding or engagement ring, will be most
+discriminating in his purchase, and make it carefully and deliberately.” J.R. Wood
+& Sons, Inc. v. Reese Jewelry Corp ., 278 F.2d 157, 159 (2d Cir. 1960). A jury could
+reasonably conclude, by crediting Costco’s evidence and rejecting Tiffany’s, that
+the relevant population of consumers would be sufficiently attentive and
+discriminating as to recognize that Tiffany had nothing to do with Costco’s
+diamond engagement rings.
+4. Overall Likelihood of Customer Confusion
+We conclude that Costco’s evidence has, when considered in the aggregate,
+created a genuine question as to the likelihood of customer confusion.  See Star
+Indus., 412 F.3d at 383.  Our conclusion rests primarily on the combination o f (1)
+Costco’s evidence that “Tiffany” is a broadly recognized term denoting a
+particular style of pronged ring setting and (2) its further indications, backed by
+prior pronouncements of this Court, that purchasers of diamond engagement
+rings educate themselves so as to become discerning consumers.
+Affording full credit to this evidence, a jury could reasonably conclude that
+consumers of diamond engagement rings would know or learn that “Tiffany”
+describes a style of setting not unique to rings manufactured  by Tiffany, and
+recognized that Costco used the term only in that descriptive sense. Such
+consumers may also be distinctly capable of recognizing that Costco’s rings  were
+not manufactured by Tiffany—based, for example, on their  price, place of
+purchase, packaging, or paperwork—and consequently be particularly unlikely to
+be confused by any aspect of Costco’s point -of-sale signs. Moreover , any Costco
+customer looking at a Tiffany-set ring identified by a sign that includes the word
+“Tiffany” would also see a jewelry case full of other unbranded rings, each
+identified by a sign indicating its own setting type in a similar or identical way.
+To be sure, Tiffany has made a persuasive (and essentially unrebutted)
+showing that the  general public associates its famous brand with high- quality
+engagement rings that compete directly with those sold by Costco. But even the
+potential for confusion inherent in such circumstances cannot dictate a judgment
+for Tiffany in light of Costco’s evidence that engagement-ring purchasers exercise
+care and become savvy, and that the context Costco provided at the point of sale
+was sufficient for those careful customers to recognize that its signs used “Tiffany”
+only as a generic descriptor. In short, Costco’s use of the word “Tiffany” to
+describe engagement rings may have created a possibility of confusion. It may even
+be the more reasonable inference that confusion was likely. But in light of Costco’s
+competing evidence—and Tiffany’s failure to demonstrate that actual purchasers
+would not recognize the word “ Tiffany” as denoting a commonly used setting
+style—we decline to hold that no  reasonable jury could find that Costco’s signs
+were not confusing. 13 See Island Software & Comput.  Serv., Inc. v. Microsoft Corp.,
+413 F.3d 257, 264 (2d Cir. 2005) ( “[A]t the summary judgment stage, [even if one]
+inference . . . seems the better of the possible inferences that can be drawn, we must
+still draw all inferences in favor of the non-moving party.”).
+B. Costco’s Fair Use Defense
+To avoid liability for infringement, however, Costco need not rely on a jury
+to reject Tiffany’s claim that Costco’s  actions created a likelihood of confusion.
+Contrary to the district court’s holding, Costco is also entitled to present  its fair
+use affirmative defense at trial. The Lanham Act provides that when a party “uses
+the words constituting [a registered] mark in a purely descriptive sense, this use
+13  Because liability for trade mark infringement under New York law mirrors
+liability under the Lanham Act, see Standard & Poor’s Corp., Inc. v. Commodity Exchange,
+Inc., 683 F.2d 704, 708  (2d Cir. 1982), the district court likewise should not have granted
+Tiffany’s motion for summary j udgment in connection with its state -law infringement
+claim.
+may qualify as permissible fair use.” Kelly-Brown v. Winfrey, 717 F.3d 295, 308 (2d
+Cir. 2013). Cruci ally, a defendant may raise a fair use defense even where the
+challenged material is likely to cause some confusion. See KP Permanent Make -Up,
+Inc. v. Lasting Impression I, Inc., 543 U.S. 111, 121–22 (2004). To demonstrate fair use,
+a defendant must establ ish that it used the allegedly infringing term “(1) other
+than as a mark, (2) in a descriptive sense, and (3) in good faith.” JA Apparel Corp.
+v. Abboud, 568 F.3d 390, 400 (2d Cir. 2009)  (internal quotation marks omitted); see
+also 15 U.S.C. § 1115(b)(4).
+The district court rejected Costco’s fair use defense at summary judgment
+on the basis that —for the same reasons that underpinned its Polaroid  analysis—
+Costco’s evidence was insufficient to establish that it used the word “Tiffany” in
+good faith. 14 Having resolved the motion on the basis of good faith alone, the
+district court did not consider the other factors pertinent to the fair use defense.
+On appeal, Costco argues that the record contains sufficient evidence to support
+14 The “good faith” prong of the fair use analysis is essentially identical to the same
+prong of the Polaroid  analysis and “concerns the question whether the user of a mark
+intended to create consumer confusion as to source or sponsorship.” JA Apparel, 568 F.3d
+at 401 (quoting EMI Catalogue P’ship v. Hill, Holliday, Connors, Cosmopulos Inc. , 228 F.3d
+56, 66–67 (2d Cir. 2000)).
+each prong of its affirmative defense. We agree. For the reasons stated above, the
+district court should not have concluded that no question of material fact exists on
+the question of Costco’s good faith. For the reasons that follow , we likewise
+conclude that Costco created a triable que stion as to the remaining factors of the
+fair use analysis.
+1. Use “As a Mark”
+A defendant uses a term “as a mark” when it employs it “as a symbol to
+attract public attention,” Kelly -Brown, 717 F.3d at 306 (internal quotation marks
+omitted), or “to identify and distinguish . . . goods [or services] . . . and to indicate
+[their] source,” 15 U.S.C. §  1127. Whether a defendant has done so may entail an
+investigation into, inter alia , whether the challenged material appeared on the
+product “itself, on its packaging, or in any other advertising or promotional
+materials related to [the] product,” and the degree to which “defendants were
+trying to create, through repetition . . . a[n] association between [themselves] and
+the [mark].” Kelly-Brown, 717 F.3d at 310–11 (internal quotation marks omitted).
+A jury could reasonably conclude that Costco did not use the term “Tiffany”
+as a trademark. Tiffany’s own evidence indicates that Costco typically identifies
+the trademark associated with  its branded products as the first word on the
+product label. 15  For this litigation, Costco produced hundreds of example s of
+signs for its engagement rings, none  of which began with the word “Tiffany” or
+any other brand name. Instead, Costco’s evidence demonstrates that it displaye d
+the word “Tiffany” in the exact same manner (including typeface, size, color, and
+relative location on the signs) that it displayed setting information for other
+engagement rings. Costco also proffered evidence that the word “Tiffany” did not
+appear on any of its rings or ring packaging, and that the rings actually bore the
+logo of a different manufacturer. See Car-Freshner Corp. v. S.C. Johnson & Son, Inc.,
+70 F.3d 267, 270 (2d Cir. 1995)  (explaining that a defendant’s display of its own
+trademark on a tree-shaped car freshener suggested that the product’s shape was
+used otherwise than as a mark).
+2. Descriptive Use
+Whether a phrase is descriptive refers to its tendency to describe the goods
+in question in a broad sense, including not only “words that describe a
+characteristic of the goods[] such as size or quality,” but also words or images that
+15 Costco’s evidence indicates that when it did sell genuine Tiffany mer chandise,
+“Tiffany” was indeed the first word on the accompanying signs. Both parties agree,
+however, that Costco has never sold engagement rings produced by Tiffany in its
+American stores.
+more abstractly identify some information about the goods in question.
+Cosmetically Sealed Indus. v. Chesebrough-Pond’s USA Co., 125 F.3d 28,  30 (2d Cir.
+1997) (citing Car-Freshner Corp, 70 F.3d at 269–70 (concluding that a car freshener’s
+pine-tree shape was a fair use of a p rotected image because the shape indicated
+both the product’s scent and the season in which it was sold)).
+Here, a jury could reasonably find that Costco used the term “Tiffany”
+descriptively, based on Costco’s evidence that (1) “Tiffany” has a descriptiv e
+meaning independent of Tiffany’s brand and (2) Costco intended to and did
+invoke that meaning when it created its point-of-sale signs. As noted above, Costco
+has identified over a century’s worth of documents suggesting that “Tiffany” —
+both alone and in c onjunction with words  like “ring,” “setting,” “style,” or
+“mounting”—is widely understood to refer to a particular type of pronged
+diamond setting. And as Costco’s employees attested in their declarations, both
+they and their vendors understood the term to be the only precise way to describe
+that style. Costco also presented unrebutted evidence that it used the term
+“Tiffany” exclusively on signs identifying rings bearing a Tiffany setting, and that
+it displayed the same set of information for engagement rings of all styles. In other
+words, Costco would generally display a diamond ring with a cathedral or bezel
+diamond setting along with a sign displaying the word “Cathedral” or “Bezel” in
+the same way that a sign identifying a diamond ring with a Tiffany setting would
+display the word “Tiffany.”
+Tiffany, for its part, resists the conclusion that the term “Tiffany” is
+amenable to descriptive use—or indeed any use other than as a mark—within the
+jewelry industry. It argues that “no case has ever bisected a trademark to allow the
+same word to be used exclusively by the trademark holder to denote the source of
+goods for every product in a regi stered class except one,” and that doing so here
+would bring about the “absurd” result that “Tiffany” could be a source identifier
+for rings of other styles, but a descriptive term for rings in the so-called “Tiffany”
+style. Appellees’ Br. 10.
+Tiffany’s a rgument fundamentally misunderstands our caselaw. There is
+nothing inherently absurd about a single word’s being both a source identifier and
+a descriptive term within the same product class. See Abercrombie & Fitch Co. v.
+Hunting World, Inc., 537 F.2d 4, 9 (2d Cir. 1976) (“[T]he same term may be put to
+different uses with respect to a single product.” (citing 15 U.S.C. § 1115(b)(4))). To
+the extent that “Tiffany” actually does have the descriptive meaning Costco
+submits that it does, Tiffany’s putative “ab surd” result is nothing more than the
+predictable reality of a legal regime in which “trademark rights may be acquired
+in a word or image with descriptive qualities.” Car -Freshner, 70 F.3d at 269. And
+within that reality, it is well established that “the p ublic’s right to use descriptive
+words or images in good faith in their ordinary descriptive sense must prevail over
+the exclusivity claims of the trademark owner.”16 Id.
+As a result, the simple fact that a defendant has trademarked a term for use
+in a particular industry does not preclude a jury’s finding that the term has some
+descriptive use within the same industry. See JA Apparel, 568 F.3d at 402 –03
+(holding that fair use may entitle a clothing company to identify its designer on
+16 That Tiffany & Co. and the Tiffany setting derive their names fr om a common
+source—Charles Lewis Tiffany, who both founded the company and invented the
+setting—does not alter this proposition. See JA Apparel , 568 F.3d at 394 (explaining that
+the plaintiff’s trademark “Joseph Abboud” refers to the same individual identified in the
+defendant’s ostensibly descriptive advertising materials); id. at 402–03 (explaining that
+the challenged usage might nonetheless be fair use). Nor does it matter that the word
+“Tiffany” is not inherently descriptive of the diamond setting at issue. One who possesses
+exclusive rights in a mark by virtue of having used it in commerce can lose that right to
+exclusivity—either outright or in connection with a limited application —by failing to
+enforce the mark so that, through usage by others in the marketplace, it becomes generic
+at least in a limited sense. The record reflects that Tiffany used the word mark “Tiffany”
+in commerce as early as 1868, while the use of the term “Tiffany” to describe a particular
+setting style acquired currency in the late 1800s. The record suggests no reason that
+Tiffany could not have taken action in the late 1800s to prevent the use of the word
+“Tiffany” descriptively in the general marketplace. Whatever Tiffany’s reasons for not
+doing so, Costco’s evidence suggests tha t the word “Tiffany” did acquire an adjectival
+meaning in the trade to identify a particular style of setting.
+advertisements even where a competitor has registered that same designer’s name
+as a trademark in connection with the sale of apparel). Indeed, the fact that Tiffany
+does not here challenge Costco’s use of the phrase “Tiffany set” or “Tiffany
+setting” may signal an implicit rec ognition that some uses of its protected mark
+are indeed descriptive. As we explained in JA Apparel , whether a defendant has
+used a name descriptively requires “individualized consideration” of how the
+defendant has used the name. Id. at 402. And as we exp lained above, Costco’s
+evidence is sufficient for a jury to find  the word “Tiffany,” when used in
+conjunction with a particular six-pronged stone setting, had acquired a descriptive
+meaning in the jewelry trade that did not suggest  an association with the jeweler
+Tiffany & Co., and that Costco used the word  descriptively in that sense and  in
+good faith under the particular circumstances of this case. To be sure, a reasonable
+jury could also reject  Costco’s evidence and find that customers would not
+recognize the word “Tiffany” as descriptive  even with the context Costco
+provided. On this record, however, that decision belongs to the jury and not to the
+court.
+II. Tiffany’s Trademark Counterfeiting Claim
+Having determined that Costco’s use of the word “Tiffany” constituted
+trademark infringement, the district court proceeded to conclude as a matter of
+law that Costco’s infringement involved a counterfeit mark.17 Under the Lanham
+Act, “[a] counterfeit is a ‘spurious mark which is identical with, or substantially
+indistinguishable from, a registered mark.’” Kelly-Brown, 717 F.3d at 314 (quoting
+15 U.S.C. §  1127). Echoing its principal infringement analysis, the district court
+held that Costco ’s conduct had necessarily involved such a mark because it had
+“utilized a word mark identical to the one that Tiffany has registered” and done
+17 In a Lanham Act litigation, a plaintiff who has employed “a counterfeit mark”—
+as opposed to a mere “colorable imitation” or other infringing us age—is subject to
+heightened statutory penalties. See 15 U.S.C. § 1117. “In a case involving the use of a
+counterfeit mark,” a Lanham Act plaintiff may elect to recover, in lieu of the standard
+profits and damages available for mere infringement, “an award of statutory damages . .
+. not less than $1,000 or more than $200,000 per counterfeit mark per type of goods or
+services sold, offered for sale, or distributed.” 15 U.S.C. § 1117(c). Even greater penalties
+are available upon a finding that a defendant use d a counterfeit mark willfully. If a
+defendant has “intentionally us [ed] a mark or designation, knowing that such mark or
+designation is a counterfeit mark,” and the plaintiff elects to pursue standard profits and
+damages, the court “shall, unless [it] finds extenuating circumstances, enter judgment for
+three times [defendan t’s] profits or [plaintiff’s] damages, whichever amount is greater,
+together with a reasonable attorney’s fee.” Id. § 1117(b). And if a plaintiff elects instead
+to pursue statutory damages, a “court [that] finds that the use of the counterfeit mark was
+willful,” may impose damages of up to “$2,000,000 per counterfeit mark per type of goods
+or services sold, offered for sale, or distributed.” Id. § 1117(c)(2). In this case, after holding
+Costco liable for willful trademark counterfeiting as a matter of law, the district court
+awarded Tiffany treble profits pursuant to § 1117(b).
+so with the “intent to confuse customers as to the source of the rings,” rendering
+its “use of the Tiffany mark . . . ‘spurious’ as a matter of law.” Tiffany, 127 F. Supp.
+3d at 255. Because  it was inappropriate to hold Costco liable for trademark
+infringement at the summary judgment stage —and because counterfeiting is
+merely an aggravated form of infringement —we vacate the district court’s
+judgment as to counterfeiting as well.18
+18 We cannot conclude on the record here that no reasonable jury could find in
+favor of Tiffany on the counterfeiting claim, and we therefore affirm the district court's
+denial of Costco's motion for summary judgment as to this claim. We  do note that it is
+likely inappropriate to impose liability for trademark counterfeiting when a defendant is
+able to establish—with or without the other two elements of the fair use defense—that it
+used a term identical to the registered mark otherwise than as a mark. In order for
+material to qualify as “counterfeit” under the Lanham Act, it must be a “spurious mark.”
+15 U.S.C. § 1127. A “spurious” mark , in turn,  is one that is “fake” and “[d]eceptively
+suggest[s] an erroneous origin.” Spurious, Black’s Law Dictionary (11th ed. 2019). We fail
+to see how a term can be a “fake” mark if it is not actually used  as a mark, or how a term
+can “deceptively suggest an erroneous origin” if it is not used as a means  to indicate
+origin in the first place. See 15 U.S.C. § 1127 (defining “trademark” and “service mark” as
+“any word, name, symbol, or device, or any combination thereof” used “to indicate the
+source” of goods and services). Terms not used as a mark may still generate confusion as
+to “affiliation, connection, .  . . association[,] .  . . sponsorship or approval,” id.
+§ 1125(a)(1)(A), or “misrepresent the nature, characteristics, qualities, or geographic
+origin” of a good or service, id. § 1125(a)(1)(B), and the refore constitute trademark
+infringement. See Int’l Info. Sys. Sec. Certification Consortium , 823 F.3d at 161 (“[P]rotection
+is not exclusively limited . . . to cases in which there may be confusion as to source.”) ;
+Kelly-Brown, 717 F.3d at 308 (“Lanham Ac t plaintiffs [need not] show that the defendant
+was using the allegedly infringing content ‘as a mark’ . . . in order to establish consumer
+confusion.”). But because terms not used as marks are not “spurious,” they cannot, as a
+matter of law, be counterfeit.
+III. Tiffany’s Entitlement to Punitive Damages
+In their briefing, both parties address the question whether —assuming
+Costco’s liability for infringement—Tiffany is entitled to punitive damages under
+New York law. Because we vacate the district court’s ruling as to Costco’s liability,
+we decline to address the question whether punitive damages would be available
+to Tiffany if a jury were to find in its favor on remand.
+CONCLUSION
+For the foregoing reasons, we VACATE the judgment of the district court
+and REMAND the case for trial.

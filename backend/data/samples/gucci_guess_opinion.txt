@@ -1,0 +1,464 @@
+Gucci America, Inc. v. Guess?, Inc., 868 F. Supp. 2d 207 (S.D.N.Y. 2012) (amended opinion and order after bench trial)
+Source: https://static.case.law/f-supp-2d/868/cases/0207-01.json
+
+[Excerpted: findings of fact on the parties, brands and marks; the accused Guess designs; applicable law; the Polaroid and dilution discussion; conclusion. Omitted: design-process, expert, damages and affirmative-defence sections, remedies, appendices, footnotes.]
+
+AMENDED OPINION AND ORDER
+
+SHIRA A. SCHEINDLIN, District Judge.
+
+I. INTRODUCTION
+
+1. This is a trademark infringement case between two global fashion companies. On May 6, 2009, Gucci America, Inc. (“Gucci”) filed a complaint against Guess?, Inc. (“Guess”), Marc Fisher Footwear LLC (“MFF”), the Max Leather Group/Cipriani Accessories, Inc. (“Max Leather/Cipriani”), Sequel AG (“Sequel”), K & M Associates L.P. (“K & M”), Viva Optique, Inc. (“Viva”), Signal Products, Inc. (“Signal”), and Swank, Inc. (“Swank”) (collectively “Defendants”), pursuant to Section 1114 and 1125 of Title 15 of the United States Code, Section 360 — Z of the New York General Business Law, and the common law of New York. Gucci claims that Defendants have infringed or counterfeited four of its trademarks, and one trade dress on over one thousand stock keeping units (“SKUs”) in an attempt to “Gucei-fy” their product line:
+
+1) the Green-Red-Green Stripe mark (“GRG Stripe”);
+
+2) the Repeating GG Pattern,
+
+3) the Diamond Motif Trade Dress, which is the Repeating GG Pattern with a pair of inverted Gs in each corner rendered in a brown/beige col- or combination,
+
+4) the Stylized G Design mark (“Stylized G”), and
+
+5) the Script Gucci Design mark (“Script Gucci”).
+
+Gucci also seeks cancellation of Guess’s “4G Square Repeating Logo” trademark on the basis of abandonment.
+
+2. Defendants answered the Second Amended Complaint on June 3, 2010, denying all of Gucci’s claims, while also raising more than a dozen affirmative defenses as well as a counterclaim seeking partial cancellation of the Gucci Stylized G registration on the basis of abandonment. Gucci answered and denied the counterclaim on June 23, 2010.
+
+3. On February 14, 2012, I held that Gucci was not entitled to monetary' relief on its dilution claims relating to Defendants’ use of the Square G mark and Quattro G Repeating Pattern, and granted Defendants partial summary judgment on those claims.
+
+4. I held a bench trial from March 28, 2012 to April 19, 2012. The parties submitted post-trial proposed findings of fact and conclusions of law on April 27, 2012. Pursuant to Rule 52(a) of the Federal Rules of Civil Procedure, I make the following findings of fact and conclusions of law. In reaching these findings and conclusions, I heard the evidence, observed the demeanor of the witnesses, and considered the arguments and submissions of counsel.
+
+5. Due to certain mathematical errors and oversights in identifying infringing styles, the Court is revising its original opinion to adjust the damage award. However, the legal analysis is unchanged from the initial Opinion and Order. Accordingly, the original opinion is now withdrawn and replaced by this Amended Opinion and Order.
+
+II. FINDINGS OF FACT
+
+A. Parties
+
+6. Gucci is organized under the laws of New York, with its principal place of business located at 685 Fifth Avenue, New York, New York.
+
+7. Guess is a organized under the laws of Delaware, with its principal place of business at 1444 South Alameda Street, Los Angeles, California.
+
+8. MFF is organized under the laws of Delaware in 2004. Its principal place of business is located at 777 Putnam Road, Greenwich, Connecticut. It also maintains a showroom at 725 Fifth Avenue, New York, New York and a distribution center in Edison, New Jersey.
+
+9. Max Leather/Cipriani is organized under the laws of New York. Its principal place of business is located at 366 Fifth Avenue, New York, New York.
+
+10. Signal is organized under the laws of California. Its principal place of business is located at 320 West 31st Street, Los Angeles, California.
+
+11. Swank is organized under the laws of Delaware. Its principal place of business is located at 90 Park Avenue, New York, New York.
+
+B. History of the Brands
+
+1. Guess
+
+12. Guess was founded in 1981 by the Brothers Marciano-Georges, Maurice, Paul, and Armand. Over the next three decades, it grew into an internationally recognized brand.
+
+13. Guess sells branded apparel and accessories, both on its own and with select licensees. It operates hundreds of its own retail stores, and places its products in more than one thousand department stores nationwide.
+
+14. Guess has developed a distinctive and unique brand image over the past thirty years. It has established itself as a mid-market lifestyle brand, somewhere below the “haute couture” fashion houses, but nonetheless above low-end retail discounters like Target or Wal-Mart.
+
+15. The ideal Guess customer is the “Guess Girl,” a brand-conscious young woman between the ages of fifteen and thirty who identifies with the sexy, trendy, flashy image of the Guess brand. She is willing to pay a premium above unbranded products to display that image through Guess-branded products.
+
+16. Between 2008 and 2010 alone, Defendants spent more than ninety million dollars advertising the Guess brand in various media channels, including magazines such as Vogue, Vanity Fair, In Style, Allure, Elle, and People, as well as billboards and buses.
+
+17. The Guess style makes frequent use of “loud” colors, exaggerated fabric details, and embellishments such as rhinestones. These act as indicators that Guess is the source of the product. Based on the results of surveys conducted by Women’s Wear Daily identifying the thirty most well-known brands, consumers understand that the Guess brand and style is not the same as Gucci’s. The Guess brand has come to be identified with such celebrity “Guess Girls” as Anna Nicole Smith and Claudia Scheiffer.
+
+2. Gucci
+
+18. Guccio Gucci established his eponymous brand in Florence, Italy in 1921. In the decades that followed, Gucci became famous for its fine leather goods, and then built on its reputation to become one of the largest luxury goods, fashion and accessory brands in the world.
+
+19. Gucci opened its pioneering New York City store in 1953, introducing Americans to Italian fashion. Since then it has expanded its presence into twenty-two states and now operates more than ninety U.S. stores. Over the years it has sold under the Gucci brand name everything from watches to cars.
+
+20. Gucci considers the designs at issue in this case to be among its “icons,” and places them on products to enable its customers to communicate that they are members of the “exclusive club” that the Gucci brand signifies. Over the past twenty years, seventy-five percent of the products have borne at least one of these designs. Sales data show that they are tremendously successful, with approximately $1.3 billion worth of product sold between 2004 and 2009 alone.
+
+21. In addition to “lifestyle” consumers — wealthy individuals who wear Gucci products regularly — Gucci also targets “aspirational” consumers, who are younger and less wealthy, but nonetheless aspire to the exclusivity that the Gucci brand represents. Because these consumers are less well-off than the “lifestyle” consumer, they tend to purchase Gucci’s more popularly priced articles, such as canvas products bearing the Diamond Motif Trade Dress and/or the Repeating GG Pattern.
+
+22. Gucci spends millions of dollars on advertising each year, including more than twenty million dollars in the period from 2001 to 2009 on the marks at issue. It advertises in fashion magazines such as Vogue, Vanity Fair, and Elle, as well as “lifestyle” magazines like Town & Country, and even teen-oriented magazines such as Lucky or Teen Vogue, all in an effort to reach a broad range of consumers.
+
+23. In addition to magazine and newspaper ads, Gucci advertises on billboards, on buses, in malls, and in a variety of online media. It also receives unpaid editorial coverage in the fashion press, which a third-party service assessed at a value of approximately twenty-five million dollars per year for the period from 2006 to 2009. Additional media exposure comes from celebrities ranging from Charlize Theron to Nicole “Snooki” Polizzi, who are often photographed wearing Gucci products.
+
+24. As a result of its advertising and commercial success, Gucci is consistently recognized as one of the top luxury brands in the world by a variety of publications. It has also been recognized as one of the top global brands, irrespective of “luxury” status.
+
+C. The Marks at Issue
+
+25. As noted above, this case involves five Gucci designs: the GRG Stripe, the Repeating GG Pattern (along with the Diamond Motif Trade Dress), the Stylized G, and the Script Gucci. Gucci imposes strict quality standards on all of its products, including those bearing these marks. Over the years, it has vigorously enforced its trademark rights, with a particular focus on the problem of counterfeiting.
+
+1. The GRG Stripe
+
+. [1] 26. Gucci has used the GRG Stripe since the 1960s. It consists of outside green stripes flanking a center stripe rendered in red. Gucci obtained registrations for the GRG Stripe in 1979 (for handbags, luggage, small leather goods, and the like) and in 1988 (for footwear).
+
+27. The GRG Stripe has appeared on approximately twenty percent of all Gucci accessories in the past two decades. From 2005 to 2009, sales of such products totaled approximately $250 million. During the nine-year period beginning in 2001 and ending in 2009, Gucci spent approximately $8.7 million on advertisements that featured the GRG Stripe.
+
+28. At trial and during depositions, Defendants acknowledged that the GRG Stipe is a key identifier of Gucci. Gucci also views the GRG Stripe as an essential part of its brand image.
+
+29. Based on its extensive nationwide sales and publicity, its recognition as an identifier of Gucci, and the fact that it was first registered more than. thirty years ago, I find that the GRG Stripe is a famous mark within the meaning of the Trademark Dilution Revision Act (“TDRA”) of 2006.
+
+2. The Repeating GG Pattern and the Diamond Motif Trade Dress
+
+30. Gucci has used the Repeating GG Pattern — a pair of inward facing, inverted G’s set at the corners of a repeating, diamond-shaped pattern connected by two dots forming straight diagonal lines— since 1966. Gucci obtained a registration for this design in 2003 (for jewelry) and 2006 (for handbags, luggage, small leather goods, neckties, scarves, footwear, etc.). The Diamond Motif Trade Dress is this pattern executed on canvas in a brown/ beige colorway, with pinpoint “shading” within the Gs. Products bearing the Diamond Motif Trade Dress account for approximately eighty percent of canvas products bearing the Repeating GG Pattern.
+
+31. Gucci has sold billions of dollars worth of products bearing the Repeating GG Pattern/Diamond Motif Trade Dress. It has become a key visual identifier for Gucci, and one that it believes motivates customers to buy other Gucci products. To support sales of products with these marks, Gucci spent more than thirteen million dollars on advertising in the U.S. between 2001 and 2009.
+
+32. At trial and during depositions, Defendants acknowledged that the Repeating GG Pattern is a key identifier of Gucci that transmits the brand’s characteristic qualities of heritage, quality, and exclusivity. Because of the mark’s popularity, Gucci merchandisers spend more than half of their accessory budget on products bearing the Repeating GG Pattern or the Diamond Motif Trade Dress.
+
+33. For the same reasons as noted in the discussion of the GRG Stripe in paragraph 29 above, I find that the Repeating GG Pattern is a famous mark within the meaning of the TDRA. While the Diamond Motif Trade Dress is not registered, I find that the other factors weigh sufficiently in Gucci’s favor to support a finding that it, too, is famous.
+
+3. The Stylized G
+
+34. Gucci began using the Stylized G in 1994. It obtained U.S. trademark registrations in 1997 (for handbags, belts, gloves), 1999 (for watches and clocks) and 2006 (for eyeglass frames and sunglasses).
+
+35. From 2004 through 2009, Gucci sold approximately fifteen million dollars worth of products bearing the Stylized G, combined wholesale and retail Over the period from 2001 to 2009, it spent approximately $1.3 million advertising such products in the U.S.
+
+36. Gucci increased its use of the Stylized G in 1995 and 1996, and the mark became the focus of an entire ready-to-wear collection in 1998. However, after a controversial, pornographic advertisement created by Tom Ford featuring the Stylized G ran in Spring 2003, Gucci scaled back on its use. Nonetheless, Gucci witnesses testified at trial that it still uses the Stylized G on the interior of handbags, as well as on belts and wallets.
+
+37. As discussed in paragraph 78 below, Guess designed it own Square G at some time during 1995, and first used it in commerce in 1996, if not earlier. At that time, Gucci had not yet registered the Stylized G in the U.S., and it had only sold and advertised it for a few years at most. Furthermore, Gucci has not shown that consumers actually recognized the Stylized G as an indicator of Gucci. Accordingly, even if the Stylized G did eventually become famous, I find that it was not famous when Guess commenced use of its Square G in 1996.
+
+4. The Script Gucci
+
+38. The Script Gucci mark was developed from the signature of Guccio Gucci, the brand’s founder. Gucci began using the mark in 1967 and has used it ever since. Gucci obtained a U.S. trademark registration for this mark in 2006 for use on various kinds of bags and cases. Gucci does not have a registration for the mark for use on footwear.
+
+39. Approximately five percent of all Gucci products sold in the last two decades have borne the Script Gucci Mark. Gucci sold fifty-eight million dollars worth of products bearing this mark at retail between 2004 and 2009. For the period from 2005 to 2009, it sold $195 million at wholesale. Over the period from 2001 to 2009, Gucci spent approximately $450,000 on advertisements visibly featuring the mark.
+
+40. As discussed in more detail in the Conclusions of Law below, I do not reach the question of whether the Script Gucci mark is famous because I find that, even if it were famous, the Script Guess mark does not dilute it, either by tarnishment or by blurring.
+
+E. Development of the Allegedly Infringing Guess Marks
+
+49. Gucci asserts that Guess and its Licensees “knowingly and slavishly replieat[ed] Gucci’s world famous design elements and designations [in order to] take advantage of the markets and demand Gucci has created for such designs without having to incur the developmental, promotional and advertising expenses that Gucci has incurred.” In order to determine whether Gucci has proved this allegation, I must examine each mark in turn.
+
+1. Defendants’ Use of the GRG Stripe
+
+50. Seven men’s shoe models designed and manufactured by MFF in 2008 bore a GRG Stripe. Prior to that time, there is no evidence that Guess or any of its Licensees used a GRG Stripe on any other category of products, whether it be apparel, handbags, belts, wallets, or shoes.
+
+51. Ample evidence shows that the GRG Stripe on these shoes was intentionally copied from Gucci. In a November 20, 2007 e-mail discussing the Melrose 2 men’s shoe, Jury Artola — assistant to the head designer of men’s footwear, Paul Vando — instructed MFF’s manufacturer that the striping detail should be “Green/ Red/Green like the GUCCI....” On May 2, 2008, Vando instructed his factory to “please reference the GUCCI sneaker” for the stripe color of one shoe, and that the “webbing whould [sic] be Green/Red/ Green as on [the Gucci] sample.” The very next day, when discussing the Deacon men’s shoe, Vando instructed his sample manufacturer to “follow the Gucci colorway” for the GRG Stripe, and even offered to follow up by sending a Gucci shoe as an example.
+
+52. With respect to the Melrose men’s shoe, Marciano admitted at trial that it was too close to the Gucci shoe that “inspired” it, and that he would have brought it to the attention of the legal department had he seen it beforehand. Marc Fisher, CEO of MFF, made similar admissions, with particular reference to the Mette shoe style.
+
+53. Departing from the standard “trend inspiration” process, the evidence shows that MFF used individual Gucci products to create Guess-branded shoes bearing the GRG Stripe on several occasions. Indeed, in at least one case, MFF included a picture of a Gucci shoe on a “spec sheet” that it sent to its factory, which was intended to describe the shoe in great detail.
+
+54. In November 2008, a Guess-branded shoe with the GRG Stripe came to the attention of Theresa McManus, Senior Intellectual Property Counsel at Guess. In response, she sent an e-mail to MFF’s outside counsel, instructing MFF to stop using the “Gucci red and green ribbon detail found in the Mette style.” Although Gucci had not complained about the footwear, McManus immediately ordered the shoes withdrawn from Guess’s website and stores.
+
+55. Nonetheless, a Gucci investigator was able to purchase a Guess shoe bearing the GRG Stripe on November 29, 2008, more than a week after McManus’s recall instructions went out. Indeed, on December 8, 2008 — more than two weeks after the recall was ordered, MFF’s CFO told McManus that MFF intended to continue production and sale of GRG Stripe shoes at wholesale. The next day, MFF instructed its factory to make a “running change” to a brown-red-brown stripe on the advice of McManus.
+
+56. Despite its apparent agreement to stop using the GRG Stripe on shoes, MFF continued to ship such shoes until February or March 2009. Mark Parsley — Vice President of Sales for MFF’s men’s division — testified that MFF did so because it had not yet received shoes with the modified stripe from its factory, and in order to preserve delicate customer relationships in a highly competitive marketplace.
+
+57. The evidence also shows that third-party retailers were still selling shoes bearing the GRG Stripe in April 2009. McManus was unable to explain why this was so, and testified that Guess left the task of third-party recalls to MFF. There is also evidence indicating that at least three shoes bearing the GRG Stripe were not fully removed from Guess’s own e-commerce site until June 2009.
+
+58. Based on the foregoing, I find that MFF intentionally copied the GRG Stripe from Gucci, and that Guess’s licensing department approved of its use on men’s shoes designed by MFF despite recognizing the GRG Stripe as an identifier of Gucci. Nonetheless, I find that Guess’s recall of products bearing the GRG Stripe design — imperfect as it may have been— when they came to the attention of its legal department is indicative of its good faith. Because MFF made the conscious decision to continue shipping and selling shoes after it was directed to stop doing so, I find that it acted in bad faith.
+
+59. I further find that a brown/ red/brown stripe is visually dissimilar from the GRG Stripe and will not cause confusion, even in the post-sale context. Gucci has produced no evidence of actual confusion or association stemming from Guess’s use of a brown/red/brown stripe, either through anecdotal consumer complaints or survey evidence.
+
+2. Guess’s Use of the Quattro G Pattern
+
+60. The use of all-over logo patterns is common in the fashion industry, especially on handbags. Such logos are often based on initials of the brand. Examples include Fendi, Michael Kors, Givenchy, Coach, and Louis Vuitton.
+
+61. Guess had used several different logos by the early-to mid-2000’s, when the logo trend began to pick up steam. In 2003, in order to capitalize on the logo trend, a designer at Guess began experimenting with multiple G logos, eventually coming up with the standalone Quattro G. There is no evidence that he referenced or copied Gucci or any other company in doing so. Marciano liked the design and personally approved it.
+
+62. Later that year, Guess engaged outside counsel — the Los Angeles firm of Christie, Parker, and Hale — to register the standalone Quattro G design as a trademark in a vertical orientation. Gucci did not oppose or object to Guess’s application for the standalone Quattro G trademark, and Gucci does not contend that the standalone Quattro G infringes any Gucci mark.
+
+63. In late 2003, the same designer used the standalone Quattro G to develop various patterns. Eventually, Guess selected a pattern with the Quattro G rotated 45 degrees clockwise and surrounded by a stitched diamond-shaped border without G’s in the corners. Guess sought a registration for this mark in 2004. However, the accompanying artwork depicted the design in a square shape rather than a diamond, and did not mention that it would be a repeating pattern.
+
+64. Prior to applying for registration, McManus — who had recently graduated from law school — conducted a trademark search, through which she determined that Gucci’s Repeating GG Pattern was registered only for use on jewelry. Other registrations for use on handbags, belts, and footwear had expired as of 2003. It was not until September 2004 that Gucci applied to reactivate its lapsed Repeating GG Pattern registrations, which did not reissue until 2006.
+
+65. Several Guess witnesses testified that they had never seen the Quattro G Pattern used in a square orientation without Gs in the corners, and that Guess never intended that use. Nonetheless, after having seen the Gucci Repeating GG Pattern registration, McManus registered the Quattro G Pattern, which consisted of the standalone mark “bordered by a square composed of a dashed line.” At trial, she gave conflicting reasons for why she did so. First, she testified that the vertical/square orientation was selected in order to achieve maximum protection against infringers. Later, she testified that the orientation of the mark and the orientation of the border was “irrelevant” to the scope of protection afforded by the registration.
+
+66. The evidence shows that the PTO Examiner did not limit his comparative search to repeating square patterns. Instead, as explained by Guess’s expert Gary Krugman, and as indicated by the Examiner’s notes on file at the PTO, he performed a comparative search for registered trademarks bearing a “G” or “GG.” However, the entry in the Official Gazette did not mention Gs in the corner or a diamond-shaped pattern, making it less likely that the application would come to Gucci’s attention.
+
+67. The history of the application in the PTO is also somewhat suspect. Originally, the Examiner rejected the application based on the finding that the Quattro G Pattern was merely ornamental. Months later, Guess argued that the pattern was either inherently distinctive, or that it had acquired distinctiveness through secondary meaning. The Examiner rejected this argument and noted that the pattern as described “does not appear on any of applicant’s evidence.” Three weeks later, however, the Examiner reversed himself and accepted the mark for registration. At trial, Krugman said that he was told by Guess’s counsel the day before his testimony that this reversal was a result of a phone call to the Examiner by Guess’s counsel.
+
+68. Based on all of the foregoing and the other evidence in the record, I find that Guess described the Quattro G Pattern as a square in order to avoid having the Repeating GG Pattern cited against its application, and in order to prevent Gucci from taking notice of the application when it was published for opposition.
+
+69. Guess first provided the Quattro G Pattern fabric to Signal in 2004. According to Suesan Faulkner, Creative Director at Signal, the corner Gs all faced in the same direction and were then noticeably smaller than those in the standalone Quattro G. However, when the pattern was first used in the Spring of 2005 in the “Quatro [sic] G” collection, it was already altered so that every other row of Gs was inverted and turned backwards. After Lori Becker of MFF complained to Guess’s licensing department in early 2005 that she had received both versions of the pattern, she was told to use the modified version, and that the change was made for technical and aesthetic reasons.
+
+70. As can be seen in the “Quatro G” handbag group from 2005, the Quattro G Pattern did not originally feature a two-tone weave or use shading inside the G’s. In order to achieve a two-tone woven canvas look and a brown-beige color scheme, Becker sent clippings of Gucci fabrics to Claser, its Italian fabric agent, in April 2006. When she received “as Gucci” fabrics back from Claser in May 2006, all of the Gs were shaded in.
+
+71. Ringwood, who spearheaded the effort to create the two-tone weave, and who prepared dozens of detailed specifications for women’s shoes using the Quattro G Pattern, testified that she never noticed the shading in the Gs until the legal proceedings began. Likewise, Marc Fisher, who has ultimate responsible for the design of women’s shoes at his namesake company, testified that he never focused on the shading. The testimony of these witnesses on this subject is not credible.
+
+72. After MFF began using the Quattro G Pattern with shading in the Gs, Stephane Labelle of Guess Europe instructed Faulkner to use the same fabric in order to co-ordinate with MFF. Faulkner then used the fabric in several handbag groups.
+
+73. The Quattro G Pattern on a two-tone brown/beige canvas with shading in the Gs was so successful that Guess’s licensing department arranged for Guess’s wallet and belt licensees to begin using the fabric. Ultimately, the Quattro G Pattern — with and without shading — was a hit, and Guess used it across various styles of handbags and shoes for several seasons.
+
+74. The evidence also shows that Guess and its licensees attempted to replicate other features of the Gucci fabric. For example, in September 2006, Ringwood asked Claser to replicate a Gucci embossing technique, and Joy Kramer of Guess’s licensing department asked for a swatch of the resulting fabric to share with the licensees. E-mail records show that Signal was attempting to copy the Gucci brown/ beige color scheme, of which Jason Rimokh — CEO of Signal — testified that he was enamored. MFF tried to replicate other Gucci colors on several occasions in 2008, while both Signal and MFF attempted to mimic coatings used on Gucci fabrics.
+
+75. On several occasions, individuals associated with Guess and its licensees noted that the Quattro G Pattern looked similar to Gucci. For example, Kramer of Guess’s licensing department stated in a June 2006 e-mail noted that a Guess shoe with the Quattro G Pattern with shading “looks so similar to Gucci but it is nice....” Richard Danderline, the former CFO of MFF, wrote to another MFF executive in June 2008 that “the ‘quattro G’ pattern is pretty close to the Gucci pattern.” He also forwarded the design to outside counsel for review, but MFF asserted attorney-client privilege over the response. At his deposition, Danderline admitted that the Quattro G Pattern and the Repeating GG Pattern were similar from “a layman’s perspective.”
+
+76. On the basis of the foregoing and other evidence in the record, I find that Guess intended to copy the upscale look of the Repeating GG Pattern and the Diamond Motif Trade Dress. This was intended to make the customer happy by giving him or her “the feeling of having something ‘designer-ish’ without it being the actual one, just similar.”
+
+3. Guess’s Use of a Square G
+
+77. Guess first sold products bearing the Square G in 1996. Based on the design-to-market time line, this means that it developed the Square G at some point during 1995. Additionally, the evidence shows that Guess has used square-shaped Gs in its name since the 1980s. Nothing in the record shows that Guess ever referenced Gucci in developing this mark.
+
+78. Guess sold more than 4.2 million units of products bearing allegedly-infringing variants of the Square G. Between 1999 and 2001 alone, the mark appeared on approximately fifty handbag style groups offered for sale. According to Guess witnesses, this means that handbags with Square G designs would have been available in nearly every one of Guess’s 1400 then-existing distribution points in the United States.
+
+79. Gucci asserts that a wide variety of square- or rectangle-shaped Gs used by Defendants infringe on the registered Stylized G. After exhaustively reviewing the photos and exemplars of accused products submitted post-trial, I find that only three Guess-branded products bear a Square G that is substantially identical in shape, such that they will convey the same overall commercial impression as the Stylized G: the belt with SKU number 913019, the Misty shoe, and the Scraps shoe. While the Square Gs on the shoes have the word “Guess” on them, I find that a casual observer in a typical post-sale setting is not likely to notice such markings.
+
+80. The remainder of the Square Gs do not convey the same overall commercial impression as the Stylized G for at least two reasons. First, the majority of them are not the same shape as the Stylized G, either because they are elongated, have non-uniform vertical and horizontal line widths, or have a tab extending downward from the top horizontal line. Second, a large percentage of the Square Gs have rhinestones and other adornments not present on the Stylized G.
+
+81. Based on the forgoing and other evidence in the record, I find that Guess did not act in bad faith in the development or sale of products bearing any Square G design. I also find that those Square G’s that are substantially identical in overall appearance to the Stylized G were not intentionally copied from Gucci, but merely happened to use the same minimally-stylized shape as found in the Stylized G.
+
+4. Guess’s Use of the Script Guess Mark
+
+82. It is undisputed that Guess has announced its brand name in a script-font on products since the early 1980s. It is also undisputed that Guess has used a “loop” in the letter “G” at the beginning of the Guess name and/or an underline under the Guess name since the same time. Gucci concedes that the complained-of Script Guess mark, depicted below, is the only allegedly infringing mark, and that it was not used until 2008. Gucci admits that without the “iconic underlining,” the Script Guess would not infringe its trademark Script Gucci.
+
+Allegedly Infringing Script Guess (2008)
+
+83. Faulkner testified that she developed the Script Guess logo by referencing previous script-font Guess logos, as well as 1950s era collegiate-style fonts on various products from other brands. I find this testimony credible.
+
+84. Gucci charges that Marciano’s purchase of the book “Gucci by Gucci” in 2006 contradicts Ms. Faulkner and shows that the Script Guess was copied from the Script Gucci. Marciano, however, testified that he never showed Faulkner the book, or directed anyone to use it as a source of design inspiration. This testimony is also credible.
+
+85. Furthermore, after careful consideration of the two marks, by themselves and on products, on physical specimens and in representative photographs, from various distances and different angles, I find that the two marks are decidedly dissimilar, and that they do not create the same overall commercial impression. Rather, I find that the complained-of Script Guess creates the same overall commercial impression as the non-infringing script-font “Guess” logos that Guess has used for the past three decades.
+
+86. Viewing all the evidence, I find that Guess did not copy Script Gucci — intentionally or otherwise — and that Guess did not intend to deceive consumers as to the source of products bearing the Script Guess. I also note that Gucci introduced no evidence of confusion, either via survey or in any other way.
+
+III. APPLICABLE LAW
+
+1. Gucci seeks injunctive relief and damages for Defendants’ alleged acts of trademark infringement, trademark counterfeiting, trade dress infringement, false designation of origin, trademark dilution and unfair competition, in violation of the Lanham Act and New York law. Gucci further seeks cancellation of Guess’s Quattro G trademark registration (U.S. Trademark Reg. No. 3,308,152) due to abandonment.
+
+2. Guess asserts various affirmative defenses, as well as a counterclaim for cancellation of Gucci’s Trademark Registration for the Stylized G.
+
+A. Trademark Infringement
+
+3. Gucci’s infringement claims relate to its registered Repeating GG Pattern, GRG Stripe, Script Gucci, and Stylized G trademarks (the “Registered Gucci Trademarks”) and its unregistered Diamond Motif Trade Dress.
+
+4. Trademark infringement claims are “analyzed under [a] familiar two-prong test....” This test “looks first to whether the plaintiffs mark is entitled to protection, and second to whether defendant’s use of the mark is likely to cause consumer confusion as to the origin or sponsorship of the defendant’s goods.” The latter inquiry “turns on whether ‘numerous ordinary prudent purchasers are likely to be misled or confused as to the source of the product in question because of the entrance in the marketplace of defendant’s mark.’ ”
+
+5. In order to succeed on its claim of trade dress infringement under Section 43(a) of the Lanham Act, Gucci must demonstrate (i) that the Diamond Motif Trade Dress has acquired distinctiveness through secondary meaning; (ii) that there is a likelihood of confusion between Defendants’ trade dress and Gucci’s; and (iii) that the trade dress is non-functional.
+
+6. “[A] probability of confusion, not a mere possibility, must be found to exist” in order to support a finding of infringement. Generally speaking, establishing that probability is the plaintiffs burden, which means that the defendant typically does not need to disprove a likelihood of confusion.
+
+7. In this case, Gucci’s infringement claims are premised solely on post-sale confusion. This type of confusion occurs when “a potential purchaser, knowing that the public is likely to be confused or deceived by the allegedly infringing product, will choose to purchase that product instead of a genuine one in order to gain the same prestige at a lower price.” In other words, the harm that is addressed by post-sale confusion claims is not a misdirected purchase, but a purchase intended to confuse.
+
+8. As with point-of-sale confusion, a post-sale confusion plaintiff must still establish a likelihood of confusion among an appreciable number of post-sale observers, taking into account all the vagaries involved with post-sale observation. Indeed, the fact that post-sale observers are removed from purchasing decisions makes post-sale trademark cases inherently difficult to prove, speculative, and subject to increased scrutiny.
+
+9. “Courts in the Second Circuit look to all of the traditional Polaroid factors in analyzing claims of post-sale confusion.” These factors are described below:
+
+(1) Strength of the Plaintiffs Mark: “The strength of a particular mark ... is measured by its distinctiveness or the degree to which it indicates the source as origin of the product,” and should be examined in its commercial context. As noted above, minimally stylized “basics” — such as letters or geometrical shapes — will only be entitled to “thin” protection, even if they are “strong” marks.
+
+(2) Similarity of Plaintiff’s and Defendant’s Marks: This is judged by “considering] all factors that could reasonably be expected to be perceived by and remembered” by members of the relevant population. In the post-sale setting, two marks will be considered similar if they create the same overall commercial impression when viewed serially, taking into account the various contexts in which the post-sale casual observer is likely to encounter them.
+
+(3) Competitive Proximity of the Products: This is measured by “the nature of the products themselves and the structure of the relevant market,” and must be viewed in light of the first two Polaroid factors. That is, as the strength of the senior mark increases, and as the junior mark becomes more similar, the competitive proximity decreases.
+
+(4) Bridging the Gap: This factor addresses the question of “whether the two companies are likely to compete directly in the same market.” Where the companies target the same customers, there is no gap to bridge, and this factor leans in favor of the plaintiff.
+
+(5) Actual confusion: Evidence of actual confusion in the post-sale context is particularly difficult to come by. The absence of evidence of actual confusion has never been held to foreclose the availability of a post-sale confusion claim, and survey evidence is often considered to show a likelihood of confusion. Finally, evidence of intentional copying gives rise to a presumption of actual confusion.
+
+(6) Defendant’s Intent/Bad Faith: This factor looks to “whether the defendant adopted its mark with the intention of capitalizing on plaintiffs reputation and goodwill and any confusion between his and the senior user’s product.” Actual or constructive knowledge of the senior user’s mark may be indicative of bad faith.
+
+(7) Quality of Defendant’s Product: This factor is “primarily concerned with whether the inferior quality of a junior user’s goods could jeopardize the senior user’s reputation.” However, this factor is less important in this case because “[t]he concern that casual observers will attribute an infringing product’s low quality to the owner of the mark is reduced in post-sale confusion cases, as such persons are not in a position to examine a product’s construction and materials.”
+
+(8) Sophistication of consumers: While point-of-sale confusion is concerned with confusion among direct purchasers— who, in the fashion market, tend to be sophisticated — post-sale confusion is concerned with confusion among casual observers, who may or may not be purchasers.
+
+None of these factors is dispositive, and the above list is not exhaustive. Instead, they are intended to act “as a useful guide” in determining if there exists a likelihood of confusion.
+
+10. The elements of trademark infringement under New York common law mirror the Lanham Act. However, to succeed on an unfair competition claim, the plaintiff must also show that the defendant acted in bad faith.
+
+B. Trademark Dilution
+
+1. Dilution by Blurring Under Federal Law
+
+11. Only a famous mark — one that is widely recognized by the national consuming public as a designation of source — is afforded protection against blurring under the Lanham Act. In determining whether a mark possesses the requisite degree of recognition to be considered famous, courts consider all relevant factors, including the following four that are enumerated by statute:
+
+the duration, extent, and geographic reach of advertising and publicity of the mark, whether advertised or publicized by the owner or third parties, [2] the amount, volume, and geographic extent of sales of goods or services offered under the mark, [3] the extent of actual recognition of the mark, and [4] whether the mark was registered under the Act of March 3,1881, or the Act of February 20, 1905, or on the principal register.
+
+12. After a showing of fame is made, Gucci must then show the following to succeed on its dilution-by-blurring claims: (1) that Guess has been using the allegedly diluting designs in commerce; (2) that Guess’s use of those designs began after each of Gucci’s marks became famous; and (3) Guess’s use is likely to cause dilution of the authentic Gucci mark by blurring.
+
+13. In considering the third element— likelihood of dilution by blurring — courts consider all the relevant factors, including the following statutory list:
+
+(1) [t]he degree of similarity between the mark or trade name and the famous mark; (2) [t]he degree of inherent or acquired distinctiveness of the famous mark; (3) [t]he extent to which the owner of the famous mark is engaging in substantially exclusive use of the mark; (4) [t]he degree of recognition of the famous mark; (5) [w]hether the user of the mark or trade name intended to create an association with the famous mark; (6) [a]ny actual association between the mark or trade name and the famous mark.
+
+2. Dilution Under New York General Business Law § 360-1
+
+14. To succeed on a claim for trademark dilution under New York General Business Law (“NY GBL”) § 360 — Z, a plaintiff must prove
+
+(1) that it possesses a strong mark, one which has a distinctive quality or has acquired a secondary meaning such that the trade name has become so associated in the public’s mind with the plaintiff that it identifies goods sold by that entity as distinguished from goods sold by others, and (2) a likelihood of dilution by either blurring or tarnishment.
+
+15. Courts look at six factors to determine if there is a likelihood of dilution by blurring: (1) the similarity of the marks; (2) the similarity of the products covered; (3) the sophistication of the consumers; (4) the existence of predatory intent; (5) the renown of the senior mark; and (6) the renown of the junior mark. However, if the court finds that the two marks are not “substantially similar,” the analysis need not proceed any further, and the dilution claim fails.
+
+C. Trademark Counterfeiting
+
+16. The Lanham Act defines a counterfeit mark as “a spurious mark which is identical with, or substantially indistinguishable from, a registered mark.” It prohibits the use of such a mark to sell, distribute, or advertise any goods, or in connection with such uses.
+
+17. As Professor McCarthy notes, counterfeiting is the “hard core” or “first degree” of trademark infringement that seeks to trick the consumer into believing he or she is getting the genuine article, rather than a “colorable imitation.” For this reason, courts have uniformly applied this provision to products that are stitch-for-stitch copies of those of another brand.
+
+D. Trademark Cancellation
+
+18. To succeed on its claim to cancel U.S. Trademark Registration No. 3,308,152 — which covers the Quattro G Pattern — Gucci must show that (1) it has a “real commercial interest” in the cancellation — that is, reason to believe it will be harmed absent relief — and (2) valid grounds for cancellation exist.
+
+19. The first element is satisfied if Gucci can show that it has been using a similar mark on similar products, or that the mark is confusingly similar to its own, earlier-registered mark. For purposes of this case, the second element will be satisfied if Gucci can show that Guess has abandoned the trademark at issue. Abandonment is established by showing that the legal owner of the mark (1) does not use it, and (2) does not intend to use it in the reasonably foreseeable future. Three consecutive years of non-use establishes a prima facie case of abandonment, while proof of intent to resume use must be concrete.
+
+E. Remedies
+
+1. Injunctive Relief
+
+20. A district court has the power to enter injunctive relief “ ‘according to the principles of equity and upon such terms as the court may deem reasonable’ ” for violations of the Lanham Act.
+
+21. Under such principles, a party is entitled to a permanent injunction if it is successful on the merits and if it can “show the absence of an adequate remedy at law and irreparable harm if the relief is not granted.” The court should also consider both the equities between the parties and the public interest, so as to effectively tailor injunctive relief to the specific legal violations at issue in the case. In trademark cases, irreparable harm is presumed once infringement or dilution has been shown, based on the ensuing loss of goodwill and ability to control one’s reputation.
+
+2. Monetary Relief
+
+22. A district court may also order monetary relief to remedy violations of the Lanham Act. In order to obtain monetary relief for actual damages stemming from trademark infringement, the owner of a trademark normally must prove “actual consumer confusion or deception resulting from the violation [of the Lanham Act].” Damages may include lost sales, a reasonable royalty, and harm to brand value.
+
+23. If the plaintiff cannot demonstrate actual consumer confusion, it may nonetheless obtain monetary relief by proving that the alleged infringer acted with an intent to deceive, because such an intent gives rise to a rebuttable presumption of actual confusion. While an intent to copy is distinct from an intent to deceive, it nonetheless creates a presumption of an intent to deceive, unless there is evidence to the contrary.
+
+24. A plaintiff may also be entitled to monetary relief in the form of an accounting of profits — as distinct from actual damages — if the infringer acted with “willful deceptiveness.” Generally speaking, an accounting is only available if the defendant is unjustly enriched, as a rough proxy for actual damages, or to deter further willful infringement. Any one of these justifications is sufficient.
+
+25. Additionally, because an accounting of profits is an equitable remedy, willful deceptiveness, while a necessary factor, must be considered along with many others, including “(1) the degree of certainty that the defendant benefited from the unlawful conduct, (2) [the] availability and adequacy of other remedies, (3) the role of a particular defendant in effectuating the infringement, (4) plaintiffs laches; and (5) plaintiffs unclean hands.” If a court does order an accounting, it should be limited to those profits attributable to the use of the allegedly infringing marks. A finding of willfulness is also required to grant monetary relief for dilution by blurring.
+
+V. DISCUSSION OF INFRINGEMENT CLAIMS
+
+A. The Registered Gucci Marks Are Valid and Entitled to Protection
+
+37. As noted above, all four of the Gucci trademarks at issue have been registered since 2006 at the latest. Accordingly, they are all incontestible as to validity, as well as Gucci’s ownership and exclusive right to use pursuant to 15 U.S.C. §§ 1065 and 1115(b). Indeed, other courts have found that the GRG Stripe and the Repeating GG Pattern are strong, famous marks entitled to the strictest protection the law affords.
+
+B. The Diamond Motif Trade Dress is Entitled to Protection
+
+38. In light of Gucci’s evidence of (1) extensive advertising expenditures; (2) unsolicited media coverage; (3) sales success; and (4) exclusive use of the Diamond Motif Trade Dress for over fifty years, I conclude that the Diamond Motif Trade Dress possesses strong secondary meaning, both with consumers and within the trade. The evidence that Defendants meticulously copied the Diamond Motif Trade Dress further supports this conclusion.
+
+39. The evidence also establishes that the combination of elements comprising the Diamond Motif Trade Dress is not essential to the use or purpose of products on which such elements appear. Accordingly, I conclude that it is not functional.
+
+C. The Polaroid Factors Generally
+
+40. Several of the Polaroid factors are the same with respect to each mark:
+
+(a) Bridging the Gap: The evidence shows that Gucci and Guess do not, as a general proposition, target the same markets. However, part of Gucci’s overall marketing strategy is to target the “aspirational” customer who may be saving up in order to buy his or her first product as an entry ticket into Gucci’s “exclusive club.” Accordingly, I con-elude that this factor does not weigh in favor of either party.
+
+(b) Quality of Defendants’ Products: Having examined exemplars of products bearing each of the accused designs— side by side and serially, from a distance and from up close, for varying periods of time, and by handling them physically— I conclude that they are of sufficiently high quality that Gucci’s reputation in the eyes of the casual observer in the post-sale setting would not be harmed. Therefore, I conclude that this factor weighs in Defendants’ favor.
+
+(c) Sophistication of Consumers: Neither party has presented evidence of the sophistication of the casual observer in the post-sale setting. This factor therefore favors Guess, as Gucci bears the burden of proof.
+
+With these factors in mind, I proceed to a mark-by-mark analysis of the Polaroid factors.
+
+D. There Is a Likelihood of Confusion Between Certain Uses of Guess’s Quattro G Pattern and the Repeating GG Pattern / Diamond Motif Trade Dress
+
+41. Strength of Plaintiff’s Mark: The record evidence of sales, advertising, and the importance of the Repeating GG Pattern and Diamond Motif Trade Dress to Gucci is clear. Accordingly, I conclude that this favor weighs heavily in Gucci’s favor.
+
+42. Similarity of Both Marks: The Quattro G Pattern is visually dissimilar from the Repeating GG Pattern in at least two ways. First, the diamonds are “anchored” by the standalone Quattro G in the former, whereas they are empty in the latter. Second, the former has single Gs (sometimes inverted, sometimes right side up), whereas the latter has a pair of inward facing inverted Gs at each corner. These differences can be seen in the depictions of each pattern below:
+
+43. Nevertheless, the two patterns share some similarities. First, both patterns are set in a diamond formation with dots or dashes connecting the corners. Second, and perhaps most obviously, both patterns feature the letter G. On balance, I conclude that the Quattro G Pattern is visually similar to the Repeating GG pattern, although this factor does not weigh very heavily in Gucci’s favor.
+
+44. When rendered in brown/beige colorways on a two-tone canvas background, and with shading inside the G’s the Quattro G Pattern is more similar to the Diamond Motif Trade Dress than to the Repeating GG Pattern. I conclude that when these circumstances coincide, this factor weighs strongly in Gucci’s favor.
+
+45. Competitive Proximity: As noted above, when the first two factors favor the plaintiff, this one does as well. That is the case with both the Repeating GG Pattern and the Diamond Motif Trade Dress, though more so for the latter than the former.
+
+46. Guess argues that the difference between its target market and that of Gucci — mid-market versus high-end — pushes this factor in its favor. However, in the post-sale context, the target selling market is of decreased importance, as the confusion that exists in the general viewing public is what matters.
+
+47. Gucci has no plans to move into the mid-market with a “diffusion line.” Nonetheless, the idea of such a line is common enough in the fashion industry that consumers unaware of Gucci’s strong position against making one may well believe that the Quattro G Pattern represents such an effort. Based on this and all of the foregoing, I conclude that this factor slightly favors Gucci.
+
+48. Actual Confusion: Gucci has no evidence of actual confusion between the Repeating GG Pattern and the Quattro G Pattern. However, as noted above, the Mantis Survey — which can be considered as evidence of actual confusion — provides some support to find that this factor favors Gucci with respect to the Diamond Motif Trade Dress.
+
+49. Furthermore, as noted in paragraphs 65 through 76 of the Findings of Fact, Guess intentionally copied the Repeating GG Pattern and the Diamond Motif Trade Dress in developing the Quattro G Pattern. Accordingly, Gucci is entitled to a presumption of actual confusion with respect to both. With that presumption in mind, this factor weighs in favor of Gucci.
+
+50. Defendant’s Intent/Bad Faith: The evidence strongly supports the inference that Guess acted in bad faith in copying the Repeating GG Pattern and the Diamond Motif Trade Dress. Additionally, Guess has received numerous cease-and-desist letters in the past, which provides additional evidence to find that this factor favors Gucci.
+
+51. Weighing the Factors: After considering all of the Polaroid factors, I conclude that there is a likelihood of confusion between the Diamond Motif Trade Dress and the Quattro G Pattern, when it is rendered in brown/beige eolorways. To be clear, by “brown/beige colorway,” I refer to eolorways that give the impression of a dark brown design on a lighter beige background, as depicted in paragraph 42 of the Conclusions of Law. Accordingly, Gucci has succeeded on its Lanham Act claims for infringement and false designation of origin, as well as its infringement claim under New York common law. These conclusions apply only to the SKU/color combinations listed in Appendix A.
+
+52. Despite the presumption of confusion that arises from Guess’s intentional copying of the Repeating GG Design and its bad faith, I find that the overall commercial impression transmitted by products bearing the Quattro G Pattern in non-brown/beige colorways is substantially different from Gucci. These products frequently feature bright and/or neon colors, garish or “bling-y” hardware, and generally succeed in communicating the “Guess Girl” image that defendants have been careful to cultivate over the years. Accordingly, the SKUs not listed in Appendix A are unlikely to cause confusion with the Diamond Motif Trade Dress or the Repeating GG pattern, and therefore do not infringe either of those designs.
+
+E. Defendants’ Use of a GRG Stripe Causes a Likelihood of Confusion with Gucci’s GRG Stripe
+
+53. Gucci has submitted evidence that MFF knowingly and in bad faith copied Gucci’s GRG Stripe. This conduct was so egregious that a full Polaroid analysis is not necessary to conclude that there is a likelihood of confusion with Gucci’s GRG Stripe. Accordingly, I conclude that Gucci has succeeded on its infringement claims under the Lanham Act and New York common law, as well as its false designation of origin claim, as those claims relate to this mark. Nonetheless, a few additional conclusions are required.
+
+54. Stripe patterns are “basics” that every brand must be able to use freely in order to compete — excepting, of course, those instances where a particular configuration has come to be identified with a particular brand. The GRG Stripe is one such configuration, and should be given strong protection. However, that protection must be limited to a narrow range. For example, it covers all reds and all greens, but does not cover a central stripe that is yellow instead of red, or outer stripes that are brown instead of green.
+
+55. Based on these limitations, and the fact that alternative color combinations are visually dissimilar from Gucci’s GRG Stripe, I conclude as a matter of law that the defendants’ use of stripes causes a likelihood of confusion with respect to only those SKUs in Appendix B. The findings of intentional copying and bad faith also apply only to these SKUs.
+
+F. Guess’s Use of Certain Block G Designs Causes a Likelihood of Confusion With Gucci’s Stylized G
+
+56. Strength of Plaintiff’s Mark: I have already concluded that the distinctiveness of the Stylized G is incontestible. The conclusion that a mark is distinctive, however, does not ineluctably lead to the conclusion that it is “strong.” Instead, with “basic” marks like letters and geometrical shapes, the protection must be narrow and specific, so as to preserve the ability of various brands to compete in the marketplace and thereby benefit the customer.
+
+57. Of all of the marks at issue, the Stylized G accounts for the fewest sales dollars, and has been the subject of the least amount of advertising. Furthermore, the primary use of the mark in the post-Tom Ford era — on the lining of Gucci handbags — is only minimally relevant to post-sale confusion, if relevant at all. Gucci has failed to conduct a survey to test for consumer recognition of the Stylized G. In light of these considerations and the findings of fact above, I conclude that the Stylized G is a weak mark.
+
+58. Similarity of the Marks: I have already found that, except for the belt with SKU 913019, the “Misty” shoe, and the “Scraps” shoe, Guess’s Square Gs are not similar to Gucci’s Stylized G. Accordingly, this factor weighs in Guess’s favor.
+
+59. Competitive Proximity: Because the Stylized G is a weak mark, and since Guess’s Square Gs are generally dissimilar to it, this factor weighs in Guess’s favor.
+
+60. Actual Confusion: Gucci produced no evidence of actual confusion, whether anecdotal or in survey form.
+
+61. Defendant’s Intent/Bad Faith: I have already found that Guess did not intentionally copy Gucci, or act in bad faith in adopting the Square G. Accordingly, this factor favors Guess.
+
+62. Weighing the Factors: Based on all the foregoing, I conclude that Guess’s use of the Square G on the products listed in paragraph 79 of the Findings of Fact is likely to cause post-sale confusion. Gucci has successfully proven its Lanham Act infringement and false designation claims, as well as its common law infringement claim related the Square G only as to these products.
+
+G. Guess’s Use of the Script Guess Does Not Cause a Likelihood of Confusion
+
+63. Strength of Plaintiffs Mark: In light of the fact that the use of script fonts is extremely common in the fashion industry, the only source-identifying properties of the Script Gucci mark stem from the fact that it spells out the word “Gucci.” Additionally, Gucci concedes that the eomplained-of Script Guess without the underline would not be infringing. This demonstrates the “thinness” of the mark, and shows that this factor decidedly favors Guess.
+
+64. Similarity of the Marks: I have already found that the Script Guess is not similar to the Script Gucci mark, and that it creates a distinct commercial impression in line with the “Guess Girl” aesthetic. Accordingly, I conclude that this factor favors Guess.
+
+65. Competitive Proximity: For the same reasons as noted in my discussion of the Stylized G, this factor favors Guess.
+
+66. Actual Confusion: Gucci has produced no evidence of any kind that any casual observer in the post-sale setting has ever confused the Script Guess mark for the Script Gucci mark.
+
+67. Defendant’s Intent/Bad Faith: I have already found that Guess did not act in bad faith in creating or using the Script Guess.
+
+68. Weighing the Factors: Considering all the Polaroid factors and all the record evidence, I find that the Script Guess causes no likelihood of confusion whatsoever. Accordingly, Gucci’s claims for infringement and false designation of origin under the Lanham Act and common law fail.
+
+H. Summary of Infringement Conclusions
+
+69. Gucci has proven that Defendants have infringed its trademarks under the Lanham Act and New York common law as follows:
+
+Repeating GG Pattem/Diamond Motif Trade Dress: Guess’s use of the Quattro G Pattern in brown/beige colorways on the SKUs listed in Appendix A infringes on these marks.
+
+GRG Stripe: Guess’s use of a GRG Stripe on the SKUs noted in Appendix B infringes on Gucci’s GRG Stripe trademark.
+
+Stylized G: Guess’s use of its Square G on the belt with SKU 913019, the “Misty” shoe, and the “Scraps” shoe infringe on Gucci’s Stylized G trademark. Script Gucci: No Guess-branded products infringe on the Script Gucci trademark.
+
+VI. DISCUSSION OF DILUTION CLAIMS
+
+70. The Quattro G Pattern — including executions on a two-tone canvas in brown/ beige colorways — and the Square G were first used in commerce before October 6, 2006. Accordingly, for purposes of dilution, they are assessed under the “actual dilution” standard with respect to Gucci’s claims for monetary relief. As Gucci has no evidence of actual dilution, I granted Defendants summary judgment on those portions of Gucci’s dilution claims that related to monetary relief.
+
+71. Because Defendants first used the Script Guess and the GRG Stripe in commerce in 2008, the less stringent “likelihood of dilution” standard of the TDRA applies to them.
+
+A. Guess’s Use of the Quattro G Pattern Gives Rise to a Likelihood of Dilution by Blurring
+
+72. Degree of Similarity: For the reasons stated in paragraphs 42 through 44 above, this factor favors Gucci.
+
+73. Distinctiveness of the Mark: Based on the discussion in paragraph 44 and the Findings of Fact, I conclude that the Repeating GG Pattern and the Diamond Motif Trade dress are both highly distinctive.
+
+74. Exclusive Use of the Mark: The evidence supports the conclusion that Gucci is the sole lawful user of the Repeating GG Pattern and the Diamond Motif Trade Dress, and that it has aggressively pursued counterfeiters using both either of those marks.
+
+75. Degree of Recognition of the Mark: As noted in the Findings of Fact, Gucci has spent millions of dollars promoting the Repeating GG Pattern and the Diamond Motif Trade Dress, and sold billions of dollars worth of products bearing both.
+
+76. Intent to Create Association with the Mark: The evidence shows that Guess intentionally copied the Diamond Motif Trade Dress in developing the Quattro G Pattern in brown/beige colorways. This leads strongly to the conclusion that Guess intended to create an association with the Diamond Motif Trade Dress in the minds of consumers.
+
+77. Actual Association with the Mark: The comments on the Macys.com website for the Melrose 2 sneaker show that Guess’s use of the Quattro G Pattern in brown/beige colorways has caused some actual dilution of the Repeating GG Pattern’s ability to act solely as a Gucci identifier. However, this evidence is weak, as the authorship of the comments is unknown, and the comments do not conclusively refer to the Quattro G Pattern in drawing comparisons to Gucci. Accordingly, I conclude that this factor favors Gucci, but only slightly.
+
+78. Weighing the Factors: After considering all the factors noted above, I conclude that Guess’s use of the Quattro G Pattern in brown/beige colorways is likely to cause dilution by blurring with respect to Gucci’s Diamond Motif Trade Dress. As in the infringement context, however, I conclude that the products executed in other colorways are sufficiently visually distinct such that they will not give rise to an association with Gucci, and are therefore not likely to cause any dilution.
+
+B. Guess’s Use of the GRG Stripe Gives Rise to a Likelihood of Dilution by Blurring
+
+79. Degree of Similarity: The GRG Stripes used by Gucci and Guess are substantially identical; therefore, this factor favors Gucci. However, for the reasons noted in paragraphs 53 through 55 of the Conclusions of Law, alternatively colored stripe combinations are sufficiently visually dissimilar from the GRG Stripe that they cannot dilute it.
+
+80. Distinctiveness of the Mark: Guess’s witnesses admit that the GRG Stripe is a strong mark and a clear identifier of Gucci. Furthermore, it is incontestible as to distinctiveness, as it has been registered for more than five years.
+
+81. Exclusive Use of the Mark: Vando testified that he saw the other companies — including Nike and Dolce & Gabbana — using green/red/green stripes in the marketplace. Fisher testified similarly. However, neither was able to present a physical example of such a shoe, or any other evidence that such use pre-dated the filing of this case. I therefore conclude that this factor does not weigh in favor of any of the parties.
+
+82. Degree of Recognition of the Mark: Based on Gucci’s extensive advertisement and sale of product bearing the GRG Stripe over several decades, as well as its substantial unpaid editorial coverage, this factor favors Gucci.
+
+83. Intent to Create Association with the Mark: I have already found that MFF intentionally copied the GRG Stripe from Gucci. Therefore, it is reasonable to infer that MFF intended to create an association with Gucci. It is also undisputed that Guess’s licensing department approved the shoes for production, despite recognizing the GRG Stripe as an indicator of Gucci. While Guess’s good faith can be seen in the later intervention and recall put in place by its legal department, that does not negate the inference that the larger Guess entity intended to create an association with the Gucci GRG Stripe by approving the shoes for manufacture in the first instance. Accordingly, I conclude that this factor favors Gucci.
+
+84. Actual Association with the Mark: The presumption of actual dilution is triggered here, as the marks are identical. This also implies that there a presumption of actual association. Accordingly, this factor favors Gucci as well.
+
+85. Weighing the Factors: Considering all the factors — especially the clear evidence of intentional copying, the substantially identical appearance of the marks, and the degree of recognition that the GRG Stripe has as a Gucci identifier — I conclude that there is a strong likelihood of dilution by blurring caused by Guess’s use of the GRG Stripe. For the reasons already noted, this finding is limited to those SKUs listed in Appendix B.
+
+C. Defendants’ Use of the Square G and the Script Guess Is Not Likely to Cause Dilution by Blurring
+
+86. As noted in the Findings of Fact above, Gucci’s Stylized G was not famous when Guess introduced its Square G. Accordingly, Gucci’s Lanham Act dilution claims with respect to the Square G fail ab initio. Its claim under N.Y. GBL § 360 — Z also fails, as the evidence does not support the conclusion that the Stylized G is a strong mark.
+
+87. As in the infringement context, a court need not rigidly analyze every one of the non-exclusive factors to determine whether a likelihood of dilution exists, but may give greater or lesser weight to those factors that it deems more or less important in any given context. Heré, I have already found that the Script Guess is visually dissimilar from the Script Gucci mark, and that it creates a different overall commercial impression. I hold that these two findings alone support the ultimate conclusion that the Script Guess is not likely to dilute the Script Gucci by blurring, either under the Lanham Act or N.Y. GBL § 360 — Z.
+
+D. Summary of Dilution Conclusions
+
+88. Based on the foregoing, I find that Gucci has proven its dilution claims under the Lanham Act and N.Y. GBL § 360 — Z as follows:
+
+Repeating GG Pattem/Diamond Motif Trade Dress: Defendants’ use of the Quattro G Pattern in brown/beige colorways — limited to the SKUs in Appendix A — is likely to cause dilution of the Diamond Motif Trade Dress by blurring. GRG Stripe: MFF’s use of a GRG Stripe identical to the Gucci mark is likely to cause dilution by blurring. This finding also applies to Guess, by dint of its approval of products bearing the diluting mark. However, the use of stripes in any other colors is not likely to cause dilution by blurring.
+
+Stylized G: Defendants’ use of the Square G commenced before this mark became famous. Accordingly, as a matter of law, it cannot dilute this mark under the Lanham Act. Because this mark is not a strong one, Gucci’s dilution claim under N.Y. GBL § 360 — Z also fails. Script Gucci: Guess’s use of the visually dissimilar Script Guess mark is not likely to dilute this mark by blurring, under either the Lanham Act or N.Y. GBL § 360-Z.
+
+X. CONCLUSION
+
+111. Over the past three years, the parties have put in countless hours and spent untold sums of money, all in the service of fashion — what Oscar Wilde aptly called “a form of ugliness so intolerable that we have to alter it every six months.” With the instant disputes now resolved, and with Gucci’s entitlement to the relief noted above, it is my hope that this ugliness will be limited to the runway and shopping floor, rather than spilling over into the courts.
+
+112. The parties’ Motions for Relief from a Judgment or Order under Rule 60(a) are granted to the extent that this Amended Opinion and Order addresses the concerns raised within those motions. The Clerk of the Court is directed to close the following motions: Docket Nos. 255, 256, and 257.
+
+SO ORDERED.
+
+APPENDIX A: INFRINGING PRODUCTS FROM GUESS AND ALL NON-FOOTWEAR LICENSEES BY SKU

@@ -1,5 +1,5 @@
 /**
- * Hand-written context for the five showcase cases: what the court decided and what the taste
+ * Hand-written context for the showcase cases (current and former):what the court decided and what the taste
  * data shows. Plain English, brand names instead of "senior"/"junior". Facts verified against the
  * opinions on 2026-10-24/25 (see backend/eval/cases_candidates.csv for sources). Live runs have no
  * entry here and render without the court line.
@@ -62,13 +62,58 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     twist: 'Same shoppers, same shelves, and the court agreed.',
     outcome: 'older brand won',
   },
+  gucci_guess: {
+    short: 'Gucci v. Guess',
+    brands: ['Gucci', 'Guess'],
+    court:
+      'The court held that mid-market Guess and high-end Gucci still meet on the street, where a passer-by never sees the price tag, and found infringement for the brown/beige Quattro G and the green-red-green stripe but not for the Script Guess.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Different price points, same street.',
+    outcome: 'mixed',
+  },
+  tiffany_costco: {
+    short: 'Tiffany v. Costco',
+    brands: ['Tiffany', 'Costco ‘Tiffany setting’ rings'],
+    court:
+      'The Second Circuit agreed the two stores’ engagement rings already compete, but threw out the $21 million judgment and sent the case to trial because a jury could find Costco’s ring buyers careful enough not to be confused.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Same product, but are the buyers too careful to be fooled?',
+    outcome: 'mixed',
+  },
+  makers_mark_cuervo: {
+    short: 'Maker’s Mark v. Cuervo',
+    brands: ['Maker’s Mark', 'Jose Cuervo Reserva de la Familia'],
+    court:
+      'The Sixth Circuit called a $24 bourbon and a $100 tequila only somewhat related and gave that and the shared sales channels little weight, then affirmed infringement on the strength and similarity of the red dripping wax seal.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'The goods barely mattered; the wax did.',
+    outcome: 'older brand won',
+  },
+  adidas_skechers: {
+    short: 'adidas v. Skechers',
+    brands: ['adidas', 'Skechers'],
+    court:
+      'The Ninth Circuit found the sneakers so closely related that buyers would assume one source and upheld the injunction against the Onix copy of the Stan Smith, but lifted the Cross Court injunction for lack of evidence of irreparable harm.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'Same goods, same buyers, and still only half a win.',
+    outcome: 'mixed',
+  },
+  caterpillar_disney: {
+    short: 'Caterpillar v. Disney',
+    brands: ['Caterpillar', 'George of the Jungle 2 (Disney)'],
+    court:
+      'The court saw no competition between bulldozers and a children’s film, doubted heavy-equipment buyers would be swayed by the movie, and refused to stop the video release.',
+    data: 'DATA PENDING: computed after the run',
+    twist: 'A famous mark, but no shared customers.',
+    outcome: 'newcomer won',
+  },
 }
 
 export function caseStory(slug: string | undefined | null): CaseStory | undefined {
   return slug ? CASE_STORIES[slug] : undefined
 }
 
-/** Display names for sample documents that are not one of the five showcase cases. */
+/** Display names for sample documents that are not one of the showcase cases. */
 const SAMPLE_NAMES: Record<string, string> = {
   adidas_thom_browne: 'Adidas v. Thom Browne',
   taco_tuesday: 'Taco Tuesday',
