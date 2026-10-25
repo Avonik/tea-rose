@@ -85,6 +85,8 @@ def _code_section(sid: str, findings: list[FactorFinding], limitations: list[str
 def read_section(read: PreliminaryRead, read_line: str) -> str:
     """Code-written "Preliminary read" section from the PreliminaryRead fields."""
     parts = [read_line, read.rationale.strip()]
+    if read.best_defence.strip():
+        parts.append(f"**Strongest defence**: {read.best_defence.strip()}")
     if read.flip_risks:
         parts.append("**What could change it**\n" + "\n".join(f"- {x}" for x in read.flip_risks))
     parts.append(f"_{NOT_A_PREDICTION}_")

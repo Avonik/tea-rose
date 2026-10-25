@@ -49,9 +49,14 @@ SCRIPTED_READ = PreliminaryRead(
                    basis="document", finding="Not alleged."),
         ReadFactor(factor="buyer_care", lean="insufficient_data", confidence="low",
                    basis="document", finding="Not alleged."),
+        ReadFactor(factor="protectability", lean="favors_senior", confidence="medium",
+                   basis="document", finding="The senior trade dress is registered."),
+        ReadFactor(factor="mark_strength", lean="favors_senior", confidence="medium",
+                   basis="document", finding="A long-used, widely known mark."),
         ReadFactor(factor="defences", lean="favors_junior", confidence="medium",
                    basis="document", finding="Parody is pleaded as a defence."),
     ],
+    best_defence="Parody: the toy comments on the senior label rather than naming its source.",
     data_factors_used=["relatedness_of_goods"],
 )  # fmt: skip
 

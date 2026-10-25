@@ -1,10 +1,12 @@
 """assess: document + extraction + data findings -> PreliminaryRead (one structured call).
 
 The model reads the DOCUMENT for the factors taste data cannot see (similarity of marks,
-intent, actual confusion, buyer care, defences) and weighs them with the interpret findings
-into a preliminary read. Code guardrails: the fixed "not a prediction" sentence, letters are
-low confidence, data factors must name real findings, outcome words and percentages are
-flagged. A failure leaves the memo without a read; it never ends the run.
+intent, actual confusion, buyer care, protectability, mark strength, defences) and weighs
+them with the interpret findings into a preliminary read, steelmanning the defence. Code
+guardrails: the fixed "not a prediction" sentence, letters and one-sided inputs (plaintiff's
+pleading only) are low confidence, a one-sided rationale says the defendant's side is not in
+the record, data factors must name real findings, outcome words and percentages are flagged.
+A failure leaves the memo without a read; it never ends the run.
 """
 
 from __future__ import annotations
@@ -37,9 +39,10 @@ from tearose.schemas import (
 from tearose.scoring.read_line import CONFIDENCE_WORD, has_forbidden, lean_target
 
 # the document goes to the prompt up to this many characters; the extraction covers the rest
-MAX_DOC_CHARS = 40_000
+MAX_DOC_CHARS = 160_000  # both pleadings in full; a 51k complaint was being cut at 40k
 HOLDING_NOTE = "the court's holding was disregarded"
 LETTER_TYPES = ("cease_and_desist",)
+ONE_SIDED_NOTE = "The defendant's side is not in the record."
 
 
 def read_title(read: PreliminaryRead, senior: str | None, junior: str | None) -> str:
@@ -108,6 +111,17 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
             "Letter, not a pleading: confidence lowered to low", f"model said {read.confidence}"
         )
         update["confidence"] = "low"
+    if read.one_sided_input:
+        if read.confidence != "low" and "confidence" not in update:
+            await ev.warning(
+                "Plaintiff's pleading only: confidence lowered to low",
+                f"model said {read.confidence}",
+            )
+            update["confidence"] = "low"
+        if "not in the record" not in read.rationale.lower():
+            update["rationale"] = f"{read.rationale.rstrip()} {ONE_SIDED_NOTE}"
+    if not read.best_defence.strip():
+        await ev.warning("No best defence stated")
     known = {f.factor for f in findings}
     used = [f for f in read.data_factors_used if f in known]
     if used != read.data_factors_used:
@@ -119,7 +133,7 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
         await ev.warning("Read factors not addressed", ", ".join(missing))
     if not read.flip_risks:
         await ev.warning("No flip risks listed")
-    prose = [read.turns_on, read.rationale, *read.flip_risks]
+    prose = [read.turns_on, read.rationale, read.best_defence, *read.flip_risks]
     prose += [r.finding for r in read.read_factors]
     if any(has_forbidden(p) for p in prose):
         await ev.warning(

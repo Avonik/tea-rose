@@ -253,6 +253,8 @@ READ_FACTORS: tuple[str, ...] = (
     "intent",
     "actual_confusion",
     "buyer_care",
+    "protectability",  # registration, distinctiveness, secondary meaning, functionality
+    "mark_strength",  # conceptual and commercial strength of the asserted mark
     "defences",
     "other",
 )
@@ -266,7 +268,8 @@ ReadLean = Literal["older_brand", "newcomer", "too_close_to_call"]
 class ReadFactor(BaseModel):
     """One factor the taste data cannot see, assessed from the document alone."""
 
-    # similarity_of_marks | intent | actual_confusion | buyer_care | defences | other
+    # similarity_of_marks | intent | actual_confusion | buyer_care | protectability |
+    # mark_strength | defences | other
     factor: str
     lean: FactorLean
     confidence: Confidence
@@ -285,6 +288,13 @@ class PreliminaryRead(BaseModel):
     turns_on: str  # one sentence: what the case most likely turns on
     rationale: str  # 3-6 sentences; the data half and the reading half clearly separated
     flip_risks: list[str] = Field(default_factory=list)  # one sentence each: what could flip it
+    # 1-2 sentences: the strongest defence the facts allow, even if none has been filed, and
+    # (when an answer/counterclaim is in the record) the document it comes from. "" = older runs
+    best_defence: str = ""
+    # True when the input is only the plaintiff's pleading (no answer, counterclaim or
+    # defendant statement): confidence is capped at low and the rationale says so in code.
+    # Default False only so runs stored before the field existed load unchanged.
+    one_sided_input: bool = False
     read_factors: list[ReadFactor] = Field(default_factory=list)
     data_factors_used: list[str] = Field(default_factory=list)  # factor ids of interpret findings
     not_a_prediction: str = NOT_A_PREDICTION  # fixed; code resets it

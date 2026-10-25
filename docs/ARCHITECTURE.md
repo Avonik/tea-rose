@@ -92,14 +92,28 @@ and weighs them with the data-backed findings into `Memo.preliminary_read`
 (`PreliminaryRead`, optional so stored runs still load):
 
 - `lean`: `older_brand` | `newcomer` | `too_close_to_call`; `confidence`: high | medium | low.
+  `too_close_to_call` is required when the deciding factor is a defence or protectability
+  question the document cannot resolve (parody / expressive use, functionality, lack of
+  secondary meaning, genericness) and the plaintiff's own allegations do not dispose of it;
+  the rationale still says which side has the better of the remaining factors.
 - `turns_on`: one sentence naming the one or two factors the case most likely turns on.
 - `rationale`: 3-6 sentences, the audience-data half and the pleading half separated.
 - `flip_risks`: one sentence each (defences pleaded, a factor a survey would change, a
   stand-in measured through a nearest category, ...).
+- `best_defence`: 1-2 sentences, the strongest defence the facts allow even when the
+  defendant has filed nothing (steelman), weighed in the read; when an answer or
+  counterclaim is in the input, each defence names the document it comes from. `""` on
+  runs stored before the field existed.
+- `one_sided_input`: `true` when the input is only the plaintiff's pleading (no answer,
+  counterclaim or defendant statement). Code then caps `confidence` at `low` and, if the
+  rationale does not already say so, appends "The defendant's side is not in the record."
+  Defaults to `false` so stored runs load unchanged.
 - `read_factors: list[ReadFactor]` (`factor`, `lean`, `confidence`, `basis` document|data,
   `finding`) for `similarity_of_marks`, `intent`, `actual_confusion`, `buyer_care`,
-  `defences` (parody / expressive use / fair use / other) and one free `other`. Each comes
-  ONLY from the document with a short quote or cite; a silent document gives "Not alleged."
+  `protectability` (registration, distinctiveness, secondary meaning, functionality),
+  `mark_strength`, `defences` (parody / expressive use / fair use / other) and one free
+  `other`. Each comes ONLY from the document with a short quote or cite; a silent document
+  gives "Not alleged."
 - `data_factors_used`: factor ids of the interpret findings; the data factors come only from
   the findings, never re-derived.
 - `not_a_prediction`: fixed, reset in code: "A preliminary read on the pleading and the
@@ -115,10 +129,12 @@ from the facts as pleaded; the court's holding was disregarded".
 `Memo.read_line` is one sentence computed in code (`scoring/read_line.py`,
 `synthesize_read_line`) from the read's lean, confidence and the object of "turns on", with
 the brand display names of the bottom line: "Preliminary read: leans toward Jack Daniel's,
-moderate confidence; turns on the parody defence." A clause or name carrying an outcome word
+moderate confidence; turns on the parody defence." With `one_sided_input` it ends "...;
+the defendant's side is not in the record." A clause or name carrying an outcome word
 or a percentage is dropped (names fall back to "the older brand" / "the newcomer"). The
 memo gets a section `read` ("Preliminary read") first after the summary: the model may
-paraphrase but not change lean, confidence or flip risks; when the section does not state the
+paraphrase but not change lean, confidence or flip risks (the code-written section adds
+"**Strongest defence**: ..." from `best_defence`); when the section does not state the
 lean ("toward <name>" / "too close to call"), code prepends `read_line`; the fixed sentence
 is always appended. Without a read (older runs, assess failed) there is no `read` section and
 `read_line` is `""`.

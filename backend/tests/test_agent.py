@@ -26,6 +26,7 @@ from tearose.config import BACKEND_DIR
 from tearose.qloo.fixtures import FixtureClient
 from tearose.schemas import (
     NOT_A_PREDICTION,
+    READ_FACTORS,
     AnalysisResult,
     Evidence,
     Extraction,
@@ -286,9 +287,15 @@ PRELIM_READ: dict[str, Any] = {
          "basis": "document", "finding": "Not alleged."},
         {"factor": "buyer_care", "lean": "insufficient_data", "confidence": "low",
          "basis": "document", "finding": "Not alleged."},
+        {"factor": "protectability", "lean": "favors_senior", "confidence": "medium",
+         "basis": "document", "finding": "The trade dress is used \"since 1866\"."},
+        {"factor": "mark_strength", "lean": "favors_senior", "confidence": "medium",
+         "basis": "document", "finding": "A long-used whiskey mark; strength is not contested."},
         {"factor": "defences", "lean": "favors_junior", "confidence": "medium",
          "basis": "document", "finding": "Parody is pleaded."},
     ],
+    "best_defence": "Parody: the toy comments on the whiskey label, as the answer pleads.",
+    "one_sided_input": False,
     "data_factors_used": ["relatedness_of_goods", "fame"],
     "not_a_prediction": "model text that code replaces",
 }  # fmt: skip
@@ -1393,6 +1400,91 @@ async def test_assess_truncates_long_documents(client: FixtureClient) -> None:
     assert f"truncated at {assess.MAX_DOC_CHARS:,}" in prompt
     assert "Count II alleges dilution by tarnishment" in prompt  # extraction key quotes
     assert any(e.title == "Document truncated for the preliminary read" for e in events)
+
+
+async def test_assess_one_sided_input_caps_confidence_and_says_so(client: FixtureClient) -> None:
+    scripted = read_with(
+        lean="older_brand",
+        confidence="medium",
+        one_sided_input=True,
+        rationale="The audience data is mixed. On the pleading, the label is imitated.",
+        best_defence="The imitated element may be common in the trade and not protectable.",
+    )
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [scripted]})
+    ctx, events = make_ctx(client, model)
+    state = assess_state(TEXT)
+    out = await assess.run(state, ctx)
+    read: PreliminaryRead = out["preliminary_read"]
+    assert read.one_sided_input and read.confidence == "low"
+    assert read.rationale.endswith(assess.ONE_SIDED_NOTE)
+    warnings = [e.title for e in events if e.type == "warning"]
+    assert "Plaintiff's pleading only: confidence lowered to low" in warnings
+    line = synthesize_read_line(read, "Jack Daniel's", "VIP Products")
+    assert line == (
+        "Preliminary read: leans toward Jack Daniel's, low confidence; turns on the parody "
+        "defence; the defendant's side is not in the record."
+    )
+    # the memo's read section carries the steelmanned defence
+    state.update(out)
+    m = await run_memo(client, state, MEMO_DRAFT)
+    sec = next(s for s in m.sections if s.id == "read")
+    assert "**Strongest defence**: The imitated element may be common" in sec.markdown
+    assert m.read_line == line
+
+
+async def test_assess_one_sided_keeps_a_rationale_that_already_says_so(
+    client: FixtureClient,
+) -> None:
+    rationale = "The audience data is mixed. The defendant's side is not in the record yet."
+    scripted = read_with(confidence="low", one_sided_input=True, rationale=rationale)
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [scripted]})
+    ctx, events = make_ctx(client, model)
+    read = (await assess.run(assess_state(TEXT), ctx))["preliminary_read"]
+    assert read.rationale == rationale
+    assert not [e for e in events if e.type == "warning"]
+
+
+async def test_assess_two_sided_input_and_missing_best_defence(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [read_with(best_defence="")]})
+    ctx, events = make_ctx(client, model)
+    read = (await assess.run(assess_state(PARODY_TEXT), ctx))["preliminary_read"]
+    assert not read.one_sided_input and read.confidence == "medium"
+    assert "not in the record" not in synthesize_read_line(read, "A", "B")
+    assert [e.title for e in events if e.type == "warning"] == ["No best defence stated"]
+
+
+async def test_assess_warns_when_new_read_factors_are_missing(client: FixtureClient) -> None:
+    factors = [f for f in PRELIM_READ["read_factors"]
+               if f["factor"] not in ("protectability", "mark_strength")]  # fmt: skip
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [read_with(read_factors=factors)]})
+    ctx, events = make_ctx(client, model)
+    await assess.run(assess_state(TEXT), ctx)
+    missing = next(e for e in events if e.title == "Read factors not addressed")
+    assert missing.detail == "protectability, mark_strength"
+
+
+def test_assess_prompt_rules_are_generic() -> None:
+    from tearose.agent.nodes.base import load_prompt
+
+    prompt = load_prompt("assess")
+    for needle in ("`protectability`", "`mark_strength`", "`best_defence`",
+                   "`one_sided_input: true`", "secondary meaning", "functionality",
+                   "`too_close_to_call` is required"):  # fmt: skip
+        assert needle in prompt
+    # the rules are not tuned to any evaluated case: no case, brand or outcome hints
+    banned = r"jack daniel|spaniel|vip|adidas|thom browne|bang|monster|reign"
+    assert not re.search(banned, prompt, re.I)
+    assert READ_FACTORS == (
+        "similarity_of_marks", "intent", "actual_confusion", "buyer_care", "protectability",
+        "mark_strength", "defences", "other",
+    )  # fmt: skip
+
+
+def test_stored_read_without_new_fields_still_loads() -> None:
+    old = {k: v for k, v in PRELIM_READ.items() if k not in ("best_defence", "one_sided_input")}
+    read = PreliminaryRead.model_validate(old)
+    assert read.best_defence == "" and read.one_sided_input is False
+    assert synthesize_read_line(read, "A", "B").endswith("turns on the parody defence.")
 
 
 def test_stored_memo_without_read_still_loads() -> None:

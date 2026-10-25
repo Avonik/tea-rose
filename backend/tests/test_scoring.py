@@ -892,6 +892,20 @@ def test_read_line_examples() -> None:
     assert synthesize_read_line(None, "A", "B") == ""
 
 
+def test_read_line_carries_the_one_sided_caveat() -> None:
+    read = _read("too_close_to_call", "low", "The case turns on secondary meaning.")
+    read = read.model_copy(update={"one_sided_input": True})
+    assert synthesize_read_line(read, "A", "B") == (
+        "Preliminary read: too close to call, low confidence; turns on secondary meaning; "
+        "the defendant's side is not in the record."
+    )
+    read = _read("newcomer", "low", "No clause here.").model_copy(update={"one_sided_input": True})
+    assert synthesize_read_line(read, None, None) == (
+        "Preliminary read: leans toward the newcomer, low confidence; the defendant's side is "
+        "not in the record."
+    )
+
+
 FORBIDDEN_WORDS = re.compile(r"probability|predict|verdict|\bwin|\blose|%", re.I)
 
 

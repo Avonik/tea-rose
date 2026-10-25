@@ -1,7 +1,8 @@
 """The memo's one-sentence preliminary read, computed in code from a PreliminaryRead.
 
 "Preliminary read: leans toward Jack Daniel's, moderate confidence; turns on the parody
-defence." The lean and confidence come from the model's structured fields; the sentence is
+defence." A read on the plaintiff's pleading alone ends "...; the defendant's side is not in
+the record." The lean and confidence come from the model's structured fields; the sentence is
 built here so it can never carry an outcome word ("win", "verdict", ...) or a percentage.
 """
 
@@ -14,6 +15,8 @@ from tearose.schemas import PreliminaryRead
 SENIOR_ROLE = "the older brand"
 JUNIOR_ROLE = "the newcomer"
 CONFIDENCE_WORD = {"high": "high", "medium": "moderate", "low": "low"}
+# appended when the input is the plaintiff's pleading only
+ONE_SIDED_CAVEAT = "the defendant's side is not in the record"
 
 # words a preliminary read must never carry (it is not a prediction or a probability)
 FORBIDDEN = re.compile(
@@ -59,7 +62,8 @@ def synthesize_read_line(
     senior_name: str | None = None,
     junior_name: str | None = None,
 ) -> str:
-    """One sentence from the read's lean, confidence and turns_on; "" without a read."""
+    """One sentence from the read's lean, confidence and turns_on (plus the one-sided caveat
+    when only the plaintiff's pleading was read); "" without a read."""
     if read is None:
         return ""
     target = lean_target(read, senior_name, junior_name)
@@ -68,4 +72,6 @@ def synthesize_read_line(
     clause = turns_on_clause(read.turns_on)
     if clause:
         line += f"; turns on {clause}"
+    if read.one_sided_input:
+        line += f"; {ONE_SIDED_CAVEAT}"
     return line + "."

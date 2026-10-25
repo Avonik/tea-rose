@@ -9,6 +9,8 @@ export const READ_FACTOR_LABEL: Record<string, string> = {
   intent: 'Copying on purpose',
   actual_confusion: 'Actual confusion alleged',
   buyer_care: 'How careful the buyers are',
+  protectability: 'Is the mark protectable at all',
+  mark_strength: 'How strong the mark is',
   defences: 'Defences raised',
   defenses: 'Defences raised',
   relatedness_of_goods: 'Related goods',
