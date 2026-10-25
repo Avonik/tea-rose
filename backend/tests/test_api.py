@@ -341,6 +341,11 @@ async def test_analyze_happy_path_and_events(make_app: Callable[..., FastAPI]) -
     assert result["status"] == "finished"
     assert result["input_excerpt"] == "COMPLAINT. Jack Daniel's v. VIP."
     assert result["memo"]["headline"]
+    # the preliminary read serialises with the memo (scripted engine)
+    assert result["memo"]["read_line"].startswith("Preliminary read: leans toward VIP Products")
+    read = result["memo"]["preliminary_read"]
+    assert read["lean"] == "newcomer" and read["not_a_prediction"].startswith("A preliminary")
+    assert [s["id"] for s in result["memo"]["sections"]][:2] == ["summary", "read"]
     trace = [e for e in events if e["event"] == "trace"]
     assert len(trace) >= 5
     first = json.loads(trace[0]["data"])

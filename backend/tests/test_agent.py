@@ -16,7 +16,7 @@ import pytest
 
 from tearose.agent.graph import GraphEngine
 from tearose.agent.llm import ScriptedChatModel, ai_tools, ainvoke_structured, tool_call
-from tearose.agent.nodes import extract, fetch, interpret, resolve, route
+from tearose.agent.nodes import assess, extract, fetch, interpret, memo, resolve, route
 from tearose.agent.nodes.base import RunContext
 from tearose.agent.nodes.interpret import display_name, display_names
 from tearose.agent.nodes.memo import FIXED_LIMITATIONS, brand_name, party_names
@@ -25,9 +25,13 @@ from tearose.agent.tools import ToolContext, make_tools
 from tearose.config import BACKEND_DIR
 from tearose.qloo.fixtures import FixtureClient
 from tearose.schemas import (
+    NOT_A_PREDICTION,
     AnalysisResult,
     Evidence,
     Extraction,
+    FactorFinding,
+    Memo,
+    PreliminaryRead,
     ProxyResolution,
     Resolution,
     ResolvedBrand,
@@ -35,7 +39,7 @@ from tearose.schemas import (
     TraceEvent,
     Universe,
 )
-from tearose.scoring import synthesize_bottom_line
+from tearose.scoring import synthesize_bottom_line, synthesize_read_line
 from tearose.scoring.describe import describe_evidence
 from tearose.scoring.score import overlap_evidence
 
@@ -259,6 +263,35 @@ MEMO_DRAFT: dict[str, Any] = {
     "headline": "Jack Daniel's fans show little affinity for dog-toy brands. A second sentence.",
     "sections": [{"id": "summary", "title": "Summary", "markdown": "Short summary."}],
 }
+
+
+PRELIM_READ: dict[str, Any] = {
+    "lean": "newcomer",
+    "confidence": "medium",
+    "turns_on": "The case most likely turns on the parody defence.",
+    "rationale": (
+        "The audience data shows weak relatedness and a broad senior audience. On the pleading, "
+        "the bottle shape imitates the senior label and the dog-toy maker answers with parody."
+    ),
+    "flip_risks": [
+        "A court that rejects the parody defence would weigh the imitated label heavily.",
+        "A consumer survey showing source confusion would change the confusion factors.",
+    ],
+    "read_factors": [
+        {"factor": "similarity_of_marks", "lean": "favors_senior", "confidence": "high",
+         "basis": "document", "finding": 'The toy uses "a bottle shape imitating" the label.'},
+        {"factor": "intent", "lean": "neutral", "confidence": "low", "basis": "document",
+         "finding": "Not alleged."},
+        {"factor": "actual_confusion", "lean": "insufficient_data", "confidence": "low",
+         "basis": "document", "finding": "Not alleged."},
+        {"factor": "buyer_care", "lean": "insufficient_data", "confidence": "low",
+         "basis": "document", "finding": "Not alleged."},
+        {"factor": "defences", "lean": "favors_junior", "confidence": "medium",
+         "basis": "document", "finding": "Parody is pleaded."},
+    ],
+    "data_factors_used": ["relatedness_of_goods", "fame"],
+    "not_a_prediction": "model text that code replaces",
+}  # fmt: skip
 
 
 # --------------------------------------------------------------------------------------
@@ -956,6 +989,7 @@ def full_script() -> ScriptedChatModel:
                 },
             ],
             "Interpretation": [INTERPRETATION, INTERPRETATION],
+            "PreliminaryRead": [PRELIM_READ, PRELIM_READ],
             "MemoDraft": [MEMO_DRAFT, MEMO_DRAFT],
             "FollowupPlan": [
                 {
@@ -995,7 +1029,14 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert r.trace[0].type == "run_started" and r.trace[-1].type == "run_finished"
     assert [e.seq for e in r.trace] == list(range(1, len(r.trace) + 1))
     nodes_started = [e.node for e in r.trace if e.type == "node_started"]
-    assert nodes_started == ["extract", "route", "resolve", "fetch", "score", "interpret", "memo"]
+    assert nodes_started == [
+        "extract", "route", "resolve", "fetch", "score", "interpret", "assess", "memo"
+    ]  # fmt: skip
+    assert any(
+        e.node == "assess" and e.type == "decision"
+        and e.title == "Preliminary read: leans toward VIP Products (moderate)"
+        for e in r.trace
+    )  # fmt: skip
 
     assert r.extraction and r.routing and r.resolution
     assert set(r.routing.analyses) == {"overlap", "bridging", "fame"}
@@ -1013,7 +1054,21 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert memo.bottom_line == synthesize_bottom_line(memo.findings, *party_names(state))
     assert memo.limitations[-5:] == list(FIXED_LIMITATIONS)
     assert memo.limitations[0] == INTERPRETATION["limitations"][0]
-    assert [s.id for s in memo.sections] == ["summary", "factors", "method", "limitations"]
+    assert [s.id for s in memo.sections] == ["summary", "read", "factors", "method", "limitations"]
+    # the preliminary read: model fields kept, fixed sentence and read line set in code
+    read = memo.preliminary_read
+    assert read is not None and read.lean == "newcomer"
+    assert read.not_a_prediction == NOT_A_PREDICTION
+    assert memo.read_line == (
+        "Preliminary read: leans toward VIP Products, moderate confidence; turns on the parody "
+        "defence."
+    )
+    assert memo.read_line == synthesize_read_line(read, *party_names(state))
+    read_sec = memo.sections[1]
+    assert read_sec.title == "Preliminary read"
+    assert read_sec.markdown.startswith(memo.read_line)  # the draft had no read: code wrote it
+    assert "parody defence would weigh" in read_sec.markdown  # flip risks listed
+    assert NOT_A_PREDICTION in read_sec.markdown
     assert len(memo.appendix_queries) >= 10
     assert memo.appendix_queries == engine.state_of("r1")["queries"]
 
@@ -1022,7 +1077,11 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert r.resolution.senior.entity_name == "Jack Daniels"
     assert display_names(state) == {"senior": "Jack Daniel's"}
     facts = describe_evidence(r.evidence, r.resolution, names=display_names(state))
-    for schema in ("Interpretation", "MemoDraft"):
+    assess_prompt = model.prompts_for("PreliminaryRead")[0]
+    assert "DOCUMENT (complaint):" in assess_prompt and "Count II alleges dilution" in assess_prompt
+    assert "Jack Daniel's fans rank the dog-toy comparators low" in assess_prompt  # findings
+    assert '"preliminary_read"' in model.prompts_for("MemoDraft")[0]
+    for schema in ("Interpretation", "PreliminaryRead", "MemoDraft"):
         prompt = model.prompts_for(schema)[0]
         assert "FACTS (computed in code; the only source for numbers)" in prompt
         facts_part = prompt[prompt.index("FACTS (computed in code") :].split("\n\n", 1)[0]
@@ -1048,8 +1107,14 @@ async def test_followup_reruns_from_resolve_and_accumulates_queries(
     assert r.resolution.junior_proxy.goods_phrase == "pet supplies"
     assert r.resolution.junior_proxy.chosen_tag_ids == [PETS]
     assert len(r.memo.appendix_queries) > first_queries
-    followup_nodes = [e.node for e in r.trace if e.type == "node_started"][7:]
-    assert followup_nodes == ["followup", "resolve", "fetch", "score", "interpret", "memo"]
+    followup_nodes = [e.node for e in r.trace if e.type == "node_started"][8:]
+    assert followup_nodes == [
+        "followup", "resolve", "fetch", "score", "interpret", "assess", "memo"
+    ]  # fmt: skip
+    assert r.memo.preliminary_read is not None
+    # the planner saw the current memo including its preliminary read
+    assert "current_preliminary_read" in model.prompts_for("FollowupPlan")[0]
+    assert "turns on the parody defence" in model.prompts_for("FollowupPlan")[0]
     assert "pet supplies" in model.prompts_for("ResolveDecision")[-1]
 
 
@@ -1094,6 +1159,7 @@ async def test_smoke_run_on_shared_fixtures() -> None:
             ],  # fmt: skip
             "ResolveDecision": [decision],
             "Interpretation": [INTERPRETATION],
+            "PreliminaryRead": [PRELIM_READ],
             "MemoDraft": [MEMO_DRAFT],
         }
     )
@@ -1102,6 +1168,7 @@ async def test_smoke_run_on_shared_fixtures() -> None:
     await engine.run(handle, TEXT)
     r = handle.result
     assert r.status == "finished", r.error
+    assert r.memo is not None and r.memo.preliminary_read is not None
     jp = r.resolution.junior_proxy
     assert len(jp.comparator_brand_names) == 3
     assert jp.comparator_source == "rule"  # the model's proposal is ignored
@@ -1184,3 +1251,153 @@ def test_bottom_line_party_names() -> None:
     assert display_name("Jack Daniels", caps_jd) == "Jack Daniels"
     # nothing known: role phrases in the bottom line
     assert party_names({}) == (None, None)
+
+
+# --------------------------------------------------------------------------------------
+# (7) assess: the preliminary read
+# --------------------------------------------------------------------------------------
+
+PARODY_TEXT = TEXT + (
+    " VIP Products answers that Bad Spaniels is a parody of the whiskey brand and protected "
+    "expressive use."
+)
+OPINION_TEXT = (
+    "OPINION. Jack Daniel's Properties, Inc. v. VIP Products LLC. VIP Products sells dog toys "
+    '"Bad Spaniels" imitating the JACK DANIEL\'S bottle. VIP argues parody. We hold that the '
+    "parody defence fails because the toy uses the mark as a source identifier."
+)
+
+
+def assess_state(text: str, **extraction: Any) -> dict[str, Any]:
+    ex = Extraction.model_validate({**EXTRACTION, **extraction})
+    return {
+        "input_text": text,
+        "extraction": ex,
+        "routing": RoutingDecision(analyses=["overlap", "fame"], rationale={}),
+        "resolution": proxied_resolution(),
+        "evidence": Evidence(),
+        "findings": [FactorFinding.model_validate(f) for f in INTERPRETATION["findings"]],
+        "case_limitations": [],
+        "queries": [],
+    }
+
+
+def read_with(**update: Any) -> dict[str, Any]:
+    return {**json.loads(json.dumps(PRELIM_READ)), **update}
+
+
+async def run_memo(client: FixtureClient, state: dict[str, Any], draft: dict[str, Any]) -> Memo:
+    model = ScriptedChatModel(scripts={"MemoDraft": [draft]})
+    ctx, _ = make_ctx(client, model)
+    return (await memo.run(state, ctx))["memo"]
+
+
+async def test_assess_parody_defence_yields_flip_risk(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [PRELIM_READ]})
+    ctx, events = make_ctx(client, model)
+    state = assess_state(PARODY_TEXT)
+    out = await assess.run(state, ctx)
+    read: PreliminaryRead = out["preliminary_read"]
+    assert any("parody" in r.lower() for r in read.flip_risks)
+    assert next(f for f in read.read_factors if f.factor == "defences").lean == "favors_junior"
+    assert read.not_a_prediction == NOT_A_PREDICTION  # code resets the fixed sentence
+    prompt = model.prompts_for("PreliminaryRead")[0]
+    assert "protected expressive use" in prompt  # the document itself reaches the model
+    assert "FACTS (computed in code; the only source for numbers)" in prompt
+    assert not [e for e in events if e.type == "warning"]
+
+    # the memo's model section paraphrases without stating the lean: the read line goes first
+    state["preliminary_read"] = read
+    draft = {**MEMO_DRAFT, "sections": [
+        *MEMO_DRAFT["sections"],
+        {"id": "read", "title": "Read", "markdown": "The pleading raises a parody defence."},
+    ]}  # fmt: skip
+    m = await run_memo(client, state, draft)
+    sec = next(s for s in m.sections if s.id == "read")
+    assert [s.id for s in m.sections][:2] == ["summary", "read"]
+    assert sec.title == "Preliminary read"
+    assert sec.markdown.startswith(m.read_line + "\n\nThe pleading raises a parody defence.")
+    assert sec.markdown.endswith(f"_{NOT_A_PREDICTION}_")
+
+
+async def test_memo_keeps_a_read_section_that_states_the_lean(client: FixtureClient) -> None:
+    state = assess_state(TEXT)
+    state["preliminary_read"] = PreliminaryRead.model_validate(PRELIM_READ)
+    md = f"The read leans towards VIP Products, with moderate confidence.\n\n{NOT_A_PREDICTION}"
+    draft = {**MEMO_DRAFT, "sections": [{"id": "read", "title": "x", "markdown": md}]}
+    m = await run_memo(client, state, draft)
+    assert next(s for s in m.sections if s.id == "read").markdown == md
+
+
+async def test_assess_opinion_disregards_the_holding(client: FixtureClient) -> None:
+    turns_on = (
+        "The case most likely turns on the parody defence; assessed from the facts as pleaded; "
+        "the court's holding was disregarded."
+    )
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [read_with(turns_on=turns_on)]})
+    ctx, events = make_ctx(client, model)
+    out = await assess.run(assess_state(OPINION_TEXT, document_type="opinion"), ctx)
+    read = out["preliminary_read"]
+    assert read.turns_on.endswith("the court's holding was disregarded.")
+    titles = [e.title for e in events if e.type == "note"]
+    assert "Court opinion: read from the facts and the parties' arguments only" in titles
+    assert "Stated holding disregarded" in titles
+    assert "DOCUMENT (opinion):" in model.prompts_for("PreliminaryRead")[0]
+    # the read line keeps only what the case turns on
+    assert synthesize_read_line(read, "Jack Daniel's", "VIP Products") == (
+        "Preliminary read: leans toward VIP Products, moderate confidence; turns on the parody "
+        "defence."
+    )
+
+
+async def test_assess_guardrails_letter_and_unknown_data_factors(client: FixtureClient) -> None:
+    scripted = read_with(
+        lean="older_brand",
+        confidence="high",
+        data_factors_used=["fame", "similarity_of_marks"],
+        flip_risks=[],
+    )
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [scripted]})
+    ctx, events = make_ctx(client, model)
+    out = await assess.run(assess_state(TEXT, document_type="cease_and_desist"), ctx)
+    read = out["preliminary_read"]
+    assert read.confidence == "low"  # a letter is never more than a low-confidence read
+    assert read.data_factors_used == ["fame"]
+    warnings = [e.title for e in events if e.type == "warning"]
+    assert "Letter, not a pleading: confidence lowered to low" in warnings
+    assert "Data factors not among the findings dropped" in warnings
+    assert "No flip risks listed" in warnings
+    decision = next(e for e in events if e.type == "decision")
+    assert decision.title == "Preliminary read: leans toward Jack Daniel's (low)"
+
+
+async def test_assess_failure_leaves_memo_without_a_read(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={})  # no PreliminaryRead scripted: the call fails
+    ctx, events = make_ctx(client, model)
+    state = assess_state(TEXT)
+    out = await assess.run(state, ctx)
+    assert out["preliminary_read"] is None and out["errors"][0].startswith("assess:")
+    assert any(e.type == "warning" and "Preliminary read failed" in e.title for e in events)
+    state.update(out)
+    m = await run_memo(client, state, MEMO_DRAFT)
+    assert m.read_line == "" and m.preliminary_read is None
+    assert "read" not in [s.id for s in m.sections]
+
+
+async def test_assess_truncates_long_documents(client: FixtureClient) -> None:
+    model = ScriptedChatModel(scripts={"PreliminaryRead": [PRELIM_READ]})
+    ctx, events = make_ctx(client, model)
+    long_text = TEXT + " filler" * (assess.MAX_DOC_CHARS // 6)
+    await assess.run(assess_state(long_text), ctx)
+    prompt = model.prompts_for("PreliminaryRead")[0]
+    assert f"truncated at {assess.MAX_DOC_CHARS:,}" in prompt
+    assert "Count II alleges dilution by tarnishment" in prompt  # extraction key quotes
+    assert any(e.title == "Document truncated for the preliminary read" for e in events)
+
+
+def test_stored_memo_without_read_still_loads() -> None:
+    m = Memo.model_validate(
+        {"headline": "h", "findings": [], "sections": [], "limitations": [],
+         "appendix_queries": []}
+    )  # fmt: skip
+    assert m.read_line == "" and m.preliminary_read is None

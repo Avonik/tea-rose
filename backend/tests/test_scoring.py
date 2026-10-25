@@ -19,12 +19,20 @@ from tearose.schemas import (
     Evidence,
     FactorFinding,
     Memo,
+    PreliminaryRead,
     ProxyResolution,
     Resolution,
     ResolvedBrand,
     RoutingDecision,
 )
-from tearose.scoring import DirectionalPeers, RawData, compute_evidence, synthesize_bottom_line
+from tearose.scoring import (
+    DirectionalPeers,
+    RawData,
+    compute_evidence,
+    synthesize_bottom_line,
+    synthesize_read_line,
+)
+from tearose.scoring.read_line import has_forbidden
 from tearose.scoring.score import (
     bin_points,
     breadth_parts,
@@ -854,3 +862,57 @@ def test_bottom_line_name_fallback_and_cleanup() -> None:
         f"Taste data supports Acme Co on 1 confusion factor and Rival Corp on 1. {SILENT}"
     )
     assert line.count(".") == 2
+
+
+# --------------------------------------------------------------------------------------
+# preliminary read line (computed in code)
+# --------------------------------------------------------------------------------------
+
+
+def _read(lean: str, confidence: str, turns_on: str) -> PreliminaryRead:
+    return PreliminaryRead(
+        lean=lean, confidence=confidence, turns_on=turns_on, rationale="r", flip_risks=["f"]
+    )
+
+
+def test_read_line_examples() -> None:
+    read = _read("older_brand", "medium", "The case most likely turns on the parody defence.")
+    assert synthesize_read_line(read, "Jack Daniel's", "VIP Products") == (
+        "Preliminary read: leans toward Jack Daniel's, moderate confidence; turns on the parody "
+        "defence."
+    )
+    read = _read("newcomer", "low", "Similarity of the marks decides it.")  # no "turns on"
+    assert synthesize_read_line(read, None, None) == (
+        "Preliminary read: leans toward the newcomer, low confidence."
+    )
+    read = _read("too_close_to_call", "high", "It turns on intent; the holding was disregarded.")
+    assert synthesize_read_line(read, "A", "B") == (
+        "Preliminary read: too close to call, high confidence; turns on intent."
+    )
+    assert synthesize_read_line(None, "A", "B") == ""
+
+
+FORBIDDEN_WORDS = re.compile(r"probability|predict|verdict|\bwin|\blose|%", re.I)
+
+
+def test_read_line_never_carries_outcome_words_or_percentages() -> None:
+    turns = [
+        "The case turns on the parody defence.",
+        "It turns on whether the senior brand will win on similarity.",
+        "It turns on the verdict of a jury on intent.",
+        "The case turns on a 60% chance that parody fails.",
+        "It turns on the probability that buyers lose track of the source.",
+        "It turns on what a court would predict about buyer care.",
+        "turns on " + "x" * 200,
+        "",
+    ]
+    names = [("Jack Daniel's", "VIP Products"), ("Winners Inc", "Lose It"), (None, None)]
+    for lean, conf, turn, (senior, junior) in itertools.product(
+        ("older_brand", "newcomer", "too_close_to_call"), ("high", "medium", "low"), turns, names
+    ):
+        line = synthesize_read_line(_read(lean, conf, turn), senior, junior)
+        assert line.startswith("Preliminary read: ") and line.endswith(".")
+        assert not has_forbidden(line), line
+        assert not FORBIDDEN_WORDS.search(line), line
+    assert has_forbidden("they will win") and has_forbidden("60%") and has_forbidden("predicted")
+    assert not has_forbidden("86th percentile") and not has_forbidden("winery")

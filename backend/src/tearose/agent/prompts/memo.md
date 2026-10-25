@@ -10,14 +10,22 @@ Return:
   percentile"); no raw floats, no hedging adjectives.
 - `sections`, in this order, with these ids:
   1. `summary` ("Summary"): 3-5 sentences.
-  2. `factors` ("Factor-by-factor"): one short paragraph per finding, in the order given,
+  2. `read` ("Preliminary read"), ONLY when the material has a `preliminary_read`: 3-6
+     sentences from its fields. Open with the `read_line` (or a paraphrase that keeps it
+     exact): the lean ("leans toward <name>" or "too close to call"), the confidence and what
+     the case turns on. Then the rationale, keeping the audience-data half and the pleading half
+     separate, then the flip risks as a bullet list ("What could change it"). You may paraphrase
+     but must not change the lean, the confidence or any flip risk, and must not add a factor.
+     End with the `not_a_prediction` sentence verbatim. Never a percentage, a probability or the
+     words predict, verdict, win or lose.
+  3. `factors` ("Factor-by-factor"): one short paragraph per finding, in the order given,
      quoting the numbers exactly.
-  3. `method` ("Method"): how the evidence was produced: brand resolution (and the proxy path
+  4. `method` ("Method"): how the evidence was produced: brand resolution (and the proxy path
      with the goods phrase and chosen tags, if used), the comparison universes, ranks within a
      query, the number of Qloo queries (listed in the appendix). Scores were computed in code.
      Cite individual queries by their id exactly as given in the query list (`Q1`, `Q7`, …);
      the reader can click each id to see the request.
-  4. `limitations` ("Limitations"): a bullet list of the limitations provided.
+  5. `limitations` ("Limitations"): a bullet list of the limitations provided.
 
 Hard rules: never call an affinity a share of consumers or a confusion rate; never invent or
 round differently any number; mark proxied findings as proxied; say "insufficient data" where

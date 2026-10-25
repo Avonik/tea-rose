@@ -17,10 +17,43 @@ from tearose.schemas import (
     Memo,
     MemoSection,
     Party,
+    PreliminaryRead,
+    ReadFactor,
     RoutingDecision,
     TraceEvent,
 )
-from tearose.scoring import synthesize_bottom_line
+from tearose.scoring import synthesize_bottom_line, synthesize_read_line
+
+# the scripted read the mock runs carry (tests, frontend development)
+SCRIPTED_READ = PreliminaryRead(
+    lean="newcomer",
+    confidence="medium",
+    turns_on="The case most likely turns on the parody defence and the relatedness of the goods.",
+    rationale=(
+        "The audience data shows little overlap between whiskey drinkers and dog-toy buyers, "
+        "while the senior brand's audience is broad. On the pleading, the marks are close by "
+        "design and the junior user pleads parody; no actual confusion is alleged."
+    ),
+    flip_risks=[
+        "A court that rejects the parody defence would weigh the near-identical trade dress "
+        "more heavily.",
+        "A consumer survey showing source confusion would change the confusion factors.",
+        "The junior user is measured through stand-in dog-toy brands, not its own audience.",
+    ],
+    read_factors=[
+        ReadFactor(factor="similarity_of_marks", lean="favors_senior", confidence="high",
+                   basis="document", finding='The toy imitates the "bottle shape" and label.'),
+        ReadFactor(factor="intent", lean="neutral", confidence="low", basis="document",
+                   finding="Intent to parody, not to confuse, is asserted."),
+        ReadFactor(factor="actual_confusion", lean="insufficient_data", confidence="low",
+                   basis="document", finding="Not alleged."),
+        ReadFactor(factor="buyer_care", lean="insufficient_data", confidence="low",
+                   basis="document", finding="Not alleged."),
+        ReadFactor(factor="defences", lean="favors_junior", confidence="medium",
+                   basis="document", finding="Parody is pleaded as a defence."),
+    ],
+    data_factors_used=["relatedness_of_goods"],
+)  # fmt: skip
 
 
 class AnalysisEngine(Protocol):
@@ -84,6 +117,11 @@ class ScriptedEngine:
         await self._step(handle, "fetch", "7 Qloo queries, 1 retry with a wider tag")
         await self._step(handle, "score", "Symmetric overlap percentile 0.18")
         await self._step(handle, "interpret", "Relatedness: favors junior; fame: favors senior")
+        await self._step(
+            handle, "assess", "Preliminary read: leans toward VIP Products (moderate)",
+            SCRIPTED_READ.turns_on,
+        )  # fmt: skip
+        read_line = synthesize_read_line(SCRIPTED_READ, "Jack Daniel's", "VIP Products")
         findings = [
             FactorFinding(
                 factor="relatedness_of_goods",
@@ -95,8 +133,17 @@ class ScriptedEngine:
         r.memo = Memo(
             headline="Jack Daniel's purchasers show little affinity for pet-supply brands.",
             bottom_line=synthesize_bottom_line(findings),
+            read_line=read_line,
+            preliminary_read=SCRIPTED_READ,
             findings=findings,
-            sections=[MemoSection(id="summary", title="Summary", markdown="Scripted placeholder.")],
+            sections=[
+                MemoSection(id="summary", title="Summary", markdown="Scripted placeholder."),
+                MemoSection(
+                    id="read",
+                    title="Preliminary read",
+                    markdown=f"{read_line}\n\n{SCRIPTED_READ.not_a_prediction}",
+                ),
+            ],
             limitations=["Affinity is not confusion.", "No survey percentages."],
             appendix_queries=[],
         )

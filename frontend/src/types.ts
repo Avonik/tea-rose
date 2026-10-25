@@ -258,10 +258,41 @@ export interface MemoSection {
   markdown: string
 }
 
+export type ReadLean = 'older_brand' | 'newcomer' | 'too_close_to_call'
+
+/** A factor taste data cannot see, read from the document (assess node). */
+export interface ReadFactor {
+  /** similarity_of_marks | intent | actual_confusion | buyer_care | defences | other */
+  factor: string
+  lean: FactorLean
+  confidence: Confidence
+  basis: 'document' | 'data'
+  finding: string
+}
+
+/** Preliminary read of how a court would likely come out: never a prediction or a probability. */
+export interface PreliminaryRead {
+  lean: ReadLean
+  confidence: Confidence
+  /** one sentence: what the case most likely turns on */
+  turns_on: string
+  /** 3-6 sentences, the data half and the pleading half separated */
+  rationale: string
+  flip_risks: string[]
+  read_factors: ReadFactor[]
+  data_factors_used: string[]
+  /** fixed sentence */
+  not_a_prediction: string
+}
+
 export interface Memo {
   headline: string
   /** Computed in code from the factor leans, never by the model. "" on runs stored before it existed. */
   bottom_line: string
+  /** One sentence computed in code from preliminary_read; "" / absent on older runs. */
+  read_line?: string
+  /** Absent or null on runs stored before it existed, or when the assess step failed. */
+  preliminary_read?: PreliminaryRead | null
   findings: FactorFinding[]
   sections: MemoSection[]
   limitations: string[]

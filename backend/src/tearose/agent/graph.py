@@ -2,7 +2,7 @@
 
 Topology:
 
-    START ─┬─> extract -> route -> resolve -> fetch -> score -> interpret -> memo -> END
+    START ─┬─> extract -> route -> resolve -> fetch -> score -> interpret -> assess -> memo -> END
            └─> followup ─┬─> resolve   (re-resolve goods / add comparator / change universe)
                          └─> score     (recompute only, reuses fetched data)
 
@@ -23,7 +23,17 @@ from typing import Any
 from langgraph.graph import END, START, StateGraph
 
 from tearose.agent.llm import ModelFactory, get_chat_model
-from tearose.agent.nodes import extract, fetch, followup, interpret, memo, resolve, route, score
+from tearose.agent.nodes import (
+    assess,
+    extract,
+    fetch,
+    followup,
+    interpret,
+    memo,
+    resolve,
+    route,
+    score,
+)
 from tearose.agent.nodes.base import RunContext
 from tearose.agent.runs import RunHandle
 from tearose.agent.state import AgentState, initial_state
@@ -41,6 +51,7 @@ PIPELINE: tuple[tuple[str, NodeFn], ...] = (
     ("fetch", fetch.run),
     ("score", score.run),
     ("interpret", interpret.run),
+    ("assess", assess.run),
     ("memo", memo.run),
 )
 
@@ -115,6 +126,7 @@ def state_from_result(result: AnalysisResult) -> AgentState:
     if result.memo is not None:
         st["queries"] = list(result.memo.appendix_queries)
         st["findings"] = list(result.memo.findings)
+        st["preliminary_read"] = result.memo.preliminary_read
     return st
 
 

@@ -1,8 +1,10 @@
 """followup: counsel's question -> FollowupPlan, then re-entry into the pipeline.
 
 Re-entry point (decided in graph.py): `recompute_only` goes to score (reusing fetched data);
-everything else reruns resolve → fetch → score → interpret → memo with the plan's instruction
-in the prompt context. Queries keep accumulating across follow-ups.
+everything else reruns resolve → fetch → score → interpret → assess → memo with the plan's
+instruction in the prompt context. The planner sees the current memo including its preliminary
+read, so a question about the read (what it turns on, what could flip it) re-runs from score and
+reaches assess and memo as the instruction. Queries keep accumulating across follow-ups.
 """
 
 from __future__ import annotations
@@ -35,12 +37,19 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     ev = NodeEvents(ctx.emit, "followup")
     question = (state.get("followup_question") or "").strip()
     memo = state.get("memo")
+    read = (memo.preliminary_read if memo else None) or state.get("preliminary_read")
     body = to_json(
         {
             "question": question,
             "case": case_payload(state),
             "current_headline": memo.headline if memo else None,
             "current_findings": [f.model_dump() for f in memo.findings] if memo else [],
+            "current_bottom_line": memo.bottom_line if memo else None,
+            "current_read_line": memo.read_line if memo else None,
+            "current_preliminary_read": read.model_dump() if read is not None else None,
+            "current_sections": (
+                [{"id": s.id, "title": s.title} for s in memo.sections] if memo else []
+            ),
         }
     )
     messages = [SystemMessage(load_prompt("followup")), HumanMessage(f"FOLLOW-UP:\n{body}")]

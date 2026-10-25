@@ -229,13 +229,14 @@ class Evidence(BaseModel):
 # --------------------------------------------------------------------------------------
 
 FactorLean = Literal["favors_senior", "neutral", "favors_junior", "insufficient_data"]
+Confidence = Literal["high", "medium", "low"]
 
 
 class FactorFinding(BaseModel):
     # relatedness_of_goods | channels_and_purchasers | bridging_the_gap | fame | zone_of_reputation
     factor: str
     lean: FactorLean
-    confidence: Literal["high", "medium", "low"]
+    confidence: Confidence
     finding: str  # 2-4 sentences in lawyer language
     evidence_refs: list[str] = Field(default_factory=list)  # query ids / evidence field names
 
@@ -246,11 +247,58 @@ class MemoSection(BaseModel):
     markdown: str
 
 
+# The factors taste data cannot see, read from the document by the `assess` node
+READ_FACTORS: tuple[str, ...] = (
+    "similarity_of_marks",
+    "intent",
+    "actual_confusion",
+    "buyer_care",
+    "defences",
+    "other",
+)
+NOT_A_PREDICTION = (
+    "A preliminary read on the pleading and the audience data, not a prediction or a "
+    "probability; a court weighs the factors, it does not count them."
+)
+ReadLean = Literal["older_brand", "newcomer", "too_close_to_call"]
+
+
+class ReadFactor(BaseModel):
+    """One factor the taste data cannot see, assessed from the document alone."""
+
+    # similarity_of_marks | intent | actual_confusion | buyer_care | defences | other
+    factor: str
+    lean: FactorLean
+    confidence: Confidence
+    basis: Literal["document", "data"]
+    # 1-2 sentences with a short quote or cite of the supporting passage; "Not alleged." when
+    # the document is silent. defences: name the defence (parody, expressive use, fair use, ...)
+    finding: str
+
+
+class PreliminaryRead(BaseModel):
+    """How a court would likely come out, read from the pleading plus the data-backed findings.
+    Never a prediction or a probability (see NOT_A_PREDICTION)."""
+
+    lean: ReadLean  # older_brand = the senior mark's side; newcomer = the junior user's side
+    confidence: Confidence
+    turns_on: str  # one sentence: what the case most likely turns on
+    rationale: str  # 3-6 sentences; the data half and the reading half clearly separated
+    flip_risks: list[str] = Field(default_factory=list)  # one sentence each: what could flip it
+    read_factors: list[ReadFactor] = Field(default_factory=list)
+    data_factors_used: list[str] = Field(default_factory=list)  # factor ids of interpret findings
+    not_a_prediction: str = NOT_A_PREDICTION  # fixed; code resets it
+
+
 class Memo(BaseModel):
     headline: str  # one sentence
     # Computed in code from the factor leans (scoring/bottom_line.py), never by the model.
     # Default "" only so runs stored before the field existed still load.
     bottom_line: str = ""
+    # One sentence computed in code from `preliminary_read` (scoring/read_line.py); "" when
+    # there is no read (older runs, or the assess step failed).
+    read_line: str = ""
+    preliminary_read: PreliminaryRead | None = None
     findings: list[FactorFinding]
     sections: list[MemoSection]
     limitations: list[str]  # the fixed "what this cannot tell you" plus case-specific items
@@ -278,7 +326,7 @@ EventType = Literal[
 class TraceEvent(BaseModel):
     ts: datetime = Field(default_factory=lambda: datetime.now(UTC))
     seq: int = 0
-    node: str  # extract | route | resolve | fetch | score | interpret | memo | followup
+    node: str  # extract | route | resolve | fetch | score | interpret | assess | memo | followup
     type: EventType
     title: str  # one line for the UI
     detail: str | None = None  # optional second line

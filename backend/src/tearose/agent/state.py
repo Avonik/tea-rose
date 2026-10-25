@@ -16,6 +16,7 @@ from tearose.schemas import (
     Extraction,
     FactorFinding,
     Memo,
+    PreliminaryRead,
     Resolution,
     RoutingDecision,
 )
@@ -33,6 +34,7 @@ class AgentState(TypedDict, total=False):
     evidence: Evidence | None
     findings: list[FactorFinding]  # from interpret
     case_limitations: list[str]  # case-specific limitations from interpret
+    preliminary_read: PreliminaryRead | None  # from assess
     memo: Memo | None
     queries: Annotated[list[QlooQuery], operator.add]
     followup_question: str | None
@@ -64,6 +66,7 @@ def initial_state(
         evidence=None,
         findings=[],
         case_limitations=[],
+        preliminary_read=None,
         memo=None,
         queries=[],
         followup_question=None,

@@ -16,7 +16,8 @@ backend/
                               fixtures.py (FixtureClient), cache.py (sqlite), names.py (brand
                               name matching), taxonomy.py (brand-genre tree + goods mapper)
     scoring/                  score.py (pure functions, NO model calls), universe.py,
-                              bottom_line.py, describe.py (fact sentences for the prompts)
+                              bottom_line.py, read_line.py, describe.py (fact sentences for
+                              the prompts)
     agent/                    LangGraph graph: state.py, graph.py, nodes/*.py, tools.py, prompts/*.md,
                               llm.py (OpenAI-compatible chat model factory + fake model for tests)
     api/                      FastAPI: app.py, auth.py, limits.py, routes_*.py, sse.py, showcase.py
@@ -53,7 +54,8 @@ docs/                         this file, qloo-api-notes.md, survey-cost-sources.
 ## Agent graph (LangGraph)
 
 State: `AgentState` (TypedDict) holding `input_text`, `extraction`, `routing`, `resolution`,
-`raw` (RawData), `evidence`, `memo`, `queries: list[QlooQuery]` (accumulating reducer),
+`raw` (RawData), `evidence`, `findings`, `preliminary_read`, `memo`,
+`queries: list[QlooQuery]` (accumulating reducer),
 `followup_question`, `blind`, `errors`, `mode`, `run_id`. Trace events are NOT in the state:
 nodes and tools emit them straight to the `RunHandle`, so they reach the SSE stream live.
 Every `QlooQuery` gets a stable `id` ("q7") when recorded; evidence refs and `tool_result`
@@ -73,14 +75,53 @@ Nodes, in order:
 | `fetch` | tool-calling loop; the agentic core; retries wider queries on empty results; records give-ups | resolution + routing → `raw` data |
 | `score` | pure Python, no LLM | raw → `Evidence` |
 | `interpret` | 1 LLM call (optionally stronger model), structured output `list[FactorFinding]` + limitations | evidence → factor findings; blinded names in eval mode |
-| `memo` | 1 LLM call → headline + sections; `bottom_line`, appendix and limitations built in code | findings + evidence → `Memo` |
-| `followup` | re-enters at `resolve` with an instruction; reruns affected downstream nodes | question → updated result |
+| `assess` | 1 LLM call (stronger model), structured output `PreliminaryRead`; code guardrails (fixed "not a prediction" sentence, letter ⇒ `low` confidence, `data_factors_used` must name findings, outcome words / percentages flagged); a failure leaves the memo without a read | document (first 40k chars) + extraction + routing + FACTS + findings → preliminary read |
+| `memo` | 1 LLM call → headline + sections; `bottom_line`, `read_line`, appendix and limitations built in code | findings + evidence + preliminary read → `Memo` |
+| `followup` | re-enters at `resolve` with an instruction; reruns affected downstream nodes (through `assess`); the planner sees the current memo incl. the preliminary read, so questions about the read re-run from `score` | question → updated result |
 
 `Memo.bottom_line` is one sentence computed by `scoring/bottom_line.py` (`synthesize_bottom_line`) from
 the factor leans alone: how many confusion factors support or cut against the senior mark, then fame
 and zone, always ending "It is silent on mark similarity, intent and actual confusion." A clause
 whose counted findings all have `low` confidence carries " (low confidence)". No model
 writes it; it never names an outcome. Runs stored before the field existed load with `""`.
+
+### Preliminary read (`assess`)
+
+After `interpret`, the `assess` node reads the DOCUMENT for the factors taste data cannot see
+and weighs them with the data-backed findings into `Memo.preliminary_read`
+(`PreliminaryRead`, optional so stored runs still load):
+
+- `lean`: `older_brand` | `newcomer` | `too_close_to_call`; `confidence`: high | medium | low.
+- `turns_on`: one sentence naming the one or two factors the case most likely turns on.
+- `rationale`: 3-6 sentences, the audience-data half and the pleading half separated.
+- `flip_risks`: one sentence each (defences pleaded, a factor a survey would change, a
+  stand-in measured through a nearest category, ...).
+- `read_factors: list[ReadFactor]` (`factor`, `lean`, `confidence`, `basis` document|data,
+  `finding`) for `similarity_of_marks`, `intent`, `actual_confusion`, `buyer_care`,
+  `defences` (parody / expressive use / fair use / other) and one free `other`. Each comes
+  ONLY from the document with a short quote or cite; a silent document gives "Not alleged."
+- `data_factors_used`: factor ids of the interpret findings; the data factors come only from
+  the findings, never re-derived.
+- `not_a_prediction`: fixed, reset in code: "A preliminary read on the pleading and the
+  audience data, not a prediction or a probability; a court weighs the factors, it does not
+  count them."
+
+**Not a prediction.** No percentage, no probability, never the words predict, verdict, win or
+lose; low confidence for a letter or when the deciding factor is missing (a cease-and-desist
+letter is forced to `low` in code). For a court opinion the read uses the facts and the
+parties' arguments only; when it had to ignore a stated holding, `turns_on` says "assessed
+from the facts as pleaded; the court's holding was disregarded".
+
+`Memo.read_line` is one sentence computed in code (`scoring/read_line.py`,
+`synthesize_read_line`) from the read's lean, confidence and the object of "turns on", with
+the brand display names of the bottom line: "Preliminary read: leans toward Jack Daniel's,
+moderate confidence; turns on the parody defence." A clause or name carrying an outcome word
+or a percentage is dropped (names fall back to "the older brand" / "the newcomer"). The
+memo gets a section `read` ("Preliminary read") first after the summary: the model may
+paraphrase but not change lean, confidence or flip risks; when the section does not state the
+lean ("toward <name>" / "too close to call"), code prepends `read_line`; the fixed sentence
+is always appended. Without a read (older runs, assess failed) there is no `read` section and
+`read_line` is `""`.
 
 ### Resolve, proxy and universe (after the live spike)
 
