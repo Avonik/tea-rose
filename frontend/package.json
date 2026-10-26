@@ -1,31 +1,30 @@
 {
-  "name": "tea-rose-frontend",
+  "name": "tea-rose-frontend-v3",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "dev:api": "vite --mode api",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview",
-    "gen:mock": "node scripts/gen-mock.mjs"
+    "typecheck": "tsc -b",
+    "preview": "vite preview"
   },
   "dependencies": {
     "dompurify": "^3.4.17",
     "maplibre-gl": "^6.15.0",
     "marked": "^18.1.1",
+    "motion": "^14.6.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "react-router-dom": "^7.18.4",
-    "recharts": "^3.10.1"
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
-    "oxlint": "^1.88.0",
     "typescript": "~6.0.3",
     "vite": "^8.3.4"
   }

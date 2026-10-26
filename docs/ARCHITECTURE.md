@@ -29,6 +29,7 @@ backend/
   eval/cases_candidates.csv   pre-registered labels (committed BEFORE any score is computed)
   tests/
 frontend/                     Vite + React + TypeScript; `npm run build` → frontend/dist (served by FastAPI)
+archive/                      earlier frontends (v1, v2), reference only; not built or served
 docs/                         this file, qloo-api-notes.md, survey-cost-sources.md
 ```
 

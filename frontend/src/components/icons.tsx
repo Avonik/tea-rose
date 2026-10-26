@@ -10,7 +10,7 @@ function Svg({ size = 16, children, ...rest }: P) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={1.9}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -25,6 +25,11 @@ function Svg({ size = 16, children, ...rest }: P) {
 export const IconChevron = (p: P) => (
   <Svg {...p}>
     <path d="m9 6 6 6-6 6" />
+  </Svg>
+)
+export const IconChevronDown = (p: P) => (
+  <Svg {...p}>
+    <path d="m6 9 6 6 6-6" />
   </Svg>
 )
 export const IconArrow = (p: P) => (
@@ -60,6 +65,12 @@ export const IconCheck = (p: P) => (
     <path d="m5 12.5 4.5 4.5L19 7.5" />
   </Svg>
 )
+export const IconCheckCircle = (p: P) => (
+  <Svg {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="m8 12.5 2.8 2.8L16 9.5" />
+  </Svg>
+)
 export const IconUpload = (p: P) => (
   <Svg {...p}>
     <path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />
@@ -73,14 +84,14 @@ export const IconDoc = (p: P) => (
 )
 export const IconLock = (p: P) => (
   <Svg {...p}>
-    <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
+    <rect x="4.5" y="10.5" width="15" height="10" rx="2.5" />
     <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
   </Svg>
 )
 export const IconPrint = (p: P) => (
   <Svg {...p}>
     <path d="M7 9V3h10v6M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2" />
-    <rect x="7" y="14" width="10" height="7" rx="1" />
+    <rect x="7" y="14" width="10" height="7" rx="1.5" />
   </Svg>
 )
 export const IconClose = (p: P) => (
@@ -92,11 +103,6 @@ export const IconTool = (p: P) => (
   <Svg {...p}>
     <path d="M4 7h16M4 12h10M4 17h7" />
     <circle cx="18" cy="15.5" r="2.5" />
-  </Svg>
-)
-export const IconSpark = (p: P) => (
-  <Svg {...p}>
-    <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5" />
   </Svg>
 )
 export const IconDiamond = (p: P) => (
@@ -125,5 +131,64 @@ export const IconSearch = (p: P) => (
   <Svg {...p}>
     <circle cx="11" cy="11" r="6.5" />
     <path d="m20 20-4.2-4.2" />
+  </Svg>
+)
+export const IconSun = (p: P) => (
+  <Svg {...p}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+  </Svg>
+)
+export const IconMoon = (p: P) => (
+  <Svg {...p}>
+    <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" />
+  </Svg>
+)
+export const IconMonitor = (p: P) => (
+  <Svg {...p}>
+    <rect x="3" y="4.5" width="18" height="12" rx="2" />
+    <path d="M8 20h8M12 16.5V20" />
+  </Svg>
+)
+export const IconList = (p: P) => (
+  <Svg {...p}>
+    <path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01" />
+  </Svg>
+)
+export const IconPulse = (p: P) => (
+  <Svg {...p}>
+    <path d="M3 12h4l2.5-6 4 12 2.5-6h5" />
+  </Svg>
+)
+export const IconMap = (p: P) => (
+  <Svg {...p}>
+    <path d="m9 4-6 2.5V20l6-2.5 6 2.5 6-2.5V4l-6 2.5z" />
+    <path d="M9 4v13.5M15 6.5V20" />
+  </Svg>
+)
+export const IconScale = (p: P) => (
+  <Svg {...p}>
+    <path d="M12 3v18M4 7h16M6 7l-3 7a3.5 3.5 0 0 0 6 0zM18 7l-3 7a3.5 3.5 0 0 0 6 0zM8 21h8" />
+  </Svg>
+)
+export const IconUsers = (p: P) => (
+  <Svg {...p}>
+    <circle cx="9" cy="8" r="3.5" />
+    <path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4.5-6.2" />
+  </Svg>
+)
+export const IconSparkle = (p: P) => (
+  <Svg {...p}>
+    <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" />
+  </Svg>
+)
+export const IconCode = (p: P) => (
+  <Svg {...p}>
+    <path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14" />
+  </Svg>
+)
+export const IconExternal = (p: P) => (
+  <Svg {...p}>
+    <path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" />
   </Svg>
 )

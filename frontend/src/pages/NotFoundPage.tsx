@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom'
-import { StateView } from '../components/ui'
+import { IconChevron } from '../components/icons'
+import { Page } from '../motion/Reveal'
 
 export default function NotFoundPage() {
   return (
-    <div className="container page-enter">
-      <StateView
-        kind="empty"
-        title="This page does not exist"
-        body="The link may be mistyped, or the run may have expired."
-        action={
-          <Link className="btn btn--sm" to="/">
-            Back to cases
+    <Page className="band notfound">
+      <div className="wrap notfound__inner">
+        <p className="eyebrow">404</p>
+        <h1 className="t-display">This page does not exist.</h1>
+        <p className="t-subtitle">The link may be mistyped, or the run may have expired.</p>
+        <p>
+          <Link className="btn btn--link btn--lg" to="/">
+            Back to cases <IconChevron size={14} />
           </Link>
-        }
-      />
-    </div>
+        </p>
+      </div>
+    </Page>
   )
 }

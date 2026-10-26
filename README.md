@@ -19,6 +19,7 @@ The output is a neutral memo for counsel in which every number traces back to a 
 ```
 backend/    FastAPI + LangGraph agent + deterministic scoring (Python 3.12, uv)
 frontend/   React + Vite + TypeScript (showcase, analyze, run view, method)
+archive/    earlier frontends (v1, v2), kept for reference; not built or served
 docs/       ARCHITECTURE.md (the contract), qloo-api-notes.md, DEPLOY.md
 ```
 
@@ -30,7 +31,7 @@ Backend (fixture mode works without any key):
 cd backend && uv sync --extra dev && uv run python -m uvicorn tearose.api.app:app --reload
 ```
 
-Frontend in mock mode (no backend needed): `cd frontend && npm install && npm run dev`.
+Frontend in mock mode (no backend needed): `cd frontend && npm install && npm run dev` (http://localhost:5173).
 Frontend against the backend: `npm run dev:api` (Vite proxies `/api` to port 8000).
 Production build served by the backend: `npm run build`, then start the backend; it serves `frontend/dist`.
 

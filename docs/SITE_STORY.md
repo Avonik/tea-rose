@@ -1,6 +1,6 @@
 # Tea Rose: the story the site tells
 
-Status: proposal, 2026-10-25. Design stays frontend-v2 as built; this document decides the
+Status: proposal, 2026-10-25. Design stays the v2 design as built (since carried into `frontend/`, formerly v3); this document decides the
 narrative, the order of sections and the copy rules. Terms used here: the **senior brand** is the
 older brand that sends the letter; the **junior** is the newcomer it accuses. On the site we avoid
 both words where a brand name can stand instead.
@@ -144,7 +144,7 @@ errors and one design error, dated them, kept every report.
 
 ## Decisions this document fixes
 
-- frontend-v2 becomes the served frontend (config default, Dockerfile, README).
+- The redesigned frontend becomes the served one: it now lives in `frontend/` (formerly v3); v1 and v2 are in `archive/`.
 - The scroll-pinned hero counts time down, not money.
 - The back-test appears on the home page as one paragraph with two numbers and a link, nothing more.
 - Court outcomes for the five showcase cases are hand-written content, two sentences each.

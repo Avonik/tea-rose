@@ -1,0 +1,133 @@
+/* Print → Save as PDF yields a clean memo: no chrome, no trace, no controls; charts and map kept. */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f4f3f1;
+    --surface-3: #e8e6e2;
+    --text: #111111;
+    --text-2: #3d3b40;
+    --text-3: #5d5a62;
+    --separator: #d9d6d1;
+    --separator-strong: #bdb9b3;
+    --senior: #2a78d6;
+    --junior: #eb6834;
+    --neg: #e34948;
+    --accent: #8c1c3e;
+    --accent-tint: #f6e7ec;
+    --warn: #6b4600;
+    --warn-bg: #fff8e8;
+    --warn-edge: #e6cf98;
+    --shadow-1: none;
+    --shadow-2: none;
+    --shadow-3: none;
+  }
+
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    font-size: 10.5pt;
+  }
+
+  .no-print,
+  .topbar,
+  .footer,
+  .skip-link,
+  .toc,
+  .run__trace,
+  .zone__controls,
+  .maplibregl-control-container,
+  .followup,
+  .pending,
+  .btn {
+    display: none !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .run__grid {
+    display: block !important;
+  }
+
+  .container,
+  .container-wide {
+    max-width: none;
+    padding: 0;
+  }
+
+  .card,
+  .memo {
+    box-shadow: none !important;
+    border: 1px solid var(--separator);
+    border-radius: 8px;
+    padding: 12pt 14pt !important;
+  }
+
+  .run__main {
+    gap: 10pt;
+  }
+
+  .card,
+  .gauge,
+  .fame-charts,
+  .zone,
+  .limits,
+  .findings tr,
+  .memo__section,
+  .compare-list,
+  .peer-table {
+    break-inside: avoid;
+  }
+
+  .memo {
+    break-before: page;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  .zone-map {
+    height: 9cm;
+  }
+
+  .disclosure__chev {
+    display: none;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .prose a[href^='#query-'],
+  a.ref-chip {
+    color: var(--accent);
+  }
+
+  .appendix__params {
+    min-width: 0;
+  }
+
+  .table-scroll {
+    overflow: visible;
+  }
+
+  .memo__bottom-line,
+  .bottom-line__summary {
+    font-size: 10.5pt;
+    color: var(--text-2);
+  }
+}

@@ -1,30 +1,37 @@
-import type { ReactNode } from 'react'
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
+import { useId, useState, type ReactNode } from 'react'
 import { ApiError } from '../api'
+import { fade, springQuick } from '../motion/springs'
 import type { Confidence, FactorLean } from '../types'
-import { IconChevron, IconError, IconInfo, IconWarn } from './icons'
+import { IconChevron, IconError, IconInfo, IconWarn, IconCheckCircle } from './icons'
 
-export function Spinner({ label }: { label?: string }) {
+// ------------------------------------------------------------------ status & feedback
+
+export function Spinner({ label, size }: { label?: string; size?: 'sm' }) {
   return (
-    <span role={label ? 'status' : undefined} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-      <span className="spinner" aria-hidden="true" />
+    <span role={label ? 'status' : undefined} className="spinner-wrap">
+      <span className={`spinner ${size === 'sm' ? 'spinner--sm' : ''}`} aria-hidden="true" />
       {label && <span>{label}</span>}
     </span>
   )
 }
 
-export function Skeleton({ h = 16, w = '100%', r }: { h?: number | string; w?: number | string; r?: number }) {
-  return <div className="skeleton" style={{ height: h, width: w, borderRadius: r }} aria-hidden="true" />
+export function Skeleton({ h = 14, w = '100%', r }: { h?: number | string; w?: number | string; r?: number }) {
+  return <span className="skeleton" style={{ height: h, width: w, borderRadius: r }} aria-hidden="true" />
 }
 
-export function SkeletonCard({ lines = 3 }: { lines?: number }) {
+/** A labelled placeholder that holds a block's place while a run streams. */
+export function SkeletonCard({ lines = 3, label, tall }: { lines?: number; label?: string; tall?: boolean }) {
   return (
-    <div className="card" aria-hidden="true">
-      <Skeleton h={14} w="30%" />
-      <div style={{ height: 14 }} />
+    <div className="skeleton-block" aria-busy="true" aria-label={label} style={tall ? { minHeight: '18rem' } : undefined}>
+      {label && (
+        <p className="caption pending-label">
+          <span className="spinner spinner--sm" aria-hidden="true" /> {label}
+        </p>
+      )}
+      <Skeleton h={22} w="38%" />
       {Array.from({ length: lines }, (_, i) => (
-        <div key={i} style={{ marginTop: 10 }}>
-          <Skeleton h={12} w={`${90 - i * 14}%`} />
-        </div>
+        <Skeleton key={i} h={12} w={`${92 - i * 14}%`} />
       ))}
     </div>
   )
@@ -49,12 +56,12 @@ export function StateView({
 }) {
   return (
     <div className={`state state--${kind}`} role={kind === 'error' ? 'alert' : 'status'}>
-      <div className="state__icon">
-        {kind === 'loading' ? <span className="spinner" aria-hidden="true" /> : kind === 'error' ? <IconError size={20} /> : <IconInfo size={20} />}
+      <div className="state__icon" aria-hidden="true">
+        {kind === 'loading' ? <span className="spinner" /> : kind === 'error' ? <IconError size={22} /> : <IconInfo size={22} />}
       </div>
-      <div className="state__title">{title}</div>
+      <h1 className="state__title">{title}</h1>
       {body && <div className="state__body">{body}</div>}
-      {action}
+      {action && <div className="state__action">{action}</div>}
     </div>
   )
 }
@@ -67,7 +74,7 @@ export function ErrorState({ error, onRetry, title = 'Could not load this' }: { 
       body={errorMessage(error)}
       action={
         onRetry && (
-          <button className="btn btn--sm" onClick={onRetry}>
+          <button type="button" className="btn btn--primary" onClick={onRetry}>
             Try again
           </button>
         )
@@ -76,15 +83,21 @@ export function ErrorState({ error, onRetry, title = 'Could not load this' }: { 
   )
 }
 
-export function Notice({ kind, children }: { kind: 'warn' | 'error' | 'info'; children: ReactNode }) {
-  const Icon = kind === 'warn' ? IconWarn : kind === 'error' ? IconError : IconInfo
+/** Status in four kinds: warning, error, info, success. Always icon + label. */
+export function Notice({ kind, children, title }: { kind: 'warn' | 'error' | 'info' | 'ok'; children: ReactNode; title?: string }) {
+  const Icon = kind === 'warn' ? IconWarn : kind === 'error' ? IconError : kind === 'ok' ? IconCheckCircle : IconInfo
   return (
-    <div className={`notice notice--${kind}`} role={kind === 'error' ? 'alert' : undefined}>
-      <Icon size={16} />
-      <div>{children}</div>
+    <div className={`notice notice--${kind}`} role={kind === 'error' ? 'alert' : kind === 'warn' ? 'status' : undefined}>
+      <Icon size={17} />
+      <div>
+        {title && <strong className="notice__title">{title} </strong>}
+        {children}
+      </div>
     </div>
   )
 }
+
+// ------------------------------------------------------------------ chips
 
 export const LEAN_LABEL: Record<FactorLean, string> = {
   favors_senior: 'Favors senior',
@@ -93,18 +106,13 @@ export const LEAN_LABEL: Record<FactorLean, string> = {
   insufficient_data: 'Insufficient data',
 }
 
-const LEAN_CLASS: Record<FactorLean, string> = {
-  favors_senior: 'chip--senior',
-  neutral: 'chip--neutral',
-  favors_junior: 'chip--junior',
-  insufficient_data: 'chip--insufficient',
-}
-
-export function LeanChip({ lean }: { lean: FactorLean }) {
+/** A lean is data: the dot carries the party colour (gray for neutral, hollow for no data); the label stays ink. */
+export function LeanChip({ lean, size, names }: { lean: FactorLean; size?: 'sm'; names?: { senior: string; junior: string } }) {
+  const label = names && lean === 'favors_senior' ? `Favors ${names.senior}` : names && lean === 'favors_junior' ? `Favors ${names.junior}` : LEAN_LABEL[lean] ?? lean
   return (
-    <span className={`chip ${LEAN_CLASS[lean] ?? 'chip--neutral'}`}>
-      {lean !== 'insufficient_data' && <span className="chip__dot" aria-hidden="true" />}
-      {LEAN_LABEL[lean] ?? lean}
+    <span className={`chip lean--${lean} ${size === 'sm' ? 'chip--sm' : ''}`}>
+      <span className={`dot ${lean === 'insufficient_data' ? 'dot--hollow' : ''}`} aria-hidden="true" />
+      {label}
     </span>
   )
 }
@@ -112,46 +120,146 @@ export function LeanChip({ lean }: { lean: FactorLean }) {
 export function ConfidenceMeter({ level }: { level: Confidence }) {
   const n = level === 'high' ? 3 : level === 'medium' ? 2 : 1
   return (
-    <span className="confidence" title={`${level} confidence`}>
+    <span className="confidence" aria-label={`${level} confidence`}>
       <span className="confidence__bars" aria-hidden="true">
         {[1, 2, 3].map((i) => (
-          <span key={i} data-on={i <= n} />
+          <span key={i} data-on={i <= n || undefined} />
         ))}
       </span>
-      <span className="confidence__label">{level}</span>
+      <span aria-hidden="true">{level.charAt(0).toUpperCase() + level.slice(1)} confidence</span>
     </span>
   )
 }
+
+// ------------------------------------------------------------------ disclosure (interruptible height spring)
 
 export function Disclosure({
   summary,
   children,
   className = '',
-  defaultOpen,
+  defaultOpen = false,
   printOpen = true,
+  id,
+  open: openProp,
+  onOpenChange,
 }: {
   summary: ReactNode
   children: ReactNode
   className?: string
   defaultOpen?: boolean
   printOpen?: boolean
+  id?: string
+  /** Controlled mode (optional): the parent owns the open state. */
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }) {
+  const [openState, setOpenState] = useState(defaultOpen)
+  const open = openProp ?? openState
+  const setOpen = (fn: (o: boolean) => boolean) => {
+    const next = fn(open)
+    if (openProp === undefined) setOpenState(next)
+    onOpenChange?.(next)
+  }
+  const reduce = useReducedMotion()
+  const autoId = useId()
+  const bodyId = id ?? autoId
   return (
-    <details className={`disclosure ${className}`} open={defaultOpen} data-print-open={printOpen || undefined}>
-      <summary>
-        <IconChevron className="disclosure__chev" size={14} />
-        {summary}
-      </summary>
-      {children}
-    </details>
+    <div className={`disclosure ${className}`} data-open={open || undefined} data-print-open={printOpen || undefined}>
+      <button type="button" className="disclosure__summary pressable" aria-expanded={open} aria-controls={bodyId} onClick={() => setOpen((o) => !o)}>
+        <motion.span className="disclosure__chev" animate={{ rotate: open ? 90 : 0 }} transition={reduce ? fade : springQuick} aria-hidden="true">
+          <IconChevron size={14} />
+        </motion.span>
+        <span className="disclosure__label">{summary}</span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id={bodyId}
+            className="disclosure__body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={reduce ? fade : springQuick}
+            style={{ overflow: 'hidden' }}
+          >
+            <div className="disclosure__inner">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!open && printOpen && <div className="disclosure__print-only">{children}</div>}
+    </div>
   )
 }
 
-export function Meter({ value, color, label }: { value: number; color?: string; label?: string }) {
-  const pct = Math.max(0, Math.min(1, value)) * 100
+// ------------------------------------------------------------------ meter & segmented control
+
+export function Meter({ value, color, label, height = 6 }: { value: number; color?: string; label?: string; height?: number }) {
+  const reduce = useReducedMotion()
+  const p = Math.max(0, Math.min(1, value))
   return (
-    <div className="meter" role="img" aria-label={label ?? `${Math.round(pct)}%`}>
-      <div className="meter__fill" style={{ width: `${pct}%`, background: color }} />
+    <div className="meter" role="img" aria-label={label ?? `${Math.round(p * 100)}%`} style={{ height }}>
+      <motion.div
+        className="meter__fill"
+        style={{ background: color }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: p }}
+        transition={reduce ? fade : { type: 'spring', bounce: 0, duration: 0.6 }}
+      />
     </div>
+  )
+}
+
+export interface SegmentOption<T extends string> {
+  value: T
+  label: ReactNode
+  icon?: ReactNode
+  disabled?: boolean
+  title?: string
+}
+
+/** A segmented control whose selection indicator slides between segments (shared layout spring). */
+export function Segmented<T extends string>({
+  value,
+  onChange,
+  options,
+  label,
+  size,
+  className = '',
+}: {
+  value: T
+  onChange: (v: T) => void
+  options: SegmentOption<T>[]
+  label: string
+  size?: 'sm'
+  className?: string
+}) {
+  const reduce = useReducedMotion()
+  const group = useId()
+  return (
+    <LayoutGroup id={group}>
+      <div className={`segmented ${size === 'sm' ? 'segmented--sm' : ''} ${className}`} role="radiogroup" aria-label={label}>
+        {options.map((o) => {
+          const on = o.value === value
+          return (
+            <button
+              key={o.value}
+              type="button"
+              role="radio"
+              aria-checked={on}
+              className="segmented__item pressable"
+              disabled={o.disabled}
+              title={o.title}
+              onClick={() => onChange(o.value)}
+            >
+              {on && <motion.span layoutId="seg-indicator" className="segmented__indicator" transition={reduce ? fade : springQuick} aria-hidden="true" />}
+              <span className="segmented__content">
+                {o.icon}
+                {o.label}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+    </LayoutGroup>
   )
 }

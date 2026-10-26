@@ -1,30 +1,101 @@
-/* Design tokens. See DESIGN_NOTES.md. Every spacing, size, color and timing comes from here. */
+/*
+ * Tea Rose design tokens. "Apple keynote, for lawyers": monochrome chrome, glass, depth.
+ * Color is reserved for data (senior indigo, junior orange, negative red). No accent in chrome.
+ * Light is the default; dark follows the system unless the reader picked an appearance.
+ */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
-  /* Type */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI Variable Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: ui-serif, 'New York', 'Iowan Old Style', 'Charter', 'Georgia', 'Cambria', serif;
-  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Consolas', 'Menlo', monospace;
+  /* surfaces */
+  --page: #ffffff;
+  --band: #f5f5f7;
+  --surface-on-page: #f5f5f7; /* grouped surface on a white band */
+  --surface-on-band: #ffffff; /* grouped surface on a gray band */
+  --group: var(--surface-on-page);
+  --fill: rgba(0, 0, 0, 0.05); /* chips, segmented tracks */
+  --fill-2: rgba(0, 0, 0, 0.09);
+  --fill-3: rgba(0, 0, 0, 0.14);
 
-  --fs-micro: 0.6875rem;
-  --fs-caption: 0.8125rem;
-  --fs-footnote: 0.875rem;
-  --fs-body: 1rem;
-  --fs-title3: 1.25rem;
-  --fs-title2: 1.625rem;
-  --fs-title1: 2.25rem;
-  --fs-display: clamp(2.25rem, 1.2rem + 4.2vw, 4rem);
+  /* text */
+  --text: #1d1d1f;
+  --text-2: #6e6e73;
+  --text-3: #86868b;
+  --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-2: rgba(0, 0, 0, 0.14);
 
-  /* Size-specific tracking: tighter as type grows */
-  --tr-display: -0.022em;
-  --tr-title: -0.012em;
-  --tr-body: 0;
+  /* materials */
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-strong: rgba(255, 255, 255, 0.86);
+  --glass-edge: rgba(255, 255, 255, 0.6);
+  --glass-line: rgba(0, 0, 0, 0.06);
+  --glass-filter: saturate(180%) blur(20px);
+  --glass-filter-thick: saturate(180%) blur(30px);
+  --scrim: rgba(0, 0, 0, 0.32);
+
+  /* actions */
+  --primary-bg: #1d1d1f;
+  --primary-fg: #ffffff;
+  --primary-bg-hover: #000000;
+  --link: #0066cc;
+  --focus: #0066cc;
+
+  /* data (charts, gauges, chips only; never text or chrome) */
+  --senior: #5e5ce6;
+  --junior: #ff9f0a;
+  --neg: #ff453a;
+  --zero: rgba(0, 0, 0, 0.22);
+  --grid: rgba(0, 0, 0, 0.08);
+
+  /* status */
+  --warn: #ff9f0a;
+  --warn-ink: #8a5300;
+  --warn-tint: rgba(255, 159, 10, 0.12);
+  --error: #ff3b30;
+  --error-ink: #c4161c;
+  --error-tint: rgba(255, 59, 48, 0.1);
+  --ok: #30d158;
+  --ok-ink: #1a7f37;
+  --ok-tint: rgba(48, 209, 88, 0.12);
+
+  /* depth */
+  --shadow-hover: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.04), 0 1rem 2.5rem rgba(0, 0, 0, 0.08);
+  --shadow-glass: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.04), 0 0.75rem 2rem rgba(0, 0, 0, 0.1);
+  --shadow-glass-thick: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.06), 0 1.5rem 3.5rem rgba(0, 0, 0, 0.16);
+  --shadow-frame: 0 1.5rem 4rem rgba(0, 0, 0, 0.1), 0 0.25rem 1rem rgba(0, 0, 0, 0.04);
+
+  /* type */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI Variable Display', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-serif: ui-serif, 'New York', Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  --fs-display: clamp(3rem, 2rem + 6vw, 7rem);
+  --fs-headline: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  --fs-title: 1.75rem;
+  --fs-title-2: 1.3125rem;
+  --fs-subtitle: 1.3125rem;
+  --fs-body: 1.0625rem;
+  --fs-callout: 0.9375rem;
+  --fs-footnote: 0.8125rem;
+  --fs-caption: 0.75rem;
+  --fs-numeral: clamp(4.5rem, 3.4rem + 3vw, 6rem);
+
+  --tr-display: -0.045em;
+  --tr-headline: -0.03em;
+  --tr-title: -0.02em;
+  --tr-title-2: -0.012em;
+  --tr-body: -0.005em;
   --tr-caption: 0.01em;
-  --tr-eyebrow: 0.06em;
+  --tr-eyebrow: 0.1em;
+  --tr-numeral: -0.04em;
 
-  /* Spacing: 4px grid in rem so it scales with the user's text size */
+  --lh-display: 1;
+  --lh-headline: 1.06;
+  --lh-title: 1.14;
+  --lh-body: 1.47;
+  --lh-prose: 1.6;
+  --lh-caption: 1.34;
+
+  /* space */
   --s-1: 0.25rem;
   --s-2: 0.5rem;
   --s-3: 0.75rem;
@@ -35,138 +106,180 @@
   --s-10: 2.5rem;
   --s-12: 3rem;
   --s-16: 4rem;
-  --s-20: 5rem;
+  --gutter: 1.375rem;
+  --band-pad: clamp(5rem, 10vw, 9rem);
+  --w-text: 61.25rem;
+  --w-wide: 75rem;
+  --w-prose: 38rem;
 
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 26px;
+  /* radii */
+  --r-xs: 0.25rem;
+  --r-sm: 0.5rem;
+  --r-md: 0.875rem;
+  --r-group: 1.125rem;
+  --r-card: 1.75rem;
   --r-pill: 999px;
 
-  --content: 72rem;
-  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  /* CSS motion is only for press feedback and color; anything that travels is a spring in JS */
+  --press: 100ms cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --dur-1: 160ms;
+  --dur-2: 240ms;
 
-  /* Motion: critically damped (no overshoot), approximating a spring with response ~0.3s */
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.45, 0, 0.2, 1);
-  --dur-1: 120ms;
-  --dur-2: 220ms;
-  --dur-3: 340ms;
-
-  /* Light palette */
-  --bg: #f6f5f2;
-  --surface: #ffffff;
-  --surface-2: #f2f0ec;
-  --surface-3: #e9e6e1;
-  --material: rgba(246, 245, 242, 0.72);
-  --material-edge: rgba(255, 255, 255, 0.6);
-  --scrim: rgba(20, 18, 22, 0.32);
-
-  --text: #1b1a1d;
-  --text-2: #55525b;
-  --text-3: #6f6b75;
-  --separator: rgba(27, 26, 29, 0.1);
-  --separator-strong: rgba(27, 26, 29, 0.18);
-
-  --accent: #a3234a;
-  --accent-hover: #8c1c3e;
-  --accent-tint: rgba(163, 35, 74, 0.08);
-  --on-accent: #ffffff;
-  --focus: #a3234a;
-
-  /* Data identity (dataviz categorical slots 1 and 2, validated) */
-  --senior: #2a78d6;
-  --senior-tint: rgba(42, 120, 214, 0.1);
-  --senior-ink: #1d5aa6;
-  --junior: #eb6834;
-  --junior-tint: rgba(235, 104, 52, 0.11);
-  --junior-ink: #b4461a;
-  --neg: #e34948;
-  --zero: #c9c6c0;
-  --grid: #ebe9e5;
-
-  /* Status (icon + label always) */
-  --warn: #8a5a00;
-  --warn-bg: #fff5df;
-  --warn-edge: #f2d79b;
-  --error: #b42323;
-  --error-bg: #fdecec;
-  --error-edge: #f3c3c3;
-  --ok: #17803d;
-  --ok-bg: #e8f6ed;
-
-  --shadow-1: 0 1px 2px rgba(20, 18, 22, 0.05), 0 1px 1px rgba(20, 18, 22, 0.03);
-  --shadow-2: 0 1px 2px rgba(20, 18, 22, 0.05), 0 6px 20px -6px rgba(20, 18, 22, 0.12);
-  --shadow-3: 0 2px 6px rgba(20, 18, 22, 0.06), 0 22px 48px -18px rgba(20, 18, 22, 0.22);
+  --target: 2.25rem;
 }
+
+@media (pointer: coarse) {
+  :root {
+    --target: 2.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------- dark */
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #131214;
-    --surface: #1c1b1e;
-    --surface-2: #242327;
-    --surface-3: #2e2d32;
-    --material: rgba(19, 18, 20, 0.7);
-    --material-edge: rgba(255, 255, 255, 0.06);
-    --scrim: rgba(0, 0, 0, 0.5);
-
-    --text: #f3f1f4;
-    --text-2: #b9b5bf;
-    --text-3: #9a96a1;
-    --separator: rgba(255, 255, 255, 0.09);
-    --separator-strong: rgba(255, 255, 255, 0.16);
-
-    --accent: #ff7a9c;
-    --accent-hover: #ff97b1;
-    --accent-tint: rgba(255, 122, 156, 0.12);
-    --on-accent: #22070f;
-    --focus: #ff7a9c;
-
-    --senior: #3987e5;
-    --senior-tint: rgba(57, 135, 229, 0.16);
-    --senior-ink: #8ab8f2;
-    --junior: #d95926;
-    --junior-tint: rgba(217, 89, 38, 0.18);
-    --junior-ink: #f0a07c;
-    --neg: #e66767;
-    --zero: #4a4850;
-    --grid: #2b2a2f;
-
-    --warn: #f3c25a;
-    --warn-bg: rgba(250, 178, 25, 0.12);
-    --warn-edge: rgba(250, 178, 25, 0.3);
-    --error: #ff8a8a;
-    --error-bg: rgba(208, 59, 59, 0.16);
-    --error-edge: rgba(208, 59, 59, 0.4);
-    --ok: #5fd08a;
-    --ok-bg: rgba(12, 163, 12, 0.14);
-
-    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
-    --shadow-3: 0 2px 6px rgba(0, 0, 0, 0.4), 0 24px 56px -18px rgba(0, 0, 0, 0.7);
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --page: #000000;
+    --band: #161617;
+    --surface-on-page: #1c1c1e;
+    --surface-on-band: #2c2c2e;
+    --fill: rgba(255, 255, 255, 0.08);
+    --fill-2: rgba(255, 255, 255, 0.13);
+    --fill-3: rgba(255, 255, 255, 0.2);
+    --text: #f5f5f7;
+    --text-2: #a1a1a6;
+    --text-3: #6e6e73;
+    --hairline: rgba(255, 255, 255, 0.12);
+    --hairline-2: rgba(255, 255, 255, 0.2);
+    --glass: rgba(22, 22, 23, 0.72);
+    --glass-strong: rgba(28, 28, 30, 0.86);
+    --glass-edge: rgba(255, 255, 255, 0.1);
+    --glass-line: rgba(255, 255, 255, 0.08);
+    --scrim: rgba(0, 0, 0, 0.55);
+    --primary-bg: #f5f5f7;
+    --primary-fg: #1d1d1f;
+    --primary-bg-hover: #ffffff;
+    --link: #2997ff;
+    --focus: #2997ff;
+    --senior: #7d7aff;
+    --junior: #ffb340;
+    --neg: #ff6961;
+    --zero: rgba(255, 255, 255, 0.3);
+    --grid: rgba(255, 255, 255, 0.1);
+    --warn-ink: #ffd60a;
+    --warn-tint: rgba(255, 159, 10, 0.16);
+    --error-ink: #ff6961;
+    --error-tint: rgba(255, 69, 58, 0.16);
+    --ok-ink: #30d158;
+    --ok-tint: rgba(48, 209, 88, 0.16);
+    --shadow-hover: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3), 0 1rem 2.5rem rgba(0, 0, 0, 0.5);
+    --shadow-glass: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.3), 0 0.75rem 2rem rgba(0, 0, 0, 0.5);
+    --shadow-glass-thick: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.4), 0 1.5rem 3.5rem rgba(0, 0, 0, 0.6);
+    --shadow-frame: 0 1.5rem 4rem rgba(0, 0, 0, 0.6);
   }
 }
 
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #000000;
+  --band: #161617;
+  --surface-on-page: #1c1c1e;
+  --surface-on-band: #2c2c2e;
+  --fill: rgba(255, 255, 255, 0.08);
+  --fill-2: rgba(255, 255, 255, 0.13);
+  --fill-3: rgba(255, 255, 255, 0.2);
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #6e6e73;
+  --hairline: rgba(255, 255, 255, 0.12);
+  --hairline-2: rgba(255, 255, 255, 0.2);
+  --glass: rgba(22, 22, 23, 0.72);
+  --glass-strong: rgba(28, 28, 30, 0.86);
+  --glass-edge: rgba(255, 255, 255, 0.1);
+  --glass-line: rgba(255, 255, 255, 0.08);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --primary-bg: #f5f5f7;
+  --primary-fg: #1d1d1f;
+  --primary-bg-hover: #ffffff;
+  --link: #2997ff;
+  --focus: #2997ff;
+  --senior: #7d7aff;
+  --junior: #ffb340;
+  --neg: #ff6961;
+  --zero: rgba(255, 255, 255, 0.3);
+  --grid: rgba(255, 255, 255, 0.1);
+  --warn-ink: #ffd60a;
+  --warn-tint: rgba(255, 159, 10, 0.16);
+  --error-ink: #ff6961;
+  --error-tint: rgba(255, 69, 58, 0.16);
+  --ok-ink: #30d158;
+  --ok-tint: rgba(48, 209, 88, 0.16);
+  --shadow-hover: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3), 0 1rem 2.5rem rgba(0, 0, 0, 0.5);
+  --shadow-glass: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.3), 0 0.75rem 2rem rgba(0, 0, 0, 0.5);
+  --shadow-glass-thick: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.4), 0 1.5rem 3.5rem rgba(0, 0, 0, 0.6);
+  --shadow-frame: 0 1.5rem 4rem rgba(0, 0, 0, 0.6);
+}
+
+/* ---------------------------------------------------------------- accessibility signals */
+
+/* Reduced transparency: glass becomes a solid, frosted surface. */
 @media (prefers-reduced-transparency: reduce) {
   :root {
-    --material: var(--bg);
+    --glass: #fbfbfd;
+    --glass-strong: #ffffff;
+    --glass-filter: none;
+    --glass-filter-thick: none;
+  }
+  :root[data-theme='dark'] {
+    --glass: #1c1c1e;
+    --glass-strong: #2c2c2e;
+  }
+}
+@media (prefers-reduced-transparency: reduce) and (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --glass: #1c1c1e;
+    --glass-strong: #2c2c2e;
   }
 }
 
+/* Increased contrast: stronger text, visible hairlines, near-solid glass with a defined edge. */
 @media (prefers-contrast: more) {
   :root {
-    --separator: rgba(27, 26, 29, 0.45);
-    --separator-strong: rgba(27, 26, 29, 0.7);
-    --text-2: #3c3a40;
-    --text-3: #3c3a40;
-    --material: var(--bg);
+    --text-2: #424245;
+    --text-3: #57575c;
+    --hairline: rgba(0, 0, 0, 0.3);
+    --hairline-2: rgba(0, 0, 0, 0.45);
+    --glass: #ffffff;
+    --glass-strong: #ffffff;
+    --glass-line: rgba(0, 0, 0, 0.45);
+    --glass-filter: none;
+    --glass-filter-thick: none;
+    --fill: rgba(0, 0, 0, 0.1);
+    --link: #0040a0;
+  }
+  :root[data-theme='dark'] {
+    --text-2: #d2d2d7;
+    --text-3: #a1a1a6;
+    --hairline: rgba(255, 255, 255, 0.35);
+    --hairline-2: rgba(255, 255, 255, 0.5);
+    --glass: #000000;
+    --glass-strong: #000000;
+    --glass-line: rgba(255, 255, 255, 0.5);
+    --fill: rgba(255, 255, 255, 0.16);
+    --link: #69b4ff;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-1: 0ms;
-    --dur-2: 120ms;
-    --dur-3: 160ms;
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --text-2: #d2d2d7;
+    --text-3: #a1a1a6;
+    --hairline: rgba(255, 255, 255, 0.35);
+    --hairline-2: rgba(255, 255, 255, 0.5);
+    --glass: #000000;
+    --glass-strong: #000000;
+    --glass-line: rgba(255, 255, 255, 0.5);
+    --fill: rgba(255, 255, 255, 0.16);
+    --link: #69b4ff;
   }
 }

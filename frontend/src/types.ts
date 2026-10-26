@@ -59,6 +59,8 @@ export interface Party {
 
 export type DocumentType =
   | 'complaint'
+  /** Set in code when the input bundles the complaint with the defendant's answer or motion. */
+  | 'pleadings'
   | 'cease_and_desist'
   | 'opinion'
   | 'petition'
@@ -83,6 +85,8 @@ export type Analysis = 'overlap' | 'bridging' | 'fame' | 'zone'
 export interface RoutingDecision {
   analyses: Analysis[]
   rationale: Record<string, string>
+  /** Analyses run for context only: measured, but not raised by the pleading. */
+  context_only?: Analysis[]
 }
 
 // ---------------------------------------------------------------- resolution
@@ -279,6 +283,10 @@ export interface PreliminaryRead {
   /** 3-6 sentences, the data half and the pleading half separated */
   rationale: string
   flip_risks: string[]
+  /** 1-2 sentences: the strongest defence the facts allow. "" / absent on older runs. */
+  best_defence?: string
+  /** True when only the plaintiff's pleading was in the input; confidence is then capped at low. */
+  one_sided_input?: boolean
   read_factors: ReadFactor[]
   data_factors_used: string[]
   /** fixed sentence */
@@ -333,6 +341,7 @@ export type NodeName =
   | 'fetch'
   | 'score'
   | 'interpret'
+  | 'assess'
   | 'memo'
   | 'followup'
 
@@ -343,6 +352,7 @@ export const PIPELINE: readonly NodeName[] = [
   'fetch',
   'score',
   'interpret',
+  'assess',
   'memo',
 ]
 
@@ -383,6 +393,13 @@ export interface ShowcaseSummary {
   year: number | null
   one_liner: string
   tags: string[]
+  read_line?: string
+  /** The preliminary read's fields (null/absent when the run has no read). */
+  read_lean?: ReadLean | null
+  read_confidence?: Confidence | null
+  read_turns_on?: string | null
+  read_best_defence?: string | null
+  read_one_sided?: boolean | null
 }
 
 // ---------------------------------------------------------------- API envelopes (docs/ARCHITECTURE.md)

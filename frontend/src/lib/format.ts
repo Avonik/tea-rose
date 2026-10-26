@@ -115,5 +115,138 @@ export const timeOf = (iso: string) => {
 
 export const bytes = (n: number) => (n < 1024 ? `${n} B` : n < 1024 * 1024 ? `${(n / 1024).toFixed(0)} KB` : `${(n / 1024 / 1024).toFixed(1)} MB`)
 
-/** "Bad Spaniels" → "Bad Spaniels’", "Jack Daniel’s" stays readable. */
-export const possessive = (name: string) => (/s$/i.test(name) ? `${name}’` : `${name}’s`)
+/** "Bad Spaniels" → "Bad Spaniels’", "Vans" → "Vans’"; a name already ending in ’s ("Jack Daniel’s") stays as it is. */
+export const possessive = (name: string) => (/['’]s$/i.test(name) ? name : /s$/i.test(name) ? `${name}’` : `${name}’s`)
+
+// ------------------------------------------------------------------ one scale for every score
+// Every score on the site is shown on a 0 to 100 axis, as an ordinal percentile or a whole
+// percentage, never as a raw float.
+
+/** 1 → "1st", 52 → "52nd", 13 → "13th". */
+export function ordinalSuffix(n: number): string {
+  const v = Math.abs(Math.round(n))
+  const t = v % 100
+  if (t >= 11 && t <= 13) return `${v}th`
+  switch (v % 10) {
+    case 1:
+      return `${v}st`
+    case 2:
+      return `${v}nd`
+    case 3:
+      return `${v}rd`
+    default:
+      return `${v}th`
+  }
+}
+
+/** A 0..1 position as a whole number 0..100 (clamped). */
+export const score100 = (x: number | null | undefined): number | null =>
+  x == null || Number.isNaN(x) ? null : Math.round(Math.max(0, Math.min(1, x)) * 100)
+
+/**
+ * 0.52 → "52nd percentile". Clamped to 1st..99th so a #1 rank reads "99th", not "100th".
+ * null → "not measured".
+ */
+export function ordinalPercentile(x: number | null | undefined): string {
+  const s = score100(x)
+  if (s == null) return 'not measured'
+  return `${ordinalSuffix(Math.max(1, Math.min(99, s)))} percentile`
+}
+
+/** Whole percentage of a 0..1 value: 0.614 → "61%". */
+export const wholePct = (x: number | null | undefined): string => {
+  const s = score100(x)
+  return s == null ? '–' : `${s}%`
+}
+
+/** −1..+1 index as a signed whole number on a −100..+100 scale: 0.31 → "+31". */
+export const signedWhole = (v: number | null | undefined): string => {
+  if (v == null || Number.isNaN(v)) return '–'
+  const n = Math.round(Math.max(-1, Math.min(1, v)) * 100)
+  return `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n)}`
+}
+
+/**
+ * Where a percentile sits, in words a reader can repeat: "in the top 14%", "near the middle",
+ * "in the bottom 20%". `p` is the share of the peer set ranked below.
+ */
+export function standing(p: number | null | undefined): string {
+  const s = score100(p)
+  if (s == null) return 'not measured'
+  if (s >= 65) return `in the top ${Math.max(1, 100 - s)}%`
+  if (s > 35) return 'near the middle'
+  return `in the bottom ${Math.max(1, s)}%`
+}
+
+/** Rank → percentile, the same formula the backend uses: 1 − (rank − 1) ÷ size. */
+export function rankPercentile(rank: number | null | undefined, size: number | null | undefined): number | null {
+  if (rank == null || !size) return null
+  return Math.max(0, Math.min(1, 1 - (rank - 1) / size))
+}
+
+/**
+ * Brand names for prose, preferring the resolved names; the roles only as a last resort, and then
+ * in plain words ("the older brand", "the newcomer"), never "senior" / "junior".
+ */
+export function brandNames(r: AnalysisResult): Record<Side, string> {
+  const res = r.resolution
+  const ex = r.extraction
+  const name = (side: Side) => {
+    const rb = res?.[side]
+    if (rb?.entity_name) return rb.entity_name
+    if (rb?.query) return rb.query
+    const p = ex?.[side]
+    if (p?.marks[0]) return titleCaseMark(p.marks[0])
+    if (p?.name) return p.name
+    return side === 'senior' ? 'the older brand' : 'the newcomer'
+  }
+  return { senior: name('senior'), junior: name('junior') }
+}
+
+/** Plain words for a proxy's category fit, for the "Measured through stand-ins" line. */
+export function fitLabel(fit: ProxyResolution['fit'], note?: string | null): string | null {
+  if (note) return note.charAt(0).toUpperCase() + note.slice(1)
+  if (fit === 'exact') return 'Exact category match'
+  if (fit === 'partial') return 'Partial category match'
+  if (fit === 'nearest') return 'Nearest category, no exact match in Qloo’s brand taxonomy'
+  return null
+}
+
+/** "MSCHF Product Studio Inc. (also searched: MSCHF)" → "MSCHF Product Studio Inc." */
+export const stripSearched = (s: string) => s.replace(/\s*\(also searched:[^)]*\)\s*/gi, ' ').trim()
+
+/**
+ * The brands as a reader knows them. A showcase case uses its own short title ("adidas v. Thom Browne");
+ * otherwise the resolved names, without the resolver's "(also searched: …)" note, in the document's own
+ * casing when the two differ only in case ("adidas", not "Adidas").
+ */
+export function displayNames(r: AnalysisResult, short?: string | null): Record<Side, string> {
+  const fromShort = short?.split(' v. ').map((s) => s.trim())
+  if (fromShort?.length === 2 && fromShort[0] && fromShort[1]) return { senior: fromShort[0], junior: fromShort[1] }
+  const base = brandNames(r)
+  const name = (side: Side) => {
+    const n = stripSearched(base[side])
+    const q = stripSearched(r.resolution?.[side]?.query ?? '')
+    return q && q.toLowerCase() === n.toLowerCase() && q !== q.toUpperCase() ? q : n
+  }
+  return { senior: name('senior'), junior: name('junior') }
+}
+
+/** "urn:tag:genre:brand:food_and_beverage:pet_food" in model prose → "Pet food". */
+export const plainTags = (text: string) => text.replace(/`?urn:tag:[\w:.-]+`?/g, (m) => tagName(m.replace(/`/g, '')))
+
+/** "Pet food" → "Pet-food", for "Pet-food stand-ins for Bad Spaniels". */
+export function standInLabel(proxy: ProxyResolution | null | undefined, name: string): string {
+  const id = proxy?.chosen_tag_ids[0]
+  const cat = (id ? tagName(id, [proxy]) : '').trim().toLowerCase().replace(/\s+/g, '-')
+  if (!cat) return `Stand-ins for ${name}`
+  return `${cat.charAt(0).toUpperCase()}${cat.slice(1)} stand-ins for ${name}`
+}
+
+/** Model prose cleaned of resolver artefacts: Qloo tag ids as tag names, no "(also searched: …)" notes. */
+export const plainProse = (text: string) => plainTags(text).replace(/\s*\(also searched:[^)]*\)/gi, '')
+
+/** The code-written headline in reader words: "Averaged over both directions, audience overlap is at the 79th percentile." → "Fans overlap, both ways, at the 79th percentile." */
+export const plainHeadline = (text: string) =>
+  plainProse(text).replace(/(^|;\s*)averaged over both directions, audience overlap is at the/gi, (_m, pre: string) => `${pre}${pre ? 'f' : 'F'}ans overlap, both ways, at the`)
+

@@ -1,6 +1,6 @@
 [
   {
-    "slug": "jack-daniels-v-vip-products",
+    "slug": "bad_spaniels",
     "title": "Bad Spaniels",
     "parties": "Jack Daniel's v. VIP Products",
     "year": 2023,
@@ -8,7 +8,7 @@
     "tags": ["parody", "dilution", "proxy path"]
   },
   {
-    "slug": "taco-bell-v-taco-johns",
+    "slug": "taco_tuesday",
     "title": "Taco Tuesday",
     "parties": "Taco Bell v. Taco John's",
     "year": 2023,
@@ -16,7 +16,7 @@
     "tags": ["genericness", "both in graph", "sanity check"]
   },
   {
-    "slug": "in-n-out-v-smashburger",
+    "slug": "in_n_out_smashburger",
     "title": "Triple Double",
     "parties": "In-N-Out v. Smashburger",
     "year": 2017,
@@ -24,7 +24,7 @@
     "tags": ["zone of reputation", "heatmap"]
   },
   {
-    "slug": "coach-v-triumph-learning",
+    "slug": "coach_triumph",
     "title": "Coach, not famous",
     "parties": "Coach Services v. Triumph Learning",
     "year": 2012,

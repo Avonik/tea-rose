@@ -1,17 +1,20 @@
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
-import { useMemo, type MouseEvent } from 'react'
-import { IconWarn } from '../components/icons'
-import { ConfidenceMeter, Disclosure, LeanChip } from '../components/ui'
-import { factorLabel, formatParams, shortId } from '../lib/format'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { useId, useMemo, useState, type MouseEvent } from 'react'
+import { IconChevron } from '../components/icons'
+import { ConfidenceMeter, LeanChip } from '../components/ui'
 import { FIXED_LIMITATIONS } from '../content/limitations'
+import { factorLabel, formatParams, plainProse, shortId } from '../lib/format'
+import { fade, springQuick } from '../motion/springs'
 import type { Memo, QlooQuery } from '../types'
+import './memo.css'
 
 marked.setOptions({ gfm: true, breaks: false })
 
-/** Turn "Q12" citations into links to the appendix rows, then render and sanitize. */
+/** Turn "Q12" citations into links to the appendix rows, Qloo tag ids into tag names, then render and sanitize. */
 function renderMarkdown(md: string): string {
-  const linked = md.replace(/(^|[^\w[#-])Q(\d{1,3})\b(?!\])/g, (_m, pre: string, n: string) => `${pre}[Q${n}](#query-${n})`)
+  const linked = plainProse(md).replace(/(^|[^\w[#-])Q(\d{1,3})\b(?!\])/g, (_m, pre: string, n: string) => `${pre}[Q${n}](#query-${n})`)
   const html = marked.parse(linked, { async: false })
   return DOMPurify.sanitize(html, { ADD_ATTR: ['target'] })
 }
@@ -21,16 +24,85 @@ function Markdown({ md }: { md: string }) {
   return <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
 }
 
-function RefChip({ r }: { r: string }) {
+// ------------------------------------------------------------------ reference navigation
+
+const PANEL_FOR_PREFIX: Record<string, string> = {
+  overlap: 'overlap',
+  bridging: 'bridging',
+  fame: 'fame',
+  zone: 'zone',
+}
+
+/** What a reader calls each evidence panel; field refs such as "overlap.symmetric_percentile" show this label. */
+const PANEL_LABEL: Record<string, string> = {
+  overlap: 'Fans overlap',
+  bridging: 'Bridging the gap',
+  fame: 'Known by everyone',
+  zone: 'Where it is known',
+}
+
+/** Evidence panel id for a field ref such as "overlap.symmetric_percentile"; null if unknown. */
+export function panelForRef(ref: string): string | null {
+  const prefix = ref.split('.')[0]
+  return PANEL_FOR_PREFIX[prefix] ?? null
+}
+
+function flash(el: HTMLElement) {
+  el.classList.remove('is-flash')
+  void el.offsetWidth
+  el.classList.add('is-flash')
+  window.setTimeout(() => el.classList.remove('is-flash'), 1300)
+}
+
+function scrollFlash(id: string, reduce: boolean, block: ScrollLogicalPosition = 'center') {
+  const el = document.getElementById(id)
+  if (!el) return false
+  requestAnimationFrame(() => {
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block })
+    flash(el)
+    history.replaceState(null, '', `#${id}`)
+  })
+  return true
+}
+
+/** Query citations as they are, field refs collapsed to one chip per evidence panel, unknown refs dropped. */
+function plainRefs(refs: string[]): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const r of refs) {
+    const key = /^Qd+$/.test(r) ? r : panelForRef(r)
+    if (!key || seen.has(key)) continue
+    seen.add(key)
+    out.push(/^Qd+$/.test(r) ? r : key)
+  }
+  return out
+}
+
+function RefChip({ r, onQuery, reduce }: { r: string; onQuery: (n: string) => void; reduce: boolean }) {
   const m = /^Q(\d+)$/.exec(r)
   if (m)
     return (
-      <a className="ref-chip" href={`#query-${m[1]}`}>
+      <a
+        className="ref-chip pressable"
+        href={`#query-${m[1]}`}
+        onClick={(e) => {
+          e.preventDefault()
+          onQuery(m[1])
+        }}
+      >
         {r}
       </a>
     )
-  return <code className="ref-chip ref-chip--field">{r}</code>
+  const panel = panelForRef(r)
+  if (!panel) return null
+  return (
+    <button type="button" className="ref-chip ref-chip--field pressable" title={`Jump to the evidence: ${PANEL_LABEL[panel]}`} onClick={() => scrollFlash(panel, reduce, 'start')}>
+      {PANEL_LABEL[panel]}
+    </button>
+  )
 }
+
+// ------------------------------------------------------------------ appendix
 
 function source(q: QlooQuery) {
   if (q.fixture_file) return { label: 'Fixture', title: q.fixture_file }
@@ -38,170 +110,238 @@ function source(q: QlooQuery) {
   return { label: 'Live', title: 'Live Qloo API call' }
 }
 
-export function QueryAppendix({ queries }: { queries: QlooQuery[] }) {
-  return (
-    <Disclosure
-      className="appendix"
-      summary={
-        <span className="appendix__summary">
-          <strong>Query appendix</strong>
-          <span className="faint num"> · {queries.length} Qloo {queries.length === 1 ? 'query' : 'queries'}; every number above cites one</span>
-        </span>
-      }
-    >
-      {queries.length === 0 ? (
-        <p className="caption faint">No queries were recorded.</p>
+export function QueryAppendix({
+  queries,
+  open,
+  onOpenChange,
+}: {
+  queries: QlooQuery[]
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}) {
+  const reduce = useReducedMotion()
+  const bodyId = useId()
+  const n = queries.length
+  const body = (
+    <div className="appendix__inner">
+      {n === 0 ? (
+        <p className="group__row caption tertiary">No queries were recorded.</p>
       ) : (
-        <div className="table-scroll">
-          <table className="table appendix__table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Endpoint</th>
-                <th scope="col">Parameters</th>
-                <th scope="col" className="r">
-                  Results
-                </th>
-                <th scope="col">Source</th>
-              </tr>
-            </thead>
-            <tbody>
-              {queries.map((q, i) => {
-                const s = source(q)
-                return (
-                  <tr key={i} id={`query-${i + 1}`} className="appendix__row">
-                    <td className="num faint">Q{i + 1}</td>
-                    <td>
-                      <code>{q.endpoint}</code>
-                    </td>
-                    <td>
-                      <ul className="appendix__params">
-                        {formatParams(q.params).map(([k, v]) => (
-                          <li key={k}>
-                            <span className="faint">{k}=</span>
-                            <span title={v}>{v.split(',').map(shortId).join(',')}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                    <td className="r num">{q.result_count ?? '–'}</td>
-                    <td>
-                      <span className={`chip chip--outline src src--${s.label.toLowerCase()}`} title={s.title}>
-                        {s.label}
-                      </span>
-                      {q.elapsed_ms != null && <span className="caption faint num appendix__ms"> {q.elapsed_ms} ms</span>}
-                      {q.status != null && q.status !== 200 && <span className="caption num appendix__status"> HTTP {q.status}</span>}
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+        <ol className="appendix__list" aria-label="Logged Qloo queries">
+          {queries.map((q, i) => {
+            const s = source(q)
+            return (
+              <li key={i} id={`query-${i + 1}`} className="group__row group__row--top group__sep appendix__row">
+                <span className="appendix__n num">Q{i + 1}</span>
+                <span className="group__main appendix__main">
+                  <code className="appendix__endpoint">{q.endpoint}</code>
+                  <ul className="appendix__params">
+                    {formatParams(q.params).map(([k, v]) => (
+                      <li key={k}>
+                        <span className="tertiary">{k}=</span>
+                        <span title={v}>{v.split(',').map(shortId).join(',')}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </span>
+                <span className="appendix__meta">
+                  <span className="num appendix__results">
+                    {q.result_count ?? '–'} <span className="caption tertiary">results</span>
+                  </span>
+                  <span className="badge" title={s.title}>
+                    {s.label}
+                  </span>
+                  {q.elapsed_ms != null && <span className="caption tertiary num">{q.elapsed_ms} ms</span>}
+                  {q.status != null && q.status !== 200 && <span className="caption num appendix__status">HTTP {q.status}</span>}
+                </span>
+              </li>
+            )
+          })}
+        </ol>
       )}
-    </Disclosure>
+    </div>
+  )
+  return (
+    <div className="group appendix" id="appendix" data-open={open || undefined} data-print-open>
+      <button type="button" className="group__row appendix__summary" aria-expanded={open} aria-controls={bodyId} onClick={() => onOpenChange(!open)}>
+        <span className="group__main">
+          <span className="group__title">Query appendix</span>
+          <span className="group__sub num">
+            {n} Qloo {n === 1 ? 'query' : 'queries'}; every number above cites one
+          </span>
+        </span>
+        <motion.span className="group__chev" animate={{ rotate: open ? 90 : 0 }} transition={reduce ? fade : springQuick} aria-hidden="true">
+          <IconChevron size={16} />
+        </motion.span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id={bodyId}
+            className="appendix__body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={reduce ? fade : springQuick}
+            style={{ overflow: 'hidden' }}
+          >
+            {body}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!open && <div className="disclosure__print-only">{body}</div>}
+    </div>
   )
 }
 
-export default function MemoView({ memo, title }: { memo: Memo; title?: string }) {
-  const limits = memo.limitations.length ? memo.limitations : FIXED_LIMITATIONS
+// ------------------------------------------------------------------ findings
 
-  // Citations point into the (collapsed) appendix: open it, then scroll and flash the row.
+function Findings({ findings, onQuery, reduce, names }: { findings: Memo['findings']; onQuery: (n: string) => void; reduce: boolean; names?: { senior: string; junior: string } }) {
+  return (
+    <section className="memo__findings" aria-labelledby="findings-title">
+      <h3 id="findings-title" className="memo__h">
+        <span className="memo__h-num num" aria-hidden="true">
+          §
+        </span>
+        Factor by factor
+      </h3>
+      <ul className="group findings">
+        {findings.map((f) => (
+          <li key={f.factor} className="group__row group__row--top finding">
+            <div className="finding__head">
+              <span className="finding__factor">{factorLabel(f.factor)}</span>
+              <span className="finding__tags">
+                <LeanChip lean={f.lean} size="sm" names={names} />
+                <ConfidenceMeter level={f.confidence} />
+              </span>
+            </div>
+            <p className="finding__text">{plainProse(f.finding)}</p>
+            {plainRefs(f.evidence_refs).length > 0 && (
+              <span className="finding__refs" aria-label="Evidence">
+                {plainRefs(f.evidence_refs).map((r) => (
+                  <RefChip key={r} r={r} onQuery={onQuery} reduce={reduce} />
+                ))}
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+// ------------------------------------------------------------------ query navigation
+
+/**
+ * The appendix lives in the collapsed "How we got here" section. A citation (Q12) opens that
+ * section and the appendix, then scrolls to and flashes the cited row once it has rendered.
+ */
+export function useQueryNav() {
+  const reduce = useReducedMotion() ?? false
+  const [howOpen, setHowOpen] = useState(false)
+  const [appendixOpen, setAppendixOpen] = useState(false)
+  function goToQuery(num: string) {
+    const id = `query-${num}`
+    setHowOpen(true)
+    setAppendixOpen(true)
+    let tries = 0
+    const attempt = () => {
+      const el = document.getElementById(id)
+      // wait until the row is inside the open (visible) body, not a print-only copy
+      if (el && el.offsetParent !== null && scrollFlash(id, reduce)) return
+      if (tries++ > 60) return
+      requestAnimationFrame(attempt)
+    }
+    requestAnimationFrame(attempt)
+  }
+  return { howOpen, setHowOpen, appendixOpen, setAppendixOpen, goToQuery, reduce }
+}
+
+// ------------------------------------------------------------------ what this means
+
+/** Section 4: the memo's prose and the factor-by-factor findings, as the model wrote them. */
+export function MemoMeaning({
+  memo,
+  title,
+  names,
+  onQuery,
+}: {
+  memo: Memo
+  title?: string
+  names?: { senior: string; junior: string }
+  onQuery: (n: string) => void
+}) {
+  const reduce = useReducedMotion() ?? false
+  const n = memo.appendix_queries.length
+
+  // Citations inside rendered markdown are plain anchors; intercept them.
   function onClick(e: MouseEvent<HTMLElement>) {
     const a = (e.target as HTMLElement).closest('a[href^="#query-"]')
-    if (!a) return
-    const id = a.getAttribute('href')!.slice(1)
-    const row = document.getElementById(id)
-    if (!row) return
+    if (!a || !(e.currentTarget as HTMLElement).contains(a)) return
+    const m = /^#query-(\d+)$/.exec(a.getAttribute('href') ?? '')
+    if (!m) return
     e.preventDefault()
-    const details = row.closest('details')
-    if (details && !details.open) details.open = true
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    requestAnimationFrame(() => {
-      row.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' })
-      row.classList.remove('is-flash')
-      void row.offsetWidth
-      row.classList.add('is-flash')
-      history.replaceState(null, '', `#${id}`)
-    })
+    onQuery(m[1])
   }
 
   return (
-    <article className="memo card" id="memo" aria-labelledby="memo-title" onClick={onClick}>
+    <article className="memo" id="memo" aria-labelledby="memo-title" onClick={onClick}>
       <header className="memo__head">
         <p className="eyebrow">Evidence memo{title ? ` · ${title}` : ''}</p>
-        <h2 id="memo-title" className="memo__headline">
-          {memo.headline}
+        <h2 id="memo-title" className="t-headline">
+          What this means
         </h2>
-        {memo.bottom_line && <p className="memo__bottom-line">{memo.bottom_line}</p>}
+        <p className="memo__dateline footnote secondary">
+          Written by the model from the scores above, citing <span className="num">{n}</span> logged Qloo {n === 1 ? 'query' : 'queries'}. Lawyer prose, as written.
+        </p>
       </header>
 
-      {memo.findings.length > 0 && (
-        <section className="memo__findings" aria-labelledby="findings-title">
-          <h3 id="findings-title" className="memo__h">
-            Factor findings
-          </h3>
-          <div className="table-scroll">
-            <table className="table findings">
-              <thead>
-                <tr>
-                  <th scope="col">Factor</th>
-                  <th scope="col">Lean</th>
-                  <th scope="col">Confidence</th>
-                  <th scope="col">Finding</th>
-                </tr>
-              </thead>
-              <tbody>
-                {memo.findings.map((f) => (
-                  <tr key={f.factor}>
-                    <th scope="row" className="findings__factor">
-                      {factorLabel(f.factor)}
-                    </th>
-                    <td>
-                      <LeanChip lean={f.lean} />
-                    </td>
-                    <td>
-                      <ConfidenceMeter level={f.confidence} />
-                    </td>
-                    <td className="findings__text">
-                      <p>{f.finding}</p>
-                      {f.evidence_refs.length > 0 && (
-                        <span className="findings__refs">
-                          {f.evidence_refs.map((r) => (
-                            <RefChip key={r} r={r} />
-                          ))}
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
-
-      {memo.sections.map((s) => (
+      {memo.sections.map((s, i) => (
         <section key={s.id} className="memo__section" aria-labelledby={`sec-${s.id}`}>
           <h3 id={`sec-${s.id}`} className="memo__h">
+            <span className="memo__h-num num" aria-hidden="true">
+              {i + 1}
+            </span>
             {s.title}
           </h3>
           <Markdown md={s.markdown} />
         </section>
       ))}
 
-      <aside className="limits" aria-labelledby="limits-title">
-        <h3 id="limits-title" className="limits__title">
-          <IconWarn size={18} /> What this cannot tell you
-        </h3>
-        <ul className="limits__list">
-          {limits.map((l, i) => (
-            <li key={i}>{l}</li>
-          ))}
-        </ul>
-      </aside>
-
-      <QueryAppendix queries={memo.appendix_queries} />
+      {memo.findings.length > 0 && <Findings findings={memo.findings} onQuery={onQuery} reduce={reduce} names={names} />}
     </article>
+  )
+}
+
+// ------------------------------------------------------------------ what it cannot tell you
+
+/** Section 5: the fixed limitations plus anything specific to the case. */
+export function MemoLimits({ memo }: { memo: Memo | null }) {
+  // The memo carries the backend's copy; the read's own limit is added when the run has a preliminary read.
+  const readLimit = FIXED_LIMITATIONS[FIXED_LIMITATIONS.length - 1]
+  const base = memo?.limitations.length ? memo.limitations : FIXED_LIMITATIONS.slice(0, -1)
+  const limits = (memo?.preliminary_read ? [...base, readLimit] : base).map(plainProse)
+  return (
+    <div className="limits-section">
+      <div className="band__head">
+        <p className="eyebrow">Limits</p>
+        <h2 id="limits-title" className="t-headline">
+          What it cannot tell you.
+        </h2>
+        <p className="t-subtitle">
+          Taste data answers who the customers are. It does not show the marks to anyone, so it cannot say whether anyone was or would be confused.
+        </p>
+      </div>
+      <aside className="group limits" aria-labelledby="limits-title">
+        <ol className="limits__list">
+          {limits.map((l, i) => (
+            <li key={i} className="group__row group__row--top group__sep">
+              <span className="limits__n num">{i + 1}</span>
+              <span className="group__main">{l}</span>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    </div>
   )
 }

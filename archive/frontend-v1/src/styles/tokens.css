@@ -1,0 +1,172 @@
+/* Design tokens. See DESIGN_NOTES.md. Every spacing, size, color and timing comes from here. */
+:root {
+  color-scheme: light dark;
+
+  /* Type */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI Variable Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: ui-serif, 'New York', 'Iowan Old Style', 'Charter', 'Georgia', 'Cambria', serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Consolas', 'Menlo', monospace;
+
+  --fs-micro: 0.6875rem;
+  --fs-caption: 0.8125rem;
+  --fs-footnote: 0.875rem;
+  --fs-body: 1rem;
+  --fs-title3: 1.25rem;
+  --fs-title2: 1.625rem;
+  --fs-title1: 2.25rem;
+  --fs-display: clamp(2.25rem, 1.2rem + 4.2vw, 4rem);
+
+  /* Size-specific tracking: tighter as type grows */
+  --tr-display: -0.022em;
+  --tr-title: -0.012em;
+  --tr-body: 0;
+  --tr-caption: 0.01em;
+  --tr-eyebrow: 0.06em;
+
+  /* Spacing: 4px grid in rem so it scales with the user's text size */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  --content: 72rem;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+
+  /* Motion: critically damped (no overshoot), approximating a spring with response ~0.3s */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 340ms;
+
+  /* Light palette */
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #f2f0ec;
+  --surface-3: #e9e6e1;
+  --material: rgba(246, 245, 242, 0.72);
+  --material-edge: rgba(255, 255, 255, 0.6);
+  --scrim: rgba(20, 18, 22, 0.32);
+
+  --text: #1b1a1d;
+  --text-2: #55525b;
+  --text-3: #6f6b75;
+  --separator: rgba(27, 26, 29, 0.1);
+  --separator-strong: rgba(27, 26, 29, 0.18);
+
+  --accent: #a3234a;
+  --accent-hover: #8c1c3e;
+  --accent-tint: rgba(163, 35, 74, 0.08);
+  --on-accent: #ffffff;
+  --focus: #a3234a;
+
+  /* Data identity (dataviz categorical slots 1 and 2, validated) */
+  --senior: #2a78d6;
+  --senior-tint: rgba(42, 120, 214, 0.1);
+  --senior-ink: #1d5aa6;
+  --junior: #eb6834;
+  --junior-tint: rgba(235, 104, 52, 0.11);
+  --junior-ink: #b4461a;
+  --neg: #e34948;
+  --zero: #c9c6c0;
+  --grid: #ebe9e5;
+
+  /* Status (icon + label always) */
+  --warn: #8a5a00;
+  --warn-bg: #fff5df;
+  --warn-edge: #f2d79b;
+  --error: #b42323;
+  --error-bg: #fdecec;
+  --error-edge: #f3c3c3;
+  --ok: #17803d;
+  --ok-bg: #e8f6ed;
+
+  --shadow-1: 0 1px 2px rgba(20, 18, 22, 0.05), 0 1px 1px rgba(20, 18, 22, 0.03);
+  --shadow-2: 0 1px 2px rgba(20, 18, 22, 0.05), 0 6px 20px -6px rgba(20, 18, 22, 0.12);
+  --shadow-3: 0 2px 6px rgba(20, 18, 22, 0.06), 0 22px 48px -18px rgba(20, 18, 22, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131214;
+    --surface: #1c1b1e;
+    --surface-2: #242327;
+    --surface-3: #2e2d32;
+    --material: rgba(19, 18, 20, 0.7);
+    --material-edge: rgba(255, 255, 255, 0.06);
+    --scrim: rgba(0, 0, 0, 0.5);
+
+    --text: #f3f1f4;
+    --text-2: #b9b5bf;
+    --text-3: #9a96a1;
+    --separator: rgba(255, 255, 255, 0.09);
+    --separator-strong: rgba(255, 255, 255, 0.16);
+
+    --accent: #ff7a9c;
+    --accent-hover: #ff97b1;
+    --accent-tint: rgba(255, 122, 156, 0.12);
+    --on-accent: #22070f;
+    --focus: #ff7a9c;
+
+    --senior: #3987e5;
+    --senior-tint: rgba(57, 135, 229, 0.16);
+    --senior-ink: #8ab8f2;
+    --junior: #d95926;
+    --junior-tint: rgba(217, 89, 38, 0.18);
+    --junior-ink: #f0a07c;
+    --neg: #e66767;
+    --zero: #4a4850;
+    --grid: #2b2a2f;
+
+    --warn: #f3c25a;
+    --warn-bg: rgba(250, 178, 25, 0.12);
+    --warn-edge: rgba(250, 178, 25, 0.3);
+    --error: #ff8a8a;
+    --error-bg: rgba(208, 59, 59, 0.16);
+    --error-edge: rgba(208, 59, 59, 0.4);
+    --ok: #5fd08a;
+    --ok-bg: rgba(12, 163, 12, 0.14);
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+    --shadow-3: 0 2px 6px rgba(0, 0, 0, 0.4), 0 24px 56px -18px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --material: var(--bg);
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --separator: rgba(27, 26, 29, 0.45);
+    --separator-strong: rgba(27, 26, 29, 0.7);
+    --text-2: #3c3a40;
+    --text-3: #3c3a40;
+    --material: var(--bg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms;
+    --dur-2: 120ms;
+    --dur-3: 160ms;
+  }
+}

@@ -10,5 +10,6 @@ backend/.pytest_cache
 backend/.ruff_cache
 frontend/node_modules
 frontend/dist
+archive
 TEA_ROSE_CONCEPT.md
 **/__pycache__
