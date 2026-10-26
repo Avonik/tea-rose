@@ -209,7 +209,9 @@ export function agreementDetail(f: ReadFields, outcome: Outcome, brands: [string
     if (outcome === 'settled') return 'the parties settled before a verdict'
     if (outcome === 'mixed') return 'the court split the result'
     const on = turnsOnShort(f.turnsOn)
-    return on ? `the court decided it on ${on}` : 'the court decided what the read left open'
+    const winner = brandName(outcome === 'older brand won' ? brands[0] : brands[1])
+    // Say what the read left open and who the court ruled for; never claim the court's reason.
+    return on ? `the read left it open on ${on}; the court ruled for ${winner}` : `the court ruled for ${winner}`
   }
   const d = defenceShort(f.bestDefence)
   return d ? `the read had flagged ${d}` : 'the read had not seen it coming'
