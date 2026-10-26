@@ -111,13 +111,18 @@ export const PREVIEW = {
   high: 'high',
 }
 
-export const BACKTEST = {
-  eyebrow: 'Back-test',
-  title: 'Does it hold up?',
-  body:
-    'We labelled 80 decided cases from the opinions before any data was pulled. Where both brands are in Qloo (14 cases), the audience measure tells the court’s “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case, it ranks the related one higher. Where a company is missing from Qloo, the stand-in method only tells you about its category.',
-  fallback: 'Small numbers, honestly labelled; we changed the method twice along the way and kept every run.',
-  link: 'See the full report, including the two times we changed our method and why',
+/** The verdict scorecard: the eight showcase cases read from the pleadings, then compared with the court. */
+export const SCORECARD = {
+  eyebrow: 'Does it hold up?',
+  title: 'How it did on eight real cases.',
+  method: 'Each case was read from the filed pleadings with the court’s decision withheld; then we compared.',
+  caveat: 'The court’s decision was withheld from the agent, but the model may still know how famous cases ended; treat this as a demonstration.',
+  court: 'Court:',
+  read: 'Tea Rose:',
+  /** The data back-test, as a side note: two sentences, no statistics. */
+  dataNote:
+    'Separately, we checked the audience measure itself against 80 decided cases, labelled from the opinions before any data was pulled. Where both brands are in Qloo, it tells the court’s “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case, it ranks the related one higher.',
+  link: 'How it was evaluated',
 }
 
 /** The eight showcase fights, in manifest order (backend/data/showcase/manifest.json). */
@@ -135,7 +140,7 @@ export const CASE_ORDER = [
 export const FIGHTS = {
   eyebrow: 'Showcase',
   title: 'Eight famous fights.',
-  sub: 'What the court decided, and what Tea Rose read before it knew. Pre-computed and free to open; every memo cites the Qloo queries it used.',
+  sub: 'What the court decided, and what Tea Rose read from the pleadings before it knew. Pre-computed and free to open; every memo cites the Qloo queries it used.',
 }
 
 export const WILL_NOT = {

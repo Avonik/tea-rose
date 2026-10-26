@@ -377,3 +377,10 @@ class ShowcaseSummary(BaseModel):
     one_liner: str  # the headline finding
     tags: list[str] = Field(default_factory=list)  # e.g. ["parody", "dilution", "proxy path"]
     read_line: str = ""  # the memo's computed preliminary-read sentence
+    # The preliminary read's fields, so a list can state "court vs Tea Rose" without the detail.
+    # None when the run has no read (older runs, or the assess step failed).
+    read_lean: str | None = None  # older_brand | newcomer | too_close_to_call
+    read_confidence: str | None = None  # high | medium | low
+    read_turns_on: str | None = None
+    read_best_defence: str | None = None
+    read_one_sided: bool | None = None

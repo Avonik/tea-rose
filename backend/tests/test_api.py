@@ -18,8 +18,9 @@ from pypdf import PdfWriter
 from tearose.agent.engine import ScriptedEngine
 from tearose.agent.runs import RunHandle, RunStore
 from tearose.api.app import create_app
+from tearose.api.showcase import summarize
 from tearose.config import Settings
-from tearose.schemas import AnalysisResult, Extraction, Memo, Party
+from tearose.schemas import AnalysisResult, Extraction, Memo, Party, PreliminaryRead
 
 PASSCODE = "open-sesame"
 TIMEOUT_S = 5.0
@@ -204,6 +205,23 @@ async def test_showcase_list_and_detail(make_app: Callable[..., FastAPI], tmp_pa
     assert detail.status_code == 200
     assert detail.json()["showcase_slug"] == "jack-daniels"
     assert missing.status_code == 404
+
+
+def test_showcase_summary_carries_the_read() -> None:
+    res = _showcase_result()
+    assert res.memo is not None
+    res.memo.preliminary_read = PreliminaryRead(
+        lean="newcomer",
+        confidence="medium",
+        turns_on="The case most likely turns on the parody defence.",
+        rationale="Data half. Reading half.",
+        best_defence="Parody.",
+        one_sided_input=True,
+    )
+    s = summarize("jack-daniels", res)
+    assert (s.read_lean, s.read_confidence, s.read_one_sided) == ("newcomer", "medium", True)
+    assert s.read_turns_on == "The case most likely turns on the parody defence."
+    assert s.read_best_defence == "Parody."
 
 
 async def test_showcase_missing_dir_is_empty(make_app: Callable[..., FastAPI]) -> None:

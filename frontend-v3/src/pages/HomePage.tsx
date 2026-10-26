@@ -4,11 +4,26 @@ import { Link } from 'react-router-dom'
 import { api } from '../api'
 import { IconChevron, IconCode, IconMap, IconPulse, IconUsers } from '../components/icons'
 import { LeanChip, Skeleton } from '../components/ui'
-import { CASE_STORIES } from '../content/cases'
-import { clamp01, ordinalSuffix, readFame, readFromText, readNationwide, readOverlap, runFacts, to100 } from '../content/copy'
+import { CASE_STORIES, type CaseStory } from '../content/cases'
+import {
+  AGREEMENT_LABEL,
+  agreement,
+  agreementDetail,
+  clamp01,
+  ordinalSuffix,
+  readFame,
+  readFieldsFromSummary,
+  readFromText,
+  readNationwide,
+  readOverlap,
+  runFacts,
+  showcaseAgreements,
+  tallyLine,
+  teaRoseSentence,
+  to100,
+} from '../content/copy'
 import {
   ANALYZE,
-  BACKTEST,
   CASE_ORDER,
   FIGHTS,
   HOW,
@@ -17,6 +32,7 @@ import {
   QUESTIONS,
   QUESTIONS_HEAD,
   READ_BAND,
+  SCORECARD,
   WILL_NOT,
   type QuestionKey,
   type StepWho,
@@ -362,25 +378,66 @@ function Preview(props: { list: ShowcaseSummary[] | null | undefined; loadingLis
   )
 }
 
-// ------------------------------------------------------------------ 4. back-test
+// ------------------------------------------------------------------ 4. the verdict scorecard
 
-/** The back-test in plain words; the statistics live behind the link, never on the home page. */
-function Backtest() {
+/** Court vs Tea Rose for one showcase case: two statements and the agreement chip, all computed. */
+function Verdict({ story, summary }: { story: CaseStory; summary: ShowcaseSummary | undefined }) {
+  const f = readFieldsFromSummary(summary)
+  const a = f ? agreement(f.lean, story.outcome) : null
+  return (
+    <>
+      <span className="case-row__line">
+        <span className="case-row__k">{SCORECARD.court}</span> {story.court}
+      </span>
+      {f && (
+        <span className="case-row__line">
+          <span className="case-row__k">{SCORECARD.read}</span> {teaRoseSentence(f, story.brands)}
+        </span>
+      )}
+      {f && a && (
+        <span className="case-row__line">
+          <span className="chip chip--sm">{AGREEMENT_LABEL[a]}</span>
+          <span className="sr-only">;</span>{' '}
+          <span className="secondary">{agreementDetail(f, story.outcome, story.brands)}</span>
+        </span>
+      )}
+    </>
+  )
+}
+
+/** The eight cases read from the pleadings, then compared with the court; the data back-test as a side note. */
+function Scorecard({ list }: { list: ShowcaseSummary[] | null | undefined }) {
+  const tally = showcaseAgreements(list)
   return (
     <section className="band band--alt" aria-labelledby="bt-title">
-      <div className="wrap wrap--prose">
+      <div className="wrap">
         <div className="band__head">
-          <p className="eyebrow">{BACKTEST.eyebrow}</p>
+          <p className="eyebrow">{SCORECARD.eyebrow}</p>
           <h2 id="bt-title" className="t-headline">
-            {BACKTEST.title}
+            {SCORECARD.title}
           </h2>
+          <p className="t-subtitle">{SCORECARD.method}</p>
         </div>
-        <p className="bt__body">
-          {BACKTEST.body} {BACKTEST.fallback}
-        </p>
+        <ul className="group case-list">
+          {CASE_ORDER.map((slug) => {
+            const c = CASE_STORIES[slug]
+            if (!c) return null
+            return (
+              <li key={slug} className="group__row group__row--top">
+                <span className="group__main">
+                  <span className="group__title">{c.short}</span>
+                  <Verdict story={c} summary={list?.find((x) => x.slug === slug)} />
+                </span>
+              </li>
+            )
+          })}
+        </ul>
+        {tally && <p className="bt__body bt__note">{tallyLine(tally)}</p>}
+        <p className="secondary bt__note">{SCORECARD.caveat}</p>
+        <p className="secondary bt__note">{SCORECARD.dataNote}</p>
         <p className="bt__more">
           <Link to="/method#backtest" className="btn btn--link">
-            {BACKTEST.link} <IconChevron size={13} />
+            {SCORECARD.link} <IconChevron size={13} />
           </Link>
         </p>
       </div>
@@ -390,14 +447,9 @@ function Backtest() {
 
 // ------------------------------------------------------------------ 5. eight famous fights
 
-/** The pre-computed run's preliminary-read sentence for one showcase row ("" when absent). */
-function listReadLine(list: ShowcaseSummary[] | null | undefined, slug: string): string {
-  return readSentence(list?.find((c) => c.slug === slug)?.read_line)
-}
-
 function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
   return (
-    <section className="band" aria-labelledby="cases-title">
+    <section id="cases" className="band" aria-labelledby="cases-title">
       <div className="wrap">
         <div className="band__head">
           <p className="eyebrow">{FIGHTS.eyebrow}</p>
@@ -409,7 +461,6 @@ function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
         <ul className="group case-list">
           {CASE_ORDER.map((slug, i) => {
             const c = CASE_STORIES[slug]
-            const read = listReadLine(list, slug)
             if (!c) return null
             return (
               <li key={slug}>
@@ -418,15 +469,7 @@ function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
                     <span className="group__main">
                       <span className="case-row__title">{c.short}</span>
                       <span className="case-row__meta">{c.brands.join(' · ')}</span>
-                      <span className="case-row__line">
-                        <span className="case-row__k">Court:</span> {c.court}
-                      </span>
-                      {read && (
-                        <span className="case-row__line">
-                          <span className="case-row__k">Tea Rose read:</span> {read}
-                        </span>
-                      )}
-                      {c.twist && <span className="caption tertiary case-row__twist">{c.twist}</span>}
+                      <Verdict story={c} summary={list?.find((x) => x.slug === slug)} />
                     </span>
                     <span className="group__chev" aria-hidden="true">
                       <IconChevron size={16} />
@@ -604,7 +647,7 @@ export default function HomePage() {
       <Questions />
       <ReadBand />
       <Preview list={list.data} loadingList={list.loading} />
-      <Backtest />
+      <Scorecard list={list.data} />
       <Fights list={list.data} />
       <WillNot />
       <HowItWorks />

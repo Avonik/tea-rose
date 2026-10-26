@@ -2,8 +2,11 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { IconChevron, IconCode, IconSparkle } from '../components/icons'
 import { Disclosure } from '../components/ui'
+import { showcaseAgreements, tallyLine } from '../content/copy'
 import { FIXED_LIMITATIONS } from '../content/limitations'
 import { useActiveSection } from '../lib/sections'
+import { useAsync } from '../lib/useAsync'
+import { api } from '../api'
 import { Page } from '../motion/Reveal'
 import '../styles/method.css'
 
@@ -165,7 +168,7 @@ const MATH: { title: string; endpoints: string[]; rows: [string, ReactNode][] }[
 const TOC: [string, string][] = [
   ['read', 'How to read a memo'],
   ['glossary', 'Glossary'],
-  ['backtest', 'Does it hold up?'],
+  ['backtest', 'How it was evaluated'],
   ['math', 'Show the math'],
   ['split', 'Agent vs. code'],
   ['limitations', 'Limitations'],
@@ -221,6 +224,7 @@ function DefList({ rows, className = '' }: { rows: [string, ReactNode][]; classN
 }
 
 export default function MethodPage() {
+  const tally = showcaseAgreements(useAsync(() => api.showcase(), []).data)
   const active = useActiveSection(
     TOC.map(([id]) => id),
     200,
@@ -269,39 +273,27 @@ export default function MethodPage() {
           <DefList rows={GLOSSARY} />
         </MBand>
 
-        <MBand id="backtest" alt eyebrow="Evaluation" title="Does it hold up?">
+        <MBand id="backtest" alt eyebrow="Evaluation" title="How it was evaluated">
           <div className="method__story">
             <p>
-              <strong>Run 1, as pre-registered.</strong> We wrote down how courts decided relatedness and shared customers in 80 decided cases before computing
-              a single score, then ran the harness exactly as registered. It contained two measurement errors. It took a brand’s category from what its
-              audience likes rather than what it sells, so a sneaker brand came out as “Food &amp; Beverage”; and a brand missing from the 150 strongest was
-              counted as the very bottom of its category instead of as unknown.
+              <strong>On eight real cases.</strong> Tea Rose read each showcase case from the filed pleadings (the complaint and, where the docket has it, the
+              defendant’s answer) with the court’s decision withheld, and gave its preliminary read. Then we compared that read with what the court decided.
+              {tally && <> {tallyLine(tally)}</>} The court’s decision was withheld from the agent, but the model may still know how famous cases ended; treat
+              this as a demonstration.
             </p>
             <p>
-              <strong>Run 2, both errors fixed.</strong> The category now comes from the brand’s own tags, and a missing rank is reported as “beyond the 150
-              strongest”, backed by a direct affinity reading. The court labels did not change. Because the fixes came after we had seen run 1, run 2 is
-              post-hoc and reported as such.
-            </p>
-            <p>
-              <strong>Run 3, the product’s own resolver.</strong> Runs 1 and 2 identified brands with a strict name rule the product does not use, a design
-              error that made the test stricter than the shipped tool. Run 3 identifies them with the same model-driven step the product runs, given no court
-              labels. Scoring stays in code. Every report is kept, dated, unchanged.
-            </p>
-            <p>
-              <strong>What run 3 found.</strong> Only 14 of the 80 cases have both brands in Qloo. On those, the direct audience measure tells the court’s
-              “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case it ranks the related one
-              higher. The rank measure does no better than the obvious rule “same product category”. For fame, 16 cases: in 74 of 100 pairs of a brand the court
-              found famous and one it did not, the famous one scores higher (only 3 of the 16 were found not famous). Where a company is missing from Qloo, the stand-in method only tells you about its category. All of
-              these numbers are too small to be more than indicative, and we say so.
-            </p>
-            <p>
-              The latest stand-in and category rules (three stand-ins picked from a code shortlist, and the decision whether a category is close enough) came
-              after run 3. The next run will use them.
+              <strong>On 80 decided cases.</strong> Separately, we labelled what the courts found about related goods and shared customers in 80 decided cases,
+              from the opinions and before any data was pulled, and compared those findings with the audience measure. Where both brands are in Qloo, it tells
+              the court’s “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case, it ranks the
+              related one higher. Where a company is missing from Qloo, the stand-in method only tells you about its category.
             </p>
           </div>
           <p className="method__cta">
+            <Link to="/#cases" className="btn btn--link">
+              Court and Tea Rose on the eight cases <IconChevron size={13} />
+            </Link>
             <a className="btn btn--link" href={RESULTS_URL} target="_blank" rel="noreferrer">
-              Read the full report <IconChevron size={13} />
+              Full back-test report (repository) <IconChevron size={13} />
             </a>
           </p>
         </MBand>

@@ -394,6 +394,12 @@ export interface ShowcaseSummary {
   one_liner: string
   tags: string[]
   read_line?: string
+  /** The preliminary read's fields (null/absent when the run has no read). */
+  read_lean?: ReadLean | null
+  read_confidence?: Confidence | null
+  read_turns_on?: string | null
+  read_best_defence?: string | null
+  read_one_sided?: boolean | null
 }
 
 // ---------------------------------------------------------------- API envelopes (docs/ARCHITECTURE.md)

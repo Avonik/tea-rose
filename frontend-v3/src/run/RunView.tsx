@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { IconBack, IconChevron, IconPrint } from '../components/icons'
 import { Disclosure, Notice, SkeletonCard } from '../components/ui'
 import { caseStory, type CaseStory } from '../content/cases'
-import { courtFraming } from '../content/copy'
+import { AGREEMENT_LABEL, agreement, agreementDetail, readFieldsFromRead, teaRoseSentence } from '../content/copy'
 import { displayNames } from '../lib/format'
 import { usePublishSections } from '../lib/sections'
 import type { Connection } from '../lib/useLiveRun'
@@ -44,12 +44,14 @@ const FACTOR_ANALYSIS: Record<string, Analysis> = {
 }
 
 /**
- * The reveal, below the preliminary read: what the court decided, the outcome, and one sentence
- * computed from the read's lean against that outcome.
+ * The reveal, below the preliminary read, in three parts: what the court said, what Tea Rose read
+ * from the pleadings (and why), and whether the two point the same way. All computed from the read's
+ * fields against the hand-written outcome; the outcome chip stays.
  */
 function CourtReveal({ story, r, names }: { story: CaseStory; r: AnalysisResult; names: { senior: string; junior: string } }) {
-  const read = r.memo?.preliminary_read
-  const framing = read ? courtFraming(read.lean, story.outcome, read.turns_on, names) : ''
+  const f = readFieldsFromRead(r.memo?.preliminary_read)
+  const a = f ? agreement(f.lean, story.outcome) : null
+  const detail = f ? agreementDetail(f, story.outcome, story.brands) : ''
   return (
     <section className="routing" aria-labelledby="court-title">
       <h2 id="court-title" className="group-label">
@@ -58,13 +60,31 @@ function CourtReveal({ story, r, names }: { story: CaseStory; r: AnalysisResult;
       <div className="group">
         <div className="group__row group__row--top">
           <span className="group__main">
+            <span className="group__sub">The court</span>
             <span className="group__title">{story.court}</span>
-            {framing && <span className="group__sub">{framing}</span>}
             <span className="chips">
               <span className="chip chip--quiet chip--sm">Outcome: {outcomeText(story.outcome, names)}</span>
             </span>
           </span>
         </div>
+        {f && (
+          <div className="group__row group__row--top">
+            <span className="group__main">
+              <span className="group__sub">Tea Rose, from the pleadings</span>
+              <span className="group__title">{teaRoseSentence(f, story.brands, true)}</span>
+            </span>
+          </div>
+        )}
+        {a && (
+          <div className="group__row group__row--top">
+            <span className="group__main">
+              <span className="chips">
+                <span className="chip chip--sm">{AGREEMENT_LABEL[a]}</span>
+              </span>
+              <span className="group__sub">{detail.charAt(0).toUpperCase() + detail.slice(1)}.</span>
+            </span>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -65,6 +65,7 @@ def summarize(slug: str, res: AnalysisResult) -> ShowcaseSummary:
         tags.extend(c.replace("_", " ") for c in ex.claims if c != "other")
     if res.resolution and (res.resolution.senior_proxy or res.resolution.junior_proxy):
         tags.append("proxy path")
+    read = res.memo.preliminary_read if res.memo else None
     return ShowcaseSummary(
         slug=slug,
         title=title,
@@ -73,6 +74,11 @@ def summarize(slug: str, res: AnalysisResult) -> ShowcaseSummary:
         one_liner=one_liner,
         tags=tags,
         read_line=(res.memo.read_line if res.memo else ""),
+        read_lean=read.lean if read else None,
+        read_confidence=read.confidence if read else None,
+        read_turns_on=read.turns_on if read else None,
+        read_best_defence=(read.best_defence or None) if read else None,
+        read_one_sided=read.one_sided_input if read else None,
     )
 
 

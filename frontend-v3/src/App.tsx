@@ -183,11 +183,35 @@ function DocumentTitle() {
   return null
 }
 
+/** Top of the page on a new route; with a #hash, the target section once it has rendered (lists load async). */
 function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    if (!hash) {
+      window.scrollTo(0, 0)
+      return
+    }
+    // Keep the target aligned for ~2 s while content above it loads; any user input hands control back.
+    let tries = 0
+    let timer = 0
+    const stop = () => window.clearTimeout(timer)
+    const seek = () => {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)))
+      if (el && Math.abs(el.getBoundingClientRect().top) > 4) el.scrollIntoView({ block: 'start' })
+      if (tries++ < 20) timer = window.setTimeout(seek, 100)
+    }
+    seek()
+    const opts = { passive: true, once: true } as const
+    window.addEventListener('wheel', stop, opts)
+    window.addEventListener('touchstart', stop, opts)
+    window.addEventListener('keydown', stop, opts)
+    return () => {
+      stop()
+      window.removeEventListener('wheel', stop)
+      window.removeEventListener('touchstart', stop)
+      window.removeEventListener('keydown', stop)
+    }
+  }, [pathname, hash])
   return null
 }
 
