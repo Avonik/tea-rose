@@ -111,10 +111,10 @@ export const PREVIEW = {
   high: 'high',
 }
 
-/** The verdict scorecard: the eight showcase cases read from the pleadings, then compared with the court. */
+/** The verdict scorecard: the eighteen showcase cases read from the pleadings, then compared with the court. */
 export const SCORECARD = {
   eyebrow: 'Does it hold up?',
-  title: 'How it did on eight real cases.',
+  title: 'How it did on eighteen real cases.',
   method: 'Each case was read from the filed pleadings with the court’s decision withheld; then we compared.',
   caveat: 'The court’s decision was withheld from the agent, but the model may still know how famous cases ended; treat this as a demonstration.',
   court: 'Court:',
@@ -125,7 +125,7 @@ export const SCORECARD = {
   link: 'How it was evaluated',
 }
 
-/** The eight showcase fights, in manifest order (backend/data/showcase/manifest.json). */
+/** The eighteen showcase fights, in manifest order (backend/data/showcase/manifest.json). */
 export const CASE_ORDER = [
   'vans_mschf',
   'adidas_skechers',
@@ -135,11 +135,21 @@ export const CASE_ORDER = [
   'bang_monster',
   'bad_spaniels',
   'adidas_thom_browne',
+  'stone_millercoors',
+  'rolex_beckertime',
+  'kraft_cracker_barrel',
+  'innout_smashburger',
+  'lv_my_other_bag',
+  'am_general_activision',
+  'sazerac_fetzer',
+  'tmobile_aio',
+  'penn_state_vintage_brand',
+  'ohio_state_redbubble',
 ] as const
 
 export const FIGHTS = {
   eyebrow: 'Showcase',
-  title: 'Eight famous fights.',
+  title: 'Eighteen famous fights.',
   sub: 'What the court decided, and what Tea Rose read from the pleadings before it knew. Pre-computed and free to open; every memo cites the Qloo queries it used.',
 }
 

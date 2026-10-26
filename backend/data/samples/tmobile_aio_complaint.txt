@@ -1,0 +1,278 @@
+===== DOCUMENT 1: Complaint (Doc. 1), filed 2013-08-23 =====
+
+T-Mobile US, Inc. and Deutsche Telekom AG v. Aio Wireless LLC, No. 4:13-cv-02478 (S.D. Tex.), Complaint (Doc. 1), filed 2013-08-23
+Source: https://storage.courtlistener.com/recap/gov.uscourts.txsd.1109921/gov.uscourts.txsd.1109921.1.0.pdf
+
+UNITED STATES DISTRICT COURT
+
+SOUTHERN DISTRICT OF TEXAS, HOUSTON DIVISION
+
+T-MOBILE US, INC., a Delaware corporation, and DEUTSCHE TELEKOM AG, a German corporation, Plaintiffs, v.
+
+AIO WIRELESS LLC, a Delaware Limited Liability Company, Defendant.
+
+COMPLAINT
+
+JURY TRIAL DEMANDED
+
+Plaintiff T-Mobile US, Inc. (“TMUS”) and Plaintiff Deutsche Telekom AG (“DT” and collectively with TMUS, “T-Mobile”) seek injunctive and monetary relief from Defendant Aio Wireless, LLC (“AIO”) for trademark dilution, trademark infringement and unfair competition with regard to T-Mobile’s trademark rights to the color magenta in the field of telecommunications services. In early 2013, T-Mobile publicly disclosed plans to compete against the incumbent telecommunications providers in a new way: by offering telecommunications services without the need for consumers to enter into a two-year or annual service contract. The dominant telecommunications provider, AT&T, responded by setting up a wholly owned subsidiary, AIO, which—out of all of the colors in the universe—chose magenta to begin promoting no-contract wireless communications services in direct competition with T-Mobile. AT&T’s subsidiary’s use of magenta to attract T-Mobile customers is likely to dilute T-Mobile’s famous magenta color trademark, and to create initial interest confusion as to the source or affiliation of AT&T’s subsidiary’s business. Defendant has thereby committed, and continues to commit, trademark dilution and infringement as well as unfair competition in violation of Sections 43(c), 32 and 43(a) of the Lanham Act, 15 U.S.C. §§ 1114, 1125(a) and (c), the Texas Anti-Dilution Statute, Tex. Bus. & Com. Code Ann. § 16.103, and Texas common law.
+
+I. PARTIES
+
+1. Plaintiff T-Mobile US, Inc. is a corporation organized under the laws of the State of Delaware with its principal place of business located at 12920 SE 38th Street, Bellevue, Washington 98006.
+
+2. Plaintiff Deutsche Telekom AG is a corporation organized under the laws of Germany with its principal place of business located at Friedrich-Ebert-Allee 140, 53113, Bonn, Federal Republic of Germany. DT is a majority owner of TMUS.
+
+3. Upon information and belief, Defendant Aio Wireless, LLC is a limited liability company organized under the laws of the State of Delaware with a principal place of business located at 12735 Morris Road, Suite 300, Alpharetta, Georgia 30004. AIO is a wholly owned subsidiary of AT&T.
+
+II. JURISDICTION AND VENUE
+
+4. This Court has original subject matter jurisdiction over T-Mobile’s claims pursuant to the Lanham Act, 15 U.S.C. §§ 1051 et seq.; and 28 U.S.C. §§ 1331 and 1338. This Court has supplemental jurisdiction over the Texas state law claims pursuant to 28 U.S.C. § 1367 because such claims are so related to the federal claims that they form part of the same case or controversy and derive from a common nucleus of operative facts.
+
+5. This Court has personal jurisdiction over AIO because AIO has established minimum contacts with this forum. AIO has recently begun regularly and continuously conducting business within this judicial district, by, among other things, marketing, advertising, offering to sell, and selling telecommunications services and products in this judicial district, including the services which are the subject of this Complaint. Additionally, this Court has personal jurisdiction over AIO because AIO has conducted tortious acts that have caused injury within this State and within this judicial district, and the claims alleged arise out of such tortious acts.
+
+6. Venue is proper in this judicial district pursuant to 28 U.S.C. §§ 1391(b) and (c) because the claims alleged in the Complaint arose, in part, in this District, and because this Court has personal jurisdiction over Defendant in this District.
+
+III. FACTS COMMON TO ALL COUNTS
+
+Plaintiffs’ Business
+
+7. DT is a global telecommunications company that serves over a hundred million customers worldwide. Through its worldwide affiliates, DT sells telecommunications products and services under the “T-Mobile” brand and the color magenta.
+
+8. DT was the parent company of TMUS from its incorporation in 2002 until TMUS became a public company in May of 2013 in connection with a merger between TMUS and Metro PCS. DT is now a majority shareholder of TMUS.
+
+9. TMUS provides wireless voice, messaging and data services to over 43 million wireless subscribers in the United States. T-Mobile launched as a nationwide brand in the United States in July 2002 with the goal of providing consumers access to the newest mobile products and services at an affordable price. Over the last eleven years, TMUS has earned a strong reputation for customer value and service.
+
+10. In early 2013, T-Mobile announced its intention to move away from the industry norm of required annual service contracts and to introduce affordable, no-contract plans that still provide consumers with the option of unlimited wireless talk, text and internet service. Plaintiffs’ Famous Magenta Trademark
+
+11. DT developed and began using its magenta color as a trademark (the “Magenta Mark”) in the early 1990’s. Since that time, DT has used the Magenta Mark consistently and prominently in its marketing and promotional materials throughout the world.
+
+12. Through DT’s consistent and longtime use of the Magenta Mark as a cornerstone of its brand identity, the magenta color mark has become an internationally recognized symbol of DT in the world of telecommunications.
+
+13. DT owns and uses (by itself and through its affiliates and licensees) a number of trademarks consisting of and incorporating the Magenta Mark throughout the world, including in the United States.
+
+14. TMUS is an authorized licensee of DT for use of DT’s trademarks, including the Magenta Mark, in the United States.
+
+15. TMUS began using the Magenta Mark upon its inception as T-Mobile in 2002 to advertise, market, promote and sell its wireless telecommunications products and services in the United States. The Magenta Mark has been a unifying source identifier and theme in T-Mobile’s advertising from the beginning, and T-Mobile has used it in every major advertising campaign through the years. True and correct copies of examples of T-Mobile’s advertising using the Magenta Mark are attached hereto as Exhibit 1.
+
+16. DT owns the following United States Trademark Registrations for the Magenta Mark (collectively the “Registered Magenta Marks”): a. United States Trademark Registration No. 3,263,625 for the Magenta Mark “ ” on the Supplemental Register to identify “Telecommunication and information technology services, namely, wireless transmission of voice and data; providing multi-user access to a global communications network; twoway wireless transmission of electronic mail, text and images between mobile telecommunications terminals and computers; voice mail and messaging services; wireless broadcasting of textual content content to mobile telecommunications terminals and computers; providing customized audio playback of musical, spoken word and other auditory content over a telecommunications network” in International Class 38. b. United States Trademark Registration No. 3,263,624 for the Magenta Mark “ ” on the Supplemental Register to identify “Telecommunication equipment, namely, mobile telephones, wireless telephones and wireless telephony apparatus” in International Class 9. True and correct copies of the above registrations are attached hereto as Exhibit 2.
+
+17. DT also owns numerous registrations that incorporate the Magenta Mark with other elements to identify telecommunications services in International Class 38, including, without limitation, United States Trademark Registration Nos. 3,190,980; 3,343,819; 3,452,979; 3,487,679; 3,491,696; 3,545,974; 3,574,838; 3,575,162; 3,578,791; 3,582,357; 3,585,513; 3,601,274; 3,614,612; 3,656,496; and 3,700,790.
+
+18. Through its continuous use and promotion of the Magenta Mark in the United States for more than ten years, T-Mobile also has developed and owns common law rights to the Magenta Mark in connection with telecommunications services across the country.
+
+19. One example of a nationwide television and print advertising campaign that TMobile ran from 2010 to 2013 using the Magenta Mark featured “Carly,” a spokeswoman in a magenta dress and later, a black jumpsuit with magenta markings. True and correct copies of advertisements featuring “Carly” are attached hereto as Exhibit 3.
+
+20. T-Mobile uses the Magenta Mark prominently in all forms of advertising media, including on its website, www.t-mobile.com, in print and outdoor advertisements, and in television commercials.
+
+21. The other major participants in the telecommunications industry also color code their advertisements and promotional materials—e.g., blue and orange for AT&T, red for Verizon, and yellow for Sprint. Consumers have learned to perceive the colors used by these providers as source indicators.
+
+22. It is also common practice in the telecommunications industry for competitors to depict their services through a coverage map in their respective corporate colors.
+
+23. T-Mobile’s advertisements often include a coverage map using its Magenta Mark. The coverage map that appears on T-Mobile’s website is reproduced below:
+
+24. T-Mobile’s Magenta Mark also is used extensively in its promotional efforts and sponsorships. For example, TMUS’s listing on the New York Stock Exchange was commemorated with a massive magenta banner hanging on the building. Additionally, at the 2011 National Basketball Association All-Star game, sponsored in part by T-Mobile, the traditional “red carpet” was replaced with a “magenta carpet.”
+
+25. T-Mobile’s marketing and promotional efforts draw attention to the use of its Magenta Mark and encourage consumers to associate the color magenta with T-Mobile. For example, during the 2011 holiday season, T-Mobile held a “Magenta Saturday Sale,” offering customers deals on Smartphones and other services. Similarly, in 2012, T-Mobile held several “Magenta Deal Days” events, offering products and services at discounted prices.
+
+26. T-Mobile has invested significant effort, time, and billions of dollars in promoting its products and services in the United States using the Magenta Mark. Since 2006, T-Mobile has spent over $3.75 billion on advertising using the Magenta Mark. And in 2013 alone, TMobile has invested over $500 million on advertising featuring the Magenta Mark.
+
+27. The products and services sold by T-Mobile under the Magenta Mark have earned great commercial success in the United States. T-Mobile serves its approximately 43 million wireless subscribers and offers its products and services at over 70,000 points of distribution nationwide, resulting in approximately $20 billion in revenue in 2012, and over $130 billion since 2006.
+
+28. The strength and recognition of the Magenta Mark are evident from the considerable amount of unsolicited media attention acknowledging T-Mobile’s prominent use of such a non-traditional color mark to identify its brand. True and correct copies of examples of such unsolicited media attention are attached hereto as Exhibit 4.
+
+29. Competitors of T-Mobile have confirmed the strength and recognition of TMobile’s Magenta Mark by using the color magenta in their advertisements to signify T-Mobile.
+
+30. As a direct result of T-Mobile’s prior use and promotion of its Magenta Mark, the Magenta Mark has acquired secondary meaning and has become a valuable marketing and business asset of T-Mobile which signifies to the consuming public a standard of quality of products and services originating exclusively from T-Mobile.
+
+31. As a direct result of the considerable time, effort, money, advertising and promotion of its Magenta Mark, the Magenta Mark has become well known, distinctive and famous. AT&T Sets Up AIO To Compete Directly Against T-Mobile
+
+32. In January of 2013, DT publicly disclosed, in connection with its planned sale of a minority interest in TMUS, plans for T-Mobile to compete against AT&T and Verizon in a new and unconventional way: by offering telecommunications services without the need for consumers to enter into a two-year or annual contract.
+
+33. On information and belief, AT&T set up AIO to compete directly with T-Mobile. Like T-Mobile, AIO targets budget-conscious consumers by offering wireless services with allinclusive plans with no contracts. Indeed, one news article observed that “Aio follows TMobile’s decision in March to move away from contract-based plans to appeal to more consumers,” and another that “AT&T is taking another page from T-Mobile’s playbook, offering unlimited data with all its plans, but pricing the different options based on how much of that data customers want at full speed.” True and correct copies of these articles are attached hereto as Exhibit 5.
+
+34. On May 9, 2013, AT&T announced its “soft” or gradual launch of AIO, a wireless service focused on providing wireless services without requiring a contract.
+
+35. During the initial phase of its launch, AIO opened stores in Houston, and in some Florida metropolitan areas. As a result, AIO promotes, markets, advertises and sells its products and services in the State of Texas.
+
+36. Upon information and belief, AIO has plans to expand to additional markets in Texas and elsewhere over the next year. Defendant’s Unlawful Conduct
+
+37. With full knowledge of T-Mobile’s use of magenta, AT&T’s subsidiary chose— out of all the colors in the spectrum—magenta to advertise, market and promote its wireless services in direct competition with T-Mobile.
+
+38. AIO does not use the orange coverage map of its parent company, but instead uses in its stores and on its website a magenta coverage map that is strikingly similar in color to the one used by T-Mobile. A photograph of AIO’s copycat magenta coverage map from one of its stores in Houston is shown below:
+
+39. AIO also makes prominent use of magenta in its logo and elsewhere in its retail stores. Visible from in front of, and hanging on the back wall of AIO stores, is a large magenta rectangle that serves as the background of AIO’s logo; the logo is backlit, giving it a glowing magenta “halo-effect.” A photograph of an AIO store located in Houston, depicting the backlit magenta logo is included below:
+
+40. AIO also uses a magenta background for outdoor advertising.
+
+41. AIO has also engaged in print advertising for its launch featuring magenta.
+
+42. AIO further uses magenta on its website, in its social media presence, in its Smartphone applications, and in its television commercials.
+
+43. The foregoing acts have occurred in interstate commerce and in a manner affecting interstate commerce.
+
+44. AIO adopted, is using, and intends to continue to use, magenta in connection with its wireless products and services despite knowledge of T-Mobile’s substantial use of, and upon information and belief despite knowledge of T-Mobile’s exclusive rights in, the Magenta Mark.
+
+45. Upon information and belief, AIO has relied, and will continue to rely, on TMobile’s existing goodwill, consumer recognition, and marketing, promotion, and advertising of T-Mobile services and related products so that AIO can enhance the sales of its wireless services and products.
+
+46. T-Mobile has not authorized, licensed or otherwise condoned or consented in any way to AIO’s use of the Magenta Mark.
+
+47. T-Mobile has no control over the nature, quality or pricing of the goods or services provided by AIO using the Magenta Mark.
+
+48. T-Mobile’s Magenta Mark had acquired secondary meaning among the relevant consuming public and had become well known, distinctive and famous before AIO commenced use of magenta.
+
+49. AIO’s use of magenta is likely to dilute the distinctive quality of the famous Magenta Mark and to decrease the capacity of that mark to identify and distinguish T-Mobile’s products and services, and is likely to cause harm to T-Mobile’s business reputation.
+
+50. AIO’s use of magenta in connection with wireless products and services launched to compete directly with T-Mobile is likely to cause consumer confusion as to the source or affiliation of those products and services.
+
+51. AIO’s conduct complained of herein has been done and is done with the intent to cause confusion, mistake or deception as to the source or affiliation of the parties’ respective products.
+
+52. AIO has misappropriated T-Mobile’s substantial property rights in the Magenta Mark, as well as the substantial goodwill associated therewith. Unless restrained and enjoined by this Court, such conduct will permit AIO to gain an unfair competitive advantage over TMobile, and permit AIO to enjoy the interest and marketing power of the Magenta Mark.
+
+53. If AIO is permitted to continue using, promoting, marketing, advertising, distributing and selling telecommunications products and services using magenta, its actions will continue to cause irreparable injury to the T-Mobile, to the distinctiveness of the Magenta Mark, and to the goodwill and business reputation associated with the Magenta Mark.
+
+IV. COUNT ONE
+
+(Trademark Dilution – Lanham Act § 43(c), 15 U.S.C. § 1125(c))
+
+54. T-Mobile incorporates by reference each and every allegation contained in Paragraphs 1-53 of this Complaint as though fully set forth herein.
+
+55. The Magenta Mark is widely recognized by the general public and has acquired fame throughout the United States, entitling it to protection from federal trademark dilution.
+
+56. AIO’s use of magenta began after the Magenta Mark became famous.
+
+57. AIO’s use of magenta, without authorization from T-Mobile, is likely to dilute the distinctive quality of the Magenta Mark and to decrease the capacity of that mark to identify and distinguish T-Mobile’s products and services, and is likely to cause harm to T-Mobile’s business reputation.
+
+58. The aforesaid acts of AIO constitute trademark dilution in violation of Section 43(c) of the Lanham Act, 15 U.S.C. § 1125(c).
+
+59. The acts of AIO alleged in Paragraphs 1-58 above were committed willfully, with full knowledge of T-Mobile’s rights and with the intention of deceiving and misleading the public and causing harm to T-Mobile.
+
+60. As a direct and proximate result of AIO’s unlawful acts, T-Mobile has suffered and will continue to suffer damages in an amount that is not presently ascertainable, but will be established at trial.
+
+61. Unless enjoined by this Court, the acts of AIO complained of herein will cause TMobile to suffer irreparable harm for which there is no adequate remedy at law.
+
+V. COUNT TWO
+
+(Texas Anti-Dilution Statute – Tex. Bus. & Com. Code § 16.103)
+
+62. T-Mobile incorporates by reference each and every allegation contained in Paragraphs 1-61 of this Complaint as though fully set forth herein.
+
+63. The Magenta Mark has been in use for many years, has achieved widespread public recognition, and has developed secondary meaning.
+
+64. Through prominent, long, and continuous use in commerce, including commerce within the State of Texas, the Magenta Mark has become and continues to be famous and distinctive throughout the State of Texas.
+
+65. AIO’s use of magenta began after the Magenta Mark became famous and distinctive.
+
+66. AIO’s use of magenta, without authorization from T-Mobile, is likely to dilute the distinctive quality of the Magenta Mark and to decrease the capacity of that mark to identify and distinguish T-Mobile’s products and services, and is likely to cause harm to T-Mobile’s business reputation.
+
+67. The aforesaid acts of AIO constitute trademark dilution in violation of the Texas Anti-Dilution Statute, Tex. Bus. & Com. Code § 16.103.
+
+68. The acts of AIO alleged in Paragraphs 1-67 above were committed willfully, with full knowledge of T-Mobile’s rights and with the intention of deceiving and misleading the public and causing harm to T-Mobile.
+
+69. As a direct and proximate result of AIO’s unlawful acts, T-Mobile has suffered and will continue to suffer damages in an amount that is not presently ascertainable, but will be established at trial.
+
+70. Unless enjoined by this Court, the acts of AIO complained of herein will cause TMobile to suffer irreparable harm for which there is no adequate remedy at law.
+
+VI. COUNT THREE
+
+(Trademark Infringement – Lanham Act § 32, 15 U.S.C. § 1114)
+
+71. T-Mobile incorporates by reference each and every allegation contained in Paragraphs 1-70 of this Complaint as though fully set forth herein.
+
+72. T-Mobile’s use of the Registered Magenta Marks predates any use by AIO in the United States.
+
+73. AIO’s unauthorized use of magenta as a source indicator is likely to cause confusion, mistake, or deception among consumers or potential consumers as to the source or origin of AIO’s products and services and/or the approval of those products and services by TMobile.
+
+74. AIO’s unauthorized use of magenta is likely to cause confusion, mistake, or deception among consumers or potential consumers as to the source or origin of T-Mobile’s products and services and/or the approval of those products and services by AIO.
+
+75. The aforesaid acts of AIO constitute trademark infringement in violation of Section 32 of the Lanham Act, 15 U.S.C. § 1114.
+
+76. The acts of AIO alleged in Paragraphs 1-75 above were committed willfully, with full knowledge of T-Mobile’s rights, and with the intention of deceiving and misleading the public and causing harm to T-Mobile.
+
+77. As a direct and proximate result of AIO’s infringing and unlawful acts, T-Mobile has suffered and will continue to suffer damages in an amount that is not presently ascertainable, but will be established at trial.
+
+78. Unless enjoined by this Court, the acts of AIO complained of herein will cause TMobile to suffer irreparable harm for which there is no adequate remedy at law.
+
+VII. COUNT FOUR
+
+(Trademark Infringement and False Designation of Origin – Lanham Act. § 43(a), 15 U.S.C. § 1125(a))
+
+79. T-Mobile incorporates by reference each and every allegation contained in Paragraphs 1-78 of this Complaint as though fully set forth herein.
+
+80. T-Mobile’s use of the Magenta Mark predates any use by AIO in the United States.
+
+81. AIO’s unauthorized use of magenta is likely to cause confusion, mistake, or deception among consumers or potential consumers as to the source or origin of AIO’s products and services and the sponsorship or endorsement of those products and services by T-Mobile.
+
+82. AIO’s unauthorized use of magenta is likely to cause confusion, mistake, or deception among consumers or potential consumers as to the source or origin of T-Mobile’s products and services and the sponsorship or endorsement of those products and services by AIO.
+
+83. The aforesaid acts of AIO constitute trademark infringement, false designation of origin and false and misleading descriptions and representations in violation of Section 43(a) of the Lanham Act, 15 U.S.C. § 1125(a).
+
+84. The acts of AIO alleged in Paragraphs 1-83 above were committed willfully, with full knowledge of T-Mobile’s rights, and with the intention of deceiving and misleading the public and causing harm to T-Mobile.
+
+85. As a direct and proximate result of AIO’s infringing and unlawful acts, T-Mobile has suffered and will continue to suffer damages in an amount that is not presently ascertainable, but will be established at trial.
+
+86. Unless enjoined by this Court, the acts of AIO complained of herein will cause TMobile to suffer irreparable harm for which there is no adequate remedy at law.
+
+VIII. COUNT FIVE
+
+(Trademark Infringement – Texas Common Law)
+
+87. T-Mobile incorporates by reference each and every allegation contained in Paragraphs 1-86 of this Complaint as though fully set forth herein.
+
+88. T-Mobile’s use of magenta predates any alleged use by AIO in the United States.
+
+89. The aforesaid acts of AIO constitute trademark infringement in violation of common law.
+
+90. The acts of AIO alleged in Paragraphs 1-89 above were committed willfully, with full knowledge of T-Mobile’s rights, and with the intention of deceiving and misleading the public and causing harm to T-Mobile.
+
+91. As a direct and proximate result of AIO’s infringing and unlawful acts, T-Mobile has suffered and will continue to suffer damages in an amount that is not presently ascertainable, but will be established at trial.
+
+92. Unless enjoined by this Court, the acts of AIO complained of herein will cause TMobile to suffer irreparable harm for which there is no adequate remedy at law.
+
+IX. COUNT SIX
+
+(Unfair Competition – Texas Common Law)
+
+93. T-Mobile incorporates by reference each and every allegation contained in Paragraphs 1-92 of this Complaint as though fully set forth herein.
+
+94. The aforesaid acts of AIO constitute unfair competition in violation of common law.
+
+95. The acts of AIO alleged in Paragraphs 1-94 above were committed willfully, with full knowledge of T-Mobile’s rights, and with the intention of deceiving and misleading the public and causing harm to T-Mobile.
+
+96. As a direct and proximate result of AIO’s infringing and unlawful acts, T-Mobile has suffered and will continue to suffer damages in an amount that is not presently ascertainable, but will be established at trial.
+
+97. Unless enjoined by this Court, the acts of AIO complained of herein will cause TMobile to suffer irreparable harm for which there is no adequate remedy at law.
+
+X. PRAYER FOR RELIEF
+
+WHEREFORE, T-Mobile requests that judgment be entered in its favor and against AIO as follows:
+
+1. Declaring that AIO’s unauthorized use of magenta is likely to dilute T-Mobile’s famous and distinctive Magenta Mark.
+
+2. Declaring that AIO’s unauthorized use of magenta infringes T-Mobile’s valid intellectual property rights;
+
+3. Declaring that AIO’s conduct was knowing, intentional, and willful;
+
+4. Preliminarily and permanently enjoining AIO, its successors, officers, agents and employees, and anyone acting in active concert or participation with or at the behest or direction of any of them, from: a. using (including, but not limited to, in connection with the promotion, marketing, advertising and sale of products or services) the Magenta Mark, any colorable imitation thereof, including but not limited to the color shown in paragraphs 38-39 above, or any otherwise dilutive or confusingly similar color or mark in its stores, advertising (including outdoor, print, website and online), and promotions; b. doing any other act or thing likely to confuse, mislead or deceive others into believing that AIO, or their products and services, are connected with, sponsored by or approved by T-Mobile; and c. engaging in any other activity constituting unfair competition with T-Mobile, or constituting an infringement of T-Mobile’s rights in and to the Magenta Mark.
+
+5. Ordering that all signage, advertisements, labels, prints, packages, wrappers and receptacles in the possession of the AIO bearing the Magenta Mark, or any colorable imitation thereof, be destroyed, and that magenta and any colorable imitations be removed from all Internet web sites, online advertising, marketing, promotions or other online materials, pursuant to 15 U.S.C. § 1118;
+
+6. Ordering AIO, pursuant to 15 U.S.C. § 1116(a), to file with the Court and serve on T-Mobile’s counsel within 30 days after service of the injunction, a written report, sworn under oath, setting forth in detail the manner and form in which AIO has complied with the injunction;
+
+7. Directing an accounting to determine AIO’s profits resulting from its unlawful activities;
+
+8. Awarding T-Mobile compensation for any and all damages, injury or harm pursuant to 15 U.S.C. § 1117 and Texas law;
+
+9. Ordering full restitution and/or disgorgement of all profits and benefits that may have been obtained by AIO as a result of its wrongful conduct pursuant 15 U.S.C. § 1117;
+
+10. Awarding T-Mobile treble damages resulting from AIO’s willful and intentional conduct pursuant to 15 U.S.C. § 1117 and Texas law;
+
+11. Awarding T-Mobile punitive and exemplary damages as permitted by Texas law;
+
+12. Assessing T-Mobile’s costs of this action and T-Mobile’s attorneys’ fees against AIO pursuant to 15 U.S.C. § 1117 and Texas law; and
+
+13. Ordering or awarding any other such relief that the Court deems just and proper.
+
+DEMAND FOR JURY TRIAL
+
+T-Mobile hereby makes a demand pursuant to Federal Rule of Civil Procedure 38(b) for a trial by jury on all issues triable to a jury.

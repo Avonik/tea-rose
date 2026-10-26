@@ -40,6 +40,56 @@
       "slug": "adidas_thom_browne",
       "sample": "adidas_thom_browne_pleadings",
       "title": "adidas America, Inc. v. Thom Browne, Inc., S.D.N.Y. 2021 / 2d Cir. 2026"
+    },
+    {
+      "slug": "stone_millercoors",
+      "sample": "stone_millercoors_pleadings",
+      "title": "Stone Brewing Co. v. MillerCoors LLC (Keystone Light), S.D. Cal. 2018 / 9th Cir. 2025"
+    },
+    {
+      "slug": "rolex_beckertime",
+      "sample": "rolex_beckertime_complaint",
+      "title": "Rolex Watch U.S.A., Inc. v. BeckerTime, LLC (modified Rolex watches), N.D. Tex. 2020 / 5th Cir. 2024"
+    },
+    {
+      "slug": "kraft_cracker_barrel",
+      "sample": "kraft_cracker_barrel_complaint",
+      "title": "Kraft Foods Group Brands LLC v. Cracker Barrel Old Country Store, Inc. (grocery-store hams), N.D. Ill. 2013 / 7th Cir. 2013"
+    },
+    {
+      "slug": "innout_smashburger",
+      "sample": "innout_smashburger_complaint",
+      "title": "In-N-Out Burgers v. Smashburger IP Holder LLC (Triple Double), C.D. Cal. 2017 / 2019"
+    },
+    {
+      "slug": "lv_my_other_bag",
+      "sample": "lv_my_other_bag_complaint",
+      "title": "Louis Vuitton Malletier, S.A. v. My Other Bag, Inc. (canvas totes), S.D.N.Y. 2014 / 2d Cir. 2016"
+    },
+    {
+      "slug": "am_general_activision",
+      "sample": "am_general_activision_complaint",
+      "title": "AM General LLC v. Activision Blizzard, Inc. (Humvees in Call of Duty), S.D.N.Y. 2017 / 2020"
+    },
+    {
+      "slug": "sazerac_fetzer",
+      "sample": "sazerac_fetzer_complaint",
+      "title": "Sazerac Co. v. Fetzer Vineyards (Buffalo Trace / 1000 Stories), N.D. Cal. 2015 / 2017"
+    },
+    {
+      "slug": "tmobile_aio",
+      "sample": "tmobile_aio_complaint",
+      "title": "T-Mobile US, Inc. v. Aio Wireless LLC (magenta / plum), S.D. Tex. 2013 / 2014"
+    },
+    {
+      "slug": "penn_state_vintage_brand",
+      "sample": "penn_state_vintage_brand_complaint",
+      "title": "The Pennsylvania State University v. Vintage Brand, LLC (retro merchandise), M.D. Pa. 2021 / 2024"
+    },
+    {
+      "slug": "ohio_state_redbubble",
+      "sample": "ohio_state_redbubble_pleadings",
+      "title": "The Ohio State University v. Redbubble, Inc. (print-on-demand), S.D. Ohio 2017 / 6th Cir. 2021"
     }
   ]
 }

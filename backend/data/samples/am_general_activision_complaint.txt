@@ -1,0 +1,484 @@
+===== DOCUMENT 1: Complaint (Doc. 1), filed 2017-11-07 =====
+
+AM General LLC v. Activision Blizzard, Inc., Activision Publishing, Inc., and Major League Gaming Corp., No. 1:17-cv-08644 (S.D.N.Y.), Complaint (Doc. 1), filed 2017-11-07
+Source: https://storage.courtlistener.com/recap/gov.uscourts.nysd.483511/gov.uscourts.nysd.483511.1.0.pdf
+
+UNITED STATES DISTRICT COURT
+
+SOUTHERN DISTRICT OF NEW YORK
+
+AM GENERAL LLC, Plaintiff, v.
+
+ACTIVISION BLIZZARD, INC., ACTIVISION PUBLISHING, INC., and MAJOR LEAGUE GAMING CORP., Defendants.
+
+COMPLAINT
+
+JURY TRIAL DEMANDED
+
+Plaintiff AM General LLC (“AM General”) states the following for its Complaint against Defendants Activision Blizzard, Inc., Activisio n Publishing, Inc., and Major League Gaming Corp. (collectively, “Defendants”).
+
+INTRODUCTION
+
+Plaintiff AM General LLC (“AM General”) makes the HUMVEE ®-branded vehicle and owns registrations for the HUMVEE ® and HMMWV ® marks and the distinctive elements that comprise the AM General Trade Dress. Wrongfully leveraging the goodwill and reputation AM General has developed in these ma rks, Defendants have used and continue to use AM General’s trademarks and trade dress in advertisi ng and promotion of their Call of Duty ® video game franchise; have featured and continue to feature AM General’s trademarks and vehicles bearing the distinctive elements of the AM General Trade Dress prominently in their video games; and have caused and continue to cause the manufactu re and sale of collate ral toys and books to further derive wrongful profits from AM Genera l’s intellectual property and to further promote Defendants’ infringing video games. Defendants’ video games have been successful but only at the expense of AM General and consumers who ar e deceived into believing that AM General licenses the games or is somehow connected with or involved in the creation of the games. Defendants have reaped billions of dollars in revenues from their wrongful acts and, in the process, have irreparably harmed AM Genera l by causing significant confusion, expressly misleading the consuming public, and diluting the goodwill and reputation of AM General’s famous marks.
+
+NATURE OF ACTION
+
+1. This is an action at law and in equity for trademark infringement, trade dress infringement, false designation of origin, fals e advertising, dilution, and related wrongs. AM General’s claims against Defendants arise unde r the Trademark Act of 1946, 15 U.S.C. §§ 1051 et seq. (“Lanham Act”), the common law of New York, and New York General Business Law § 360-l.
+
+THE PARTIES
+
+2. AM General is headquartered in Sout h Bend, Indiana, and is organized and existing under the laws of the State of Delaware . AM General’s sole member is AM General Holdings LLC, whose controlling member is MacAndrews AMG Holdings LLC. The sole member of MacAndrews AMG Holdings LLC is MacAndrews & Forbes Inc., which has its principal place of business in New York, New York.
+
+3. Upon information and belief, Defendant Activ ision Blizzard, Inc. is a corporation organized and existing under the laws of the State of Delaware, with a principal place of business in Santa Monica, California. Defendant Activision Blizzard, Inc. is registered to do business in New York and has a registered agent in New York.
+
+4. Upon information and belief, Defendant Activ ision Blizzard, Inc. is an interactive entertainment company and video game developer. Defendant Activision Blizzard, Inc. earns revenue through the sale, distribution, and licensing of content related to its video games.
+
+5. Upon information and belief, Defendants Activision Publishing, Inc. and Major League Gaming Corp. are business segments of Defendant Activision Blizzard, Inc.
+
+6. Upon information and belief, Defendant Activision Publishing, Inc. is a corporation organized and existing under the laws of the State of Delaware, with a principal place of business in Santa Monica, California. Defendant Activision Publishing, Inc. is registered to do business in New York and has a registered agent in New York.
+
+7. Upon information and belief, Defendant Activision Publishing, Inc. is an American video game developer, publisher, and distributor. Defendant Activision Publishing, Inc.’s leading product franchise is Call of Duty ®. Games within the Call of Duty ® franchise are sold for use on numerous video gaming platform s and are delivered using physical media and internet downloads. Games within the Call of Duty ® franchise enable single-player and multiplayer gameplay. In addition, games within the Call of Duty ® franchise may be played via one or more paid subscription services available th rough the internet, from which one or more of Defendants earns revenues.
+
+8. Upon information and belief, Defendant Activision Blizzard, Inc. and/or Defendant Activision Publishing, Inc. have li censed content relating to the Call of Duty ® franchise for use in video games, toys, books, and other content. For example, Defendant Activision Blizzard, Inc. and/or Defendant Activision Publishi ng, Inc. entered into one or more license agreement(s) with MEGA Brands, Inc. and/ or Mattel, Inc. relati ng to the manufacture, distribution, and sale of certain Call of Duty® Collector Construction Sets. As a further example, Defendant Activision Blizzard, Inc. and/or Defendant Activision Publishing, Inc. entered into one or more license agreement(s) with Bra dyGames, Id Software, and/or Penguin Random House LLC (headquartered in New York, New Yo rk) relating to the ma nufacture, publishing, distribution, and sale of certain Call of Duty® Strategy Guides.
+
+9. Upon information and belief, Defendant Major League Gaming, Corp. is a corporation organized and existing under the laws of the State of Delaware, with a principal place of business in New York, New York.
+
+10. Upon information and belief, Defendant Major League Gaming Corp. operates in the eSports business and operates tournaments for video games, including the Call of Duty ® franchise. Defendant Major League Gaming Cor p. broadcasts, through in ternet live streaming, video gaming tournaments, and events. Players a nd spectators can observe the broadcasts of the gaming tournaments and events, which depict the content of games, including the Call of Duty ® franchise. Through Defendant Major League Gaming Corp.’s website, players are invited to join tournaments.
+
+JURISDICTION AND VENUE
+
+11. This Court has subject matter jurisdiction over the federal claims for trademark infringement, trade dress infringement, false designation of origin, false advertising, dilution, and related wrongs under 28 U.S.C. §§ 1331, 1338(a). The Court has subject matter jurisdiction over the state claims under 28 U.S.C. § 1367(a).
+
+12. This Court has personal jurisdiction over the Defendants because Defendants have engaged in infringing conduct, in cluding but not limited to advert ising, promoting, and selling infringing products and hosting tournament pla y, in this District, among other places. In addition, this Court has persona l jurisdiction over Defendant Major League Gaming Corp., because Defendant Major League Gaming Corp. has its principal place of business in this District, and over Defendants Acti vision Blizzard, Inc. and Activision Publishing, Inc., because they are registered to do business in New York and have registered agents in New York.
+
+13. Venue is proper in this District under 28 U.S.C. § 1391(b).
+
+FACTUAL BACKGROUND
+
+A. AM General’s Trademarks and Trade Dress
+
+14. AM General designs, engineers, manufactur es, supplies, and supports specialized vehicles for military and commercial customers. It is best known today for its global leadership in the design and production of, and support for, the High Mobility Multipurpose Wheeled Vehicle (“HMMWV”), which is also known as th e “HUMVEE” and is wide ly recognized as the most versatile, dependable, and m obile light tactical wheeled vehi cle in the world. Photographs of exemplary HUMVEE®-branded vehicles are reproduced as Figures 1–4 below: Figure 1 Figure 2 Figure 3 Figure 4
+
+15. AM General has successfully developed and produced more than 1.5 million vehicles, including more than 278,000 HUMVEE ®-branded vehicles. HUMVEE ®-branded vehicles have been in service for more than 30 years with the United States Armed Forces and with over 50 foreign countries.
+
+16. For many decades, AM General has devoted, and continues to devote, substantial time, effort, and resources in the development and design of HUMVEE®-branded vehicles and to the goodwill and reputation of the HUMVEE ® and HMMWV® brands, including the distinctive trade dress associated with HUMVEE®-branded vehicles.
+
+17. AM General is the owner of all rights, tit le, and interest in numerous trademarks and trade dress. Of particular relevance to this action, AM Genera l is the owner of United States Trademark Reg. No. 1,697,530, which covers the HUMVEE ® mark for trucks. A true and accurate copy of Reg. No. 1,697,530 is attached hereto as Exhibit 1. As reflected in Exhibit 1, the HUMVEE® mark for trucks was first used in comm erce at least as early as April 1983. The HUMVEE® mark is incontestable, which means th at it is “conclusive evidence” of AM General’s ownership of the mark, of the validit y of the mark, and of AM General’s “exclusive right” to use the mark in commerce for trucks. See 15 U.S.C. § 1115(b).
+
+18. AM General is also the owner of United States Trademark Reg. No. 2,305,256, which covers the HUMVEE® mark for toys. A true and accurate copy of Reg. No. 2,305,256 is attached hereto as Exhibit 2. As reflected in Exhibit 2 , the HUMVEE® mark for toys was first used in commerce at least as early as June 1997. The HUMVEE ® mark is incontestable, which means that it is “conclusive evidence” of AM General’s ownership of the mark, of the validity of the mark, and of AM General’s “exclusive right ” to use the mark in commerce for toys. See 15 U.S.C. § 1115(b).
+
+19. AM General is also the owner of United States Trademark Reg. No. 3,026,594, which covers the HMMWV® mark for vehicles. A true and accurate copy of Reg. No. 3,026,594 is attached hereto as Exhibit 3. As reflected in Exhibit 3, the HMMWV® mark was first used in commerce at least as early as December 13, 1986. The HMMWV® mark is incontestable, which means that it is “conclusive evidence” of AM General’s ownership of the mark, of the validity of the mark, and of AM General’s “exclusive right ” to use the mark in commerce for vehicles. See 15 U.S.C. § 1115(b).
+
+20. In addition, AM General’s HUMVEE ®-branded vehicles bear certain distinctive elements, which individually and collectively comprise the “AM General Trade Dress.” As shown in Figures 1–4, above, the AM General Tr ade Dress includes the overall shape of the vehicle, an X design on the lo wer portion of the vehicle’s doors (in certain configurations), a slanted upper rear portion of the vehicle (in certain configura tions), side mirror mounts attached to each side of the vehicle ad jacent to the vehicle windshield (not to the vehicle’s doors), a windshield that is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangu lar doors, a blackout headlight in the left front hood recess, and/or seven vertical ovals comprising the front grille. See 15 U.S.C. § 1115(b).
+
+21. AM General has registered certain elemen ts of the AM General Trade Dress on the Principal Register of the United States Pa tent and Trademark Office. Specifically, AM General is the owner of Reg. No. 5,107,327 (the “Registered AM General Trade Dress”) for motor vehicles and toy vehicles . Figure 5, below, depicts the Registered AM General Trade Dress, which consists of “a three-dimensional c onfiguration of an X de sign on the lower portion of two vehicle doors, a slanted upper rear portion of a vehicle and side mirror mounts attached to each side of a vehicle adjacent to the windshi eld.” A true and accurate copy of Reg. No. 5,107,327 is attached hereto as Exhibit 4. As reflected in Exhibit 4, the Registered AM General Trade Dress was first used in commerce for vehicl es at least as early as April 1983 and for toys at least as early as December 31, 1999. This registration is “prima facie evidence” of AM General’s ownership of the mark, of the validit y of the mark, and of AM General’s “exclusive right” to use the mark in commerce for vehicles and toys. See 15 U.S.C. § 1115(b). Figure 5
+
+22. The AM General Trade Dress (including but not limited to the Registered AM General Trade Dress) is distinctive and is not functional. The elements of the AM General Trade Dress (including but not limited to the Registered AM General Trade Dress) serve to allow consumers to easily recognize HUMVEE ®-branded vehicles and toys bearing the AM General Trade Dress and to distinguish the source of HUMVEE ®-branded vehicles and toys bearing the AM General Trade Dress from the source of vehicles and toys manufactured by others.
+
+23. The AM General Trade Dress has been he ld to be valid and well-known and was so held long before the unlawful acts givi ng rise to this action. For example, in General Motors Corp. & AM General, LLC v. Lanard Toys, Inc., the Sixth Circuit affirmed a summary judgment ruling that the AM General Trade Dress was valid and non-functional as a matter of law. General Motors Corp. & AM General, LLC v. Lanard Toys, Inc. , 468 F.3d 405, 417 (6th Cir. 2006).
+
+24. Based on extensive use, promotion, and sa les, the AM General Trade Dress is distinctive and enjoys secondary meaning among consumers as a device that identifies and distinguishes AM General, or a single anonymous source, as the source of HUMVEE ®-branded vehicles bearing the AM General Trade Dress. For example, the AM General Trade Dress has been described as “iconic,” “famous,” and “world renowned.” See Exhibits 5–10.
+
+25. Since at least as early as the 1990s, AM General has licensed others to use the HUMVEE® mark and/or the AM General Trade Dress on or in connection with a wide variety of products, which have been sold to millions of consumers throughout the United States.
+
+26. For example, AM General granted a licen se to Infogrames Inc. to use the HUMVEE® mark and the AM General Trade Dress in connection with the video game HUMVEE® AssaultTM.
+
+27. AM General granted a license to N ovalogic, Inc. to use the HUMVEE ® mark in connection with the video game Delta Force - Black Hawk DownTM.
+
+28. AM General granted a license to The Codemasters Software Company, Ltd. to use the HUMVEE ® mark and the AM General Trade Dres s in connection with the video game Operation Flashpoint®: Red River®.
+
+29. AM General granted a license to THQ Inc. to use the HUMVEE ® mark and the AM General Trade Dress in connection with the video game Homefront® and in promotional and other materials related to the Homefront® video game.
+
+30. AM General granted a license to Maisto International Inc. to use the HUMVEE ® mark and the AM General Trade Dress in connection with scale vehicle models.
+
+31. AM General granted a license to Mattel to use the HUMVEE ® mark and the AM General Trade Dress in connection with toys of specified scales.
+
+32. Consumers have come to expect that goods bearing the HUMVEE ® marks, the HMMWV® mark, and/or distinctive elements of th e AM General Trade Dress originate from and/or are authorized, licensed, or approved by AM General and were so authorized, licensed, or approved long before the unlawful conduct that forms the basis fo r this action. AM General’s HUMVEE® and HMMWV® marks and the AM General Trade Dress are famous to the general purchasing public in the United States and were famous long before the unlawful conduct that forms the basis for this action.
+
+B. Defendants’ Unlawful Conduct
+
+1. Defendants’ Unauthorized Use of HUMVEE ® and HMMWV® Marks and the AM General Trade Dress in Connection with Infringing Video Games
+
+33. Beginning after AM General’s firs t use in commerce of the HUMVEE ® and HMMWV® marks and the AM General Trade Dress (inc luding but not limited to the Registered AM General Trade Dress), and s eeking to profit from the strength of such marks and dress and the success of goods bearing such marks and/or dress, Defendants have (directly and/or contributorily) produced, manuf actured, caused to be manufactured, sold, offered for sale, distributed, and/or induced others to use—and continue to produce, manufacture, cause to be manufactured, sell, offer for sale, distribute, and/or induce others to use—products, including video games and/or other content and materials, that incorporate, use, and prominently rely upon the AM General Trade Dress and that infringe and continue to infringe the HUMVEE ® and HMMWV® marks (the “Infringing Products”). Such Infringing Products include but are not limited to the following video games:  Call of Duty®: Modern Warfare® 2;  Call of Duty®: Modern Warfare® 3;  Call of Duty® 4: Modern Warfare®;  Call of Duty®: Modern Warfare® Remastered;  Call of Duty® Modern Warfare®: Mobilized;  Call of Duty®: Black Ops II;  Call of Duty®: Ghosts; and  Call of Duty®: Heroes. True and accurate images of a sample of Defendants’ Infri nging Products and Defendants’ unauthorized use of the AM General Trade Dr ess and marks to promote these Infringing Products are attached hereto as Exhibit 11.
+
+34. Defendants’ wrongful use of AM Genera l’s intellectual property, including the AM General Trade Dress and the HUMVEE ® and HMMWV ® marks, in the Call of Duty ® franchise is pervasive, plays a significant role in the gameplay of the Infr inging Products, and is a key selling feature of the games.
+
+35. For example, in Call of Duty ®: Modern Warfare ® 2, multiple in-game missions and multiplayer levels include depictions of vehicles bearing the (or substantially similar) distinctive design elements of the AM General Tr ade Dress (“Infringing Vehicles”). In some instances, the game player is able to (and even required to in order to progress in the game) climb onto the Infringing Vehicles and climb into (viewing the interior) and ride in the Infringing Vehicles while controlling and fi ring a weapon on the vehicle. See, e.g., Exhibit 11 at 7–18; Exhibit 12. In others, the player is tasked with manning a weapon from a helicopter to protect Infringing Vehicles that are seen driving on the ground below. At various points in the game, the Infringing Vehicles are explicitly and misleadingly identified using AM General’s marks as, e.g., “HUMVEE 01 M1026 HMMWV.” In other instances, the characters explicitly and misleadingly refer to the Infringing Vehicles as the “Humvee,” including dialog that states “We’re leaving on Hunter Three’s Humvee, over.” There are also Infringing Vehicles depicted in miniature or toy configurations in the game. The Infringing Vehicles depicted include distinctive elements of the AM General Trade Dress, including its overall shape, X design on th e lower portion of the vehicle’s doors, slanted upper rear portion, side mirror mounts attached to each side of the vehicle adjacent to the vehicle windshield (not to the ve hicle’s doors), a windshield that is bisected by a metal bar and does no t have lights above it, windshiel d wipers attached to the top of the front windows, rectangular doors, and seven vertical ovals comprising the front grille. Exhibit 11 at 7–18.
+
+36. Figures 6–11, below, are scr eenshots of Call of Duty ®: Modern Warfare ® 2 gameplay depicting exemplary una uthorized uses of the HUMVEE ® and HMMWV® marks and the AM General Trade Dress. out of an overturned Infr inging Vehicle that is on fire. In other scen es, the characters explicitly and misleadingly refer to Infringi ng Vehicles as the “Humvee,” including dialog that states “Do not fire on the Humvees, those are our guys,” “Get Volk in the Humvee, let’s go!,” “One of the humvees has just been hit,” and “Get a javelin from the Humvee and finish off those tanks.” The Infringing Vehicles depicted in clude distinctive elements of the AM General Trade Dress, including its overall shape, X design on the lo wer portion of the vehicle’s doors, side mirror mounts attached to each side of the vehicle adjacent to the vehicle windshield (not to the vehicle’s doors), a windshield th at is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, and seven vertical ovals comprising the front grille. Exhibit 11 at 21–25.
+
+38. In Call of Duty ® 4: Modern Warfare, multiple in-game missions and multiplayer levels include depictions of Infr inging Vehicles. In some instances , the game player is able to climb onto the Infringing Vehicles and climb into and ride inside the Infringing Vehicles while controlling a weapon on the vehicle. In others, the player is tasked with manning a weapon from a helicopter to protect Infringi ng Vehicles that are seen dr iving on the ground below. The Infringing Vehicles depicted in clude distinctive elements of the AM General Trade Dress, including its overall shape, X design on the lo wer portion of the vehicl e’s doors, slanted upper rear portion, side mirror mounts a ttached to each side of the vehicle adjacent to the vehicle windshield (not to the vehicle’s doors), a windshield that is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, and seven vertical ovals comprising the front grille. Exhibit 11 at 2–6.
+
+39. In Call of Duty ®: Modern Warfare ® Remastered, multiple in-game missions and multiplayer levels include depictions of Infringing Vehicles. In some instances, the game player is able to climb onto the Infringing Vehicles . The Infringing Vehicles depicted include distinctive elements of the AM General Trade Dress, including its overall shape, slanted upper rear portion, side mirror mounts a ttached to each side of the vehicle adjacent to the vehicle windshield (not to the vehicle’s doors), a windshield that is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, and seven vertical ovals comprising the front grille. Exhibit 11 at 34–35.
+
+40. In Call of Duty ®: Black Ops II, players see Infringing Vehicles, exterior and interior, as part of a mission, and in some inst ances see characters exit the Infringing Vehicles. The Infringing Vehicles depicted include distinctive elements of the AM General Trade Dress, including its overall shape, X design on the lo wer portion of the vehicl e’s doors, slanted upper rear portion, side mirror mounts a ttached to each side of the vehicle adjacent to the vehicle windshield (not to the vehicle’s doors), a windshield that is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, a blackout headlight in the left front hood recess, and seve n vertical ovals comprising the front grille. Exhibit 11 at 26–29.
+
+41. In Call of Duty ®: Ghosts, players are able to see Infringing Vehicles, maneuver around them, and climb on them. The Infringing Vehicles depicted include distinctive elements of the AM General Trade Dress, including its overall shape, slanted upper rear portion, side mirror mounts attached to each si de of the vehicle adjacent to th e vehicle windshield (not to the vehicle’s doors), a windshield th at is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, a blackout headlight in the left front hood recess, and seve n vertical ovals compri sing the front grille. Exhibit 11 at 30–32.
+
+42. In Call of Duty® Modern Warfare®: Mobilized, players can approach an Infringing Vehicle and control a weapon on the top of an Infringing Vehicle. Exhibit 11 at 19–
+
+20. The Infringing Vehicles depi cted include distinctive elemen ts of the AM General Trade Dress, including its overall shape, slanted upper rear portion, side mirror mounts attached to each side of the vehicle adjacent to the vehicle windshield (not to the vehicle’s doors), a windshield that is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, a blackout headlight in the left front hood recess, and seven vertical ovals comprising the front grille. Exhibit 11 at 19–20.
+
+43. In Call of Duty®: Heroes, Infringing Ve hicles are seen driv ing along roads near the player’s base. The Infringing Vehicles depi cted include distinctive elements of the AM General Trade Dress, including its overall shape. Exhibit 11 at 33.
+
+44. Figures 12–13, below, are screenshots depicting exemplary Infringing Vehicles in the Infringing Products, which have been annotat ed to call out Defendants’ unauthorized use of certain distinctive elements of the AM General Trade Dress.
+
+45. Figure 12 is exemplary of Defendants’ wr ongful use of AM General Trade Dress, including the vehicle’s overall sh ape, which is a distinctive element of the AM General Trade Dress. Figure 12A includes a red annotation calli ng out the depicted windshield that is bisected by a metal bar and does not have lights above it, which are distinctive elements of the AM General Trade Dress. Figure 12B includes a red annotation calling out the depicted seven vertical ovals comprising the front grille, which is a distinctive element of the AM General Trade Dress. Figure 12C includes a red annotation calling out the depicted side mirror mounts attached to each side of a vehicle adjacent to the vehicle windshield (not to the vehicle’s doors), which are distinctive elements of the AM General Trad e Dress. Figure 12D includes a red annotation
+
+46. Upon information and belief, Defendants al so license, distribut e, and/or provide access to the Infringing Video Games through subscription services. For example, in 2011 Defendants Activision Blizzard, Inc. and Activision Publishing, Inc. launched Call of Duty ®: Elite, an online subscription-based service offe ring additional multiplayer content. Premium members of the Call of Duty®: Elite service were charged $50 per year for the service.
+
+2. Defendants’ Unauthorized Use of the AM General Trade Dress in Connection with Advertising and Promotion of Infringing Video Games
+
+47. Without AM General’s permission, in order to promote certain of Defendants’ Infringing Products, in order to advertise the pe rvasive depiction of In fringing Vehicles in Defendants’ Infringing Products, and in a manner that explicit ly misleads consumers into believing that AM General or the maker of HUMVEE ®-branded vehicles (if unknown) sponsors or supports Defendants’ Infringi ng Products, Defendants have prominently depicted vehicles bearing the distinctive elements of the AM Ge neral Trade Dress in advertising and marketing materials. True and accurate copies of images taken from Defendants’ advertising materials are attached as Exhibit 13.
+
+48. For example, video trailers us ed to promote the Call of Duty ® video games prominently feature depictions of vehicles bearing distinctive elements of the AM General Trade Dress. Exhibit 13 at 2–11.
+
+49. The “Launch Trailer” for Call of Duty ®: Modern Warfare® 2 starts with series of shots depicting soldiers getting into and driving a prominently featured Infringing Vehicle from multiple angles. Exhibit 13 at 3–5. GamerSpawn, Call of Duty: Modern Warfare 2 – Launch Trailer, YouTube (Nov. 5, 2009), https://www.youtube.com/watch?v=AzwBeDV5IAY.
+
+50. The “Reveal Trailer” and “Infam y Trailer” for Call of Duty ®: Modern Warfare® 2, both depict Infringing Vehicles being driven and getting blown up. See, e.g., Exhibit 13 at 2, 7–9. HMMWV HUMVEE,s Call of duty Black Ops Den Haag.mpg , YouTube (Nov. 12, 2010), https://www.youtube.com/watch?v=7d2TA4U-oAQ.
+
+3. Defendants’ Unauthorized Use of the AM General Trade Dress in Connection with MegaBloks Toys
+
+54. Upon information and belief, one or more of Defendants arranged for the manufacture, distribution, and sale of toy vehi cles bearing the (or substantially similar) distinctive elements of the AM General Trade Dress. Fo r example, in or around 2013 Defendants and MEGA Brands released a seven-toy series of Call of Duty ® Collector Construction Sets to promote, advertise and further extract profits from the Call of Duty ® franchise. One of the seven toys is the “Light Armor Firebase,” No. 06817, which includes a toy vehicle bearing the (or substant ially similar) distinctive elements of the AM General Trade Dress. See, e.g., Exhibit 14 at 4. Light Armor Firebase Call of Duty , MEGA Shop, https://shop.megabrands.com/en-us/shop/ construction-toys/call-of-duty/light-armor-firebase-dcl23 (last visited Nov. 6, 2017).
+
+55. And in or around 2016, Defendants and ME GA Brands released an eight-toy series of Call of Duty ® Collector Construction Sets. One of the eight toys is the “Armored Vehicle Charge,” No. DPB57, which includes a toy vehicle bearing the (or substantially similar) distinctive elements of the AM General Trade Dress. See, e.g., Exhibit 14 at 2. Armored Vehicle Charge Call of Duty , MEGA Shop, https://sh op.megabrands.com/enca/shop/construction-toys/call-of-duty/armored-vehicle-charge-dpb57 (last visited Nov. 6, 2017).
+
+56. The packaging and instruction manuals accompanying the toys described in Paragraphs 54–55, above, bear the ACTIVISION ® mark and the notice “©20[xx] Activision Publishing, Inc. ACTIVISION, and CALL OF DUT Y are trademarks of Activision Publishing, Inc.” Exhibit 14 at 3, 5. Defendants’ Infringing Products, advertise the perv asive depiction of vehicles bearing the (or substantially similar) distinctive elements of the AM General Trade Dress in Defendants’ Infringing Products and expressly mislead consum ers to believe AM General or the maker of HUMVEE®-branded vehicles (if unknown) sponsors or supports Defendants’ Infringing Products.
+
+4. Defendants’ Unauthorized Use of HUMVEE® mark and the AM General Trade Dress in Connection with BradyGames Strategy Guides
+
+59. Upon information and belief, one or more of Defendants authorized BradyGames, Id Software, and/or Penguin Random House LLC to manufacture, publis h, distribute, and sell strategy guides for Defendants’ Infringing Products.
+
+60. Upon information and belief, in 2011, Activ ision entered into a “Strategy Guide Publishing Agreement” with BradyGames for such strategy guides.
+
+61. Such strategy guides pervasivel y and misleadingly use the HUMVEE ® mark and depict vehicles bearing the (or substantially si milar) distinctive elements of the AM General Trade Dress. For example, the Call of Duty ®: Modern Warfare ® 2 strategy guide describes the various acts, missions, and ot her details of Call of Duty ®: Modern Warfare ® 2. The Call of Duty®: Modern Warfare ® 2 strategy guide prominently featur es Infringing Vehicles bearing the (or substantially similar) distinctive elements of the AM General Trade Dress, examples of which are shown in Exhibit 15 at 2–5.
+
+62. For example, as shown in Figure 14 ( see also Exhibit 15 at 3), below, the Call of Duty®: Modern Warfare® 2 strategy guide introduces Act 1 of the game on pages 10 and 11 and prominently depicts Infringing Ve hicles bearing the (or substa ntially similar) distinctive elements of the AM General Trade Dress, including the overall shape of the vehicle, an X design on the lower portion of the vehicle’s doors, a sl anted upper rear portion of the vehicle, side mirror mounts attached to each side of a vehicle adjacent to th e vehicle windshield (not to the vehicle’s doors), a windshield th at is bisected by a metal bar and does not have lights above it, windshield wipers attached to the top of the front windows, rectangular doors, a blackout headlight in the left front hood recess, and seven vertical ovals comprising the front grille. Figure 14
+
+63. The Call of Duty ®: Modern Warfare ® 2 strategy guide continues by describing engagements of Act 1, which prominently feature In fringing Vehicles as part of the gameplay. In doing so, the strategy guide ma kes pervasive use of the HUMVEE® mark. Exhibit 15 at 2–4. For example on page 18 (Exhibit 15 at 4), “Engagement 2,” is introduced as follows: Once the militants begin to fall back, proceed up the stairs to the bridge and wait for your Humvee to roll up. Then hop in the back. Don’t run in front of it—you can get squashed! Similarly, on page 18 (Exhibit 15 at 4), “Engagement 3” is introduced as follows: The next section has you manning a mounted turret on your Humvee as the convoy rolls throug h the streets. Once you get clearance to open up, don’t feel shy about holding the trigger— there’s no ammo limit, and you can’t overheat! “Engagement 3” is further described on page 19 (Exhibit 15 at 4) as follows: However, this doesn’t last, as th e sounds of gunfire ring out ahead. Your Humvee pulls up to an ab andoned school. Militants run along the rooftop in plain view, armed and firing at the convoy.
+
+64. Similarly, the Call of Duty ®: Modern Warfare ® 3 strategy guide describes the various acts, missions, and ot her details of Call of Duty ®: Modern Warfare ® 3 and features Infringing Vehicles bearing the (or substantially similar) distinctive elements of the AM General Trade Dress. Exhibit 15 at 7–9.
+
+65. The strategy guides described in Paragraphs 59–64, above, bear the ACTIVISION® mark and the notice “©20[ xx] Activision Publishing, Inc. ACTIVISION, CALL OF DUTY and MODERN WARFARE ar e [registered] trademarks [or registered trademarks] [and CALL OF DUTY MW3 is a trademark] of Activision Publishing, Inc.” Exhibit 15 at 6, 10.
+
+66. Upon information and belief, such use of the HUMVEE® mark and the distinctive elements of the AM General Trade Dress in co nnection with the manufacture, distribution, and sale of the strategy guides described in Paragraphs 59–64, above, without license or authorization from AM General, further served to promote Defendants’ Infringing Products, advertise the pervasive depiction of vehicles bearing the (or substantially similar) distinctive elements of the AM General Trade Dress in Defendants’ Infringing Products, and expressly mislead consumers to believe AM General or the maker of HUMVEE ®-branded vehicles (if unknown) sponsors or supports Defendants’ Infringing Products.
+
+5. Defendants’ Widespread, Pervasive, and Unauthorized Use of the HUMVEE® and HMMWV ® marks and the AM General Trade Dress Is Willful, Causes Confusion, and Expressly Misleads Consumers
+
+67. As detailed above, Defendants have misappropriated, copied and used, and continue to misappropriate, copy, and use, the AM General Trade Dress and the HUMVEE ® and HMMWV® marks in connection with the Infringi ng Products and the advertising, promotion, and sale thereof.
+
+68. Defendants’ use of the AM General Trade Dress and HUMVEE ® and HMMWV® marks in connection with the advertising, prom otion, and sale of the Infringing Products has caused and is likely to cause purchasers and potential purchasers to falsely believe that Defendants’ Infringing Products are associated wit h, are approved, license d, or sponsored by AM General or the maker of HUMVEE ®-branded vehicles (if unknown) or that AM General or the maker of HUMVEE ®-branded vehicles (if unknown) participated in the creation of the Infringing Products or was otherwise consulted or involved with those products.
+
+69. Defendants have distributed and continue to make available user guides for Defendants’ Infringing Vi deo Games. Such user guides incl ude a so-called “Software License Agreement,” which states to customers the following (or similar) language: OWNERSHIP. All title, ownership rights and intellectual property rights in and to this Program and any and all copies thereof (including but not limited to any titles, computer code, themes, objects, characters, character names, stories, dialog, catch phrases, locations, concepts, artwork, animation, sounds, musical compositions, audio-visual effects, methods of operation, moral rights, and any related documenta tion, incorporated into this Program) are owned by Activision or its licensors. … This Program contains ce rtain licensed materials and Activision’s licensors may protect their rights in the event of any violation of this Agreement. Exhibit 16. Such statements are false and misleadi ng. AM General did not license Activision’s use of the HUMVEE® and HMMWV® marks and AM General Trade Dress, and Activision does not own the HUMVEE® and HMMWV® marks or AM General Trade Dress.
+
+70. Such statements by Defendants expressl y mislead customers to believe AM General or the maker of HUMVEE ®-branded vehicles (if unknown) sponsors, supports, or has otherwise authorized or licen sed Defendants’ use of HUMVEE ® and HMMWV ® marks and depiction of vehicles bearing th e (or substantially similar) distinctive elements of the AM General Trade Dress, or participated in the design of the products.
+
+71. Upon information and belief, Defendants’ misappropriation of, copying of, and use of colorable imitations of AM General’s Trade Dress has been done with Defendants’ knowledge of Plaintiff AM General’s rights therein; with an intent to trade upon and pirate away the substantial reputation and goodwill symbolized by the AM General Trade Dress; and with an intent to cause confusion, mistake, or decepti on among purchasers, potential purchasers, the public, and/or the trade.
+
+72. The foregoing activities of Defendants al so demonstrate Defendants’ clear and unmistakable intent to infringe AM General’s marks. Defendants’ use in the Infringing Products of AM General’s marks has caused and is likely to cause confusion, mistake, and deception among purchasers and potential purchasers and to deceive th e public into purchasing Defendants’ Infringing Products and/or believing that Defenda nts’ Infringing Products are associated with, are approved by, and/or are sponsored by AM General when that is not the case.
+
+73. Defendants’ pervasive and prominent use in the Infringing Products—in the form of video games, toys, and other content—of AM General Trade Dress and marks is designed to create the false impression that Plaintiff AM General has authorized Defendants’ use. See Exhibit 16.
+
+6. Defendants’ Unauthorized Use of the HUMVEE ® and HMMWV® marks and the AM General Trade Dress Is Caus ing and Has Caused Harm to AM General
+
+74. Defendants’ activities with respect to the Infringing Products have resulted in, are resulting in, and will continue to result in harm to AM General, including without limitation damage to Plaintiff AM General’s reputation and goodwill symbolized by the AM General Trade Dress and marks as well as monetary losses and damage.
+
+75. Upon information and belief, Defendants ha ve wrongfully profited and have been unjustly enriched by their sales and/or licensing of the Infri nging Products directly and/or contributorily.
+
+76. Upon information and belief, Defendants’ sale and/or licensing of the Infringing Products have generated substantially in excess of US $5,200,000,000.00 in revenue.
+
+77. Upon information and belief, Defendants’ sales of the Infringing Products have resulted in over 130 million units sold.
+
+C. AM General’s Knowledge of Defendants’ Wrongful Conduct
+
+78. Upon information and belief, AM Genera l first became aware of Defendants’ unauthorized use of AM General’s intellectual property in or around May 2016. More specifically, on May 24, 2016, a repr esentative of Global Icons, LLC—an outside licensing agency whose contractual duties include the po licing of AM General’s trademarks and trade dress—alerted counsel for AM Ge neral to the fact that Defenda nt Activision Blizzard, Inc. and/or Defendant Activision Publ ishing, Inc. (“Activision”) was us ing depictions of vehicles bearing the (or substantially similar) distinctive elements of the AM General Trade Dress in video games and toys as part of the Call of Duty® franchise. The nature and extent of Defendants’ wrongful use was at that time unknown.
+
+79. On or about June 20, 2016, counsel for Gl obal Icons (on behalf of AM General) sent a cease-and-desist letter to Activision. Activision and Globa l Icons engaged in informal communications regarding this dispute in at leas t August, September, and October 2016. Activision did not substantively respond until January 2017.
+
+80. On or about January 18, 2017, Activision sent Global Icons a letter responding to the June 2016 cease-and-desist letter. Thereafter, Activision and Global Icons engaged in oral and email communications in at least March and August 2017.
+
+81. Upon information and belief, Defendants continue to engage in unauthorized, wrongful, and misleading use of AM General’s marks and trade dress.
+
+FIRST CAUSE OF ACTION
+
+Federal Trademark Infringement, 15 U.S.C. § 1114 (Against All Defendants)
+
+82. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+83. AM General owns incontestable federa l trademark registrations for HUMVEE ® for trucks and toys. See Reg. Nos. 1,697,530 and 2,305,526.
+
+84. Defendants have had both actual and c onstructive knowledge of AM General’s federally registered HUMVEE® marks.
+
+85. Defendants have used, are using, and have caused others to use AM General’s federally registered HUMVEE ® marks, and marks confusingly similar thereto, in connection with the advertising, promotion, and sale of their goods and services without AM General’s authorization.
+
+86. Defendants’ unauthorized use of AM General’s HUMVEE® marks has caused and is likely to cause confusion, mistake, and d eception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of 15 U.S.C. § 1114.
+
+87. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on th e goodwill and reputation of AM General and its federally registered HUMVEE® marks and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+88. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+89. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in its federally registered HUMVEE ® marks and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defendants are enjoined from their unlawful conduct, AM General will continue to suffer irreparable harm for which it has no adequate remedy at law.
+
+SECOND CAUSE OF ACTION
+
+Federal Trademark Infringement, 15 U.S.C. § 1114 (Against All Defendants)
+
+90. The allegations of the foregoing Paragraphs are repleaded and incorporated by reference as if fully set forth herein.
+
+91. AM General owns an incontestable fe deral trademark registration for HMMWV ® for vehicles. See Reg. No. 3,026,594.
+
+92. Defendants have had both actual and c onstructive knowledge of AM General’s federally registered HMMWV® mark.
+
+93. Defendants have used, are using, and have caused others to use AM General’s federally registered HMMWV® mark, and marks confusingly sim ilar thereto, in connection with the advertising, promotion, and sale of their goods and services without AM General’s authorization.
+
+94. Defendants’ unauthorized use of AM General’s HMMWV ® mark has caused and is likely to cause confusion, mistake, and d eception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of 15 U.S.C. § 1114.
+
+95. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on th e goodwill and reputation of AM General and its federally registered HMMWV® mark and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+96. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+97. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in its federally registered HMMWV ® mark and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defendants are enjoined from their unlawful conduct, AM General will continue to suffer irreparable harm for which it has no adequate remedy at law.
+
+THIRD CAUSE OF ACTION
+
+Federal Trade Dress Infringement, 15 U.S.C. § 1114 (Against All Defendants)
+
+98. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+99. AM General owns a federal trademark registration for certain elements of the AM General Trade Dress (“the Registered AM Gene ral Trade Dress”) for mo tor vehicles and toy vehicles. See Reg. No. 5,107,327.
+
+100. The Registered AM General Trade Dress is distinctive and is not functional.
+
+101. Defendants have had both actual and cons tructive knowledge of the Registered AM General Trade Dress.
+
+102. Defendants have used, are using, and have caused others to use the Registered AM General Trade Dress in connection with the advertising, promotion, and sale of their goods and services without AM General’s authoriza tion and with full knowledge of AM General’s rights in that trade dress.
+
+103. Defendants’ unauthorized use of the Re gistered AM General Trade Dress has caused and is likely to cause confusion, mistake, or deception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of 15 U.S.C. § 1114.
+
+104. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on th e goodwill and reputation of AM General and the Registered AM General Trade Dr ess and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+105. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+106. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in the Registered AM General Trade Dress and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defendants are permanently enjoined from their wrongful conduct, AM General will con tinue to suffer irreparable harm for which it has no adequate remedy at law.
+
+FOURTH CAUSE OF ACTION
+
+Federal Trademark Infringement, Unfair Competition, and False Designation of Origin 15 U.S.C. § 1125 (Against All Defendants)
+
+107. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+108. AM General owns common law marks fo r HUMVEE for a variety of goods and services, including vehicles and toys.
+
+109. Defendants have had both actual and c onstructive knowledge of AM General’s superior rights in the HUMVEE marks.
+
+110. Defendants have used, are us ing, and have caused others to use in commerce AM General’s HUMVEE marks in connection with the advertising, promoti on, and sale of their goods and services without AM General’s authorization.
+
+111. Defendants’ unauthorized use of AM Ge neral’s HUMVEE marks has caused and is likely to cause confusion, mistake, and d eception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of 15 U.S.C. § 1125.
+
+112. Defendants’ unlawful conduct was knowing, de liberate, willful, and in bad faith and done with the intent to trade on the go odwill and reputation of AM General and its HUMVEE marks and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+113. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+114. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in its HUMVEE marks and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defenda nts are permanently enjoined from their unlawful conduct, AM General will continue to suffer irreparabl e injury for which it has no adequate remedy at law.
+
+FIFTH CAUSE OF ACTION
+
+Federal Trademark Infringement, Unfair Competition, and False Designation of Origin 15 U.S.C. § 1125 (Against All Defendants)
+
+115. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+116. AM General owns common law marks for HMMWV for a variety of goods and services, including vehicles and toys.
+
+117. Defendants have had both actual and c onstructive knowledge of AM General’s superior rights in the HMMWV mark.
+
+118. Defendants have used, are using, and have caused others to use AM General’s HMMWV mark in connection with the advertis ing, promotion, and sale of their goods and services without AM General’s authorization.
+
+119. Defendants’ unauthorized use of AM General’s HMMWV mark has caused and is likely to cause confusion, mistake, and deception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of 15 U.S.C. § 1125.
+
+120. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on th e goodwill and reputation of AM General and its HMMWV mark and to deceive consumers into be lieving that AM General was connected with Defendants’ goods and services.
+
+121. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+122. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in its HMMWV mark and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defenda nts are permanently enjoined from their wrongful conduct, AM General will continue to suffer irreparable conduct for which it has no adequate remedy at law.
+
+SIXTH CAUSE OF ACTION
+
+Federal Trade Dress Infringement, Unfair Competition, and False Designation of Origin 15 U.S.C. § 1125 (Against All Defendants)
+
+123. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+124. AM General owns common law rights in the AM General Trade Dress for a variety of goods and services, including vehicles and toys.
+
+125. The AM General Trade Dress is distinctive and is not functional.
+
+126. Defendants have had both actual and c onstructive knowledge of AM General’s superior rights in the AM General Trade Dress.
+
+127. Defendants have used, are us ing, and have caused others to use in commerce the AM General Trade Dress in connection with the advertising, promotion, and sale of their goods and services without AM General’s authorization.
+
+128. Defendants’ unauthorized use of the AM General Trade Dress has caused and is likely to cause confusion, mistake, and deception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of 15 U.S.C. § 1125.
+
+129. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on the goodwill and reputation of AM General and the AM General Trade Dress and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+130. As a result of Defendant’s unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+131. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in the AM General Trade Dress and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defendants are permanently enjoined from their unlawful conduct, AM General will continue to suffer irrepara ble injury for which it has no adequate remedy at law.
+
+SEVENTH CAUSE OF ACTION
+
+Federal False Advertising, 15 U.S.C. § 1125 (Against All Defendants)
+
+132. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+133. Upon information and belief, Defendants ha ve stated to third-party manufacturers and others in the trade that they have the auth ority to approve the use of the AM General Trade Dress in connection with the advertising, promotion, and sale of goods when in fact Defendants never had such authority.
+
+134. Defendants are distributing, have distribute d, and caused others to distribute user guides for Defendants’ infringing video games that misrepresent that Defendants’ use of the AM General Trade Dress and HUMVEE ® and HMMWV ® marks is authorized, licensed, or sponsored by AM General when in fact it is not.
+
+135. Defendants’ false or misleading statements misrepresent the nature, characteristics, and qualities of Defendants’ goods , services, or commercial activities, and have deceived and are likely to deceive the public and the trade in violation of 15 U.S.C. § 1125.
+
+136. Defendants’ unlawful conduct was and is knowing, willful, deliberate, and in bad faith because Defendants knew at the time the statements were made that they were false or misleading statements and made the statements in order to increase the sales of their goods or services.
+
+137. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+138. Unless Defendants are permanently enjoined from their unlawful conduct, AM General will continue to suffer irreparable injury for which it has no adequate remedy at law.
+
+EIGHTH CAUSE OF ACTION
+
+Federal Trade Dress and Trademark Dilution, 15 U.S.C. § 1125(c) (Against All Defendants)
+
+139. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+140. AM General owns the AM General Trade Dress, including the Registered AM General Trade Dress. The AM General Trade Dress is distinctive and is not functional.
+
+141. AM General also owns the distinctive HUMVEE® and HMMWV® marks.
+
+142. The AM General Trad e Dress and HUMVEE ® and HMMWV® marks are widely recognized by the general consum ing public and are famous and became famous long before Defendants commenced their unlawful use of that trade dress and those marks.
+
+143. Defendants have used, are using, and have caused others to use the AM General Trade Dress and the HUMVEE® and HMMWV® marks, and substantially similar trade dress and marks, in commerce in connection with the adve rtising, promotion, and sale of their goods and services without AM General’s authorization.
+
+144. Defendants’ unauthorized use of the AM General Trade Dress and HUMVEE ® and HMMWV® marks, and substantially similar trade dress and marks, is likely to impair and damage the distinctiveness of AM General’s Trade Dress and its HUMVEE ® and HMMWV ® marks by causing the public to no longer associate the AM General Trade Dress and those marks exclusively with the goods and services o ffered by AM General and its licensees, which constitutes dilution by blurring in violation of 15 U.S.C. § 1125(c).
+
+145. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on the goodwill and reputation of AM General and its AM General Trade Dress and HUMVEE® and HMMWV® marks, to impair the distinctiveness of that trade dress and those marks, and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+146. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+147. Unless Defendants are permanently enjoin ed from their wrongful conduct, AM General will continue to suffer irreparable injury for which it has no adequate remedy at law.
+
+NINTH CAUSE OF ACTION
+
+Trademark Infringement, Unfair Competition, and False Designation of Origin Under New York Law (Against All Defendants)
+
+148. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+149. AM General owns common law trademark rights in the HUMVEE and HMMWV marks for a variety of goods and services, including vehicles and toys.
+
+150. Defendants have had both actual and c onstructive knowledge of AM General’s superior rights in the HUMVEE and HMMWV marks.
+
+151. Defendants have used, are using, and have caused others to use AM General’s HUMVEE and HMMWV marks in connection with th e advertising, promotion, and sale of their goods and services without AM General’s authorization.
+
+152. Through Defendants’ unauthorized use, Defendants unfairly appropriated or exploited the special qualities associated w ith AM General’s HUMVEE and HMMWV marks, resulting in the misappropriation of a commercial advantage belonging to AM General.
+
+153. Defendants’ unauthorized use of AM General’s HUMVEE and HMMWV marks has caused and is likely to cause confusion, mistake, and deception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of New York law.
+
+154. Defendants’ unlawful conduct was knowing, de liberate, willful, and in bad faith and done with the intent to trade on the go odwill and reputation of AM General and its HUMVEE and HMMWV marks and to deceive consum ers into believing that AM General was connected with Defendants’ goods and services.
+
+155. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+156. Unless Defendants are permanently enjoin ed from their wrongful conduct, AM General will continue to suffer irreparable injury for which it has no adequate remedy at law.
+
+TENTH CAUSE OF ACTION
+
+Trade Dress Infringement Under New York Law (Against All Defendants)
+
+157. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+158. AM General owns common law rights in the AM General Trade Dress for a variety of goods and services, including vehicles and toys.
+
+159. The AM General Trade Dress is distinctive and is not functional.
+
+160. Defendants have had both actual and c onstructive knowledge of AM General’s superior rights in the AM General Trade Dress.
+
+161. Defendants have used, are using, and have caused others to use the AM General Trade Dress in connection with th e advertising, promotion, and sa le of their goods and services without AM General’s authorization.
+
+162. Through Defendants’ unauthorized use, Defendants unfairly appropriated or exploited the special qualities associated with the AM General Trade Dress, resulting in the misappropriation of a commercial advantage belonging to AM General.
+
+163. Defendants’ unauthorized use of the AM General Trade Dress has caused and is likely to cause confusion, mistake, and deception as to the affiliation, connection, or association with, or sponsorship or approval by, AM General, in violation of New York law.
+
+164. Defendants’ unlawful conduct was and is knowing, deliberate, and willful and done with the intent to trade on the goodwill and reputation of AM General and the AM General Trade Dress and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+165. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+166. Defendants’ unlawful conduct has caused AM General to lose control over the goodwill it has established in its trade dress and to irreparably injure AM General’s business, reputation, and goodwill. Unless Defendants are permanently en joined from their unlawful conduct, AM General will continue to suffer irreparable injury for which it has no adequate remedy at law.
+
+ELEVENTH CAUSE OF ACTION
+
+False Advertising and Unfair Competition Under New York Law (Against All Defendants)
+
+167. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+168. Upon information and belief, Defendants ha ve stated to third-party manufacturers and others in the trade that they have the auth ority to approve the use of the AM General Trade Dress in connection with the advertising, promotion, and sale of goods and services when in fact Defendants never had such authority.
+
+169. Defendants are distributing, have distribute d, and have caused others to distribute user guides for Defendants’ infringing video games th at misrepresent that Defendants’ use of the AM General Trade Dress and HUMVEE and HM MWV marks is authorized, licensed, or sponsored by AM General when in fact it is not.
+
+170. Defendants’ false or misleading statements misrepresent the nature, characteristics, and qualities of Defendants’ go ods, services, or commercial activities and have deceived and are likely to deceive the public and the trade in violation of New York law.
+
+171. Defendants’ unlawful conduct was and is knowing, willful, deliberate, and in bad faith because Defendants knew at the time the stat ements were made that they were false and made the statements in order to increase the sales of their video games.
+
+172. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+173. Unless Defendants are permanently enjoined from their unlawful conduct, AM General will continue to suffer irreparable injury for which it has no adequate remedy at law.
+
+TWELFTH CAUSE OF ACTION
+
+Trademark Dilution in Violation of N.Y. Gen. Bus. Law § 360-l (Against All Defendants)
+
+174. The allegations of the fo regoing Paragraphs are repl eaded and incorporated by reference as if fully set forth herein.
+
+175. AM General owns the AM General Trade Dress. The AM General Trade Dress is distinctive and is not functional.
+
+176. AM General also owns the distinctive HUMVEE® and HMMWV® marks.
+
+177. Defendants have used, are using, and have caused others to use the AM General Trade Dress and HUMVEE® and HMMWV® marks without AM General’s authorization.
+
+178. Defendants’ unauthorized use of the AM General Trade Dress and HUMVEE and HMMWV marks has impaired and damaged a nd is likely to impair and damage the distinctiveness of AM General’s Trade Dress and HUMVEE ® and HMMWV® marks by causing the public to no longer associate that trade dress and those marks exclusively with the goods and services offered by AM General and its licens ees, which constitutes dilution by blurring in violation of N.Y. Gen. Bus. Law. Section 360-l.
+
+179. Defendants’ unlawful conduct was and is knowing, deliberate, willful, and in bad faith and done with the intent to trade on the goodwill and reputation of AM General and its AM General Trade Dress and HUMVEE® and HMMWV® marks, to impair the distinctiveness of that trade dress and those marks, and to deceive consumers into believing that AM General was connected with Defendants’ goods and services.
+
+180. As a result of Defendants’ unlawful c onduct, AM General has suffered and is likely to suffer damages, and Defendants have obtained profits and/or unjust enrichment.
+
+181. Unless Defendants are permanently enjoin ed from their wrongful conduct, AM General will continue to suffer irreparable injury for which it has no adequate remedy at law.
+
+PRAYER FOR RELIEF
+
+WHEREFORE, based on the foregoing allegations, AM General prays for judgment and relief as follows:
+
+A. That this Court enter judgment in favor of AM General and against Defendants, jointly and severally, on all claims for relief alleged herein;
+
+B. That this Court issue a permanent injunction that:
+
+1. Enjoins Defendants, their employees, ow ners, agents, officers, directors, attorneys, representatives, affiliates, subsidiaries, successors, and assigns, and all those in active concert or participation with them or having knowledge of the causes of action from using AM General’s HUMVEE and HMMWV marks and the AM Gene ral Trade Dress, alone or in combination with any word(s), term (s), designation(s), marks(s), or design(s), as well as any mark, image, or depiction that is confusingly similar to or likely to impair the distinctiveness of AM General’s HUMVEE and HMMWV marks and the AM General Trade Dress;
+
+2. Enjoins Defendants, their employees, ow ners, agents, officers, directors, attorneys, representatives, affiliates, subsidiaries, successors, and assigns, and all those in active concert or participation with them or having knowledge of the causes of action from making false or misleading statements concerning AM General’s HUMVEE and HMMWV marks and the AM General Trade Dress and Defendants’ use thereof, whether Defendants’ use of AM General’s HUMVEE and HMMWV marks and the AM General Trade Dress is licensed, sponsored, or approved by AM General; whether third parties have th e authorization to use AM General’s HUMVEE and HMMWV marks and the AM General Trade Dress; in the sale, advertising, or promotion of their goods and services using AM General’s HUMVEE and HMMWV marks and the AM General Trade Dress, alone or in combination with any word(s), term(s), designation(s), marks(s), or design(s), as well as any mark, image, or depiction that is confusingly similar or likely to impair AM General’s HUMVEE and HMMWV marks and/or the AM General Trade Dress;
+
+3. Requires Defendants, their employees, owners, agents, officers, directors, attorneys, representatives, affiliates, subsidiaries, successors, and assigns, and all those in active concert or participation with them or having knowledge of the causes of action to e ngage in corrective advertising in a form pre-approved by AM General and the Court to dispel the confusion caused by Defendants’ unlawful conduct, including Defendants’ misrepresentations that they have the right to authorize the use of the AM General Trade Dress and AM General’s trademarks; and
+
+4. Requires Defendants to f ile with the Court and serve on AM General, within thirty (30) days after entry of an injunction, a report in writing under oath setting forth in detail th e manner in which Defendants have complied with the Court’s injunction.
+
+C. That this Court grant monetary relief in the form of:
+
+1. Compensatory damages under 15 U.S.C. § 1117 and New York law for all injuries to AM General caused by Defendants’ acts alleged herein;
+
+2. An accounting of Defendants’ profits derived by Defendants’ acts alleged herein under 15 U.S.C. § 1117 and Ne w York law and said accounting trebled;
+
+3. Punitive damages under New York law;
+
+4. Enhanced or treble damages under 15 U.S.C. § 1117 and New York law;
+
+5. Attorneys’ fees and costs under 15 U.S.C. § 1117 and New York law;
+
+6. Prejudgment and postjudgment interest; and
+
+7. Such other and further relief which the Court deems just and proper.
+
+JURY TRIAL DEMAND
+
+Plaintiff AM General respectfully demands a jury trial pursuant to Rule 38(b) of the Federal Rules of Civil Procedure on all claims and issues so triable.

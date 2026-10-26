@@ -276,7 +276,7 @@ export default function MethodPage() {
         <MBand id="backtest" alt eyebrow="Evaluation" title="How it was evaluated">
           <div className="method__story">
             <p>
-              <strong>On eight real cases.</strong> Tea Rose read each showcase case from the filed pleadings (the complaint and, where the docket has it, the
+              <strong>On eighteen real cases.</strong> Tea Rose read each showcase case from the filed pleadings (the complaint and, where the docket has it, the
               defendant’s answer) with the court’s decision withheld, and gave its preliminary read. Then we compared that read with what the court decided.
               {tally && <> {tallyLine(tally)}</>} The court’s decision was withheld from the agent, but the model may still know how famous cases ended; treat
               this as a demonstration.
@@ -290,7 +290,7 @@ export default function MethodPage() {
           </div>
           <p className="method__cta">
             <Link to="/#cases" className="btn btn--link">
-              Court and Tea Rose on the eight cases <IconChevron size={13} />
+              Court and Tea Rose on the eighteen cases <IconChevron size={13} />
             </Link>
             <a className="btn btn--link" href={RESULTS_URL} target="_blank" rel="noreferrer">
               Full back-test report (repository) <IconChevron size={13} />

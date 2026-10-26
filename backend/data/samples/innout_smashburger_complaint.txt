@@ -1,0 +1,317 @@
+===== DOCUMENT 1: Complaint (Doc. 1), filed 2017-08-28 =====
+
+In-N-Out Burgers v. Smashburger IP Holder LLC and Smashburger Franchising LLC, No. 8:17-cv-01474 (C.D. Cal.), Complaint (Doc. 1), filed 2017-08-28
+Source: https://storage.courtlistener.com/recap/gov.uscourts.cacd.687587/gov.uscourts.cacd.687587.1.0_1.pdf
+Note: Superseded by a First Amended Complaint (Doc. 15) that is not available on RECAP; Smashburger's answer and counterclaim (Docs. 34, 36) are not available either. Pre-decision. Full text, PDF-extracted (line numbers/page headers/ECF stamps removed; signature block and exhibits A-J omitted; the registration tables are flattened to text).
+
+UNITED STATES DISTRICT COURT
+
+CENTRAL DISTRICT OF CALIFORNIA
+
+IN-N-OUT BURGERS, a California corporation, Plaintiff, vs.
+
+SMASHBURGER IP HOLDER LLC, a Delaware limited liability company; and SMASHBURGER FRANCHISING LLC, a Delaware limited liability company, Defendants.
+
+Case No. 8:17-cv-1474
+
+PLAINTIFF IN-N-OUT BURGERS’ COMPLAINT FOR: (1) FEDERAL TRADEMARK INFRINGEMENT [15 U.S.C. § 1114]; (2) FEDERAL UNFAIR COMPETITION [15 U.S.C. § 1125(a)]; (3) FEDERAL TRADEMARK DILUTION [15 U.S.C. § 1125(c)]; (4) CALIFORNIA STATUTORY TRADEMARK INFRINGEMENT [Cal. Bus. & Prof. Code §§ 14320(a), 14330]; (5) CALIFORNIA STATUTORY TRADEMARK DILUTION [Cal. Bus. & Prof. Code § 14247]; (6) COMMON LAW UNFAIR COMPETITION; AND (7) CALIFORNIA STATUTORY UNFAIR COMPETITION [Cal. Bus. & Prof. Code §§ 17200 et seq.]
+
+JURY TRIAL DEMANDED
+
+Plaintiff In-N-Out Burgers (“In-N-Out”) alleges as follows:
+
+JURISDICTION AND VENUE
+
+1. This is a civil action seeking monetary damages and injunctive relief under federal and California law based upon trademark infringement, unfair competition, and trademark dilution by defendants Smashburger IP Holder LLC and Smashburger Franchising LLC (collectively, “Smashburger”). Smashburger has recently adopted the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks to sell burgers in direct competition with In-N-Out, which sells burgers under, inter alia, the DOUBLE-DOUBLE, TRIPLE TRIPLE, and QUAD QUAD marks, each of which is protected by federal and California trademark registrations. Smashburger’s use of the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks is likely to confuse and mislead the consuming public, and injure In-N-Out, by causing consumers to believe incorrectly that Smashburger’s products originate from or are authorized by In-N-Out.
+
+2. The Court has federal question jurisdiction under 15 U.S.C. § 1121 and 28 U.S.C. §§ 1331 and 1338(a) over In-N-Out’s First, Second, and Third Claims for Relief for infringement of federally registered trademarks, unfair competition, and trademark dilution actionable under the Lanham Act, 15 U.S.C. §§ 1051 et seq., because the claims arise under an act of Congress relating to trademarks. The Court has jurisdiction pursuant to 28 U.S.C. § 1338(b) over Smashburger’s Fourth, Fifth, Sixth, and Seventh Claims for Relief under California law for infringement of California-registered trademarks, dilution of trademarks, common law unfair competition, and statutory unfair competition under Cal. Bus. & Prof. Code §§ 17200 et seq. because those claims are joined with substantial and related claims under the trademark laws, and the Court also has supplemental jurisdiction over those claims under 28 U.S.C. § 1367(a) because those claims are so related to In-N-Out’s claims within the Court’s original jurisdiction that they form part of the same case or controversy under Article III of the United States Constitution.
+
+3. This Court has personal jurisdiction over Smashburger, and venue is proper in the Central District of California pursuant to 28 U.S.C. § 1391(b). In-NOut is informed and believes, and based thereon alleges, that Smashburger operates its restaurants throughout the Central District of California, including in Orange County. The effects of Smashburger’s infringing acts have been felt in the State of California and in this District, where In-N-Out is located.
+
+THE PARTIES
+
+4. In-N-Out is a California corporation having its principal place of business in Irvine, California. In-N-Out operates a chain of quick-service restaurants specializing in hamburger and cheeseburger sandwiches and other products and services.
+
+5. In-N-Out is informed and believes, and based thereon alleges, that defendants Smashburger IP Holder LLC and Smashburger Franchising LLC are both Delaware limited liability companies, each having a principal place of business at 3900 East Mexico Avenue, Suite 1200, Denver, Colorado 80210. In-N-Out is further informed and believes, and based thereon alleges, that Smashburger operates a chain of quick-service restaurants specializing in hamburger and cheeseburger sandwiches and other products and services.
+
+IN-N-OUT’S BUSINESS AND MARKS
+
+6. Founded in 1948 by Harry Snyder and his wife Esther Snyder, In-N-Out operates a highly recognizable and successful chain of quick-service restaurants specializing in hamburger and cheeseburger sandwiches and other products and services. In-N-Out remains a family owned and operated business and currently operates more than 300 restaurants in the United States.
+
+7. Celebrated for its fresh food and other high standards of quality, In-NOut consistently rates as the top quick-service restaurant in customer satisfaction surveys. In 2015, Zagat users rated In-N-Out as the favorite chain restaurant in Los Angeles. In April 2015, In-N-Out earned the top ranking from consumers for the third year in a row in the Limited-Service category in Nation’s Restaurant News’ annual Consumer Picks report.
+
+8. In 2014, the National Restaurant Association ranked In-N-Out as the nation’s top hamburger spot, “head and shoulders above the rest.” Also in 2014, OC Metro magazine named In-N-Out as the most trustworthy brand in Orange County for the second consecutive year, based on a consumer survey. In 2013, the Quick Service Restaurant (QSR) Benchmark Study rated In-N-Out as “America’s Favorite Burger Brand.”
+
+9. In 2011, Zagat’s fast food survey lauded In-N-Out as the number one large quick service chain in the “Top Food” category. In 2010, Consumer Reports ranked In-N-Out as the nation’s top burger sandwich chain
+
+10. In-N-Out has amassed tremendous consumer goodwill over the decades. It is an iconic brand, and its products and services have acquired renown and a fiercely devoted fan base throughout the country, including in its home state of California.
+
+11. In-N-Out owns a family of marks, along with the goodwill associated therewith, that are comprised of a number followed by another number and that are used in its restaurants in association with its food offerings, including the following valid and subsisting United States trademark registrations (collectively, the “Federal Registered Marks”) registered on the Principal Register of the United States Patent and Trademark Office (the “USPTO”): Exhibit Mark U.S. Registration No. Registration Date Description of Services or Goods
+
+A DOUBLE-DOUBLE 1,002,370 1/21/1975
+
+Specially prepared sandwich as part of restaurant services (IC 042) Exhibit Mark U.S. Registration No. Registration Date Description of Services or Goods B
+
+DOUBLE
+
+DOUBLE
+
+1,165,723 8/18/1981 Hamburger Sandwiches for Consumption On or Off the Premises (IC 030)
+
+C DOUBLE-DOUBLE 3,572,485 2/10/2009
+
+A sandwich, namely, a burger the principal ingredients of which are two meat patties and two slices of cheese (IC 030)
+
+D DOUBLE-DOUBLE 4,446,247 12/10/2013
+
+Sandwiches; custommade sandwiches (IC 030); prepared meals consisting primarily of meat and vegetables and including bread and cheese, and the aforesaid meals provided in bowls, boxes, bags and trays (IC 029) E
+
+DOUBLE
+
+DOUBLE
+
+4,625,449 10/21/2014 Aprons; Hats; Shirts for infants, babies, toddlers and children (IC 025)
+
+F TRIPLE TRIPLE 1,598,825 5/29/1990
+
+Hamburger sandwiches and cheeseburger sandwiches, for consumption on or off the premises (IC 030) Exhibit Mark U.S. Registration No. Registration Date Description of Services or Goods
+
+G QUAD QUAD 1,598,826 5/29/1990
+
+Hamburger sandwiches and cheeseburger sandwiches, for consumption on or off the premises (IC 030) H 2 X 2 1,609,251 8/7/1990 Hamburger sandwiches and cheeseburger sandwiches, for consumption on or off the premises (IC 030) I 3 X 3 1,602,609 6/19/1990 Made-to-order cheeseburger sandwiches having three cooked beef hamburger patties and three cheese slices, for consumption on or off the premises (IC 030) J 4 X 4 1,955,465 2/13/1996 Made-to-order cheeseburger sandwiches having four cooked beef hamburger patties and four cheese slices for consumption on or off the premises (IC 030)
+
+12. True and correct copies of the registration certificates for the Federal Registered Marks are attached hereto as Exhibits A-J, respectively, and are incorporated by reference.
+
+13. Out of the ten Federal Registered Marks, the following eight are incontestable registrations pursuant to 15 U.S.C. § 1065: U.S. Reg. Nos. 1,002,370, 1,165,723, 3,572,485, 1,598,825, 1,598,826, 1,609,251, 1,602,609, and 1,955,465.
+
+14. Moreover, In-N-Out owns a similar family of California trademark and service mark registrations that are also comprised of a number followed by another number, including the following marks (collectively, the “State Registered Marks”) registered with the California Secretary of State: Exhibit Mark California Registration No. Registration Date Description of Services or Goods
+
+K DOUBLE-DOUBLE 2539 9/19/1973
+
+Restaurant services in connection with the sale of food such as hamburgers, cheeseburgers (Class No. 100) L
+
+DOUBLE-
+
+DOUBLE
+
+51534 9/19/1973 Restaurant foods such as hamburgers, cheeseburgers (Class No. 46)
+
+M TRIPLE TRIPLE 91353 1/12/1990
+
+Hamburger and cheeseburger sandwiches for consumption on or off the premises (Class No. 46)
+
+N QUAD QUAD 91373 1/17/1990
+
+Hamburger and cheeseburger sandwiches for consumption on or off the premises (Class No. 46) O 2 X 2 91354 1/12/1990 Hamburger and cheeseburger sandwiches for consumption on or off the premises (Class No. 46) P 3 X 3 91381 1/17/1990 Hamburger and cheeseburger sandwiches for consumption on or off the premises (Class No. 46) Exhibit Mark California Registration No. Registration Date Description of Services or Goods Q 4 X 4 91368 1/17/1990 Hamburger and cheeseburger sandwiches for consumption on or off the premises (Class No. 46)
+
+15. True and correct copies of the registrations for the State Registered Marks, with the most recent renewal certificates, are attached hereto as Exhibits KQ, respectively, and are incorporated by reference.
+
+16. In-N-Out owns all right, title and interest in and to the Federal Registered Marks and the State Registered Marks (collectively, the “Registered Marks”). As shown above, In-N-Out has obtained trademark and service mark registrations for the Registered Marks for a range of food and other products and services, including, inter alia, restaurant services, and hamburger and cheeseburger sandwiches.
+
+17. The Registered Marks have been used in interstate commerce, including extensively in California, to identify and distinguish In-N-Out’s products and services for decades, and they serve as symbols of In-N-Out’s quality, reputation, and goodwill. In-N-Out’s menu has largely stayed the same since it opened its first restaurant almost seventy (70) years ago and it has become well known across the United States for its dedication to serving fresh, high quality and delicious food.
+
+18. Since at least as early as 1963, In-N-Out has continuously used its registered DOUBLE-DOUBLE trademark in connection with hamburger sandwiches in interstate commerce. Since at least as early as 1966, In-N-Out has continuously used its registered TRIPLE TRIPLE trademark in connection with hamburger sandwiches in interstate commerce.
+
+19. In-N-Out uses its Registered Marks in association with food and restaurant services for its customers. As one example, In-N-Out uses its Registered Marks on its menu, food packaging, advertising materials and promotional items.
+
+20. As another example, In-N-Out uses the Registered Marks on its “NotSo-Secret Menu” and through customer use. The Not-So-Secret Menu refers to menu items that are not shown on the menu in In-N-Out’s restaurants but are publicized and widely known and used by customers, whether by word of mouth or, more recently, by online communications like social media and blog posts. Ordering such items from the Not-So-Secret Menu is known to be a unique and popular feature of In-NOut that appeals to customer enjoyment and satisfaction.
+
+21. In-N-Out is also widely known for providing variations of its menu items to customize orders for providing an exceptional customer experience. Accordingly, In-N-Out’s customers commonly mix the DOUBLE-DOUBLE, TRIPLE TRIPLE, and QUAD QUAD menu names to form names to customize orders, including “Triple Double.”
+
+22. Likewise, In-N-Out’s customers also commonly mix the 2 X 2, 3 X 3, and 4 X 4 menu names to form names to customize orders, including “3 X 2.”
+
+23. Through its restaurants and online store, In-N-Out has sold and continues to sell goods throughout the United States.
+
+24. In-N-Out makes use of its Registered Marks in interstate commerce, including extensively throughout California, by displaying them on product packaging, menus, signage, promotional materials and advertising materials.
+
+25. In-N-Out has invested millions of dollars in developing, advertising and otherwise promoting the Registered Marks in the United States in an effort to create a strong association among In-N-Out’s products and services, its consumer goodwill and its Registered Marks.
+
+26. As a result of the care and skill exercised by In-N-Out in the conduct of its business, the high quality of its products and services offered under its Registered Marks, and the extensive advertising, sale and promotion of In-N-Out’s products bearing the Registered Marks, the Registered Marks have acquired secondary meaning throughout the United States, and they are widely recognized by the general consuming public as a designation that In-N-Out is the source of the goods and services bearing the Registered Marks.
+
+27. Since the date of first use of each of the Registered Marks, In-N-Out has intended to maintain exclusive ownership of the Registered Marks and to continue use of the Registered Marks in interstate commerce, including extensively in California, in connection with In-N-Out’s products and services.
+
+28. In-N-Out has carefully monitored and policed the use of the Registered Marks and maintains tight control over the use of the Registered Marks.
+
+SMASHBURGER’S INFRINGING ACTS
+
+29. In-N-Out is informed and believes, and based thereon alleges, that Smashburger is in exactly the same industry as In-N-Out, as Smashburger also operates a chain of quick-service restaurants specializing in hamburger and cheeseburger sandwiches.
+
+30. In-N-Out is informed and believes, and based thereon alleges, that Smashburger operates more than 345 restaurants across 38 states in the United States, including 36 locations in California.
+
+31. In-N-Out is informed and believes, and based thereon alleges, that in July 2017, Smashburger launched a new burger product under the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in all of its restaurant locations nationwide.
+
+32. Smashburger has advertised, and continues to advertise, its TRIPLE DOUBLE burger on the home page of Smashburger’s website, where the TRIPLE DOUBLE mark is prominently displayed. See http://smashburger.com/. A true and correct screenshot of the home page of Smashburger’s webpage is attached hereto as Exhibit R.
+
+33. Smashburger has advertised, and continues to advertise, its TRIPLE DOUBLE burger on its social media handles. See https://www.instagram.com/p/BWX6_gHgUY-/?hl=en&takenby=smashburgerA. A true and correct screenshot of a post on Smashburger’s Instagram account is attached hereto as Exhibit S.
+
+34. In-N-Out is informed and believes, and based thereon alleges, that Smashburger’s burger sold under the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks has a similar price point to In-N-Out’s DOUBLEDOUBLE and TRIPLE TRIPLE burgers.
+
+35. Prior to its use of the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks, Smashburger IP Holder LLC filed four intent-to-use applications with the USPTO on November 14, 2016, which are summarized in the following table (collectively, “Smashburger’s Trademark Applications”): Mark U.S. App. Serial No. Filing Date Description of Services or Goods
+
+TRIPLE DOUBLE 87/236,154 11/14/2016
+
+Carry-out restaurants; restaurant services; self-service restaurants (IC 043)
+
+SMASHBURGER
+
+TRIPLE DOUBLE
+
+87/236,167 11/14/2016 Carry-out restaurants; restaurant services; self-service restaurants (IC 043)
+
+TRIPLE DOUBLE
+
+87/236,274 11/14/2016 Sandwiches (IC 030)
+
+SMASHBURGER
+
+TRIPLE DOUBLE 87/236,287 11/14/2016 Sandwiches (IC 030)
+
+36. The USPTO published all four applications for opposition in the Official Gazette on April 4, 2017.
+
+37. In-N-Out filed a Consolidated Notice of Opposition with the Trademark Trial and Appeal Board (the “TTAB”) on June 2, 2017, opposing Smashburger’s Trademark Applications. This opposition proceeding is currently pending before the TTAB as In-N-Out Burgers v. Smashburger IP Holder LLC, Opp. No. 91/234,860.
+
+38. Smashburger was aware of the existence of In-N-Out’s Registered Marks before it began using the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks in commerce, as is evidenced by the fact that Smashburger first commenced use of such marks in commerce after In-N-Out filed its Consolidated Notice of Opposition in which it opposed Smashburger’s Trademark Applications.
+
+39. In-N-Out is informed and believes, and based thereon alleges, that Smashburger chose to use the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks because Smashburger knew, prior to its use such marks, that each of In-N-Out’s Registered Marks is famous and connotes a high standard of quality.
+
+40. In-N-Out is informed and believes, and based thereon alleges, that Smashburger, being in the same field as In-N-Out, providing the same products as InN-Out and being aware of In-N-Out’s marks and reputation associated therewith, chose to adopt and use the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks to trade on the goodwill associated with In-N-Out’s Registered Marks.
+
+41. In-N-Out is not affiliated in any way with Smashburger’s business.
+
+42. Without authorization from In-N-Out, and despite the fact that Smashburger is in no way affiliated with In-N-Out, Smashburger has sold and advertised, and continues to sell and advertise, its TRIPLE DOUBLE burger.
+
+43. Smashburger’s unauthorized use of the TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE marks in the sale of its burger products and in its marketing and advertising materials creates a likelihood of consumer confusion because actual and prospective customers are likely to believe that In-N-Out has approved or licensed Smashburger’s use of its marks, or that In-N-Out is somehow affiliated or connected with Smashburger or its services. In fact, In-N-Out has not sponsored, licensed, or authorized Smashburger’s goods or services, and Smashburger and its services are not affiliated or connected with In-N-Out.
+
+44. Further, Smashburger’s use of In-N-Out’s famous trademarks implies that the quality of the goods and services offered by Smashburger is the same as that of In-N-Out.
+
+FIRST CLAIM FOR RELIEF
+
+(Federal Trademark Infringement (15 U.S.C. § 1114))
+
+45. In-N-Out refers to the allegations contained in paragraphs 1 through 44 above and incorporates them by reference as though fully set forth herein.
+
+46. In-N-Out exclusively owns the Registered Marks, which are valid and enforceable.
+
+47. In-N-Out has used the Registered Marks in interstate commerce in connection with the advertising and promotion of its restaurant goods and services.
+
+48. Without authorization, Smashburger has used and continues to use the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in interstate commerce in connection with its restaurant business and hamburger products.
+
+49. In-N-Out is informed and believes, and based thereon alleges, that Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE has caused, and will likely continue to cause, confusion, mistake, or deception in the relevant consumer market.
+
+50. Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE constitutes infringement of federally registered trademarks in violation of 15 U.S.C. § 1114.
+
+51. In-N-Out has suffered, and will continue to suffer, damages as a result of Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and
+
+SMASHBURGER TRIPLE DOUBLE.
+
+52. In-N-Out is informed and believes, and based thereon alleges, that Smashburger has acted in bad faith and/or willfully in using the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in connection with its restaurant services and burger sandwiches.
+
+53. Smashburger’s infringing acts have caused and will continue to cause In-N-Out to suffer irreparable injuries to its reputation and goodwill. In-N-Out does not have an adequate remedy at law to recover for this harm, and it is therefore entitled to injunctive relief.
+
+SECOND CLAIM FOR RELIEF
+
+(Federal Unfair Competition (15 U.S.C. § 1125(a)))
+
+54. In-N-Out refers to the allegations contained in paragraphs 1 through 53 above and incorporates them by reference as though fully set forth herein.
+
+55. In-N-Out is informed and believes, and based thereon alleges, that Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in connection with its goods and services constitutes a false designation of origin, a false or misleading description of fact, and/or false or misleading representation of fact, and has caused and is likely to cause confusion, mistake, and/or deception as to: a. the affiliation, connection or association of the Registered Marks with Smashburger; b. the origin, sponsorship or approval of Smashburger’s use of the Registered Marks; and c. the nature, characteristics, or qualities of Smashburger’s goods that bear and services that are rendered in connection with the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE
+
+DOUBLE.
+
+56. The aforesaid acts constitute unfair competition in violation of 15 U.S.C. § 1125(a).
+
+57. In-N-Out has suffered, and will continue to suffer, damages as a result of Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and
+
+SMASHBURGER TRIPLE DOUBLE.
+
+58. In-N-Out is informed and believes, and based thereon alleges, that Smashburger has acted in bad faith and/or willfully in using the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in connection with its restaurant services and burger sandwiches.
+
+59. Smashburger’s infringing acts have caused and will continue to cause In-N-Out to suffer irreparable injuries to its reputation and goodwill. In-N-Out does not have an adequate remedy at law to recover for this harm, and it is therefore entitled to injunctive relief.
+
+THIRD CLAIM FOR RELIEF
+
+(Federal Trademark Dilution (15 U.S.C. § 1125(c)))
+
+60. In-N-Out refers to the allegations contained in paragraphs 1 through 59 above and incorporates them by reference as though fully set forth herein.
+
+61. The Registered Marks are distinctive and famous in the United States and were famous before Smashburger’s use of the marks TRIPLE
+
+DOUBLE and SMASHBURGER TRIPLE DOUBLE.
+
+62. Smashburger’s actions have and are likely to dilute, blur, and tarnish the distinctive quality of the Registered Marks, and lessen the capacity of the Registered Marks to identify and distinguish In-N-Out’s products.
+
+63. Smashburger’s acts constitute trademark dilution in violation of 15 U.S.C. § 1125(c).
+
+64. In-N-Out has suffered, and will continue to suffer, damages as a result of Smashburger’s conduct constituting trademark dilution.
+
+65. Smashburger’s acts have caused and will continue to cause In-N-Out to suffer irreparable injuries to its reputation and goodwill. In-N-Out does not have an adequate remedy at law to recover for this harm, and is therefore entitled to injunctive relief pursuant to 15 U.S.C. § 1125(c)(2).
+
+FOURTH CLAIM FOR RELIEF
+
+(Trademark Infringement (Cal. Bus. & Prof. Code §§ 14320(a), 14330))
+
+66. In-N-Out refers to the allegations contained in paragraphs 1 through 65 above and incorporates them by reference as though fully set forth herein.
+
+67. In-N-Out exclusively owns the State Registered Marks, which are valid and enforceable.
+
+68. In-N-Out has used the State Registered Marks in interstate commerce, including extensively in California, in connection with the advertising and promotion of its restaurant goods and services.
+
+69. Without consent or authorization, Smashburger has used and continues to use the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in interstate commerce, including in California, in connection with its restaurant business and hamburger products.
+
+70. In-N-Out is informed and believes, and based thereon alleges, that Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE has caused, and will likely continue to cause, confusion, mistake, or deception in the relevant consumer market.
+
+71. In-N-Out has suffered, and will continue to suffer, damages as a result of Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and
+
+SMASHBURGER TRIPLE DOUBLE.
+
+72. Smashburger’s unauthorized use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE constitutes infringement of state registered trademarks in violation of Cal. Bus. & Prof. Code §§ 14320(a) and 14330.
+
+73. In-N-Out is informed and believes, and based thereon alleges, that Smashburger has acted in bad faith and/or willfully in using the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE in connection with its restaurant services and burger sandwiches.
+
+74. Smashburger’s infringing acts have caused and will continue to cause In-N-Out to suffer irreparable injuries to its reputation and goodwill. In-N-Out does not have an adequate remedy at law to recover for this harm, and is therefore entitled to injunctive relief.
+
+FIFTH CLAIM FOR RELIEF
+
+(Trademark Dilution (Cal. Bus. & Prof. Code § 14247))
+
+75. In-N-Out refers to the allegations contained in paragraphs 1 through 74 above and incorporates them by reference as though fully set forth herein.
+
+76. In-N-Out is the owner of the Registered Marks, which are famous marks that are inherently distinctive throughout California, both inherently and through acquired distinctiveness as a result of In-N-Out’s long-term advertising, publicity, and use of the Registered Marks in California for as long as more than 50 years, as a result of which the Registered Marks are widely recognized by the general consuming public of California as a designation of source of In-N-Out’s goods and services. In particular, but without limitation, the Registered Marks are famous and distinctive in each city where Smashburger operates in California.
+
+77. Smashburger’s use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE began after the Registered Marks became famous in California.
+
+78. Smashburger’s use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE is likely to cause dilution of the distinctive nature of the Registered Marks by blurring the Registered Marks, i.e., such use is likely to lessen consumers’ association of In-N-Out’s famous Registered Marks with In-N-Out’s goods and services.
+
+79. Smashburger’s use of the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE is likely to cause dilution of the distinctive nature of the Registered Marks by lessening the extensive and valuable goodwill, quality, and reputation that is associated with the Registered Marks.
+
+80. Smashburger’s trademark dilution in violation of Cal. Bus. & Prof. Code § 14247 has caused substantial injury to In-N-Out and is continuing to cause substantial injury. In-N-Out has no adequate remedy at law for these injuries. Unless Smashburger is restrained by this Court from continuing its trademark dilution in violation of Cal. Bus. & Prof. Code § 14247, these injuries will continue to accrue. Pursuant to Cal. Bus. & Prof. Code § 14247, In-N-Out is entitled to preliminary and permanent injunctive relief against Smashburger’s trademark dilution, throughout the geographic area in which those marks are found to have become famous prior to commencement of Smashburger’s junior use.
+
+SIXTH CLAIM FOR RELIEF
+
+(Unfair Competition Under the California Common Law)
+
+81. In-N-Out refers to the allegations contained in paragraphs 1 through 80 above and incorporates them by reference as though fully set forth herein.
+
+82. The acts of Smashburger, complained of above, constitute unfair competition in violation of the common law of the State of California.
+
+83. Upon information and belief, Smashburger’s acts have been committed and are being committed with the deliberate purpose and intent of appropriating and trading on In-N-Out’s goodwill and reputation.
+
+84. In-N-Out has suffered, and will continue to suffer, damages as a result of Smashburger’s unfair competition.
+
+85. The actions of Smashburger described herein were taken with substantial certainty that such acts would cause harm to In-N-Out, in conscious disregard for the rights of In-N-Out and by conduct that was done with malice and ill-will and intent to harm In-N-Out, such as to constitute oppression, fraud, malice, and despicable conduct under Cal. Civ. Code § 3294, entitling In-N-Out to exemplary damages in an amount appropriate to punish and set an example of Smashburger.
+
+86. The foregoing acts of Smashburger have caused In-N-Out irreparable harm, and, unless enjoined, Smashburger’s acts as alleged herein will continue to cause In-N-Out irreparable harm, loss and injury.
+
+SEVENTH CLAIM FOR RELIEF
+
+(Unfair Competition (Cal. Bus. & Prof. Code §§ 17200 et seq.))
+
+87. In-N-Out refers to the allegations contained in Paragraphs 1 through 86 above and incorporates them by reference as though fully set forth herein.
+
+88. Smashburger, by doing the acts alleged herein, has acted in violation of 15 U.S.C. §§ 1114 and 1125 and Cal. Bus. & Prof. Code § 14247, and has thereby engaged in unfair and unlawful business practices constituting statutory unfair competition in violation of Cal. Bus. & Prof. Code §§ 17200 et seq.
+
+89. Smashburger’s unfair and unlawful business practices in violation of Cal. Bus. & Prof. Code §§ 17200 et seq. have caused substantial injury to In-N-Out and are continuing to cause substantial injury. In-N-Out has no adequate remedy at law for these injuries. Unless Smashburger is restrained by this Court from continuing its unfair and unlawful business practices in violation of Cal. Bus. & Prof. Code §§ 17200 et seq., these injuries will continue to accrue. Pursuant to Cal. Bus. & Prof. Code § 17204, In-N-Out is entitled to preliminary and permanent injunctive relief against Smashburger’s unfair and unlawful business practices constituting statutory unfair competition in violation of Cal. Bus. & Prof. Code §§ 17200 et seq. WHEREFORE, In-N-Out requests judgment in its favor and against Smashburger as follows: a. That Smashburger, its agents, servants, employees, successors, assigns and attorneys and any related companies, and all persons in active concert or participation with one or more of them be permanently enjoined and restrained from unlawfully using the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE, or any other mark that is confusingly similar to the Registered Marks; b. For a preliminary injunction and a permanent injunction enjoining and restraining Smashburger, and its directors, officers, agents, servants, employees, representatives, successors, assigns and any person acting at their request or direction or in active concert or participation with them, including but not limited to their franchisees, or any company related to Smashburger, from using in California the marks TRIPLE DOUBLE and SMASHBURGER TRIPLE DOUBLE, or any other mark that is likely to dilute the Registered Marks; c. For an award of compensatory damages in an amount to be determined at trial; d. For a finding that this is an exceptional case under the Lanham Act; e. For treble damages pursuant to 15 U.S.C. § 1117; f. For exemplary damages as authorized by law; g. For an award of reasonable attorney fees, investigatory fees and expenses; and h. For any such other relief that the circumstances may require and that the Court deems just and proper.
+
+DEMAND FOR JURY TRIAL
+
+Plaintiff In-N-Out Burgers hereby demands a jury trial, as provided by Rule 38 of the Federal Rules of Civil Procedure, on all claims that are triable to a jury.

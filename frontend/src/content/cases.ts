@@ -163,6 +163,95 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     outcome: 'newcomer won',
     source: 'https://www.govinfo.gov/content/pkg/USCOURTS-flsd-0_19-cv-60809/pdf/USCOURTS-flsd-0_19-cv-60809-4.pdf',
   },
+  stone_millercoors: {
+    short: 'Stone Brewing v. MillerCoors',
+    brands: ['Stone Brewing', 'Keystone Light “Stone” cans (MillerCoors)'],
+    court:
+      'A San Diego jury found in 2022 that MillerCoors’ “Stone” branding of Keystone Light infringed Stone Brewing’s mark and awarded $56 million, and the Ninth Circuit upheld the award in 2025.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'older brand won',
+    source: 'https://www.govinfo.gov/content/pkg/USCOURTS-casd-3_18-cv-00331/pdf/USCOURTS-casd-3_18-cv-00331-25.pdf',
+  },
+  rolex_beckertime: {
+    short: 'Rolex v. BeckerTime',
+    brands: ['Rolex', 'BeckerTime modified Rolex watches'],
+    court:
+      'The court held that BeckerTime’s Rolexes refitted with aftermarket parts infringed, and the Fifth Circuit upheld that in 2024 but denied Rolex BeckerTime’s profits because Rolex had waited too long to sue.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'older brand won',
+    source: 'https://storage.courtlistener.com/pdf/2024/03/21/rolex_watch_v._beckertime.pdf',
+  },
+  kraft_cracker_barrel: {
+    short: 'Kraft v. Cracker Barrel',
+    brands: ['Cracker Barrel cheese (Kraft)', 'Cracker Barrel Old Country Store grocery hams'],
+    court:
+      'The court barred the restaurant chain from selling Cracker Barrel hams in grocery stores, and the Seventh Circuit upheld the injunction because the products would sit in the same aisles as Kraft’s cheese.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'older brand won',
+    source: 'https://static.case.law/f3d/735/cases/0735-01.json',
+  },
+  innout_smashburger: {
+    short: 'In-N-Out v. Smashburger',
+    brands: ['In-N-Out (Double-Double)', 'Smashburger Triple Double'],
+    court: 'The court never ruled on confusion: it refused to dismiss part of In-N-Out’s claims, and the burger chains settled in June 2019.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'settled',
+    source: 'https://www.courtlistener.com/docket/6144796/idb/in-n-out-burgers-v-smashburger-ip-holder-llc/',
+  },
+  lv_my_other_bag: {
+    short: 'Louis Vuitton v. My Other Bag',
+    brands: ['Louis Vuitton', 'My Other Bag canvas totes'],
+    court:
+      'The court ruled for My Other Bag: a $35 canvas tote with a cartoon of a Louis Vuitton bag is an obvious joke that does not compete with the handbags, and the Second Circuit affirmed.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'newcomer won',
+    source: 'https://static.case.law/f-supp-3d/156/cases/0425-01.json',
+  },
+  am_general_activision: {
+    short: 'AM General v. Activision',
+    brands: ['Humvee (AM General)', 'Call of Duty (Activision)'],
+    court:
+      'The court granted Activision summary judgment on every claim: showing Humvees in Call of Duty is artistic realism, and military vehicles and video games are too far apart to confuse buyers.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'newcomer won',
+    source: 'https://storage.courtlistener.com/recap/gov.uscourts.nysd.483511/gov.uscourts.nysd.483511.218.0.pdf',
+  },
+  sazerac_fetzer: {
+    short: 'Buffalo Trace v. 1000 Stories',
+    brands: ['Buffalo Trace bourbon (Sazerac)', '1000 Stories wine (Fetzer)'],
+    court:
+      'After a bench trial the court ruled for Fetzer: bourbon and bourbon-barrel wine share some sales channels, but the two labels looked too different to confuse buyers.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'newcomer won',
+    source: 'https://static.case.law/f-supp-3d/265/cases/1013-01.json',
+  },
+  tmobile_aio: {
+    short: 'T-Mobile v. Aio',
+    brands: ['T-Mobile magenta', 'Aio Wireless plum (AT&T)'],
+    court:
+      'The court stopped Aio using its plum colour because both sell no-contract plans to the same budget customers, but held T-Mobile’s magenta not famous enough with the general public for a dilution claim.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'mixed',
+    source: 'https://static.case.law/f-supp-2d/991/cases/0888-01.json',
+  },
+  penn_state_vintage_brand: {
+    short: 'Penn State v. Vintage Brand',
+    brands: ['Penn State', 'Vintage Brand retro merchandise'],
+    court:
+      'A jury found in November 2024 that Vintage Brand’s retro Penn State merchandise willfully infringed the university’s marks, rejected its fair-use and functionality defences, and awarded $28,000.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'older brand won',
+    source: 'https://www.mofo.com/resources/insights/241209-penn-state-secures-trademark-victory-in-dispute-over-vintage-merch',
+  },
+  ohio_state_redbubble: {
+    short: 'Ohio State v. Redbubble',
+    brands: ['Ohio State', 'Redbubble print-on-demand merchandise'],
+    court:
+      'The district court cleared Redbubble because it never sold the shirts itself, the Sixth Circuit reversed in 2021, and Ohio State dropped the case in a 2022 settlement.',
+    data: 'DATA PENDING: computed after the run',
+    outcome: 'settled',
+    source: 'https://news.bloomberglaw.com/ip-law/ohio-state-redbubble-settle-leaving-trademark-liability-murky',
+  },
 }
 
 export function caseStory(slug: string | undefined | null): CaseStory | undefined {
