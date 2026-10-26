@@ -24,16 +24,16 @@ export const HERO = {
   /** The word next to the rose glyph: one brand mark, not a second headline. */
   brand: 'Tea Rose',
   /** Above the clock through beats 1 and 2: what the clock is counting. */
-  eyebrow: 'When two brands fight over who their customers are',
+  eyebrow: 'Every trademark fight asks the same question: who are the customers? Finding out takes',
   /** Beat 1: the survey, under "6 weeks". */
-  survey: 'A consumer survey.',
+  survey: 'with a consumer survey, at',
   money: '$15,000 to $100,000.',
   source:
     'Sources: California Lawyers Association 2025, IPWatchdog 2019, Michigan Bar Journal 2020. Basic studies from $15,000; commonly $50,000 to $100,000; about two months.',
   /** Beat 2: replaces the survey line while the clock counts down to a minute. */
-  answer: 'Tea Rose reads the dispute and answers the customer questions from Qloo’s taste graph.',
+  answer: 'with Tea Rose, which reads the pleading and answers from Qloo’s taste graph.',
   /** Read once by assistive tech instead of the ticking numeral. */
-  sr: 'When two brands fight over who their customers are, a consumer survey takes about six weeks and costs $15,000 to $100,000. Tea Rose reads the dispute and answers the customer questions from Qloo’s taste graph in about a minute.',
+  sr: 'Every trademark fight asks the same question: who are the customers? Finding out takes six weeks with a consumer survey, at $15,000 to $100,000, or about one minute with Tea Rose, which reads the pleading and answers from Qloo’s taste graph.',
   /** Beat 3: the clock has settled on a minute. */
   title: 'Trademark evidence from the taste graph.',
   openCase: 'Open a case',
