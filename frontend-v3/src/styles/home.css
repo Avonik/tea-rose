@@ -89,8 +89,8 @@
 
 /* Beats, top to bottom: eyebrow, clock, line. */
 .hero-eyebrow {
-  max-width: 26rem;
-  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.3125rem);
+  max-width: 34rem; /* same measure and size as .hero-line: one sentence across the clock */
+  font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.5rem);
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.012em;

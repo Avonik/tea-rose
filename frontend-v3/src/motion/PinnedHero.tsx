@@ -93,10 +93,10 @@ function ScrollHero({ caseHref }: { caseHref: string }) {
   }
   const [tick, setTick] = useState(() => tickAt(p.get()))
 
-  // Beat 2: the survey line leaves as the clock starts, the Tea Rose line arrives while it counts.
-  const surveyOpacity = useTransform(p, [0.12, 0.17], [1, 0])
-  const answerOpacity = useTransform(p, [0.19, 0.25], [0, 1])
-  const answerY = useTransform(p, [0.19, 0.25], [12, 0])
+  // Beat 2: the survey line stays through the first half of the countdown; the Tea Rose line arrives late, as the clock nears a minute.
+  const surveyOpacity = useTransform(p, [0.3, 0.36], [1, 0])
+  const answerOpacity = useTransform(p, [0.4, 0.48], [0, 1])
+  const answerY = useTransform(p, [0.4, 0.48], [12, 0])
 
   // Beat 3: the clock recedes, the headline settles.
   const figOpacity = useTransform(p, [0.72, 0.8], [1, 0])
