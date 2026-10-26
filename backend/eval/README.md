@@ -1,6 +1,6 @@
 # Evaluation set: `cases_candidates.csv`
 
-52 decided (or formally terminated) US trademark matters, 2000–2026. In each one, at least the senior mark is a consumer-facing brand, and in most both are. The set is used to check whether Qloo cultural-affinity overlap between the senior and junior brand (or their goods categories) tracks how courts labelled two confusion factors: **relatedness of goods** and **channels / purchasers**.
+80 decided (or formally terminated) US trademark matters, 2000–2026: 52 from the first round plus 28 added on 2026-10-25 (see cases_round2_NOTES.md). In each one, at least the senior mark is a consumer-facing brand, and in most both are. The set is used to check whether Qloo cultural-affinity overlap between the senior and junior brand (or their goods categories) tracks how courts labelled two confusion factors: **relatedness of goods** and **channels / purchasers**.
 
 ## How the labels were produced
 

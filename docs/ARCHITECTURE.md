@@ -24,7 +24,7 @@ backend/
     eval/                     back-test harness: run_backtest.py, baselines.py, labels loader
   fixtures/qloo/*.json        synthetic, doc-shaped responses (today); never live data
   data/samples/*.txt          public court documents for extraction tests
-  data/showcase/*.json        pre-computed AnalysisResult per showcase case (committed)
+  data/showcase/*.json        pre-computed AnalysisResult per showcase case (generated on the server, gitignored; only manifest.json is committed)
   data/cache/, data/live/, data/runs/   gitignored
   eval/cases_candidates.csv   pre-registered labels (committed BEFORE any score is computed)
   tests/
