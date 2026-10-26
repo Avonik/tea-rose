@@ -3,7 +3,26 @@
 
 /* ---------------------------------------------------------------- 1. pinned hero */
 
-/* The section is a ~320vh track; the stage sticks for the whole track and the beats are driven by
+/* A black stage in both colour schemes, like a keynote. Its own tokens, scoped to the section, so
+   the page theme (and the nav's glass) never flips. One rhythm unit, --hu (24px), sets every gap. */
+.band.hero-black {
+  --hu: 1.5rem;
+  --hero-bg: #000000;
+  --hero-text: #f5f5f7;
+  --hero-text-2: #a1a1a6;
+  --hero-text-3: #6e6e73;
+  --hero-hairline: rgba(255, 255, 255, 0.12);
+  --text: var(--hero-text);
+  --text-2: var(--hero-text-2);
+  --text-3: var(--hero-text-3);
+  --hairline: var(--hero-hairline);
+  --focus: #2997ff;
+  color-scheme: dark;
+  background: var(--hero-bg);
+  color: var(--hero-text);
+}
+
+/* The section is a ~320svh track; the stage sticks for the whole track and the beats are driven by
    scroll progress (motion/PinnedHero.tsx). No band padding: the stage owns the viewport. */
 .band.hero-pin {
   padding-block: 0;
@@ -15,6 +34,7 @@
   height: 320svh;
 }
 
+/* Top padding clears the floating nav (12px + 48px) by two rhythm units. */
 .hero-pin__stage {
   position: sticky;
   top: 0;
@@ -22,108 +42,183 @@
   place-items: center;
   height: 100vh;
   height: 100svh;
-  padding: clamp(5rem, 12vh, 7rem) var(--gutter) clamp(4rem, 10vh, 6rem);
+  padding: calc(3.75rem + var(--hu) * 2) var(--gutter) calc(var(--hu) * 4);
   overflow: clip;
 }
 
-/* All beats share one grid cell, so the cross-fades never shift layout. */
-.hero-pin__layer {
-  grid-area: 1 / 1;
+.hero-pin__content {
   display: grid;
   justify-items: center;
-  gap: clamp(1.25rem, 3vh, 2rem);
+  gap: calc(var(--hu) * 2);
   width: 100%;
   max-width: 62rem;
+}
+
+/* All beats share one grid cell, top-aligned under the mark, so the cross-fades never shift layout. */
+.hero-pin__beats {
+  display: grid;
+  width: 100%;
+}
+
+.hero-pin__layer {
+  grid-area: 1 / 1;
+  align-self: start;
+  display: grid;
+  justify-items: center;
+  width: 100%;
   text-align: center;
   will-change: opacity, transform;
 }
 
-/* Two texts stacked in one cell (stake / answer); the cell is as tall as the taller one. */
-.hero-pin__swap {
+/* The brand mark: glyph over a small tracked word. */
+.hero-mark {
   display: grid;
-  width: 100%;
-  max-width: 40rem;
+  justify-items: center;
+  gap: 0.5rem;
+  color: var(--hero-text);
 }
 
-.hero-pin__swap > * {
-  grid-area: 1 / 1;
+.hero-mark__word {
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-left: 0.1em; /* optical centring: tracking adds space after the last letter */
 }
 
-.hero-pin__eyebrows .eyebrow {
-  max-width: 30rem;
-  margin-inline: auto;
+/* Beats, top to bottom: eyebrow, clock, line. */
+.hero-eyebrow {
+  max-width: 26rem;
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.3125rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: var(--hero-text-2);
   text-wrap: balance;
 }
 
 /* The clock. The number sits right-aligned in a box two tabular digits wide, the unit left-aligned
    in a box as wide as "minutes": the whole line has one width for every tick, so nothing jitters. */
 .hero-clock {
-  --clock: clamp(3.75rem, 1rem + 9.5vw, 9rem);
+  --clock: clamp(4.2rem, 0.6rem + 10.6vw, 10rem);
   display: grid;
-  grid-template-columns: 1.24em 3.75em;
-  column-gap: 0.22em;
+  grid-template-columns: 1.2em 3.45em;
+  column-gap: 0.2em;
   align-items: baseline;
+  margin-block: calc(var(--hu) * 0.5) var(--hu);
   font-size: var(--clock);
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
 }
 
 .hero-clock__n {
   justify-self: end;
-  font-weight: 600;
+  color: var(--hero-text);
   font-variant-numeric: tabular-nums;
 }
 
 .hero-clock__unit {
   justify-self: start;
-  font-weight: 400;
-  color: var(--text-2);
-  letter-spacing: -0.03em;
+  color: var(--hero-text-2);
+}
+
+/* Two texts stacked in one cell (survey / answer); the cell is as tall as the taller one. */
+.hero-pin__swap {
+  display: grid;
+  width: 100%;
+  max-width: 36rem;
+}
+
+.hero-pin__swap > * {
+  grid-area: 1 / 1;
 }
 
 .hero-pin__line {
   display: grid;
   align-content: start;
-  gap: var(--s-4);
+  justify-items: center;
+  gap: var(--hu);
 }
 
-.hero-pin__money {
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* The two halves of the stake line break between each other, never inside. */
-.hero-pin__money,
-.hero-pin__weeks {
-  white-space: nowrap;
-}
-
-.hero-pin__answer {
-  max-width: 32rem;
-  margin-inline: auto;
+.hero-line {
+  max-width: 34rem;
+  font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: -0.015em;
+  color: var(--hero-text-2);
   text-wrap: balance;
 }
 
-.hero-pin__source {
+.hero-line__nowrap {
+  white-space: nowrap;
+}
+
+.hero-line__money {
+  font-weight: 600;
+  color: var(--hero-text);
+  white-space: nowrap;
+}
+
+.hero-source {
   max-width: 34rem;
-  margin-inline: auto;
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--hero-text-3);
+  text-wrap: pretty;
 }
 
-.hero-pin__title {
-  max-width: 14ch;
+/* Beat 3 */
+.hero-title {
+  max-width: 20ch;
+  font-size: clamp(2.75rem, 1.6rem + 4.6vw, 5.75rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--hero-text);
+  text-wrap: balance;
 }
 
-.hero-pin__promise {
-  max-width: 40rem;
-}
-
-.hero-pin__actions {
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: var(--s-3);
-  margin-top: var(--s-2);
+  margin-top: calc(var(--hu) * 2);
+}
+
+/* Pills on black: white primary with dark text, dark glass secondary. Hero scope only. */
+.hero-black .btn--on-dark {
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  box-shadow: inset 0 0 0 1px var(--hero-hairline);
+  color: var(--hero-text);
+}
+
+.hero-black .btn--on-dark:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.hero-black .btn--on-dark.btn--primary {
+  background: var(--hero-text);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  color: #1d1d1f;
+}
+
+.hero-black .btn--on-dark.btn--primary:hover {
+  background: #ffffff;
+}
+
+.hero-black .btn--on-dark:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
 .hero-pin__hint {
@@ -134,41 +229,53 @@
   justify-items: center;
   gap: var(--s-2);
   transform: translateX(-50%);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  color: var(--hero-text-3);
 }
 
 .hero-pin__hint-line {
   width: 1px;
-  height: 2rem;
-  background: linear-gradient(var(--text-3), transparent);
+  height: 1.5rem;
+  background: linear-gradient(var(--hero-text-3), transparent);
+}
+
+/* While the black stage is under the nav, the shell's page-coloured scroll-edge fade is hidden: in
+   light mode it would lay a gray haze over the black (flag set by PinnedHero). */
+:root[data-hero-under-nav] .scroll-edge {
+  opacity: 0;
+}
+
+@media (max-height: 700px) {
+  .band.hero-black {
+    --hu: 1rem;
+  }
 }
 
 @media (max-height: 600px) {
-  .hero-pin__source {
+  .hero-source {
     display: none;
   }
 }
 
 /* Reduced motion: the beats stacked in normal flow, no pinning. */
 .hero-static {
-  padding-top: clamp(8.5rem, 16vh, 11rem);
+  padding-top: calc(3.75rem + var(--hu) * 3);
 }
 
 .hero-static__beats {
   display: grid;
-  gap: clamp(3.5rem, 9vw, 6rem);
+  justify-items: center;
+  gap: calc(var(--hu) * 4);
 }
 
 .hero-static__beat {
   display: grid;
   justify-items: center;
-  gap: var(--s-5);
   text-align: center;
-}
-
-.hero-static__beat > .t-subtitle {
-  max-width: 40rem;
 }
 
 /* ---------------------------------------------------------------- 2. the three questions */
@@ -820,6 +927,24 @@
   .hero-pin__hint {
     display: none;
   }
+  /* The black stage prints light: black text on white, pills as outlined text. */
+  .band.hero-black {
+    --hero-bg: #ffffff;
+    --hero-text: #000000;
+    --hero-text-2: #333333;
+    --hero-text-3: #555555;
+    --hero-hairline: rgba(0, 0, 0, 0.3);
+    color-scheme: light;
+  }
+  .hero-pin__content {
+    gap: var(--s-6);
+  }
+  .hero-black .btn--on-dark,
+  .hero-black .btn--on-dark.btn--primary {
+    background: none;
+    box-shadow: inset 0 0 0 1px var(--hero-hairline);
+    color: #000000;
+  }
   .tl__text--print {
     display: block;
   }
@@ -837,4 +962,15 @@
 .frame__caption {
   margin-top: var(--s-4);
   text-align: center;
+}
+
+/* While the black stage sits under the floating nav, the nav wears its dark glass in both schemes. */
+:root[data-hero-under-nav] .fnav {
+  --glass: rgba(22, 22, 23, 0.72);
+  --glass-line: rgba(255, 255, 255, 0.12);
+  --glass-edge: rgba(255, 255, 255, 0.06);
+  --text: #f5f5f7;
+  --secondary: #a1a1a6;
+  --group: #2c2c2e;
+  --group-alt: #2c2c2e;
 }

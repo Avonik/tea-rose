@@ -21,21 +21,21 @@ export const COUNTDOWN: Tick[] = [
 export const tickUnit = (t: Tick) => (t.n === 1 ? t.unit.slice(0, -1) : t.unit)
 
 export const HERO = {
-  /** Beat 1: what the clock is counting. */
-  eyebrow: 'A consumer survey, when two brands fight over who their customers are',
+  /** The word next to the rose glyph: one brand mark, not a second headline. */
+  brand: 'Tea Rose',
+  /** Above the clock through beats 1 and 2: what the clock is counting. */
+  eyebrow: 'When two brands fight over who their customers are',
+  /** Beat 1: the survey, under "6 weeks". */
+  survey: 'A consumer survey.',
   money: '$15,000 to $100,000.',
-  weeks: 'Six to eight weeks.',
   source:
-    'Survey costs: about $15,000 to $25,000 for a basic internet study (California Lawyers Association 2025; IPWatchdog 2019), commonly cited at $50,000 to $100,000, with about two months from start to report (IPWatchdog 2019; Michigan Bar Journal 2020).',
-  /** Beat 2: the clock has reached a minute. */
-  endEyebrow: 'With Tea Rose',
-  end: 'Tea Rose reads the dispute and answers the customer questions in about a minute.',
+    'Sources: California Lawyers Association 2025, IPWatchdog 2019, Michigan Bar Journal 2020. Basic studies from $15,000; commonly $50,000 to $100,000; about two months.',
+  /** Beat 2: replaces the survey line while the clock counts down to a minute. */
+  answer: 'Tea Rose reads the dispute and answers the customer questions from Qloo’s taste graph.',
   /** Read once by assistive tech instead of the ticking numeral. */
-  sr: 'A consumer survey costs $15,000 to $100,000 and takes six to eight weeks. Tea Rose reads the dispute and answers the customer questions in about a minute.',
-  /** Beat 3. */
+  sr: 'When two brands fight over who their customers are, a consumer survey takes about six weeks and costs $15,000 to $100,000. Tea Rose reads the dispute and answers the customer questions from Qloo’s taste graph in about a minute.',
+  /** Beat 3: the clock has settled on a minute. */
   title: 'Trademark evidence from the taste graph.',
-  promise:
-    'Trademark fights turn on who the customers are. Tea Rose reads the dispute, answers the customer questions from Qloo’s taste graph, then says exactly what it cannot tell you.',
   openCase: 'Open a case',
   analyze: 'Analyze a document',
   hint: 'Scroll',
