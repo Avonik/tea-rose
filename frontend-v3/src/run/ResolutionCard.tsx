@@ -1,6 +1,6 @@
 import { IconCheck } from '../components/icons'
 import { Disclosure, Meter } from '../components/ui'
-import { ordinalPercentile, shortId, tagName, tagOptionId } from '../lib/format'
+import { ordinalPercentile, shortId, stripSearched, tagName, tagOptionId } from '../lib/format'
 import type { ProxyResolution, Resolution, ResolvedBrand, Side } from '../types'
 
 function ProxyBlock({ proxy }: { proxy: ProxyResolution }) {
@@ -9,8 +9,9 @@ function ProxyBlock({ proxy }: { proxy: ProxyResolution }) {
     <>
       <div className="group__row group__sep resolve__lead">
         <p className="footnote secondary">
-          Not in Qloo’s graph, so brands from its category stand in. The goods phrase <q className="serif">{proxy.goods_phrase}</q> was mapped onto Qloo’s brand-category
-          taxonomy; the agent could only pick from these nodes.
+          Not in Qloo, so three well-known brands from its category stand in. The goods phrase <q className="serif">{proxy.goods_phrase}</q> was matched to
+          Qloo’s brand categories, and the agent could only pick from these; code then built a shortlist of brands, the agent picked the stand-ins and decided
+          whether the category is close enough to measure.
         </p>
         {proxy.fit_note && <p className="footnote secondary">Category fit: {proxy.fit_note}</p>}
       </div>
@@ -24,8 +25,9 @@ function ProxyBlock({ proxy }: { proxy: ProxyResolution }) {
                 {on && <IconCheck size={14} />}
               </span>
               <span className="group__main">
-                <span className="tag-menu__name">{String(t.name ?? tagName(id))}</span>
-                <code className="tag-menu__id">{id}</code>
+                <span className="tag-menu__name" title={id}>
+                  {String(t.name ?? tagName(id))}
+                </span>
               </span>
               <span className="sr-only">{on ? ' (chosen)' : ' (not chosen)'}</span>
               {on && <span className="group__value caption">Chosen</span>}
@@ -39,7 +41,7 @@ function ProxyBlock({ proxy }: { proxy: ProxyResolution }) {
       </div>
       {proxy.comparator_brand_names.length > 0 && (
         <div className="group__row group__row--top group__sep">
-          <span className="resolve__k">Comparators</span>
+          <span className="resolve__k">Stand-ins</span>
           <span className="group__main">
             <span className="chips">
               {proxy.comparator_brand_names.map((n) => (
@@ -64,7 +66,7 @@ function SideGroup({ side, brand, proxy }: { side: Side; brand: ResolvedBrand; p
       <div className="group">
         <div className="group__header resolve-side__head">
           <span className={`dot dot--${side}`} aria-hidden="true" />
-          <h3 className="t-title-2">{brand.entity_name ?? brand.query}</h3>
+          <h3 className="t-title-2">{brand.entity_name ?? stripSearched(brand.query)}</h3>
           <span className="badge">{resolved ? 'Qloo entity' : proxy ? 'Stand-ins' : 'Not found'}</span>
         </div>
         {resolved ? (

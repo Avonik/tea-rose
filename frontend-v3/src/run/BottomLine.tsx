@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { IconChevron } from '../components/icons'
 import { LeanChip, SkeletonCard } from '../components/ui'
-import { factorLabel } from '../lib/format'
+import { factorLabel, plainHeadline } from '../lib/format'
 import { fade, spring } from '../motion/springs'
 import type { Memo } from '../types'
 
@@ -9,9 +9,21 @@ import type { Memo } from '../types'
  * The memo's answer at the top of the page, so the verdict is legible before the evidence. The slot
  * is reserved as soon as a memo is expected, so nothing above the reader shifts when it lands.
  */
-export default function BottomLine({ memo, expected, names }: { memo: Memo | null; expected: boolean; names?: { senior: string; junior: string } }) {
+export default function BottomLine({
+  memo,
+  expected,
+  names,
+  contextFactors = [],
+}: {
+  memo: Memo | null
+  expected: boolean
+  names?: { senior: string; junior: string }
+  /** Factors measured for context only (the pleading did not raise them): no chip here. */
+  contextFactors?: string[]
+}) {
   const reduce = useReducedMotion()
   if (!memo && !expected) return null
+  const findings = (memo?.findings ?? []).filter((f) => !contextFactors.includes(f.factor))
   const n = memo?.appendix_queries.length ?? 0
   return (
     <div className="slot bottom-line-slot" id="bottom-line">
@@ -29,11 +41,11 @@ export default function BottomLine({ memo, expected, names }: { memo: Memo | nul
             <p className="eyebrow" id="bottom-line-title">
               Bottom line
             </p>
-            <p className="bottom-line__headline serif">{memo.headline}</p>
+            <p className="bottom-line__headline serif">{plainHeadline(memo.headline)}</p>
             {memo.bottom_line && <p className="bottom-line__summary">{memo.bottom_line}</p>}
-            {memo.findings.length > 0 && (
+            {findings.length > 0 && (
               <ul className="bottom-line__leans" aria-label="Factor findings">
-                {memo.findings.map((f) => (
+                {findings.map((f) => (
                   <li key={f.factor}>
                     <span className="bottom-line__factor">{factorLabel(f.factor)}</span>
                     <span className="bottom-line__arrow" aria-hidden="true">

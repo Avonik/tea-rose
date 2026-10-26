@@ -672,7 +672,10 @@ def test_pick_category_tags_prefers_brand_genre_tags():
 # bottom line (synthesised in code from the factor leans)
 # --------------------------------------------------------------------------------------
 
-SILENT = "It is silent on mark similarity, intent and actual confusion."
+SILENT = (
+    "Mark similarity, intent and actual confusion are read from the pleadings in the "
+    "preliminary read, not measured."
+)
 FORBIDDEN = ("win", "lose", "verdict", "likely", "probability")
 
 

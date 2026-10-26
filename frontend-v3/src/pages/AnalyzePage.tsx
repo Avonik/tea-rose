@@ -188,7 +188,7 @@ function analyzeError(e: unknown): string {
 const NEXT_STEPS = [
   { icon: <IconDoc size={16} />, title: 'Reads the document', text: 'Parties, marks, goods quoted verbatim, and the claims pleaded.' },
   { icon: <IconScale size={16} />, title: 'Measures on Qloo', text: 'Shared purchasers, fame breadth and zone of reputation, every call logged.' },
-  { icon: <IconSparkle size={16} />, title: 'Writes the memo', text: 'Factor findings, limitations and a query appendix. About two minutes.' },
+  { icon: <IconSparkle size={16} />, title: 'Writes the memo', text: 'A preliminary read from the pleadings, factor findings, limitations and a query appendix. About two minutes.' },
 ]
 
 function Intake({ me, limits, onSignedOut }: { me: AuthMe; limits?: Limits; onSignedOut: () => void }) {
@@ -295,9 +295,9 @@ function Intake({ me, limits, onSignedOut }: { me: AuthMe; limits?: Limits; onSi
     <form className="intake" onSubmit={submit} noValidate>
       <header className="intake__head">
         <p className="eyebrow">New analysis</p>
-        <h1 className="t-headline">Paste the complaint or the letter</h1>
+        <h1 className="t-headline">Paste the pleadings or the letter</h1>
         <p className="t-subtitle">
-          Tea Rose reads it, decides which questions are live, and measures them on Qloo’s taste graph. A run takes about two
+          The complaint, plus the defendant’s answer if you have it. Tea Rose reads it, decides which questions are live, and measures them on Qloo’s taste graph. A run takes about two
           minutes.
         </p>
       </header>

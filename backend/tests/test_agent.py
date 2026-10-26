@@ -341,6 +341,21 @@ async def test_extract_maps_bad_spaniels_paragraph(client: FixtureClient) -> Non
     assert not [e for e in events if e.type == "warning"]  # goods are verbatim
 
 
+async def test_extract_marks_bundled_pleadings_in_code(client: FixtureClient) -> None:
+    """A second document banner (the defendant's answer or motion) makes the input "pleadings"."""
+    bundled = (
+        "===== DOCUMENT 1: Complaint =====\n" + TEXT + "\n===== DOCUMENT 2: Answer =====\nDenied.\n"
+    )
+    model = ScriptedChatModel(scripts={"Extraction": [json.dumps(EXTRACTION)]})
+    ctx, _ = make_ctx(client, model)
+    out = await extract.run({"input_text": bundled}, ctx)
+    assert out["extraction"].document_type == "pleadings"
+    model = ScriptedChatModel(scripts={"Extraction": [json.dumps(EXTRACTION)]})
+    ctx, _ = make_ctx(client, model)
+    out = await extract.run({"input_text": TEXT}, ctx)
+    assert out["extraction"].document_type == "complaint"
+
+
 async def test_extract_warns_on_paraphrased_goods(client: FixtureClient) -> None:
     bad = json.loads(json.dumps(EXTRACTION))
     bad["junior"]["goods"] = ["canine playthings"]
@@ -1054,8 +1069,8 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     # computed in code from the leans (relatedness favors junior, fame favors senior), not scripted
     assert memo.bottom_line == (
         "Taste data cuts against Jack Daniel's on the one confusion factor measured but "
-        "supports Jack Daniel's on fame. It is silent on mark similarity, intent and actual "
-        "confusion."
+        "supports Jack Daniel's on fame. Mark similarity, intent and actual confusion are read "
+        "from the pleadings in the preliminary read, not measured."
     )
     state = engine.state_of("r1")
     assert memo.bottom_line == synthesize_bottom_line(memo.findings, *party_names(state))

@@ -47,13 +47,67 @@ export function readNationwide(n: number): string {
   return 'Concentrated: a few places hold most of the affinity.'
 }
 
-/** "24 Qloo queries, 57 seconds" from the appendix length and the trace timestamps, when both are sane. */
+/** "15 Qloo queries, 2 minutes" from the appendix length and the trace timestamps, when both are sane. */
 export function runFacts(queries: number, firstTs?: string, lastTs?: string): string | null {
   const parts: string[] = []
   if (queries > 0) parts.push(`${queries} Qloo ${queries === 1 ? 'query' : 'queries'}`)
   if (firstTs && lastTs) {
     const s = Math.round((Date.parse(lastTs) - Date.parse(firstTs)) / 1000)
-    if (Number.isFinite(s) && s > 0 && s < 3600) parts.push(s < 90 ? `${s} seconds` : `${Math.round(s / 60)} minutes`)
+    if (Number.isFinite(s) && s > 0 && s < 3600) {
+      const m = Math.max(1, Math.round(s / 60))
+      parts.push(s < 60 ? `${s} seconds` : `${m} ${m === 1 ? 'minute' : 'minutes'}`)
+    }
   }
   return parts.length ? parts.join(', ') : null
+}
+
+const READ_FROM: Record<string, string> = {
+  pleadings: 'Read from the complaint and the answer',
+  complaint: 'Read from the complaint; the defendant’s side is not in the record',
+  cease_and_desist: 'Read from the letter',
+  opinion: 'Read from the court’s opinion',
+  petition: 'Read from the petition',
+}
+
+/**
+ * Which documents the agent read, from the extracted document type (code sets "pleadings" when the
+ * defendant's answer or motion is in the input). No trailing full stop.
+ */
+export function readFromText(docType: string | null | undefined, oneSided?: boolean): string {
+  // Runs stored before code detected bundled pleadings: the read itself records whether the defendant's side was in.
+  if (docType === 'complaint' && oneSided === false) return READ_FROM.pleadings
+  return (docType && READ_FROM[docType]) || 'Read from the filing'
+}
+
+/** "The case most likely turns on X." → "x", to sit inside a sentence. */
+export function turnsOnPhrase(s: string | null | undefined): string {
+  const t = (s ?? '')
+    .replace(/^\s*(the case )?(most likely |likely )?turns on\s+/i, '')
+    .trim()
+    .replace(/[.\s]+$/, '')
+  return t ? t.charAt(0).toLowerCase() + t.slice(1) : ''
+}
+
+/**
+ * One framing sentence for the reveal, computed from the read's lean and the court's outcome.
+ * `lean`: older_brand | newcomer | too_close_to_call. `outcome`: the hand-written CaseStory outcome.
+ */
+export function courtFraming(
+  lean: string,
+  outcome: 'older brand won' | 'newcomer won' | 'mixed' | 'settled',
+  turnsOn: string,
+  names: { senior: string; junior: string },
+): string {
+  const on = turnsOnPhrase(turnsOn)
+  const flagged = on ? `; the read had flagged the open question: ${on}` : ''
+  if (lean === 'too_close_to_call') {
+    if (outcome === 'settled') return 'The read called it too close; the parties settled before a verdict.'
+    if (outcome === 'mixed') return 'The read called it too close, and the court split the result.'
+    return `The read called it too close; the court decided it on ${on || 'the facts the read left open'}.`
+  }
+  const toward = lean === 'older_brand' ? names.senior : names.junior
+  if (outcome === 'settled') return `The read leaned toward ${toward}; the parties settled before a verdict.`
+  if (outcome === 'mixed') return `The read leaned toward ${toward}; the court split the result${on ? `. The read had flagged the open question: ${on}` : ''}.`
+  const same = (lean === 'older_brand' && outcome === 'older brand won') || (lean === 'newcomer' && outcome === 'newcomer won')
+  return same ? 'The read and the court point the same way.' : `The court went the other way${flagged}.`
 }

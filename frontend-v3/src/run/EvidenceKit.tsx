@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { createContext, useContext, type ReactNode } from 'react'
 import { IconInfo } from '../components/icons'
 import { fitLabel, ordinalPercentile, wholePct } from '../lib/format'
 import type { ProxyResolution } from '../types'
@@ -40,6 +40,9 @@ export function StandIns({ proxy, name }: { proxy: ProxyResolution | null | unde
   )
 }
 
+/** True inside a question measured for context only: run for completeness, not raised by the pleading. */
+export const ContextOnly = createContext(false)
+
 /**
  * One of the three questions in its band: the question as the title, a plain lead sentence, the
  * stand-in line where it applies, the gauges, an optional chart beside them, detail below.
@@ -63,6 +66,7 @@ export function QuestionBlock({
   aside?: ReactNode
   detail?: ReactNode
 }) {
+  const context = useContext(ContextOnly)
   return (
     <article className="qb ev" id={id} aria-labelledby={`${id}-title`}>
       <header className="qb__head">
@@ -71,6 +75,7 @@ export function QuestionBlock({
           {title}
         </h3>
         <p className="t-subtitle qb__lead">{lead}</p>
+        {context && <p className="stand-ins">Measured for context; the pleading did not raise it.</p>}
         {standIns}
       </header>
       <div className={`qb__grid ${aside ? 'qb__grid--split' : ''}`}>

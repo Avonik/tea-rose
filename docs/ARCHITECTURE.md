@@ -81,7 +81,7 @@ Nodes, in order:
 
 `Memo.bottom_line` is one sentence computed by `scoring/bottom_line.py` (`synthesize_bottom_line`) from
 the factor leans alone: how many confusion factors support or cut against the senior mark, then fame
-and zone, always ending "It is silent on mark similarity, intent and actual confusion." A clause
+and zone, always ending "Mark similarity, intent and actual confusion are read from the pleadings in the preliminary read, not measured." A clause
 whose counted findings all have `low` confidence carries " (low confidence)". No model
 writes it; it never names an outcome. Runs stored before the field existed load with `""`.
 

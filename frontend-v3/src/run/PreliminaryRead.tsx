@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
-import { factorLabel } from '../lib/format'
+import { readFromText, turnsOnPhrase } from '../content/copy'
+import { factorLabel, plainProse } from '../lib/format'
 import { fade, spring } from '../motion/springs'
 import type { Confidence, FactorLean, Memo, PreliminaryRead as Read, ReadLean } from '../types'
 
@@ -71,22 +72,53 @@ function LeanDot({ lean }: { lean: FactorLean }) {
   )
 }
 
+const CONFUSION = ['relatedness_of_goods', 'channels_and_purchasers', 'bridging_the_gap']
+
 /**
- * "Preliminary read": how the factors are likely to weigh, from the complaint and the audience data.
+ * When the read is too close to call but the measured confusion factors favour one side, one sentence
+ * bridges the two: "Audience overlap favours Vans; the read stays open because …". Computed from fields.
+ */
+export function bridgeSentence(memo: Memo, names: { senior: string; junior: string }, skip: string[] = []): string {
+  const read = memo.preliminary_read
+  if (!read || read.lean !== 'too_close_to_call') return ''
+  const f = memo.findings.filter((x) => CONFUSION.includes(x.factor) && !skip.includes(x.factor))
+  const s = f.filter((x) => x.lean === 'favors_senior').length
+  const j = f.filter((x) => x.lean === 'favors_junior').length
+  if (s === j) return ''
+  const why = turnsOnPhrase(read.turns_on)
+  return `Audience overlap favours ${s > j ? names.senior : names.junior}; the read stays open because it turns on ${why || 'what the data cannot measure'}.`
+}
+
+/**
+ * "Preliminary read": how the factors are likely to weigh, from the pleadings and the audience data.
  * Never a prediction; renders nothing for runs stored before the assess step existed.
  */
-export default function PreliminaryReadCard({ memo, names }: { memo: Memo | null; names: { senior: string; junior: string } }) {
+export default function PreliminaryReadCard({
+  memo,
+  names,
+  docType,
+  contextFactors = [],
+}: {
+  memo: Memo | null
+  names: { senior: string; junior: string }
+  /** Extraction.document_type: "pleadings" when the defendant's answer or motion was in the input. */
+  docType?: string | null
+  /** Factors measured for context only (the pleading did not raise them). */
+  contextFactors?: string[]
+}) {
   const reduce = useReducedMotion()
   const read = memo?.preliminary_read
   if (!memo || !read) return null
   const headline = readSentence(memo.read_line) || leanText(read.lean, names)
-  const paragraphs = read.rationale
+  const paragraphs = plainProse(read.rationale)
     .split(/\n\s*\n/)
     .map((p) => p.trim())
     .filter(Boolean)
   const fromDoc = read.read_factors.filter((f) => f.basis === 'document')
   const used = new Set(read.data_factors_used)
-  const measured = used.size ? memo.findings.filter((f) => used.has(f.factor)) : memo.findings
+  const measured = (used.size ? memo.findings.filter((f) => used.has(f.factor)) : memo.findings).filter((f) => !contextFactors.includes(f.factor))
+  const bridge = bridgeSentence(memo, names, contextFactors)
+  const source = readFromText(docType, read.one_sided_input)
 
   return (
     <motion.section
@@ -103,13 +135,20 @@ export default function PreliminaryReadCard({ memo, names }: { memo: Memo | null
       <p className="read__headline serif">{headline}</p>
       <ReadChips read={read} names={names} />
       <p className="read__intro footnote secondary">
-        How the factors a court weighs are likely to fall, read from the complaint (the pleading, the document that starts the lawsuit) and the audience
-        data. Not the court’s decision.
+        How the factors a court weighs are likely to fall, read from the pleadings (the complaint that starts the lawsuit and, where the docket has it, the
+        defendant’s answer) and the audience data. Not the court’s decision. {source}.
       </p>
+      {bridge && <p className="read__turns">{bridge}</p>}
 
       {read.turns_on && (
         <p className="read__turns">
           <span className="read__k">What it turns on:</span> {turnsOn(read.turns_on)}
+        </p>
+      )}
+
+      {read.best_defence?.trim() && (
+        <p className="read__turns">
+          <span className="read__k">Strongest defence:</span> {plainProse(read.best_defence.trim())}
         </p>
       )}
 
@@ -126,7 +165,7 @@ export default function PreliminaryReadCard({ memo, names }: { memo: Memo | null
           <h3 className="read__h">What could flip it</h3>
           <ul className="read__flip-list">
             {read.flip_risks.map((f, i) => (
-              <li key={i}>{f}</li>
+              <li key={i}>{plainProse(f)}</li>
             ))}
           </ul>
         </div>
@@ -135,7 +174,7 @@ export default function PreliminaryReadCard({ memo, names }: { memo: Memo | null
       {(fromDoc.length > 0 || measured.length > 0) && (
         <div className="read__table">
           <div className="read__col">
-            <h3 className="read__h">Read from the complaint</h3>
+            <h3 className="read__h">Read from the pleadings</h3>
             <ul className="group read__list">
               {fromDoc.map((f, i) => (
                 <li key={`${f.factor}-${i}`} className="group__row group__row--top group__sep read__row">
@@ -143,7 +182,7 @@ export default function PreliminaryReadCard({ memo, names }: { memo: Memo | null
                   <span className="group__main">
                     <span className="group__title">{readFactorLabel(f.factor)}</span>
                     <span className="group__sub read__finding" title={f.finding}>
-                      {f.finding}
+                      {plainProse(f.finding)}
                     </span>
                   </span>
                 </li>

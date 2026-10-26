@@ -12,6 +12,8 @@ from tearose.agent.nodes.base import NodeEvents, RunContext, load_prompt
 from tearose.schemas import Extraction
 
 MAX_CHARS = 60_000
+# A bundled input (complaint plus the defendant's answer or motion) carries a banner per document.
+SECOND_DOCUMENT = re.compile(r"^===== DOCUMENT 2", re.MULTILINE)
 
 
 def _norm(s: str) -> str:
@@ -39,6 +41,9 @@ async def run(state: dict[str, Any], ctx: RunContext) -> dict[str, Any]:
     # The schema's side labels are positional; make them consistent.
     ex.senior.side = "senior"
     ex.junior.side = "junior"
+    # Code, not the model: both sides' pleadings are in the input.
+    if SECOND_DOCUMENT.search(text):
+        ex.document_type = "pleadings"
 
     goods = ex.senior.goods + ex.junior.goods
     off = not_verbatim(goods, text)

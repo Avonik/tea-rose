@@ -115,8 +115,8 @@ export const timeOf = (iso: string) => {
 
 export const bytes = (n: number) => (n < 1024 ? `${n} B` : n < 1024 * 1024 ? `${(n / 1024).toFixed(0)} KB` : `${(n / 1024 / 1024).toFixed(1)} MB`)
 
-/** "Bad Spaniels" → "Bad Spaniels’", "Jack Daniel’s" stays readable. */
-export const possessive = (name: string) => (/s$/i.test(name) ? `${name}’` : `${name}’s`)
+/** "Bad Spaniels" → "Bad Spaniels’", "Vans" → "Vans’"; a name already ending in ’s ("Jack Daniel’s") stays as it is. */
+export const possessive = (name: string) => (/['’]s$/i.test(name) ? name : /s$/i.test(name) ? `${name}’` : `${name}’s`)
 
 // ------------------------------------------------------------------ one scale for every score
 // Every score on the site is shown on a 0 to 100 axis, as an ordinal percentile or a whole
@@ -211,3 +211,42 @@ export function fitLabel(fit: ProxyResolution['fit'], note?: string | null): str
   if (fit === 'nearest') return 'Nearest category, no exact match in Qloo’s brand taxonomy'
   return null
 }
+
+/** "MSCHF Product Studio Inc. (also searched: MSCHF)" → "MSCHF Product Studio Inc." */
+export const stripSearched = (s: string) => s.replace(/\s*\(also searched:[^)]*\)\s*/gi, ' ').trim()
+
+/**
+ * The brands as a reader knows them. A showcase case uses its own short title ("adidas v. Thom Browne");
+ * otherwise the resolved names, without the resolver's "(also searched: …)" note, in the document's own
+ * casing when the two differ only in case ("adidas", not "Adidas").
+ */
+export function displayNames(r: AnalysisResult, short?: string | null): Record<Side, string> {
+  const fromShort = short?.split(' v. ').map((s) => s.trim())
+  if (fromShort?.length === 2 && fromShort[0] && fromShort[1]) return { senior: fromShort[0], junior: fromShort[1] }
+  const base = brandNames(r)
+  const name = (side: Side) => {
+    const n = stripSearched(base[side])
+    const q = stripSearched(r.resolution?.[side]?.query ?? '')
+    return q && q.toLowerCase() === n.toLowerCase() && q !== q.toUpperCase() ? q : n
+  }
+  return { senior: name('senior'), junior: name('junior') }
+}
+
+/** "urn:tag:genre:brand:food_and_beverage:pet_food" in model prose → "Pet food". */
+export const plainTags = (text: string) => text.replace(/`?urn:tag:[\w:.-]+`?/g, (m) => tagName(m.replace(/`/g, '')))
+
+/** "Pet food" → "Pet-food", for "Pet-food stand-ins for Bad Spaniels". */
+export function standInLabel(proxy: ProxyResolution | null | undefined, name: string): string {
+  const id = proxy?.chosen_tag_ids[0]
+  const cat = (id ? tagName(id, [proxy]) : '').trim().toLowerCase().replace(/\s+/g, '-')
+  if (!cat) return `Stand-ins for ${name}`
+  return `${cat.charAt(0).toUpperCase()}${cat.slice(1)} stand-ins for ${name}`
+}
+
+/** Model prose cleaned of resolver artefacts: Qloo tag ids as tag names, no "(also searched: …)" notes. */
+export const plainProse = (text: string) => plainTags(text).replace(/\s*\(also searched:[^)]*\)/gi, '')
+
+/** The code-written headline in reader words: "Averaged over both directions, audience overlap is at the 79th percentile." → "Fans overlap, both ways, at the 79th percentile." */
+export const plainHeadline = (text: string) =>
+  plainProse(text).replace(/(^|;\s*)averaged over both directions, audience overlap is at the/gi, (_m, pre: string) => `${pre}${pre ? 'f' : 'F'}ans overlap, both ways, at the`)
+

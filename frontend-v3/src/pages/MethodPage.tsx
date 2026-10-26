@@ -1,85 +1,11 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { IconChevron, IconCode, IconSparkle } from '../components/icons'
-import { Disclosure, StateView } from '../components/ui'
-import backtest from '../content/backtest.json'
+import { Disclosure } from '../components/ui'
 import { FIXED_LIMITATIONS } from '../content/limitations'
 import { useActiveSection } from '../lib/sections'
 import { Page } from '../motion/Reveal'
 import '../styles/method.css'
-
-interface BacktestRow {
-  n: string | number
-  metric: string
-  value: string | number
-  baseline: string
-}
-
-function BacktestTable({ rows, note, status }: { rows: BacktestRow[]; note?: string; status?: string }) {
-  if (!rows.length) return <StateView kind="empty" title="No back-test results yet" body={note} />
-  // Before the back-test has run, a table of "pending" pills reads as broken: show the plan.
-  if (status === 'pending' && rows.every((r) => r.value === 'pending'))
-    return (
-      <div className="backtest-plan">
-        <div className="group">
-          <div className="group__header backtest-plan__status">
-            <span className="chip chip--sm">Pre-registered</span>
-            <span className="footnote secondary">{note}</span>
-          </div>
-          <ol className="backtest-plan__list">
-            {rows.map((r, i) => (
-              <li key={i} className="group__row group__row--top group__sep">
-                <span className="method-n num">{i + 1}</span>
-                <span className="group__main">
-                  <span>{r.metric}</span>
-                  {r.baseline && r.baseline !== 'n/a' && (
-                    <span className="group__sub">Baseline: {r.baseline.replace(/:\s*pending$/i, '').toLowerCase()}</span>
-                  )}
-                </span>
-                <span className="group__value caption">pending</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    )
-  return (
-    <>
-      <div className="group table-scroll">
-        <table className="table backtest">
-          <thead>
-            <tr>
-              <th scope="col" className="r">
-                n
-              </th>
-              <th scope="col">Metric</th>
-              <th scope="col" className="r">
-                Value
-              </th>
-              <th scope="col">Baseline</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={i}>
-                <td className="r num">{r.n === 'pending' ? <span className="chip chip--sm">pending</span> : r.n}</td>
-                <td>{r.metric}</td>
-                <td className="r num">{r.value === 'pending' ? <span className="chip chip--sm">pending</span> : r.value}</td>
-                <td className="secondary">{r.baseline}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {(note || status) && (
-        <p className="caption tertiary">
-          {status === 'pending' && <strong>Status: pending. </strong>}
-          {note}
-        </p>
-      )}
-    </>
-  )
-}
 
 const RESULTS_URL = 'https://github.com/Avonik/tea-rose/tree/main/backend/eval/results'
 
@@ -110,9 +36,20 @@ const READING: [string, ReactNode][] = [
   [
     'What a stand-in is',
     <>
-      Small brands are often missing from Qloo. Then the model picks a few well-known brands from the same product category (Pedigree and Blue Buffalo for a
-      pet food, say) and measures those instead. Every block measured that way starts with “Measured through stand-ins” and says how close the category is:
-      exact, partial, or only the nearest one Qloo has.
+      Small brands are often missing from Qloo. Then code builds a shortlist of well-known brands from the same product category, the model picks three of
+      them (Pedigree and Milk-Bone for a dog toy, say) and decides whether that category is close enough to measure at all. Every block measured that way
+      starts with “Measured through stand-ins” and says how close the category is: exact, partial, or only the nearest one Qloo has.
+    </>,
+  ],
+  [
+    'What the preliminary read is',
+    <>
+      After the numbers, the agent reads the pleadings (the complaint and, where the docket has it, the defendant’s answer) and says which way the case
+      leans: toward the older brand, toward the newcomer, or too close to call. It names what the case turns on, the strongest defence and what could flip
+      it, and reads what data cannot measure: how alike the marks are, copying on purpose, actual confusion alleged, how careful buyers are. Confidence
+      (high, moderate or low) is the agent’s own judgment, not a probability. When only the plaintiff’s side is in the record, confidence is capped at low
+      and the page says so. “Too close to call” is an honest answer, not a failure. The court’s decision is never in the agent’s input, but the model may
+      remember how a famous case ended, so the showcase cases are a demonstration, not a test.
     </>,
   ],
   [
@@ -236,17 +173,20 @@ const TOC: [string, string][] = [
 ]
 
 const AGENT = [
-  'Reads the pleading; quotes goods verbatim.',
-  'Decides which doctrines are live.',
-  'Resolves brands; on the proxy path picks tags only from the menu Qloo returned, and records every option.',
+  'Reads the pleadings; quotes goods verbatim.',
+  'Decides which of the four analyses the dispute calls for.',
+  'Finds each brand in Qloo; for a missing company picks a category only from the menu Qloo returned, and records every option.',
+  'Chooses three stand-in brands from a shortlist code builds, and decides whether the category is close enough to measure.',
   'Retries a query wider when it comes back empty, and records give-ups.',
-  'Translates scores into factor language and writes the memo.',
+  'Turns the scores into the factors a court weighs and writes the memo.',
+  'Gives the preliminary read: the lean, its confidence, what the case turns on, the strongest defence.',
 ]
 
 const CODE = [
   'Every score is a pure, unit-tested Python function with no model in its path.',
   'Every Qloo call is logged with its exact parameters and result count.',
   'The query appendix is assembled by code, so every number in the memo cites a call.',
+  'The bottom-line sentence is counted in code from the factor leans, never written by the model.',
 ]
 
 function MBand({ id, alt, eyebrow, title, children }: { id: string; alt?: boolean; eyebrow: string; title: string; children: ReactNode }) {
@@ -319,8 +259,8 @@ export default function MethodPage() {
 
         <MBand id="read" alt eyebrow="Plain English" title="How to read a memo">
           <p className="t-subtitle method__p">
-            Every case page answers first, then explains. The bottom line comes first, then three questions, each with one gauge on the same 0 to 100 scale
-            and one sentence saying what it means. These are the five things worth knowing before you read one.
+            Every case page answers first, then explains. The preliminary read and the bottom line come first, then three questions, each with one gauge on
+            the same 0 to 100 scale and one sentence saying what it means. These are the six things worth knowing before you read one.
           </p>
           <DefList rows={READING} />
         </MBand>
@@ -347,11 +287,21 @@ export default function MethodPage() {
               error that made the test stricter than the shipped tool. Run 3 identifies them with the same model-driven step the product runs, given no court
               labels. Scoring stays in code. Every report is kept, dated, unchanged.
             </p>
+            <p>
+              <strong>What run 3 found.</strong> Only 14 of the 80 cases have both brands in Qloo. On those, the direct audience measure tells the court’s
+              “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case it ranks the related one
+              higher. The rank measure does no better than the obvious rule “same product category”. For fame, 16 cases: in 74 of 100 pairs of a brand the court
+              found famous and one it did not, the famous one scores higher (only 3 of the 16 were found not famous). Where a company is missing from Qloo, the stand-in method only tells you about its category. All of
+              these numbers are too small to be more than indicative, and we say so.
+            </p>
+            <p>
+              The latest stand-in and category rules (three stand-ins picked from a code shortlist, and the decision whether a category is close enough) came
+              after run 3. The next run will use them.
+            </p>
           </div>
-          <BacktestTable rows={backtest.rows as BacktestRow[]} note={backtest.note} status={backtest.status} />
           <p className="method__cta">
             <a className="btn btn--link" href={RESULTS_URL} target="_blank" rel="noreferrer">
-              Read every report in backend/eval/results <IconChevron size={13} />
+              Read the full report <IconChevron size={13} />
             </a>
           </p>
         </MBand>
@@ -406,8 +356,9 @@ export default function MethodPage() {
             </div>
           </div>
           <p className="secondary method__note">
-            Like a firm commissioning a survey: the associate chooses who to ask; the survey house runs the math. A model that remembers how a case ended can only
-            influence which brands are looked up, and every such choice is logged.
+            Like a firm commissioning a survey: the associate chooses who to ask; the survey house runs the math. The court’s decision is never given to the
+            agent, but a model may remember how a famous case ended, and that memory can colour its preliminary read; it cannot change a number. That is why
+            the showcase is a demonstration, not a test.
           </p>
         </MBand>
 
@@ -421,8 +372,8 @@ export default function MethodPage() {
             ))}
           </ol>
           <p className="secondary method__note">
-            These five appear in every memo, followed by anything specific to the case. Overlap informs, it does not decide: in Bad Spaniels the court found
-            that whiskey drinkers and pet-product buyers overlap, and the dog toy still won.
+            The first five appear in every memo, followed by anything specific to the case; the last applies whenever there is a preliminary read. Overlap
+            informs, it does not decide: in Bad Spaniels the court found that whiskey drinkers and pet-product buyers overlap, and the dog toy still won.
           </p>
         </MBand>
 

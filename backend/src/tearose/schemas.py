@@ -31,8 +31,10 @@ class Party(BaseModel):
 
 
 class Extraction(BaseModel):
+    # "pleadings" is set in code (extract.py) when the input bundles the complaint with the
+    # defendant's answer or motion ("===== DOCUMENT 2" banner); the model never picks it.
     document_type: Literal[
-        "complaint", "cease_and_desist", "opinion", "petition", "notes", "unknown"
+        "complaint", "pleadings", "cease_and_desist", "opinion", "petition", "notes", "unknown"
     ]
     title: str
     senior: Party

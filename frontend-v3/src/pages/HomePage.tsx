@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import { api } from '../api'
 import { IconChevron, IconCode, IconMap, IconPulse, IconUsers } from '../components/icons'
 import { LeanChip, Skeleton } from '../components/ui'
-import backtest from '../content/backtest.json'
 import { CASE_STORIES } from '../content/cases'
-import { clamp01, ordinalSuffix, readFame, readNationwide, readOverlap, runFacts, to100 } from '../content/copy'
+import { clamp01, ordinalSuffix, readFame, readFromText, readNationwide, readOverlap, runFacts, to100 } from '../content/copy'
 import {
   ANALYZE,
   BACKTEST,
@@ -17,11 +16,12 @@ import {
   QUESTION_COLUMNS,
   QUESTIONS,
   QUESTIONS_HEAD,
+  READ_BAND,
   WILL_NOT,
   type QuestionKey,
   type StepWho,
 } from '../content/home'
-import { factorLabel, sideNames } from '../lib/format'
+import { factorLabel, plainHeadline, sideNames } from '../lib/format'
 import { useAsync } from '../lib/useAsync'
 import { AnimatedNumber } from '../motion/AnimatedNumber'
 import { PinnedHero } from '../motion/PinnedHero'
@@ -90,6 +90,36 @@ function Questions() {
             ))}
           </ul>
         </div>
+      </div>
+    </section>
+  )
+}
+
+// ------------------------------------------------------------------ 2b. the preliminary read
+
+function ReadBand() {
+  return (
+    <section className="band band--alt" aria-labelledby="read-band-title">
+      <div className="wrap">
+        <div className="band__head">
+          <p className="eyebrow">{READ_BAND.eyebrow}</p>
+          <h2 id="read-band-title" className="t-headline">
+            {READ_BAND.title}
+          </h2>
+        </div>
+        <ul className="group limits-group">
+          {READ_BAND.rows.map((r, i) => (
+            <li key={r.title} className="group__row group__row--top">
+              <span className="limits-group__n num" aria-hidden="true">
+                {i + 1}
+              </span>
+              <span className="group__main">
+                <span className="group__title">{r.title}</span>
+                <span className="group__sub">{r.text}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
@@ -188,7 +218,6 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
   const names = sideNames(result)
   const story = CASE_STORIES[summary.slug]
   const older = story?.brands[0] ?? names.senior
-  const newer = story?.brands[1] ?? names.junior
   // Lean chips name the brand that a factor favours, never "senior"/"junior".
   const [olderShort, newerShort] = story?.short.split(' v. ') ?? [names.senior, names.junior]
   const chipNames = { senior: olderShort ?? names.senior, junior: newerShort ?? names.junior }
@@ -200,24 +229,31 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
 
   // Why a gauge is empty: the question was never part of this dispute, or Qloo had too little data.
   const routed = result.routing?.analyses
+  const context = result.routing?.context_only ?? []
   const missing = (a: 'overlap' | 'fame' | 'zone') => (routed && !routed.includes(a) ? PREVIEW.notPleaded[a] : PREVIEW.tooThin)
 
   // Chips only for questions this dispute raised; an unpleaded one already says so in its gauge card.
-  const FACTOR_ANALYSIS: Record<string, 'fame' | 'zone'> = { fame: 'fame', zone_of_reputation: 'zone' }
+  // Context-only analyses (measured, not raised by the pleading) are not factor findings of this dispute.
+  const FACTOR_ANALYSIS: Record<string, 'overlap' | 'bridging' | 'fame' | 'zone'> = {
+    relatedness_of_goods: 'overlap',
+    channels_and_purchasers: 'overlap',
+    bridging_the_gap: 'bridging',
+    fame: 'fame',
+    zone_of_reputation: 'zone',
+  }
   const findings = (memo?.findings ?? []).filter((f) => {
     const a = FACTOR_ANALYSIS[f.factor]
-    return !(a && routed && !routed.includes(a))
+    return !(a && ((routed && !routed.includes(a)) || context.includes(a)))
   })
 
-  // Lead with the preliminary read (from the complaint), then the code-computed bottom line.
+  // Lead with the preliminary read (from the pleadings), then the code-computed bottom line.
   const read = memo?.preliminary_read ?? null
   const readLine = readSentence(memo?.read_line)
-  const bottom = memo?.bottom_line || memo?.headline || summary.one_liner
+  const bottom = memo?.bottom_line || plainHeadline(memo?.headline || summary.one_liner)
   const lead = readLine || bottom
   const trace = result.trace
   const facts = runFacts(memo?.appendix_queries.length ?? 0, trace[0]?.ts, trace[trace.length - 1]?.ts)
-  const docType = result.extraction?.document_type
-  const readFrom = (docType && PREVIEW.readFrom[docType]) || PREVIEW.readFromDefault
+  const readFrom = readFromText(result.extraction?.document_type, read?.one_sided_input)
 
   return (
     <Reveal from="none" className="frame__screen">
@@ -257,7 +293,7 @@ function FrameContent({ summary, result }: { summary: ShowcaseSummary; result: A
           right="same crowd"
           meaning={overlap == null ? null : readOverlap(overlap)}
           missing={missing('overlap')}
-          note={ev?.overlap?.used_proxy ? `Measured through a stand-in category for ${newer}.` : undefined}
+          note={ev?.overlap?.used_proxy ? `Measured through stand-in brands for ${chipNames.junior}.` : undefined}
         />
         <PlainGauge
           label="Known by everyone"
@@ -310,7 +346,7 @@ function DeviceFrame({ list, loadingList }: { list: ShowcaseSummary[] | null | u
 
 function Preview(props: { list: ShowcaseSummary[] | null | undefined; loadingList: boolean }) {
   return (
-    <section className="band band--alt" aria-labelledby="preview-title">
+    <section className="band" aria-labelledby="preview-title">
       <div className="wrap wrap--wide">
         <div className="band__head band__head--center">
           <p className="eyebrow">{PREVIEW.eyebrow}</p>
@@ -320,7 +356,7 @@ function Preview(props: { list: ShowcaseSummary[] | null | undefined; loadingLis
           <p className="t-subtitle">{PREVIEW.sub}</p>
         </div>
         <DeviceFrame {...props} />
-        <p className="caption tertiary frame__caption">Read from the filed complaint, never the court’s decision.</p>
+        <p className="caption tertiary frame__caption">{PREVIEW.caption}</p>
       </div>
     </section>
   )
@@ -328,12 +364,10 @@ function Preview(props: { list: ShowcaseSummary[] | null | undefined; loadingLis
 
 // ------------------------------------------------------------------ 4. back-test
 
+/** The back-test in plain words; the statistics live behind the link, never on the home page. */
 function Backtest() {
-  const bt = backtest as { status?: string; note?: string }
-  // The JSON note still describes the pre-run placeholder while status is "pending"; only show it once results are in.
-  const note = bt.status !== 'pending' ? bt.note : undefined
   return (
-    <section className="band" aria-labelledby="bt-title">
+    <section className="band band--alt" aria-labelledby="bt-title">
       <div className="wrap wrap--prose">
         <div className="band__head">
           <p className="eyebrow">{BACKTEST.eyebrow}</p>
@@ -344,7 +378,6 @@ function Backtest() {
         <p className="bt__body">
           {BACKTEST.body} {BACKTEST.fallback}
         </p>
-        {note && <p className="caption tertiary bt__note">{note}</p>}
         <p className="bt__more">
           <Link to="/method#backtest" className="btn btn--link">
             {BACKTEST.link} <IconChevron size={13} />
@@ -357,19 +390,14 @@ function Backtest() {
 
 // ------------------------------------------------------------------ 5. eight famous fights
 
-/**
- * TODO(backend): ShowcaseSummary has no read_line yet. Add `read_line: str = ""` (Memo.read_line of the
- * pre-computed run) to ShowcaseSummary in backend/src/tearose/schemas.py and src/types.ts; until then each
- * row shows the court line only (fetching api.showcaseCase per slug is too heavy for the list).
- */
+/** The pre-computed run's preliminary-read sentence for one showcase row ("" when absent). */
 function listReadLine(list: ShowcaseSummary[] | null | undefined, slug: string): string {
-  const hit = list?.find((c) => c.slug === slug) as (ShowcaseSummary & { read_line?: string }) | undefined
-  return readSentence(hit?.read_line)
+  return readSentence(list?.find((c) => c.slug === slug)?.read_line)
 }
 
 function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
   return (
-    <section className="band band--alt" aria-labelledby="cases-title">
+    <section className="band" aria-labelledby="cases-title">
       <div className="wrap">
         <div className="band__head">
           <p className="eyebrow">{FIGHTS.eyebrow}</p>
@@ -381,6 +409,7 @@ function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
         <ul className="group case-list">
           {CASE_ORDER.map((slug, i) => {
             const c = CASE_STORIES[slug]
+            const read = listReadLine(list, slug)
             if (!c) return null
             return (
               <li key={slug}>
@@ -392,9 +421,9 @@ function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
                       <span className="case-row__line">
                         <span className="case-row__k">Court:</span> {c.court}
                       </span>
-                      {listReadLine(list, slug) && (
+                      {read && (
                         <span className="case-row__line">
-                          <span className="case-row__k">Tea Rose read:</span> {listReadLine(list, slug)}
+                          <span className="case-row__k">Tea Rose read:</span> {read}
                         </span>
                       )}
                       {c.twist && <span className="caption tertiary case-row__twist">{c.twist}</span>}
@@ -417,13 +446,14 @@ function Fights({ list }: { list: ShowcaseSummary[] | null | undefined }) {
 
 function WillNot() {
   return (
-    <section className="band" aria-labelledby="limits-title">
+    <section className="band band--alt" aria-labelledby="limits-title">
       <div className="wrap">
         <div className="band__head">
           <p className="eyebrow">{WILL_NOT.eyebrow}</p>
           <h2 id="limits-title" className="t-headline">
             {WILL_NOT.title}
           </h2>
+          <p className="t-subtitle">{WILL_NOT.lead}</p>
         </div>
         <ul className="group limits-group">
           {WILL_NOT.items.map((l, i) => (
@@ -461,7 +491,7 @@ function HowItWorks() {
   const [open, setOpen] = useState(false)
   const listId = useId()
   return (
-    <section className="band band--alt" aria-labelledby="how-title">
+    <section className="band" aria-labelledby="how-title">
       <div className="wrap wrap--wide">
         <div className="band__head">
           <p className="eyebrow">{HOW.eyebrow}</p>
@@ -544,7 +574,7 @@ function AnalyzeBand() {
       ? `A passcode is required. Live runs are capped at ${l.daily_cap} a day across the site and ${l.session_cap} per session.`
       : 'A passcode is required. Live runs are capped per day and per session.'
   return (
-    <section className="band analyze-band" aria-labelledby="analyze-title">
+    <section className="band band--alt analyze-band" aria-labelledby="analyze-title">
       <div className="wrap analyze-band__inner">
         <div className="analyze-band__copy">
           <p className="eyebrow">{ANALYZE.eyebrow}</p>
@@ -572,6 +602,7 @@ export default function HomePage() {
     <Page className="home">
       <PinnedHero caseHref={caseHref} />
       <Questions />
+      <ReadBand />
       <Preview list={list.data} loadingList={list.loading} />
       <Backtest />
       <Fights list={list.data} />

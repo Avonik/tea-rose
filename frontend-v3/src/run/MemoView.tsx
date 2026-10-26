@@ -5,16 +5,16 @@ import { useId, useMemo, useState, type MouseEvent } from 'react'
 import { IconChevron } from '../components/icons'
 import { ConfidenceMeter, LeanChip } from '../components/ui'
 import { FIXED_LIMITATIONS } from '../content/limitations'
-import { factorLabel, formatParams, shortId } from '../lib/format'
+import { factorLabel, formatParams, plainProse, shortId } from '../lib/format'
 import { fade, springQuick } from '../motion/springs'
 import type { Memo, QlooQuery } from '../types'
 import './memo.css'
 
 marked.setOptions({ gfm: true, breaks: false })
 
-/** Turn "Q12" citations into links to the appendix rows, then render and sanitize. */
+/** Turn "Q12" citations into links to the appendix rows, Qloo tag ids into tag names, then render and sanitize. */
 function renderMarkdown(md: string): string {
-  const linked = md.replace(/(^|[^\w[#-])Q(\d{1,3})\b(?!\])/g, (_m, pre: string, n: string) => `${pre}[Q${n}](#query-${n})`)
+  const linked = plainProse(md).replace(/(^|[^\w[#-])Q(\d{1,3})\b(?!\])/g, (_m, pre: string, n: string) => `${pre}[Q${n}](#query-${n})`)
   const html = marked.parse(linked, { async: false })
   return DOMPurify.sanitize(html, { ADD_ATTR: ['target'] })
 }
@@ -31,6 +31,14 @@ const PANEL_FOR_PREFIX: Record<string, string> = {
   bridging: 'bridging',
   fame: 'fame',
   zone: 'zone',
+}
+
+/** What a reader calls each evidence panel; field refs such as "overlap.symmetric_percentile" show this label. */
+const PANEL_LABEL: Record<string, string> = {
+  overlap: 'Fans overlap',
+  bridging: 'Bridging the gap',
+  fame: 'Known by everyone',
+  zone: 'Where it is known',
 }
 
 /** Evidence panel id for a field ref such as "overlap.symmetric_percentile"; null if unknown. */
@@ -57,6 +65,19 @@ function scrollFlash(id: string, reduce: boolean, block: ScrollLogicalPosition =
   return true
 }
 
+/** Query citations as they are, field refs collapsed to one chip per evidence panel, unknown refs dropped. */
+function plainRefs(refs: string[]): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const r of refs) {
+    const key = /^Qd+$/.test(r) ? r : panelForRef(r)
+    if (!key || seen.has(key)) continue
+    seen.add(key)
+    out.push(/^Qd+$/.test(r) ? r : key)
+  }
+  return out
+}
+
 function RefChip({ r, onQuery, reduce }: { r: string; onQuery: (n: string) => void; reduce: boolean }) {
   const m = /^Q(\d+)$/.exec(r)
   if (m)
@@ -73,10 +94,10 @@ function RefChip({ r, onQuery, reduce }: { r: string; onQuery: (n: string) => vo
       </a>
     )
   const panel = panelForRef(r)
-  if (!panel) return <code className="ref-chip ref-chip--field">{r}</code>
+  if (!panel) return null
   return (
-    <button type="button" className="ref-chip ref-chip--field pressable" title={`Jump to the ${panel} evidence`} onClick={() => scrollFlash(panel, reduce, 'start')}>
-      {r}
+    <button type="button" className="ref-chip ref-chip--field pressable" title={`Jump to the evidence: ${PANEL_LABEL[panel]}`} onClick={() => scrollFlash(panel, reduce, 'start')}>
+      {PANEL_LABEL[panel]}
     </button>
   )
 }
@@ -194,10 +215,10 @@ function Findings({ findings, onQuery, reduce, names }: { findings: Memo['findin
                 <ConfidenceMeter level={f.confidence} />
               </span>
             </div>
-            <p className="finding__text">{f.finding}</p>
-            {f.evidence_refs.length > 0 && (
+            <p className="finding__text">{plainProse(f.finding)}</p>
+            {plainRefs(f.evidence_refs).length > 0 && (
               <span className="finding__refs" aria-label="Evidence">
-                {f.evidence_refs.map((r) => (
+                {plainRefs(f.evidence_refs).map((r) => (
                   <RefChip key={r} r={r} onQuery={onQuery} reduce={reduce} />
                 ))}
               </span>
@@ -296,7 +317,10 @@ export function MemoMeaning({
 
 /** Section 5: the fixed limitations plus anything specific to the case. */
 export function MemoLimits({ memo }: { memo: Memo | null }) {
-  const limits = memo?.limitations.length ? memo.limitations : FIXED_LIMITATIONS
+  // The memo carries the backend's copy; the read's own limit is added when the run has a preliminary read.
+  const readLimit = FIXED_LIMITATIONS[FIXED_LIMITATIONS.length - 1]
+  const base = memo?.limitations.length ? memo.limitations : FIXED_LIMITATIONS.slice(0, -1)
+  const limits = (memo?.preliminary_read ? [...base, readLimit] : base).map(plainProse)
   return (
     <div className="limits-section">
       <div className="band__head">

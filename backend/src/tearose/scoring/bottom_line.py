@@ -2,7 +2,7 @@
 
 Neutral by construction: it counts which side each factor's lean favours, names the senior mark
 and the junior user symmetrically (by brand name when known, else by role), and always states
-what the taste graph cannot speak to.
+what the taste graph cannot speak to (read from the pleadings instead, never measured).
 A clause whose counted findings are all low-confidence carries " (low confidence)".
 """
 
@@ -15,7 +15,10 @@ CONFUSION_FACTORS: tuple[str, ...] = (
     "channels_and_purchasers",
     "bridging_the_gap",
 )
-SILENT_CLAUSE = "It is silent on mark similarity, intent and actual confusion."
+SILENT_CLAUSE = (
+    "Mark similarity, intent and actual confusion are read from the pleadings in the "
+    "preliminary read, not measured."
+)
 
 SENIOR_ROLE = "the senior mark"
 JUNIOR_ROLE = "the junior user"

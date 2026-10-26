@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom'
 import { IconBack, IconChevron, IconPrint } from '../components/icons'
 import { Disclosure, Notice, SkeletonCard } from '../components/ui'
 import { caseStory, type CaseStory } from '../content/cases'
-import { brandNames } from '../lib/format'
+import { courtFraming } from '../content/copy'
+import { displayNames } from '../lib/format'
 import { usePublishSections } from '../lib/sections'
 import type { Connection } from '../lib/useLiveRun'
 import { Sheet, type Snap } from '../motion/Sheet'
 import { fade, spring, springQuick } from '../motion/springs'
 import type { Analysis, AnalysisResult, RunStatus, TraceEvent } from '../types'
 import BottomLine from './BottomLine'
-import { CaseOpening, CaseParties } from './CaseHeader'
+import { CaseOpening, CaseParties, outcomeText } from './CaseHeader'
+import { ContextOnly } from './EvidenceKit'
 import FamePanel from './FamePanel'
 import FollowupBox from './FollowupBox'
 import { MemoLimits, MemoMeaning, QueryAppendix, useQueryNav } from './MemoView'
@@ -31,6 +33,42 @@ const QUESTION_LABEL: Record<Question, string> = {
   zone: 'Where is it known?',
 }
 const ANALYSES_FOR: Record<Question, Analysis[]> = { overlap: ['overlap', 'bridging'], fame: ['fame'], zone: ['zone'] }
+
+/** Which analysis measures each memo factor. */
+const FACTOR_ANALYSIS: Record<string, Analysis> = {
+  relatedness_of_goods: 'overlap',
+  channels_and_purchasers: 'overlap',
+  bridging_the_gap: 'bridging',
+  fame: 'fame',
+  zone_of_reputation: 'zone',
+}
+
+/**
+ * The reveal, below the preliminary read: what the court decided, the outcome, and one sentence
+ * computed from the read's lean against that outcome.
+ */
+function CourtReveal({ story, r, names }: { story: CaseStory; r: AnalysisResult; names: { senior: string; junior: string } }) {
+  const read = r.memo?.preliminary_read
+  const framing = read ? courtFraming(read.lean, story.outcome, read.turns_on, names) : ''
+  return (
+    <section className="routing" aria-labelledby="court-title">
+      <h2 id="court-title" className="group-label">
+        What the court decided
+      </h2>
+      <div className="group">
+        <div className="group__row group__row--top">
+          <span className="group__main">
+            <span className="group__title">{story.court}</span>
+            {framing && <span className="group__sub">{framing}</span>}
+            <span className="chips">
+              <span className="chip chip--quiet chip--sm">Outcome: {outcomeText(story.outcome, names)}</span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 /** Showcase slugs used by the mock dataset, mapped onto the story keys in content/cases.ts. */
 const STORY_ALIAS: Record<string, string> = {
@@ -227,10 +265,12 @@ export default function RunView({
   year?: number | null
 }) {
   const running = r.status === 'running' || r.status === 'queued' || streaming
-  const names = brandNames(r)
+  const story: CaseStory | undefined = caseStory(r.showcase_slug) ?? caseStory(STORY_ALIAS[r.showcase_slug ?? ''])
+  const names = displayNames(r, story?.short)
   const ev = r.evidence
   const routed = r.routing?.analyses
-  const story: CaseStory | undefined = caseStory(r.showcase_slug) ?? caseStory(STORY_ALIAS[r.showcase_slug ?? ''])
+  const context = r.routing?.context_only ?? []
+  const contextFactors = Object.keys(FACTOR_ANALYSIS).filter((f) => context.includes(FACTOR_ANALYSIS[f]))
   const title = story?.short ?? (r.extraction ? `${names.senior} v. ${names.junior}` : undefined)
   const desktop = useMediaQuery(DESKTOP)
   const nav = useQueryNav()
@@ -297,7 +337,13 @@ export default function RunView({
           panel = <ZonePanel ev={ev!.zone!} senior={names.senior} junior={names.junior} juniorProxy={r.resolution?.junior_proxy} />
           break
       }
-      return <Slot state="panel">{panel}</Slot>
+      const forContext = ANALYSES_FOR[q].filter((a) => routed?.includes(a) ?? true)
+      const isContext = forContext.length > 0 && forContext.every((a) => context.includes(a))
+      return (
+        <Slot state="panel">
+          <ContextOnly.Provider value={isContext}>{panel}</ContextOnly.Provider>
+        </Slot>
+      )
     }
     const wanted = ANALYSES_FOR[q]
     if (routed && !wanted.some((a) => routed.includes(a)))
@@ -341,7 +387,15 @@ export default function RunView({
         )}
         <Slot state={r.extraction ? 'case' : running ? 'case-skeleton' : 'case-input'}>
           {r.extraction ? (
-            <CaseOpening extraction={r.extraction} names={names} story={story} year={year} readLine={r.memo?.read_line}>
+            <CaseOpening
+              extraction={r.extraction}
+              names={names}
+              story={story}
+              year={year}
+              readLine={r.memo?.read_line}
+              oneSided={r.memo?.preliminary_read?.one_sided_input}
+              hasReadCard={!!r.memo?.preliminary_read}
+            >
               <Toolbar live={live} r={r} running={running} />
             </CaseOpening>
           ) : (
@@ -353,8 +407,9 @@ export default function RunView({
             </div>
           )}
         </Slot>
-        <PreliminaryReadCard memo={r.memo} names={names} />
-        <BottomLine memo={r.memo} expected={memoExpected} names={names} />
+        <PreliminaryReadCard memo={r.memo} names={names} docType={r.extraction?.document_type} contextFactors={contextFactors} />
+        {story && r.memo && <CourtReveal story={story} r={r} names={names} />}
+        <BottomLine memo={r.memo} expected={memoExpected} names={names} contextFactors={contextFactors} />
       </>
     ),
   })
@@ -371,7 +426,7 @@ export default function RunView({
           <h2 className="t-display evidence-intro__title">The three questions.</h2>
           <p className="t-subtitle">
             The questions a judge asks about customers. Every score is on the same 0 to 100 scale, and 75 or more counts as high. Code computed them from Qloo’s
-            answers; no model touches these numbers.
+            answers (Qloo is a taste graph: anonymised data on what audiences like across brands, music and places); no model touches these numbers.
           </p>
         </div>
       ),

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Disclosure } from '../components/ui'
-import { ordinalPercentile, possessive, rankPercentile, standing, wholePct } from '../lib/format'
+import { ordinalPercentile, possessive, rankPercentile, standing, standInLabel, wholePct } from '../lib/format'
 import type { BridgingEvidence, CompareRow, OverlapEvidence, RankedPeer, Resolution, Side } from '../types'
 import { BridgingGauge } from './BridgingPanel'
 import { EvidenceNotes, QuestionBlock, StandIns } from './EvidenceKit'
@@ -10,6 +10,8 @@ import './evidence.css'
 export { EvidenceNotes }
 
 const SMALL_CATEGORY = 20
+
+const lowerFirst = (t: string) => t.charAt(0).toLowerCase() + t.slice(1)
 
 /** What an overlap percentile means, in the words a reader would use. */
 function readOverlap(p: number): string {
@@ -99,6 +101,10 @@ function CompareList({ title, rows, side, kind }: { title: string; rows: Compare
 interface Direction {
   /** Fans of `seed` were asked; `target` was looked for among the brands in `category`. */
   seed: string
+  /** "Pet-food stand-ins for Bad Spaniels" when the seed side was measured through stand-ins. */
+  seedStandIns?: string
+  /** The same label for the target side. */
+  targetStandIns?: string
   target: string
   targetIsStandIn: boolean
   category: string
@@ -114,7 +120,8 @@ interface Direction {
 function directionMeasure(key: string, d: Direction): SubMeasure {
   const subject = d.targetIsStandIn ? `the stand-ins for ${d.target}` : d.target
   const verb = d.targetIsStandIn ? 'sit' : 'sits'
-  const label = `${possessive(d.seed)} fans like ${d.target}`
+  const liked = d.targetStandIns ? `the ${lowerFirst(d.targetStandIns)}` : d.target
+  const label = d.seedStandIns ? `${d.seedStandIns}: their fans like ${liked}` : `${possessive(d.seed)} fans like ${liked}`
   const small = d.universe != null && d.universe < SMALL_CATEGORY ? ` A small category (${d.universe} brands), so the rank is coarse.` : ''
   if (d.censored || (d.percentile == null && d.rank == null)) {
     const depth = d.depth ?? 150
@@ -189,6 +196,8 @@ export default function OverlapPanel({
   if (ev) {
     const sj = directionMeasure('s2j', {
       seed: names.senior,
+      seedStandIns: seniorProxy ? standInLabel(seniorProxy, names.senior) : undefined,
+      targetStandIns: proxy ? standInLabel(proxy, names.junior) : undefined,
       target: names.junior,
       targetIsStandIn: !!proxy,
       category: jUni?.description ?? `brands in ${possessive(names.junior)} category`,
@@ -202,6 +211,8 @@ export default function OverlapPanel({
     })
     const js = directionMeasure('j2s', {
       seed: names.junior,
+      seedStandIns: proxy ? standInLabel(proxy, names.junior) : undefined,
+      targetStandIns: seniorProxy ? standInLabel(seniorProxy, names.senior) : undefined,
       target: names.senior,
       targetIsStandIn: !!seniorProxy,
       category: sUni?.description ?? `brands in ${possessive(names.senior)} category`,
@@ -223,7 +234,7 @@ export default function OverlapPanel({
       const one = [sj, js].filter((s) => s.censored).length === 1 ? ' Only one direction has a rank, so the average is that direction alone.' : ''
       meaning = (
         <>
-          Averaged over both directions, each brand sits {standing(p)} of the other’s category: {readOverlap(p)}.{one}
+          Taking both directions together, each brand sits {standing(p)} of the other’s category: {readOverlap(p)}.{one}
         </>
       )
       lead = (
@@ -249,7 +260,7 @@ export default function OverlapPanel({
     gauges = (
       <ScaleGauge
         id="overlap-gauge"
-        title="Fans overlap"
+        title="Fans overlap, both ways"
         value={value}
         display={display}
         low="separate crowds"
@@ -281,7 +292,7 @@ export default function OverlapPanel({
               highlightLabel={proxy ? 'stand-in' : names.junior}
             />
             <PeerList
-              title={`Top ${sUni?.description ?? 'brands'} for ${proxy ? 'the stand-ins’' : possessive(names.junior)} fans`}
+              title={`Top ${sUni?.description ?? 'brands'} for ${proxy ? `fans of the ${lowerFirst(standInLabel(proxy, names.junior))}` : `${possessive(names.junior)} fans`}`}
               peers={ev.top_peers_junior_seed}
               side="junior"
               highlight={highlight}
@@ -301,7 +312,7 @@ export default function OverlapPanel({
               <div className="compare__grid">
                 <CompareList title={tagRows ? 'Traits that connect them' : 'Liked by both audiences'} rows={ev.shared_affinities} side="shared" kind="shared" />
                 <CompareList title={`Only ${names.senior}`} rows={ev.distinct_to_senior} side="senior" kind="distinct" />
-                <CompareList title={`Only ${proxy ? 'the stand-ins' : names.junior}`} rows={ev.distinct_to_junior} side="junior" kind="distinct" />
+                <CompareList title={`Only ${proxy ? `the ${lowerFirst(standInLabel(proxy, names.junior))}` : names.junior}`} rows={ev.distinct_to_junior} side="junior" kind="distinct" />
               </div>
             </div>
           )}

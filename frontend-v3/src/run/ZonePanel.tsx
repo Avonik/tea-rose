@@ -1,5 +1,5 @@
 import { Component, lazy, Suspense, useState, type ReactNode } from 'react'
-import { wholePct } from '../lib/format'
+import { standInLabel, wholePct } from '../lib/format'
 import type { ProxyResolution, ZoneEvidence } from '../types'
 import { EvidenceNotes, QuestionBlock, StandIns } from './EvidenceKit'
 import ScaleGauge from './ScaleGauge'
@@ -65,7 +65,7 @@ export default function ZonePanel({
   const [showSenior, setShowSenior] = useState(true)
   const [showJunior, setShowJunior] = useState(false)
   const hasJunior = ev.junior_points.length > 0
-  const juniorLabel = juniorProxy ? `${junior} (stand-ins)` : junior
+  const juniorLabel = juniorProxy ? standInLabel(juniorProxy, junior) : junior
   const maxShare = Math.max(0.0001, ...ev.top_regions.map((r) => Number(r.share ?? 0)))
   const hasAny = ev.points.length > 0 || hasJunior
   const g = ev.concentration_index
@@ -121,7 +121,7 @@ export default function ZonePanel({
                 ? [
                     {
                       key: 'overlap',
-                      label: `Same places as ${junior}`,
+                      label: `Same places as ${juniorProxy ? `the ${juniorLabel.charAt(0).toLowerCase()}${juniorLabel.slice(1)}` : junior}`,
                       value: ev.geographic_overlap,
                       display: of100(ev.geographic_overlap),
                       tone: 'junior',

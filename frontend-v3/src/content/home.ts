@@ -15,7 +15,7 @@ export const COUNTDOWN: Tick[] = [
   ...[6, 5, 4, 3, 2, 1].map((n) => ({ n, unit: 'weeks' as const })),
   ...[6, 5, 4, 3, 2, 1].map((n) => ({ n, unit: 'days' as const })),
   ...[23, 18, 12, 8, 6, 4, 3, 2, 1].map((n) => ({ n, unit: 'hours' as const })),
-  ...[45, 30, 20, 10, 5, 3, 2, 1].map((n) => ({ n, unit: 'minutes' as const })),
+  ...[45, 30, 20, 10, 5, 3, 2].map((n) => ({ n, unit: 'minutes' as const })),
 ]
 
 export const tickUnit = (t: Tick) => (t.n === 1 ? t.unit.slice(0, -1) : t.unit)
@@ -29,12 +29,12 @@ export const HERO = {
   survey: 'with a consumer survey, at',
   money: '$15,000 to $100,000.',
   source:
-    'Sources: California Lawyers Association 2025, IPWatchdog 2019, Michigan Bar Journal 2020. Basic studies from $15,000; commonly $50,000 to $100,000; about two months.',
-  /** Beat 2: replaces the survey line while the clock counts down to a minute. */
-  answer: 'with Tea Rose, which reads the pleading and answers from Qloo’s taste graph.',
+    'Sources: California Lawyers Association 2025, IPWatchdog 2019, Michigan Bar Journal 2020. From about $15,000; commonly $50,000 to $100,000; weeks to two months.',
+  /** Beat 2: replaces the survey line while the clock counts down to two minutes. */
+  answer: 'with Tea Rose, which reads the pleadings and answers from Qloo’s taste graph.',
   /** Read once by assistive tech instead of the ticking numeral. */
-  sr: 'Every trademark fight asks the same question: who are the customers? Finding out takes six weeks with a consumer survey, at $15,000 to $100,000, or about one minute with Tea Rose, which reads the pleading and answers from Qloo’s taste graph.',
-  /** Beat 3: the clock has settled on a minute. */
+  sr: 'Every trademark fight asks the same question: who are the customers? Finding out takes six weeks with a consumer survey, at $15,000 to $100,000, or about two minutes with Tea Rose, which reads the pleadings and answers from Qloo’s taste graph.',
+  /** Beat 3: the clock has settled on two minutes. */
   title: 'Trademark evidence from the taste graph.',
   openCase: 'Open a case',
   analyze: 'Analyze a document',
@@ -54,7 +54,7 @@ export const QUESTIONS: { key: QuestionKey; q: string; measure: string; court: s
     key: 'overlap',
     q: 'Do the same people buy both?',
     measure: 'Where each brand ranks among the other’s fans, checked in both directions.',
-    court: 'Two confusion factors: whether the goods are related, and whether they reach the same buyers.',
+    court: 'Two factors in likelihood of confusion (would buyers mistake who makes it): related goods, and the same buyers.',
   },
   {
     key: 'fame',
@@ -72,19 +72,34 @@ export const QUESTIONS: { key: QuestionKey; q: string; measure: string; court: s
 
 export const QUESTION_COLUMNS = { q: 'The question', measure: 'What we measure', court: 'What a court does with it' }
 
+/** The preliminary read, introduced right after the three questions: what the agent reads that data cannot measure. */
+export const READ_BAND = {
+  eyebrow: 'Then the agent reads the rest',
+  title: 'A preliminary read, from the pleadings.',
+  rows: [
+    {
+      title: 'What it is',
+      text: 'Which way the case leans (toward the older brand, the newcomer, or too close to call), how confident the agent is, what the case turns on, the strongest defence, and what could flip it.',
+    },
+    {
+      title: 'What it reads that data cannot measure',
+      text: 'From the pleadings (the complaint and, where the docket has it, the defendant’s answer): how alike the marks are, copying on purpose, actual confusion alleged, how careful buyers are, and whether the mark can be protected at all.',
+    },
+    {
+      title: 'What it is not',
+      text: 'A prediction or a probability. The court’s decision is withheld from the agent, but the model may still know how famous cases ended, so the showcase is a demonstration, not a test.',
+    },
+  ],
+}
+
 export const PREVIEW = {
   eyebrow: 'Live preview',
   title: 'Watch it read a real case.',
-  sub: 'The model read the filing and picked the brands, Qloo returned the audiences, code computed every number.',
+  sub: 'The model read the pleadings and picked the brands, Qloo returned the audiences, code computed every number.',
+  /** Follows readFromText (content/copy.ts), which names the documents the agent read. */
   foot: 'resolved against Qloo, scored in code.',
-  /** How the foot names the source document, by extracted document type. */
-  readFrom: {
-    complaint: 'Read from the complaint',
-    cease_and_desist: 'Read from the letter',
-    opinion: 'Read from the court’s opinion',
-    petition: 'Read from the petition',
-  } as Record<string, string>,
-  readFromDefault: 'Read from the filing',
+  /** The caption under the frame: what the agent was given, and what it never sees. */
+  caption: 'Read from the pleadings, never the court’s decision.',
   notMeasured: 'Not measured in this case',
   /** Why a gauge is empty: the question was not part of the dispute, or Qloo had too little data. */
   notPleaded: {
@@ -100,9 +115,8 @@ export const BACKTEST = {
   eyebrow: 'Back-test',
   title: 'Does it hold up?',
   body:
-    'We checked it against 80 decided cases. Where both brands are in Qloo, the audience signal agrees with the court’s finding on related goods and shared customers in 88% of pairings, against 67% for the obvious rule “same product category”.',
-  fallback:
-    'Where one side is a company Qloo does not know, we fall back to its product category and the memo says so; that fallback is only as good as the category.',
+    'We labelled 80 decided cases from the opinions before any data was pulled. Where both brands are in Qloo (14 cases), the audience measure tells the court’s “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case, it ranks the related one higher. Where a company is missing from Qloo, the stand-in method only tells you about its category.',
+  fallback: 'Small numbers, honestly labelled; we changed the method twice along the way and kept every run.',
   link: 'See the full report, including the two times we changed our method and why',
 }
 
@@ -115,17 +129,20 @@ export const CASE_ORDER = [
   'nike_stockx',
   'bang_monster',
   'bad_spaniels',
+  'adidas_thom_browne',
 ] as const
 
 export const FIGHTS = {
   eyebrow: 'Showcase',
-  title: 'Seven famous fights.',
-  sub: 'What the court decided, and what the taste data shows. Pre-computed and free to open; every memo cites the Qloo queries it used.',
+  title: 'Eight famous fights.',
+  sub: 'What the court decided, and what Tea Rose read before it knew. Pre-computed and free to open; every memo cites the Qloo queries it used.',
 }
 
 export const WILL_NOT = {
   eyebrow: 'Limits',
   title: 'What it will not tell you.',
+  /** Leads the list: these four are read from the pleadings in the preliminary read, never measured. */
+  lead: 'Not measured, only read from what the parties allege:',
   items: [
     'Whether the marks look or sound alike.',
     'Whether the newcomer copied on purpose.',
@@ -144,20 +161,31 @@ export const HOW = {
   expand: 'Show what each step does',
   collapse: 'Hide the step details',
   steps: [
-    { id: 'extract', label: 'Extract', who: 'agent', text: 'The model reads the pleading: parties, marks, goods quoted verbatim, claims.' },
-    { id: 'route', label: 'Route', who: 'agent', text: 'The model decides which legal questions are live. Dilution pleaded means fame is measured.' },
-    { id: 'resolve', label: 'Resolve', who: 'agent', text: 'The model finds each brand in Qloo, or picks stand-in categories from the menu Qloo returns.' },
+    { id: 'extract', label: 'Extract', who: 'agent', text: 'The model reads the pleadings: parties, marks, goods quoted verbatim, claims.' },
+    { id: 'route', label: 'Route', who: 'agent', text: 'The model decides which of the four analyses the dispute calls for. Dilution pleaded means fame is measured.' },
+    {
+      id: 'resolve',
+      label: 'Resolve',
+      who: 'agent',
+      text: 'The model finds each brand in Qloo. For a company Qloo does not know, it picks three stand-in brands from a shortlist code builds, and decides whether that category is close enough to measure.',
+    },
     { id: 'fetch', label: 'Fetch', who: 'agent', text: 'The agent calls Qloo, retries wider when a query comes back empty, and logs every call.' },
-    { id: 'score', label: 'Score', who: 'code', text: 'Code computes ranks and percentiles: unit-tested Python, no model, never raw affinity.' },
-    { id: 'interpret', label: 'Interpret', who: 'agent', text: 'The model translates the scores into factor language and names what is thin or stood in.' },
-    { id: 'memo', label: 'Memo', who: 'both', text: 'The model writes a neutral memo; code assembles the query appendix.' },
+    { id: 'score', label: 'Score', who: 'code', text: 'Code computes ranks and percentiles: tested Python, no model, never a raw affinity score.' },
+    { id: 'interpret', label: 'Interpret', who: 'agent', text: 'The model turns the scores into the factors a court weighs and names what is thin or stood in.' },
+    {
+      id: 'assess',
+      label: 'Assess',
+      who: 'agent',
+      text: 'The model gives the preliminary read: which way the case leans, how confident, what it turns on, the strongest defence. The court’s decision is never in its input.',
+    },
+    { id: 'memo', label: 'Memo', who: 'both', text: 'The model writes a neutral memo; code writes the bottom line and the query appendix.' },
   ] as { id: string; label: string; who: StepWho; text: string }[],
-  who: { agent: 'Model judgment', code: 'Deterministic code', both: 'Model writes, code builds the appendix' } as Record<StepWho, string>,
+  who: { agent: 'Model judgment', code: 'Deterministic code', both: 'Model writes, code adds the bottom line and appendix' } as Record<StepWho, string>,
 }
 
 export const ANALYZE = {
   eyebrow: 'Analyze your own',
   title: 'Bring your own dispute.',
-  sub: 'Paste or upload a complaint or a cease-and-desist letter and get the same memo for your two brands.',
+  sub: 'Paste or upload a complaint (with the defendant’s answer, if you have it) or a cease-and-desist letter and get the same memo for your two brands.',
   cta: 'Analyze a document',
 }

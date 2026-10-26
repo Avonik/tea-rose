@@ -1,7 +1,8 @@
 /**
  * Hand-written context for the showcase cases (current and former): what the court decided and what the taste
  * data shows. Plain English, brand names instead of "senior"/"junior". The agent's input is always the
- * filed complaint; opinions and the sources below are used only for the court line. Facts verified on
+ * pleadings (the complaint, plus the answer or motion where the docket has one); opinions and the sources below
+ * are used only for the court line. Facts verified on
  * 2026-10-24/25 (see backend/eval/cases_candidates.csv and each entry's `source`). Live runs have no
  * entry here and render without the court line.
  */
@@ -63,7 +64,6 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     brands: ['Vans', 'Wavy Baby sneakers (MSCHF)'],
     court: 'The Second Circuit upheld the injunction: a distorted sneaker sold as a sneaker is not a protected parody.',
     data: 'DATA PENDING: computed after the run',
-    twist: 'Same shoppers, same shelves, and the court agreed.',
     outcome: 'older brand won',
     source: 'https://storage.courtlistener.com/pdf/2023/12/05/vans_inc._v._mschf_product_studio_inc..pdf',
   },

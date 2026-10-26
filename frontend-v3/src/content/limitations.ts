@@ -1,8 +1,13 @@
-/** The five fixed "What this cannot tell you" items. Memos carry their own copy; this is the fallback and the Method page source. */
+/**
+ * The fixed "What this cannot tell you" items, in the order of backend memo.py FIXED_LIMITATIONS, in plain
+ * words, plus one on the preliminary read. Memos carry their own copy; this is the fallback and the Method
+ * page source.
+ */
 export const FIXED_LIMITATIONS = [
-  'Affinity is not confusion. Taste overlap shows who likes what; it does not measure whether any consumer was or would be confused about source.',
-  'No survey percentages. Scores are ranks within one query, never a share of consumers.',
-  'Data reflects today, not the year of the dispute.',
-  'Coverage gaps. Small brands are often missing from Qloo; proxy categories stand in and are flagged.',
-  'Age and gender only, and heatmaps show relative concentration, not absolute reach.',
+  'Affinity is not confusion. Taste overlap is evidence on whether the goods are related and reach the same buyers; it is not a confusion rate.',
+  'No survey percentages. Qloo scores each answer on its own scale, so a score is a position in a list, never a share of consumers.',
+  'Coverage gaps are stated per brand. Small brands are often missing from Qloo; where stand-in brands were measured instead, the finding says so.',
+  'Data reflects today’s taste, not the year of the dispute.',
+  'Not legal advice; a tool for counsel.',
+  'The preliminary read is the agent’s judgment on the pleadings, not a measurement; with only the plaintiff’s side in the record its confidence is capped at low.',
 ]

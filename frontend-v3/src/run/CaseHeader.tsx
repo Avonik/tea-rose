@@ -2,8 +2,9 @@ import type { ReactNode } from 'react'
 import { IconCheck } from '../components/icons'
 import { Disclosure } from '../components/ui'
 import type { CaseStory } from '../content/cases'
+import { readFromText } from '../content/copy'
 import { readSentence } from './PreliminaryRead'
-import { CLAIM_LABEL, humanize } from '../lib/format'
+import { CLAIM_LABEL, humanize, stripSearched } from '../lib/format'
 import type { Extraction, Party, RoutingDecision } from '../types'
 
 const ANALYSIS_LABEL: Record<string, string> = {
@@ -13,7 +14,7 @@ const ANALYSIS_LABEL: Record<string, string> = {
   zone: 'Where is it known?',
 }
 
-function outcomeText(outcome: CaseStory['outcome'], names: { senior: string; junior: string }) {
+export function outcomeText(outcome: CaseStory['outcome'], names: { senior: string; junior: string }) {
   switch (outcome) {
     case 'older brand won':
       return `${names.senior} won`
@@ -28,8 +29,8 @@ function outcomeText(outcome: CaseStory['outcome'], names: { senior: string; jun
 
 /**
  * Section 1, the header: title, year and court, the two brands as chips, and for the showcase
- * cases one split line: what the court decided and what the taste data shows. Live runs have no
- * court line; they show the document's own summary instead.
+ * cases the read line (what Tea Rose read from the pleadings). The court's decision is revealed
+ * below the preliminary read, never in the header. Live runs show the document's own summary.
  */
 export function CaseOpening({
   extraction: x,
@@ -37,6 +38,8 @@ export function CaseOpening({
   story,
   year,
   readLine,
+  oneSided,
+  hasReadCard,
   children,
 }: {
   extraction: Extraction
@@ -45,6 +48,10 @@ export function CaseOpening({
   year?: number | null
   /** Memo.read_line: replaces the data half while the hand-written data sentence is still a placeholder. */
   readLine?: string
+  /** PreliminaryRead.one_sided_input, for runs stored before "pleadings" was detected in code. */
+  oneSided?: boolean
+  /** The preliminary-read card renders right below: the header then shows the document summary instead of repeating the read. */
+  hasReadCard?: boolean
   children?: ReactNode
 }) {
   // The hand-written data sentence is a placeholder until the run is in; never show it.
@@ -70,26 +77,21 @@ export function CaseOpening({
           <span className="dot dot--junior" aria-hidden="true" />
           {names.junior}
         </span>
-        {story && <span className="chip chip--quiet opening__outcome">Outcome: {outcomeText(story.outcome, names)}</span>}
       </p>
       {children}
-      {story ? (
+      {story && !dataPending ? (
         <dl className="opening__split">
           <div className="opening__split-half">
-            <dt className="eyebrow">The court decided</dt>
-            <dd>{story.court}</dd>
+            <dt className="eyebrow">The taste data shows</dt>
+            <dd>{story.data}</dd>
           </div>
-          {!dataPending ? (
-            <div className="opening__split-half">
-              <dt className="eyebrow">The taste data shows</dt>
-              <dd>{story.data}</dd>
-            </div>
-          ) : read ? (
-            <div className="opening__split-half">
-              <dt className="eyebrow">Tea Rose read, from the complaint only</dt>
-              <dd>{read}</dd>
-            </div>
-          ) : null}
+        </dl>
+      ) : read && !hasReadCard ? (
+        <dl className="opening__split">
+          <div className="opening__split-half">
+            <dt className="eyebrow">{readFromText(x.document_type, oneSided)}</dt>
+            <dd>{read}</dd>
+          </div>
         </dl>
       ) : (
         <p className="t-subtitle opening__summary">{x.summary}</p>
@@ -101,11 +103,11 @@ export function CaseOpening({
 function PartyGroup({ p }: { p: Party }) {
   return (
     <div className={`party party--${p.side}`}>
-      <p className="group-label">{p.side === 'senior' ? 'The older brand · claimant' : 'The newcomer · respondent'}</p>
+      <p className="group-label">{p.side === 'senior' ? 'The older brand' : 'The newcomer'}</p>
       <div className="group">
         <div className="group__header party__head">
           <span className={`dot dot--${p.side}`} aria-hidden="true" />
-          <h3 className="t-title-2">{p.name}</h3>
+          <h3 className="t-title-2">{stripSearched(p.name)}</h3>
         </div>
         <dl className="party__rows">
           {p.marks.length > 0 && (
@@ -197,7 +199,7 @@ export function CaseParties({ extraction: x, routing }: { extraction: Extraction
                     <span className="group__title">{ANALYSIS_LABEL[a]}</span>
                     {routing.rationale[a] && <span className="group__sub">{routing.rationale[a]}</span>}
                   </span>
-                  <span className="group__value caption">{on ? 'Measured' : 'Not measured'}</span>
+                  <span className="group__value caption">{!on ? 'Not measured' : routing.context_only?.includes(a as never) ? 'Measured for context' : 'Measured'}</span>
                 </li>
               )
             })}
