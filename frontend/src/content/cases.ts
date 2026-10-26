@@ -21,6 +21,11 @@ export type CaseStory = {
   outcome: 'older brand won' | 'newcomer won' | 'mixed' | 'settled'
   /** Where the court sentence was verified (opinion, docket entry or reliable report). */
   source?: string
+  /**
+   * Hand-checked: the strongest defence named in the pre-computed read (read_best_defence) is the ground the
+   * court later ruled on. Set only where that holds; used by the home page's results paragraphs.
+   */
+  readNamedWinningDefence?: boolean
 }
 
 export const CASE_STORIES: Record<string, CaseStory> = {
@@ -161,6 +166,8 @@ export const CASE_STORIES: Record<string, CaseStory> = {
     data: 'DATA PENDING: computed after the run',
     twist: 'Same drink, same buyers, and still no confusion.',
     outcome: 'newcomer won',
+    // Read named commonplace can features and the distinct BANG/REIGN wording; the court found no secondary meaning and no confusion.
+    readNamedWinningDefence: true,
     source: 'https://www.govinfo.gov/content/pkg/USCOURTS-flsd-0_19-cv-60809/pdf/USCOURTS-flsd-0_19-cv-60809-4.pdf',
   },
   stone_millercoors: {
@@ -223,6 +230,8 @@ export const CASE_STORIES: Record<string, CaseStory> = {
       'After a bench trial the court ruled for Fetzer: bourbon and bourbon-barrel wine share some sales channels, but the two labels looked too different to confuse buyers.',
     data: 'DATA PENDING: computed after the run',
     outcome: 'newcomer won',
+    // Read named the distinct label presentation and branding; the court found the labels too different to confuse.
+    readNamedWinningDefence: true,
     source: 'https://static.case.law/f-supp-3d/265/cases/1013-01.json',
   },
   tmobile_aio: {

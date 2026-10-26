@@ -263,3 +263,27 @@ export function Segmented<T extends string>({
     </LayoutGroup>
   )
 }
+
+// ------------------------------------------------------------------ verdict chips
+
+type VerdictChip = { label: string; side: 'senior' | 'junior' | null }
+
+/**
+ * Two one-word verdicts before the sentences: "Court: Vans" and "Tea Rose: Too close". The dot carries the
+ * brand's party colour where a brand is named; Mixed, Settled and Too close keep the neutral grey dot.
+ */
+export function VerdictChips({ court, read }: { court: VerdictChip; read?: VerdictChip | null }) {
+  const one = (k: string, c: VerdictChip) => (
+    <span className="chip chip--sm verdict-chip">
+      <span className="verdict-chip__k">{k}:</span>
+      <span className={`dot ${c.side ? `dot--${c.side}` : ''}`} aria-hidden="true" />
+      {c.label}
+    </span>
+  )
+  return (
+    <span className="chips verdict-chips">
+      {one('Court', court)}
+      {read && one('Tea Rose', read)}
+    </span>
+  )
+}

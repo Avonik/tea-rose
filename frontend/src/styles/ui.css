@@ -791,3 +791,9 @@ button.chip[aria-pressed='true']:hover {
   background: var(--primary-bg);
   color: var(--primary-fg);
 }
+
+/* Verdict chips: the label reads secondary, the verdict primary */
+.verdict-chip__k {
+  color: var(--text-2);
+  font-weight: 400;
+}
