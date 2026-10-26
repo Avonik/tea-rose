@@ -59,3 +59,6 @@ backend/data/showcase/*.json
 # Back-test intermediate files hold Qloo response data; only the report under backend/eval/results/ is committed
 backend/eval/resolved.json
 backend/eval/scores.json
+
+# Internal to-do list
+TODO.md
