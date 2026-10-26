@@ -17,8 +17,8 @@ Manifest: backend/data/showcase/manifest.json
 
 Each case runs through the full GraphEngine (same code path as a live run) and is written to
 backend/data/showcase/<slug>.json as an AnalysisResult with showcase_slug set. The API loads
-that directory at startup. Results are generated on the server and gitignored; they contain Qloo-derived numbers
-but no raw responses.
+that directory at startup. Results are generated on the server and gitignored: they contain
+Qloo-derived numbers but no raw responses.
 """
 
 from __future__ import annotations
