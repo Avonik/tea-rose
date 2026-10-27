@@ -79,7 +79,7 @@ export const READ_BAND = {
   rows: [
     {
       title: 'What it is',
-      text: 'Which way the case leans (toward the older brand, the newcomer, or too close to call), how confident the agent is, what the case turns on, the strongest defence, and what could flip it.',
+      text: 'Which way the case leans (toward the older brand, the newcomer, or too close to call), how confident the agent is, what the case hinges on, the strongest defence, and what could flip it.',
     },
     {
       title: 'What it reads that data cannot measure',
@@ -117,6 +117,8 @@ export const SCORECARD = {
   title: 'How it did on eighteen real cases.',
   court: 'Court:',
   read: 'Tea Rose:',
+  /** The results table: column heads. */
+  columns: { result: 'Tea Rose and the court', cases: 'Cases', meaning: 'What that means' },
   /** The data back-test, as a side note: two sentences, no statistics. */
   dataNote:
     'Separately, we checked the audience measure itself against 80 decided cases, labelled from the opinions before any data was pulled. Where both brands are in Qloo, it tells the court’s “related goods” findings from the “unrelated” ones well: in 88 of 100 random pairs of a “related” and an “unrelated” case, it ranks the related one higher.',
@@ -201,7 +203,7 @@ export const HOW = {
       id: 'assess',
       label: 'Assess',
       who: 'agent',
-      text: 'The model gives the preliminary read: which way the case leans, how confident, what it turns on, the strongest defence. The court’s decision is never in its input.',
+      text: 'The model gives the preliminary read: which way the case leans, how confident, what it hinges on, the strongest defence. The court’s decision is never in its input.',
     },
     { id: 'memo', label: 'Memo', who: 'both', text: 'The model writes a neutral memo; code writes the bottom line and the query appendix.' },
   ] as { id: string; label: string; who: StepWho; text: string }[],

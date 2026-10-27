@@ -48,7 +48,7 @@ const READING: [string, ReactNode][] = [
     'What the preliminary read is',
     <>
       After the numbers, the agent reads the pleadings (the complaint and, where the docket has it, the defendant’s answer) and says which way the case
-      leans: toward the older brand, toward the newcomer, or too close to call. It names what the case turns on, the strongest defence and what could flip
+      leans: toward the older brand, toward the newcomer, or too close to call. It names what the case hinges on, the strongest defence and what could flip
       it, and reads what data cannot measure: how alike the marks are, copying on purpose, actual confusion alleged, how careful buyers are. Confidence
       (high, moderate or low) is the agent’s own judgment, not a probability. When only the plaintiff’s side is in the record, confidence is capped at low
       and the page says so. “Too close to call” is an honest answer, not a failure. The court’s decision is never in the agent’s input, but the model may
@@ -182,7 +182,7 @@ const AGENT = [
   'Chooses three stand-in brands from a shortlist code builds, and decides whether the category is close enough to measure.',
   'Retries a query wider when it comes back empty, and records give-ups.',
   'Turns the scores into the factors a court weighs and writes the memo.',
-  'Gives the preliminary read: the lean, its confidence, what the case turns on, the strongest defence.',
+  'Gives the preliminary read: the lean, its confidence, what the case hinges on, the strongest defence.',
 ]
 
 const CODE = [

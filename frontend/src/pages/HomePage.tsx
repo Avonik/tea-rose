@@ -19,7 +19,7 @@ import {
   readNationwide,
   readOverlap,
   RESULTS_CAVEAT,
-  resultsParagraphs,
+  resultsSummary,
   runFacts,
   teaRoseSentence,
   to100,
@@ -409,9 +409,9 @@ function Verdict({ story, summary }: { story: CaseStory; summary: ShowcaseSummar
   )
 }
 
-/** The eighteen-case results as a short statistical write-up (numbers computed live); the data back-test as a side note. */
+/** The eighteen-case results: a small table (numbers computed live), a few plain sentences, the data back-test as a side note. */
 function Scorecard({ list }: { list: ShowcaseSummary[] | null | undefined }) {
-  const paras = resultsParagraphs(list)
+  const r = resultsSummary(list)
   return (
     <section className="band band--alt" aria-labelledby="bt-title">
       <div className="wrap">
@@ -421,14 +421,49 @@ function Scorecard({ list }: { list: ShowcaseSummary[] | null | undefined }) {
             {SCORECARD.title}
           </h2>
         </div>
-        <div className="bt__text">
-          {(paras ?? [RESULTS_CAVEAT]).map((p, i) => (
-            <p key={i} className="bt__body">
-              {p}
-            </p>
-          ))}
-        </div>
-        <p className="secondary bt__note">{SCORECARD.dataNote}</p>
+        {r ? (
+          <>
+            <div className="table-scroll bt__table">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">{SCORECARD.columns.result}</th>
+                    <th scope="col" className="r">
+                      {SCORECARD.columns.cases}
+                    </th>
+                    <th scope="col">{SCORECARD.columns.meaning}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {r.rows.map((row) => (
+                    <tr key={row.agreement}>
+                      <td>
+                        <span className="chip chip--sm">{AGREEMENT_LABEL[row.agreement]}</span>
+                      </td>
+                      <td className="r num">{row.count}</td>
+                      <td>{row.meaning}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="bt__text">
+              {r.sentences.map((p, i) => (
+                <p key={i} className="bt__body">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="bt__text">
+            <p className="bt__body">{RESULTS_CAVEAT}</p>
+          </div>
+        )}
+        <p className="secondary bt__note">
+          {r && <>{RESULTS_CAVEAT} </>}
+          {SCORECARD.dataNote}
+        </p>
         <p className="bt__more">
           <Link to="/method#backtest" className="btn btn--link">
             {SCORECARD.link} <IconChevron size={13} />

@@ -975,6 +975,26 @@
   --group-alt: #2c2c2e;
 }
 
+/* The results table: same measure as the text, the chip column tight, the meaning column wide */
+.bt__table {
+  max-width: 46rem;
+  margin-bottom: var(--s-5);
+}
+
+.bt__table .table td {
+  font-size: var(--fs-callout);
+}
+
+.bt__table .table td:first-child,
+.bt__table .table th:first-child {
+  white-space: nowrap;
+  padding-left: 0;
+}
+
+.bt__table .table td:nth-child(2) {
+  width: 4rem;
+}
+
 /* The results write-up: a readable measure, paragraphs spaced like the notes below */
 .bt__text {
   display: grid;

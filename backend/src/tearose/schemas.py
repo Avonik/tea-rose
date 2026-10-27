@@ -353,6 +353,37 @@ class TraceEvent(BaseModel):
 RunStatus = Literal["queued", "running", "finished", "failed"]
 
 
+class LlmUsage(BaseModel):
+    """Tokens the language model consumed in a run (summed over every call), with the cost when
+    LLM_PRICE_* is configured. Cached input tokens are a subset of input_tokens; reasoning tokens
+    a subset of output_tokens."""
+
+    model: str = ""
+    reasoning_effort: str | None = None
+    calls: int = 0
+    input_tokens: int = 0
+    cached_input_tokens: int = 0
+    output_tokens: int = 0
+    reasoning_tokens: int = 0
+    cost_usd: float | None = None  # None until prices are configured
+
+    def add(self, other: LlmUsage) -> LlmUsage:
+        return LlmUsage(
+            model=self.model or other.model,
+            reasoning_effort=self.reasoning_effort or other.reasoning_effort,
+            calls=self.calls + other.calls,
+            input_tokens=self.input_tokens + other.input_tokens,
+            cached_input_tokens=self.cached_input_tokens + other.cached_input_tokens,
+            output_tokens=self.output_tokens + other.output_tokens,
+            reasoning_tokens=self.reasoning_tokens + other.reasoning_tokens,
+            cost_usd=(
+                None
+                if self.cost_usd is None and other.cost_usd is None
+                else (self.cost_usd or 0.0) + (other.cost_usd or 0.0)
+            ),
+        )
+
+
 class AnalysisResult(BaseModel):
     run_id: str
     status: RunStatus
@@ -367,6 +398,7 @@ class AnalysisResult(BaseModel):
     memo: Memo | None = None
     trace: list[TraceEvent] = Field(default_factory=list)
     error: str | None = None
+    llm_usage: LlmUsage | None = None  # tokens and cost over the run (and its follow-ups)
 
 
 class ShowcaseSummary(BaseModel):

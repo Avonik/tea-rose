@@ -46,31 +46,30 @@ Each case was read from the filed pleadings with the court's decision withheld; 
 
 | Case | The court | Tea Rose read | Agreement |
 | --- | --- | --- | --- |
-| Vans v. MSCHF (Wavy Baby) | Ordered the sneakers off the market, upheld on appeal: a distorted sneaker sold as a sneaker is not a protected parody. | Too close to call, low confidence: turns on MSCHF's pleaded free-speech and parody defences and how close Wavy Baby's design is to Vans'. | Too close to call |
+| Vans v. MSCHF (Wavy Baby) | Ordered the sneakers off the market, upheld on appeal: a distorted sneaker sold as a sneaker is not a protected parody. | Too close to call, moderate confidence: turns on MSCHF's pleaded free-speech and parody defences and how close Wavy Baby's design is to Vans'. | Too close to call |
 | adidas v. Skechers | Upheld the order against Skechers' copy of the Stan Smith, lifted it for a second shoe. | Leans toward adidas, low confidence: turns on how alike the shoes are and whether the Stan Smith's look is protectable. Complaint only. | Split result |
-| Hermès v. Rothschild (MetaBirkins) | A jury found the NFTs infringed and diluted the Birkin mark; further sales barred. | Too close to call, low confidence: turns on whether free-speech protection for art covers the images and their "MetaBirkins" title. | Too close to call |
+| Hermès v. Rothschild (MetaBirkins) | A jury found the NFTs infringed and diluted the Birkin mark; further sales barred. | Too close to call, moderate confidence: turns on whether free-speech protection covers "MetaBirkins" as the name under which the artworks are sold, and whether that use signals Hermès sponsorship. | Too close to call |
 | Vans v. Walmart | Stopped Walmart selling look-alike sneakers while the case went on: shoppers likely to be confused. | Leans toward Vans, low confidence: turns on how alike the shoe designs are and the confusion the complaint alleges. Complaint only. | Same way |
 | Nike v. StockX (Vault NFTs) | Nike won on counterfeit shoes before trial; the NFT claims settled. | Too close to call, moderate confidence: turns on StockX's defences that it only named the genuine Nike goods it resold. | Too close to call |
 | Bang v. Monster (Reign) | Ruled for Monster after trial: same drink, same buyers, but Bang's can design did not identify Bang to shoppers. | Leans toward Bang, low confidence: turns on how alike the cans and names are and whether the alleged confusion holds up. Complaint only. | Other way |
 | Jack Daniel's v. Bad Spaniels | Found that whiskey drinkers and pet-product buyers overlap, and the dog toy still won: a parody, no confusion. | Too close to call, moderate confidence: turns on the parody defence and how alike the marks are. | Too close to call |
 | adidas v. Thom Browne | A jury cleared Thom Browne of infringing or diluting the three stripes; upheld on appeal. | Too close to call, low confidence: turns on how alike the specific stripe designs are. | Too close to call |
-| Stone Brewing v. MillerCoors | A jury found that MillerCoors' "Stone" branding of Keystone Light infringed and awarded $56 million; upheld on appeal. | Too close to call, low confidence: turns on MillerCoors' claim that it used "Stone" first, and how buyers see the word on the full Keystone can. | Too close to call |
+| Stone Brewing v. MillerCoors | A jury found that MillerCoors' "Stone" branding of Keystone Light infringed and awarded $56 million; upheld on appeal. | Too close to call, moderate confidence: turns on MillerCoors' claim that it used "Stone" first, and how buyers see the word on the full Keystone can. | Too close to call |
 | Rolex v. BeckerTime | Rolexes refitted with aftermarket parts infringed; upheld on appeal, though Rolex got no profits because it waited too long to sue. | Leans toward Rolex, low confidence: turns on how alike the marks are and the alleged re-marking of altered watches with Rolex's name. Complaint only. | Same way |
 | Kraft v. Cracker Barrel | Barred the restaurant chain from selling Cracker Barrel hams in grocery stores, beside Kraft's Cracker Barrel cheese; upheld on appeal. | Leans toward Kraft, low confidence: turns on how alike the marks are and the shared grocery aisles the complaint describes. Complaint only. | Same way |
 | In-N-Out v. Smashburger | No ruling on confusion; the burger chains settled. | Leans toward In-N-Out, low confidence: turns on how alike "Double-Double" and "Triple Double" are, and whether that naming pattern points to In-N-Out. Complaint only. | Split result |
 | Louis Vuitton v. My Other Bag | Ruled for My Other Bag: a canvas tote with a cartoon of a Louis Vuitton bag is an obvious joke that does not compete; upheld on appeal. | Too close to call, low confidence: turns on whether the tote reads as a parody rather than a sponsored product. Complaint only. | Too close to call |
 | AM General v. Activision | Ruled for Activision before trial: Humvees in Call of Duty are artistic realism, and military vehicles and video games are too far apart to confuse buyers. | Too close to call, low confidence: turns on whether showing the vehicle in a game is protected expression. Complaint only. | Too close to call |
-| Buffalo Trace v. 1000 Stories | Ruled for the wine after trial: bourbon and bourbon-barrel wine share some shelves, but the labels looked too different to confuse buyers. | Leans toward Buffalo Trace, low confidence: turns on how alike the buffalo designs are and whether shared drinkers mean confused buyers. Complaint only. | Other way |
+| Buffalo Trace v. 1000 Stories | Ruled for the wine after trial: bourbon and bourbon-barrel wine share some shelves, but the labels looked too different to confuse buyers. | Too close to call, low confidence: turns on whether the shared buffalo imagery makes a similar overall impression and whether the trade dress is protectable at all. Complaint only. | Too close to call |
 | T-Mobile v. Aio | Stopped Aio using its plum colour, since both sell to the same budget customers, but held T-Mobile's magenta not famous enough for dilution. | Too close to call, low confidence: turns on whether magenta identifies T-Mobile at all and how closely Aio's colour resembles it. Complaint only. | Too close to call |
 | Penn State v. Vintage Brand | A jury found Vintage Brand's retro merchandise infringed the university's marks on purpose and rejected its defences. | Leans toward Penn State, low confidence: turns on how alike the vintage designs are to Penn State's registered marks. Complaint only. | Same way |
 | Ohio State v. Redbubble | The trial court cleared Redbubble, the appeals court reversed, and the case settled. | Too close to call, low confidence: turns on whether the designs act as a brand or as decoration, including Redbubble's pleaded free-speech defences. | Too close to call |
 
-Tally: same way 4, split result 2, too close to call 10, other way 2. The read never leaned toward
+Tally: same way 4, split result 2, too close to call 11, other way 1. The read never leaned toward
 the newcomer in this set: it committed to a side only when the record held the plaintiff's side
-alone, and in four of the six newcomer wins it said too close to call. The two "other way" rows,
-Bang and Buffalo Trace, were both read from the complaint alone; in Bang the read had still named
-the defence that won, that the can's features are commonplace rather than a sign of who makes the
-drink.
+alone, and in five of the six newcomer wins it said too close to call. The one "other way" row,
+Bang, was read from the complaint alone, and the read had still named the defence that won, that
+the can's features are commonplace rather than a sign of who makes the drink.
 
 The court's decision was withheld from the agent, but the model may still know how famous cases
 ended; treat this as a demonstration, not a test. Where a brand is not in Qloo, it is measured
@@ -175,6 +174,7 @@ works). Never commit it.
 | `OPENAI_API_KEY`, `OPENAI_BASE_URL` | Any provider that speaks the OpenAI chat API |
 | `LLM_MODEL`, `LLM_MODEL_STRONG` | Model for every step (default `gpt-5-mini`); optional stronger model for interpretation |
 | `LLM_REASONING_EFFORT` | `low`, `medium` or `high`; dropped automatically if the provider rejects it |
+| `LLM_PRICE_INPUT_PER_M`, `LLM_PRICE_OUTPUT_PER_M`, `LLM_PRICE_CACHED_INPUT_PER_M` | USD per million tokens; when the first two are set, every run records its cost next to its token counts (`llm_usage` in the result, `run_finished` in the trace) |
 | `PASSCODE`, `SESSION_SECRET` | Live analysis is off while `PASSCODE` is empty; showcase cases are always public |
 | `CAP_LIVE_RUNS_PER_DAY`, `CAP_LIVE_RUNS_PER_SESSION` | Live-run caps (defaults 60 and 15) |
 | `HOST`, `PORT`, `SECURE_COOKIES` | Server; set `SECURE_COOKIES=false` to log in over plain http locally |

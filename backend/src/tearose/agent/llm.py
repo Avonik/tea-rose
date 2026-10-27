@@ -23,6 +23,8 @@ from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
 
+from tearose.schemas import LlmUsage
+
 ModelFactory = Callable[[bool], BaseChatModel]
 
 log = logging.getLogger(__name__)
@@ -45,6 +47,11 @@ def _fallback_chat_class() -> type[BaseChatModel]:
 
     class ReasoningFallbackChatOpenAI(ChatOpenAI):
         fallback_notes: list[str] = Field(default_factory=list, exclude=True)
+        usage: LlmUsage = Field(default_factory=LlmUsage, exclude=True)
+
+        def _count(self, result: ChatResult) -> ChatResult:
+            self.usage = self.usage.add(usage_of(result, self.model_name, self.reasoning_effort))
+            return result
 
         def _drop_reasoning(self, exc: BaseException) -> bool:
             if self.reasoning_effort is None or not reasoning_rejected(exc):
@@ -61,22 +68,78 @@ def _fallback_chat_class() -> type[BaseChatModel]:
         async def _agenerate(self, messages: Any, stop: Any = None, run_manager: Any = None,
                              **kwargs: Any) -> ChatResult:  # fmt: skip
             try:
-                return await super()._agenerate(messages, stop, run_manager, **kwargs)
+                return self._count(await super()._agenerate(messages, stop, run_manager, **kwargs))
             except Exception as exc:
                 if not self._drop_reasoning(exc):
                     raise
-            return await super()._agenerate(messages, stop, run_manager, **kwargs)
+            return self._count(await super()._agenerate(messages, stop, run_manager, **kwargs))
 
         def _generate(self, messages: Any, stop: Any = None, run_manager: Any = None,
                       **kwargs: Any) -> ChatResult:  # fmt: skip
             try:
-                return super()._generate(messages, stop, run_manager, **kwargs)
+                return self._count(super()._generate(messages, stop, run_manager, **kwargs))
             except Exception as exc:
                 if not self._drop_reasoning(exc):
                     raise
-            return super()._generate(messages, stop, run_manager, **kwargs)
+            return self._count(super()._generate(messages, stop, run_manager, **kwargs))
 
     return ReasoningFallbackChatOpenAI
+
+
+def usage_of(result: ChatResult, model: str = "", effort: str | None = None) -> LlmUsage:
+    """One call's tokens from the reply's usage_metadata (zero when the provider sent none)."""
+    tokens: dict[str, Any] = {}
+    for g in result.generations:
+        meta = getattr(g.message, "usage_metadata", None)
+        if meta:
+            tokens = dict(meta)
+            break
+    in_details = tokens.get("input_token_details") or {}
+    out_details = tokens.get("output_token_details") or {}
+    usage = LlmUsage(
+        model=model,
+        reasoning_effort=effort,
+        calls=1,
+        input_tokens=int(tokens.get("input_tokens") or 0),
+        cached_input_tokens=int(in_details.get("cache_read") or 0),
+        output_tokens=int(tokens.get("output_tokens") or 0),
+        reasoning_tokens=int(out_details.get("reasoning") or 0),
+    )
+    usage.cost_usd = cost_usd(usage)
+    return usage
+
+
+def cost_usd(usage: LlmUsage) -> float | None:
+    """The cost at the configured LLM_PRICE_* rates (USD per million tokens); None without them."""
+    from tearose.config import get_settings
+
+    s = get_settings()
+    if s.llm_price_input_per_m is None or s.llm_price_output_per_m is None:
+        return None
+    cached_rate = (
+        s.llm_price_input_per_m
+        if s.llm_price_cached_input_per_m is None
+        else s.llm_price_cached_input_per_m
+    )
+    fresh = usage.input_tokens - usage.cached_input_tokens
+    return (
+        fresh * s.llm_price_input_per_m
+        + usage.cached_input_tokens * cached_rate
+        + usage.output_tokens * s.llm_price_output_per_m
+    ) / 1_000_000
+
+
+def model_usage(model: Any) -> LlmUsage:
+    """What a model instance has consumed so far (empty for models that do not count)."""
+    usage = getattr(model, "usage", None)
+    return usage if isinstance(usage, LlmUsage) else LlmUsage()
+
+
+def total_usage(models: Sequence[Any]) -> LlmUsage:
+    total = LlmUsage()
+    for m in models:
+        total = total.add(model_usage(m))
+    return total
 
 
 def drain_model_notes(model: Any) -> list[str]:

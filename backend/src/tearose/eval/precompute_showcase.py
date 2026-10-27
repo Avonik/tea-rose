@@ -91,6 +91,14 @@ async def _run_case(
     out.write_text(handle.result.model_dump_json(indent=2), encoding="utf-8")
     n_q = len(handle.result.memo.appendix_queries) if handle.result.memo else 0
     print(f"-> {out.name}: {handle.result.status}, {n_q} queries, {elapsed:.1f}s")
+    u = handle.result.llm_usage
+    if u and u.calls:
+        cost = f"USD {u.cost_usd:.4f}" if u.cost_usd is not None else "cost n/a (set LLM_PRICE_*)"
+        print(
+            f"   LLM {u.model} (effort {u.reasoning_effort or 'default'}): {u.calls} calls, "
+            f"{u.input_tokens:,} in ({u.cached_input_tokens:,} cached), "
+            f"{u.output_tokens:,} out ({u.reasoning_tokens:,} reasoning), {cost}"
+        )
     return handle.result
 
 

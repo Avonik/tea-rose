@@ -22,7 +22,7 @@ from typing import Any
 
 from langgraph.graph import END, START, StateGraph
 
-from tearose.agent.llm import ModelFactory, get_chat_model
+from tearose.agent.llm import ModelFactory, get_chat_model, total_usage
 from tearose.agent.nodes import (
     assess,
     extract,
@@ -39,7 +39,7 @@ from tearose.agent.runs import RunHandle
 from tearose.agent.state import AgentState, initial_state
 from tearose.agent.tools import ToolContext
 from tearose.qloo.client import QlooClient
-from tearose.schemas import AnalysisResult, TraceEvent
+from tearose.schemas import AnalysisResult, LlmUsage, TraceEvent
 
 log = logging.getLogger(__name__)
 
@@ -61,7 +61,9 @@ def _wrap(name: str, fn: NodeFn, ctx: RunContext):
         ctx.tools.node = name
         await ctx.emit(TraceEvent(node=name, type="node_started", title=f"{name}: started"))
         t0 = time.perf_counter()
+        before = total_usage(ctx.models)
         update = await fn(dict(state), ctx)
+        used = total_usage(ctx.models)
         for note in ctx.model_notes():
             await ctx.emit(
                 TraceEvent(node=name, type="note", title="Model setting dropped", detail=note)
@@ -77,6 +79,9 @@ def _wrap(name: str, fn: NodeFn, ctx: RunContext):
                 data={
                     "elapsed_ms": int((time.perf_counter() - t0) * 1000),
                     "queries": len(new_queries),
+                    "llm_calls": used.calls - before.calls,
+                    "llm_input_tokens": used.input_tokens - before.input_tokens,
+                    "llm_output_tokens": used.output_tokens - before.output_tokens,
                 },
             )
         )
@@ -220,13 +225,19 @@ class GraphEngine:
             return
         self._remember(handle.run_id, final)  # type: ignore[arg-type]
         memo_ = final.get("memo")
+        usage = total_usage(ctx.models)
+        handle.result.llm_usage = (handle.result.llm_usage or LlmUsage()).add(usage)
         await handle.emit(
             TraceEvent(
                 node="memo",
                 type="run_finished",
                 title="Memo ready",
                 detail=memo_.headline if memo_ else None,
-                data={"queries": len(final.get("queries") or []), "errors": final.get("errors")},
+                data={
+                    "queries": len(final.get("queries") or []),
+                    "errors": final.get("errors"),
+                    "llm_usage": usage.model_dump(),
+                },
             )
         )
         await handle.set_status("finished")

@@ -1050,6 +1050,10 @@ async def test_full_run_streams_events_and_finishes(client: FixtureClient) -> No
     assert "running" in status_at_event  # events arrived while the run was in progress
     assert r.trace[0].type == "run_started" and r.trace[-1].type == "run_finished"
     assert [e.seq for e in r.trace] == list(range(1, len(r.trace) + 1))
+    # Token accounting is always present; the scripted model reports no tokens, so it reads zero.
+    assert r.llm_usage is not None and r.llm_usage.calls == 0 and r.llm_usage.cost_usd is None
+    assert r.trace[-1].data["llm_usage"]["calls"] == 0
+    assert all("llm_calls" in e.data for e in r.trace if e.type == "node_finished")
     nodes_started = [e.node for e in r.trace if e.type == "node_started"]
     assert nodes_started == [
         "extract", "route", "resolve", "fetch", "score", "interpret", "assess", "memo"
@@ -1508,3 +1512,86 @@ def test_stored_memo_without_read_still_loads() -> None:
          "appendix_queries": []}
     )  # fmt: skip
     assert m.read_line == "" and m.preliminary_read is None
+
+
+def _reply(**usage: Any) -> Any:
+    from langchain_core.messages import AIMessage
+    from langchain_core.outputs import ChatGeneration, ChatResult
+
+    msg = AIMessage(content="ok")
+    msg.usage_metadata = usage or None  # type: ignore[assignment]
+    return ChatResult(generations=[ChatGeneration(message=msg)])
+
+
+async def test_usage_is_summed_over_calls_and_costed_when_prices_are_set(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from langchain_core.messages import HumanMessage
+    from langchain_openai import ChatOpenAI
+
+    import tearose.config as config
+    from tearose.agent.llm import get_chat_model, model_usage, total_usage
+
+    replies = [
+        _reply(
+            input_tokens=1000,
+            output_tokens=200,
+            total_tokens=1200,
+            input_token_details={"cache_read": 400},
+            output_token_details={"reasoning": 150},
+        ),
+        _reply(input_tokens=500, output_tokens=100, total_tokens=600),
+        _reply(),  # a provider that sends no usage counts as a call with zero tokens
+    ]
+
+    async def fake(self: Any, messages: Any, stop: Any = None, run_manager: Any = None, **kw: Any):
+        return replies.pop(0)
+
+    monkeypatch.setattr(ChatOpenAI, "_agenerate", fake)
+    monkeypatch.setattr(
+        config, "get_settings", lambda: _settings(llm_model="m1", llm_reasoning_effort="low")
+    )
+    model = get_chat_model()
+    for _ in range(3):
+        await model.ainvoke([HumanMessage("hi")])
+    u = model_usage(model)
+    assert (u.model, u.reasoning_effort, u.calls) == ("m1", "low", 3)
+    assert (u.input_tokens, u.cached_input_tokens) == (1500, 400)
+    assert (u.output_tokens, u.reasoning_tokens) == (300, 150)
+    assert u.cost_usd is None  # no prices configured
+
+    # Prices: fresh input at 2, cached input at 0.5, output at 10 USD per million tokens.
+    monkeypatch.setattr(
+        config,
+        "get_settings",
+        lambda: _settings(
+            llm_price_input_per_m=2.0,
+            llm_price_cached_input_per_m=0.5,
+            llm_price_output_per_m=10.0,
+        ),
+    )
+    replies.append(
+        _reply(
+            input_tokens=1_000_000,
+            output_tokens=100_000,
+            total_tokens=1_100_000,
+            input_token_details={"cache_read": 200_000},
+        )
+    )
+    priced = get_chat_model()
+    await priced.ainvoke([HumanMessage("hi")])
+    assert model_usage(priced).cost_usd == pytest.approx(0.8 * 2.0 + 0.2 * 0.5 + 0.1 * 10.0)
+
+    # Totals over several instances; a model without a counter (the scripted fake) adds nothing.
+    total = total_usage([model, priced, ScriptedChatModel()])
+    assert (total.calls, total.input_tokens) == (4, 1_001_500)
+    assert total.cost_usd == pytest.approx(model_usage(priced).cost_usd)
+
+
+def test_usage_add_keeps_cost_unknown_until_one_side_knows_it() -> None:
+    from tearose.schemas import LlmUsage
+
+    a = LlmUsage(calls=1, input_tokens=10)
+    b = LlmUsage(calls=2, output_tokens=5, cost_usd=0.25)
+    assert a.add(a).cost_usd is None
+    assert a.add(b).cost_usd == 0.25 and a.add(b).calls == 3

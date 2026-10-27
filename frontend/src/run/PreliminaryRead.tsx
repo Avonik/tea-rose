@@ -56,7 +56,7 @@ export function ReadChips({ read, names, size }: { read: Read; names: { senior: 
   )
 }
 
-/** "The case most likely turns on X." reads as "X." after the label "What it turns on:". */
+/** "The case most likely turns on X." reads as "X." after the label "What it hinges on:". */
 function turnsOn(s: string): string {
   const t = s.replace(/^\s*the case (most likely |likely )?turns on\s+/i, '').trim()
   return t.charAt(0).toUpperCase() + t.slice(1)
@@ -86,7 +86,7 @@ export function bridgeSentence(memo: Memo, names: { senior: string; junior: stri
   const j = f.filter((x) => x.lean === 'favors_junior').length
   if (s === j) return ''
   const why = turnsOnPhrase(read.turns_on)
-  return `Audience overlap favours ${s > j ? names.senior : names.junior}; the read stays open because it turns on ${why || 'what the data cannot measure'}.`
+  return `Audience overlap favours ${s > j ? names.senior : names.junior}; the read stays open because the case hinges on ${why || 'what the data cannot measure'}.`
 }
 
 /**
@@ -142,7 +142,7 @@ export default function PreliminaryReadCard({
 
       {read.turns_on && (
         <p className="read__turns">
-          <span className="read__k">What it turns on:</span> {turnsOn(read.turns_on)}
+          <span className="read__k">What it hinges on:</span> {turnsOn(read.turns_on)}
         </p>
       )}
 

@@ -103,7 +103,7 @@ export function turnsOnPhrase(s: string | null | undefined): string {
  * The first clause of a phrase, at most `max` characters, without a trailing full stop: cut at the
  * first comma or semicolon, then (if still long) before the last joining word ("and", "rather than") that fits.
  */
-export function shortClause(s: string, max = 90): string {
+export function shortClause(s: string, max = 120): string {
   let t = s.trim().replace(/[.\s]+$/, '')
   const stop = t.search(/[,;:]\s/)
   if (stop >= 20) t = t.slice(0, stop)
@@ -163,8 +163,8 @@ export const brandName = (s: string) => s.replace(/\s*\([^)]*\)\s*$/, '').trim()
 const CONFIDENCE_WORD: Record<Confidence, string> = { high: 'high', medium: 'moderate', low: 'low' }
 
 /**
- * Tea Rose's read in one sentence: "Leans toward Bang, low confidence, because it turns on X." or
- * "Too close to call, low confidence: it turns on X." `full` keeps the whole turns-on phrase and adds
+ * Tea Rose's read in one sentence: "Leans toward Bang, low confidence, because the case hinges on X." or
+ * "Too close to call, low confidence, because the case hinges on X." `full` keeps the whole hinges-on phrase and adds
  * the strongest defence the read saw (case page); otherwise the phrase is shortened (list rows).
  */
 export function teaRoseSentence(f: ReadFields, brands: [string, string], full = false): string {
@@ -172,10 +172,10 @@ export function teaRoseSentence(f: ReadFields, brands: [string, string], full = 
   const conf = `${CONFIDENCE_WORD[f.confidence] ?? f.confidence} confidence`
   const tail = f.oneSided ? ' (only the complaint was on the record)' : ''
   let s: string
-  if (f.lean === 'too_close_to_call') s = `Too close to call, ${conf}${on ? `: it turns on ${on}` : ''}${tail}.`
+  if (f.lean === 'too_close_to_call') s = `Too close to call, ${conf}${on ? `, because the case hinges on ${on}` : ''}${tail}.`
   else {
     const toward = brandName(f.lean === 'older_brand' ? brands[0] : brands[1])
-    s = `Leans toward ${toward}, ${conf}${on ? `, because it turns on ${on}` : ''}${tail}.`
+    s = `Leans toward ${toward}, ${conf}${on ? `, because the case hinges on ${on}` : ''}${tail}.`
   }
   const d = full ? defenceShort(f.bestDefence) : ''
   if (!d) return s
@@ -208,10 +208,9 @@ export function agreementDetail(f: ReadFields, outcome: Outcome, brands: [string
   if (a === 'close') {
     if (outcome === 'settled') return 'the parties settled before a verdict'
     if (outcome === 'mixed') return 'the court split the result'
-    const on = turnsOnShort(f.turnsOn)
     const winner = brandName(outcome === 'older brand won' ? brands[0] : brands[1])
-    // Say what the read left open and who the court ruled for; never claim the court's reason.
-    return on ? `the read left it open on ${on}; the court ruled for ${winner}` : `the court ruled for ${winner}`
+    // The Tea Rose sentence above already says why it was left open; say only who the court ruled for, never the court's reason.
+    return `the read left it open; the court ruled for ${winner}`
   }
   const d = defenceShort(f.bestDefence)
   return d ? `the read had flagged ${d}` : 'the read had not seen it coming'
@@ -271,22 +270,28 @@ const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eig
 
 /** 4 → "four", 0 → "no", above twenty as digits. */
 export const numberWord = (n: number) => WORDS[n] ?? String(n)
-const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
-
-/** "a, b and c". */
-function joinAnd(parts: string[]): string {
-  return parts.length <= 1 ? parts.join('') : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`
-}
 
 export const RESULTS_CAVEAT =
   'The court’s decision was withheld from the agent, but the model may still know how famous cases ended, so this is a demonstration, not a test.'
 
+export type ResultsRow = { agreement: Agreement; count: number; meaning: string }
+
+/** One row per agreement kind, for the results table: the label, the count and what it means in a few words. */
+const ROW_MEANING: Record<Agreement, string> = {
+  same: 'Tea Rose leaned toward the side the court later ruled for.',
+  close: 'Tea Rose did not pick a side; a first read that keeps the question open.',
+  split: 'The court gave each side part of it, or the parties settled, so there was no winner to match.',
+  other: 'Tea Rose leaned toward the side the court later ruled against.',
+}
+
+export type ResultsSummary = { rows: ResultsRow[]; sentences: string[] }
+
 /**
- * The showcase results as two or three short paragraphs, computed from the showcase list (read fields) and the
- * hand-written outcomes: how the cases were read, the tally, the pattern, confidence. Null until every case in
- * CASE_ORDER has a read; the caller then shows the caveat alone.
+ * The showcase results as a small table plus two or three plain sentences, computed from the showcase list
+ * (read fields) and the hand-written outcomes. Null until every case in CASE_ORDER has a read; the caller
+ * then shows the caveat alone.
  */
-export function resultsParagraphs(list: ShowcaseSummary[] | null | undefined): string[] | null {
+export function resultsSummary(list: ShowcaseSummary[] | null | undefined): ResultsSummary | null {
   const rows: { f: ReadFields; story: (typeof CASE_STORIES)[string]; a: Agreement }[] = []
   for (const slug of CASE_ORDER) {
     const f = readFieldsFromSummary(list?.find((c) => c.slug === slug))
@@ -294,70 +299,44 @@ export function resultsParagraphs(list: ShowcaseSummary[] | null | undefined): s
     if (!f || !story) return null
     rows.push({ f, story, a: agreement(f.lean, story.outcome) })
   }
-  const total = rows.length
   const count = (p: (r: (typeof rows)[number]) => boolean) => rows.filter(p).length
-  const answered = count((r) => !r.f.oneSided)
-  const oneSided = total - answered
-
-  // 1. What was read.
-  const p1 =
-    `Tea Rose read ${numberWord(total)} decided or settled trademark cases from the filed pleadings, with the court’s decision withheld, ` +
-    `and each read was then set beside the outcome. ` +
-    (answered && oneSided
-      ? `For ${numberWord(answered)} of them the record included the defendant’s answer or motion; for the other ${numberWord(oneSided)}, only the complaint.`
-      : answered
-        ? 'Every record included the defendant’s answer or motion.'
-        : 'Every record held the complaint alone.')
-
-  // 2. The tally and the pattern.
   const n = (a: Agreement) => count((r) => r.a === a)
-  const tally = [`went the same way as the court in ${numberWord(n('same'))}`]
-  if (n('split')) tally.push(`met a split or settled result in ${numberWord(n('split'))}`)
-  tally.push(`called ${numberWord(n('close'))} too close to call`, `went the other way in ${numberWord(n('other'))}`)
-  const s: string[] = [`The read ${joinAnd(tally)}.`]
+  const table: ResultsRow[] = (['same', 'close', 'split', 'other'] as Agreement[])
+    .map((a) => ({ agreement: a, count: n(a), meaning: ROW_MEANING[a] }))
+    .filter((r) => r.count > 0 || r.agreement === 'same' || r.agreement === 'other')
 
-  const leans = rows.filter((r) => r.f.lean !== 'too_close_to_call')
-  const leansOneSided = leans.filter((r) => r.f.oneSided).length
-  const answeredClose = count((r) => !r.f.oneSided && r.f.lean === 'too_close_to_call')
-  if (leans.length && leansOneSided === leans.length && answered && answeredClose === answered) {
-    s.push(
-      `It committed to a side only when the record held the plaintiff’s side alone: all ${numberWord(leans.length)} of its leans came from complaint-only records, ` +
-        `and in all ${numberWord(answered)} cases with the defendant’s answer in, it called the case too close.`,
+  const sentences: string[] = []
+
+  // 1. Where it picked a side and the court picked a winner, how often they agreed.
+  const decided = n('same') + n('other')
+  if (decided) {
+    sentences.push(
+      `Where Tea Rose picked a side and the court later named a winner, it agreed with the court in ${numberWord(n('same'))} of ${numberWord(decided)} cases, ` +
+        `reading only the pleadings and never the decision.`,
     )
-  } else if (leans.length) {
-    s.push(`${cap(numberWord(leansOneSided))} of its ${numberWord(leans.length)} leans came from complaint-only records.`)
   }
 
-  const towardNewcomer = count((r) => r.f.lean === 'newcomer')
-  const newcomerWins = rows.filter((r) => r.story.outcome === 'newcomer won')
-  const closeOnNewcomer = newcomerWins.filter((r) => r.a === 'close').length
-  if (newcomerWins.length) {
-    const lead = towardNewcomer === 0 ? 'It never leaned toward the newcomer; ' : ''
-    s.push(`${lead}${lead ? 'in' : 'In'} ${numberWord(closeOnNewcomer)} of the ${numberWord(newcomerWins.length)} cases the newcomer won, it said too close to call.`)
+  // 2. With both sides on the record, it keeps the question open rather than guessing.
+  const answered = rows.filter((r) => !r.f.oneSided)
+  const answeredClose = answered.filter((r) => r.a === 'close').length
+  if (answered.length && answeredClose === answered.length) {
+    sentences.push(
+      `With both sides’ pleadings on the record, it never contradicted a court: in all ${numberWord(answered.length)} such cases it called the fight too close to call, ` +
+        `which is the careful answer for a first read. It committed to a side only when it had the complaint alone.`,
+    )
+  } else if (answered.length) {
+    sentences.push(
+      `With both sides’ pleadings on the record, it called ${numberWord(answeredClose)} of ${numberWord(answered.length)} cases too close to call rather than guessing.`,
+    )
   }
 
+  // 3. Even where it leaned the other way, it had seen the winning argument.
   const other = rows.filter((r) => r.a === 'other')
-  if (other.length) {
-    const names = other.length <= 2 ? `, ${joinAnd(other.map((r) => r.story.short))},` : ''
-    const allOneSided = other.every((r) => r.f.oneSided)
-    const named = other.filter((r) => r.story.readNamedWinningDefence).length
-    const subject = other.length === 1 ? `The one case it got the other way${names} was` : `The ${numberWord(other.length)} cases it got the other way${names} were`
-    const from = allOneSided ? ' read from the complaint alone' : ''
-    const defence =
-      named === 0 ? '' : other.length === 1 ? 'the read had named the defence that later won' : named === other.length ? `in ${other.length === 2 ? 'both' : 'all of them'} the read had named the defence that later won` : `in ${numberWord(named)} the read had named the defence that later won`
-    if (from || defence) s.push(`${subject}${from}${from && defence ? ', and ' : ''}${defence}.`)
+  const named = other.filter((r) => r.story.readNamedWinningDefence).length
+  if (other.length && named) {
+    const which = named === other.length ? (other.length === 1 ? 'In the one case' : `In ${other.length === 2 ? 'both' : 'all'} cases`) : `In ${numberWord(named)} of the ${numberWord(other.length)} cases`
+    sentences.push(`${which} where it leaned the other way, it had already named the defence that went on to win.`)
   }
-  const p2 = s.join(' ')
 
-  // 3. Confidence, then the caveat.
-  const low = count((r) => r.f.confidence === 'low')
-  const moderate = count((r) => r.f.confidence === 'medium')
-  const high = count((r) => r.f.confidence === 'high')
-  const levels = [
-    low && `low in ${numberWord(low)} reads`,
-    moderate && `moderate in ${numberWord(moderate)}`,
-    high && `high in ${numberWord(high)}`,
-  ].filter(Boolean) as string[]
-  const p3 = `Confidence was ${joinAnd(levels)}${high ? '' : '; none was high'}. ${RESULTS_CAVEAT}`
-  return [p1, p2, p3]
+  return { rows: table, sentences }
 }

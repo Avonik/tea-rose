@@ -39,6 +39,10 @@ class Settings(BaseSettings):
     # reasoning models: low | medium | high, sent as reasoning_effort; None = provider default.
     # A provider that rejects the parameter gets one retry without it (noted in the trace).
     llm_reasoning_effort: str | None = None
+    # USD per million tokens, for the cost line in the trace and the result (None = tokens only).
+    llm_price_input_per_m: float | None = None
+    llm_price_cached_input_per_m: float | None = None  # falls back to the input price
+    llm_price_output_per_m: float | None = None
 
     # --- Access control and budget protection -----------------------------------
     passcode: str = ""  # live mode is disabled when empty
