@@ -12,6 +12,9 @@ is `Secure`, so the public URL must be HTTPS.
 ```bash
 git clone https://github.com/Avonik/tea-rose.git && cd tea-rose
 cp backend/.env.example .env     # then edit: QLOO_MODE=live, QLOO_API_KEY, OPENAI_API_KEY, PASSCODE, SESSION_SECRET
+# The pre-computed showcase results are gitignored (they hold Qloo response data), so copy them
+# from the machine that computed them before building; the image bakes them in via COPY backend/.
+# From that machine: rsync -av backend/data/showcase/*.json pi:tea-rose/backend/data/showcase/
 docker compose up -d --build     # first build on the Pi takes several minutes (frontend + Python wheels)
 curl -s http://127.0.0.1:8000/api/health
 ```
@@ -29,7 +32,8 @@ tearose.example.org {
 SSE needs no special proxy configuration in Caddy; for nginx set `proxy_buffering off;` and
 `proxy_read_timeout 1h;` on the location.
 
-Update: `git pull && docker compose up -d --build`. Logs: `docker compose logs -f tearose`.
+Update: `git pull && docker compose up -d --build`; re-computed showcase cases need the same rsync
+first, since a rebuild bakes in whatever `backend/data/showcase/` holds on the Pi. Logs: `docker compose logs -f tearose`.
 
 Secrets and caches never enter the image: `.env` is read at runtime via `env_file`, and the cache
 directories are volumes. Do not copy `backend/data/cache` or `backend/data/live` into the repo.
@@ -47,6 +51,6 @@ the Qloo cache across deploys. Render runs amd64; the Dockerfile has no arch-spe
 - [ ] `PASSCODE` set and tested; the passcode goes into the Devpost submission text
 - [ ] `SESSION_SECRET` is long and random
 - [ ] Caps generous enough for judges (`CAP_LIVE_RUNS_PER_DAY`, `CAP_LIVE_RUNS_PER_SESSION`)
-- [ ] Showcase cases pre-computed and committed under `backend/data/showcase/`
+- [ ] Showcase cases pre-computed and copied to `backend/data/showcase/` on the Pi (they are not in git)
 - [ ] Mirror deployed and reachable; URL noted privately
 - [ ] Cache volume warm: open every showcase case once after deploy
