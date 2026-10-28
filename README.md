@@ -8,6 +8,8 @@
 
 https://github.com/user-attachments/assets/59fbc611-33aa-46d0-9f46-0ed51e72eac0
 
+*Two-minute explainer: the name, the agent, two real reads, the results on eighteen cases. Live at [tea-rose.juhermes.de](https://tea-rose.juhermes.de).*
+
 ## The question
 
 Every trademark fight asks the same question: who are the customers? Today the answer is a consumer
