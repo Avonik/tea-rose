@@ -6,6 +6,13 @@
 [![Qloo Agentic Hackathon 2026](https://img.shields.io/badge/Qloo-Agentic%20Hackathon%202026-8a2be2.svg)](#acknowledgements)
 [![Python 3.12 | React](https://img.shields.io/badge/stack-Python%203.12%20%7C%20React-informational.svg)](#run-it)
 
+<!-- Video: open README.md in GitHub's web editor and drag the mp4 onto the empty line below. GitHub uploads it
+     and inserts a https://github.com/user-attachments/assets/... URL; left on a line of its own, it renders as an
+     inline player. The caption stays underneath. -->
+
+
+*Two-minute explainer: the name, the agent, two real reads, the results on eighteen cases. Live at [tea-rose.juhermes.de](https://tea-rose.juhermes.de).*
+
 ## The question
 
 Every trademark fight asks the same question: who are the customers? Today the answer is a consumer
@@ -15,6 +22,15 @@ defendant's answer where the docket has one) and answers the customer questions 
 of Qloo, a company that maps what people like across brands, music, film, food and places, in about
 two minutes. Then it gives counsel a preliminary read of the whole case, and says plainly what it
 cannot tell you.
+
+## Why the name
+
+The Tea Rose doctrine is a hundred-year-old rule of US trademark law, named after a brand of flour:
+an unregistered mark is protected only where its customers already know it (*Hanover Star Milling
+v. Metcalf*, 1916, and *United Drug v. Rectanus*, 1918, together the Tea Rose–Rectanus doctrine).
+Where a brand is actually known is one of the three customer questions this agent answers from the
+taste graph; the affinity map on every case page is that doctrine drawn out. To a trademark lawyer
+the name says what the tool is about; to everyone else it reads as a product.
 
 ## What you get
 
@@ -247,6 +263,9 @@ archive/         earlier frontends, kept for reference; not built or served
 - [CourtListener and RECAP](https://www.courtlistener.com/) (Free Law Project) and
   [GovInfo](https://www.govinfo.gov/), for the filings and opinions.
 - The [Caselaw Access Project](https://case.law/) (Harvard Law School Library), for opinion texts.
+- The explainer video: music "Happy Beats / Business Moves Vol. 12" by Sascha Ende
+  ([ende.app](https://ende.app), CC BY 4.0); sound effects by [Kenney](https://kenney.nl) (CC0);
+  narration by Kokoro-82M.
 
 ## Licence
 
