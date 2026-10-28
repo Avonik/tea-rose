@@ -6,12 +6,7 @@
 [![Qloo Agentic Hackathon 2026](https://img.shields.io/badge/Qloo-Agentic%20Hackathon%202026-8a2be2.svg)](#acknowledgements)
 [![Python 3.12 | React](https://img.shields.io/badge/stack-Python%203.12%20%7C%20React-informational.svg)](#run-it)
 
-<!-- Video: open README.md in GitHub's web editor and drag the mp4 onto the empty line below. GitHub uploads it
-     and inserts a https://github.com/user-attachments/assets/... URL; left on a line of its own, it renders as an
-     inline player. The caption stays underneath. -->
-
-
-*Two-minute explainer: the name, the agent, two real reads, the results on eighteen cases. Live at [tea-rose.juhermes.de](https://tea-rose.juhermes.de).*
+https://github.com/user-attachments/assets/59fbc611-33aa-46d0-9f46-0ed51e72eac0
 
 ## The question
 
